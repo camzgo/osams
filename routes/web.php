@@ -15,9 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/master', function () {
-    return view('layouts.master');
-});
+// Route::get('/master', function () {
+//     return view('admin.master');
+// });
+// Route::get('/admin', function () {
+//     return view('layouts.admin');
+// });
+// 
+Route::resource('admin', 'AdminPagesController');
+
 
 Auth::routes();
 

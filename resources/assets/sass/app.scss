@@ -9,6 +9,8 @@
 @import '~bootstrap/scss/bootstrap';
 
 @import '~admin-lte/dist/css/adminlte.css';
+
+$fa-font-path: "../fonts/" !default;
 @import '~font-awesome/scss/font-awesome.scss';
 
 .navbar-laravel {
