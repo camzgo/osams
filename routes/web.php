@@ -23,7 +23,7 @@ Route::get('/', function () {
 // });
 // 
 Route::resource('admin', 'AdminPagesController');
-
+Route::resource('applicant', 'ApplicantMainController');
 
 Auth::routes();
 
