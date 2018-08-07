@@ -167,6 +167,14 @@
               </p>
             </a>
           </li>
+           <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-map-marker"></i>
+              <p>
+                Tracking
+              </p>
+            </a>
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
@@ -178,14 +186,20 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Active Page</p>
+                  <i class="fa fa-sign-in nav-icon"></i>
+                  <p>Register</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Inactive Page</p>
+                  <i class="fa fa-paper-plane nav-icon"></i>
+                  <p>Apply</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-check nav-icon"></i>
+                  <p>Approve</p>
                 </a>
               </li>
             </ul>
@@ -201,8 +215,14 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/applicant" class="nav-link">
-                  <i class="fa fa-user-o nav-icon"></i>
+                  <i class="fa fa-user nav-icon"></i>
                   <p>Applicant</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-folder nav-icon"></i>
+                  <p>Application</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -231,7 +251,7 @@
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="fa fa-history nav-icon"></i>
-                  <p>Activity Log</p>
+                  <p>Audit Log</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -246,11 +266,17 @@
                   <p>Backup and Restore</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-lock nav-icon"></i>
+                  <p>Level of Access</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-file"></i>
+              <i class="nav-icon fa fa-bar-chart"></i>
               <p>
                 Reports
                 <i class="right fa fa-angle-left"></i>
@@ -259,14 +285,20 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Active Page</p>
+                  <i class="fa fa-file nav-icon"></i>
+                  <p>Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Inactive Page</p>
+                  <i class="fa fa-file nav-icon"></i>
+                  <p>Scholarship Programs</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-file nav-icon"></i>
+                  <p>Application Forms</p>
                 </a>
               </li>
             </ul>

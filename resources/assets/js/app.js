@@ -9,6 +9,9 @@ require('./bootstrap');
 require('../../../node_modules/jquery/dist/jquery.slim.min.js');
 require('../../../node_modules/popper.js/dist/popper.min.js');
 require('../../../node_modules/bootstrap/dist/js/bootstrap.min.js');
+require('../../../node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js');
+require('../../../node_modules/jquery/dist/jquery.min.js');
+// require('../../../node_modules/dataTables.bootstrap4');
 // require('../../../node_modules/admin-lte/plugins/font-awesome/font-awesome.min.css');
 window.Vue = require('vue');
 
@@ -23,3 +26,4 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 const app = new Vue({
     el: '#app'
 });
+

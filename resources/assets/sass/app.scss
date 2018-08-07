@@ -9,10 +9,18 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+//MDB
+// @import '~mdbootstrap/scss/mdb.scss';
+
+
 @import '~admin-lte/dist/css/adminlte.css';
 
 $fa-font-path: "../fonts/" !default;
 @import '~font-awesome/scss/font-awesome.scss';
+
+@import '~datatables.net-bs4/css/dataTables.bootstrap4.min.css';
+
+@import url("https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css");
 
 .navbar-laravel {
   background-color: #fff;

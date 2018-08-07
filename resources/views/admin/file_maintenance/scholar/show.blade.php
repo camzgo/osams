@@ -1,17 +1,28 @@
-@extends('layouts.admin')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>ADMINISTRATOR</title>
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  <script src="{{asset('js/app.js')}}"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>  
+  
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper" id="app">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
       </li>
     </ul>
 
@@ -105,6 +116,14 @@
               </p>
             </a>
           </li>
+           <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-map-marker"></i>
+              <p>
+                Tracking
+              </p>
+            </a>
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
@@ -116,14 +135,20 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Active Page</p>
+                  <i class="fa fa-sign-in nav-icon"></i>
+                  <p>Register</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Inactive Page</p>
+                  <i class="fa fa-paper-plane nav-icon"></i>
+                  <p>Apply</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-check nav-icon"></i>
+                  <p>Approve</p>
                 </a>
               </li>
             </ul>
@@ -138,23 +163,42 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="/announcement" class="nav-link">
+                  <i class="fa fa-bullhorn nav-icon"></i>
+                  <p>Announcement</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="/applicant" class="nav-link">
                   <i class="fa fa-user nav-icon"></i>
                   <p>Applicant</p>
                 </a>
               </li>
               <li class="nav-item">
+                <a href="/application" class="nav-link">
+                  <i class="fa fa-folder nav-icon"></i>
+                  <p>Application</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/faqs" class="nav-link">
+                  <i class="fa fa-question nav-icon"></i>
+                  <p>FAQs</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="/scholarship" class="nav-link active">
-                  <i class="fa fa-circle-o nav-icon"></i>
+                  <i class="fa fa-graduation-cap nav-icon"></i>
                   <p>Scholarship</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
+                <a href="/users" class="nav-link">
+                  <i class="fa fa-users nav-icon"></i>
                   <p>Users</p>
                 </a>
               </li>
+              
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -168,27 +212,33 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Activity Log</p>
+                  <i class="fa fa-history nav-icon"></i>
+                  <p>Audit Log</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
+                  <i class="fa fa-archive nav-icon"></i>
                   <p>Archive</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
+                  <i class="fa fa-hdd-o nav-icon"></i>
                   <p>Backup and Restore</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-lock nav-icon"></i>
+                  <p>Level of Access</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-file"></i>
+              <i class="nav-icon fa fa-bar-chart"></i>
               <p>
                 Reports
                 <i class="right fa fa-angle-left"></i>
@@ -197,14 +247,20 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Active Page</p>
+                  <i class="fa fa-file nav-icon"></i>
+                  <p>Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Inactive Page</p>
+                  <i class="fa fa-file nav-icon"></i>
+                  <p>Scholarship Programs</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-file nav-icon"></i>
+                  <p>Application Forms</p>
                 </a>
               </li>
             </ul>
@@ -221,13 +277,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Applicant</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">File Maintenance</li>
-              <li class="breadcrumb-item active">Applicant</li>
+              <li class="breadcrumb-item active">Scholarship</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -236,53 +291,238 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
+     <div class="content">
       <div class="container-fluid">
-        <table class="table">
-            <thead class="thead-light">
-            <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Email</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-                <td><a href="" class="btn btn-primary">Edit</a> <a href="" class="btn btn-danger">Delete</a></td>
-            </tr>
-            <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-                <td><a href="" class="btn btn-primary">Edit</a> <a href="" class="btn btn-danger">Delete</a></td>
-            </tr>
-            <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
-                <td><a href="" class="btn btn-primary">Edit</a> <a href="" class="btn btn-danger">Delete</a></td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="card">
+          <div class="card-header" id="th-cl1">
+              <h3 class="brand-text font-weight-bold">Scholarship</h3>
+          </div>
+          <div class="card-body"> 
+        <br>
+        <div class="container">
+    
+     <table class=" table table-hover table-hover" style="width:100%" id="table">
+               <thead class="th-cl1">
+                  <tr>
+                     <th>ID</th>
+                     <th>Name</th>
+                     <th>Description</th>
+                     <th>Amount</th>
+                     <th>Deadline</th>
+                     <th>Slots</th>
+                     <th>Status</th>
+                     <th>Actions</th>
+                     {{-- <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></button></th> --}}
+                  </tr>
+               </thead>
+            </table>
+            <br>
+</div>
+<div id="mainModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form method="post" id="main_form">
+                <div class="modal-header">
+                   <h4 class="modal-title">Add Data</h4>
+                   <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+                </div>
+                <div class="modal-body">
+                    {{csrf_field()}}
+                    <span id="form_output"></span>
+                    <div class="form-group">
+                        <label>Scholarship Name:</label>
+                        <input type="text" name="scholarship_name" id="scholarship_name" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea type="text" name="scholarship_desc" id="scholarship_desc" class="form-control" rows="5"></textarea>
+                    </div>
+                    <div class="form-group ">
+                      <label>Amount</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Php</span>
+                        </div>
+                          <input type="number" name="amount" id="amount" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Deadline</label>
+                        <input type="date" name="deadline" id="deadline" class="form-control" data-provide="datepicker" />
+                    </div>
+                    <div class="form-group">
+                        <label>Slots</label>
+                        <input type="text" name="slot" id="slot" class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="scholarship_id" id="scholarship_id" value="" />
+                    <input type="hidden" name="button_action" id="button_action" value="update" />
+                    <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="delModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" id="del_form">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+              </div>
+                <div class="modal-body">
+                    {{csrf_field()}}
+                    <span id="del_output"> </span>
+                    <div class="form-group">
+                        <h5 class="brand-text font-weight-bold">Are you sure you want to close it?</h5>
+                    </div>
+                    <div class="form-group" style="float:right;">
+                       <input type="submit" name="submit" id="action" value="Close" class="btn btn-danger" />
+                       <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
+                    </div>
+                    <div class="form-group">
+                      <input type="hidden" name="del_id" id="del_id" value="" />
+                      <input type="hidden" name="status_code" id="status_code" value="">
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+        
+</div>
+<script>
+     $(function() {
+               $('#table').DataTable({
+               processing: true,
+               serverSide: true,
+               ajax: '{{ route('scholar.getdata') }}',
+               columns: [
+                        { data: 'id', name: 'id' },
+                        { data: 'scholarship_name', name: 'scholarship_name' },
+                        { data: 'scholarship_desc', name: 'scholarship_desc' },
+                        { data: 'amount', name: 'amount'},
+                        { data: 'deadline', name: 'deadline'},
+                        { data: 'slot', name: 'slot'},
+                        { width: '10%', data: 'badge', orderable:false, searchable: false},
+                        { width: '20%', data: 'action', orderable:false, searchable: false}
+                        
+                        // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
+                  ]
+            });
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    <div class="p-3">
-      <h5>Title</h5>
-      <p>Sidebar content</p>
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
+        $('#add_data').click(function(){
+        $('#formModal').modal('show');
+        $('#data_form')[0].reset();
+        $('#form_output').html('');
+        $('#button_action').val('insert');
+        $('#action').val('Add');
+        $('.modal-title').text('Add Question');
+    });
 
+    $('#main_form').on('submit', function(event){
+        event.preventDefault();
+        var form_data = $(this).serialize();
+        $.ajax({
+            url:"{{ route('scholar.postdata') }}",
+            method:"POST",
+            data:form_data,
+            dataType:"json",
+            success:function(data)
+            {
+                if(data.error.length > 0)
+                {
+                    var error_html = '';
+                    for(var count = 0; count < data.error.length; count++)
+                    {
+                        error_html += '<div class="alert alert-danger">'+data.error[count]+'</div>';
+                    }
+                    $('#form_output').html(error_html);
+                }
+                else
+                {
+                    $('#form_output').html(data.success);
+                    $('#main_form')[0].reset();
+                    $('#action').val('Add');
+                    $('.modal-title').text('Add Data');
+                    $('#button_action').val('insert');
+                    $('#table').DataTable().ajax.reload();
+                }
+            }
+        })
+    });
 
-@endsection
+    $(document).on('click', '.edit', function(){
+        var id = $(this).attr("id");
+        $('#form_output').html('');
+        $.ajax({
+            url:"{{route('scholar.fetchdata')}}",
+            method:'get',
+            data:{id:id},
+            dataType:'json',
+            success:function(data)
+            {
+                $('#scholarship_name').val(data.scholarship_name);
+                $('#scholarship_desc').val(data.scholarship_desc);
+                $('#amount').val(data.amount);
+                $('#slot').val(data.slot);
+                $('#deadline').val(data.deadline);
+                $('#scholarship_id').val(id);
+                $('#mainModal').modal('show');
+                $('#action').val('Edit');
+                $('.modal-title').text('Edit Data');
+               // $('#button_action').val('update');
+            }
+    });   
+    });
+    
+    $(document).on('click', '.delete', function(){
+        var id = $(this).attr('id');
+         //$('#del_output').html('');
+         $.ajax({
+            url:"{{route('scholar.fetchdata')}}",
+            method:'get',
+            data:{id:id},
+            dataType:'json',
+            success:function(data)
+            {
+                $('#del_id').val(id);
+                $('#status_code').val(data.status);          
+                $('#delModal').modal('show');
+               // $('#button_action').val('update');
+            }
+        
+    }); 
+    });
+    $('#del_form').on('submit', function(event){
+        // event.preventDefault();
+        // var del_data = $(this).serialize();
+        $.ajax({
+            url:"{{route('scholar.removedata')}}",
+            method:"POST",
+            //data:del_data,
+            dataType:"json",
+            success:function(data)
+            {
+              //$('#del_output').html(data.success);
+              //$('#del_form')[0].reset();
+              $('#table').DataTable().ajax.reload();
+              $('#table').DataTable().ajax.reload();      
+            }
+        });
+    }); 
+  
+});
+</script>
+</body>
+</html>

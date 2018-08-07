@@ -15,6 +15,7 @@ class ApplicantMainController extends Controller
     {
         //
         return view ('admin.file_maintenance.applicant.show');
+        //return Datatables::of(students::query())->make(true);
     }
 
     /**
@@ -25,6 +26,8 @@ class ApplicantMainController extends Controller
     public function create()
     {
         //
+       // return view ('admin.file_maintenance.applicant.show');
+
     }
 
     /**
