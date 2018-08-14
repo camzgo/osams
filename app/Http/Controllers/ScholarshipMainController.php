@@ -95,8 +95,16 @@ class ScholarshipMainController extends Controller
         ->addColumn('action', function($scholarships){
             if($scholarships->status=="OPEN")
             {
+                // return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$scholarships->id.'"><i class="fa fa-edit"></i> Edit</a>
+                //     <a href="#" class="btn btn-sm btn-danger delete" id="'.$scholarships->id.'"><i class="fa fa-close"></i> Closed</a>';
+                
                 return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$scholarships->id.'"><i class="fa fa-edit"></i> Edit</a>
-                    <a href="#" class="btn btn-sm btn-danger delete" id="'.$scholarships->id.'"><i class="fa fa-close"></i> Closed</a>';
+                     <a href="#" class="btn btn-sm btn-danger delete" id="'.$scholarships->id.'"><i class="fa fa-close"></i> Closed</a>';
+                
+                // {!!Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+                //                             {{Form::hidden('_method', 'DELETE')}}
+                //                             {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                //                         {!!Form::close()!!}
             }
             else
             {
@@ -147,10 +155,17 @@ class ScholarshipMainController extends Controller
             'scholarship_desc'  => 'required',
             'amount'            => 'required',
             'deadline'         => 'required',
-            'slot'            => 'required'
+            'slot'            => 'required',
+            'status'          => 'required'
         
         ]);
         
+    //     protected $rules =
+    // [
+    //     'title' => 'required|min:2|max:32|regex:/^[a-z ,.\'-]+$/i',
+    //     'content' => 'required|min:2|max:128|regex:/^[a-z ,.\'-]+$/i'
+    // ];
+
         $error_array = array();
         $success_output = '';
         $refresh = "return redirect('/scholarship');";
@@ -177,6 +192,19 @@ class ScholarshipMainController extends Controller
                 $success_output = '<div class="alert alert-success">Success!</div>';
 
             }
+            if($request->get('button_action') == 'close')
+            {
+                $scholarship = Scholarship::find($request->get('scholarship_id'));
+                $scholarship->scholarship_name = $request->get('scholarship_name');
+                $scholarship->scholarship_desc = $request->get('scholarship_desc');
+                $scholarship->amount = $request->get('amount');
+                $scholarship->deadline =$request->get('deadline');
+                $scholarship->slot = $request->get('slot');
+                $scholarship->status = $request->get('status');
+                $scholarship->save();
+                $success_output = '<div class="alert alert-success">Success!</div>';
+
+            }
             
         }
         
@@ -190,18 +218,8 @@ class ScholarshipMainController extends Controller
 
     function removedata(Request $request)
     {
-        // $chk=$request->get('status');
-        // $chnge;
-        // if($chk=='OPEN')
-        // {
-        //     $chnge = 'CLOSED';
-        // }
-        // else
-        // {
-        //     $chnge='OPEN';
-        // }
         $scholarship = Scholarship::find($request->get('del_id'));
-        $scholarship->status = $request->get('status_code'); 
+        $scholarship->status = $request->get('status');
         $scholarship->save();
     }
     function getstat(Request $request)

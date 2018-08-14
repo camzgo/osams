@@ -41,6 +41,10 @@ Route::get('faqs/fetchdata', 'FaqsMainController@fetchdata')->name('faqs.fetchda
 Route::get('faqs/removedata', 'FaqsMainController@removedata')->name('faqs.removedata');
 Route::get('faqs/massremove', 'FaqsMainController@massremove')->name('faqs.massremove');
 
+
+Route::get('apply/getdata', 'ApplyController@getdata')->name('apply.getdata');
+
+
 // Route::get ( '/here', function () {
 //     $data = Data::all ();
 //     return view ('admin.file_maintenance.applicant.sample')->withData ( $data );
@@ -55,6 +59,9 @@ Route::resource('announcement', 'AnnounceMainController');
 Route::resource('faqs', 'FaqsMainController');
 Route::resource('scholarship', 'ScholarshipMainController');
 Route::resource('users', 'UsersMainController');
+Route::resource('reg', 'RegisterMainController');
+Route::resource('apply', 'ApplyController');
+
 
 
 Route::get('create', 'DisplayDataController@create');
@@ -63,3 +70,4 @@ Route::get('getdata', 'DisplayDataController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

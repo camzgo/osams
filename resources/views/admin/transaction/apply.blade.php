@@ -124,7 +124,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
               <p>
@@ -140,7 +140,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link active">
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
                 </a>
@@ -153,7 +153,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>
@@ -187,7 +187,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/scholarship" class="nav-link active">
+                <a href="/scholarship" class="nav-link">
                   <i class="fa fa-graduation-cap nav-icon"></i>
                   <p>Scholarship</p>
                 </a>
@@ -281,8 +281,8 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">File Maintenance</li>
-              <li class="breadcrumb-item active">Scholarship</li>
+              <li class="breadcrumb-item active">Transaction</li>
+              <li class="breadcrumb-item active">Apply</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -295,126 +295,62 @@
       <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h3 class="brand-text font-weight-bold">Scholarship</h3>
+              <h3 class="brand-text font-weight-bold">Apply</h3>
           </div>
           <div class="card-body"> 
         <br>
         <div class="container">
-    
-     <table class=" table table-hover table-hover" style="width:100%" id="table">
+    <br />
+    <br />
+     <table class=" table table-hover" style="width:100%" id="table">
                <thead class="th-cl1">
                   <tr>
-                     <th>#</th>
-                     <th>Name</th>
-                     <th>Description</th>
-                     <th>Amount</th>
-                     <th>Deadline</th>
-                     <th>Slots</th>
-                     <th>Status</th>
-                     <th>Actions</th>
-                     {{-- <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></button></th> --}}
+                     <th>ID</th>
+                     {{-- <th>surname</th>
+                     <th>First Name</th>
+                     <th>Middle Name</th> --}}
+
+                     {{-- <th>Answer</th>
+                     <th>Actions</th> --}}
+                     <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></button></th>
                   </tr>
                </thead>
             </table>
             <br>
 </div>
-<div id="mainModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg modal-dialog-centered" id="md-form">
+<div id="formModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <form method="post" id="main_form">
+            <form method="post" id="data_form">
                 <div class="modal-header">
-                   <h4 class="modal-title">Add Data</h4>
+                   <h4 class="modal-title">Add Question <i class="fa fa-question"></i></h4>
                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
                 </div>
                 <div class="modal-body">
-                  {{csrf_field()}}                  
-                  <div id="editForm">
-                      <span id="form_output"></span>
-                      <div class="form-group">
-                          <label>Scholarship Name:</label>
-                          <input type="text" name="scholarship_name" id="scholarship_name" class="form-control" />
-                      </div>
-                      <div class="form-group">
-                          <label>Description</label>
-                          <textarea type="text" name="scholarship_desc" id="scholarship_desc" class="form-control" rows="5"></textarea>
-                      </div>
-                      <div class="form-group ">
-                        <label>Amount</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">Php</span>
-                          </div>
-                            <input type="number" name="amount" id="amount" class="form-control" />
-                        </div>
-                      </div>
-                      <div class="form-group">
-                          <label>Deadline</label>
-                          <input type="date" name="deadline" id="deadline" class="form-control" data-provide="datepicker" />
-                      </div>
-                      <div class="form-group">
-                          <label>Slots</label>
-                          <input type="text" name="slot" id="slot" class="form-control" />
-                      </div>
-                  </div>
-                  <div id="delForm">
-                     <span id="del_output"> </span>
-                    <div class="form-group">
-                        <h5 class="brand-text font-weight-bold">Are you sure you want to close it?</h5>
-                    </div>
-                    <div class="form-group">
-                      <input type="hidden" name="del_id" id="del_id" value="" />
-                      <input type="hidden" name="status" id="status" value="">
-                    </div>
-                     {{-- <div class="form-group" style="float:right;">
-                       <input type="submit" class="btn btn-danger" id="close_this" name="submit" value="Close"/>
-                       <button type="button" class="btn btn-danger" id="close_this" name="close_this" onclick="archiveData()"> Close </button>
-                       <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
-                    </div> --}}
-                  </div>
-                </div>
-                  <div class="modal-footer">
-                      <input type="hidden" name="scholarship_id" id="scholarship_id" value="" />
-                      <input type="hidden" name="button_action" id="button_action" value="insert" />
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
-                      <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
-                  </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-{{-- <div id="delModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="post" id="del_form">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
-              </div>
-                <div class="modal-body">
                     {{csrf_field()}}
-                    <span id="del_output"> </span>
+                    <span id="form_output"></span>
                     <div class="form-group">
-                        <h5 class="brand-text font-weight-bold">Are you sure you want to close it?</h5>
+                        <label>Enter Question</label>
+                        <input type="text" name="question" id="question" class="form-control" />
                     </div>
                     <div class="form-group">
-                      <input type="hidden" name="del_id" id="del_id" value="" />
-                      <input type="hidden" name="status" id="status" value="">
+                        <label>Enter Answer</label>
+                        <textarea rows="5" name="answer" id="answer" class="form-control"></textarea>
                     </div>
-                     <div class="form-group" style="float:right;">
-                       <input type="submit" class="btn btn-danger" id="close_this" name="submit" value="Close"/>
-                       <button type="button" class="btn btn-danger" id="close_this" name="close_this" onclick="archiveData()"> Close </button>
-                       <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
-                    </div>
-                        
-                  </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="faq_id" id="faq_id" value="" />
+                    <input type="hidden" name="button_action" id="button_action" value="insert" />
+                    <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </form>
         </div>
     </div>
-</div> --}}
-
 </div>
 </div>
-
+</div>
+       
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -426,22 +362,17 @@
                $('#table').DataTable({
                processing: true,
                serverSide: true,
-               ajax: '{{ route('scholar.getdata') }}',
+               ajax: '{{ route('apply.getdata') }}',
                columns: [
-                        { data: 'id', name: 'id' },
-                        { data: 'scholarship_name', name: 'scholarship_name' },
-                        { data: 'scholarship_desc', name: 'scholarship_desc' },
-                        { data: 'amount', name: 'amount'},
-                        { data: 'deadline', name: 'deadline'},
-                        { data: 'slot', name: 'slot'},
-                        { width: '10%', data: 'badge', orderable:false, searchable: false},
+                        { data: 'name', name: 'name' },
+                        // { data: 'surname', name: 'surname' },
+                        // { data: 'first_name', name: 'first_name' },
+                        // { data: 'middle_name', name: 'middle_name'},
                         { width: '20%', data: 'action', orderable:false, searchable: false}
-                        
                         // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
-                  ]
+                  ] 
             });
-
-        $('#add_data').click(function(){
+    $('#add_data').click(function(){
         $('#formModal').modal('show');
         $('#data_form')[0].reset();
         $('#form_output').html('');
@@ -450,11 +381,11 @@
         $('.modal-title').text('Add Question');
     });
 
-    $('#main_form').on('submit', function(event){
+    $('#data_form').on('submit', function(event){
         event.preventDefault();
         var form_data = $(this).serialize();
         $.ajax({
-            url:"{{ route('scholar.postdata') }}",
+            url:"{{ route('faqs.postdata') }}",
             method:"POST",
             data:form_data,
             dataType:"json",
@@ -472,189 +403,38 @@
                 else
                 {
                     $('#form_output').html(data.success);
-                    $('#main_form')[0].reset();
+                    $('#data_form')[0].reset();
+                    $('#action').val('Add');
+                    $('.modal-title').text('Add Question');
+                    $('#button_action').val('insert');
                     $('#table').DataTable().ajax.reload();
-                    $('#mainModal').modal('hide');
                 }
             }
         })
     });
 
+
     $(document).on('click', '.edit', function(){
         var id = $(this).attr("id");
         $('#form_output').html('');
         $.ajax({
-            url:"{{route('scholar.fetchdata')}}",
+            url:"{{route('faqs.fetchdata')}}",
             method:'get',
             data:{id:id},
             dataType:'json',
             success:function(data)
             {
-              edit_Form();
-              $('#scholarship_name').val(data.scholarship_name);
-              $('#scholarship_desc').val(data.scholarship_desc);
-              $('#amount').val(data.amount);
-              $('#slot').val(data.slot);
-              $('#deadline').val(data.deadline);
-              $('#scholarship_id').val(id);
-              $('#mainModal').modal('show');
-              $('#action').val('Edit');
-              document.getElementById("action").className = "btn btn-info";
-              document.getElementById("md-form").classList.add('modal-lg');
-              $('#button_action').val('update');
-              $('.modal-title').text('Edit Data');
-               // $('#button_action').val('update');
+                $('#question').val(data.question);
+                $('#answer').val(data.answer);
+                $('#faq_id').val(id);
+                $('#formModal').modal('show');
+                $('#action').val('Edit');
+                $('.modal-title').text('Edit Question');
+                $('#button_action').val('update');
             }
     });   
     });
-    
-    $(document).on('click', '.delete', function(){
-        var id = $(this).attr('id');
-         //$('#del_output').html('');
-         $.ajax({
-            url:"{{route('scholar.fetchdata')}}",
-            method:'get',
-            data:{id:id},
-            dataType:'json',
-            success:function(data)
-            {
-                console.log("status: " + data.status );
-                
-                $('#del_id').val(id);
-                if(data.status == "OPEN"){
-                  $('#status').val("CLOSED");
-                  $('#action').val('Close');
-                  document.getElementById("action").className = "btn btn-danger";
-                }
-                else
-                {
-                  $('#status').val("OPEN");
-                  $('#action').val('Open');
-                  document.getElementById("action").className = "btn btn-success";
-                }
-                del_Form();
-                $('#scholarship_name').val(data.scholarship_name);
-                $('#scholarship_desc').val(data.scholarship_desc);
-                $('#amount').val(data.amount);
-                $('#slot').val(data.slot);
-                $('#deadline').val(data.deadline);
-                $('#scholarship_id').val(id);
-                $('#mainModal').modal('show');
-                document.getElementById("md-form").classList.remove('modal-lg');
-                $('#button_action').val('close');
-                $('.modal-title').text('');
-                          
-               // $('#delModal').modal('show');
-                
-               // $('#button_action').val('update');
-            }
-            }); 
-        console.log("id: " + id);
-        
-    }); 
-    // // $('#del_form').on('submit', function(event){
-    //     // event.preventDefault();
-    //     // var del_data = $(this).serialize();
-    //     $.ajax({
-    //         url:"{{route('scholar.removedata')}}",
-    //         method:"POST",
-    //         //data:del_data,
-    //         dataType:"json",
-    //         success:function(data)
-    //         {
-    //           //$('#del_output').html(data.success);
-    //           //$('#del_form')[0].reset();
-    //           $('#table').DataTable().ajax.reload();
-    //           $('#table').DataTable().ajax.reload();      
-    //         }
-    //     });
-    // }); 
-    // click', '.close_this',
-    // $('.delModal').on('click', '.close_this', function(event)
-    // {
-    //   $.ajax({
-    //     type: 'POST',
-    //     url:"{{route('scholar.removedata')}}",
-    //     data: {
-    //             'id': $("#del_id").val(),
-    //             'status': $('#status').val()
-    //         },
-    //     success:function(data)
-    //     {
-    //       $('#table').DataTable().ajax.reload();
-    //     }
-    //   });
-    // });
-    // $('#del_form').on('submit', function(event){
-    //     event.preventDefault();
-    //     var del_data = $(this).serialize();
-    //     //console.log('Successful!');
-    //     $.ajax({
-    //         url:"{{ route('scholar.removedata') }}",
-    //         method:"POST",
-    //         data:del_data,
-    //         dataType:"json",
-    //         success:function(data)
-    //         {
-    //           $('#table').DataTable().ajax.reload();
-    //           console.log('Successful!');
-    //             if(data.error.length > 0)
-    //             {
-    //                 var error_html = '';
-    //                 for(var count = 0; count < data.error.length; count++)
-    //                 {
-    //                     error_html += '<div class="alert alert-danger">'+data.error[count]+'</div>';
-    //                 }
-    //                 $('#form_output').html(error_html);
-    //             }
-    //             else
-    //             {
-    //                 $('#table').DataTable().ajax.reload();
-    //             }
-    //         }
-    //     })
-    // });
-    
-  
 });
-// function archiveData()
-//     {
-//       $.ajax({
-//         type: 'POST',
-//         url:"{{route('scholar.removedata')}}",
-//         data: {
-//                 'id': $("#del_id").val(),
-//                 'status': $('#status').val()
-//             },
-//         success:function(data)
-//         {
-//           $('#table').DataTable().ajax.reload();
-//         }
-//       });
-//     }
-
-function edit_Form() {
-    var x = document.getElementById("editForm");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    }
-    var y = document.getElementById("delForm");
-    y.style.display = "none";
-    // } else {
-    //     x.style.display = "block";
-    // }
-}
-function del_Form() {
-    var x = document.getElementById("delForm");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    }
-    var y = document.getElementById("editForm");
-    y.style.display = "none";
-    // } else {
-    //     x.style.display = "block";
-    // }
-}
 </script>
 </body>
 </html>
