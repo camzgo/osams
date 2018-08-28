@@ -20,11 +20,11 @@
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
     <!-- Left navbar links -->
-    <ul class="navbar-nav">
+    {{-- <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
       </li>
-    </ul>
+    </ul> --}}
 
     <!-- Right navbar links -->
      <ul class="navbar-nav ml-auto">
@@ -117,7 +117,7 @@
             </a>
           </li>
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/tracking" class="nav-link">
               <i class="nav-icon fa fa-map-marker"></i>
               <p>
                 Tracking
@@ -134,19 +134,22 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/reg" class="nav-link">
+                  &nbsp
                   <i class="fa fa-sign-in nav-icon"></i>
                   <p>Register</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/apply" class="nav-link">
+                  &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/approve" class="nav-link">
+                  &nbsp
                   <i class="fa fa-check nav-icon"></i>
                   <p>Approve</p>
                 </a>
@@ -164,36 +167,42 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/announcement" class="nav-link active">
+                  &nbsp
                   <i class="fa fa-bullhorn nav-icon"></i>
                   <p>Announcement</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/applicant" class="nav-link">
+                  &nbsp
                   <i class="fa fa-user nav-icon"></i>
                   <p>Applicant</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/application" class="nav-link">
+                  &nbsp
                   <i class="fa fa-folder nav-icon"></i>
                   <p>Application</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/faqs" class="nav-link">
+                  &nbsp
                   <i class="fa fa-question nav-icon"></i>
                   <p>FAQs</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/scholarship" class="nav-link">
+                  &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
                   <p>Scholarship</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/users" class="nav-link">
+                  &nbsp
                   <i class="fa fa-users nav-icon"></i>
                   <p>Users</p>
                 </a>
@@ -212,24 +221,68 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-history nav-icon"></i>
                   <p>Audit Log</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-archive nav-icon"></i>
-                  <p>Archive</p>
+                  <p>Archive
+                    <i class="right fa fa-angle-left"></i>
+                  </p>
+                  
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/archive/announcement" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-bullhorn nav-icon"></i>
+                        <p>Announcement</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/applicant" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-user nav-icon"></i>
+                        <p>Applicant</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/application" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-folder nav-icon"></i>
+                        <p>Application</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/faqs" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-question nav-icon"></i>
+                        <p>FAQs</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/users" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-users nav-icon"></i>
+                        <p>Users</p>
+                        </a>
+                    </li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-hdd-o nav-icon"></i>
                   <p>Backup and Restore</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-lock nav-icon"></i>
                   <p>Level of Access</p>
                 </a>
@@ -247,18 +300,21 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-file nav-icon"></i>
-                  <p>Master List of Scholars</p>
+                  <p> Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Scholarship Programs</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Application Forms</p>
                 </a>
@@ -277,13 +333,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">File Maintenance</li>
-              <li class="breadcrumb-item active">Applicant</li>
+              <li class="breadcrumb-item active">Announcement</li>
             </ol>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -295,17 +351,13 @@
       <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h3 class="brand-text font-weight-bold" >Announcement</h3>
+              <h3 class="boldtx">Announcement</h3>
           </div>
           <div class="card-body"> 
         <div class="flt-right">
-            <a href="#" class="btn btn-primary">
-              <i class="fa fa-print"></i>
-              Print
-            </a>
-            <a href="announcement/create" class="btn btn-success">
+            <a href="announcement/create" class="btn btn-success ">
                 <i class="fa fa-plus"></i>
-                Add Applicant
+                Add New
             </a>
           </div>
 
@@ -316,46 +368,60 @@
      <table class=" table table-hover" style="width:100%" id="table">
                <thead >
                   <tr>
-                     <th>ID</th>
-                     <th>First Name</th>
-                     <th>Last Name</th>
+                     <th>#</th>
+                     <th>Title</th>
+                     <th>Body</th>
                      <th>Actions</th>
-                     <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-sm"><i class="fa fa-close"></i></button></th>
+                     {{-- <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-sm"><i class="fa fa-close"></i></button></th> --}}
                   </tr>
                </thead>
             </table>
             <br>
 </div>
-<div id="announcementModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+<div id="mainModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form method="post" id="_form">
+            <form method="post" id="main_form">
                 <div class="modal-header">
-                   <h4 class="modal-title">Add Data</h4>
                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
                 </div>
                 <div class="modal-body">
                     {{csrf_field()}}
-                    <span id="form_output"></span>
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" name="title" id="title" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>Enter Last Name</label>
-                        <input type="text" name="last_name" id="last_name" class="form-control" />
+                    <div id="delForm">
+                      <span id="del_output"> </span>
+                      <div class="form-group">
+                          <h5 class="brand-text font-weight-bold" id="hddel">Are you sure you want to delete it?</h5>
+                      </div>
+                      <div class="ghost">
+                        <input type="hidden" name='del_id' id='del_id' value="" class="ghost"/>
+                        <input type="hidden" name='del_isdel' id='del_isdel' value="" class="ghost"/>
+                        <input type="hidden" name='del_title' id='del_title' value="" class="ghost"/>
+                        <input type="hidden" name='del_body' id='del_body' value="" class="ghost"/>
+
+                      </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="student_id" id="student_id" value="" />
                     <input type="hidden" name="button_action" id="button_action" value="insert" />
-                    <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" name="submit" id="action" value="Add" class="btn btn-danger" />
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+
+
+<div class="ghost">
+  <input type="hidden" name='a_id' id='a_id' value="" class="ghost"/>
+  <input type="hidden" name='title' id='title' value="" class="ghost"/>
+  <input type="hidden" name='body' id='body' value="" class="ghost"/>
+  <input type="hidden" name='cover_photo' id='cover_photo' value="" class="ghost"/>
+  <input type="hidden" name='a_isdel' id='a_isdel' value="" class="ghost"/>
+</div>
+
+
 </div>
 </div>
       </div><!-- /.container-fluid -->
@@ -369,13 +435,13 @@
                $('#table').DataTable({
                processing: true,
                serverSide: true,
-               ajax: '{{ route('ajaxdata.getdata') }}',
+               ajax: '{{ route('announce.getdata') }}',
                columns: [
                         { data: 'id', name: 'id' },
-                        { data: 'first_name', name: 'first_name' },
-                        { data: 'last_name', name: 'last_name' },
+                        { data: 'title', name: 'title' },
+                        { data: 'body', name: 'body' },
                         { width: '20%', data: 'action', orderable:false, searchable: false},
-                        { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
+                        // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
                   ]
             });
     $('#add_data').click(function(){
@@ -387,11 +453,36 @@
         $('.modal-title').text('Add Data');
     });
 
-    $('#_form').on('submit', function(event){
+    $(document).on('click', '.edit', function(){
+        var id = $(this).attr("id");
+        $('#form_output').html('');
+        $.ajax({
+            url:"{{route('announce.fetchdata')}}",
+            method:'get',
+            data:{id:id},
+            dataType:'json',
+            success:function(data)
+            {
+              //console.log('id: ' + id + ' '+ 'title: ' + data.title + ' '+ 'body: ' + data.body +' ' + 'cover_photo: ' + data.cover_photo + ' ' + 'isdel: ' + data.a_isdel);
+
+                // $('#first_name').val(data.first_name);
+                // $('#last_name').val(data.last_name);
+                $('#title').val(data.title);
+                $('#body').val(data.body);
+                $('#student_id').val(id);
+                // $('#announcementModal').modal('show');
+                $('#action').val('Edit');
+                $('.modal-title').text('Edit Data');
+                $('#button_action').val('update');
+                window.location = '/announcement/' + id +'/edit'; 
+            }
+    });   
+    });
+$('#main_form').on('submit', function(event){
         event.preventDefault();
         var form_data = $(this).serialize();
         $.ajax({
-            url:"{{ route('ajaxdata.postdata') }}",
+            url:"{{ route('announce.postdata') }}",
             method:"POST",
             data:form_data,
             dataType:"json",
@@ -408,84 +499,52 @@
                 }
                 else
                 {
-                    $('#form_output').html(data.success);
-                    $('#_form')[0].reset();
-                    $('#action').val('Add');
-                    $('.modal-title').text('Add Data');
-                    $('#button_action').val('insert');
+                    $('#main_form')[0].reset();
                     $('#table').DataTable().ajax.reload();
+                    $('#mainModal').modal('hide');
+                    if (($('#action').val() == 'Delete'))
+                    {
+                      swal(
+                        'Success!',
+                        'Announcement is successfully deleted',
+                        'success'
+                      )
+                    }
                 }
             }
         })
     });
 
-    $(document).on('click', '.edit', function(){
-        var id = $(this).attr("id");
-        $('#form_output').html('');
-        $.ajax({
-            url:"{{route('ajaxdata.fetchdata')}}",
-            method:'get',
+ $(document).on('click', '.delete', function(){
+        var id = $(this).attr('id');
+         //$('#del_output').html('');
+         $.ajax({
+            url:"{{route('announce.fetchdata')}}",
+            method:'GET',
             data:{id:id},
             dataType:'json',
             success:function(data)
             {
-                $('#first_name').val(data.first_name);
-                $('#last_name').val(data.last_name);
-                $('#student_id').val(id);
-                $('#announcementModal').modal('show');
-                $('#action').val('Edit');
-                $('.modal-title').text('Edit Data');
-                $('#button_action').val('update');
-            }
-    });   
-    });
-    
-    $(document).on('click', '.delete', function(){
-        var id = $(this).attr('id');
-        if(confirm("Are you sure you want to Delete this data?"))
-        {
-            $.ajax({
-                url:"{{route('ajaxdata.removedata')}}",
-                mehtod:"get",
-                data:{id:id},
-                success:function(data)
-                {
-                    alert(data);
-                    $('#table').DataTable().ajax.reload();
+                if(data.a_isdel == 0){
+                  $('#del_isdel').val(1);
+                  $('#action').val('Delete');
                 }
-            })
-        }
-        else
-        {
-            return false;
-        }
-    }); 
+                //console.log('id: '+ id + ' '+ 'isdel: ' + data.a_isdel);
 
-    $(document).on('click', '#bulk_delete', function(){
-        var id = [];
-        if(confirm("Are you sure you want to Delete this data?"))
-        {
-            $('.student_checkbox:checked').each(function(){
-                id.push($(this).val());
-            });
-            if(id.length > 0)
-            {
-                $.ajax({
-                    url:"{{ route('ajaxdata.massremove')}}",
-                    method:"get",
-                    data:{id:id},
-                    success:function(data)
-                    {
-                        alert(data);
-                        $('#table').DataTable().ajax.reload();
-                    }
-                });
+                $('#del_id').val(id);
+                $('#del_title').val(data.title);
+                $('#del_body').val(data.body);
+                $('#mainModal').modal('show');
+                $('#button_action').val('delete');
+                $('.modal-title').text('');
+                
+                var x =  $('#del_isdel').val(); 
+                var y = $('#del_id').val();
+                var z = $('#title').val();
+                var w = $('#body').val();
+                //console.log('id: '+ y + ' '+ 'isdel: ' + x + ' ' + z + ' ' + w);
             }
-            else
-            {
-                alert("Please select atleast one checkbox");
-            }
-        }
+            }); 
     });
 });
 </script>

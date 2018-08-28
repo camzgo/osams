@@ -10,21 +10,22 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.11/dist/sweetalert2.min.css"> --}}
   <script src="{{asset('js/app.js')}}"></script>
   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>  
-  
+  {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.11/dist/sweetalert2.min.js"></script>   --}}
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
     <!-- Left navbar links -->
-    <ul class="navbar-nav">
+    {{-- <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
       </li>
-    </ul>
+    </ul> --}}
 
     <!-- Right navbar links -->
      <ul class="navbar-nav ml-auto">
@@ -135,18 +136,21 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-sign-in nav-icon"></i>
                   <p>Register</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-check nav-icon"></i>
                   <p>Approve</p>
                 </a>
@@ -164,36 +168,42 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/announcement" class="nav-link">
+                  &nbsp
                   <i class="fa fa-bullhorn nav-icon"></i>
                   <p>Announcement</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/applicant" class="nav-link">
+                  &nbsp
                   <i class="fa fa-user nav-icon"></i>
                   <p>Applicant</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/application" class="nav-link">
+                  &nbsp
                   <i class="fa fa-folder nav-icon"></i>
                   <p>Application</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/faqs" class="nav-link">
+                  &nbsp
                   <i class="fa fa-question nav-icon"></i>
                   <p>FAQs</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/scholarship" class="nav-link active">
+                  &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
                   <p>Scholarship</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/users" class="nav-link">
+                  &nbsp
                   <i class="fa fa-users nav-icon"></i>
                   <p>Users</p>
                 </a>
@@ -212,24 +222,68 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-history nav-icon"></i>
                   <p>Audit Log</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-archive nav-icon"></i>
-                  <p>Archive</p>
+                  <p>Archive
+                    <i class="right fa fa-angle-left"></i>
+                  </p>
+                  
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/archive/announcement" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-bullhorn nav-icon"></i>
+                        <p>Announcement</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/applicant" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-user nav-icon"></i>
+                        <p>Applicant</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/application" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-folder nav-icon"></i>
+                        <p>Application</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/faqs" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-question nav-icon"></i>
+                        <p>FAQs</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/users" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-users nav-icon"></i>
+                        <p>Users</p>
+                        </a>
+                    </li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-hdd-o nav-icon"></i>
                   <p>Backup and Restore</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-lock nav-icon"></i>
                   <p>Level of Access</p>
                 </a>
@@ -247,18 +301,21 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-file nav-icon"></i>
-                  <p>Master List of Scholars</p>
+                  <p> Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Scholarship Programs</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Application Forms</p>
                 </a>
@@ -277,13 +334,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">File Maintenance</li>
               <li class="breadcrumb-item active">Scholarship</li>
             </ol>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -295,7 +352,7 @@
       <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h3 class="brand-text font-weight-bold">Scholarship</h3>
+              <h3 class="boldtx">Scholarship</h3>
           </div>
           <div class="card-body"> 
         <br>
@@ -310,7 +367,7 @@
                      <th>Amount</th>
                      <th>Deadline</th>
                      <th>Slots</th>
-                     <th>Status</th>
+                     <th>Current Status</th>
                      <th>Actions</th>
                      {{-- <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></button></th> --}}
                   </tr>
@@ -318,7 +375,8 @@
             </table>
             <br>
 </div>
-<div id="mainModal" class="modal fade" role="dialog">
+
+<div id="mainModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg modal-dialog-centered" id="md-form">
         <div class="modal-content">
             <form method="post" id="main_form">
@@ -327,16 +385,16 @@
                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
                 </div>
                 <div class="modal-body">
-                  {{csrf_field()}}                  
+                  {{csrf_field()}} 
+                  <span id="form_output"></span>                 
                   <div id="editForm">
-                      <span id="form_output"></span>
                       <div class="form-group">
                           <label>Scholarship Name:</label>
                           <input type="text" name="scholarship_name" id="scholarship_name" class="form-control" />
                       </div>
                       <div class="form-group">
                           <label>Description</label>
-                          <textarea type="text" name="scholarship_desc" id="scholarship_desc" class="form-control" rows="5"></textarea>
+                          <textarea type="text" name="scholarship_desc" id="scholarship_desc" class="form-control noresize" rows="5"></textarea>
                       </div>
                       <div class="form-group ">
                         <label>Amount</label>
@@ -359,7 +417,7 @@
                   <div id="delForm">
                      <span id="del_output"> </span>
                     <div class="form-group">
-                        <h5 class="brand-text font-weight-bold">Are you sure you want to close it?</h5>
+                        <h5 class="brand-text font-weight-bold" id="hddel">Are you sure you want to close it?</h5>
                     </div>
                     <div class="form-group">
                       <input type="hidden" name="del_id" id="del_id" value="" />
@@ -434,7 +492,7 @@
                         { data: 'amount', name: 'amount'},
                         { data: 'deadline', name: 'deadline'},
                         { data: 'slot', name: 'slot'},
-                        { width: '10%', data: 'badge', orderable:false, searchable: false},
+                        { width: '12%', data: 'badge', orderable:false, searchable: false},
                         { width: '20%', data: 'action', orderable:false, searchable: false}
                         
                         // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
@@ -443,7 +501,7 @@
 
         $('#add_data').click(function(){
         $('#formModal').modal('show');
-        $('#data_form')[0].reset();
+        $('#main_form')[0].reset();
         $('#form_output').html('');
         $('#button_action').val('insert');
         $('#action').val('Add');
@@ -471,10 +529,33 @@
                 }
                 else
                 {
-                    $('#form_output').html(data.success);
                     $('#main_form')[0].reset();
                     $('#table').DataTable().ajax.reload();
                     $('#mainModal').modal('hide');
+                    if($('#action').val() == 'Edit')
+                    {
+                      swal(
+                        'Success!',
+                        'The data is updated',
+                        'success'
+                      )
+                    }
+                    else if (($('#action').val() == 'Close'))
+                    {
+                      swal(
+                        'Success!',
+                        'You have successfully close the program',
+                        'success'
+                      )
+                    }
+                    else if (($('#action').val() == 'Open'))
+                    {
+                      swal(
+                        'Success!',
+                        'You have successfully open the program',
+                        'success'
+                      )
+                    }
                 }
             }
         })
@@ -518,19 +599,21 @@
             dataType:'json',
             success:function(data)
             {
-                console.log("status: " + data.status );
+                // console.log("status: " + data.status );
                 
                 $('#del_id').val(id);
                 if(data.status == "OPEN"){
                   $('#status').val("CLOSED");
                   $('#action').val('Close');
                   document.getElementById("action").className = "btn btn-danger";
+                  $("#hddel").text("Are you sure you want to close it?");
                 }
                 else
                 {
                   $('#status').val("OPEN");
                   $('#action').val('Open');
                   document.getElementById("action").className = "btn btn-success";
+                  $("#hddel").text("Are you sure you want to open it?");
                 }
                 del_Form();
                 $('#scholarship_name').val(data.scholarship_name);
@@ -549,7 +632,7 @@
                // $('#button_action').val('update');
             }
             }); 
-        console.log("id: " + id);
+        //console.log("id: " + id);
         
     }); 
     // // $('#del_form').on('submit', function(event){

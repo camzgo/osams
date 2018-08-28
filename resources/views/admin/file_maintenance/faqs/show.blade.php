@@ -20,18 +20,18 @@
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
     <!-- Left navbar links -->
-    <ul class="navbar-nav">
+    {{-- <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
       </li>
-    </ul>
+    </ul> --}}
 
     <!-- Right navbar links -->
      <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fa fa-envelope"></i> 
+          MESSAGES
           <span class="badge badge-danger navbar-badge" style="font-size: 8px;">10</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -117,7 +117,7 @@
             </a>
           </li>
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/tracking" class="nav-link">
               <i class="nav-icon fa fa-map-marker"></i>
               <p>
                 Tracking
@@ -134,19 +134,22 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/reg" class="nav-link">
+                  &nbsp
                   <i class="fa fa-sign-in nav-icon"></i>
                   <p>Register</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/apply" class="nav-link">
+                  &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/approve" class="nav-link">
+                  &nbsp
                   <i class="fa fa-check nav-icon"></i>
                   <p>Approve</p>
                 </a>
@@ -164,36 +167,42 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/announcement" class="nav-link">
+                  &nbsp
                   <i class="fa fa-bullhorn nav-icon"></i>
                   <p>Announcement</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/applicant" class="nav-link">
+                  &nbsp
                   <i class="fa fa-user nav-icon"></i>
                   <p>Applicant</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/application" class="nav-link">
+                  &nbsp
                   <i class="fa fa-folder nav-icon"></i>
                   <p>Application</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/faqs" class="nav-link active">
+                  &nbsp
                   <i class="fa fa-question nav-icon"></i>
                   <p>FAQs</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/scholarship" class="nav-link">
+                  &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
                   <p>Scholarship</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/users" class="nav-link">
+                  &nbsp
                   <i class="fa fa-users nav-icon"></i>
                   <p>Users</p>
                 </a>
@@ -212,24 +221,68 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-history nav-icon"></i>
                   <p>Audit Log</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-archive nav-icon"></i>
-                  <p>Archive</p>
+                  <p>Archive
+                    <i class="right fa fa-angle-left"></i>
+                  </p>
+                  
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/archive/announcement" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-bullhorn nav-icon"></i>
+                        <p>Announcement</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/applicant" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-user nav-icon"></i>
+                        <p>Applicant</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/application" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-folder nav-icon"></i>
+                        <p>Application</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/faqs" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-question nav-icon"></i>
+                        <p>FAQs</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/users" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-users nav-icon"></i>
+                        <p>Users</p>
+                        </a>
+                    </li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-hdd-o nav-icon"></i>
                   <p>Backup and Restore</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-lock nav-icon"></i>
                   <p>Level of Access</p>
                 </a>
@@ -247,18 +300,21 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-file nav-icon"></i>
-                  <p>Master List of Scholars</p>
+                  <p> Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Scholarship Programs</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Application Forms</p>
                 </a>
@@ -277,13 +333,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">File Maintenance</li>
-              <li class="breadcrumb-item active">Applicant</li>
+              <li class="breadcrumb-item active">FAQS</li>
             </ol>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -295,13 +351,13 @@
       <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h3 class="brand-text font-weight-bold">Frequently Ask Questions (FAQs)</h3>
+              <h3 class="boldtx">Frequently Ask Questions (FAQs)</h3>
           </div>
           <div class="card-body"> 
          <div class="flt-right">
-            <a href="#" class="btn btn-success" id="add_data">
+            <a href="#" class="btn btn-success" id="add_data" data-backdrop="static" data-keyboard="false">
                 <i class="fa fa-plus"></i>
-                Add Question
+                Add New
             </a>
           </div>
 
@@ -312,7 +368,7 @@
      <table class=" table table-hover" style="width:100%" id="table">
                <thead class="th-cl1">
                   <tr>
-                     <th>ID</th>
+                     <th>#</th>
                      <th>Question</th>
                      <th>Answer</th>
                      <th>Actions</th>
@@ -322,36 +378,51 @@
             </table>
             <br>
 </div>
-<div id="formModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="post" id="data_form">
-                <div class="modal-header">
-                   <h4 class="modal-title">Add Question <i class="fa fa-question"></i></h4>
-                   <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
-                </div>
-                <div class="modal-body">
-                    {{csrf_field()}}
-                    <span id="form_output"></span>
-                    <div class="form-group">
-                        <label>Enter Question</label>
-                        <input type="text" name="question" id="question" class="form-control" />
+
+    <div id="mainModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg modal-dialog-centered" id="md-form">
+            <div class="modal-content">
+                <form method="post" id="main_form">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Add New</h4>
+                      <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
                     </div>
-                    <div class="form-group">
-                        <label>Enter Answer</label>
-                        <textarea rows="5" name="answer" id="answer" class="form-control"></textarea>
+                    <div class="modal-body">
+                      {{csrf_field()}}    
+                      <span id="form_output"></span>              
+                      <div id="editForm">
+                          <div class="form-group">
+                              <label>Question</label>
+                              <input type="text" name="question" id="question" class="form-control" />
+                          </div>
+                          <div class="form-group">
+                              <label>Answer</label>
+                              <textarea type="text" name="answer" id="answer" class="form-control noresize" rows="7"></textarea>
+                          </div>
+                      </div>
+                      <div id="delForm">
+                        <span id="del_output"> </span>
+                        <div class="form-group">
+                            <h5 class="brand-text font-weight-bold" id="hddel">Are you sure you want to delete it?</h5>
+                        </div>
+                        <div class="form-group">
+                          <input type="hidden" name="del_id" id="del_id" value="" />
+                          <input type="hidden" name="faq_isdel" id="faq_isdel" value=""/>
+                        </div>
+                      </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="faq_id" id="faq_id" value="" />
-                    <input type="hidden" name="button_action" id="button_action" value="insert" />
-                    <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </form>
+                      <div class="modal-footer">
+                          <input type="hidden" name="faq_id" id="faq_id" value="" />
+                          <input type="hidden" name="button_action" id="button_action" value="insert" />
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
+                          <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
+                      </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+
+
 </div>
 </div>
        
@@ -376,15 +447,16 @@
                   ] 
             });
     $('#add_data').click(function(){
-        $('#formModal').modal('show');
-        $('#data_form')[0].reset();
+        $('#mainModal').modal('show');
+        $('#main_form')[0].reset();
         $('#form_output').html('');
         $('#button_action').val('insert');
         $('#action').val('Add');
         $('.modal-title').text('Add Question');
+        edit_Form();
     });
 
-    $('#data_form').on('submit', function(event){
+    $('#main_form').on('submit', function(event){
         event.preventDefault();
         var form_data = $(this).serialize();
         $.ajax({
@@ -405,12 +477,37 @@
                 }
                 else
                 {
-                    $('#form_output').html(data.success);
-                    $('#data_form')[0].reset();
-                    $('#action').val('Add');
+                   // $('#form_output').html(data.success);
+                    $('#main_form')[0].reset();
+                    //$('#action').val('Add');
                     $('.modal-title').text('Add Question');
-                    $('#button_action').val('insert');
+                    //$('#button_action').val('insert');
                     $('#table').DataTable().ajax.reload();
+                    $('#mainModal').modal('hide');
+                    if($('#action').val() == 'Edit')
+                    {
+                      swal(
+                        'Success!',
+                        'Your question has been successfully updated',
+                        'success'
+                      )
+                    }
+                    else if (($('#action').val() == 'Add'))
+                    {
+                      swal(
+                        'Success!',
+                        'You have successfully add a new question',
+                        'success'
+                      )
+                    }
+                    else if (($('#action').val() == 'Delete'))
+                    {
+                      swal(
+                        'Success!',
+                        'Question is successfully deleted',
+                        'success'
+                      )
+                    }
                 }
             }
         })
@@ -434,58 +531,64 @@
                 $('#action').val('Edit');
                 $('.modal-title').text('Edit Question');
                 $('#button_action').val('update');
+                edit_Form();
+                $('#mainModal').modal('show');
+                $('#action').val('Edit');
+                document.getElementById("action").className = "btn btn-info";
+                document.getElementById("md-form").classList.add('modal-lg');
+                $('#button_action').val('update');
+                $('.modal-title').text('Edit Question');
             }
     });   
     });
     
-    $(document).on('click', '.delete', function(){
+ $(document).on('click', '.delete', function(){
         var id = $(this).attr('id');
-        if(confirm("Are you sure you want to Delete this data?"))
-        {
-            $.ajax({
-                url:"{{route('faqs.removedata')}}",
-                method:"get",
-                data:{id:id},
-                success:function(data)
-                {
-                    alert(data);
-                    $('#table').DataTable().ajax.reload();
+         //$('#del_output').html('');
+         $.ajax({
+            url:"{{route('faqs.fetchdata')}}",
+            method:'get',
+            data:{id:id},
+            dataType:'json',
+            success:function(data)
+            {
+              // var smp=data.faq_isdel;
+              //   console.log(id + ' ' +smp);
+                $('#del_id').val(id);
+                if(data.faq_isdel == 0){
+                  $('#faq_isdel').val(1);
+                  $('#action').val('Delete');
+                  document.getElementById("action").className = "btn btn-danger";
+                  $("#hddel").text("Are you sure you want to delete it?");
                 }
-            })
-        }
-        else
-        {
-            return false;
-        }
-    }); 
-
-    $(document).on('click', '#bulk_delete', function(){
-        var id = [];
-        if(confirm("Are you sure you want to Delete this data?"))
-        {
-            $('.student_checkbox:checked').each(function(){
-                id.push($(this).val());
-            });
-            if(id.length > 0)
-            {
-                $.ajax({
-                    url:"{{ route('ajaxdata.massremove')}}",
-                    method:"get",
-                    data:{id:id},
-                    success:function(data)
-                    {
-                        alert(data);
-                        $('#table').DataTable().ajax.reload();
-                    }
-                });
+                del_Form();
+                $('#question').val(data.question);
+                $('#answer').val(data.answer);
+                $('#faq_id').val(id);
+                $('#mainModal').modal('show');
+                document.getElementById("md-form").classList.remove('modal-lg');
+                $('#button_action').val('delete');
+                $('.modal-title').text('');
             }
-            else
-            {
-                alert("Please select atleast one checkbox");
-            }
-        }
+            }); 
     });
 });
+function edit_Form() {
+    var x = document.getElementById("editForm");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    }
+    var y = document.getElementById("delForm");
+    y.style.display = "none";
+}
+function del_Form() {
+    var x = document.getElementById("delForm");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    }
+    var y = document.getElementById("editForm");
+    y.style.display = "none";
+}
 </script>
 </body>
 </html>

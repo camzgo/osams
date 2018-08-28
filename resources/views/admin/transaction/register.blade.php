@@ -1,12 +1,33 @@
-@extends('layouts.admin')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>ADMINISTRATOR</title>
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  <script src="{{asset('js/app.js')}}"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script> 
+  {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
+
+  
+</head>
+
+<body class="hold-transition sidebar-mini">
+<div class="wrapper" id="app">
   <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
     <!-- Left navbar links -->
-    <ul class="navbar-nav">
+    {{-- <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
       </li>
-    </ul>
+    </ul> --}}
 
     <!-- Right navbar links -->
      <ul class="navbar-nav ml-auto">
@@ -99,14 +120,14 @@
             </a>
           </li>
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/tracking" class="nav-link">
               <i class="nav-icon fa fa-map-marker"></i>
               <p>
                 Tracking
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
               <p>
@@ -116,26 +137,29 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/reg" class="nav-link active">
+                  &nbsp
                   <i class="fa fa-sign-in nav-icon"></i>
                   <p>Register</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/apply" class="nav-link">
+                  &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/approve" class="nav-link">
+                  &nbsp
                   <i class="fa fa-check nav-icon"></i>
                   <p>Approve</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>
@@ -146,36 +170,42 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/announcement" class="nav-link">
+                  &nbsp
                   <i class="fa fa-bullhorn nav-icon"></i>
                   <p>Announcement</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/applicant" class="nav-link">
+                  &nbsp
                   <i class="fa fa-user nav-icon"></i>
                   <p>Applicant</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/application" class="nav-link">
+                  &nbsp
                   <i class="fa fa-folder nav-icon"></i>
                   <p>Application</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/faqs" class="nav-link">
+                  &nbsp
                   <i class="fa fa-question nav-icon"></i>
                   <p>FAQs</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/scholarship" class="nav-link active">
+                <a href="/scholarship" class="nav-link">
+                  &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
                   <p>Scholarship</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/users" class="nav-link">
+                  &nbsp
                   <i class="fa fa-users nav-icon"></i>
                   <p>Users</p>
                 </a>
@@ -194,24 +224,68 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-history nav-icon"></i>
                   <p>Audit Log</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-archive nav-icon"></i>
-                  <p>Archive</p>
+                  <p>Archive
+                    <i class="right fa fa-angle-left"></i>
+                  </p>
+                  
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/archive/announcement" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-bullhorn nav-icon"></i>
+                        <p>Announcement</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/applicant" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-user nav-icon"></i>
+                        <p>Applicant</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/application" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-folder nav-icon"></i>
+                        <p>Application</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/faqs" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-question nav-icon"></i>
+                        <p>FAQs</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/users" class="nav-link">
+                          &nbsp &nbsp &nbsp
+                        <i class="fa fa-users nav-icon"></i>
+                        <p>Users</p>
+                        </a>
+                    </li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-hdd-o nav-icon"></i>
                   <p>Backup and Restore</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-lock nav-icon"></i>
                   <p>Level of Access</p>
                 </a>
@@ -229,18 +303,21 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-file nav-icon"></i>
-                  <p>Master List of Scholars</p>
+                  <p> Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Scholarship Programs</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Application Forms</p>
                 </a>
@@ -259,13 +336,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">Transaction</li>
               <li class="breadcrumb-item active">Register</li>
             </ol>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -277,7 +354,7 @@
       <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h3 class="brand-text font-weight-bold">Register</h3>
+              <h3 class="boldtx">Register</h3>
           </div>
           <div class="card-body"> 
         <br>
@@ -323,7 +400,8 @@
                 {{Form::submit('Register', ['class' => 'btn btn-success'])}}
             </div>
             {!! Form::close() !!} --}}
-            <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+
+            {{-- <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -410,7 +488,7 @@
                         </div>
 
                         <div class="form-group row">
-                            {{-- <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label> --}}
+                            
 
                             <div class="col-md-6">
                                 <input id="password" type="hidden" value="capitolscholar" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
@@ -425,7 +503,7 @@
                         </div>
 
                         <div class="form-group row">
-                            {{-- <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label> --}}
+                            
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" value="capitolscholar" class="form-control" name="password_confirmation" required>
@@ -439,6 +517,57 @@
                                 </button>
                             </div>
                         </div>
+                    </form> --}}
+
+
+                    <form action="{{ action('ApplicantMainController@store') }}" method="POST" >
+                    {{csrf_field()}}
+                    <div class="container">
+                      <div class="row">
+                        <label for="fullname">* Full Name</label>
+                      </div>
+                      <div class="row form-group">
+                        <div class = "col-md-4">
+                          <input type="text" class="form-control" id="surname" name="surname" placeholder='Surname' required/>
+                        </div>
+                        <div class = "col-md-4">
+                          <input type="text" class="form-control" id="first_name" name="first_name" placeholder='First Name' required/>
+                        </div>
+                        <div class = "col-md-2">
+                          <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name'/>
+                        </div>
+                        <div class = "col-md-2">
+                          <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+                        </div>
+                      </div>
+                      <div class="row form-group">
+                        <div class="col-md-2">
+                            <label for="gender">* Gender</label>
+                            <select name="gender" id="gender" class="selectpicker show-tick form-control" data-style="selCol" required>
+                              <option value="" selected disabled>--Select--</option>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="bdate">* Birth Date</label>
+                          <input type="date" name="bday" id="bday" class="form-control" data-provide="datepicker" required/>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="mobile_number">* Mobile Number</label>
+                          <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder='09xx-xxx-xxxx' required/>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="email">* Email</label>
+                          <input type="email" class="form-control" id="email" name="email" placeholder='example@mail.com' required/>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="flt-right mt-4">
+                      <input type="submit" value="Register" class="material-button-raised"/>
+                    </div>
+                    
                     </form>
         </div>
 
@@ -452,7 +581,12 @@
         
 </div>
 
+<script>
 
+$(document).ready(function(){
+  $('#mobile_no').mask('0000-000-0000');
+});
 
-
-@endsection
+</script>
+</body>
+</html>

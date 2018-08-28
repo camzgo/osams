@@ -17,6 +17,7 @@ try {
 require('admin-lte');
 require('jquery');
 require('datatables.net-bs4');
+// require('jquery-ui')
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

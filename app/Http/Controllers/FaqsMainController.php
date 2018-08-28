@@ -93,7 +93,7 @@ class FaqsMainController extends Controller
         return DataTables::of($faquestions)
         ->addColumn('action', function($faquestions){
             return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$faquestions->id.'"><i class="fa fa-edit"></i> Edit</a>
-                    <a href="#" class="btn btn-sm btn-danger delete" id="'.$faquestions->id.'"><i class="fa fa-close"></i> Delete</a> ';
+                    <a href="#" class="btn btn-sm btn-danger delete" id="'.$faquestions->id.'"><i class="fa fa-trash"></i> Delete</a> ';
         })
         ->addColumn('checkbox', '<input type="checkbox" name="form_checkbox[]" class="form_checkbox" value="{{$id}}"/>')
         ->rawColumns(['checkbox', 'action'])
@@ -106,7 +106,8 @@ class FaqsMainController extends Controller
         $faquestion = Faquestion::find($id);
         $output = array(
             'question'    =>  $faquestion->question,
-            'answer'     =>  $faquestion->answer
+            'answer'     =>  $faquestion->answer,
+            'faq_isdel' => $faquestion->faq_isdel
         );
         echo json_encode($output);
         //eval ($goback);
@@ -140,19 +141,29 @@ class FaqsMainController extends Controller
                     'faq_isdel' => $def
                 ]);
                 $faquestion->save();
-                $success_output = '<div class="alert alert-success">Data Inserted</div>';
+                $success_output = '';
             }
 
-            if($request->get('button_action') == 'update')
+            else if($request->get('button_action') == 'update')
             {
                 $faquestion = Faquestion::find($request->get('faq_id'));
                 $faquestion->question = $request->get('question');
                 $faquestion->answer = $request->get('answer');
                 $faquestion->save();
-                $success_output = '<div class="alert alert-success">Data Updated</div>';
+                $success_output = '';
 
             }
-            
+            else if($request->get('button_action') == 'delete')
+            {
+                $faquestion = Faquestion::find($request->get('faq_id'));
+                $faquestion->question = $request->get('question');
+                $faquestion->answer = $request->get('answer');
+                $faquestion->faq_isdel = $request->get('faq_isdel');
+
+                $faquestion->save();
+                $success_output = '';
+
+            }
         }
         
         $output = array(

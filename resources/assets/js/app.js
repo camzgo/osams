@@ -11,9 +11,17 @@ require('../../../node_modules/popper.js/dist/popper.min.js');
 require('../../../node_modules/bootstrap/dist/js/bootstrap.min.js');
 require('../../../node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js');
 require('../../../node_modules/jquery/dist/jquery.min.js');
+// require('../../../node_modules/jquery-ui/ui/jquery-1-7.js');
+require('../../../node_modules/jquery-mask-plugin/dist/jquery.mask.min.js');
+require('../../../node_modules/bootstrap-select/dist/js/bootstrap-select.min.js');
+require('../../../node_modules/jquery-validation/dist/jquery.validate.js');
+require('../../../node_modules/jquery-validation/dist/jquery.validate.min.js');
+// require('../../../node_modules/materialize-css/dist/js/materialize.js');
+
 // require('../../../node_modules/dataTables.bootstrap4');
 // require('../../../node_modules/admin-lte/plugins/font-awesome/font-awesome.min.css');
 window.Vue = require('vue');
+window.swal = require('sweetalert2');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -22,7 +30,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('delModal', require('./components/delModal.vue'));
+//Vue.component('delModal', require('./components/delModal.vue'));
 const app = new Vue({
     el: '#app'
 });

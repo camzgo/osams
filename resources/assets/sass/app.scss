@@ -2,6 +2,11 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
+@import url('https://fonts.googleapis.com/css?family=Exo');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,500,500i,700');
+@import url('https://fonts.googleapis.com/css?family=Magra:400,700');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700');
 
 // Variables
 @import "variables";
@@ -12,8 +17,16 @@
 //MDB
 // @import '~mdbootstrap/scss/mdb.scss';
 
+@import '~sweetalert2/src/sweetalert2.scss';
 
 @import '~admin-lte/dist/css/adminlte.css';
+
+@import '~jquery-ui/themes/base/datepicker.css';
+
+@import '~bootstrap-select/dist/css/bootstrap-select.css';
+// @import '~materialize-css/sass/materialize.scss';
+// @import '~materialize-css/dist/css/materialize.css';
+
 
 $fa-font-path: "../fonts/" !default;
 @import '~font-awesome/scss/font-awesome.scss';

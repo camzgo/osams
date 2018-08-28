@@ -156,7 +156,7 @@ class ScholarshipMainController extends Controller
             'amount'            => 'required',
             'deadline'         => 'required',
             'slot'            => 'required',
-            'status'          => 'required'
+            //'status'          => 'required'
         
         ]);
         

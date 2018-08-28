@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('inc.navbar')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -14,7 +15,8 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    @component('components.who')
+                    @endcomponent
                 </div>
             </div>
         </div>
