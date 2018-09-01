@@ -135,21 +135,21 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/reg" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-sign-in nav-icon"></i>
                   <p>Register</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/apply" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/approve" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-check nav-icon"></i>
                   <p>Approve</p>
                 </a>
@@ -167,44 +167,44 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/announcement" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-bullhorn nav-icon"></i>
                   <p>Announcement</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/applicant" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-user nav-icon"></i>
                   <p>Applicant</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/application" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-folder nav-icon"></i>
                   <p>Application</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/faqs" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-question nav-icon"></i>
                   <p>FAQs</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/scholarship" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
                   <p>Scholarship</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/users" class="nav-link active">
-                  &nbsp
+                <a href="/employee" class="nav-link active">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-users nav-icon"></i>
-                  <p>Users</p>
+                  <p>Employee</p>
                 </a>
               </li>
               
@@ -221,14 +221,14 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-history nav-icon"></i>
                   <p>Audit Log</p>
                 </a>
               </li>
               <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-archive nav-icon"></i>
                   <p>Archive
                     <i class="right fa fa-angle-left"></i>
@@ -238,51 +238,51 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="/archive/announcement" class="nav-link">
-                          &nbsp &nbsp &nbsp
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-bullhorn nav-icon"></i>
                         <p>Announcement</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/archive/applicant" class="nav-link">
-                          &nbsp &nbsp &nbsp
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-user nav-icon"></i>
                         <p>Applicant</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/archive/application" class="nav-link">
-                          &nbsp &nbsp &nbsp
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-folder nav-icon"></i>
                         <p>Application</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/archive/faqs" class="nav-link">
-                          &nbsp &nbsp &nbsp
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-question nav-icon"></i>
                         <p>FAQs</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/archive/users" class="nav-link">
-                          &nbsp &nbsp &nbsp
+                        <a href="/archive/employee" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-users nav-icon"></i>
-                        <p>Users</p>
+                        <p>Employee</p>
                         </a>
                     </li>
                 </ul>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-hdd-o nav-icon"></i>
                   <p>Backup and Restore</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-lock nav-icon"></i>
                   <p>Level of Access</p>
                 </a>
@@ -300,21 +300,21 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p> Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Scholarship Programs</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Application Forms</p>
                 </a>
@@ -336,7 +336,7 @@
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">File Maintenance</li>
-              <li class="breadcrumb-item active">Users</li>
+              <li class="breadcrumb-item active">Employee</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -351,7 +351,7 @@
       <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h3 class="boldtx">Users</h3>
+              <h3 class="boldtx">Employee</h3>
           </div>
           <div class="card-body"> 
         <br>
@@ -369,11 +369,9 @@
      <table class=" table table-hover table-hover" style="width:100%" id="table">
                <thead class="th-cl1">
                   <tr>
-                     <th>#</th>
+                     <th>Name</th>
                      <th>Email</th>
-                     <th>Created</th>
                      <th>Actions</th>
-                     <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></button></th>
                   </tr>
                </thead>
             </table>
@@ -423,9 +421,8 @@
                serverSide: true,
                ajax: '{{ route('users.getdata') }}',
                columns: [
-                        { data: 'id', name: 'id' },
+                        { data: 'fullname', name: 'fullname' },
                         { data: 'email', name: 'email' },
-                        { data: 'created_at', name: 'created_at' },
                         { width: '20%', data: 'action', orderable:false, searchable: false}
                         // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
                   ]

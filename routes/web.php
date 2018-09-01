@@ -84,7 +84,7 @@ Route::prefix('archive/applicant')->group(function(){
     Route::get('/removedata', 'ApplicantArchiveController@removedata')->name('archiveapplicant.removedata'); 
 });
 
-Route::prefix('users')->group(function(){
+Route::prefix('employee')->group(function(){
     Route::get('/getdata', 'UsersMainController@getdata')->name('users.getdata');
     Route::get('/fetchdata', 'UsersMainController@fetchdata')->name('users.fetchdata');
     Route::post('/postdata', 'UsersMainController@postdata')->name('users.postdata');
@@ -96,6 +96,9 @@ Route::prefix('users')->group(function(){
 
 Route::prefix('scholarship-category')->group(function(){
     Route::get('/eefap', 'ScholarshipCatController@eefapShow');
+    Route::get('/eefap2', 'ScholarshipCatController@shoW');
+    Route::post('/eefap/fetch', 'ScholarshipCatController@fetch')->name('eefap.fetch');
+    Route::get('/pcl', 'ScholarshipCatController@pclShow');
 });
 
 
@@ -127,7 +130,7 @@ Route::resource('application', 'ApplicationMainController');
 Route::resource('announcement', 'AnnounceMainController');
 Route::resource('faqs', 'FaqsMainController');
 Route::resource('scholarship', 'ScholarshipMainController');
-Route::resource('users', 'UsersMainController');
+Route::resource('employee', 'UsersMainController');
 Route::resource('reg', 'RegisterMainController');
 Route::resource('apply', 'ApplyController');
 Route::resource('archive/faqs', 'FaqArchiveController');

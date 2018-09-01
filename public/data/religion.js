@@ -121,9 +121,9 @@ var jsonReligion = {
 
 
 $(document).ready(function () {
-    var listItems = '<option selected disabled value="0">--Select--</option>';
+    var listItems = '<option selected disabled value="">--Select--</option>';
     for (var i = 0; i < jsonReligion.Religion.length; i++) {
-        listItems += "<option value='" + jsonReligion.Religion[i].id + "'>" + jsonReligion.Religion[i].regName + "</option>";
+        listItems += "<option value='" + jsonReligion.Religion[i].regName + "'>" + jsonReligion.Religion[i].regName + "</option>";
     }
 
     $("#religion").html(listItems);

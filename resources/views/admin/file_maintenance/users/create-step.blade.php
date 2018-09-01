@@ -252,7 +252,7 @@ button:focus {
       </div>
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
+<nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -263,7 +263,7 @@ button:focus {
             </a>
           </li>
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/tracking" class="nav-link">
               <i class="nav-icon fa fa-map-marker"></i>
               <p>
                 Tracking
@@ -280,19 +280,22 @@ button:focus {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/reg" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-sign-in nav-icon"></i>
                   <p>Register</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/apply" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/approve" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-check nav-icon"></i>
                   <p>Approve</p>
                 </a>
@@ -310,36 +313,42 @@ button:focus {
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/announcement" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-bullhorn nav-icon"></i>
-                  <p>Annoucement</p>
+                  <p>Announcement</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/applicant" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-user nav-icon"></i>
                   <p>Applicant</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/application" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-folder nav-icon"></i>
                   <p>Application</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/faqs" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-question nav-icon"></i>
                   <p>FAQs</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/scholarship" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
                   <p>Scholarship</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/users" class="nav-link active">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-users nav-icon"></i>
                   <p>Users</p>
                 </a>
@@ -358,24 +367,68 @@ button:focus {
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-history nav-icon"></i>
                   <p>Audit Log</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-archive nav-icon"></i>
-                  <p>Archive</p>
+                  <p>Archive
+                    <i class="right fa fa-angle-left"></i>
+                  </p>
+                  
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/archive/announcement" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-bullhorn nav-icon"></i>
+                        <p>Announcement</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/applicant" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-user nav-icon"></i>
+                        <p>Applicant</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/application" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-folder nav-icon"></i>
+                        <p>Application</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/faqs" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-question nav-icon"></i>
+                        <p>FAQs</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/users" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-users nav-icon"></i>
+                        <p>Users</p>
+                        </a>
+                    </li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-hdd-o nav-icon"></i>
                   <p>Backup and Restore</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-lock nav-icon"></i>
                   <p>Level of Access</p>
                 </a>
@@ -393,18 +446,21 @@ button:focus {
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
-                  <p>Master List of Scholars</p>
+                  <p> Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Scholarship Programs</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Application Forms</p>
                 </a>
@@ -464,16 +520,16 @@ button:focus {
         </div>
         <div class="row form-group">
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="surname" placeholder='Surname' required/>
+            <input type="text" class="form-control req" id="surname" name="surname" placeholder='Surname' required/>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="first_name" placeholder='First Name' required/>
+            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='First Name' required/>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="middle_name" placeholder='Middle Name'/>
+            <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name'/>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
           </div>
         </div>
         <div class="row form-group">
@@ -481,8 +537,8 @@ button:focus {
               <label for="gender">* Gender</label>
               <select name="gender" id="gender" class=" form-control req"  required>
                 <option value="" selected disabled>--Select--</option>
-                <option value="M">Male</option>
-                <option value="F">Female</option>
+                <option value="Male">MALE</option>
+                <option value="Female">FEMALE</option>
               </select>
           </div>
           <div class="col-md-2">
@@ -493,16 +549,14 @@ button:focus {
               <label for="nationality">* Nationality</label>
               <select name="nationality" id="nationality" class="form-control req" required>
                 <option value="" selected disabled>--Select--</option>
-                <option value="F">Filipino</option>
-                <option value="A">Foreigner</option>
+                <option value="Filipino">Filipino</option>
+                <option value="Foreigner">Foreigner</option>
               </select>
           </div>
           <div class="col-md-3">
             <label for="religion">* Religion</label>
             <select name="religion" id="religion" class="form-control req"  required>
               <option value="" selected disabled>--Select--</option>
-              <option value="R">Roman Catholic</option>
-              <option value="M">Muslim</option>
             </select>
           </div>
           <div class="col-md-2">
@@ -548,7 +602,7 @@ button:focus {
           </div>
           <div class="col-md-6">
             <label for="street">* Street</label>
-            <input type="text" class="form-control req" id="street" placeholder='Street' required/>
+            <input type="text" class="form-control req" id="_street" name="_street" placeholder='Street' required/>
           </div>
         </div>
       </div>
@@ -570,13 +624,13 @@ button:focus {
               <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+63</span>
               </div>
-              <input type="text" class="form-control req" id="mobile_no" placeholder='9xxxxxxxxx' required/>
+              <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required/>
             </div>
             
           </div>
           <div class="col-md-4">
             <label for="email">* Email</label>
-            <input type="email" class="form-control req" id="email" placeholder='example@mail.com' required/>
+            <input type="email" class="form-control req" id="email" name="email" placeholder='example@mail.com' required/>
           </div>
         </div>
       </div>
@@ -733,8 +787,10 @@ function fixStepIndicator(n) {
 }
 
 $(document).ready(function(){
-
   $('.dynamic').change(function(){
+    var x = $('#municipality').val();
+    console.log(x);
+    console.log($('#barangay').val());
     if($(this).val() != '')
     {
     var select = $(this).attr("id");
@@ -758,10 +814,7 @@ $(document).ready(function(){
     $('#barangay').val('');
   });
 
- 
-
 });
-
 
 
 </script>

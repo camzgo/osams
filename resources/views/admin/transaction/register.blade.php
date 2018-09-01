@@ -204,10 +204,10 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/users" class="nav-link">
+                <a href="/employee" class="nav-link">
                   &nbsp
                   <i class="fa fa-users nav-icon"></i>
-                  <p>Users</p>
+                  <p>Employee</p>
                 </a>
               </li>
               
@@ -268,10 +268,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/archive/users" class="nav-link">
+                        <a href="/archive/employee" class="nav-link">
                           &nbsp &nbsp &nbsp
                         <i class="fa fa-users nav-icon"></i>
-                        <p>Users</p>
+                        <p>Employee</p>
                         </a>
                     </li>
                 </ul>
@@ -354,7 +354,7 @@
       <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h3 class="boldtx">Register</h3>
+              <h3 class="boldtx">Register Applicant</h3>
           </div>
           <div class="card-body"> 
         <br>

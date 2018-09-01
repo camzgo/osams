@@ -18,9 +18,9 @@ class AddToAdmin extends Migration
         {
             $table->string('surname', 50);
             $table->string('first_name', 50);
-            $table->string('middle_name', 50)->nullable()->change();
-            $table->string('suffix', 10);
-            $table->foreign('account_id')->references('id')->on('account_type');
+            $table->string('middle_name', 50)->nullable();
+            $table->string('suffix', 10)->nullable();
+            $table->integer('account_id');
         });
     }
 
@@ -38,6 +38,7 @@ class AddToAdmin extends Migration
             $table->dropColumn('first_name');
             $table->dropColumn('middle_name');
             $table->dropColumn('suffix');
+            $table->dropColumn('account_id');
         });
     }
 }

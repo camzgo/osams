@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <link rel="shortcut icon" href="{{{ asset('images/favicon.ico') }}}">
 
   <title>ADMINISTRATOR</title>
   <!-- CSRF Token -->
@@ -263,7 +264,7 @@ button:focus {
             </a>
           </li>
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/tracking" class="nav-link">
               <i class="nav-icon fa fa-map-marker"></i>
               <p>
                 Tracking
@@ -280,26 +281,29 @@ button:focus {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/reg" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-sign-in nav-icon"></i>
                   <p>Register</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/apply" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/approve" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-check nav-icon"></i>
                   <p>Approve</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>
@@ -310,38 +314,44 @@ button:focus {
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/announcement" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-bullhorn nav-icon"></i>
-                  <p>Annoucement</p>
+                  <p>Announcement</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/applicant" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-user nav-icon"></i>
                   <p>Applicant</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/application" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-folder nav-icon"></i>
                   <p>Application</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/faqs" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-question nav-icon"></i>
                   <p>FAQs</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/scholarship" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
                   <p>Scholarship</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/users" class="nav-link active">
+                <a href="/users" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-users nav-icon"></i>
-                  <p>Users</p>
+                  <p>Employee</p>
                 </a>
               </li>
               
@@ -358,24 +368,68 @@ button:focus {
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-history nav-icon"></i>
                   <p>Audit Log</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-archive nav-icon"></i>
-                  <p>Archive</p>
+                  <p>Archive
+                    <i class="right fa fa-angle-left"></i>
+                  </p>
+                  
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/archive/announcement" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-bullhorn nav-icon"></i>
+                        <p>Announcement</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/applicant" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-user nav-icon"></i>
+                        <p>Applicant</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/application" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-folder nav-icon"></i>
+                        <p>Application</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/faqs" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-question nav-icon"></i>
+                        <p>FAQs</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archive/users" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-users nav-icon"></i>
+                        <p>Employee</p>
+                        </a>
+                    </li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-hdd-o nav-icon"></i>
                   <p>Backup and Restore</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-lock nav-icon"></i>
                   <p>Level of Access</p>
                 </a>
@@ -393,18 +447,21 @@ button:focus {
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
-                  <p>Master List of Scholars</p>
+                  <p> Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Scholarship Programs</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Application Forms</p>
                 </a>
@@ -451,6 +508,17 @@ button:focus {
 
 
       <div class="tab">
+        @php echo "<button>this</button>" @endphp
+
+        <nav>
+   <ol class="cd-breadcrumb triangle">
+      <li class="visited"><a href="#0">Cart</a></li>
+      <li class="visited" ><a href="#0">Billing</a></li>
+      <li class="current"><em>Delivery</em></li>
+      <li><em>Review</em></li>
+   </ol>
+</nav>
+
         <div class="row form-group mt-2">
           <h5 class="tx1">Personal Information</h5>
         </div>
@@ -623,6 +691,8 @@ button:focus {
 
 
 
+
+
       
 
       
@@ -630,6 +700,8 @@ button:focus {
       {{-- <div class="flt-right">
         <input type="submit" value="Register" class="material-button-raised"/>
       </div> --}}
+
+
       <div style="overflow:auto;" class="mt-4">
         <div style="float:right;">
           <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
@@ -644,18 +716,6 @@ button:focus {
         <span class="step"></span>
       </div>
     </form>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -689,12 +749,6 @@ button:focus {
         
 </div>
 <script>
-
-
-
-  // $( function() {
-  //   $( "#datepicker" ).datepicker();
-  // } );
 
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000');

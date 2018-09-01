@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Admin;
+use App\AdminInfo;
 use DataTables;
 use Validator;
 use DB;
@@ -21,6 +22,7 @@ class UsersMainController extends Controller
     public function index()
     {
         //
+
         return view ('admin.file_maintenance.users.show');
     }
 
@@ -35,7 +37,7 @@ class UsersMainController extends Controller
         
         // $municipal_list = DB::table('munbar')->groupBy('municipality')->get();
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
-        return view ('admin.file_maintenance.users.create-step')->with('municipal_list', $municipal_list);
+        return view ('admin.file_maintenance.users.create-step-3')->with('municipal_list', $municipal_list);
     }
 
     /**
@@ -49,11 +51,62 @@ class UsersMainController extends Controller
         //
         // return view ('admin.file_maintenance.users.chk');
 
-        $admin = new Admin([
+        // $admin = new Admin([
             
+        // ]);
+        // $announce->save();
+        $user_photo = "None";
+        $user_isdel = 0;
+        $pass = 'defaultpassword';
+
+        $suffix = $request->suffix;
+        // if($suffix=="")
+        
+        $id = DB::table('admins')->insertGetId([
+            'email' => $request->email,
+            'password' => Hash::make($pass), 
+            'user_photo' => $user_photo,
+            'user_isdel' => $user_isdel,
+            'surname' => $request->surname,
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'suffix' => $request->suffix,
+            'account_id' => $user_isdel,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
         ]);
-        $announce->save();
-        return redirect('/users');
+
+
+        // $admins =  new Admin ([
+            
+
+        // ]);
+
+        // $email = $request->email;
+        // $admins->save(); 
+        
+        // $eid = DB::table('admins')->insertGetId(
+        //     array('email' => $email)
+        // );
+
+        // $mail = 'shishi@mail.com';
+        // $query = DB::select('select id from admins where email = ?', [$mail]);
+        // $idint = (int)$query;
+        $adminsInfo = new AdminInfo ([
+            'gender' => $request->gender,
+            'birthdate' => $request->bday,
+            'nationality' => $request->nationality,
+            'religion' => $request->religion,
+            'civil_status' => $request->civil_status,
+            'mobile_number' => $request->mobile_no,
+            'municipality' => $request->municipality,
+            'barangay' => $request->barangay,
+            'street' => $request->_street,
+            'admins_id' => $id
+        ]);
+        $adminsInfo->save();
+        
+        return redirect('/users/');
 
     }
 
@@ -104,7 +157,8 @@ class UsersMainController extends Controller
 
     function getdata()
     {
-        $admins = Admin::select('id','email', 'created_at')->where('user_isdel', '0')->get();
+        $admins = Admin::select("email",
+        DB::raw("CONCAT(admins.surname,', ',admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as fullname"))->where('user_isdel', '0')->get();
         return DataTables::of($admins)
         ->addColumn('action', function($admins){
             return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$admins->id.'"><i class="fa fa-edit"></i> Edit</a>
