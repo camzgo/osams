@@ -45,9 +45,9 @@
 								<div class="wizard-navigation">
 									<ul>
 			                            <li><a href="#personal" data-toggle="tab">Personal Information</a></li>
-			                            <li><a href="#guardian" data-toggle="tab">Guardian Information</a></li>
-										<li><a href="#education" data-toggle="tab">Other Information</a></li>
-										{{-- <li><a href="#references" data-toggle="tab">Character References</a></li> --}}
+			                            {{-- <li><a href="#guardian" data-toggle="tab">Guardian Information</a></li> --}}
+										<li><a href="#education" data-toggle="tab">Educational Information</a></li>
+										<li><a href="#awards" data-toggle="tab">Awards Received</a></li>
 										<li><a href="#requirements" data-toggle="tab">Requirements</a></li>
 			                        </ul>
 								</div>
@@ -93,20 +93,12 @@
 											</div> --}}
 											<div class="row container">
 												{{-- <h5 class="tx1"><strong>Address</strong></h5> --}}
-												<div class = "col-md-2">
-													<select name="district" id="district" data-val="true"  data-val-required="Please select District" data-dependent="municipality" class="form-control dynamic"  >
-														<option value="" selected disabled>District (required)</option>
-														@foreach ($district_list as $district)
-															<option value="{{$district->district}}">{{$district->district}}</option>
-														@endforeach
-													</select>
-												</div>
 												<div class = "col-md-3">
 													<select name="municipality" id="municipality" data-val="true"  data-val-required="Please select Municipality" data-dependent="barangay" class="form-control dynamic"  >
 														<option value="" selected disabled>Municipality (required)</option>
-														{{-- @foreach ($municipal_list as $municipal)
+														@foreach ($municipal_list as $municipal)
 															<option value="{{$municipal->municipality}}">{{$municipal->municipality}}</option>
-														@endforeach --}}
+														@endforeach
 													</select>
 												</div>
 												<div class="col-md-3">
@@ -114,7 +106,7 @@
 														<option value="" selected disabled>Barangay (required)</option>
 													</select>
 												</div>
-												<div class="col-md-3">
+												<div class="col-md-5">
 													<div class="form-group label-floating">
 													  <label class="control-label">Street</label>
 													  <input name="street" type="text" class="form-control">
@@ -124,266 +116,142 @@
 
 											<div class="row container">
 												{{-- <h4 class="tx1"><strong>Contact</strong></h4> --}}
-												<div class="col-md-2">
-													<select name="gender" id="gender" class="form-control">
-														<option value="" selected disabled>Gender (required)</option>
-														<option value="Male">MALE</option>
-														<option value="Female">FEMALE</option>
-													</select>
-												</div>
-												<div class="col-md-2">
-													<select name="civil_status" id="civil_status" class="form-control">
-														<option value="" selected disabled>Civil Status (required)</option>
-														<option value="Single">Single</option>
-														<option value="Married">Married</option>
-														<option value="Separated">Separated</option>
-														<option value="Widowed">Widowed</option>
-													</select>
-												</div>
-												<div class="col-md-3">
-													<select name="nationality" id="nationality" class="form-control">
-														<option value="" selected disabled>Citizenship (required)</option>
-														<option value="Filipino">Filipino</option>
-														<option value="Foreigner">Foreigner</option>
-													</select>
-												</div>
-												<div class="col-md-4">
-													<select name="religion" id="religion" class="form-control">
-														<option value="" selected disabled>Religion (required)</option>
-													</select>
-												</div>
-
-												{{-- <div class="col-md-2">
-													<div class="form-group label-floating">
-													<label class="control-label">School Enrolled <small>(required)</small></label>
-													<input name="school_enrolled" id="school_enrolled" type="text" class="form-control">
-													</div>
-												</div> --}}
-												{{-- 
-												</div>
-												<div class="col-md-4">
-													<div class="form-group label-floating">
-													<label class="control-label">School Enrolled <small>(required)</small></label>
-													<input name="school_enrolled" id="school_enrolled" type="text" class="form-control">
-													</div>
-												</div>
-												<div class="col-md-4">
-													<div class="form-group label-floating">
-													<label class="control-label">Course/Program (No Abbreviation) <small>(required)</small></label>
-													<input name="school_enrolled" id="school_enrolled" type="text" class="form-control">
-													</div>
-												</div>
-												<div class="col-md-2">
-													<div class="form-group label-floating">
-													<label class="control-label">Year Level <small>(required)</small></label>
-													<input name="school_enrolled" id="school_enrolled" type="text" class="form-control">
-													</div>
-												</div> --}}
-											</div>
-											<div class="row container">
-												<div class="col-md-2">
-													<div class="input-group">
-													<span class="input-group-addon">
-														<small>Birth Date (required)</small>
-													</span>
-													{{-- <label class="control-label">Birth Date (required)</label> --}}
-													<input type="date" name="bday" id="bday" class="form-control" data-provide="datepicker" />
-												</div>
-											</div>
-
-												<div class="col-md-6" style="padding-left:170px;">
-													<div class="form-group label-floating">
-													  <label class="control-label">Place of Birth (required)</label>
-													  <input name="bplace" type="text" class="form-control">
-													</div>
-												</div>
-
 												<div class="col-md-3">
 													<div class="form-group label-floating">
 													<label class="control-label">9XX-XXX-XXXX <small>(required)</small></label>
 													<input name="mobile_no" id="mobile_no" type="text" class="form-control">
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group label-floating">
+													<label class="control-label">facebook/username <small>(required)</small></label>
+													<input name="fb_name" id="fb_name" type="text" class="form-control">
 													</div>
 												</div>
 											</div>
 									
 										</div>
 		                            </div>
-		                            <div class="tab-pane" id="guardian">
-		                                <div class="container">
-		                                	<div class="row container">
-												<h6 class="tx1">Father's Name</h6>
-												<div class="col-md-3">
-													<div class="form-group label-floating">
-			                                          <label class="control-label">Surname <small>(required)</small></label>
-			                                          <input name="fsurname" type="text" class="form-control">
-			                                        </div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group label-floating">
-			                                          <label class="control-label">First Name <small>(required)</small></label>
-			                                          <input name="ffirst_name" type="text" class="form-control">
-			                                        </div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group label-floating">
-			                                          <label class="control-label">Middle Name</label>
-			                                          <input name="fmiddle_name" type="text" class="form-control">
-			                                        </div>
-												</div>
-												<div class="col-md-2">
-													<div class="form-group label-floating">
-													  <label class="control-label">Suffix (e.g., Jr. Sr. III)</label>
-													  <input name="fsuffix" type="text" class="form-control">
-													</div>
-												</div>
-											</div>
-											<div class="row container">
-												<h6 class="tx1">Mother's Name</h6>
-												<div class="col-md-3">
-													<div class="form-group label-floating">
-			                                          <label class="control-label">Surname <small>(required)</small></label>
-			                                          <input name="msurname" type="text" class="form-control">
-			                                        </div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group label-floating">
-			                                          <label class="control-label">First Name <small>(required)</small></label>
-			                                          <input name="mfirst_name" type="text" class="form-control">
-			                                        </div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group label-floating">
-			                                          <label class="control-label">Middle Name</label>
-			                                          <input name="mmiddle_name" type="text" class="form-control">
-			                                        </div>
-												</div>
-												<div class="col-md-2">
-													<div class="form-group label-floating">
-													  <label class="control-label">Suffix (e.g., Jr. Sr. III)</label>
-													  <input name="msuffix" type="text" class="form-control">
-													</div>
-												</div>
-											</div>
-											{{-- <div class="row container">
-												<div class = "col-md-3">
-													<select name="pmunicipality" id="pmunicipality" data-val="true"  data-val-required="Please select Municipality" data-dependent="pbarangay" class="form-control ppdynamic"  >
-														<option value="" selected disabled>Municipality (required)</option>
-														@foreach ($municipal_list as $municipal)
-															<option value="{{$municipal->municipality}}">{{$municipal->municipality}}</option>
-														@endforeach
-													</select>
-												</div>
-												<div class="col-md-3">
-													<select name="pbarangay" id="pbarangay" class="form-control ppdynamic">
-														<option value="" selected disabled>Barangay (required)</option>
-													</select>
-												</div>
-												<div class="col-md-5">
-													<div class="form-group label-floating">
-													  <label class="control-label">Street</label>
-													  <input name="street" type="text" class="form-control">
-													</div>
-												</div>
-											</div>  --}}
-										
-
-											<div class="row container">
-												<div class="col-md-3">
-													<div class="form-group label-floating">
-													  <label class="control-label">Father's Occupation <small>(required)</small></label>
-													  <input name="foccupation" type="text" class="form-control">
-													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group label-floating">
-													  <label class="control-label">Mother's Occupation <small>(required)</small></label>
-													  <input name="moccupation" type="text" class="form-control">
-													</div>
-												</div>
-												<div class="col-md-5">
-													<div class="form-group label-floating">
-													  <input name="paddress" type="text" class="form-control" placeholder="Address (Street, Village Subdivision, Municipality) (required)">
-													</div>
-												</div>
-											</div>
-										</div>
-		                                
-		                            </div>
+		                            
 		                            <div class="tab-pane" id="education">
 										<div class="container">
 		                                	<div class="row container">
-												<h6 class="tx1">Educational Information</h6>
-												<div class="col-md-4">
+												<div class="col-md-5">
 													<div class="form-group label-floating">
-													<label class="control-label">School Enrolled <small>(required)</small></label>
-													<input name="school_enrolled" id="school_enrolled" type="text" class="form-control">
-													</div>
+			                                          <label><strong>College/University Name (No Abbreviation) </strong><small>(required)</small></label>
+			                                          <input name="college_name" type="text" class="form-control" placeholder="College/University Name">
+			                                        </div>
 												</div>
+												<div class="col-md-6">
+													<div class="form-group label-floating">
+			                                          <label><strong>College/University Address</strong> <small>(required)</small></label>
+													  <input name="college_address" type="text" class="form-control" placeholder ="(Building no., Street, City Municipality, Province)">
+			                                        </div>
+												</div>
+											</div>
+											<div class="row container">
 												<div class="col-md-4">
 													<div class="form-group label-floating">
-													<label class="control-label">Course/Program (No Abbreviation) <small>(required)</small></label>
-													<input name="course" id="course" type="text" class="form-control">
-													</div>
+			                                          <label class="control-label">Course/Program (No Abbreviation) <small>(required)</small></label>
+													  <input name="course" type="text" class="form-control" >
+			                                        </div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group label-floating">
+			                                          <label class="control-label">Major (No Abbreviation) <small>(required)</small></label>
+													  <input name="major" type="text" class="form-control" >
+			                                        </div>
 												</div>
 												<div class="col-md-2">
 													<div class="form-group label-floating">
-													<label class="control-label">Year Level <small>(required)</small></label>
-													<input name="year_level" id="year_level" type="text" class="form-control">
+			                                          <label class="control-label">Year Level <small>(required)</small></label>
+													  <input name="level" type="text" class="form-control" >
+			                                        </div>
+												</div>
+												<div class="col-md-2">
+													<div class="form-group label-floating">
+													<label class="control-label">General Average <small>(required)</small></label>
+													<input name="gen_average" type="text" class="form-control" >
 													</div>
 												</div>
 											</div>
-											<div class="row container">
-												<h6 class="tx1">In case of emergency</h6>
-												<div class="col-md-4">
-													<div class="form-group label-floating">
-													<label class="control-label">Person to be contacted in case of emergency <small>(required)</small></label>
-													<input name="emergency" id="emergency" type="text" class="form-control">
+												<div class="row container">
+													<div class="radio radio-inline col-md-5">
+														<label style="color:black;">
+															<input type="radio" name="optradio">
+															2 Year's course
+														</label>
+														<label style="color:black;">
+															<input type="radio" name="optradio">
+															Bachelor's Degree
+														</label>
+														<label style="color:black;">
+															<input type="radio" name="optradio">
+															Ladderized
+														</label>
+													</div>
+													<div class="radio radio-inline col-md-3" style="padding:12px;">
+														<label style="color:black;"><strong>Graduating:</strong> </label>
+														<label style="color:black;">
+															<input type="radio" name="grad">
+															YES
+														</label>
+														<label style="color:black;">
+															<input type="radio" name="grad">
+															NO
+														</label>
 													</div>
 												</div>
-												<div class="col-md-3">
-													<div class="form-group label-floating">
-													<label class="control-label">9XX-XXX-XXXX <small>(required)</small></label>
-													<input name="mobile_no" id="mobile_no" type="text" class="form-control">
+												<div class="row container">
+													<div class="radio radio-inline col-md-6" style="padding:10px;">
+														<h6 style="color:black;"><strong>I certify that:</strong> </h6>
+														<label style="color:black;">
+															<input type="radio" name="spes">
+															Yes, I am SPES Recipient
+														</label>
+														<label style="color:black;">
+															<input type="radio" name="spes">
+															No, I am not SPES Recipient
+														</label>
 													</div>
 												</div>
-											</div>
 										</div>
 									</div>
-									{{-- <div class="tab-pane" id="references">
+									<div class="tab-pane" id="awards">
 										<div class="container">
-											<div class="row container">
-												<div class="col-md-4">
-													<h5 class="tx1">Name</h5>
-												</div>
-												<div class="col-md-3">
-													<h5 class="tx1">Occupation</h5>
-												</div>
-												<div class="col-md-4">
-													<h5 class="tx1">Address</h5>
-												</div>
-											</div>
-											<div class="row container">
-												<div class="col-md-4">
-													<div class="form-group label-floating">
-													<label class="control-label">Name</label>
-													<input name="emergency" id="emergency" type="text" class="form-control">
+		                                	<div class="row container">
+												<div class="col-md-5">
+														<ul class="list-group" style="padding-top:20px;">
+															<li class="list-group-item active"><strong>Awards Received/Rank</strong></li>
+															<li class="list-group-item">
+																{{-- <span class="checkbox">
+																	<label>
+																		<input type="checkbox"  name="optionsCheckboxes">
+																		<strong>with Highest Honors</strong>
+																	</label>
+																</span>  --}}
+																<input type="radio" name="rb1" id="rb1" value="Highest Honors"> with Highest Honors
+																{{-- <div class="vcheckbox">
+																	<input type="checkbox" id="checkbox_1">
+																	<label for="checkbox_1">Pure CSS Checkbox</label>
+																</div> --}}
+																{{-- <label class="material-checkbox">
+																<input type="checkbox">
+																<span>Checkbox</span>
+																</label> --}}
+															</li>
+															<li class="list-group-item"><input type="radio" name="rb1" id="rb2" value="High Honors"> with High Honors</li>
+															<li class="list-group-item"><input type="radio" name="rb1" id="rb3" value="Honors"> with Honors</li>
+															<li class="list-group-item"><input type="radio" name="rb2" id="rb4" value="SK Chairman"> SK Chairman</li>
+															<li class="list-group-item"><input type="radio" name="rb2" id="rb5" value="SK Councilor"> SK Councilor</li>
+														</ul>
 													</div>
-												</div>
-												<div class="col-md-3">
-													<div class="form-group label-floating">
-													<label class="control-label">Occupation</label>
-													<input name="emergency" id="emergency" type="text" class="form-control">
-													</div>
-												</div>
-												<div class="col-md-4">
-													<div class="form-group label-floating">
-													<label class="control-label">Name</label>
-													<input name="emergency" id="emergency" type="text" class="form-control">
-													</div>
-												</div>
 											</div>
 										</div>
-									</div> --}}
+
+									</div>
+
+
 									<div class="tab-pane" id="requirements">
 		                                
 		                                <div class="row">
@@ -438,7 +306,7 @@
 													</div>
 													<div class="col-md-6">
 														<ul class="list-group">
-															<li class="list-group-item active">Requirements</li>
+															<li class="list-group-item active"><strong>Requirements</strong></li>
 															<li class="list-group-item"><span class="fa fa-check"></span> Dapibus ac facilisis in</li>
 															<li class="list-group-item">Morbi leo risus</li>
 															<li class="list-group-item">Porta ac consectetur ac</li>
@@ -488,7 +356,7 @@
 		                        </div>
 		                        <div class="wizard-footer">
 		                            <div class="pull-right">
-		                                <input type='button' class='btn btn-next btn-fill btn-success btn-wd' name='next' value='Next' />
+		                                <input type='button' class='btn btn-next btn-fill btn-success btn-wd' id="next" name='next' value='Next' />
 		                                <input type='button' class='btn btn-finish btn-fill btn-success btn-wd' name='finish' value='Finish' />
 		                            </div>
 
@@ -524,8 +392,6 @@
 
 		$(document).ready(function(){
 			$('.dynamic').change(function(){
-				var z = $('#district').val();
-				console.log(z);
 				var x = $('#municipality').val();
 				console.log(x);
 				console.log($('#barangay').val());
@@ -548,44 +414,11 @@
 				}
 			});
 
-			$('#district').change(function(){
-				$('#municipality').val('');
-				$('#barangay').val('');
-			});
 			$('#municipality').change(function(){
 				$('#barangay').val('');
 			});
 
 		});
-
-		$(document).ready(function(){
-		$('.ppdynamic').change(function(){
-				var x = $('#pmunicipality').val();
-				console.log(x);
-				console.log($('#pbarangay').val());
-				if($(this).val() != '')
-				{
-				var select2 = $(this).attr("id");
-				var value2 = $(this).val();
-				var dependent2 = $(this).data('dependent');
-				var _token2 = $('input[name="_token"]').val();
-				$.ajax({
-				url:"{{ route('pcl.fetch') }}",
-				method:"POST",
-				data:{select2:select2, value2:value2, _token2:_token2, dependent2:dependent2},
-				success:function(result)
-				{
-				$('#'+dependent2).html(result);
-				}
-
-				})
-				}
-			});
-
-			$('#pmunicipality').change(function(){
-				$('#pbarangay').val('');
-			});
-			});
 
 		function online()
 		{
@@ -619,6 +452,23 @@
 			z.style.display = "none";
 		}
 
+		function myFunction(id) {
+			// var x = $(this).attr("id");
+			console.log(id);
+			// var checkBox = document.getElementById(x);
+			//var text = document.getElementById("text");
+			// if (checkBox.checked == true){
+			// 	//text.style.display = "block";
+			// 	console.log($(this).val());
+			// } else {
+			// //text.style.display = "none";
+			// }
+		}
+
+		$('input[name=rb1]').change(function(){
+			
+			
+		});
 	</script>
 	<!--   Core JS Files   -->
     {{-- <script src="../wassets/js/jquery-2.2.4.min.js" type="text/javascript"></script> --}}
@@ -631,6 +481,29 @@
     <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 	<script src="../wassets/js/jquery.validate.min.js"></script>
 
-	<script src="{{ URL::asset('data/religion-pcl.js') }}" type="text/javascript"></script>
 
+
+
+
+
+
+
+
+
+	{{-- <!-- Font Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Bootstrap core CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Material Design Bootstrap -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/css/mdb.min.css" rel="stylesheet"> --}}
+
+
+	{{-- <!-- JQuery -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/js/mdb.min.js"></script> --}}
 </html>

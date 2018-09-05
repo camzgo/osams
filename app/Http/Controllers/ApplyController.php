@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Scholarship;
 use DataTables;
 // use App\Http\Controllers\Facades\DB;
-use App\Http\Controllers\DB;
+use Illuminate\Support\Facades\DB;
+use Validator;
 
 class ApplyController extends Controller
 {
@@ -88,36 +90,107 @@ class ApplyController extends Controller
     //     //
     // }
 
-        function getdata()
+    function showCat()
+    {
+        return view ('admin.transaction.applycat');
+    }
+
+    function getdata()
     {
         //$users = User::select('id', 'surname', 'first_name', 'middle_name');
-         $users = User::select(
-             DB::raw("CONCAT(users.surname, ' ', users.first_name, ' ', users.middle_name) AS name"))->get();
-        //$faquestions = Faquestion::select('id','question', 'answer')->where('faq_isdel', '0')->get();
+        $users = User::select("id", "email", 
+        DB::raw("CONCAT(users.surname,', ',users.first_name, ' ', users.middle_name) as fullname"))->where('applicant_isdel', '0')->get();
         return DataTables::of($users)
         ->addColumn('action', function($users){
-            return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$users->id.'"><i class="fa fa-edit"></i> Edit</a>
-                    <a href="#" class="btn btn-sm btn-danger delete" id="'.$users->id.'"><i class="fa fa-close"></i> Delete</a> ';
+            return '<a href="#" class="btn btn-sm btn-primary edit " id="'.$users->id.'"><i class="fa fa-paper-plane"></i> Apply</a>';
         })
-        // ->addColumn('checkbox', '<input type="checkbox" name="form_checkbox[]" class="form_checkbox" value="{{$id}}"/>')
-        // ->rawColumns(['checkbox', 'action'])
         ->make(true);
-
-//         Base Query
-// $baseQuery = DB::table('webinars')
-//     //->join('users', 'panelists.user_id', '=', 'users.id')
-//     ->select(
-//         'id',
-//         'title',
-//         'description',
-//         'hosts',
-//         DB::raw('concat(starts_on, " ", timezone) as starts'),
-//         'duration',
-//         'created_at'
-//     )
-//     ->where('user_id', '=', $user_ID);
-
     }
+
+    function applydata()
+    {
+        $users = User::select("email", 
+        DB::raw("CONCAT(users.surname,', ',users.first_name, ' ', users.middle_name) as fullname"))->where('applicant_isdel', '0')->get();
+        return DataTables::of($users)
+        ->addColumn('action', function($users){
+            return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$users->id.'"><i class="fa fa-edit"></i>Apply</a>';
+        })
+        ->make(true);
+    }
+
+    function scholardata()
+    {
+        $scholarships = Scholarship::select('id','scholarship_name', 'scholarship_desc', 'amount', 'deadline', 'slot', 'status', 'type');
+        return DataTables::of($scholarships)
+
+        ->addColumn('action', function($scholarships){
+            if($scholarships->status=="OPEN")
+            {
+                if($scholarships->type=="eefap")
+                {
+                    //return '<a href="/apply/scholarship-category/eefap/'.$scholarships->id.'" class="btn btn-sm btn-warning edit dt" id="'.$scholarships->id.'" name="btn-apply"><i class="fa fa-folder"></i> Choose</a>';
+                    
+                    $name = $scholarships->scholarship_name;
+                    switch ($scholarships->scholarship_name)
+                    {
+                        case "NCW" :
+                        return '<a href="#" class="btn btn-sm btn-warning  ncw " id="ncw" name="btn-apply"><i class="fa fa-paper-plane"></i> Choose</a>';
+                        break;
+
+                        case "GAD" :
+                        return '<a href="#" class="btn btn-sm btn-warning gad" id="gad" name="btn-apply"><i class="fa fa-paper-plane"></i> Choose</a>';
+                        break;
+
+                        case  "VG OLD and NEW" :
+                        return '<a href="#" class="btn btn-sm btn-warning  oldnew" id="oldnew" name="btn-apply"><i class="fa fa-paper-plane"></i> Choose</a>';
+                        break;
+
+                        case "GRADUATE FROM PUBLIC" :
+                        return '<a href="#" class="btn btn-sm btn-warning  public" id="public" name="btn-apply"><i class="fa fa-paper-plane"></i> Choose</a>';
+                        break;
+
+                        case "GRADUATE FROM PRIVATE" :
+                        return '<a href="#" class="btn btn-sm btn-warning  private" id="private" name="btn-apply"><i class="fa fa-paper-plane"></i> Choose</a>';
+                        break;
+
+                        default:
+                        echo 'buguk';
+                    }
+                }
+
+                else if ($scholarships->type=="eefap-gv")
+                {
+                    //return '<a href="/apply/scholarship-category/eefap-gv/'.$scholarships->id.'" class="btn btn-sm btn-warning  dt" id="'.$scholarships->id.'" name="btn-apply"><i class="fa fa-folder"></i> Choose</a>';
+                
+                    $name = $scholarships->scholarship_name;
+                    switch ($scholarships->scholarship_name)
+                    {
+                        case "VG DHVTSU" :
+                        return '<a href="#" class="btn btn-sm btn-warning  dhvtsu " id="dhvtsu"><i class="fa fa-paper-plane"></i> Choose</a>';
+                        break;
+
+                        case "HONORS and RANKS" :
+                        return '<a href="#" class="btn btn-sm btn-warning  honors " id="honors"><i class="fa fa-paper-plane"></i> Choose</a>';
+                        break;
+                    }
+
+                }
+                else if ($scholarships->type=="pcl")
+                {
+                   return '<a href="#" class="btn btn-sm btn-warning  pcl" id="pcl"><i class="fa fa-paper-plane"></i> Choose</a>';
+                }
+                
+               
+            }
+            else if ($scholarships->status=="CLOSED")
+            {
+                return '<a href="#" class="btn btn-sm btn-secondary edit" id="'.$scholarships->id.'"><i class="fa fa-paper-plane"></i> Choose</a>';
+            }
+            
+        })
+        ->make(true);
+    }
+
     function fetchdata(Request $request)
     {
         $id = $request->input('id');

@@ -94,16 +94,37 @@ Route::prefix('employee')->group(function(){
     Route::post('/create/fetch', 'UsersMainController@fetch')->name('users.fetch');
 });
 
-Route::prefix('scholarship-category')->group(function(){
-    Route::get('/eefap', 'ScholarshipCatController@eefapShow');
+Route::prefix('apply/scholarship-category')->group(function(){
+
+    
     Route::get('/eefap2', 'ScholarshipCatController@shoW');
     Route::post('/eefap/fetch', 'ScholarshipCatController@fetch')->name('eefap.fetch');
-    Route::get('/pcl', 'ScholarshipCatController@pclShow');
+    
+    Route::post('/pcl/fetch', 'ScholarshipCatController@pfetch')->name('pcl.fetch');
+    Route::get('/eefap-gv/{id}', 'ScholarshipCatController@gvShow');
+    Route::post('/eefap', 'ScholarshipCatController@eefapStore');
+// });
+
+Route::get('/gad/{id}', 'ScholarshipCatController@gadShow');
+Route::get('/graduate-private/{id}', 'ScholarshipCatController@gradprivate');
+Route::get('/graduate-public/{id}', 'ScholarshipCatController@gradpublic');
+Route::get('/ncw/{id}', 'ScholarshipCatController@ncw');
+Route::get('/vg-oldnew/{id}', 'ScholarshipCatController@oldnew');
+
+
+Route::get('/honor-rank/{id}', 'ScholarshipCatController@honors');
+Route::get('/vg-dhvtsu/{id}', 'ScholarshipCatController@dhvtsu');
+
+Route::get('/pcl/{id}', 'ScholarshipCatController@pclShow');
+});
+Route::prefix('apply')->group(function(){
+    Route::get('/getdata', 'ApplyController@getdata')->name('apply.getdata');
+    Route::get('/getdata2', 'ApplyController@applydata')->name('apply.data');
+    Route::get('/getdata3', 'ApplyController@scholardata')->name('apply.scholardata');
+    Route::get('/scholarship-category', 'ApplyController@showCat');
 });
 
-
-
-Route::get('apply/getdata', 'ApplyController@getdata')->name('apply.getdata');
+Route::get('/barcode', 'BarcodeController@barcode');
 
 
 Route::get('/pampanga','AddressController@municipal');

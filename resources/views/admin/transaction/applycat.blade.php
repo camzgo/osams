@@ -20,11 +20,7 @@
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
     <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
-      </li>
-    </ul>
+    
 
     <!-- Right navbar links -->
      <ul class="navbar-nav ml-auto">
@@ -106,7 +102,7 @@
       </div>
 
       <!-- Sidebar Menu -->
-<nav class="mt-2">
+      <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -124,7 +120,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
               <p>
@@ -141,7 +137,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/apply" class="nav-link">
+                <a href="/apply" class="nav-link active">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
@@ -156,7 +152,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>
@@ -180,7 +176,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/application" class="nav-link active">
+                <a href="/application" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-folder nav-icon"></i>
                   <p>Application</p>
@@ -201,7 +197,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/employee" class="nav-link">
+                <a href="/users" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-users nav-icon"></i>
                   <p>Employee</p>
@@ -265,7 +261,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/archive/employee" class="nav-link">
+                        <a href="/archive/users" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-users nav-icon"></i>
                         <p>Employee</p>
@@ -333,14 +329,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Applicant</h1>
+            <ol class="breadcrumb float-sm-left">
+              <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+              <li class="breadcrumb-item active">Transactions</li>
+              <li class="breadcrumb-item active">Apply</li>
+            </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">File Maintenance</li>
-              <li class="breadcrumb-item active">Applicant</li>
-            </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -350,198 +345,72 @@
     <!-- Main content -->
      <div class="content">
       <div class="container-fluid">
-         <div class="flt-right">
-            <a href="#" class="btn btn-primary">
-              <i class="fa fa-print"></i>
-              Print
-            </a>
-            <a href="#" class="btn btn-success">
-                <i class="fa fa-plus"></i>
-                Add Applicant
-            </a>
+        <div class="card">
+          <div class="card-header" id="th-cl1">
+              <h3 class="boldtx">Scholarship Categories</h3>
           </div>
-
-        <br>
-        <div class="container">
-    <br />
-    <br />
-     <table class=" table table-hover table-hover" style="width:100%" id="table">
-               <thead class="th-cl1">
-                  <tr>
-                     <th>ID</th>
-                     <th>First Name</th>
-                     <th>Last Name</th>
-                     <th>Actions</th>
-                     <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></button></th>
-                  </tr>
-               </thead>
-            </table>
+          <div class="card-body"> 
             <br>
-</div>
-<div id="studentModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="post" id="student_form">
-                <div class="modal-header">
-                   <h4 class="modal-title">Add Data</h4>
-                   <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
-                </div>
-                <div class="modal-body">
-                    {{csrf_field()}}
-                    <span id="form_output"></span>
-                    <div class="form-group">
-                        <label>Enter First Name</label>
-                        <input type="text" name="first_name" id="first_name" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>Enter Last Name</label>
-                        <input type="text" name="last_name" id="last_name" class="form-control" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="student_id" id="student_id" value="" />
-                    <input type="hidden" name="button_action" id="button_action" value="insert" />
-                    <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </form>
+            <div class="container">
+              <table id="scholar" class="table table-hover"style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Scholarship</th>
+                    <th>Amount</th>
+                    <th>Deadline</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                  </tr>
+                </thead>
+                
+              </table>
+                <br>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
-       
+
+
+
+
+<!--CARD-->
+        
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
   </div>
-        
+       
 </div>
 <script>
      $(function() {
-               $('#table').DataTable({
+
+            $('#scholar').DataTable({
                processing: true,
                serverSide: true,
                lengthChange: false,
-               ajax: '{{ route('ajaxdata.getdata') }}',
+              //  scrollY: 300,
+               pageLength: 4,
+               pagingType: "simple",
+               ajax: '{{ route('apply.scholardata') }}',
                columns: [
-                        { data: 'id', name: 'id' },
-                        { data: 'first_name', name: 'first_name' },
-                        { data: 'last_name', name: 'last_name' },
-                        { width: '20%', data: 'action', orderable:false, searchable: false},
-                        { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
-                  ]
+                        { data: 'scholarship_name', name: 'scholarship_name' },
+                        { data: 'amount', name: 'amount' },
+                        { data: 'deadline', name: 'deadline'},
+                        { data: 'status', name: 'status' },
+
+                        // { data: 'surname', name: 'surname' },
+                        // { data: 'first_name', name: 'first_name' },
+                        // { data: 'middle_name', name: 'middle_name'},
+                        
+                        { width: '20%', data: 'action', orderable:false, searchable: false}
+                  ] 
             });
-    $('#add_data').click(function(){
-        $('#studentModal').modal('show');
-        $('#student_form')[0].reset();
-        $('#form_output').html('');
-        $('#button_action').val('insert');
-        $('#action').val('Add');
-        $('.modal-title').text('Add Data');
-    });
 
-    $('#student_form').on('submit', function(event){
-        event.preventDefault();
-        var form_data = $(this).serialize();
-        $.ajax({
-            url:"{{ route('ajaxdata.postdata') }}",
-            method:"POST",
-            data:form_data,
-            dataType:"json",
-            success:function(data)
-            {
-                if(data.error.length > 0)
-                {
-                    var error_html = '';
-                    for(var count = 0; count < data.error.length; count++)
-                    {
-                        error_html += '<div class="alert alert-danger">'+data.error[count]+'</div>';
-                    }
-                    $('#form_output').html(error_html);
-                }
-                else
-                {
-                    $('#form_output').html(data.success);
-                    $('#student_form')[0].reset();
-                    $('#action').val('Add');
-                    $('.modal-title').text('Add Data');
-                    $('#button_action').val('insert');
-                    $('#table').DataTable().ajax.reload();
-                }
-            }
-        })
-    });
+          });
+            
+            
 
-    $(document).on('click', '.edit', function(){
-        var id = $(this).attr("id");
-        $('#form_output').html('');
-        $.ajax({
-            url:"{{route('ajaxdata.fetchdata')}}",
-            method:'get',
-            data:{id:id},
-            dataType:'json',
-            success:function(data)
-            {
-                $('#first_name').val(data.first_name);
-                $('#last_name').val(data.last_name);
-                $('#student_id').val(id);
-                $('#studentModal').modal('show');
-                $('#action').val('Edit');
-                $('.modal-title').text('Edit Data');
-                $('#button_action').val('update');
-            }
-    });   
-    });
     
-    $(document).on('click', '.delete', function(){
-        var id = $(this).attr('id');
-        if(confirm("Are you sure you want to Delete this data?"))
-        {
-            $.ajax({
-                url:"{{route('ajaxdata.removedata')}}",
-                mehtod:"get",
-                data:{id:id},
-                success:function(data)
-                {
-                    alert(data);
-                    $('#table').DataTable().ajax.reload();
-                }
-            })
-        }
-        else
-        {
-            return false;
-        }
-    }); 
-
-    $(document).on('click', '#bulk_delete', function(){
-        var id = [];
-        if(confirm("Are you sure you want to Delete this data?"))
-        {
-            $('.student_checkbox:checked').each(function(){
-                id.push($(this).val());
-            });
-            if(id.length > 0)
-            {
-                $.ajax({
-                    url:"{{ route('ajaxdata.massremove')}}",
-                    method:"get",
-                    data:{id:id},
-                    success:function(data)
-                    {
-                        alert(data);
-                        $('#table').DataTable().ajax.reload();
-                    }
-                });
-            }
-            else
-            {
-                alert("Please select atleast one checkbox");
-            }
-        }
-    });
-});
 </script>
 </body>
 </html>
-
-

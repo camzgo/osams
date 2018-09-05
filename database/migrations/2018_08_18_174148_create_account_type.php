@@ -36,3 +36,7 @@ class CreateAccountType extends Migration
         Schema::dropIfExists('account_type');
     }
 }
+
+/**
+ * php artisan make:migration create_fdd_table --create=admins
+ */

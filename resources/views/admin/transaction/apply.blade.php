@@ -20,11 +20,7 @@
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
     <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
-      </li>
-    </ul>
+    
 
     <!-- Right navbar links -->
      <ul class="navbar-nav ml-auto">
@@ -124,7 +120,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
               <p>
@@ -141,7 +137,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/apply" class="nav-link">
+                <a href="/apply" class="nav-link active">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
@@ -156,7 +152,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>
@@ -201,7 +197,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/users" class="nav-link active">
+                <a href="/users" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-users nav-icon"></i>
                   <p>Employee</p>
@@ -333,13 +329,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">Transaction</li>
+              <li class="breadcrumb-item active">Transactions</li>
               <li class="breadcrumb-item active">Apply</li>
             </ol>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -351,81 +347,164 @@
       <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h3 class="brand-text font-weight-bold">Apply</h3>
+              <h3 class="boldtx">Apply</h3>
           </div>
           <div class="card-body"> 
-        <br>
-        <div class="container">
-    <br />
-    <br />
-     <table class=" table table-hover" style="width:100%" id="table">
-               <thead class="th-cl1">
-                  <tr>
-                     <th>ID</th>
-                     {{-- <th>surname</th>
-                     <th>First Name</th>
-                     <th>Middle Name</th> --}}
-
-                     {{-- <th>Answer</th>
-                     <th>Actions</th> --}}
-                     <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></button></th>
-                  </tr>
-               </thead>
-            </table>
             <br>
-</div>
-<div id="formModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="post" id="data_form">
-                <div class="modal-header">
-                   <h4 class="modal-title">Add Question <i class="fa fa-question"></i></h4>
-                   <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
-                </div>
-                <div class="modal-body">
-                    {{csrf_field()}}
-                    <span id="form_output"></span>
-                    <div class="form-group">
-                        <label>Enter Question</label>
-                        <input type="text" name="question" id="question" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>Enter Answer</label>
-                        <textarea rows="5" name="answer" id="answer" class="form-control"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="faq_id" id="faq_id" value="" />
-                    <input type="hidden" name="button_action" id="button_action" value="insert" />
-                    <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </form>
+            <div class="container">
+              <table class="table table-hover" style="width:100%" id="table">
+                  <thead class="th-cl1">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>          
+                    </tr>
+                  </thead>
+                </table>
+                <br>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
-</div>
-</div>
-       
+
+      <div id="mainModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg modal-dialog-centered" id="md-form">
+            <div class="modal-content">
+                <form method="post" id="main_form">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Scholarship Categories</h4>
+                      <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+                    </div>
+                    <div class="modal-body">
+                      {{csrf_field()}}    
+                        <div class="container">
+                          <table id="scholar" class="table table-hover"style="width:100%">
+                            <thead>
+                              <tr>
+                                <th>Scholarship</th>
+                                <th>Amount</th>
+                                <th>Deadline</th>
+                                <th>Status</th>
+                                <th>Action</th>
+
+                              </tr>
+                            </thead>
+                            
+                          </table>
+                        </div>                        
+                    </div>
+                      <div class="modal-footer">
+                          <input type="hidden" name="faq_id" id="faq_id" value="" />
+                          <input type="hidden" name="button_action" id="button_action" value="insert" />
+                          {{-- <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
+                          <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" /> --}}
+                      </div>
+                </form>
+            </div>
+          </div>
+        </div>
+        {{-- </div> --}}
+    {{-- </div> --}}
+
+
+
+
+<!--CARD-->
+        <div class="card">
+                  <div class="card-header" id="th-cl1">
+                      <h3 class="boldtx">Applied</h3>
+                  </div>
+                  <div class="card-body"> 
+                <br>
+                <div class="container">
+
+            <table class="table table-hover" style="width:100%" id="table2">
+                    <thead class="th-cl1">
+                      <tr>
+                          <th>Name</th>
+                          <th>Email</th>       
+                      </tr>
+                    </thead>
+                </table>
+                <br>
+            </div>
+          </div>
+        </div>
+        <br><br>
+        @php
+          // session_start();
+          //   if (isset($_GET["id"])) {
+          //    $_SESSION["ids"] = $_GET["id"];
+          //   }
+          //     echo $_SESSION['ids'];
+          @endphp
+        {{-- @php  session_start();
+                              if (isset($_GET["id"])) {
+                              $_SESSION["ids"] = $_GET["id"];
+                                }  @endphp
+        --}}
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
   </div>
-        
+       
 </div>
 <script>
+  var sid;
      $(function() {
                $('#table').DataTable({
                processing: true,
                serverSide: true,
+               lengthChange: false,
                ajax: '{{ route('apply.getdata') }}',
                columns: [
-                        { data: 'name', name: 'name' },
+                        { data: 'fullname', name: 'fullname' },
+                        { data: 'email', name: 'email' },
+
                         // { data: 'surname', name: 'surname' },
                         // { data: 'first_name', name: 'first_name' },
                         // { data: 'middle_name', name: 'middle_name'},
                         { width: '20%', data: 'action', orderable:false, searchable: false}
                         // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
+                  ] 
+            });
+
+
+            $('#table2').DataTable({
+               processing: true,
+               serverSide: true,
+               lengthChange: false,
+               ajax: '{{ route('apply.data') }}',
+               columns: [
+                        { data: 'fullname', name: 'fullname' },
+                        { data: 'email', name: 'email' }
+
+                        // { data: 'surname', name: 'surname' },
+                        // { data: 'first_name', name: 'first_name' },
+                        // { data: 'middle_name', name: 'middle_name'},
+                        
+                        // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
+                  ] 
+            });
+
+            $('#scholar').DataTable({
+               processing: true,
+               serverSide: true,
+               lengthChange: false,
+              //  scrollY: 300,
+               pageLength: 4,
+               pagingType: "simple",
+               ajax: '{{ route('apply.scholardata') }}',
+               columns: [
+                        { data: 'scholarship_name', name: 'scholarship_name' },
+                        { data: 'amount', name: 'amount' },
+                        { data: 'deadline', name: 'deadline'},
+                        { data: 'status', name: 'status' },
+
+                        // { data: 'surname', name: 'surname' },
+                        // { data: 'first_name', name: 'first_name' },
+                        // { data: 'middle_name', name: 'middle_name'},
+                        
+                        { width: '20%', data: 'action', orderable:false, searchable: false}
                   ] 
             });
     $('#add_data').click(function(){
@@ -437,7 +516,7 @@
         $('.modal-title').text('Add Question');
     });
 
-    $('#data_form').on('submit', function(event){
+    $('#main_form').on('submit', function(event){
         event.preventDefault();
         var form_data = $(this).serialize();
         $.ajax({
@@ -458,12 +537,37 @@
                 }
                 else
                 {
-                    $('#form_output').html(data.success);
-                    $('#data_form')[0].reset();
-                    $('#action').val('Add');
+                   // $('#form_output').html(data.success);
+                    $('#main_form')[0].reset();
+                    //$('#action').val('Add');
                     $('.modal-title').text('Add Question');
-                    $('#button_action').val('insert');
+                    //$('#button_action').val('insert');
                     $('#table').DataTable().ajax.reload();
+                    $('#mainModal').modal('hide');
+                    if($('#action').val() == 'Edit')
+                    {
+                      swal(
+                        'Success!',
+                        'Your question has been successfully updated',
+                        'success'
+                      )
+                    }
+                    else if (($('#action').val() == 'Add'))
+                    {
+                      swal(
+                        'Success!',
+                        'You have successfully add a new question',
+                        'success'
+                      )
+                    }
+                    else if (($('#action').val() == 'Delete'))
+                    {
+                      swal(
+                        'Success!',
+                        'Question is successfully deleted',
+                        'success'
+                      )
+                    }
                 }
             }
         })
@@ -471,25 +575,122 @@
 
 
     $(document).on('click', '.edit', function(){
-        var id = $(this).attr("id");
-        $('#form_output').html('');
-        $.ajax({
+    //     var id = $(this).attr("id");
+    //     $('#form_output').html('');
+    //     $.ajax({
+    //         url:"{{route('faqs.fetchdata')}}",
+    //         method:'get',
+    //         data:{id:id},
+    //         dataType:'json',
+    //         success:function(data)
+    //         {
+    //             $('#question').val(data.question);
+    //             $('#answer').val(data.answer);
+    //             $('#faq_id').val(id);
+    //             $('#formModal').modal('show');
+    //             $('#action').val('Edit');
+    //             $('.modal-title').text('Edit Question');
+    //             $('#button_action').val('update');
+    //             edit_Form();
+    //             $('#mainModal').modal('show');
+    //             $('#action').val('Edit');
+    //             document.getElementById("action").className = "btn btn-info";
+    //             document.getElementById("md-form").classList.add('modal-lg');
+    //             $('#button_action').val('update');
+    //             $('.modal-title').text('Edit Question');
+    //         }
+    // });   
+    sid = $(this).attr('id');
+   //var id = $('#edit')
+    
+    //alert(id);
+    $('#mainModal').modal('show');
+     $('#ncw').attr("href", "/apply/scholarship-category/ncw/"+sid);
+    $('#gad').attr("href", "/apply/scholarship-category/gad/"+sid);
+    $('#public').attr("href", "/apply/scholarship-category/graduate-public/"+sid);
+    $('#private').attr("href", "/apply/scholarship-category/graduate-public/"+sid);
+    $('#oldnew').attr("href", "/apply/scholarship-category/vg-oldnew/"+sid);
+    // $('#ncw').attr("href", "/apply/scholarship-category/ncw/"+sid);
+    // $('#gad').attr("href", "/apply/scholarship-category/gad/"+sid);
+    // $('#public').attr("href", "/apply/scholarship-category/graduate-public/"+sid);
+    // $('#private').attr("href", "/apply/scholarship-category/graduate-public/"+sid);
+    // $('#oldnew').attr("href", "/apply/scholarship-category/vg-oldnew/"+sid);
+    //$('#btn-apply').name(id);
+    // $('.edit').id(id);
+      //window.location = '/apply/' + id; 
+     //window.history.pushState("", "", '/apply/?sid=' +sid);
+    // history.pushState("", document.title, querystring);
+    });
+ $(document).on('click', '.ncw', function(){
+    $(this).attr("href", "/apply/scholarship-category/ncw/"+sid);
+ });
+
+ $(document).on('click', '.gad', function(){
+    $(this).attr("href", "/apply/scholarship-category/gad/"+sid);
+ });
+
+ $(document).on('click', '.public', function(){
+    $(this).attr("href", "/apply/scholarship-category/graduate-public/"+sid);
+ });
+
+ $(document).on('click', '.private', function(){
+    $(this).attr("href", "/apply/scholarship-category/graduate-private/"+sid);
+ });
+
+ $(document).on('click', '.oldnew', function(){
+    $(this).attr("href", "/apply/scholarship-category/vg-oldnew/"+sid);
+ });
+
+ $(document).on('click', '.dhvtsu', function(){
+    $(this).attr("href", "/apply/scholarship-category/vg-dhvtsu/"+sid);
+ });
+
+ $(document).on('click', '.honors', function(){
+    $(this).attr("href", "/apply/scholarship-category/honor-rank/"+sid);
+ });
+
+ $(document).on('click', '.pcl', function(){
+    $(this).attr("href", "/apply/scholarship-category/pcl/"+sid);
+ });
+    
+    
+ $(document).on('click', '.delete', function(){
+        var id = $(this).attr('id');
+         //$('#del_output').html('');
+         $.ajax({
             url:"{{route('faqs.fetchdata')}}",
             method:'get',
             data:{id:id},
             dataType:'json',
             success:function(data)
             {
+              // var smp=data.faq_isdel;
+              //   console.log(id + ' ' +smp);
+                $('#del_id').val(id);
+                if(data.faq_isdel == 0){
+                  $('#faq_isdel').val(1);
+                  $('#action').val('Delete');
+                  document.getElementById("action").className = "btn btn-danger";
+                  $("#hddel").text("Are you sure you want to delete it?");
+                }
+                del_Form();
                 $('#question').val(data.question);
                 $('#answer').val(data.answer);
                 $('#faq_id').val(id);
-                $('#formModal').modal('show');
-                $('#action').val('Edit');
-                $('.modal-title').text('Edit Question');
-                $('#button_action').val('update');
+                $('#mainModal').modal('show');
+                document.getElementById("md-form").classList.remove('modal-lg');
+                $('#button_action').val('delete');
+                $('.modal-title').text('');
             }
-    });   
+            }); 
     });
+});
+$(document).ready(function(){
+//  $('#ncw').attr("href", "/apply/scholarship-category/ncw/"+sid);
+//     $('#gad').attr("href", "/apply/scholarship-category/gad/"+sid);
+//     $('#public').attr("href", "/apply/scholarship-category/graduate-public/"+sid);
+//     $('#private').attr("href", "/apply/scholarship-category/graduate-public/"+sid);
+//     $('#oldnew').attr("href", "/apply/scholarship-category/vg-oldnew/"+sid);
 });
 </script>
 </body>

@@ -22,7 +22,7 @@
 	<link href="/wassets/css/material-bootstrap-wizard.css" rel="stylesheet" />
 </head>
 
-<body class="bg-2">
+<body class="bg-3">
 	{{-- <!-- <div class="image-container set-full-height" style="background-image: url('priv/wassets/img/wizard-profile.jpg')"> --> --}}
 	    <!--   Creative Tim Branding   -->
 	    <!--   Big container   -->
@@ -32,7 +32,7 @@
 		            <!--      Wizard container        -->
 		            <div class="wizard-container">
 		                <div class="card wizard-card" style="width: 80em;" data-color="green" id="wizardProfile">
-		                    <form action="" method="">
+		                    <form action="{{ action('ScholarshipCatController@eefapStore') }}" method="post" enctype="multipart/form-data">
 								{{csrf_field()}}
 		                <!--        You can switch " data-color="purple" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
 
@@ -389,7 +389,7 @@
 		                        <div class="wizard-footer">
 		                            <div class="pull-right">
 		                                <input type='button' class='btn btn-next btn-fill btn-success btn-wd' name='next' value='Next' />
-		                                <input type='button' class='btn btn-finish btn-fill btn-success btn-wd' name='finish' value='Finish' />
+		                                <input type='submit' class='btn btn-finish btn-fill btn-success btn-wd' name='finish' value='Finish' />
 		                            </div>
 
 		                            <div class="pull-left">

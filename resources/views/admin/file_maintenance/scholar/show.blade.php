@@ -358,7 +358,7 @@
         <br>
         <div class="container">
     
-     <table class=" table table-hover table-hover" style="width:100%" id="table">
+     <table class=" table table-hover" style="width:100%" id="table">
                <thead class="th-cl1">
                   <tr>
                      <th>#</th>

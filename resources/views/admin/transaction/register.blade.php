@@ -338,7 +338,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">Transaction</li>
+              <li class="breadcrumb-item active">Transactions</li>
               <li class="breadcrumb-item active">Register</li>
             </ol>
           </div><!-- /.col -->
