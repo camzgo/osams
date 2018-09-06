@@ -501,7 +501,7 @@ button:focus {
               <h4 class="boldtx">PCL</h4>
           </div>
           <div class="card-body">
-    <form action="" id="regForm" method="post" enctype="multipart/form-data" class="container">
+    <form action="{{ action('ScholarshipCatController@pclStore') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
       {{csrf_field()}}
 
 
@@ -521,21 +521,21 @@ button:focus {
         </div>
         <div class="row form-group">
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' required/>
+            <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$users->surname}}" required/>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' required/>
+            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$users->first_name}}" required/>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name'/>
+            <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$users->middle_name}}"/>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$users->suffix}}"/>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-3">
-            <label for="municipality">* District</label>
+            <label>* District</label>
             <select name="district" id="district" data-val="true"  data-val-required="Please select District" data-dependent="municipality" class="form-control dynamic req" required >
               <option value="" selected disabled>--Select--</option>
                 @foreach ($district_list as $district)
@@ -557,7 +557,7 @@ button:focus {
           </div>
           <div class="col-md-3">
             <label for="street">Street</label>
-            <input type="text" class="form-control" id="_street" name="_street" placeholder='Street'/>
+            <input type="text" class="form-control" id="street" name="street" placeholder='Street'/>
           </div>
         </div>
         <div class="row form-group">
@@ -595,13 +595,13 @@ button:focus {
           </div>
           <div class="col-md-2">
             <label for="bdate">* Birth Date</label>
-            <input type="date" name="bday" id="bday" class="form-control req" data-provide="datepicker" required/>
+            <input type="date" name="bday" id="bday" class="form-control req" data-provide="datepicker" value="{{$users->bday}}" required/>
           </div>
         </div>
          <div class="row form-group">
            <div class="col-md-4">
             <label>* Place of Birth</label>
-            <input type="text" class="form-control req" id="birth_place" name="birh_place" placeholder='Place of Birth' required/>
+           <input type="text" class="form-control req" id="birth_place" name="birth_place" placeholder='Place of Birth'  required/>
           </div>
           <div class="col-md-3">
             <label for="mobile_no">* Mobile Number</label>
@@ -609,7 +609,7 @@ button:focus {
               <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+63</span>
               </div>
-              <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required/>
+            <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required value="{{$users->mobile_number}}"/>
             </div>  
           </div>
           
@@ -725,11 +725,13 @@ button:focus {
               <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+63</span>
               </div>
-              <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required/>
+              <input type="text" class="form-control req" id="emobile_no" name="emobile_no" placeholder='9xxxxxxxxx' required/>
             </div>  
           </div>
           <div class="ghost">
-            <input class="ghost" type="hidden" id="sid"/>
+            <input class="ghost" type="hidden" name="sid" id="sid"/>
+            <input type="hidden" class="ghost" id="barcode" name="barcode" value="{{$barcode}}"/>
+            <input type="hidden" class="ghost" id="gender2" name="gender2" value="{{$users->gender}}"/>
           </div>
         </div>
         
@@ -765,8 +767,11 @@ button:focus {
 
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
-  $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
-
+  $('#emobile_no').mask('0000000000', {"clearIncomplete": true});
+  
+  var gen = $('#gender2').val();
+  
+  document.getElementById('gender').value=gen;
   var pathname = window.location.pathname;
   var parts = pathname.split('/');
   console.log(parts[4]);

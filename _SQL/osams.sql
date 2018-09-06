@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2018 at 09:26 PM
+-- Generation Time: Sep 06, 2018 at 10:46 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -152,6 +152,15 @@ CREATE TABLE `application` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `application`
+--
+
+INSERT INTO `application` (`id`, `application_status`, `renew`, `barcode_image`, `barcode_number`, `applicant_id`, `scholar_id`, `created_at`, `updated_at`) VALUES
+(1, 'Pending', 0, 'NONE', 'RGzZ0URHVJ', 1, 5, '2018-09-06 10:28:15', '2018-09-06 10:28:15'),
+(2, 'Pending', 0, 'NONE', 'CSTjtDX0Ih', 2, 8, '2018-09-06 11:18:13', '2018-09-06 11:18:13'),
+(3, 'Pending', 0, 'NONE', 'OIzy8ol2ae', 3, 2, '2018-09-06 11:19:22', '2018-09-06 11:19:22');
+
 -- --------------------------------------------------------
 
 --
@@ -162,18 +171,18 @@ CREATE TABLE `eefap` (
   `id` int(10) UNSIGNED NOT NULL,
   `surname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `first_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `middle_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `suffix` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `middle_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `suffix` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile_number` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fb_account` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gsurname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gfirst_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gmiddle_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gsuffix` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gmiddle_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gsuffix` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gmobile_number` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `municipality` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `barangay` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `street` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `street` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `college_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `college_address` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `course` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -190,6 +199,14 @@ CREATE TABLE `eefap` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `eefap`
+--
+
+INSERT INTO `eefap` (`id`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `fb_account`, `gsurname`, `gfirst_name`, `gmiddle_name`, `gsuffix`, `gmobile_number`, `municipality`, `barangay`, `street`, `college_name`, `college_address`, `course`, `major`, `program_type`, `year_level`, `graduating`, `general_average`, `spes`, `scholarship_id`, `applicant_id`, `application_id`, `created_at`, `updated_at`) VALUES
+(1, 'Ocampo', 'Albert', 'Gold', 'Jr.', '9051241420', 'fdsds/ffdsd', 'dsfdsf', 'fsdfds', NULL, NULL, '0000000000', 'APALIT', 'Colgante (Holy Family)', NULL, 'fdfd', 'fdfd', 'dfd', 'dfd', 'Bachelor\'s Degree', 'dd', 'YES', 'fd', 'YES', 5, 1, 1, NULL, NULL),
+(2, 'Cong', 'King', 'Ca', NULL, '9172245112', 'dfdfd', 'fdf', 'dfd', NULL, NULL, '0000000000', 'SANTA ANA', 'Santo Rosario (Pagbatuan)', NULL, 'sdsd', 'sdsd', 'sds', 'sds', '2 Years Course', 'sds', 'NO', 'sd', 'YES', 2, 3, 3, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -202,12 +219,12 @@ CREATE TABLE `eefapgv` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `surname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `first_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `middle_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `suffix` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `middle_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `suffix` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile_number` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `municipality` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `barangay` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `street` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `street` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `college_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `college_address` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `course` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -222,6 +239,13 @@ CREATE TABLE `eefapgv` (
   `applicant_id` int(11) NOT NULL,
   `application_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `eefapgv`
+--
+
+INSERT INTO `eefapgv` (`id`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `municipality`, `barangay`, `street`, `college_name`, `college_address`, `course`, `major`, `program_type`, `year_level`, `graduating`, `general_average`, `spes`, `awards`, `scholarship_id`, `applicant_id`, `application_id`) VALUES
+(1, NULL, NULL, 'Ocampo', 'Camille', 'Fierro', NULL, '9051124520', 'MEXICO', 'Parian (Poblacion)', NULL, 'gfdgfd', 'fgdgd', 'fgfg', 'gf', 'Bachelor\'s Degree', 'dgfd', 'YES', 'fg', 'NO', 'Highest Honors', 8, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -275,10 +299,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (19, '2018_08_17_165847_add_to_admin', 9),
 (20, '2018_08_18_144419_create_admins_info_table', 9),
 (21, '2018_08_18_174148_create_account_type', 9),
-(30, '2018_09_02_074615_create_eefap_table', 10),
-(31, '2018_09_02_075607_create_eefapgv_table', 10),
-(32, '2018_09_02_075715_create_pcl_table', 10),
-(33, '2018_09_03_192445_create_application_table', 10);
+(42, '2018_09_02_074615_create_eefap_table', 10),
+(43, '2018_09_02_075607_create_eefapgv_table', 10),
+(44, '2018_09_02_075715_create_pcl_table', 10),
+(45, '2018_09_03_192445_create_application_table', 10);
 
 -- --------------------------------------------------------
 
@@ -843,18 +867,6 @@ INSERT INTO `munbar` (`id`, `municipality`, `barangay`, `district`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
---
-
-CREATE TABLE `password_resets` (
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `pcl`
 --
 
@@ -865,12 +877,12 @@ CREATE TABLE `pcl` (
   `surname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `first_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `middle_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `suffix` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `suffix` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile_number` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `district` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `municipality` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `barangay` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `street` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `street` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `school_enrolled` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `course` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `year_level` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -882,13 +894,13 @@ CREATE TABLE `pcl` (
   `birth_place` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fsurname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ffirst_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fmiddle_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fsuffix` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fmiddle_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fsuffix` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `foccupation` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `msurname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mfirst_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mmiddle_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `msuffix` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mmiddle_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `msuffix` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `moccupation` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `emergency` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -897,6 +909,13 @@ CREATE TABLE `pcl` (
   `applicant_id` int(11) NOT NULL,
   `application_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `pcl`
+--
+
+INSERT INTO `pcl` (`id`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `district`, `municipality`, `barangay`, `street`, `school_enrolled`, `course`, `year_level`, `gender`, `birthdate`, `nationality`, `religion`, `civil_status`, `birth_place`, `fsurname`, `ffirst_name`, `fmiddle_name`, `fsuffix`, `foccupation`, `msurname`, `mfirst_name`, `mmiddle_name`, `msuffix`, `moccupation`, `address`, `emergency`, `emobile_number`, `scholarship_id`, `applicant_id`, `application_id`) VALUES
+(1, NULL, NULL, 'Cong', 'King', 'Ca', NULL, '9172245112', '3rd District', 'MEXICO', 'Nueva Victoria', 'cv', 'dfdfd', 'dfdf', 'df', 'Male', '1998-02-05', 'Filipino', 'The Church of Jesus Christ of Latter-day Saints', 'Single', 'fdsfsdfsdf', 'dfdf', 'dfd', 'fd', NULL, 'dfdf', 'fdf', 'ddfd', 'fd', NULL, 'dfdf', 'dfdfdfd', 'fdfdfd', '9172245112', 6, 3, 4);
 
 -- --------------------------------------------------------
 
@@ -44812,6 +44831,30 @@ INSERT INTO `refregion` (`id`, `psgcCode`, `regDesc`, `regCode`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `requirements`
+--
+
+CREATE TABLE `requirements` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `type` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `requirements`
+--
+
+INSERT INTO `requirements` (`id`, `name`, `type`) VALUES
+(1, 'Bio-data with/2x2 Picture', 'eefap'),
+(2, 'Grades/Form 138', 'eefap'),
+(3, 'Certificate of Registration/Assessment Form', 'eefap'),
+(4, 'Barangay/Residency/Indigency', 'eefap'),
+(5, 'Official Receipt', 'eefap'),
+(6, 'School ID', 'eefap');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `scholarships`
 --
 
@@ -44904,9 +44947,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `gender`, `bday`, `profile_photo`, `applicant_isdel`, `suffix`, `mobile_number`) VALUES
-(1, 'gold@mail.com', '$2y$10$XI.K4/qIMsyUQ6Q49.uhuOocu4CyeGxBaZQ59vqCLrRinbig63wi6', 'xKZAF1lmEjUeD4gsyLZeavtUeOqZzVqrnmOHcpJRKxHYzmupseJTGadas0fe', '2018-08-08 06:04:07', '2018-08-16 08:17:54', 'Ocampo', 'Albert', 'Gold', 'Male', '1999-04-04', '0', '0', NULL, ''),
-(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', NULL, '2018-08-09 15:16:18', '2018-08-16 08:17:58', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', '0', NULL, ''),
-(3, 'cong@mail.com', '$2y$10$9luqQ659uIm1WurOBMMTQO1d8xFwKNf4CpBbJCV290ALkGLF5UG8K', 'xYd77OqpHEXPD7ZO1bTxfvSrmCBMVCaZPiKlZZbqGFRpjjSoVDD3z5LFUAo1', '2018-08-18 09:12:14', '2018-08-18 09:12:14', 'Cong', 'King', 'Ca', 'Male', '1998-02-05', 'none', '0', NULL, '');
+(1, 'gold@mail.com', '$2y$10$XI.K4/qIMsyUQ6Q49.uhuOocu4CyeGxBaZQ59vqCLrRinbig63wi6', 'xKZAF1lmEjUeD4gsyLZeavtUeOqZzVqrnmOHcpJRKxHYzmupseJTGadas0fe', '2018-08-08 06:04:07', '2018-08-16 08:17:54', 'Ocampo', 'Albert', 'Gold', 'Male', '1999-04-04', '0', '0', 'Jr.', '9051241420'),
+(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', NULL, '2018-08-09 15:16:18', '2018-08-16 08:17:58', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', '0', NULL, '9051124520'),
+(3, 'cong@mail.com', '$2y$10$9luqQ659uIm1WurOBMMTQO1d8xFwKNf4CpBbJCV290ALkGLF5UG8K', 'xYd77OqpHEXPD7ZO1bTxfvSrmCBMVCaZPiKlZZbqGFRpjjSoVDD3z5LFUAo1', '2018-08-18 09:12:14', '2018-08-18 09:12:14', 'Cong', 'King', 'Ca', 'Male', '1998-02-05', 'none', '0', NULL, '9172245112');
 
 --
 -- Indexes for dumped tables
@@ -44974,12 +45017,6 @@ ALTER TABLE `munbar`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
-
---
 -- Indexes for table `pcl`
 --
 ALTER TABLE `pcl`
@@ -45007,6 +45044,12 @@ ALTER TABLE `refprovince`
 -- Indexes for table `refregion`
 --
 ALTER TABLE `refregion`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `requirements`
+--
+ALTER TABLE `requirements`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -45060,19 +45103,19 @@ ALTER TABLE `announcements`
 -- AUTO_INCREMENT for table `application`
 --
 ALTER TABLE `application`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `eefap`
 --
 ALTER TABLE `eefap`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `eefapgv`
 --
 ALTER TABLE `eefapgv`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `faquestions`
@@ -45084,7 +45127,7 @@ ALTER TABLE `faquestions`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `munbar`
@@ -45096,7 +45139,7 @@ ALTER TABLE `munbar`
 -- AUTO_INCREMENT for table `pcl`
 --
 ALTER TABLE `pcl`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `refbrgy`

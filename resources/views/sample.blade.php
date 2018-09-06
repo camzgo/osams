@@ -15,7 +15,7 @@
 
 
 <div class="container text-center" style="border: 1px solid #a1a1a1;padding: 15px;width: 70%;">
-  <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('rIE7niseQQsg', 'C39')}}" alt="barcode" /> <br> <br>
+  <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('234561789', 'C39')}}" alt="barcode" /> <br> <br>
     <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('rIE7niseQQsg', 'C39+')}}" alt="barcode" /> <br> <br>
   <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('rIE7niseQQsg', 'C39E')}}" alt="barcode" /> <br> <br>
   <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('rIE7niseQQsg', 'C39E+')}}" alt="barcode" /> <br> <br>

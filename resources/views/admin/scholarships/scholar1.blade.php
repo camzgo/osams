@@ -501,22 +501,9 @@ button:focus {
               <h4 class="boldtx" id="title_scholar"></h4>
           </div>
           <div class="card-body">
-  @php
-
-// echo generateRandomString();
-//   function generateRandomString($length = 12) {
-//     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-//     $charactersLength = strlen($characters);
-//     $randomString = '';
-//     for ($i = 0; $i < $length; $i++) {
-//         $randomString .= $characters[rand(0, $charactersLength - 1)];
-//     }
-//     return $randomString;
-// }
-  
-  @endphp
-            <img src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode, 'C39+')}}" alt="barcode" />
-          <small>{{$barcode}}</small>
+            
+          {{-- <img src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode, 'C39')}}" alt="barcode" /> --}}
+          {{-- <small>{{$barcode}}</small> --}}
     <form action="{{ action('ScholarshipCatController@eefapStore') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
       {{csrf_field()}}
 
@@ -537,16 +524,16 @@ button:focus {
         </div>
         <div class="row form-group">
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' required/>
+          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$users->surname}}" required/>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' required/>
+            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$users->first_name}}" required/>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name'/>
+          <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{$users->middle_name}}" placeholder='Middle Name'/>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <input type="text" class="form-control" id="suffix" name="suffix" value="{{$users->suffix}}" placeholder='Suffix (e.g., Jr. Sr. III)'/>
           </div>
         </div>
         <div class="row form-group">
@@ -569,7 +556,7 @@ button:focus {
           </div>
           <div class="col-md-6">
             <label for="street">Street</label>
-            <input type="text" class="form-control" id="_street" name="_street" placeholder='Street'/>
+            <input type="text" class="form-control" id="_street" name="_street" placeholder='(Street, Village Subdivision)'/>
           </div>
         </div>
          <div class="row form-group">
@@ -579,7 +566,7 @@ button:focus {
               <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+63</span>
               </div>
-              <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required/>
+              <input type="text" class="form-control req" id="mobile_no" name="mobile_no" value="{{$users->mobile_number}}" placeholder='9xxxxxxxxx' required/>
             </div>
             
           </div>
@@ -619,37 +606,7 @@ button:focus {
           </div>
         </div>
         <div class="row form-group">
-            {{-- <div class="col-md-3">
-                <label>* Relationship</label>
-                <select name="relationship" id="relationship" class="form-control">
-                    <option value="" selected disabled>--Select--</option>
-                    <option value="Father">Father</option>
-                    <option value="Mother">Mother</option>
-                    <option value="Brother">Brother</option>
-                    <option value="Sister">Sister</option>
-                    <option value="Grandfather">Grandfather</option>
-                    <option value="Grandmother">Grandmother</option>
-                    <option value="Uncle">Uncle</option>
-                    <option value="Aunt">Aunt</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label>* Civil Status</label>
-                <select name="gcivil" id="gcivil" class="form-control">
-                    <option value="" selected disabled>--Select--</option>
-                    <option value="Single">Single</option>
-                    <option value="Married">Married</option>
-                    <option value="Separated">Separated</option>
-                    <option value="Widowed">Widowed</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label>* Occupation</label>
-                    <input type="text" class="form-control" id="occupation" name="occupation" placeholder='Occupation' required/>
-                </div>
-            </div> --}}
+
             <div class="col-md-4">
             <label for="mobile_no">* Mobile Number</label>
             <div class="input-group">
@@ -672,22 +629,6 @@ button:focus {
           <h4 class="tx1">Educational Information</h4>
         </div>
         <hr/>
-        {{-- <div class="row form-group"> --}}
-          {{-- <div class="col-md-4">
-            <label for="mobile_no">* Mobile Number</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">+63</span>
-              </div>
-              <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required/>
-            </div>
-            
-          </div>
-          <div class="col-md-4">
-            <label for="email">* Email</label>
-            <input type="email" class="form-control req" id="email" name="email" placeholder='example@mail.com' required/>
-          </div>
-        </div> --}}
         <div class="row form-group">
             <div class="col-md-5">
                 <label>* College/University Name <small>(No Abbreviation)</small></label>
@@ -743,13 +684,14 @@ button:focus {
             </select>
           </div>
           <div class="ghost">
-            <input class="ghost" id="aid" type="hidden" value="sid"/>
+            <input class="ghost" id="sid" name="sid" type="hidden" value=""/>
           </div>
           <div class="ghost">
             {!! Form::open(['action' => ['AnnounceMainController@update',  $scholar_id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
             <div class = "form-group col-md-8 ghost">
             {{Form::text('title_id', $scholar_id, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
             {{Form::text('title', $scholar_name, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
+            {{Form::text('barcode', $barcode, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
             </div>
             {!! Form::close() !!}
           </div>
@@ -866,7 +808,7 @@ function validateForm() {
   // This function deals with validation of the form fields
   var x, y, i, valid = true;
   x = document.getElementsByClassName("tab");
-  y = x[currentTab].getElementsByClassName("");
+  y = x[currentTab].getElementsByClassName("req");
   // w = x[currentTab].getElementsByTagName("select");
   // A loop that checks every input field in the current tab:
   for (i = 0; i < y.length; i++) {

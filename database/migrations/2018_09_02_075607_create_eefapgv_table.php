@@ -18,12 +18,12 @@ class CreateEefapgvTable extends Migration
             $table->timestamps();
             $table->string('surname', 50);
             $table->string('first_name', 50);
-            $table->string('middle_name', 50);
-            $table->string('suffix', 10);
+            $table->string('middle_name', 50)->nullable();
+            $table->string('suffix', 10)->nullable();
             $table->string('mobile_number', 20);
             $table->string('municipality', 50);
             $table->string('barangay', 50);
-            $table->string('street');
+            $table->string('street')->nullable();
             $table->string('college_name', 50);
             $table->string('college_address', 150);
             $table->string('course', 50);

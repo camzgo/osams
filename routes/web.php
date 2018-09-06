@@ -103,27 +103,39 @@ Route::prefix('apply/scholarship-category')->group(function(){
     Route::post('/pcl/fetch', 'ScholarshipCatController@pfetch')->name('pcl.fetch');
     Route::get('/eefap-gv/{id}', 'ScholarshipCatController@gvShow');
     Route::post('/eefap', 'ScholarshipCatController@eefapStore');
+    Route::post('/eefap-gv', 'ScholarshipCatController@eefapgvStore');
+    Route::post('/pcl', 'ScholarshipCatController@pclStore');
 // });
 
-Route::get('/gad/{id}', 'ScholarshipCatController@gadShow');
-Route::get('/graduate-private/{id}', 'ScholarshipCatController@gradprivate');
-Route::get('/graduate-public/{id}', 'ScholarshipCatController@gradpublic');
-Route::get('/ncw/{id}', 'ScholarshipCatController@ncw');
-Route::get('/vg-oldnew/{id}', 'ScholarshipCatController@oldnew');
+    Route::get('/gad/{id}', 'ScholarshipCatController@gadShow');
+    Route::get('/graduate-private/{id}', 'ScholarshipCatController@gradprivate');
+    Route::get('/graduate-public/{id}', 'ScholarshipCatController@gradpublic');
+    Route::get('/ncw/{id}', 'ScholarshipCatController@ncw');
+    Route::get('/vg-oldnew/{id}', 'ScholarshipCatController@oldnew');
 
 
-Route::get('/honor-rank/{id}', 'ScholarshipCatController@honors');
-Route::get('/vg-dhvtsu/{id}', 'ScholarshipCatController@dhvtsu');
+    Route::get('/honor-rank/{id}', 'ScholarshipCatController@honors');
+    Route::get('/vg-dhvtsu/{id}', 'ScholarshipCatController@dhvtsu');
 
-Route::get('/pcl/{id}', 'ScholarshipCatController@pclShow');
+    Route::get('/pcl/{id}', 'ScholarshipCatController@pclShow');
 });
+
+
 Route::prefix('apply')->group(function(){
     Route::get('/getdata', 'ApplyController@getdata')->name('apply.getdata');
     Route::get('/getdata2', 'ApplyController@applydata')->name('apply.data');
     Route::get('/getdata3', 'ApplyController@scholardata')->name('apply.scholardata');
     Route::get('/scholarship-category', 'ApplyController@showCat');
+    Route::get('/send', 'ApplyController@showsend');
 });
 
+Route::prefix('approve')->group(function()
+{
+    Route::get('/', 'ApproveController@approveShow');
+    Route::get('/fetchdata', 'ApproveController@searchData')->name('search.fetchdata');
+});
+
+Route::get('/admindash', 'ApproveController@admindash');
 Route::get('/barcode', 'BarcodeController@barcode');
 
 

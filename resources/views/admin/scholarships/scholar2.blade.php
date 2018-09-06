@@ -501,7 +501,7 @@ button:focus {
               <h4 class="boldtx" id="title_scholar"></h4>
           </div>
           <div class="card-body">
-    <form action="" id="regForm" method="post" enctype="multipart/form-data" class="container">
+    <form action="{{ action('ScholarshipCatController@eefapgvStore') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
       {{csrf_field()}}
 
 
@@ -521,16 +521,16 @@ button:focus {
         </div>
         <div class="row form-group">
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' required/>
+          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$users->surname}}" required/>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' required/>
+          <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$users->first_name}}" required/>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name'/>
+          <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$users->middle_name}}"/>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+          <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$users->suffix}}"/>
           </div>
         </div>
         <div class="row form-group">
@@ -553,7 +553,7 @@ button:focus {
           </div>
           <div class="col-md-6">
             <label for="street">Street</label>
-            <input type="text" class="form-control" id="_street" name="_street" placeholder='Street'/>
+            <input type="text" class="form-control" id="street" name="street" placeholder='(Street, Village Subdivision)'/>
           </div>
         </div>
          <div class="row form-group">
@@ -563,7 +563,7 @@ button:focus {
               <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+63</span>
               </div>
-              <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required/>
+            <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required value="{{$users->mobile_number}}"/>
             </div>
             
           </div>
@@ -635,7 +635,7 @@ button:focus {
           </div>
           <div class="col-md-3">
             <label>* I certify that: </label>
-            <select name="grad" id="grad" class="form-control">
+            <select name="spes" id="spes" class="form-control">
               <option value="" selected disabled>--Select--</option>
               <option value="YES">Yes, I am SPES Recipient</option>
               <option value="NO">No, I am not SPES Recipient</option>
@@ -666,18 +666,21 @@ button:focus {
           <div class="col-md-3">
             <ul class="list-group" style="padding-top:10px;">
               <li class="list-group-item active"><strong>Rank</strong></li>
-              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb2" id="rb4" value="SK Chairmain"> <span> SK Chairman </span></li>
-              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb2" id="rb5" value="SK Councilor"> <span> SK Councilor </span></li>
+              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb1" id="rb4" value="SK Chairman"> <span> SK Chairman </span></li>
+              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb1" id="rb5" value="SK Councilor"> <span> SK Councilor </span></li>
+                <li class="list-group-item list-group-item-secondary"> <label class="rad inline"> <input type="radio" name="rb1" id="rb6" value="None/VG DHVTSU"> <span> None/VG DHVTSU </span></li>
             </ul>					
           </div>
           <div class="ghost">
-            <input class="ghost" type="hidden" id="sid"/>
+            <input class="ghost" id="sid" name="sid" type="hidden" value=""/>
+            <input class="ghost" id="award" name="award" type="hidden" value=""/>
           </div>
           <div class="ghost">
             {!! Form::open(['action' => ['AnnounceMainController@update',  $scholar_id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
             <div class = "form-group col-md-8 ghost">
             {{Form::text('title_id', $scholar_id, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
             {{Form::text('title', $scholar_name, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
+            {{Form::text('barcode', $barcode, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
             </div>
             {!! Form::close() !!}
           </div>
@@ -711,6 +714,37 @@ button:focus {
         
 </div>
 <script>
+
+  $('input[type="radio"]').click(function(){
+
+    var award;
+    if (document.getElementById('rb1').checked) {
+      award = document.getElementById('rb1').value;
+    }
+    else if (document.getElementById('rb2').checked)
+    {
+      award = document.getElementById('rb2').value;
+    }
+    else if (document.getElementById('rb3').checked)
+    {
+      award = document.getElementById('rb3').value;
+    }
+    else if (document.getElementById('rb4').checked)
+    {
+      award = document.getElementById('rb4').value;
+    }
+    else if (document.getElementById('rb5').checked)
+    {
+      award = document.getElementById('rb5').value;
+    }
+    else if (document.getElementById('rb6').checked)
+    {
+      award = document.getElementById('rb6').value;
+    }
+     $('#award').val(award);
+
+    //console.log(award);
+    });
 
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});

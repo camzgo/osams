@@ -137,14 +137,14 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/apply" class="nav-link">
+                <a href="/apply" class="nav-link active">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/approve" class="nav-link active">
+                <a href="/approve" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-check nav-icon"></i>
                   <p>Approve</p>
@@ -332,7 +332,7 @@
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">Transactions</li>
-              <li class="breadcrumb-item active">Approve</li>
+              <li class="breadcrumb-item active">Apply</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -345,97 +345,25 @@
     <!-- Main content -->
      <div class="content">
       <div class="container-fluid">
-        <div class="card">
-          <div class="card-header" id="th-cl1">
-              <h3 class="boldtx">Approve</h3>
+        {{-- <div class="card">
+          <div class="card-header" id="th-cl3">
+              <h3 class="boldtx">Apply</h3>
           </div>
-          <div class="card-body"> 
-            <br>
-            <div class="container">
-              {{-- <table class="table table-hover" style="width:100%" id="table">
-                  <thead class="th-cl1">
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>          
-                    </tr>
-                  </thead>
-                </table> --}}
-
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <div class="row ml-4" >
-                                <div class="col-md-10">
-                                    <input type="text" class="form-control" id="search" oninput="trthis()"/>
-                                </div>
-                                <div class="col-md-2">
-                                    <button class="btn btn-info"><i class="fa fa-barcode"></i> SCAN</button>
-                                </div>
-                            </div>
-                            <hr/>
-                        </div>
-                        <div class="container">
-                            <div class="row form-group">
-                                <h4 class="tx1">Application Information</h4>
-                            </div>
-                            <div class="row form-group">
-                                <div class = "col-md-6">
-                                    <label>Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder='' disabled value="DFDFDFDF" />
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Scholarship</label>
-                                    <input type="text" class="form-control" id="scholarship" name="scholarship" placeholder='' disabled value="DFDFDFDF" />
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col-md-6">
-                                    <label>Address</label>
-                                    <input type="text" class="form-control" id="address" name="address" placeholder='' disabled value="DFDFDFDF" />
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Mobile Number</label>
-                                    <div class="input-group">
-                                    <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">+63</span>
-                                    </div>
-                                    <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="GFGFGF" disabled placeholder='9xxxxxxxxx' required/>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-                            <div class="row form-group">
-                                <div class="col-md-6">
-                                    <ul class="list-group mt-4">
-                                        <li class="list-group-item active"><strong>Requirements</strong></li>
-                                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                                        <li class="list-group-item">Morbi leo risus</li>
-                                        <li class="list-group-item">Porta ac consectetur ac</li>
-                                        <li class="list-group-item">Vestibulum at eros</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row form-group pull-right">
-                                <button class="btn btn-danger"><strong><i class="fa fa-close"></i> DISAPPROVED</strong></button> &nbsp &nbsp
-                                <button class="btn btn-success"><strong><i class="fa fa-check"></i> APPROVED</strong></button>
-                            </div>
-                        </div>
+          
+        </div> --}}
+        <div class="card-body"> 
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title"><i class="fa fa-paper-plane"></i> MESSAGE</h1>
+                    <hr/>
+                    <p>Your application has been sent.</p>
+                    {{-- <br>    --}}
+                    <div class="pull-right">
+                        <a href="/approve" class="btn btn-success"> Proceed to Approve</a>
                     </div>
                 </div>
-
-
-
-                <br>
             </div>
           </div>
-        </div>
-        {{-- </div> --}}
-    {{-- </div> --}}
-
-
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -443,26 +371,7 @@
        
 </div>
 <script>
-function trthis()
-{
-    //console.log($('#search').val());
 
-        var id = $('#search').val();
-       // $('#form_output').html('');
-        $.ajax({
-            url:"{{route('search.fetchdata')}}",
-            method:'get',
-            data:{id:id},
-            dataType:'json',
-            success:function(data)
-            {
-                $('#name').val(data.name);
-                $('#mobile_no').val(data.mobile_number);
-                $('#address').val(data.address);
-                $('#scholarship').val(data.scholarship);
-            }
-        });
-}
 </script>
 </body>
 </html>

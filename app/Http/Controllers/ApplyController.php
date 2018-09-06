@@ -95,11 +95,21 @@ class ApplyController extends Controller
         return view ('admin.transaction.applycat');
     }
 
+    function showsend()
+    {
+         return view ('admin.scholarships.application');
+    }
     function getdata()
     {
         //$users = User::select('id', 'surname', 'first_name', 'middle_name');
-        $users = User::select("id", "email", 
-        DB::raw("CONCAT(users.surname,', ',users.first_name, ' ', users.middle_name) as fullname"))->where('applicant_isdel', '0')->get();
+        // $users = User::select("id", "email", 
+        // DB::raw("CONCAT(users.surname,', ',users.first_name, ' ', users.middle_name) as fullname"))->where('applicant_isdel', '0')->get();
+
+        $users = DB::table('users')
+        ->leftJoin('application', 'application.applicant_id', '=', 'users.id')
+        ->whereNull('application.applicant_id')
+        //->where(DB::raw("application.applicant_id IS NULL"))
+        ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"), 'users.id', 'users.email')->get();
         return DataTables::of($users)
         ->addColumn('action', function($users){
             return '<a href="#" class="btn btn-sm btn-primary edit " id="'.$users->id.'"><i class="fa fa-paper-plane"></i> Apply</a>';
@@ -109,8 +119,9 @@ class ApplyController extends Controller
 
     function applydata()
     {
-        $users = User::select("email", 
-        DB::raw("CONCAT(users.surname,', ',users.first_name, ' ', users.middle_name) as fullname"))->where('applicant_isdel', '0')->get();
+         $users = DB::table('users')
+        ->join('application', 'application.applicant_id', '=', 'users.id')
+        ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"), 'users.id', 'users.email')->get();
         return DataTables::of($users)
         ->addColumn('action', function($users){
             return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$users->id.'"><i class="fa fa-edit"></i>Apply</a>';

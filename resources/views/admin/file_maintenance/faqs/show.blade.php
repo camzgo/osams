@@ -573,7 +573,7 @@
             }); 
     });
 });
-function edit_Form() {
+function edit_Form() { 
     var x = document.getElementById("editForm");
     if (x.style.display === "none") {
         x.style.display = "block";
