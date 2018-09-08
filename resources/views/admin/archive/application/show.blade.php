@@ -31,7 +31,7 @@
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          MESSAGES
+          <i class="fa fa-envelope"></i> 
           <span class="badge badge-danger navbar-badge" style="font-size: 8px;">10</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -156,7 +156,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>
@@ -187,7 +187,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/faqs" class="nav-link active">
+                <a href="/faqs" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-question nav-icon"></i>
                   <p>FAQs</p>
@@ -210,7 +210,7 @@
               
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
               <p>
@@ -226,7 +226,7 @@
                   <p>Audit Log</p>
                 </a>
               </li>
-              <li class="nav-item has-treeview">
+              <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-archive nav-icon"></i>
@@ -251,7 +251,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/archive/application" class="nav-link">
+                        <a href="/archive/application" class="nav-link active">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-folder nav-icon"></i>
                         <p>Application</p>
@@ -333,10 +333,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-             <ol class="breadcrumb float-sm-left">
+            <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">File Maintenance</li>
-              <li class="breadcrumb-item active">FAQS</li>
+              <li class="breadcrumb-item active">Utilities</li>
+              <li class="breadcrumb-item active">Archive</li>
+              <li class="breadcrumb-item active">Application</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -350,27 +351,28 @@
      <div class="content">
       <div class="container-fluid">
         <div class="card">
-          <div class="card-header" id="th-cl1">
-              <h3 class="boldtx">Frequently Ask Questions (FAQs)</h3>
+          <div class="card-header" id="th-cl2">
+              <h3 class="boldtx">Application Archive</h3>
           </div>
           <div class="card-body"> 
          <div class="flt-right">
-            <a href="#" class="btn btn-success" id="add_data" data-backdrop="static" data-keyboard="false">
+            {{-- <a href="#" class="btn btn-success" id="add_data" data-backdrop="static" data-keyboard="false">
                 <i class="fa fa-plus"></i>
                 Add New
-            </a>
+            </a> --}}
           </div>
 
         <br>
         <div class="container">
     <br />
-    <br />
      <table class=" table table-hover" style="width:100%" id="table">
-               <thead class="th-cl1">
+               <thead class="th-cl2">
                   <tr>
-                     <th>Question</th>
-                     <th>Answer</th>
+                     <th>Name</th>
+                     <th>Scholarship</th>
+                     <th>Submitted at</th>
                      <th>Actions</th>
+                     {{-- <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></button></th> --}}
                   </tr>
                </thead>
             </table>
@@ -378,42 +380,38 @@
 </div>
 
     <div id="mainModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-lg modal-dialog-centered" id="md-form">
+        <div class="modal-dialog modal-dialog-centered" id="md-form">
             <div class="modal-content">
                 <form method="post" id="main_form">
                     <div class="modal-header">
-                      <h4 class="modal-title">Add New</h4>
                       <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
                     </div>
                     <div class="modal-body">
-                      {{csrf_field()}}    
-                      <span id="form_output"></span>              
-                      <div id="editForm">
-                          <div class="form-group">
-                              <label>Question</label>
-                              <input type="text" name="question" id="question" class="form-control" />
-                          </div>
-                          <div class="form-group">
-                              <label>Answer</label>
-                              <textarea type="text" name="answer" id="answer" class="form-control noresize" rows="7"></textarea>
-                          </div>
-                      </div>
+                      {{csrf_field()}}             
                       <div id="delForm">
                         <span id="del_output"> </span>
-                        <div class="form-group">
-                            <h5 class="brand-text font-weight-bold" id="hddel">Are you sure you want to delete it?</h5>
+                        <div class="form-group" id="dvh2">
+                            <h5 class="brand-text font-weight-bold" id="hddel"></h5>
+                            {{-- <h2 class="brand-text font-weight-bold ghost" id="hddel2">Are you sure?</h2> --}}
+                            <p class="ghost" id="sec">You will not be able to recover this file</p>
                         </div>
-                        <div class="form-group">
-                          <input type="hidden" name="del_id" id="del_id" value="" />
-                          <input type="hidden" name="faq_isdel" id="faq_isdel" value=""/>
+                        <div class="form-group ghost">
+                          {{-- <input type="hidden" name="del_question" id="del_question" value="" class="ghost"/>
+                          <input type="hidden" name="del_answer" id="del_answer" value="" class="ghost"/> --}}
+                          <input type="hidden" name="app_status" id="app_status" value="" class="ghost"/>
+                          <input type="hidden" name="app_id" id="app_id" value="" class="ghost"/>
+                          <input type="hidden" name="scholar_id" id="scholar_id" value="" class="ghost"/>
+                          <input type="hidden" name="confirm" id="confirm" value="" class="ghost"/>
                         </div>
                       </div>
                     </div>
                       <div class="modal-footer">
-                          <input type="hidden" name="faq_id" id="faq_id" value="" />
                           <input type="hidden" name="button_action" id="button_action" value="insert" />
                           <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
-                          <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
+                            <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
+                          <div class="" id="condel" name="condel">
+                            <button class="btn btn-danger" value="" id="del" onclick="confirmDel()">Delete</button>
+                          </div>
                       </div>
                 </form>
             </div>
@@ -427,36 +425,30 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-  </div>
         
+  </div>
 </div>
 <script>
+
      $(function() {
                $('#table').DataTable({
                processing: true,
                serverSide: true,
-               ajax: '{{ route('faqs.getdata') }}',
+               ajax: '{{ route('archiveapplication.getdata') }}',
                columns: [
-                        { data: 'question', name: 'question' },
-                        { data: 'answer', name: 'answer' },
+                        { data: 'fullname', name: 'fullname' },
+                        { data: 'scholarship_name', name: 'scholarship_name' },
+                        { data: 'created_at', name: 'created_at'},
                         { width: '20%', data: 'action', orderable:false, searchable: false}
+                        // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
                   ] 
             });
-    $('#add_data').click(function(){
-        $('#mainModal').modal('show');
-        $('#main_form')[0].reset();
-        $('#form_output').html('');
-        $('#button_action').val('insert');
-        $('#action').val('Add');
-        $('.modal-title').text('Add Question');
-        edit_Form();
-    });
 
     $('#main_form').on('submit', function(event){
         event.preventDefault();
         var form_data = $(this).serialize();
         $.ajax({
-            url:"{{ route('faqs.postdata') }}",
+            url:"{{ route('archiveapplication.postdata') }}",
             method:"POST",
             data:form_data,
             dataType:"json",
@@ -475,32 +467,13 @@
                 {
                    // $('#form_output').html(data.success);
                     $('#main_form')[0].reset();
-                    //$('#action').val('Add');
-                    $('.modal-title').text('Add Question');
-                    //$('#button_action').val('insert');
                     $('#table').DataTable().ajax.reload();
                     $('#mainModal').modal('hide');
-                    if($('#action').val() == 'Edit')
+                    if($('#action').val() == 'Restore')
                     {
                       swal(
                         'Success!',
-                        'Your data has been successfully updated',
-                        'success'
-                      )
-                    }
-                    else if (($('#action').val() == 'Add'))
-                    {
-                      swal(
-                        'Success!',
-                        'You have successfully add a new data',
-                        'success'
-                      )
-                    }
-                    else if (($('#action').val() == 'Delete'))
-                    {
-                      swal(
-                        'Success!',
-                        'Your data is successfully deleted',
+                        'Your data has been successfully restored',
                         'success'
                       )
                     }
@@ -514,76 +487,134 @@
         var id = $(this).attr("id");
         $('#form_output').html('');
         $.ajax({
-            url:"{{route('faqs.fetchdata')}}",
+            url:"{{route('archiveapplication.fetchdata')}}",
             method:'get',
             data:{id:id},
             dataType:'json',
             success:function(data)
             {
-                $('#question').val(data.question);
-                $('#answer').val(data.answer);
-                $('#faq_id').val(id);
-                $('#formModal').modal('show');
-                $('#action').val('Edit');
-                $('.modal-title').text('Edit Question');
+                if(data.faq_isdel==1)
+                {
+                    $('#app').val(0);
+                }
+
+                // $('#del_question').val(data.question);
+                // $('#del_answer').val(data.answer);
+                $('#app_id').val(id);
+                $('#scholar_id').val(data.scholar_id);
+                $('#app_status').val(data.application_status);
+
                 $('#button_action').val('update');
-                edit_Form();
                 $('#mainModal').modal('show');
-                $('#action').val('Edit');
-                document.getElementById("action").className = "btn btn-info";
-                document.getElementById("md-form").classList.add('modal-lg');
-                $('#button_action').val('update');
-                $('.modal-title').text('Edit Question');
+                $('#action').val('Restore');
+                $('#hddel').text('Are you sure you want to restore it?');
+                document.getElementById("action").className = "btn btn-success";
+                document.getElementById("condel").className = "ghost";
+                document.getElementById("sec").className = "ghost";
+                document.getElementById("hddel").classList.remove("ghost");
+                if($('#confirm').val()=='true')
+                {
+                    var parent = document.getElementById("dvh2");
+                    var child = document.getElementById("hddel2");
+                    parent.removeChild(child);
+                     $('#confirm').val('');
+                }
+                //console.log(id + ' ' + data.faq_isdel + ' ' + data.answer + ' ' +data.question);
             }
     });   
     });
     
  $(document).on('click', '.delete', function(){
         var id = $(this).attr('id');
-         //$('#del_output').html('');
-         $.ajax({
-            url:"{{route('faqs.fetchdata')}}",
-            method:'get',
-            data:{id:id},
-            dataType:'json',
-            success:function(data)
-            {
-              // var smp=data.faq_isdel;
-              //   console.log(id + ' ' +smp);
-                $('#del_id').val(id);
-                if(data.faq_isdel == 0){
-                  $('#faq_isdel').val(1);
-                  $('#action').val('Delete');
-                  document.getElementById("action").className = "btn btn-danger";
-                  $("#hddel").text("Are you sure you want to delete it?");
-                }
-                del_Form();
-                $('#question').val(data.question);
-                $('#answer').val(data.answer);
-                $('#faq_id').val(id);
-                $('#mainModal').modal('show');
-                document.getElementById("md-form").classList.remove('modal-lg');
-                $('#button_action').val('delete');
-                $('.modal-title').text('');
-            }
-            }); 
+        // if(confirm("Are you sure you want to delete this data?"))
+        // {
+        //     $.ajax({
+        //         url:"{{route('archivefaqs.removedata')}}",
+        //         method:"get",
+        //         data:{id:id},
+        //         success:function(data)
+        //         {
+        //             var x = data
+        //             swal("Done!", ""+data, "success");
+        //             $('#table').DataTable().ajax.reload();
+        //         }
+        //     })
+        // }
+        // else
+        // {
+        //     return false;
+        // }
+
+        $('#mainModal').modal('show');
+        //$('#hddel').text('Are you sure you want to delete it?');
+        document.getElementById("action").className = "ghost";
+        document.getElementById("condel").className = "";
+        document.getElementById("sec").className = "";
+        document.getElementById("hddel").classList.add("ghost");
+        $('#del').val(id);
+        $('#confirm').val('true');
+        // $('#scholar_id').val(data.scholar_id);
+        // $('#app_status').val(data.application_status);
+        document.getElementById("sec").style.textAlign = "center";
+        // var para = document.createElement("h2");
+        // var node = document.createTextNode("Are you sure?");
+        // para.appendChild(node);
+        // var element = document.getElementById("dvh2");
+        // var child = document.getElementById("hddel");
+        // element.insertBefore(para, child);
+        //document.getElementById("hddel2").style.textAlign = "center";
+        //document.getElementById("hddel2").classList.remove("ghost");
+
+        var para = document.createElement("h2");
+        var node = document.createTextNode("Are you sure?");
+        para.appendChild(node);
+        // para.id = "hddel2";
+        // par.classList.add("brand-text font-weight-bold");
+        var element = document.getElementById("dvh2");
+        var child = document.getElementById("hddel");
+        element.insertBefore(para, child);
+        para.setAttribute("id", "hddel2");
+        para.setAttribute("class", "brand-text font-weight-bold");
+        document.getElementById("hddel2").style.textAlign = "center";
+
     });
 });
-function edit_Form() { 
-    var x = document.getElementById("editForm");
-    if (x.style.display === "none") {
-        x.style.display = "block";
+function confirmDel()
+{
+    var id = $('#del').val();
+    var confirm = $('#confirm').val();
+    var scholar_id = $()
+
+   
+    
+    if(confirm=='true')
+    {
+        $.ajax({
+            url:"{{route('archiveapplication.removedata')}}",
+            method:"get",
+            data:{id:id},
+            success:function(data)
+            {
+              var x = data
+              $('#mainModal').modal('hide');
+              swal("Done!", ""+data, "success");
+              $('#table').DataTable().ajax.reload();
+              
+            }
+        })
+
+        document.getElementById("hddel").classList.remove("ghost");
+        var parent = document.getElementById("dvh2");
+        var child = document.getElementById("hddel2");
+        parent.removeChild(child);
+                            
     }
-    var y = document.getElementById("delForm");
-    y.style.display = "none";
-}
-function del_Form() {
-    var x = document.getElementById("delForm");
-    if (x.style.display === "none") {
-        x.style.display = "block";
+    else
+    {
+        return false;
     }
-    var y = document.getElementById("editForm");
-    y.style.display = "none";
+    
+    
 }
 </script>
 </body>

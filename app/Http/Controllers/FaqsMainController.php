@@ -110,7 +110,7 @@ class FaqsMainController extends Controller
             'faq_isdel' => $faquestion->faq_isdel
         );
         echo json_encode($output);
-        //eval ($goback);
+        //eval ($goback); 
     }
 
     function postdata(Request $request)

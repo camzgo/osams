@@ -156,7 +156,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>
@@ -187,7 +187,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/faqs" class="nav-link active">
+                <a href="/faqs" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-question nav-icon"></i>
                   <p>FAQs</p>
@@ -210,7 +210,7 @@
               
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
               <p>
@@ -281,7 +281,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link active">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-lock nav-icon"></i>
                   <p>Level of Access</p>
@@ -335,8 +335,8 @@
           <div class="col-sm-6">
              <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">File Maintenance</li>
-              <li class="breadcrumb-item active">FAQS</li>
+              <li class="breadcrumb-item active">Utilities</li>
+              <li class="breadcrumb-item active">Level of Access</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -351,7 +351,7 @@
       <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h3 class="boldtx">Frequently Ask Questions (FAQs)</h3>
+              <h3 class="boldtx">Level of access</h3>
           </div>
           <div class="card-body"> 
          <div class="flt-right">
@@ -368,8 +368,13 @@
      <table class=" table table-hover" style="width:100%" id="table">
                <thead class="th-cl1">
                   <tr>
-                     <th>Question</th>
-                     <th>Answer</th>
+                     <th>Account Name</th>
+                     <th>Description</th>
+                     <th>File Maintenance</th>
+                     <th>Tracking</th>
+                     <th>Transactions</th>
+                     <th>Utilities</th>
+                     <th>Reports</th>
                      <th>Actions</th>
                   </tr>
                </thead>
@@ -435,11 +440,17 @@
                $('#table').DataTable({
                processing: true,
                serverSide: true,
-               ajax: '{{ route('faqs.getdata') }}',
+               ajax: '{{ route('permission.getdata') }}',
                columns: [
-                        { data: 'question', name: 'question' },
-                        { data: 'answer', name: 'answer' },
-                        { width: '20%', data: 'action', orderable:false, searchable: false}
+                        { data: 'account_name', name: 'account_name' },
+                        { data: 'account_desc', name: 'account_desc' },
+                        { width: '10%', data: 'chk1', orderable:false, searchable: false},
+                        { width: '10%', data: 'chk2', orderable:false, searchable: false},
+                        { width: '10%', data: 'chk3', orderable:false, searchable: false},
+                        { width: '10%', data: 'chk4', orderable:false, searchable: false},
+                        { width: '10%', data: 'chk5', orderable:false, searchable: false},
+                        { width: '20%', data: 'action', orderable:false, searchable: false},
+                        
                   ] 
             });
     $('#add_data').click(function(){

@@ -154,7 +154,7 @@ class FaqArchiveController extends Controller
         $faquestion = Faquestion::find($request->input('id'));
         if($faquestion->delete())
         {
-            echo 'It was succesfully deleted!';
+            echo 'It was successfully deleted!';
         }
     }
 }

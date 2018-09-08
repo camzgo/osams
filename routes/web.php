@@ -94,6 +94,26 @@ Route::prefix('employee')->group(function(){
     Route::post('/create/fetch', 'UsersMainController@fetch')->name('users.fetch');
 });
 
+Route::prefix('archive/employee')->group(function()
+{
+    Route::get('/getdata', 'UsersArchiveController@getdata')->name('archiveusers.getdata');
+    Route::get('/fetchdata', 'UsersArchiveController@fetchdata')->name('archiveusers.fetchdata');
+    Route::post('/postdata', 'UsersArchiveController@postdata')->name('archiveusers.postdata');
+    Route::get('/removedata', 'UsersArchiveController@removedata')->name('archiveusers.removedata'); 
+    Route::get('/', 'UsersArchiveController@index');
+});
+
+
+Route::prefix('archive/application')->group(function()
+{
+    Route::get('/', 'ApplicationArchiveController@index');
+    Route::get('/getdata', 'ApplicationArchiveController@getdata')->name('archiveapplication.getdata');
+    // Route::get('/getdata2', 'ApplicationMainController@getdata2')->name('application.getdata2');
+    Route::post('/postdata', 'ApplicationArchiveController@postdata')->name('archiveapplication.postdata');
+    Route::get('/fetchdata', 'ApplicationArchiveController@fetchdata')->name('archiveapplication.fetchdata');
+    Route::get('/removedata', 'ApplicationArchiveController@removedata')->name('archiveapplication.removedata'); 
+});
+
 Route::prefix('apply/scholarship-category')->group(function(){
 
     
@@ -129,10 +149,28 @@ Route::prefix('apply')->group(function(){
     Route::get('/send', 'ApplyController@showsend');
 });
 
+
+Route::prefix('application')->group(function()
+{
+    Route::get('/getdata', 'ApplicationMainController@getdata')->name('application.getdata');
+    Route::get('/getdata2', 'ApplicationMainController@getdata2')->name('application.getdata2');
+    Route::post('/postdata', 'ApplicationMainController@postdata')->name('application.postdata');
+    Route::get('/fetchdata', 'ApplicationMainController@fetchdata')->name('application.fetchdata');
+});
 Route::prefix('approve')->group(function()
 {
     Route::get('/', 'ApproveController@approveShow');
     Route::get('/fetchdata', 'ApproveController@searchData')->name('search.fetchdata');
+    Route::post('/', 'ApproveController@approved')->name('approved.postdata');
+    Route::get('/getdata', 'ApproveController@listapproved')->name('list.getdata');
+});
+
+
+Route::prefix('permission-access')->group(function(){
+    Route::get('/', 'UtilitiesController@permission');
+    Route::get('/getdata', 'UtilitiesController@getdata')->name('permission.getdata');
+    Route::post('/postdata', 'UtilitiesController@postdata')->name('permission.postdata');
+    Route::get('/fetchdata', 'UtilitiesController@fetchdata')->name('permission.fetchdata');
 });
 
 Route::get('/admindash', 'ApproveController@admindash');

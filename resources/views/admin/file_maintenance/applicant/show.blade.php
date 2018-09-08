@@ -367,7 +367,6 @@
      <table class=" table table-hover table-hover" style="width:100%" id="table">
                <thead class="th-cl1">
                   <tr>
-                     <th>#</th>
                      <th>Name</th>
                      <th>Email</th>
                      <th>Gender</th>
@@ -449,7 +448,6 @@
                serverSide: true,
                ajax: '{{ route('applicant.getdata') }}',
                aoColumns: [
-                        { data: 'id', name: 'id' },
                         { data: 'fullname', name: 'fullname'},
                         { data: 'email', name: 'email' },
                         { data: 'gender', name: 'gender' },
@@ -506,7 +504,7 @@
                     {
                       swal(
                         'Success!',
-                        'Your question has been successfully updated',
+                        'Your data has been successfully updated',
                         'success'
                       )
                     }
@@ -514,7 +512,7 @@
                     {
                       swal(
                         'Success!',
-                        'You have successfully add a new question',
+                        'You have successfully add a new data',
                         'success'
                       )
                     }
@@ -522,7 +520,7 @@
                     {
                       swal(
                         'Success!',
-                        'Question is successfully deleted',
+                        'Your data is successfully deleted',
                         'success'
                       )
                     }

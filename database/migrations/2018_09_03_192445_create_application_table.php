@@ -21,6 +21,7 @@ class CreateApplicationTable extends Migration
             $table->string('barcode_number');
             $table->integer('applicant_id');
             $table->integer('scholar_id');
+            $table->integer('application_isdel')->nullable();
             $table->timestamps();
         });
     }

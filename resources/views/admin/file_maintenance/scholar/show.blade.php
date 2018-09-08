@@ -361,7 +361,6 @@
      <table class=" table table-hover" style="width:100%" id="table">
                <thead class="th-cl1">
                   <tr>
-                     <th>#</th>
                      <th>Name</th>
                      <th>Description</th>
                      <th>Amount</th>
@@ -486,7 +485,6 @@
                serverSide: true,
                ajax: '{{ route('scholar.getdata') }}',
                columns: [
-                        { data: 'id', name: 'id' },
                         { data: 'scholarship_name', name: 'scholarship_name' },
                         { data: 'scholarship_desc', name: 'scholarship_desc' },
                         { data: 'amount', name: 'amount'},
@@ -536,7 +534,7 @@
                     {
                       swal(
                         'Success!',
-                        'The data is updated',
+                        'Your data is updated',
                         'success'
                       )
                     }

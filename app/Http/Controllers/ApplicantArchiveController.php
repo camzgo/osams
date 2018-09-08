@@ -160,7 +160,7 @@ class ApplicantArchiveController extends Controller
         $user = User::find($request->input('id'));
         if($user->delete())
         {
-            echo 'It was succesfully deleted!';
+            echo 'It was successfully deleted!';
         }
     }
 

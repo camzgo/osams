@@ -155,7 +155,7 @@ class AnnounceArchiveController extends Controller
         $announce = Announcement::find($request->input('id'));
         if($announce->delete())
         {
-            echo 'It was succesfully deleted!';
+            echo 'It was successfully deleted!';
         }
     }
 }

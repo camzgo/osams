@@ -608,7 +608,7 @@ button:focus {
         </div>
         <hr/> --}}
         <div class="row form-group">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label for="mobile_no">* Mobile Number</label>
             <div class="input-group">
               <div class="input-group-prepend">

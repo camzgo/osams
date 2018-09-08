@@ -366,11 +366,9 @@
         <br>
         <div class="container">
     <br />
-    <br />
      <table class=" table table-hover" style="width:100%" id="table">
                <thead class="th-cl2">
                   <tr>
-                     <th>#</th>
                      <th>Title</th>
                      <th>Body</th>
                      <th>Actions</th>
@@ -437,7 +435,6 @@
                serverSide: true,
                ajax: '{{ route('archiveannounce.getdata') }}',
                columns: [
-                        { data: 'id', name: 'id' },
                         { data: 'title', name: 'title' },
                         { data: 'body', name: 'body' },
       //                   { mData: function vehicle(data, type, dataToSet) {
@@ -478,7 +475,7 @@
                     {
                       swal(
                         'Success!',
-                        'Your file has been successfully restored',
+                        'Your data has been successfully restored',
                         'success'
                       )
                     }

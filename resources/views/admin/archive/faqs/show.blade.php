@@ -365,11 +365,9 @@
         <br>
         <div class="container">
     <br />
-    <br />
      <table class=" table table-hover" style="width:100%" id="table">
                <thead class="th-cl2">
                   <tr>
-                     <th>#</th>
                      <th>Question</th>
                      <th>Answer</th>
                      <th>Actions</th>
@@ -436,7 +434,6 @@
                serverSide: true,
                ajax: '{{ route('archivefaqs.getdata') }}',
                columns: [
-                        { data: 'id', name: 'id' },
                         { data: 'question', name: 'question' },
                         { data: 'answer', name: 'answer' },
                         { width: '20%', data: 'action', orderable:false, searchable: false}
@@ -473,23 +470,7 @@
                     {
                       swal(
                         'Success!',
-                        'Your question has been successfully updated',
-                        'success'
-                      )
-                    }
-                    else if (($('#action').val() == 'Add'))
-                    {
-                      swal(
-                        'Success!',
-                        'You have successfully add a new question',
-                        'success'
-                      )
-                    }
-                    else if (($('#action').val() == 'Delete'))
-                    {
-                      swal(
-                        'Success!',
-                        'Question is successfully deleted',
+                        'Your data has been successfully restored',
                         'success'
                       )
                     }
@@ -592,7 +573,7 @@ function confirmDel()
     var id = $('#del').val();
     var confirm = $('#confirm').val();
 
-    $('#mainModal').modal('hide');
+   
     
     if(confirm=='true')
     {
@@ -603,8 +584,10 @@ function confirmDel()
             success:function(data)
             {
               var x = data
+              $('#mainModal').modal('hide');
               swal("Done!", ""+data, "success");
               $('#table').DataTable().ajax.reload();
+              
             }
         })
 

@@ -368,7 +368,6 @@
      <table class=" table table-hover" style="width:100%" id="table">
                <thead >
                   <tr>
-                     <th>#</th>
                      <th>Title</th>
                      <th>Body</th>
                      <th>Actions</th>
@@ -437,7 +436,6 @@
                serverSide: true,
                ajax: '{{ route('announce.getdata') }}',
                columns: [
-                        { data: 'id', name: 'id' },
                         { data: 'title', name: 'title' },
                         { data: 'body', name: 'body' },
                         { width: '20%', data: 'action', orderable:false, searchable: false},
@@ -506,7 +504,7 @@ $('#main_form').on('submit', function(event){
                     {
                       swal(
                         'Success!',
-                        'Announcement is successfully deleted',
+                        'Your data is successfully deleted',
                         'success'
                       )
                     }

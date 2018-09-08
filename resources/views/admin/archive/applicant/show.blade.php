@@ -365,11 +365,9 @@
         <br>
         <div class="container">
     <br />
-    <br />
      <table class=" table table-hover" style="width:100%" id="table">
                <thead class="th-cl2">
                   <tr>
-                     <th>#</th>
                      <th>Name</th>
                      <th>Email</th>
                      <th>Gender</th>
@@ -437,7 +435,6 @@
                serverSide: true,
                ajax: '{{ route('archiveapplicant.getdata') }}',
                columns: [
-                        { data: 'id', name: 'id' },
                         { data: 'fullname', name: 'fullname' },
                         { data: 'email', name: 'email' },
                         { data: 'gender', name: 'gender' },
@@ -475,7 +472,7 @@
                     {
                       swal(
                         'Success!',
-                        'Your file has been successfully restored',
+                        'Your data has been successfully restored',
                         'success'
                       )
                     }

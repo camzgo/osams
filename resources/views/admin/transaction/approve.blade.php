@@ -352,30 +352,22 @@
           <div class="card-body"> 
             <br>
             <div class="container">
-              {{-- <table class="table table-hover" style="width:100%" id="table">
-                  <thead class="th-cl1">
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>          
-                    </tr>
-                  </thead>
-                </table> --}}
-
 
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
                             <div class="row ml-4" >
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" id="search" oninput="trthis()"/>
+                                    <input type="text" class="form-control" id="search" oninput="search()" />
                                 </div>
                                 <div class="col-md-2">
-                                    <button class="btn btn-info"><i class="fa fa-barcode"></i> SCAN</button>
+                                    <button class="btn btn-info" id="btn-sr" onclick="typeli()"><i id="sr-icon" class="fa fa-keyboard-o"></i> TYPE</button>
                                 </div>
                             </div>
                             <hr/>
                         </div>
+                        <form id="main_form" method="post" form="{{ action('ApproveController@approved') }}">
+                          {{csrf_field()}}  
                         <div class="container">
                             <div class="row form-group">
                                 <h4 class="tx1">Application Information</h4>
@@ -383,17 +375,17 @@
                             <div class="row form-group">
                                 <div class = "col-md-6">
                                     <label>Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder='' disabled value="DFDFDFDF" />
+                                    <input type="text" class="form-control" id="name" name="name" placeholder='' disabled value="NONE" />
                                 </div>
                                 <div class="col-md-4">
                                     <label>Scholarship</label>
-                                    <input type="text" class="form-control" id="scholarship" name="scholarship" placeholder='' disabled value="DFDFDFDF" />
+                                    <input type="text" class="form-control" id="scholarship" name="scholarship" placeholder='' disabled value="NONE" />
                                 </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-6">
                                     <label>Address</label>
-                                    <input type="text" class="form-control" id="address" name="address" placeholder='' disabled value="DFDFDFDF" />
+                                    <input type="text" class="form-control" id="address" name="address" placeholder='' disabled value="NONE" />
                                 </div>
                                 <div class="col-md-4">
                                     <label>Mobile Number</label>
@@ -401,33 +393,103 @@
                                     <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">+63</span>
                                     </div>
-                                    <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="GFGFGF" disabled placeholder='9xxxxxxxxx' required/>
+                                    <input type="text" class="form-control" id="mobile_no" name="mobile_no"  disabled placeholder='xxxxxxxxxx' required/>
                                     </div>
                                     
                                 </div>
                             </div>
 
                             <div class="row form-group">
-                                <div class="col-md-6">
+                                <div class="col-md-6" id="eefap">
                                     <ul class="list-group mt-4">
                                         <li class="list-group-item active"><strong>Requirements</strong></li>
-                                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                                        <li class="list-group-item">Morbi leo risus</li>
-                                        <li class="list-group-item">Porta ac consectetur ac</li>
-                                        <li class="list-group-item">Vestibulum at eros</li>
+                                        <li class="list-group-item"><i id="chk1"></i> Bio-data with/ 2x2 Picture</li>
+                                        <li class="list-group-item"><i id="chk2"></i> Grades/ Form 138 (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk3"></i> Certificate of Registration/ Assessment Form (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk4"></i> Barangay/ Residency/ Indigency Certificate</li>
+                                        <li class="list-group-item"><i id="chk5"></i> Official Receipt (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk6"></i> School ID (Photocopy)</li>
                                     </ul>
                                 </div>
+
+                                <div class="col-md-6" id="eefapgv">
+                                    <ul class="list-group mt-4">
+                                        <li class="list-group-item active"><strong>Requirements</strong></li>
+                                        <li class="list-group-item"><i id="chk21"></i> Bio-data with 2x2 Picture</li>
+                                        <li class="list-group-item"><i id="chk22"></i> Certificate of Honor (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk23"></i> Grades/ Class Cards/ Form 138 (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk24"></i> Barangay/ Residency/ Indigency Certificate</li>
+                                        <li class="list-group-item"><i id="chk25"></i> Official Receipt (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk26"></i> Certificate of Registration/ Assessment Form (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk27"></i> School ID (Photocopy)</li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-6" id="eefapgv2">
+                                    <ul class="list-group mt-4">
+                                        <li class="list-group-item active"><strong>Requirements</strong></li>
+                                        <li class="list-group-item"><i id="chk31"></i> Bio-data with 2x2 Picture</li>
+                                        <li class="list-group-item"><i id="chk32"></i> Grades/ Class Cards/ Form 138 (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk33"></i> Barangay/ Residency/ Indigency Certificate</li>
+                                        <li class="list-group-item"><i id="chk34"></i> Official Receipt (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk35"></i> Certificate of Registration/ Assessment Form (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk36"></i> School ID (Photocopy)</li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-6" id="pcl">
+                                    <ul class="list-group mt-4">
+                                        <li class="list-group-item active"><strong>Requirements</strong></li>
+                                        <li class="list-group-item"><i id="chk41"></i> Bio-data with/ 2x2 Picture</li>
+                                        <li class="list-group-item"><i id="chk42"></i> Grades/ Form 138 (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk43"></i> Certificate of Registration/ Assessment Form (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk44"></i> Barangay/ Residency/ Indigency Certificate</li>
+                                        <li class="list-group-item"><i id="chk45"></i> Official Receipt (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk46"></i> School ID (Photocopy)</li>
+                                    </ul>
+                                </div>
+
+                                
                             </div>
+                           
+                          </form>
                             <div class="row form-group pull-right">
-                                <button class="btn btn-danger"><strong><i class="fa fa-close"></i> DISAPPROVED</strong></button> &nbsp &nbsp
-                                <button class="btn btn-success"><strong><i class="fa fa-check"></i> APPROVED</strong></button>
+                                <button class="btn btn-danger" id="btn-disapproved"  disabled><i class="fa fa-close"></i> DISAPPROVED</button> &nbsp &nbsp
+                                <button class="btn btn-success" id="btn-approved"   disabled><i class="fa fa-check"></i> APPROVED</button>
+                                <div class="ghost">
+                                  <input type="hidden" class="ghost" id="applicant_id" name="applicant_id" value=""/>
+                                  <input type="hidden" class="ghost" id="sc_id" name="sc_id" value=""/>
+                                  <input type="hidden" class="ghost" id="aid" name="aid" value=""/>
+                                  <input type="hidden" class="ghost" id="action" name="action"/>
+                                  {{-- <input type="submit" name="submit" id="submit"  class="btn btn-info ghost" disabled /> --}}
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
+                    
                 </div>
 
 
-
+                <div class="card mt-4">
+                  <div class="card-body">
+                    <div class="card-title">
+                      <strong>List of approved applications</strong>
+                    </div><hr/>
+                    <div class="container">
+                      <table class="table table-hover" style="width:100%" id="table">
+                      <thead >
+                        <tr>
+                            <th>Name</th>
+                            <th>Scholarship</th>
+                            <th>Date Approved</th>
+                            <th>Received by</th>          
+                        </tr>
+                      </thead>
+                    </table>  
+                    </div>
+                  </div>
+                </div>
                 <br>
             </div>
           </div>
@@ -443,26 +505,207 @@
        
 </div>
 <script>
-function trthis()
+ $(function() {
+    $('#table').DataTable({
+    processing: true,
+    serverSide: true,
+    lengthChange: false,
+    ajax: '{{ route('list.getdata') }}',
+    columns: [
+            { data: 'fullname', name: 'fullname' },
+            { data: 'scholarship_name', name: 'scholarship_name' },
+            { data: 'date_approved', name: 'date_approved'}
+
+            // { data: 'surname', name: 'surname' },
+            // { data: 'first_name', name: 'first_name' },
+            // { data: 'middle_name', name: 'middle_name'},
+          //  { width: '20%', data: 'action', orderable:false, searchable: false}
+            // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
+      ] 
+    });
+});
+
+
+
+$(document).ready(function(){
+
+  var x = document.getElementById("eefap");
+  x.style.display = "none"; 
+  var y = document.getElementById("eefapgv");
+  y.style.display = "none"; 
+  var z = document.getElementById("eefapgv2");
+  z.style.display = "none"; 
+  var w = document.getElementById("pcl");
+  w.style.display = "none"; 
+
+});
+function search()
 {
     //console.log($('#search').val());
 
-        var id = $('#search').val();
-       // $('#form_output').html('');
+        var ids = $('#search').val();
+        var id = ids.trim();
+
+        // document.getElementById("btn-disapproved").disabled = false;
+        // document.getElementById("btn-approved").disabled = false;
+
         $.ajax({
-            url:"{{route('search.fetchdata')}}",
-            method:'get',
-            data:{id:id},
-            dataType:'json',
-            success:function(data)
-            {
-                $('#name').val(data.name);
-                $('#mobile_no').val(data.mobile_number);
-                $('#address').val(data.address);
-                $('#scholarship').val(data.scholarship);
-            }
+          url:"{{route('search.fetchdata')}}",
+          method:'get',
+          data:{id:id},
+          dataType:'json',
+          success:function(data)
+          {
+              $('#name').val(data.name);
+              $('#mobile_no').val(data.mobile_number);
+              $('#address').val(data.address);
+              $('#scholarship').val(data.scholarship);
+              $('#aid').val(data.aid);
+              $('#sc_id').val(data.sc_id);
+              $('#applicant_id').val(data.applicant_id);
+
+              var name = data.name;
+              var mobile_no = data.mobile_number;
+              var address = data.address;
+              var scholarship = data.scholarship;
+             
+              if(name != "")
+              {
+                document.getElementById("btn-disapproved").disabled = false;
+                document.getElementById("btn-approved").disabled = false;
+              
+
+              if(data.type =="eefap")
+              {
+                var x = document.getElementById("eefap");
+                x.style.display = "block";
+                for(var i=1; i<=6; i++)
+                {
+                  var x = "chk"+i;
+                  document.getElementById(x).className = "fa fa-check";
+                }
+              }
+              else if (data.type =="eefap-gv")
+              {
+                if(data.scholarship == "HONORS and RANKS")
+                {
+                  var y = document.getElementById("eefapgv");
+                  y.style.display = "block";
+                  for(var c=1; c<=7; c++)
+                  {
+                    document.getElementById('chk2'+c).className = "fa fa-check";
+                  }
+                }
+
+                else
+                {
+                  var w = document.getElementById("eefapgv2");
+                  w.style.display = "block";
+                  for(var iw=1; iw<=6; iw++)
+                  {
+                    
+                    document.getElementById('chk3'+iw).className = "fa fa-check";
+                  }
+                }
+              }
+              else if (data.type == "pcl")
+              {
+                var z = document.getElementById("pcl");
+                  z.style.display = "block";
+                  for(var i=1; i<=6; i++)
+                  {
+                    var x = "chk4"+i;
+                    document.getElementById(x).className = "fa fa-check";
+                  }
+              }
+              }
+              
+          }
+
         });
+        
+
+         //document.getElementById("chk").className = "fa fa-check";
+          var reset = null;
+          $('#name').val('NONE');
+          $('#mobile_no').val(reset);
+          $('#address').val('NONE');
+          $('#scholarship').val('NONE');
+        if (id == "")
+        {
+          var reset = null;
+          $('#name').val('NONE');
+          $('#mobile_no').val(reset);
+          $('#address').val('NONE');
+          $('#scholarship').val('NONE');
+
+          var x = document.getElementById("eefap");
+          x.style.display = "none"; 
+          var y = document.getElementById("eefapgv");
+          y.style.display = "none"; 
+          var z = document.getElementById("eefapgv2");
+          z.style.display = "none"; 
+          var w = document.getElementById("pcl");
+          w.style.display = "none"; 
+
+          document.getElementById("btn-disapproved").disabled = true;
+          document.getElementById("btn-approved").disabled = true;
+
+          for(var i=1; i<=6; i++)
+          {
+            var x = "chk"+i;
+            document.getElementById(x).className ="";
+          }
+        }
+       // $('#form_output').html('');
+        
+
 }
+
+
+
+$('#btn-approved').click(function(event)
+{
+ // $( "form:main_form" ).trigger( "submit" );
+ //event.preventDefault();
+  document.getElementById("main_form").submit();
+  $('#action').val('approved');
+
+});
+
+$('#btn-disapproved').click(function(event)
+{
+ // $( "form:main_form" ).trigger( "submit" );
+ //event.preventDefault();
+  document.getElementById("main_form").submit();
+  $('#action').val('disapproved');
+
+});
+
+function typeli()
+{
+
+ // console.log($('#btn-sr').text());
+
+  // if($('#btn-sr').text() ==" TYPE")
+  // {
+  //   document.getElementById('sr-icon').className = "fa fa-barcode";
+  //   $('#btn-sr').text(' SCAN');
+  //   document.getElementById('search').readOnly = true;
+    
+  // }
+  // else
+  // {
+  //   document.getElementById('sr-icon').className = "fa fa-keyboard-o";
+  //   $('#btn-sr').text(' TYPE');
+  //   document.getElementById('search').readOnly = false;
+  // }
+    
+
+  // $('#search').val('OIzy8ol2ae'); 
+  // search();
+}
+
 </script>
 </body>
 </html>

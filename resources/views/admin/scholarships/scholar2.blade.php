@@ -547,8 +547,6 @@ button:focus {
             <label for="barangay">* Barangay</label>
             <select name="barangay" id="barangay" class="form-control dynamic req" required >
               <option value="" selected disabled>--Select--</option>
-              <option value="R">Roman Catholic</option>
-              <option value="M">Muslim</option>
             </select>
           </div>
           <div class="col-md-6">
@@ -821,7 +819,7 @@ function validateForm() {
   // This function deals with validation of the form fields
   var x, y, i, valid = true;
   x = document.getElementsByClassName("tab");
-  y = x[currentTab].getElementsByClassName("");
+  y = x[currentTab].getElementsByClassName("req");
   // w = x[currentTab].getElementsByTagName("select");
   // A loop that checks every input field in the current tab:
   for (i = 0; i < y.length; i++) {

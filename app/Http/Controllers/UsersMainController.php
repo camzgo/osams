@@ -157,12 +157,11 @@ class UsersMainController extends Controller
 
     function getdata()
     {
-        $admins = Admin::select("email",
+        $admins = Admin::select("id","email",
         DB::raw("CONCAT(admins.surname,', ',admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as fullname"))->where('user_isdel', '0')->get();
         return DataTables::of($admins)
         ->addColumn('action', function($admins){
-            return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$admins->id.'"><i class="fa fa-edit"></i> Edit</a>
-                    <a href="#" class="btn btn-sm btn-danger delete" id="'.$admins->id.'"><i class="fa fa-trash"></i> Delete</a> ';
+            return '<a href="#" class="btn btn-sm btn-danger delete" id="'.$admins->id.'"><i class="fa fa-trash"></i> Delete</a> ';
         })
         // ->addColumn('checkbox', '<input type="checkbox" name="form_checkbox[]" class="form_checkbox" value="{{$id}}"/>')
         // ->rawColumns(['checkbox', 'action'])
@@ -172,11 +171,11 @@ class UsersMainController extends Controller
     function fetchdata(Request $request)
     {
         $id = $request->input('id');
-        $faquestion = Faquestion::find($id);
+        $admin = Admin::find($id);
         $output = array(
-            'question'    =>  $faquestion->question,
-            'answer'     =>  $faquestion->answer,
-            'faq_isdel' => $faquestion->faq_isdel
+            'email'    =>  $admin->email,
+            'surname'     =>  $admin->surname,
+            'user_isdel' => $admin->user_isdel
         );
         echo json_encode($output);
         //eval ($goback);
@@ -185,14 +184,14 @@ class UsersMainController extends Controller
     function postdata(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'question' => 'required',
-            'answer'  => 'required',
+            'emp_isdel' => 'required',
+            'emp_id'  => 'required',
         ]);
         
         $error_array = array();
         $success_output = '';
         $def = 0;
-        $refresh = "return redirect('/faqs');";
+        $refresh = "return redirect('/employee');";
         if ($validation->fails())
         {
             foreach ($validation->messages()->getMessages() as $field_name => $messages)
@@ -202,36 +201,14 @@ class UsersMainController extends Controller
         }
         else
         {
-            if($request->get('button_action') == 'insert')
+            
+            if($request->get('button_action') == 'delete')
             {
-                $faquestion = new Faquestion([
-                    'question'    =>  $request->get('question'),
-                    'answer'     =>  $request->get('answer'),
-                    'faq_isdel' => $def
-                ]);
-                $faquestion->save();
+                $admin = Admin::find($request->get('emp_id'));
+                $admin->user_isdel = $request->get('emp_isdel');
+                // $faquestion->answer = $request->get('answer');
+                $admin->save();
                 $success_output = '';
-            }
-
-            else if($request->get('button_action') == 'update')
-            {
-                $faquestion = Faquestion::find($request->get('faq_id'));
-                $faquestion->question = $request->get('question');
-                $faquestion->answer = $request->get('answer');
-                $faquestion->save();
-                $success_output = '';
-
-            }
-            else if($request->get('button_action') == 'delete')
-            {
-                $faquestion = Faquestion::find($request->get('faq_id'));
-                $faquestion->question = $request->get('question');
-                $faquestion->answer = $request->get('answer');
-                $faquestion->faq_isdel = $request->get('faq_isdel');
-
-                $faquestion->save();
-                $success_output = '';
-
             }
         }
         
@@ -243,23 +220,7 @@ class UsersMainController extends Controller
         //eval ($goback);
     }
 
-    function removedata(Request $request)
-    {
-        $faquestion = Faquestion::find($request->input('id'));
-        $faquestion->faq_isdel = 1;
-        $faquestion->save();
-        
-    }
 
-    function massremove(Request $request)
-    {
-        $student_id_array = $request->input('id');
-        $student = Student::whereIn('id', $student_id_array);
-        if($student->delete())
-        {
-            echo 'Data Deleted';
-        }
-    }
 
 
     function fetch(Request $request)
