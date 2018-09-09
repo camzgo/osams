@@ -10,7 +10,7 @@ use DataTables;
 use Validator;
 use DB;
 use App\Municipality;
-
+use App\AccountType;
 
 class UsersMainController extends Controller
 {
@@ -37,7 +37,8 @@ class UsersMainController extends Controller
         
         // $municipal_list = DB::table('munbar')->groupBy('municipality')->get();
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
-        return view ('admin.file_maintenance.users.create-step-3')->with('municipal_list', $municipal_list);
+        $accnt = DB::select('select account_name, id from account_type WHERE account_name != "Admin"');
+        return view ('admin.file_maintenance.users.create-step-3')->with('municipal_list', $municipal_list)->with('accnt', $accnt);
     }
 
     /**
@@ -71,7 +72,7 @@ class UsersMainController extends Controller
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
             'suffix' => $request->suffix,
-            'account_id' => $user_isdel,
+            'account_id' => $request->user_type,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
@@ -106,7 +107,7 @@ class UsersMainController extends Controller
         ]);
         $adminsInfo->save();
         
-        return redirect('/users/');
+        return redirect('/employee/');
 
     }
 
@@ -157,8 +158,10 @@ class UsersMainController extends Controller
 
     function getdata()
     {
-        $admins = Admin::select("id","email",
-        DB::raw("CONCAT(admins.surname,', ',admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as fullname"))->where('user_isdel', '0')->get();
+        $admins = DB::table('admins')
+        ->join('account_type', 'account_type.id', '=', 'admins.account_id')
+        ->select("admins.id","admins.email", "account_type.account_name",
+        DB::raw("CONCAT_WS('', admins.surname,', ', admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as fullname"))->where('user_isdel', '0')->get();
         return DataTables::of($admins)
         ->addColumn('action', function($admins){
             return '<a href="#" class="btn btn-sm btn-danger delete" id="'.$admins->id.'"><i class="fa fa-trash"></i> Delete</a> ';

@@ -371,6 +371,7 @@
                   <tr>
                      <th>Name</th>
                      <th>Email</th>
+                     <th>Account Type</th>
                      <th>Actions</th>
                      {{-- <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></button></th> --}}
                   </tr>
@@ -437,6 +438,7 @@
                columns: [
                         { data: 'fullname', name: 'fullname' },
                         { data: 'email', name: 'email' },
+                        { data: 'account_name', name: 'account_name'},
                         { width: '20%', data: 'action', orderable:false, searchable: false}
                         // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
                   ] 

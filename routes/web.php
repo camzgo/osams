@@ -171,10 +171,14 @@ Route::prefix('permission-access')->group(function(){
     Route::get('/getdata', 'UtilitiesController@getdata')->name('permission.getdata');
     Route::post('/postdata', 'UtilitiesController@postdata')->name('permission.postdata');
     Route::get('/fetchdata', 'UtilitiesController@fetchdata')->name('permission.fetchdata');
+    Route::get('/removedata', 'UtilitiesController@removedata')->name('permission.removedata'); 
 });
 
+
+Route::get('/reg/success', 'RegisterMainController@send');
 Route::get('/admindash', 'ApproveController@admindash');
 Route::get('/barcode', 'BarcodeController@barcode');
+Route::get('/fronte', 'BarcodeController@fronte');
 
 
 Route::get('/pampanga','AddressController@municipal');

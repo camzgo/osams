@@ -371,6 +371,7 @@
                   <tr>
                      <th>Name</th>
                      <th>Email</th>
+                     <th>Account Type</th>
                      <th>Actions</th>
                   </tr>
                </thead>
@@ -427,6 +428,7 @@
                columns: [
                         { data: 'fullname', name: 'fullname' },
                         { data: 'email', name: 'email' },
+                        { data: 'account_name', name: 'account_name' },
                         { width: '20%', data: 'action', orderable:false, searchable: false}
                         // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
                   ]
@@ -462,7 +464,7 @@
                     {
                       swal(
                         'Success!',
-                        'Employee is successfully deleted',
+                        'Your data is successfully deleted',
                         'success'
                       )
                     }

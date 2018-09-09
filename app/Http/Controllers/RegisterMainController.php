@@ -137,4 +137,9 @@ class RegisterMainController extends Controller
     {
         //
     }
+
+    function send() 
+    {
+        return view ('admin.transaction.regsuccess');
+    }
 }

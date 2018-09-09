@@ -22,8 +22,10 @@ class UsersArchiveController extends Controller
 
     function getdata()
     {
-        $admins = Admin::select("id","email",
-        DB::raw("CONCAT(admins.surname,', ',admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as fullname"))->where('user_isdel', '1')->get();
+        $admins = DB::table('admins')
+        ->join('account_type', 'account_type.id', '=', 'admins.account_id')
+        ->select("admins.id","admins.email", "account_type.account_name",
+        DB::raw("CONCAT_WS('', admins.surname,', ', admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as fullname"))->where('user_isdel', '1')->get();
         return DataTables::of($admins)
         ->addColumn('action', function($admins){
             return '<a href="#" class="btn btn-sm btn-success edit" id="'.$admins->id.'"><i class="fa fa-refresh"></i> Restore </a>

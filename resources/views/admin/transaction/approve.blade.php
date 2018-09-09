@@ -356,12 +356,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <div class="row ml-4" >
+                            <div class="row ml-4 " >
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" id="search" oninput="search()" />
+                                    <input type="text" class="form-control" id="search" name="search" oninput="search()" readonly/>
                                 </div>
-                                <div class="col-md-2">
-                                    <button class="btn btn-info" id="btn-sr" onclick="typeli()"><i id="sr-icon" class="fa fa-keyboard-o"></i> TYPE</button>
+                                <div class="mr-4">
+                                    <button class="btn btn-info" id="btn-srch" onclick="typeli()"> TYPE</button>
                                 </div>
                             </div>
                             <hr/>
@@ -400,7 +400,7 @@
                             </div>
 
                             <div class="row form-group">
-                                <div class="col-md-6" id="eefap">
+                                <div class="col-md-6" id="eefap" style="display:none;">
                                     <ul class="list-group mt-4">
                                         <li class="list-group-item active"><strong>Requirements</strong></li>
                                         <li class="list-group-item"><i id="chk1"></i> Bio-data with/ 2x2 Picture</li>
@@ -412,7 +412,7 @@
                                     </ul>
                                 </div>
 
-                                <div class="col-md-6" id="eefapgv">
+                                <div class="col-md-6" id="eefapgv" style="display:none;">
                                     <ul class="list-group mt-4">
                                         <li class="list-group-item active"><strong>Requirements</strong></li>
                                         <li class="list-group-item"><i id="chk21"></i> Bio-data with 2x2 Picture</li>
@@ -425,7 +425,7 @@
                                     </ul>
                                 </div>
 
-                                <div class="col-md-6" id="eefapgv2">
+                                <div class="col-md-6" id="eefapgv2" style="display:none;">
                                     <ul class="list-group mt-4">
                                         <li class="list-group-item active"><strong>Requirements</strong></li>
                                         <li class="list-group-item"><i id="chk31"></i> Bio-data with 2x2 Picture</li>
@@ -437,7 +437,7 @@
                                     </ul>
                                 </div>
 
-                                <div class="col-md-6" id="pcl">
+                                <div class="col-md-6" id="pcl" style="display:none;">
                                     <ul class="list-group mt-4">
                                         <li class="list-group-item active"><strong>Requirements</strong></li>
                                         <li class="list-group-item"><i id="chk41"></i> Bio-data with/ 2x2 Picture</li>
@@ -682,24 +682,37 @@ $('#btn-disapproved').click(function(event)
 
 });
 
+var chk = 0;
 function typeli()
 {
 
  // console.log($('#btn-sr').text());
 
-  // if($('#btn-sr').text() ==" TYPE")
-  // {
-  //   document.getElementById('sr-icon').className = "fa fa-barcode";
-  //   $('#btn-sr').text(' SCAN');
-  //   document.getElementById('search').readOnly = true;
+  if(chk==0)
+  {
+    // $('#srch-icon').removeClass("fa fa-keyboard");
+    // $("#srch-icon").addClass("fa fa-barcode");
+     //document.getElementById("srch-icon").classList.add('fa-barcode');
+    $('#btn-srch').text(' SCAN');
+
+    // var d = document.getElementById("srch-icon");
+    // d.style.display = "none"; 
+    // var c = document.getElementById("srch-icon2");
+    // c.style.display = "block"; 
+    //document.getElementById("srch-icon").className = "fa-barcode";
+    //document.getElementById('search').readOnly = true;
+   // document.getElementById('search').removeAttribute('readonly');
+    $('#search').prop('readonly', false);
+    chk+=1;
     
-  // }
-  // else
-  // {
-  //   document.getElementById('sr-icon').className = "fa fa-keyboard-o";
-  //   $('#btn-sr').text(' TYPE');
-  //   document.getElementById('search').readOnly = false;
-  // }
+  }
+  else
+  {
+   
+    $('#btn-srch').text(' TYPE');
+    $('#search').prop('readonly', true);
+    chk=0;
+  }
     
 
   // $('#search').val('OIzy8ol2ae'); 

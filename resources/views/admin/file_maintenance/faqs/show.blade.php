@@ -492,7 +492,7 @@
                     {
                       swal(
                         'Success!',
-                        'You have successfully add a new data',
+                        'You have successfully added a new data',
                         'success'
                       )
                     }

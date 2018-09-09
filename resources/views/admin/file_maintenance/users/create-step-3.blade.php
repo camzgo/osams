@@ -18,148 +18,6 @@
 
   
 </head>
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #f1f1f1;
-}
-
-#regForm {
-  /* background-color: #ffffff;
-  margin: 100px auto;
-  font-family: Raleway;
-  padding: 40px;
-  width: 70%;
-  min-width: 300px; */
-}
-
-h1 {
-  text-align: center;  
-}
-
-input {
-  /* padding: 10px;
-  width: 100%;
-  font-size: 17px;
-  font-family: Raleway;
-  border: 1px solid #aaaaaa; */
-  display: block;
-  width: 100%;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #ffffff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  -webkit-box-shadow: inset 0 0 0 transparent;
-          box-shadow: inset 0 0 0 transparent;
-  -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-  transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-  margin: 0;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-
-/* Mark input boxes that gets an error on validation: */
-input.invalid {
-  background-color: #ffdddd;
-}
-select.invalid {
-  background-color: #ffdddd;
-}
-
-/* Hide all steps by default: */
-.tab {
-  display: none;
-}
-
-button {
-  /* background-color: #4CAF50;
-  color: #ffffff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 17px;
-  font-family: Raleway;
-  cursor: pointer; */
-  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-           border: none;
-  border-radius: 2px;
-  display: inline-block;
-  height: 36px;
-  line-height: 36px;
-  padding: 0 16px;
-  text-transform: uppercase;
-  font-weight: bold;
-  vertical-align: middle;
-  -webkit-tap-highlight-color: transparent;
-  font-size: 14px;
-  outline: 0;
-  text-decoration: none;
-  color: #fff;
-  background-color: #26a69a;
-  text-align: center;
-  letter-spacing: .5px;
-  -webkit-transition: background-color .2s ease-out;
-  transition: background-color .2s ease-out;
-  cursor: pointer;
-
-  position: relative;
-  overflow: hidden;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  vertical-align: middle;
-  z-index: 1;
-  -webkit-transition: .3s ease-out;
-  transition: .3s ease-out;
-}
-
-button:hover {
-  /* opacity: 0.8; */
-  background-color: #2bbbad;
-}
-
-button:focus {
-  background-color: #1d7d74;
-}
-
-#prevBtn {
-  background-color: #bbbbbb;
-}
-
-/* Make circles that indicate the steps of the form: */
-.step {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbbbbb;
-  border: none;  
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0.5;
-}
-
-.step.active {
-  opacity: 1;
-}
-
-/* Mark the steps that are finished and valid: */
-.step.finish {
-  background-color: #4CAF50;
-}
-
-</style>
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
@@ -509,11 +367,12 @@ button:focus {
         <hr/>
         <div class="row form-group">
           <div class="col-md-4">
-            <label for="user_type">* Account Type</label>
-            <select name="user_type" id="user_type" class="form-control req"  required >
+            <label for="user_type">* Account Type</label> <br>
+            <select name="user_type" id="user_type" class="selectpicker show-tick "  required >
               <option value="" selected disabled>--Select--</option>
-              <option value="R">Roman Catholic</option>
-              <option value="M">Muslim</option>
+              @foreach ($accnt as $accnt_list)
+                  <option value="{{$accnt_list->id}}">{{$accnt_list->account_name}}</option>
+              @endforeach
             </select>
           </div>
         </div> 

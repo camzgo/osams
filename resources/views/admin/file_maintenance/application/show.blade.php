@@ -511,7 +511,7 @@
                    // $('#form_output').html(data.success);
                     $('#main_form')[0].reset();
                     //$('#action').val('Add');
-                    $('.modal-title').text('Add Question');
+                   
                     //$('#button_action').val('insert');
                     $('#table').DataTable().ajax.reload();
                     $('#table2').DataTable().ajax.reload();
