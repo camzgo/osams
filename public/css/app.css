@@ -14999,6 +14999,134 @@ select.selectpicker {
   -webkit-border-radius: 100%;
 }
 
+.align-items-lg-center {
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+}
+
+.btn-white {
+  color: #212529;
+  border-color: #fff;
+  background-color: #fff;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.btn-white:hover {
+  color: #212529;
+  border-color: #e6e6e6;
+  background-color: #ececec;
+  -webkit-box-shadow: 0 0 15px rgba(255, 255, 255, 0.35);
+          box-shadow: 0 0 15px rgba(255, 255, 255, 0.35);
+}
+
+.btn-white.focus,
+.btn-white:focus {
+  -webkit-box-shadow: none, 0 0 0 0 rgba(255, 255, 255, 0.5);
+          box-shadow: none, 0 0 0 0 rgba(255, 255, 255, 0.5);
+}
+
+.btn-white.disabled,
+.btn-white:disabled {
+  color: #212529;
+  border-color: #fff;
+  background-color: #fff;
+}
+
+.btn-white:not(:disabled):not(.disabled).active,
+.btn-white:not(:disabled):not(.disabled):active,
+.show > .btn-white.dropdown-toggle {
+  color: #212529;
+  border-color: #dfdfdf;
+  background-color: #e6e6e6;
+}
+
+.btn-white:not(:disabled):not(.disabled).active:focus,
+.btn-white:not(:disabled):not(.disabled):active:focus,
+.show > .btn-white.dropdown-toggle:focus {
+  -webkit-box-shadow: none, 0 0 0 0 rgba(255, 255, 255, 0.5);
+          box-shadow: none, 0 0 0 0 rgba(255, 255, 255, 0.5);
+}
+
+.footer2 {
+  position: relative;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #e2e2e2;
+  text-align: center;
+  font-family: "Open Sans", serif;
+}
+
+.footer-link {
+  color: #000000;
+}
+
+.footer-link:hover {
+  color: #3a3737;
+}
+
+.slice {
+  position: relative;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.slice-xl {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.slice-lg {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.slice-sm {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.slice:not(.border-top):not(.border-bottom):not(.delimiter-bottom):not([class*=bg-]) + .slice:not(.border-top):not(.border-bottom):not(.delimiter-top):not([class*=bg-]) {
+  padding-top: 0;
+}
+
+@font-face {
+  font-family: "myfont";
+  src: url(/fonts/PoetsenOne-Regular.ttf?e7f249e71a563eed9c495835657eb9c2);
+}
+
+.tsx {
+  font-family: "myfont";
+  font-size: 5em;
+  color: #FFFFFF;
+}
+
+.step1 {
+  width: 1120px;
+  height: 250px;
+  z-index: 3;
+  padding: 25px;
+  margin-bottom: 0px;
+  font-family: "myfont";
+}
+
+.step2 {
+  width: 100%;
+  height: 17em;
+  margin-bottom: 0px;
+  padding: 25px;
+  font-family: "myfont";
+  background-color: #000000;
+}
+
+.shdow {
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 /*!
  * Bootstrap v4.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors

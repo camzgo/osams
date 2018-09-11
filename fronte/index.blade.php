@@ -18,8 +18,22 @@
     <link type="text/css" href="/added/vendor/highlight/css/styles/atom-one-dark.css" rel="stylesheet">
     <!-- Theme CSS -->
     <link type="text/css" href="/added/css/theme.min.css" rel="stylesheet">
+    <link type="text/css" href="/added/css/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css" rel="stylesheet">
+    <link type="text/css" href="/added/css/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" rel="stylesheet">
+     <script src="/added/js/bootstrap/bootstrap.min.js"></script>
 </head>
 <style>
+    *{
+        margin: 0; 
+        padding: 0;
+    }
+    .img-fluid
+    {
+        max-width: 100%;
+        height: 100%;
+        display: block;
+    }
+
 
 /* equal card height */
 .row-equal > div[class*='col-'] {
@@ -71,7 +85,7 @@
                         </li>
                         <!-- FAQS -->
                         <li class="nav-item">
-                            <a class="nav-link" href="pages/faq.html" role="button">FAQs</a>
+                            <a class="nav-link" href="pages/faq.tml" role="button">FAQs</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="pages/site-map.html" role="button">Site Map</a>
@@ -460,142 +474,49 @@
 <br>
 <br><br>
   <section >
-       <div id="demo" class="carousel slide ml-2" data-ride="carousel">
+       
+<div class="owl-carousel owl-theme">
+    <div class="item">
+        <img src="{{asset('images/fa.jpg')}}" alt="12" class="img-fluid">
+    </div>
+     <div class="item">
+        <img src="{{asset('images/fa.jpg')}}" alt="12" class="img-fluid">
+    </div>
+     <div class="item">
+        <img src="{{asset('images/fa.jpg')}}" alt="12" class="img-fluid">
+    </div>
+     <div class="item">
+        <img src="{{asset('images/fa.jpg')}}" alt="12" class="img-fluid">
+    </div>
+     <div class="item">
+        <img src="{{asset('images/fa.jpg')}}" alt="12" class="img-fluid">
+    </div>
+     <div class="item">
+        <img src="{{asset('images/fa.jpg')}}" alt="12" class="img-fluid">
+    </div>
+     <div class="item">
+        <img src="{{asset('images/fa.jpg')}}" alt="12" class="img-fluid">
+    </div>
+     <div class="item">
+        <img src="{{asset('images/fa.jpg')}}" alt="12" class="img-fluid">
+    </div>
+     <div class="item">
+        <img src="{{asset('images/fa.jpg')}}" alt="12" class="img-fluid">
+    </div>
+     <div class="item">
+        <img src="{{asset('images/fa.jpg')}}" alt="12" class="img-fluid">
+    </div>
+     <div class="item">
+        <img src="{{asset('images/fa.jpg')}}" alt="12" class="img-fluid">
+    </div>
+     <div class="item">
+        <img src="{{asset('images/fa.jpg')}}" alt="12" class="img-fluid">
+    </div>
+</div>
 
-                              <!-- Indicators -->
-                              <ul class="carousel-indicators">
-                                <li data-target="#demo" data-slide-to="0" ></li>
-                                <li data-target="#demo" data-slide-to="1"></li>
-                              </ul>
-                              
-                              <!-- The slideshow -->
-                              <div class="carousel-inner ">
-                                <div class="carousel-item active">
-                                  <div style="width:750px">
-                                    <div class="row no-gutters">
-                                      <div class="col-md-3">
-                                        <div class="card" style="width:150px; height:220px;">
-                                          <img class="card-img-top" src="{{asset('images/fa.jpg')}}" alt="Card image" style="width:100%">
-                                          <div class="card-body">
 
-                                            {{-- <p class="card-title">PUBLIC & PRIVATE</p> --}}
-                                            {{-- <h6 style="text-align: center;"><strong><small>Graduate from </small>PUBLIC and PRIVATE</strong></h6> --}}
-                                            {{-- <small class="ml-3"><strong>Graduate from</strong></small>
-                                            <h6 style="text-align: center;"><strong>PUBLIC</strong></h6> --}}
-                                            <a href="#" class="btn btn-primary btn-rounded" style="width:105px;">Apply</a>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-3">
-                                        <div class="card" style="width:150px; height:220px;">
-                                          <img class="card-img-top" src="{{asset('images/fa.jpg')}}" alt="Card image" style="width:100%">
-                                          <div class="card-body">
-                                            {{-- <small class="ml-3"><strong>Graduate from</strong></small>
-                                            <h6 style="text-align: center;"><strong>PRIVATE</strong></h6> --}}
-                                            {{-- <small style="text-align: center;">Gender and Development</small> --}}
-                                            
-                                            <a href="#" class="btn btn-primary btn-rounded" style="width:105px;">Apply</a>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-3">
-                                        <div class="card" style="width:150px; height:220px;">
-                                          <img class="card-img-top" src="{{asset('images/fa.jpg')}}" alt="Card image" style="width:100%">
-                                          <div class="card-body">
-                                            {{-- <h6 class="card-title boldtx" style="text-align: center;">GAD</h6> --}}
-                                            
-                                            <a href="#" class="btn btn-primary btn-rounded" style="width:105px;">Apply</a>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-3">
-                                        <div class="card" style="width:150px; height:220px;">
-                                          <img class="card-img-top" src="{{asset('images/fa.jpg')}}" alt="Card image" style="width:100%">
-                                          <div class="card-body">
-                                            {{-- <h6 class="card-title boldtx" style="text-align: center;">NCW</h6> --}}
-                                            
-                                            <a href="#" class="btn btn-primary btn-rounded" style="width:105px;">Apply</a>
-                                          </div>
-                                        </div>
-                                      </div>
-                                  </div>
-                                  </div>
-                                  
-                                </div>
-                                <div class="carousel-item no-gutters">
-                                  <div style="width:750px">
-                                    <div class="row no-gutters">
-                                      <div class="col-md-3">
-                                        <div class="card" style="width:150px; height:220px;">
-                                          <img class="card-img-top" src="{{asset('images/user8-128x128.jpg')}}" alt="Card image" style="width:100%">
-                                          <div class="card-body">
-                                            {{-- <small class="ml-3"><strong>Vice Governor</strong></small>
-                                            <h6 style="text-align: center;"><strong>OLD AND NEW</strong></h6> --}}
-                                            
-                                            <a href="#" class="btn btn-primary btn-rounded" style="width:105px;">Apply</a>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-3">
-                                        <div class="card" style="width:150px; height:220px;">
-                                          <img class="card-img-top" src="{{asset('images/user8-128x128.jpg')}}" alt="Card image" style="width:100%">
-                                          <div class="card-body">
-                                            {{-- <small class="ml-3"><strong>Vice Governor</strong></small>
-                                            <h6 style="text-align: center;"><strong>DHVTSU</strong></h6> --}}
-                                            
-                                            <a href="#" class="btn btn-primary btn-rounded" style="width:105px;">Apply</a>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-3">
-                                        <div class="card" style="width:150px; height:220px;">
-                                          <img class="card-img-top" src="{{asset('images/user8-128x128.jpg')}}" alt="Card image" style="width:100%">
-                                          <div class="card-body">
-                                            {{-- <h6 class="card-title boldtx" style="text-align: center;">PCL</h6> --}}
-                                            
-                                            <a href="#" class="btn btn-primary btn-rounded" style="width:105px;">Apply</a>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-3">
-                                        <div class="card" style="width:150px; height:220px;">
-                                          <img class="card-img-top" src="{{asset('images/user8-128x128.jpg')}}" alt="Card image" style="width:100%">
-                                          <div class="card-body">
-                                            {{-- <small class="ml-8"><strong>with</strong></small> --}}
-                                            {{-- <h6 style="text-align: center;"><strong>HONORS</strong></h6>
-                                            <h6 style="text-align: center;"><strong>RANKS</strong></h6> --}}
-                                            
-                                            <a href="#" class="btn btn-primary btn-rounded" style="width:105px;">Apply</a>
-                                          </div>
-                                        </div>
-                                      </div>
-                                  </div>
-                                  </div>
-                                </div>
-                              
-                              <!-- Left and right controls -->
-                              <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                                <span class="carousel-control-prev-icon"></span>
-                              </a>
-                              <a class="carousel-control-next" href="#demo" data-slide="next">
-                                <span class="carousel-control-next-icon"></span>
-                              </a>
-                            </div>
 
-                            {{-- <div class="col">
-                             <div class="container">
-                              <div class="card" style="width:150px;">
-                                <img class="card-img-top" src="{{asset('images/user8-128x128.jpg')}}" alt="Card image" style="width:100%">
-                                <div class="card-body">
-                                  <h4 class="card-title boldtx">NCW</h4>
-                                  
-                                  <a href="#" class="btn btn-primary btn-rounded" style="width:105px;">Apply</a>
-                                </div>
-                              </div>
-                              <br>
-                            </div>
-                          </div> --}}
-                        </div>  
+
   </section>
 
 
@@ -688,9 +609,15 @@
             </div>
         </footer>
     <!-- Core -->
-    <script src="/added/vendor/jquery/jquery.min.js"></script>
+    <script src="/added/css/OwlCarousel2-2.3.4/dist/owl.carousel.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
     <script src="/added/vendor/popper/popper.min.js"></script>
-    <script src="/added/js/bootstrap/bootstrap.min.js"></script>
+    {{-- <script src="/added/vendor/jquery/jquery.min.js"></script> --}}
+    {{-- <script src="/added/vendor/popper/popper.min.js"></script> --}}
+   
     <!-- FontAwesome 5 -->
     <script src="/added/vendor/fontawesome/js/fontawesome-all.min.js" defer></script>
     <!-- Page plugins -->
@@ -700,26 +627,30 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104437451-1"></script>
     <script>
-        // window.dataLayer = window.dataLayer || [];
-        //   function gtag(){dataLayer.push(arguments);}
-        //   gtag('js', new Date());
-          
-        //   gtag('config', 'UA-104437451-1');
+       $('.owl-carousel').owlCarousel({
+            loop:true,
+            margin:10,
+            nav:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:5
+                }
+            }
+        })
 
 
-    (function($) {
-    "use strict";
 
-    // manual carousel controls
-    $('.next2').click(function(){ $('.carousel').carousel('next');return false; });
-    $('.prev2').click(function(){ $('.carousel').carousel('prev');return false; });
-    
-    })(jQuery);
     </script>
-    <script
+    {{-- <script
   src="https://code.jquery.com/jquery-3.3.1.slim.js"
   integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script> --}}
 </body>
 
 

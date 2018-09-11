@@ -22,10 +22,10 @@
   <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('rIE7niseQQsg', 'C93')}}" alt="barcode" /> <br> <br>
   <br/>
   <br/>
-  <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('19', 'S25')}}" alt="barcode" /> <br> <br>
-  <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('20', 'S25+')}}" alt="barcode" /><br> <br>
-  <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('21', 'I25')}}" alt="barcode" /><br> <br>
-  <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('22', 'MSI+')}}" alt="barcode" /><br> <br>
+  <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('25525', 'S25')}}" alt="barcode" /> <br> <br>
+  <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('20225555', 'S25+')}}" alt="barcode" /><br> <br>
+  <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('2255225', 'I25')}}" alt="barcode" /><br> <br>
+  <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('223344', 'MSI+')}}" alt="barcode" /><br> <br>
   <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('23', 'POSTNET')}}" alt="barcode" /><br> <br>
   <br/>
   <br/>

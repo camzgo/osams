@@ -16,7 +16,9 @@ class BarcodeController extends Controller
 public function fronte()
 {
 
-    $faq = DB::table('faquestions')->get();
-    return view('faq')->with('faq', $faq);
+    // $faq = DB::table('faquestions')->get();
+    // return view('faq')->with('faq', $faq);
+
+    return view ('sas');
 }
 }
