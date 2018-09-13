@@ -453,8 +453,6 @@
             <label for="barangay">* Barangay</label>
             <select name="barangay" id="barangay" class="form-control dynamic req" required >
               <option value="" selected disabled>--Select--</option>
-              <option value="R">Roman Catholic</option>
-              <option value="M">Muslim</option>
             </select>
           </div>
           <div class="col-md-6">

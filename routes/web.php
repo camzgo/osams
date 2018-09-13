@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontendController@fronte');
 
 Route::get('/frontend', function () {
     return view('applicant_frontend.dashboard');
@@ -189,6 +187,10 @@ Route::prefix('fronte')->group(function()
     Route::get('/scholarship', 'FrontendController@scholarship');
     Route::get('/scholarship/details', 'FrontendController@sdetails');
     Route::get('/profile/personal-information', 'FrontendController@myProfile');
+    Route::get('/profile/guardian-information', 'FrontendController@guardian');
+    Route::get('/profile/education-information', 'FrontendController@education');
+    Route::get('/account', 'FrontendController@account');
+    Route::post('/profile/personal-information/fetch', 'FrontendController@fetch')->name('profile.fetch');
 });
 
 

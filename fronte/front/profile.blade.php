@@ -13,8 +13,7 @@
 
  
     <nav class="navbar navbar-expand-lg navbar-dark py-3" style="height: 6em;   position: relative;
-    background: linear-gradient(80deg, #004280 0, #001a33 100%)
-    ">
+    background: linear-gradient(80deg, #004280 0, #001a33 100%)">
     <div class="container">
  <a class="navbar-brand" href="#">
     <img src="/added/img/icons/logo.png" class="mr-4" width="50px" alt="">

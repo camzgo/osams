@@ -15196,6 +15196,78 @@ select.selectpicker {
   background-color: #ffffff;
 }
 
+.tr-progress-bar {
+  margin: 10px 0;
+}
+
+.bar-item {
+  background: #E5E7ED;
+  border-radius: 50%;
+  color: #768CAD;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 17px;
+  height: 30px;
+  line-height: 30px;
+  position: relative;
+  text-align: center;
+  width: 31px;
+  z-index: 9;
+}
+
+.bar-item-bar {
+  background: #E5E7ED;
+  display: inline-block;
+  margin: 0 -5px;
+  height: 12px;
+  width: 170px;
+  z-index: 2;
+}
+
+.tr-bib-active {
+  background: #3ec054;
+}
+
+.tr-first {
+  margin-left: 0;
+}
+
+.tr-active {
+  background: #3ec054;
+  color: #ffffff;
+}
+
+.shipping-info .translate {
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  position: absolute;
+  background-color: #eff0f5;
+  border-top: 1px solid #dadada;
+  border-left: 1px solid #dadada;
+  top: -6px;
+  -ms-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+
+.shipping-info .tracking-list {
+  border: 1px solid #dadada;
+  background-color: #eff0f5;
+  border-radius: 4px;
+  padding: 12px;
+  position: relative;
+}
+
+.track-list {
+  background-color: #f5f3f3;
+  width: 890px;
+  height: 200px;
+  margin-left: 3em;
+  margin-top: 10px;
+}
+
 /*!
  * Bootstrap v4.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors

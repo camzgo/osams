@@ -99,17 +99,17 @@
           <div class="col-lg-9">
             <div class="card">
               <div class="card-body">
-                <div class="card-title"><div class="alert alert-info" role="alert">My Scholarship</div></div><hr> 
+                <div class="card-title"><div class="boldtx alert alert-info" role="alert"> <i class="fa fa-folder"></i> Application Information</div></div><hr> 
 
                 <div class="container">
-                  <div class="row">
+                  {{-- <div class="row">
                     <h4 class="tx1">Scholarship Details</h4>
-                  </div>
+                  </div> --}}
 
-                  <div class="row mb-2">
+                  <div class="form-row mb-2">
                     <div class="col-md-6 ">
                     <ul class="list-group">
-                      <li class="list-group-item active"><i class="fa fa-folder-open"></i><strong> Application Information</strong></li>
+                      <li class="list-group-item active"><i class="fa fa-folder-open"></i><strong> Application Details</strong></li>
                       <li class="list-group-item">
                         <div class="row no-gutters">
                           <div class="col-md-6">
@@ -259,8 +259,66 @@
 
 
 
-                </div>
+                </div><hr>
+                <div class="form-row">
+                  <div class="card" style="width: 100%;">
+                    <div class="card-header boldtx bg-warning text-white">
+                      Application Track
+                    </div>
+                    <div class="card-body">
+                       <!-- Tracking progress -->
+                      <div class="container" >
+                        <div class="translate"></div>
+                        <div class="form-row" style="margin-left: 4em;">
+                          <div class="tr-progress-bar">
+                            <div class="bar-item tr-first tr-active">1</div>
+                            <span class="bar-item-bar tr-bib-active"></span>
+                            <div class="bar-item  tr-active">2</div>
 
+                            <span class="bar-item-bar tr-bib-active"></span>
+                            <div class="bar-item tr-active">3</div>
+
+                            <span class="bar-item-bar"></span>
+                            <div class="bar-item">4</div>
+
+                            <span class="bar-item-bar"></span>
+                            <div class="bar-item">5</div>    
+                          </div>
+                        </div>
+                        <div class="form-row" style="margin-left: 2em; margin-right: 2em;">
+                          <div class="col-md-2 ml-2">
+                            <p>Approved</p>
+                          </div>
+                          <div class="col-md-2 text-center ml-2">
+                            <p>Re-Checking</p>
+                          </div>
+                          <div class="col-md-2 text-center" style="margin-left: 3em;">
+                            <p>Consolidation</p>
+                          </div>
+                          <div class="col-md-2 text-center" style="margin-left: 3.2em;">
+                            <p>Payroll</p>
+                         </div>
+                         <div class="col-md-2 text-center" style="margin-left: 3.2em;">   
+                            <p>Releasing</p>
+                          </div>
+                        </div>
+
+                      </div>
+                      {{-- <div class="form-row" style="margin-left: 8em; margin-top: 10px;">
+                        <div class="card" style="width: 730px; height: 200px;">
+                          <div class="card-body">
+
+                          </div>
+                        </div>
+                      </div>
+                       --}}
+                       {{-- <div class="track-list">
+                         <div class="container">
+                           
+                         </div>
+                       </div> --}}
+                  </div>
+                </div>
 
               </div>
             </div>
@@ -268,7 +326,10 @@
         </div>
       </div>
     </section>
+<section>
 
+  
+</section>
    
    
 </main>

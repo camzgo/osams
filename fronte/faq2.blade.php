@@ -47,14 +47,32 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto align-items-lg-center">
-      <li class="nav-item mr-0">
-          <a data-toggle="modal" data-target="#sign-up-modal" class="btn  d-none d-lg-inline-flex text-white" role="button"><strong>Sign up</strong></a>
-      </li>
-      <li class="nav-item mr-0">
-          <a data-toggle="modal" data-target="#login-modal" style="width: 8em;  font-size: .90rem;" class="btn btn-sm btn-white btn-rounded " role="button">
-              <i class="fa fa-sign-in"></i>&nbsp <strong>Sign In</strong>
-          </a>
-      </li>
+      @guest
+        <li class="nav-item mr-0">
+            <a  class="btn d-none d-lg-inline-flex text-white" role="button" href="{{ route('register') }}"><strong>Sign up</strong></a>
+        </li>
+        <li class="nav-item mr-0">
+            <a style="width: 8em;  font-size: .90rem;" class="btn btn-sm btn-white btn-rounded " role="button" href="{{ route('login') }}"><i class="fa fa-sign-in"></i>&nbsp; <strong>Sign In</strong></a>
+        </li>
+      @else
+        <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->name }} <span class="caret"></span>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
+        </li>
+      @endguest
     </ul>
   </div>
 </div>
@@ -78,21 +96,17 @@
         <div class="row row-grid">
           <div class="col">
             <div class="">
-                            {{-- <h4 class="mb-4" id="section_1">Theme integration</h4> --}}
-                        @if(count($faq) > 0)
-                            @foreach($faq as $faqs)
-
-
-                            <div class="py-3 border-bottom">
-                            <h5 class="mb-3">Q: {{$faqs->question}}</h5>
-                                <p class=" mb-0"> {{$faqs->answer}}</p>
-                            </div>
-                            @endforeach
-                            
-                        @else
-                            <p>No post found!</p>
-                        @endif
-
+              @if(count($faq) > 0)
+                @foreach($faq as $faqs)
+                  <div class="py-3 border-bottom">
+                  <h5 class="mb-3">Q: {{$faqs->question}}</h5>
+                      <p class=" mb-0"> {{$faqs->answer}}</p>
+                  </div>
+                @endforeach
+                  
+              @else
+                  <p>No data found!</p>
+              @endif
           </div>
         </div>
       </div>

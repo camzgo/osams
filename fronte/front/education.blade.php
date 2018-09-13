@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
-    <title>Pampanga Capitol</title>
+    <title>Educational Information | Pampanga Capitol</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script src="{{asset('js/app.js')}}"></script>
@@ -97,94 +97,52 @@
           <div class="col-lg-9">
             <div class="card">
               <div class="card-body">
-                <div class="card-title"><div class="boldtx alert alert-primary" role="alert"> <i class="fa fa-user"></i> Personal Information</div></div><hr>
+                <div class="card-title"><div class="boldtx alert alert-primary" role="alert"> <i class="fa fa-university"></i> Educational Information</div></div><hr>
                  <form action="" id="regForm" method="post" enctype="multipart/form-data" class="container">
                  {{csrf_field()}}
                   <div class="container">
+                    
                     <div class="form-row form-group">
-                      <div class="col-md-3">
-                        <label>Surname <small>(required)</small></label>
-                        <input type="text" class="form-control" name="surname" id="surname" placeholder="Surname">
+                      <div class="col-md-5">
+                        <label>Course / Program (No Abbreviation) <small>(required)</small></label>
+                        <input type="text" class="form-control" name="course" id="course" placeholder="Course / Program " required>
                       </div>
                       <div class="col-md-3">
-                        <label>First Name <small>(required)</small></label>
-                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name">
+                        <label>Year Level <small>(required)</small></label>
+                        <div class="input-group">
+                          <input type="text" class="form-control" id="yr_lvl" name="yr_lvl" placeholder='eg. 1st' required/>
+                          <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon1">YEAR</span>
+                          </div>
+                        </div>
                       </div>
-                      <div class="col-md-3">
-                        <label>Middle Name <small>(required)</small></label>
-                        <input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Middle Name">
+                      <div class="col-md-2">
+                        <label>Year Entered <small>(required)</small></label>
+                        <input type="text" class="form-control" name="year_entered" id="year_entered" placeholder="YYYY" required>
                       </div>
-                      <div class="col-md-3">
-                        <label>Suffix <small>(required)</small></label>
-                        <input type="text" class="form-control" name="suffix" id="suffix" placeholder="Suffix (e.g., Jr. Sr. III)">
-                      </div>
+                      <div class="col-md-2">
+                        <label>Duration <small>(required)</small></label>
+                        <div class="input-group">
+                          <input type="text" class="form-control" id="duration" name="duration" placeholder='00' required/>
+                          <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon1">YEARS</span>
+                          </div>
+                        </div> 
+                      </div>  
                     </div>
                     <div class="form-row form-group">
-                      <div class="col-md-2">
-                        <label for="gender">Gender <small>(required)</small></label>
-                        <select name="gender" id="gender" class=" form-control "  required>
-                          <option value="" selected disabled>--Select--</option>
-                          <option value="Male">MALE</option>
-                          <option value="Female">FEMALE</option>
-                        </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="nationality">Nationality <small>(required)</small></label>
-                            <select name="nationality" id="nationality" class="form-control " required>
-                              <option value="" selected disabled>--Select--</option>
-                              <option value="Filipino">Filipino</option>
-                              <option value="Foreigner">Foreigner</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                          <label for="religion">Religion <small>(required)</small></label>
-                          <select name="religion" id="religion" class="form-control "  required>
-                            <option value="" selected disabled>--Select--</option>
-                          </select>
-                        </div>
-                        <div class="col-md-3">
-                          <label for="civils">Civil Status <small>(required)</small></label>
-                          <select name="civil_status" id="civil_status" class="form-control "  required>
-                            <option value="" selected disabled>--Select--</option>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                            <option value="Separated">Separated</option>
-                            <option value="Widowed">Widowed</option>
-                          </select>
-                        </div>
+                      <div class="col-md-6">
+                        <label>College / University Name (No Abbreviation) <small>(required)</small></label>
+                        <input type="text" class="form-control" name="course" id="course" placeholder="College / University Name (No Abbreviation)" required>
                       </div>
-                      <div class="form-row form-group">
-                        <div class="col-md-3">
-                          <label for="municipality">Municipality <small>(required)</small></label>
-                          <select name="municipality" id="municipality" data-val="true"  data-val-required="Please select Municipality" data-dependent="barangay" class="form-control dynamic" required >
-                            <option value="" selected disabled>--Select--</option>
-                            @foreach ($municipal_list as $municipal)
-                                <option value="{{$municipal->municipality}}">{{$municipal->municipality}}</option>
-                            @endforeach
-                          </select>
-                        </div>
-                        <div class="col-md-3">
-                          <label for="barangay">Barangay <small>(required)</small></label>
-                          <select name="barangay" id="barangay" class="form-control dynamic" required >
-                            <option value="" selected disabled>--Select--</option>
-                          </select>
-                        </div>
-                        <div class="col-md-6">
-                          <label for="street">Street</label>
-                          <input type="text" class="form-control" id="street" name="street" placeholder='(Street, Village Subdivision)'/>
-                        </div>
+                      <div class="col-md-6">
+                        <label>College / University Address <small>(required)</small></label>
+                        <input type="text" class="form-control" name="course" id="course" placeholder="Building no., Street, Barangay Town, City Municipality, Province" required>
                       </div>
-                      <div class="form-row form-group">
-                        <div class="col-md-3">
-                          <label for="bdate">Birth Date <small>(required)</small></label>
-                          <input type="date" name="bday" id="bday" class="form-control" data-provide="datepicker" required/>
-                        </div>
-                        <div class="col-md-6">
-                          <label for="bplace">Birth Place <small>(required)</small></label>
-                          <input type="text" name="bplace" id="bplace" class="form-control" placeholder="Birth Place" required/>
-                        </div>
-                      </div>
-                      <div class="form-row form-group">
+
+                    </div>
+                    
+                      <div class="row form-group">
                         <div class="col-md-6">
                           <a href="#" class="btn btn-secondary">Back to My Profile</a>
                         </div>
@@ -200,10 +158,6 @@
 
             </div>
           </div>
-
-          {{-- <div class="col-md-3">
-                        
-                      </div> --}}
 
 
 
@@ -227,8 +181,9 @@
 
 </body>
 <script>
-  $(document).ready(function(){
+$(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
+  $('#year_entered').mask('0000', {"clearIncomplete": true});
 });
 
 $(document).ready(function(){
@@ -263,6 +218,6 @@ $(document).ready(function(){
 
 
 </script>
-<script src="{{ URL::asset('data/religion.js') }}" type="text/javascript"></script>
+
 
 </html>

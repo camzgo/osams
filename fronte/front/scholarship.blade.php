@@ -99,7 +99,7 @@
           <div class="col-lg-9">
             <div class="card">
               <div class="card-body">
-                <div class="card-title"><div class="alert alert-info" role="alert">My Scholarship</div></div><hr>
+                <div class="card-title"><div class="boldtx alert alert-info" role="alert"><i class="fa fa-graduation-cap"></i> My Scholarship</div></div><hr>
                 <a class="card " href="/fronte/scholarship/details">
                   <div class="card-body" style="weight: 100% height: 500px;">
                     <div class="row">
