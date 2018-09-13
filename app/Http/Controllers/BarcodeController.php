@@ -13,12 +13,6 @@ class BarcodeController extends Controller
     return view('sample');
 }
 
-public function fronte()
-{
+    
 
-    // $faq = DB::table('faquestions')->get();
-    // return view('faq')->with('faq', $faq);
-
-    return view ('sas');
-}
 }

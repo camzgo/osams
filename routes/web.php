@@ -178,7 +178,19 @@ Route::prefix('permission-access')->group(function(){
 Route::get('/reg/success', 'RegisterMainController@send');
 Route::get('/admindash', 'ApproveController@admindash');
 Route::get('/barcode', 'BarcodeController@barcode');
-Route::get('/fronte', 'BarcodeController@fronte');
+
+Route::prefix('fronte')->group(function()
+{
+    Route::get('/', 'FrontendController@fronte');
+    Route::get('/faqs', 'FrontendController@faq');
+    Route::get('/about-us', 'FrontendController@about');
+    Route::get('/contact', 'FrontendController@contact');
+    Route::get('/profile', 'FrontendController@profile');
+    Route::get('/scholarship', 'FrontendController@scholarship');
+    Route::get('/scholarship/details', 'FrontendController@sdetails');
+    Route::get('/profile/personal-information', 'FrontendController@myProfile');
+});
+
 
 
 Route::get('/pampanga','AddressController@municipal');

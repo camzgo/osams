@@ -429,7 +429,7 @@
                                     <ul class="list-group mt-4">
                                         <li class="list-group-item active"><strong>Requirements</strong></li>
                                         <li class="list-group-item"><i id="chk31"></i> Bio-data with 2x2 Picture</li>
-                                        <li class="list-group-item"><i id="chk32"></i> Grades/ Class Cards/ Form 138 (Photocopy)</li>
+                                        <li class="list-group-item"><i id="chk32"></i> Grades/ Form 138 (Photocopy)</li>
                                         <li class="list-group-item"><i id="chk33"></i> Barangay/ Residency/ Indigency Certificate</li>
                                         <li class="list-group-item"><i id="chk34"></i> Official Receipt (Photocopy)</li>
                                         <li class="list-group-item"><i id="chk35"></i> Certificate of Registration/ Assessment Form (Photocopy)</li>
