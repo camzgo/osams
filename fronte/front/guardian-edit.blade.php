@@ -105,19 +105,19 @@
                     <div class="form-row form-group">
                       <div class="col-md-3">
                         <label>Surname <small>(required)</small></label>
-                        <input type="text" class="form-control" name="surname" id="surname" placeholder="Surname">
+                        <input type="text" class="form-control" name="surname" id="surname" value="{{$guardian->surname}}" placeholder="Surname">
                       </div>
                       <div class="col-md-3">
                         <label>First Name <small>(required)</small></label>
-                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name">
+                        <input type="text" class="form-control" name="first_name" id="first_name" value="{{$guardian->first_name}}" placeholder="First Name">
                       </div>
                       <div class="col-md-3">
                         <label>Middle Name <small>(required)</small></label>
-                        <input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Middle Name">
+                        <input type="text" class="form-control" name="middle_name" id="middle_name" value="{{$guardian->middle_name}}" placeholder="Middle Name">
                       </div>
                       <div class="col-md-3">
                         <label>Suffix <small>(required)</small> </label>
-                        <input type="text" class="form-control" name="suffix" id="suffix" placeholder="Suffix (e.g., Jr. Sr. III)">
+                        <input type="text" class="form-control" name="suffix" id="suffix" value="{{$guardian->suffix}}" placeholder="Suffix (e.g., Jr. Sr. III)">
                       </div>
                     </div>
                     <div class="form-row form-group">
@@ -141,11 +141,11 @@
                         </div>
                         <div class="col-md-3">
                           <label for="nationality">Nationality <small>(required)</small></label>
-                          <input type="text" name="nationality" id="nationality" class="form-control"  placeholder="Nationality" required/>
+                          <input type="text" name="nationality" id="nationality" class="form-control" value="{{$guardian->nationality}}" placeholder="Nationality" required/>
                         </div>
                         <div class="col-md-4">
                           <label>Occupation <small>(required)</small></label>
-                          <input type="text" name="occupation" id="occupation" class="form-control"  placeholder="Occupation" required/>
+                          <input type="text" name="occupation" id="occupation" class="form-control"  placeholder="Occupation" value="{{$guardian->occupation}}" required/>
                         </div>
                       </div>
                       <div class="form-row form-group">
@@ -166,7 +166,7 @@
                         </div>
                         <div class="col-md-6">
                           <label for="street">Street</label>
-                          <input type="text" class="form-control" id="street" name="street" placeholder='(Street, Village Subdivision)'/>
+                          <input type="text" class="form-control" id="street" name="street" value="{{$guardian->street}}" placeholder='(Street, Village Subdivision)'/>
                         </div>
                       </div>
                       <div class="form-row form-group">
@@ -176,12 +176,12 @@
                             <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">+63</span>
                             </div>
-                            <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required/>
+                            <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' value="{{$guardian->mobile_number}}" required/>
                           </div> 
                         </div>
                         <div class="col-md-3">
                           <label for="bdate">Birth Date <small>(required)</small></label>
-                          <input type="date" name="bday" id="bday" class="form-control" data-provide="datepicker" required/>
+                          <input type="date" name="bday" id="bday" class="form-control" data-provide="datepicker" value="{{$guardian->bday}}" required/>
                         </div>
                         <div class="col-md-4">
                           <label>Relationship <small>(required)</small></label>
@@ -238,7 +238,7 @@
 
 </body>
 <script>
-  $(document).ready(function(){
+$(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
 });
 
@@ -269,6 +269,14 @@ $(document).ready(function(){
   $('#municipality').change(function(){
     $('#barangay').val('');
   });
+
+});
+
+$(document).ready(function(){
+
+  document.getElementById('gender').value="{{$guardian->gender}}";
+  document.getElementById('civil_status').value="{{$guardian->civil_status}}";
+  document.getElementById('relationship').value="{{$guardian->relationship}}";
 
 });
 

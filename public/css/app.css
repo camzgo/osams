@@ -15268,6 +15268,12 @@ select.selectpicker {
   margin-top: 10px;
 }
 
+body {
+  padding-right: 0 !important;
+}
+
+/* unset bs3 setting */
+
 /*!
  * Bootstrap v4.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors

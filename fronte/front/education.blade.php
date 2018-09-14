@@ -98,7 +98,7 @@
             <div class="card">
               <div class="card-body">
                 <div class="card-title"><div class="boldtx alert alert-primary" role="alert"> <i class="fa fa-university"></i> Educational Information</div></div><hr>
-                 <form action="" id="regForm" method="post" enctype="multipart/form-data" class="container">
+                 <form action="{{ action('FrontendController@storedEducation') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
                  {{csrf_field()}}
                   <div class="container">
                     
@@ -118,7 +118,7 @@
                       </div>
                       <div class="col-md-2">
                         <label>Year Entered <small>(required)</small></label>
-                        <input type="text" class="form-control" name="year_entered" id="year_entered" placeholder="YYYY" required>
+                        <input type="text" class="form-control" name="yr_entered" id="yr_entered" placeholder="YYYY" required>
                       </div>
                       <div class="col-md-2">
                         <label>Duration <small>(required)</small></label>
@@ -133,11 +133,11 @@
                     <div class="form-row form-group">
                       <div class="col-md-6">
                         <label>College / University Name (No Abbreviation) <small>(required)</small></label>
-                        <input type="text" class="form-control" name="course" id="course" placeholder="College / University Name (No Abbreviation)" required>
+                        <input type="text" class="form-control" name="college_name" id="college_name" placeholder="College / University Name (No Abbreviation)" required>
                       </div>
                       <div class="col-md-6">
                         <label>College / University Address <small>(required)</small></label>
-                        <input type="text" class="form-control" name="course" id="course" placeholder="Building no., Street, Barangay Town, City Municipality, Province" required>
+                        <input type="text" class="form-control" name="college_address" id="college_address" placeholder="Building no., Street, Barangay Town, City Municipality, Province" required>
                       </div>
 
                     </div>
@@ -184,6 +184,7 @@
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   $('#year_entered').mask('0000', {"clearIncomplete": true});
+  $('#duration').mask('00', {"clearIncomplete": true});
 });
 
 $(document).ready(function(){

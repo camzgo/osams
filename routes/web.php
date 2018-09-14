@@ -13,9 +13,9 @@
 
 Route::get('/', 'FrontendController@fronte');
 
-Route::get('/frontend', function () {
-    return view('applicant_frontend.dashboard');
-});
+// Route::get('/frontend', function () {
+//     return view('applicant_frontend.dashboard');
+// });
 // Route::get('ajaxdata', 'AjaxdataController@index')->name('ajaxdata');
 // Route::get('ajaxdata/getdata', 'AjaxdataController@getdata')->name('ajaxdata.getdata');
 Route::get('ajaxdata', 'AjaxdataController@index')->name('ajaxdata');
@@ -28,7 +28,7 @@ Route::get('ajaxdata/removedata', 'AjaxdataController@removedata')->name('ajaxda
 Route::get('ajaxdata/massremove', 'AjaxdataController@massremove')->name('ajaxdata.massremove');
 
 
-Route::prefix('scholarship')->group(function(){
+Route::prefix('admin/scholarship')->group(function(){
     Route::get('/getdata', 'ScholarshipMainController@getdata')->name('scholar.getdata');
     Route::post('/postdata', 'ScholarshipMainController@postdata')->name('scholar.postdata');
     Route::get('/fetchdata', 'ScholarshipMainController@fetchdata')->name('scholar.fetchdata');
@@ -37,7 +37,7 @@ Route::prefix('scholarship')->group(function(){
 
 // Route::get('scholarship/getstat', 'ScholarshipMainController@getstat')->name('scholar.getstat');
 
-Route::prefix('faqs')->group(function(){
+Route::prefix('admin/faqs')->group(function(){
     Route::get('/getdata', 'FaqsMainController@getdata')->name('faqs.getdata');
     Route::post('/postdata', 'FaqsMainController@postdata')->name('faqs.postdata');
     Route::get('/fetchdata', 'FaqsMainController@fetchdata')->name('faqs.fetchdata');
@@ -45,21 +45,21 @@ Route::prefix('faqs')->group(function(){
 // Route::get('faqs/removedata', 'FaqsMainController@removedata')->name('faqs.removedata');
 // Route::get('faqs/massremove', 'FaqsMainController@massremove')->name('faqs.massremove');
 
-Route::prefix('announcement')->group(function(){
+Route::prefix('admin/announcement')->group(function(){
     Route::get('/getdata', 'AnnounceMainController@getdata')->name('announce.getdata');
     Route::get('/fetchdata', 'AnnounceMainController@fetchdata')->name('announce.fetchdata');
     Route::post('/postdata', 'AnnounceMainController@postdata')->name('announce.postdata');
 });
 
 
-Route::prefix('applicant')->group(function(){
+Route::prefix('admin/applicant')->group(function(){
     Route::get('/getdata', 'ApplicantMainController@getdata')->name('applicant.getdata');
     Route::post('/postdata', 'ApplicantMainController@postdata')->name('applicant.postdata');
     Route::get('/fetchdata', 'ApplicantMainController@fetchdata')->name('applicant.fetchdata');
 });
 
 
-Route::prefix('archive/faqs')->group(function(){
+Route::prefix('admin/archive/faqs')->group(function(){
     Route::get('/getdata', 'FaqArchiveController@getdata')->name('archivefaqs.getdata');
     Route::get('/fetchdata', 'FaqArchiveController@fetchdata')->name('archivefaqs.fetchdata');
     Route::post('/postdata', 'FaqArchiveController@postdata')->name('archivefaqs.postdata');
@@ -67,7 +67,7 @@ Route::prefix('archive/faqs')->group(function(){
 });
 
 
-Route::prefix('archive/announcement')->group(function(){
+Route::prefix('admin/archive/announcement')->group(function(){
     Route::get('/getdata', 'AnnounceArchiveController@getdata')->name('archiveannounce.getdata');
     Route::get('/fetchdata', 'AnnounceArchiveController@fetchdata')->name('archiveannounce.fetchdata');
     Route::post('/postdata', 'AnnounceArchiveController@postdata')->name('archiveannounce.postdata');
@@ -75,14 +75,14 @@ Route::prefix('archive/announcement')->group(function(){
 });
 
 
-Route::prefix('archive/applicant')->group(function(){
+Route::prefix('admin/archive/applicant')->group(function(){
     Route::get('/getdata', 'ApplicantArchiveController@getdata')->name('archiveapplicant.getdata');
     Route::get('/fetchdata', 'ApplicantArchiveController@fetchdata')->name('archiveapplicant.fetchdata');
     Route::post('/postdata', 'ApplicantArchiveController@postdata')->name('archiveapplicant.postdata');
     Route::get('/removedata', 'ApplicantArchiveController@removedata')->name('archiveapplicant.removedata'); 
 });
 
-Route::prefix('employee')->group(function(){
+Route::prefix('admin/employee')->group(function(){
     Route::get('/getdata', 'UsersMainController@getdata')->name('users.getdata');
     Route::get('/fetchdata', 'UsersMainController@fetchdata')->name('users.fetchdata');
     Route::post('/postdata', 'UsersMainController@postdata')->name('users.postdata');
@@ -92,7 +92,7 @@ Route::prefix('employee')->group(function(){
     Route::post('/create/fetch', 'UsersMainController@fetch')->name('users.fetch');
 });
 
-Route::prefix('archive/employee')->group(function()
+Route::prefix('admin/archive/employee')->group(function()
 {
     Route::get('/getdata', 'UsersArchiveController@getdata')->name('archiveusers.getdata');
     Route::get('/fetchdata', 'UsersArchiveController@fetchdata')->name('archiveusers.fetchdata');
@@ -102,7 +102,7 @@ Route::prefix('archive/employee')->group(function()
 });
 
 
-Route::prefix('archive/application')->group(function()
+Route::prefix('admin/archive/application')->group(function()
 {
     Route::get('/', 'ApplicationArchiveController@index');
     Route::get('/getdata', 'ApplicationArchiveController@getdata')->name('archiveapplication.getdata');
@@ -112,7 +112,7 @@ Route::prefix('archive/application')->group(function()
     Route::get('/removedata', 'ApplicationArchiveController@removedata')->name('archiveapplication.removedata'); 
 });
 
-Route::prefix('apply/scholarship-category')->group(function(){
+Route::prefix('admin/apply/scholarship-category')->group(function(){
 
     
     Route::get('/eefap2', 'ScholarshipCatController@shoW');
@@ -139,7 +139,7 @@ Route::prefix('apply/scholarship-category')->group(function(){
 });
 
 
-Route::prefix('apply')->group(function(){
+Route::prefix('admin/apply')->group(function(){
     Route::get('/getdata', 'ApplyController@getdata')->name('apply.getdata');
     Route::get('/getdata2', 'ApplyController@applydata')->name('apply.data');
     Route::get('/getdata3', 'ApplyController@scholardata')->name('apply.scholardata');
@@ -148,14 +148,14 @@ Route::prefix('apply')->group(function(){
 });
 
 
-Route::prefix('application')->group(function()
+Route::prefix('admin/application')->group(function()
 {
     Route::get('/getdata', 'ApplicationMainController@getdata')->name('application.getdata');
     Route::get('/getdata2', 'ApplicationMainController@getdata2')->name('application.getdata2');
     Route::post('/postdata', 'ApplicationMainController@postdata')->name('application.postdata');
     Route::get('/fetchdata', 'ApplicationMainController@fetchdata')->name('application.fetchdata');
 });
-Route::prefix('approve')->group(function()
+Route::prefix('admin/approve')->group(function()
 {
     Route::get('/', 'ApproveController@approveShow');
     Route::get('/fetchdata', 'ApproveController@searchData')->name('search.fetchdata');
@@ -164,7 +164,7 @@ Route::prefix('approve')->group(function()
 });
 
 
-Route::prefix('permission-access')->group(function(){
+Route::prefix('admin/permission-access')->group(function(){
     Route::get('/', 'UtilitiesController@permission');
     Route::get('/getdata', 'UtilitiesController@getdata')->name('permission.getdata');
     Route::post('/postdata', 'UtilitiesController@postdata')->name('permission.postdata');
@@ -173,25 +173,47 @@ Route::prefix('permission-access')->group(function(){
 });
 
 
-Route::get('/reg/success', 'RegisterMainController@send');
+Route::get('admin/reg/success', 'RegisterMainController@send');
 Route::get('/admindash', 'ApproveController@admindash');
 Route::get('/barcode', 'BarcodeController@barcode');
 
-Route::prefix('fronte')->group(function()
+
+Route::prefix('/')->group(function()
 {
-    Route::get('/', 'FrontendController@fronte');
     Route::get('/faqs', 'FrontendController@faq');
-    Route::get('/about-us', 'FrontendController@about');
+    Route::get('/about', 'FrontendController@about');
     Route::get('/contact', 'FrontendController@contact');
+    Route::get('/signup', 'FrontendController@signup');
     Route::get('/profile', 'FrontendController@profile');
     Route::get('/scholarship', 'FrontendController@scholarship');
     Route::get('/scholarship/details', 'FrontendController@sdetails');
     Route::get('/profile/personal-information', 'FrontendController@myProfile');
+    Route::get('/profile/personal-information/edit', 'FrontendController@myProfileEdit');
     Route::get('/profile/guardian-information', 'FrontendController@guardian');
+    Route::get('/profile/guardian-information/edit', 'FrontendController@guardianEdit');
     Route::get('/profile/education-information', 'FrontendController@education');
+    Route::get('/profile/education-information/edit', 'FrontendController@educationEdit');
     Route::get('/account', 'FrontendController@account');
     Route::post('/profile/personal-information/fetch', 'FrontendController@fetch')->name('profile.fetch');
+    Route::post('/profile/personal-information', 'FrontendController@storedPersonal');
+    Route::post('/profile/guardian-information', 'FrontendController@storedGuardian');
+    Route::post('/profile/education-information', 'FrontendController@storedEducation');
 });
+// Route::prefix('fronte')->group(function()
+// {
+//     Route::get('/', 'FrontendController@fronte');
+//     Route::get('/faqs', 'FrontendController@faq');
+//     Route::get('/about-us', 'FrontendController@about');
+//     Route::get('/contact', 'FrontendController@contact');
+//     Route::get('/profile', 'FrontendController@profile');
+//     Route::get('/scholarship', 'FrontendController@scholarship');
+//     Route::get('/scholarship/details', 'FrontendController@sdetails');
+//     Route::get('/profile/personal-information', 'FrontendController@myProfile');
+//     Route::get('/profile/guardian-information', 'FrontendController@guardian');
+//     Route::get('/profile/education-information', 'FrontendController@education');
+//     Route::get('/account', 'FrontendController@account');
+//     Route::post('/profile/personal-information/fetch', 'FrontendController@fetch')->name('profile.fetch');
+// });
 
 
 
@@ -214,17 +236,17 @@ Route::get('/json-village', 'CountryController@villages');
 
 // Route::resource('admin', 'AdminPagesController');
 
-Route::resource('applicant', 'ApplicantMainController');
-Route::resource('application', 'ApplicationMainController');
-Route::resource('announcement', 'AnnounceMainController');
-Route::resource('faqs', 'FaqsMainController');
-Route::resource('scholarship', 'ScholarshipMainController');
-Route::resource('employee', 'UsersMainController');
-Route::resource('reg', 'RegisterMainController');
-Route::resource('apply', 'ApplyController');
-Route::resource('archive/faqs', 'FaqArchiveController');
-Route::resource('archive/announcement', 'AnnounceArchiveController');
-Route::resource('archive/applicant', 'ApplicantArchiveController');
+Route::resource('admin/applicant', 'ApplicantMainController');
+Route::resource('admin/application', 'ApplicationMainController');
+Route::resource('admin/announcement', 'AnnounceMainController');
+Route::resource('admin/faqs', 'FaqsMainController');
+Route::resource('admin/scholarship', 'ScholarshipMainController');
+Route::resource('admin/employee', 'UsersMainController');
+Route::resource('admin/reg', 'RegisterMainController');
+Route::resource('admin/apply', 'ApplyController');
+Route::resource('admin/archive/faqs', 'FaqArchiveController');
+Route::resource('admin/archive/announcement', 'AnnounceArchiveController');
+Route::resource('admin/archive/applicant', 'ApplicantArchiveController');
 
 Route::get('create', 'DisplayDataController@create');
 Route::get('getdata', 'DisplayDataController@index');
@@ -232,7 +254,8 @@ Route::get('getdata', 'DisplayDataController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/user/logout', 'Auth\LoginController@user_logout')->name('user.logout');
+
+Route::get('/user/logout', 'Auth\LoginController@user_logout')->name('user.logout');
 
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');

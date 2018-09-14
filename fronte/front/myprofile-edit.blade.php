@@ -5,66 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
-    <title>Parents / Guardian Information | Pampanga Capitol</title>
+    <title>Pampanga Capitol</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script src="{{asset('js/app.js')}}"></script>
 </head>
 
- 
-    <nav class="navbar navbar-expand-lg navbar-dark py-3" style="height: 6em;   position: relative;
-    background: linear-gradient(80deg, #004280 0, #001a33 100%)
-    ">
-    <div class="container">
- <a class="navbar-brand" href="#">
-    <img src="/added/img/icons/logo.png" class="mr-4" width="50px" alt="">
-    <strong>Online Scholarship Application</strong>
-     {{-- <img  class="mr-4" style="width: 50px;"> --}}
-  </a>
-
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>Home</strong><span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>About Us</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>FAQs</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>Site Map</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>Contact Us</strong></a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto align-items-lg-center">
-      <li class="nav-item mr-0">
-          {{-- <a data-toggle="modal" data-target="#sign-up-modal" class="btn  d-none d-lg-inline-flex text-white" role="button"><strong>Sign up</strong></a> --}}
-         <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-10px;">1</span> 
-        <a href="#"><i class="fa fa-envelope-o"></i></a>
-      </li>
-      <li class="nav-item mr-0">
-          {{-- <a data-toggle="modal" data-target="#sign-up-modal" class="btn  d-none d-lg-inline-flex text-white" role="button"><strong>Sign up</strong></a> --}}
-         <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-10px;">1</span> 
-        <a href="#"><i class="fa fa-globe"></i></a>
-      </li>
-      {{-- <li class="nav-item mr-0">
-          <a data-toggle="modal" data-target="#login-modal" style="width: 8em;  font-size: .90rem;" class="btn btn-sm btn-white btn-rounded " role="button">
-              <i class="fa fa-sign-in"></i>&nbsp <strong>Sign In</strong>
-          </a>
-      </li> --}}
-    </ul>
-  </div>
-</div>
-</nav>
+@include('inc.nav')
 <main>
     <section class="slice">
       <div class="container-fluid">
@@ -97,27 +44,26 @@
           <div class="col-lg-9">
             <div class="card">
               <div class="card-body">
-                <div class="card-title"><div class="boldtx alert alert-primary" role="alert"> <i class="fa fa-user"></i> Parents / Guardian Information</div></div><hr>
-                 <form action="{{ action('FrontendController@storedGuardian') }}"" id="regForm" method="post" enctype="multipart/form-data" class="container">
+                <div class="card-title"><div class="boldtx alert alert-primary" role="alert"> <i class="fa fa-user"></i> Personal Information</div></div><hr>
+                 <form action="{{ action('FrontendController@storedPersonal') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
                  {{csrf_field()}}
                   <div class="container">
-                    
                     <div class="form-row form-group">
                       <div class="col-md-3">
                         <label>Surname <small>(required)</small></label>
-                        <input type="text" class="form-control" name="surname" id="surname" placeholder="Surname">
+                        <input type="text" class="form-control" name="surname" id="surname" placeholder="Surname" value="{{Auth::user()->surname}}">
                       </div>
                       <div class="col-md-3">
                         <label>First Name <small>(required)</small></label>
-                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name">
+                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" value="{{Auth::user()->first_name}}">
                       </div>
                       <div class="col-md-3">
                         <label>Middle Name <small>(required)</small></label>
-                        <input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Middle Name">
+                        <input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Middle Name" value="{{Auth::user()->middle_name}}">
                       </div>
                       <div class="col-md-3">
-                        <label>Suffix <small>(required)</small> </label>
-                        <input type="text" class="form-control" name="suffix" id="suffix" placeholder="Suffix (e.g., Jr. Sr. III)">
+                        <label>Suffix <small>(required)</small></label>
+                        <input type="text" class="form-control" name="suffix" id="suffix" placeholder="Suffix (e.g., Jr. Sr. III)" value="{{Auth::user()->suffix}}">
                       </div>
                     </div>
                     <div class="form-row form-group">
@@ -130,6 +76,20 @@
                         </select>
                         </div>
                         <div class="col-md-3">
+                            <label for="nationality">Nationality <small>(required)</small></label>
+                            <select name="nationality" id="nationality" class="form-control " required>
+                              <option value="" selected disabled>--Select--</option>
+                              <option value="Filipino">Filipino</option>
+                              <option value="Foreigner">Foreigner</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                          <label>Religion <small>(required)</small></label>
+                          <select name="religion" id="religion" class="form-control "  required>
+                            <option value="" selected disabled>--Select--</option>
+                          </select>
+                        </div>
+                        <div class="col-md-3">
                           <label for="civils">Civil Status <small>(required)</small></label>
                           <select name="civil_status" id="civil_status" class="form-control "  required>
                             <option value="" selected disabled>--Select--</option>
@@ -138,14 +98,6 @@
                             <option value="Separated">Separated</option>
                             <option value="Widowed">Widowed</option>
                           </select>
-                        </div>
-                        <div class="col-md-3">
-                          <label for="nationality">Nationality <small>(required)</small></label>
-                          <input type="text" name="nationality" id="nationality" class="form-control"  placeholder="Nationality" required/>
-                        </div>
-                        <div class="col-md-4">
-                          <label>Occupation <small>(required)</small></label>
-                          <input type="text" name="occupation" id="occupation" class="form-control"  placeholder="Occupation" required/>
                         </div>
                       </div>
                       <div class="form-row form-group">
@@ -171,50 +123,37 @@
                       </div>
                       <div class="form-row form-group">
                         <div class="col-md-3">
-                          <label for="mobile_no">Mobile Number <small>(required)</small></label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">+63</span>
-                            </div>
-                            <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required/>
-                          </div> 
-                        </div>
-                        <div class="col-md-3">
                           <label for="bdate">Birth Date <small>(required)</small></label>
-                          <input type="date" name="bday" id="bday" class="form-control" data-provide="datepicker" required/>
+                          <input type="date" name="bday" id="bday" class="form-control" data-provide="datepicker" value="{{Auth::user()->bday}}" required/>
                         </div>
-                        <div class="col-md-4">
-                          <label>Relationship <small>(required)</small></label>
-                          <select name="relationship" id="relationship" class="form-control">
-                            <option value="" selected disabled>--Select--</option>
-                            <option value="Father">Father</option>
-														<option value="Mother">Mother</option>
-														<option value="Brother">Brother</option>
-														<option value="Sister">Sister</option>
-														<option value="Grandfather">Grandfather</option>
-														<option value="Grandmother">Grandmother</option>
-														<option value="Uncle">Uncle</option>
-														<option value="Aunt">Aunt</option>
-														<option value="Other">Other</option>
-                          </select>
+                        <div class="col-md-6">
+                          <label for="bplace">Birth Place <small>(required)</small></label>
+                          <input type="text" name="bplace" id="bplace" class="form-control" placeholder="Birth Place"  required/>
                         </div>
                       </div>
-                      <div class="row form-group">
+                      <div class="form-row form-group">
                         <div class="col-md-6">
-                          <a href="/profile" class="btn btn-secondary">Back to My Profile</a>
+                          <a href="/profile" class="btn  btn-outline-secondary">Back to My Profile</a>
                         </div>
                         <div class="col-md-6">
                           <input type="submit" class="btn btn-primary pull-right" value="Save Changes"/>  
                         </div>
                       </div>
-                      
-
+                      <div class="ghost">
+                        <input type="hidden" name="gen2" id="gen2" value="{{Auth::user()->gender}}">
+                        <input type="hidden" name="nation" id="nation" value="">
+                      </div>
+                      <div class="ghost"></div>
                     </div>
                   </form>
                 </div>
 
             </div>
           </div>
+
+          {{-- <div class="col-md-3">
+                        
+                      </div> --}}
 
 
 
@@ -237,9 +176,14 @@
 </footer>
 
 </body>
+<script src="{{ URL::asset('data/religion.js') }}" type="text/javascript"></script>
 <script>
-  $(document).ready(function(){
+  
+  
+$(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
+  var gen = $('#gen2').val();
+  document.getElementById('gender').value=gen;
 });
 
 $(document).ready(function(){
@@ -270,6 +214,18 @@ $(document).ready(function(){
     $('#barangay').val('');
   });
 
+});
+
+$(document).ready(function()
+{
+  var gen = $('#gen2').val();
+  document.getElementById('gender').value=gen;
+
+  document.getElementById('nationality').value="{{$personal->nationality}}";
+  document.getElementById('religion').value="{{$personal->religion}}";
+  document.getElementById('civil_status').value="{{$personal->civil_status}}";
+  document.getElementById('street').value="{{$personal->street}}";
+  document.getElementById('bplace').value="{{$personal->birth_place}}";
 });
 
 

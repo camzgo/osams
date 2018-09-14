@@ -47,10 +47,10 @@
         @guest
             
             <li class="nav-item mr-0">
-                <a  class="btn d-none d-lg-inline-flex text-white" role="button" href="{{ route('register') }}"><strong>Sign up</strong></a>
+                <a data-toggle="modal" data-target="#sign-up-modal" class="btn d-none d-lg-inline-flex text-white" role="button" href="{{ route('register') }}"><strong>Sign up</strong></a>
             </li>
             <li class="nav-item mr-0">
-                <a style="width: 8em;  font-size: .90rem;" class="btn btn-sm btn-white btn-rounded " role="button" href="{{ route('login') }}"><i class="fa fa-sign-in"></i>&nbsp; <strong>Sign In</strong></a>
+                <a data-toggle="modal" data-target="#login-modal" style="width: 8em;  font-size: .90rem;" class="btn btn-sm btn-white btn-rounded " role="button" href="{{ route('login') }}"><i class="fa fa-sign-in"></i>&nbsp; <strong>Sign In</strong></a>
             </li>
         @else
             <li class="nav-item dropdown">
@@ -66,7 +66,7 @@
                     </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
+                        @CSRF
                     </form>
                 </div>
             </li>
