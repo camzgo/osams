@@ -622,35 +622,35 @@
     // history.pushState("", document.title, querystring);
     });
  $(document).on('click', '.ncw', function(){
-    $(this).attr("href", "/apply/scholarship-category/ncw/"+sid);
+    $(this).attr("href", "/admin/apply/scholarship-category/ncw/"+sid);
  });
 
  $(document).on('click', '.gad', function(){
-    $(this).attr("href", "/apply/scholarship-category/gad/"+sid);
+    $(this).attr("href", "/admin/apply/scholarship-category/gad/"+sid);
  });
 
  $(document).on('click', '.public', function(){
-    $(this).attr("href", "/apply/scholarship-category/graduate-public/"+sid);
+    $(this).attr("href", "/admin/apply/scholarship-category/graduate-public/"+sid);
  });
 
  $(document).on('click', '.private', function(){
-    $(this).attr("href", "/apply/scholarship-category/graduate-private/"+sid);
+    $(this).attr("href", "/admin/apply/scholarship-category/graduate-private/"+sid);
  });
 
  $(document).on('click', '.oldnew', function(){
-    $(this).attr("href", "/apply/scholarship-category/vg-oldnew/"+sid);
+    $(this).attr("href", "/admin/apply/scholarship-category/vg-oldnew/"+sid);
  });
 
  $(document).on('click', '.dhvtsu', function(){
-    $(this).attr("href", "/apply/scholarship-category/vg-dhvtsu/"+sid);
+    $(this).attr("href", "/admin/apply/scholarship-category/vg-dhvtsu/"+sid);
  });
 
  $(document).on('click', '.honors', function(){
-    $(this).attr("href", "/apply/scholarship-category/honor-rank/"+sid);
+    $(this).attr("href", "/admin/apply/scholarship-category/honor-rank/"+sid);
  });
 
  $(document).on('click', '.pcl', function(){
-    $(this).attr("href", "/apply/scholarship-category/pcl/"+sid);
+    $(this).attr("href", "/admin/apply/scholarship-category/pcl/"+sid);
  });
     
     

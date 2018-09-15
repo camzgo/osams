@@ -11,62 +11,7 @@
     <script src="{{asset('js/app.js')}}"></script>
 </head>
 
- 
-    <nav class="navbar navbar-expand-lg navbar-dark py-3" style="height: 6em;   position: relative;
-    background: linear-gradient(80deg, #004280 0, #001a33 100%)
-    ">
-    <div class="container">
- <a class="navbar-brand" href="#">
-    <img src="/added/img/icons/logo.png" class="mr-4" width="50px" alt="">
-    <strong>Online Scholarship Application</strong>
-     {{-- <img  class="mr-4" style="width: 50px;"> --}}
-  </a>
-
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>Home</strong><span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>About Us</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>FAQs</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>Site Map</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>Contact Us</strong></a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto align-items-lg-center">
-      <li class="nav-item mr-0">
-          {{-- <a data-toggle="modal" data-target="#sign-up-modal" class="btn  d-none d-lg-inline-flex text-white" role="button"><strong>Sign up</strong></a> --}}
-        <a href="#" class="nav-link">
-          <span class="badge badge-success badge-pill badge-navbar" style="float:right; margin-bottom:-12px;">10</span>
-          <i class="fa fa-envelope"></i>
-        </a>
-      </li>
-      <li class="nav-item mr-0">
-          {{-- <a data-toggle="modal" data-target="#sign-up-modal" class="btn  d-none d-lg-inline-flex text-white" role="button"><strong>Sign up</strong></a> --}}
-         {{-- <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-10px;">1</span> 
-        <a href="#"><i class="fa fa-globe"></i></a> --}}
-      </li>
-      {{-- <li class="nav-item mr-0">
-          <a data-toggle="modal" data-target="#login-modal" style="width: 8em;  font-size: .90rem;" class="btn btn-sm btn-white btn-rounded " role="button">
-              <i class="fa fa-sign-in"></i>&nbsp <strong>Sign In</strong>
-          </a>
-      </li> --}}
-    </ul>
-  </div>
-</div>
-</nav>
+@include('inc.nav')
 <main>
     <section class="slice">
       <div class="container-fluid">
@@ -100,11 +45,12 @@
             <div class="card">
               <div class="card-body">
                 <div class="card-title"><div class="boldtx alert alert-info" role="alert"><i class="fa fa-graduation-cap"></i> My Scholarship</div></div><hr>
-                <a class="card " href="/fronte/scholarship/details">
+                @if($ck=="show")
+                <a class="card " href="scholarship/details">
                   <div class="card-body" style="weight: 100% height: 500px;">
                     <div class="row">
                       <div class="col-md-8">
-                        <h5 class="boldtx"><strong>NCW</strong></h5>
+                        <h5 class="boldtx"><strong>{{$scholar->scholarship_name}}</strong></h5>
                       </div>
                       <div class="col-md-4">
                         <h4><span class="badge badge-warning text-white pull-right">Pending</span></h4>
@@ -115,7 +61,9 @@
 
                   </div>
                 </a>
-                    
+                @else
+                <h4>You don't have application!</h4>
+                    @endif
               </div>
             </div>
           </div>

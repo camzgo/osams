@@ -8,7 +8,12 @@ use App\Personal;
 use App\Guardian;
 use App\Education;
 use App\Municipality;
+use App\Eefapgv;
+use App\Eefap;
+use App\Pcl;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class FrontendController extends Controller
 {
@@ -33,23 +38,14 @@ class FrontendController extends Controller
     }
     function profile()
     {
-        $personal = DB::table('personal_info')->where('applicant_id', Auth::user()->id)->first();
+        $tak = DB::table('personal_info')->where('applicant_id', Auth::user()->id)->first();
         $guardian = DB::table('guardian_info')->where('applicant_id', Auth::user()->id)->first();
         $education = DB::table('education_info')->where('applicant_id', Auth::user()->id)->first();
 
-        $perUrl = array (); 
+        
         $gurUrl = array ();
         $eduUrl = array ();
-        if($personal)
-        {
-            $perUrl[] = 'profile/personal-information/edit';
-            $perUrl[] ="Edit Profile";
-        }
-        else
-        {
-           $perUrl = 'profile/personal-information';
-           $pertxt ="Complete My Profile";
-        }
+        $takti =  array();
 
         if($guardian)
         {
@@ -73,7 +69,18 @@ class FrontendController extends Controller
             $eduUrl[] = 'Where do you study?';
         }
 
-        return view('front.profile')->with('perUrl', $perUrl)->with('gurUrl', $gurUrl)->with('eduUrl', $eduUrl);
+        if($tak)
+        {
+            $takti[] = "/profile/personal-information/edit";
+            $takti[] = "Edit Profile";
+        }
+        else
+        {
+            $takti[] = "/profile/personal-information";
+            $takti[] = "Complete My Profile";
+        }
+
+        return view('front.profile')->with('takti', $takti)->with('gurUrl', $gurUrl)->with('eduUrl', $eduUrl);
     }
     function myProfile()
     {
@@ -90,12 +97,52 @@ class FrontendController extends Controller
 
     function scholarship()
     {
-        return view('front.scholarship');
+        $ck;
+        $applicant = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
+
+        
+        if($applicant)
+        {
+            $ck="show";
+            $scholar = DB::table('scholarships')->where('id', $applicant->scholar_id)->first();
+        }
+        else
+        {
+            $ck="none";
+        }
+        return view('front.scholarship')->with('ck', $ck)->with('scholar', $scholar);
     }
 
     function sdetails()
     {
-        return view('front.sdetails');
+        $applicant = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
+
+        
+        if($applicant)
+        {
+           $scholar = DB::table('scholarships')->where('id', $applicant->scholar_id)->first();
+
+           if($scholar->type == "eefap")
+           {
+               $eefap = DB::table('eefap')->where('application_id', $applicant->id)->first();
+               return view('front.sdetails')->with('eefap', $eefap)->with('applicant', $applicant)->with('scholar', $scholar);
+           }
+           else if($scholar->type == "eefap-gv")
+           {
+               $eefapgv = DB::table('eefapgv')->where('application_id', $applicant->id)->first();
+               return view('front.sdetails-eefapgv')->with('eefapgv', $eefapgv)->with('applicant', $applicant)->with('scholar', $scholar);
+           }
+           else if($scholar->type == "pcl")
+           {
+               $pcl = DB::table('pcl')->where('application_id', $applicant->id)->first();
+               return view('front.sdetails-pcl')->with('pcl', $pcl)->with('applicant', $applicant)->with('scholar', $scholar);
+           }
+        }
+        else
+        {
+            
+        }
+        
     }
     
     function guardian()
@@ -285,5 +332,221 @@ class FrontendController extends Controller
             ]);
             return redirect ('/profile');
         }
+    }
+
+    function accountEdit(Request $request)
+    {
+        $this -> validate($request, [
+            'mobile_no' =>'required',
+            'email' => 'required|string|email|max:255|unique:users'
+            // 'cover_image' => 'image|nullable|max:1999'
+        ]);	
+
+        $user = User::find(Auth::user()->id);
+        $user->email = $request->get('email1');
+        $user->mobile_number = $request->get('mobile_no');
+        $user->save();
+        return redirect('/account');
+    }
+
+    function changePassword(Request $request)
+    {
+        // $cur = Hash::make('register');
+        // if($cur == Auth::user()->password)
+        // {
+        //     return 'Success!';
+        // }
+        // return $cur.'----->>>>  $2y$10$KS9I/Myw4Q1FJ0jYgsn86.q7iUkRcOg0RoQC/I6tiTBTE1U6s1NmC';
+
+        
+        if (!(Hash::check($request->get('current'), Auth::user()->password))) {
+            // The passwords matches
+            return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
+        }
+        if(strcmp($request->get('current'), $request->get('new_password')) == 0){
+            //Current password and new password are same
+            return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
+        }
+
+        $validatedData = $request->validate([
+            'current' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+ 
+        //Change Password
+        $user = Auth::user();
+        $user->password = bcrypt($request->get('new_password'));
+        $user->save();
+ 
+        return redirect()->back()->with("success","Password changed successfully !");
+
+        
+
+        // $user = User::find(Auth::user()->id);
+        // $user->password = Hash::make($request->get('new_password'));
+        // $user->save();
+    }
+
+    
+    function viewEefapgv()
+    {
+        $municipal_list = DB::select('select municipality from `munbar` group by municipality');
+        $eefapgv = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->first();
+        return view('front.eefapgv-view2')->with('eefapgv', $eefapgv)->with('municipal_list', $municipal_list);
+    }
+
+    function viewEefap()
+    {
+        $municipal_list = DB::select('select municipality from `munbar` group by municipality');
+        $eefap = DB::table('eefap')->where('applicant_id', Auth::user()->id)->first();
+        return view('front.eefap-view')->with('eefap', $eefap)->with('municipal_list', $municipal_list);
+    }
+
+    function viewPcl()
+    {
+        $district_list = DB::select('select district FROM `munbar` GROUP BY district');
+        $pcl = DB::table('pcl')->where('applicant_id', Auth::user()->id)->first();
+        return view('front.pcl-view')->with('pcl', $pcl)->with('district_list', $district_list);
+    }
+
+
+    function storedEefapgv(Request $request)
+    {
+        $eefapgvId = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->first();
+        $id = $eefapgvId->id;
+        
+        $eefapgv = Eefapgv::find($id);
+        $eefapgv->surname = $request->get('surname');
+        $eefapgv->first_name = $request->get('first_name');
+        $eefapgv->middle_name = $request->get('middle_name');
+        $eefapgv->suffix = $request->get('suffix');
+        $eefapgv->mobile_number = $request->get('mobile_no');
+        $eefapgv->municipality = $request->get('municipality');
+        $eefapgv->barangay = $request->get('barangay');
+        $eefapgv->street = $request->get('street');
+        $eefapgv->college_name = $request->get('college_name');
+        $eefapgv->college_address = $request->get('college_address');
+        $eefapgv->course = $request->get('course');
+        $eefapgv->major = $request->get('major');
+        $eefapgv->program_type = $request->get('educ_prog');
+        $eefapgv->year_level = $request->get('yr_lvl');
+        $eefapgv->graduating = $request->get('grad');
+        $eefapgv->general_average = $request->get('gen_average');
+        $eefapgv->spes = $request->get('spes');
+        $eefapgv->awards ='Highest Honors';
+        $eefapgv->save();
+        return redirect ('/scholarship/details');
+
+    }
+
+    function storedEefap(Request $request)
+    {
+        $eefapId = DB::table('eefap')->where('applicant_id', Auth::user()->id)->first();
+        $id = $eefapId->id;
+        
+        $eefap = Eefap::find($id);
+        $eefap->surname = $request->get('surname');
+        $eefap->first_name = $request->get('first_name');
+        $eefap->middle_name = $request->get('middle_name');
+        $eefap->suffix = $request->get('suffix');
+        $eefap->mobile_number = $request->get('mobile_no');
+        $eefap->municipality = $request->get('municipality');
+        $eefap->barangay = $request->get('barangay');
+        $eefap->street = $request->get('street');
+        $eefap->college_name = $request->get('college_name');
+        $eefap->college_address = $request->get('college_address');
+        $eefap->course = $request->get('course');
+        $eefap->major = $request->get('major');
+        $eefap->program_type = $request->get('educ_prog');
+        $eefap->year_level = $request->get('yr_lvl');
+        $eefap->graduating = $request->get('grad');
+        $eefap->general_average = $request->get('gen_average');
+        $eefap->spes = $request->get('spes');
+        $eefap->fb_account = $request->get('fb_account');
+        $eefap->gsurname = $request->get('gsurname');
+        $eefap->gfirst_name = $request->get('gfirst_name');
+        $eefap->gmiddle_name = $request->get('gmiddle_name');
+        $eefap->gsuffix = $request->get('gsuffix');
+        $eefap->gmobile_number = $request->get('gmobile_no');
+        $eefap->save();
+        return redirect ('/scholarship/details');
+
+    }
+
+    function storedPcl(Request $request)
+    {
+        $pclId = DB::table('pcl')->where('applicant_id', Auth::user()->id)->first();
+        $id = $pclId->id;
+        
+        $pcl = Pcl::find($id);
+        $pcl->surname = $request->get('surname');
+        $pcl->first_name = $request->get('first_name');
+        $pcl->middle_name = $request->get('middle_name');
+        $pcl->suffix = $request->get('suffix');
+        $pcl->mobile_number = $request->get('mobile_no');
+        $pcl->district = $request->get('district');
+        $pcl->municipality = $request->get('municipality');
+        $pcl->barangay = $request->get('barangay');
+        $pcl->street = $request->get('street');
+        $pcl->school_enrolled = $request->get('college_name');
+        $pcl->course = $request->get('course');
+        $pcl->year_level = $request->get('yr_lvl');
+        $pcl->fsurname = $request->get('fsurname');
+        $pcl->ffirst_name = $request->get('ffirst_name');
+        $pcl->fmiddle_name = $request->get('fmiddle_name');
+        $pcl->fsuffix = $request->get('fsuffix');
+        $pcl->foccupation = $request->get('foccupation');
+        $pcl->msurname = $request->get('msurname');
+        $pcl->mfirst_name = $request->get('mfirst_name');
+        $pcl->mmiddle_name = $request->get('mmiddle_name');
+        $pcl->msuffix = $request->get('msuffix');
+        $pcl->moccupation = $request->get('moccupation');
+        $pcl->address = $request->get('gaddress');
+        $pcl->emergency = $request->get('emergency');
+        $pcl->emobile_number = $request->get('emobile_no');
+        $pcl->gender  = $request->get('gender');
+        $pcl->birthdate = $request->get('bday');
+        $pcl->nationality = $request->get('nationality');
+        $pcl->religion = $request->get('religion');
+        $pcl->civil_status = $request->get('civil_status');
+        $pcl->birth_place = $request->get('birth_place');
+        $pcl->save();
+        return redirect ('/scholarship/details');
+
+    }
+
+
+    function gvfetch(Request $request)
+    {
+        $select2 = $request->get('select2');
+        $value2 = $request->get('value2');
+        $dependent2 = $request->get('dependent2');
+        $data = DB::table('munbar')
+        ->where($select2, $value2)
+        ->groupBy($dependent2)
+        ->get();
+        $output = '<option value="" selected disabled>--Select--</option>';
+        foreach($data as $row)
+        {
+            $output .= '<option value="'.$row->$dependent2.'">'.$row->$dependent2.'</option>';
+        }
+        echo $output;
+    }
+
+    function pclfetch(Request $request)
+    {
+        $select2 = $request->get('select');
+        $value2 = $request->get('value');
+        $dependent2 = $request->get('dependent');
+        $data = DB::table('munbar')
+        ->where($select2, $value2)
+        ->groupBy($dependent2)
+        ->get();
+        $output = '<option value="" selected disabled>--Select--</option>';
+        foreach($data as $row)
+        {
+            $output .= '<option value="'.$row->$dependent2.'">'.$row->$dependent2.'</option>';
+        }
+        echo $output;
     }
 }

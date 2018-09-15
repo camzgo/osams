@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2018 at 11:06 PM
+-- Generation Time: Sep 15, 2018 at 08:56 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -46,7 +46,9 @@ CREATE TABLE `account_type` (
 --
 
 INSERT INTO `account_type` (`id`, `account_name`, `account_desc`, `file_maintenance`, `tracking`, `transactions`, `utilities`, `reports`, `created_at`, `updated_at`) VALUES
-(1, 'Sample', ' sfdsfsdfsdfsdfsfdsfdsfdfdsfdsfdsfsfsfsdfsdfsdfdsfsdfsdfs', 'Deny', 'Grant', 'Grant', 'Deny', 'Grant', NULL, NULL);
+(2, 'Admin', 'admin', 'Grant', 'Grant', 'Grant', 'Grant', 'Grant', '2018-09-09 01:42:54', '2018-09-09 01:48:08'),
+(3, 'Another', 'another', 'Grant', 'Deny', 'Deny', 'Grant', 'Deny', '2018-09-09 02:38:46', '2018-09-09 02:38:46'),
+(4, 'Encoder', 'Encoder', 'Deny', 'Deny', 'Grant', 'Deny', 'Grant', '2018-09-09 02:57:58', '2018-09-09 02:57:58');
 
 -- --------------------------------------------------------
 
@@ -76,7 +78,8 @@ CREATE TABLE `admins` (
 
 INSERT INTO `admins` (`id`, `email`, `password`, `user_photo`, `user_isdel`, `remember_token`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `suffix`, `account_id`) VALUES
 (1, 'admin@mail.com', '$2y$10$xtc5OEr7YlfCe9BAAQaZ7u7NEy03BRKmBaM5AERcY6g467n8qS/3u', 'none', '0', 'Vj5xScMUrHQjEex0fHkhw2Cj5eFVoQYayWtSx9cuTlCM4dHgBd71jYgLDPgj', '2018-08-17 06:37:27', '2018-08-17 06:37:27', 'admin', 'admin', '', ' ', 0),
-(4, 'sean@mail.com', '$2y$10$Cuu7tI0WhMN7QnYyKRHype31iPCO3v4.Wkm2uSLcWSj9/csTuwPJu', 'None', '0', NULL, '2018-08-29 22:33:20', '2018-08-29 22:33:20', 'Chong', 'Sean', 'Go', ' ', 0);
+(4, 'sean@mail.com', '$2y$10$Cuu7tI0WhMN7QnYyKRHype31iPCO3v4.Wkm2uSLcWSj9/csTuwPJu', 'None', '0', NULL, '2018-08-29 22:33:20', '2018-08-29 22:33:20', 'Chong', 'Sean', 'Go', ' ', 0),
+(5, 'fdd@mail.com', '$2y$10$goByD7gybklCsAs0AsuNKeVakCwruRTkSTMyWNClPqGkYczZnm0Ou', 'None', '0', NULL, '2018-09-09 02:43:18', '2018-09-09 02:56:21', 'Sample', 'Sample', NULL, NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -112,7 +115,8 @@ INSERT INTO `admins_info` (`id`, `gender`, `birthdate`, `nationality`, `religion
 (5, 'Male', '2018-08-29', 'Filipino', 'Iglesia Ni Cristo', 'Single', '9111111111', 'MACABEBE', 'San Gabriel (Poblacion)', 'sssdwwewwqewewq', 1, '2018-08-28 23:43:09', '2018-08-28 23:43:09'),
 (6, 'Male', '2018-08-30', 'Filipino', 'Iglesia Ni Cristo', 'Single', '9999999999', 'APALIT', 'Balucuc (Nuestra Señora de la Divina Pastora)', 'dfdfdf', 1, '2018-08-29 21:50:55', '2018-08-29 21:50:55'),
 (7, 'Male', '2018-08-30', 'Filipino', 'Roman Catholic', 'Single', '9999999999', 'CANDABA', 'Bambang', 'Example Street', 3, '2018-08-29 22:22:50', '2018-08-29 22:22:50'),
-(8, 'Female', '2018-08-30', 'Foreigner', 'Jesus Is Lord Church Worldwide', 'Single', '9172553422', 'CITY OF SAN FERNANDO (Capital)', 'Lourdes', 'Example Street', 4, '2018-08-29 22:33:20', '2018-08-29 22:33:20');
+(8, 'Female', '2018-08-30', 'Foreigner', 'Jesus Is Lord Church Worldwide', 'Single', '9172553422', 'CITY OF SAN FERNANDO (Capital)', 'Lourdes', 'Example Street', 4, '2018-08-29 22:33:20', '2018-08-29 22:33:20'),
+(9, 'Male', '2018-09-09', 'Filipino', 'Roman Catholic', 'Single', '0000000000', 'ANGELES CITY', 'Balibago', 'rwrwrwerwerwer', 5, '2018-09-09 02:43:18', '2018-09-09 02:43:18');
 
 -- --------------------------------------------------------
 
@@ -163,9 +167,10 @@ CREATE TABLE `application` (
 --
 
 INSERT INTO `application` (`id`, `application_status`, `renew`, `barcode_image`, `barcode_number`, `applicant_id`, `scholar_id`, `application_isdel`, `created_at`, `updated_at`) VALUES
-(1, 'Disapproved', 0, 'NONE', 'PjGoU6prHf', 3, 6, NULL, '2018-09-08 07:52:40', '2018-09-08 10:08:49'),
+(1, 'Pending', 0, 'NONE', 'PjGoU6prHf', 3, 6, NULL, '2018-09-08 07:52:40', '2018-09-08 10:08:49'),
 (2, 'Approved', 0, 'NONE', '8wUpDQauxp', 1, 4, NULL, '2018-09-08 08:01:28', '2018-09-08 09:01:25'),
-(3, 'Approved', 0, 'NONE', 'dQ6cmjqlfK', 2, 8, NULL, '2018-09-08 08:04:54', '2018-09-08 09:01:44');
+(3, 'Approved', 0, 'NONE', 'dQ6cmjqlfK', 2, 8, NULL, '2018-09-08 08:04:54', '2018-09-08 09:01:44'),
+(4, 'Pending', 0, 'NONE', '0zjPuNEWfP', 5, 6, NULL, '2018-09-15 09:49:46', '2018-09-15 09:49:46');
 
 -- --------------------------------------------------------
 
@@ -190,6 +195,32 @@ CREATE TABLE `approval_date` (
 INSERT INTO `approval_date` (`id`, `date_approved`, `status`, `applicant_id`, `application_id`, `scholarship_id`, `employee_id`) VALUES
 (1, '2018-09-08', 'Approved', 1, 2, 4, 0),
 (2, '2018-09-08', 'Approved', 2, 3, 8, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `education_info`
+--
+
+CREATE TABLE `education_info` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `course` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `yr_lvl` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `yr_entered` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `duration` int(11) NOT NULL,
+  `college_name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `college_address` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `applicant_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `education_info`
+--
+
+INSERT INTO `education_info` (`id`, `course`, `yr_lvl`, `yr_entered`, `duration`, `college_name`, `college_address`, `applicant_id`, `created_at`, `updated_at`) VALUES
+(1, 'Bachelor of Science in Information System', '2nd', '2017', 4, 'Our Lady of Fatima University', 'San Fernando, Pampanga', 5, NULL, '2018-09-14 12:17:29');
 
 -- --------------------------------------------------------
 
@@ -234,7 +265,7 @@ CREATE TABLE `eefap` (
 --
 
 INSERT INTO `eefap` (`id`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `fb_account`, `gsurname`, `gfirst_name`, `gmiddle_name`, `gsuffix`, `gmobile_number`, `municipality`, `barangay`, `street`, `college_name`, `college_address`, `course`, `major`, `program_type`, `year_level`, `graduating`, `general_average`, `spes`, `scholarship_id`, `applicant_id`, `application_id`, `created_at`, `updated_at`) VALUES
-(1, 'Ocampo', 'Albert', 'Gold', 'Jr.', '9051241420', 'ssdsd', 'dsds', 'sds', 'ss', NULL, '0000000000', 'CITY OF SAN FERNANDO (Capital)', 'Maimpis', NULL, 'fdf', 'dfdf', 'dfd', 'df', '2 Years Course', 'dfd', 'YES', 'df', 'NO', 4, 1, 2, NULL, NULL);
+(1, 'Ocampo', 'Albert', 'Gold', 'Jr.', '9051241420', 'facebook.com/asadas', 'dsds', 'sds', 'ss', NULL, '1111111111', 'MEXICO', 'Parian (Poblacion)', 'example street', 'STI', 'JASA', 'dfd', 'General', '2 Years Course', '4th', 'YES', 'df', 'YES', 4, 1, 2, NULL, '2018-09-15 09:38:49');
 
 -- --------------------------------------------------------
 
@@ -274,7 +305,7 @@ CREATE TABLE `eefapgv` (
 --
 
 INSERT INTO `eefapgv` (`id`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `municipality`, `barangay`, `street`, `college_name`, `college_address`, `course`, `major`, `program_type`, `year_level`, `graduating`, `general_average`, `spes`, `awards`, `scholarship_id`, `applicant_id`, `application_id`) VALUES
-(1, NULL, NULL, 'Ocampo', 'Camille', 'Fierro', NULL, '9051124520', 'CITY OF SAN FERNANDO (Capital)', 'Maimpis', 'dfd', 'dfd', 'dfd', 'gfhf', 'ghg', 'Bachelor\'s Degree', 'df', 'NO', 'gg', 'NO', 'Highest Honors', 8, 2, 3);
+(1, NULL, '2018-09-15 08:58:32', 'Ocampo', 'Camille', 'Fierro', NULL, '9051124520', 'MEXICO', 'Parian (Poblacion)', 'dfd', 'STi College', 'JASA', 'BSIT', 'General', 'Bachelor\'s Degree', '4th', 'YES', 'gg', 'YES', 'Highest Honors', 8, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -296,7 +327,44 @@ CREATE TABLE `faquestions` (
 --
 
 INSERT INTO `faquestions` (`id`, `question`, `answer`, `faq_isdel`, `created_at`, `updated_at`) VALUES
-(2, 'What is the difference?', 'There is no difference.', 0, NULL, '2018-09-08 10:19:04');
+(2, 'What is the difference?', 'There is no difference.', 0, NULL, '2018-09-08 10:19:04'),
+(3, 'Sample 1', 'sampldfdsfdsfdfsfsdfdsfdsfsdfsdfsdfsdfs', 0, '2018-09-09 10:35:40', '2018-09-09 10:35:40'),
+(4, 'Sample 2', 'fsdffsfdsfgfgsfdvcbvjhkffdgfsdffsfdsfgfgsfdvcbvjhkffdgfsdffsfdsfg', 0, '2018-09-09 10:37:45', '2018-09-09 10:37:58'),
+(5, 'Sample 3', 'dfdsfsdfdsfdsfdsdfsdfsdfsdfdsfdsfdsfsdf', 0, '2018-09-09 10:40:13', '2018-09-09 10:40:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guardian_info`
+--
+
+CREATE TABLE `guardian_info` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `surname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `first_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `middle_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `suffix` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile_number` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nationality` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `occupation` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `civil_status` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `municipality` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `barangay` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `street` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bday` date NOT NULL,
+  `relationship` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `applicant_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `guardian_info`
+--
+
+INSERT INTO `guardian_info` (`id`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `gender`, `nationality`, `occupation`, `civil_status`, `municipality`, `barangay`, `street`, `bday`, `relationship`, `applicant_id`, `created_at`, `updated_at`) VALUES
+(1, 'Khan', 'Cong', 'Low', NULL, '9172564236', 'Male', 'Chinese', 'Businessman', 'Married', 'CITY OF SAN FERNANDO (Capital)', 'Sindalan', 'example street', '2018-09-15', 'Father', 5, NULL, '2018-09-14 11:40:50');
 
 -- --------------------------------------------------------
 
@@ -330,7 +398,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (43, '2018_09_02_075607_create_eefapgv_table', 10),
 (44, '2018_09_02_075715_create_pcl_table', 10),
 (53, '2018_09_03_192445_create_application_table', 11),
-(54, '2018_09_08_042342_create_approval_date_table', 11);
+(54, '2018_09_08_042342_create_approval_date_table', 11),
+(55, '2018_09_14_151449_create_table_personal_info', 12),
+(56, '2018_09_14_152021_create_table_guardian_info', 12),
+(57, '2018_09_14_153325_create_table_education_info', 12);
 
 -- --------------------------------------------------------
 
@@ -904,7 +975,7 @@ CREATE TABLE `pcl` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `surname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `first_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `middle_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `middle_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `suffix` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile_number` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `district` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -944,7 +1015,36 @@ CREATE TABLE `pcl` (
 
 INSERT INTO `pcl` (`id`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `district`, `municipality`, `barangay`, `street`, `school_enrolled`, `course`, `year_level`, `gender`, `birthdate`, `nationality`, `religion`, `civil_status`, `birth_place`, `fsurname`, `ffirst_name`, `fmiddle_name`, `fsuffix`, `foccupation`, `msurname`, `mfirst_name`, `mmiddle_name`, `msuffix`, `moccupation`, `address`, `emergency`, `emobile_number`, `scholarship_id`, `applicant_id`, `application_id`) VALUES
 (1, NULL, NULL, 'Cong', 'King', 'Ca', NULL, '9172245112', '3rd District', 'MEXICO', 'Nueva Victoria', 'cv', 'dfdfd', 'dfdf', 'df', 'Male', '1998-02-05', 'Filipino', 'The Church of Jesus Christ of Latter-day Saints', 'Single', 'fdsfsdfsdf', 'dfdf', 'dfd', 'fd', NULL, 'dfdf', 'fdf', 'ddfd', 'fd', NULL, 'dfdf', 'dfdfdfd', 'fdfdfd', '9172245112', 6, 3, 4),
-(2, NULL, NULL, 'Cong', 'King', 'Ca', NULL, '9172245112', '1st District', 'ANGELES CITY', 'Agapito del Rosario', 'sample street', 'fdfd', 'dfdf', 'df', 'Male', '1998-02-05', 'Filipino', 'Roman Catholic', 'Single', 'sample birth place', 'fdgdfg', 'dfgfdg', 'gfg', NULL, 'fgf', 'fgfg', 'fgfg', 'fgfg', NULL, 'fgf', 'fgff', 'dfdf', '9172245112', 6, 3, 1);
+(2, NULL, NULL, 'Cong', 'King', 'Ca', NULL, '9172245112', '1st District', 'ANGELES CITY', 'Agapito del Rosario', 'sample street', 'fdfd', 'dfdf', 'df', 'Male', '1998-02-05', 'Filipino', 'Roman Catholic', 'Single', 'sample birth place', 'fdgdfg', 'dfgfdg', 'gfg', NULL, 'fgf', 'fgfg', 'fgfg', 'fgfg', NULL, 'fgf', 'fgff', 'dfdf', '9172245112', 6, 3, 1),
+(3, NULL, '2018-09-15 10:54:05', 'Khan', 'Seng', 'Sy', NULL, '9172516220', '1st District', 'ANGELES CITY', 'Balibago', 'example street', 'STI', 'JASAASA', '2nd', 'Female', '1997-02-02', 'Filipino', 'Roman Catholic', 'Single', 'example bplace', 'wew', 'hew', NULL, NULL, 'dfcvxh', 'ewed', 'dsg', NULL, NULL, 'fhghs', 'qwewe', 'emersfdfdsf', '9172516220', 6, 5, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_info`
+--
+
+CREATE TABLE `personal_info` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `nationality` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `religion` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `civil_status` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `birth_place` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `municipality` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `barangay` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `street` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `applicant_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `personal_info`
+--
+
+INSERT INTO `personal_info` (`id`, `nationality`, `religion`, `civil_status`, `birth_place`, `municipality`, `barangay`, `street`, `applicant_id`, `created_at`, `updated_at`) VALUES
+(1, 'Filipino', 'Roman Catholic', 'Single', 'aa', 'APALIT', 'Balucuc (Nuestra Señora de la Divina Pastora)', 'Example', 5, NULL, '2018-09-14 10:51:17'),
+(2, 'Filipino', 'Roman Catholic', 'Married', 'example birth place', 'MEXICO', 'Parian (Poblacion)', 'example street', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -44965,20 +45065,21 @@ CREATE TABLE `users` (
   `middle_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gender` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `bday` date NOT NULL,
-  `profile_photo` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `applicant_isdel` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `suffix` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mobile_number` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
+  `mobile_number` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profile_photo` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `gender`, `bday`, `profile_photo`, `applicant_isdel`, `suffix`, `mobile_number`) VALUES
-(1, 'gold@mail.com', '$2y$10$XI.K4/qIMsyUQ6Q49.uhuOocu4CyeGxBaZQ59vqCLrRinbig63wi6', 'xKZAF1lmEjUeD4gsyLZeavtUeOqZzVqrnmOHcpJRKxHYzmupseJTGadas0fe', '2018-08-08 06:04:07', '2018-08-16 08:17:54', 'Ocampo', 'Albert', 'Gold', 'Male', '1999-04-04', '0', '0', 'Jr.', '9051241420'),
-(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', NULL, '2018-08-09 15:16:18', '2018-08-16 08:17:58', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', '0', NULL, '9051124520'),
-(3, 'cong@mail.com', '$2y$10$9luqQ659uIm1WurOBMMTQO1d8xFwKNf4CpBbJCV290ALkGLF5UG8K', 'xYd77OqpHEXPD7ZO1bTxfvSrmCBMVCaZPiKlZZbqGFRpjjSoVDD3z5LFUAo1', '2018-08-18 09:12:14', '2018-08-18 09:12:14', 'Cong', 'King', 'Ca', 'Male', '1998-02-05', 'none', '0', NULL, '9172245112');
+INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `gender`, `bday`, `applicant_isdel`, `suffix`, `mobile_number`, `profile_photo`) VALUES
+(1, 'gold@mail.com', '$2y$10$XI.K4/qIMsyUQ6Q49.uhuOocu4CyeGxBaZQ59vqCLrRinbig63wi6', 'zeKL2OPfQLpEjcOYaNklQ3lFTAguL48Vh0sIc2ok85SELLTYyR3mW4kMXOab', '2018-08-08 06:04:07', '2018-08-16 08:17:54', 'Ocampo', 'Albert', 'Gold', 'Male', '1999-04-04', '0', 'Jr.', '9051241420', NULL),
+(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', '0J71wuv2UPY2cGJVP9XrEvB4fom5toIFeF3clKSW1zGZohv8lpojcznn2qx6', '2018-08-09 15:16:18', '2018-08-16 08:17:58', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', NULL, '9051124520', NULL),
+(3, 'cong@mail.com', '$2y$10$9luqQ659uIm1WurOBMMTQO1d8xFwKNf4CpBbJCV290ALkGLF5UG8K', 'xYd77OqpHEXPD7ZO1bTxfvSrmCBMVCaZPiKlZZbqGFRpjjSoVDD3z5LFUAo1', '2018-08-18 09:12:14', '2018-08-18 09:12:14', 'Cong', 'King', 'Ca', 'Male', '1998-02-05', '0', NULL, '9172245112', NULL),
+(5, 'khan@mail.com', '$2y$10$KS9I/Myw4Q1FJ0jYgsn86.q7iUkRcOg0RoQC/I6tiTBTE1U6s1NmC', 'woSI1O7IVZXGwmoRjycgCRjo3igFLwG6PCxHW5aUaxubeV5RbQFCuwxQOKDs', '2018-09-14 05:33:49', '2018-09-14 23:58:18', 'Khan', 'Seng', 'Sy', 'Female', '1997-02-02', '0', NULL, '9172516220', NULL);
 
 --
 -- Indexes for dumped tables
@@ -45022,6 +45123,12 @@ ALTER TABLE `approval_date`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `education_info`
+--
+ALTER TABLE `education_info`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `eefap`
 --
 ALTER TABLE `eefap`
@@ -45040,6 +45147,12 @@ ALTER TABLE `faquestions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `guardian_info`
+--
+ALTER TABLE `guardian_info`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -45055,6 +45168,12 @@ ALTER TABLE `munbar`
 -- Indexes for table `pcl`
 --
 ALTER TABLE `pcl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `personal_info`
+--
+ALTER TABLE `personal_info`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -45114,19 +45233,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `account_type`
 --
 ALTER TABLE `account_type`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `admins_info`
 --
 ALTER TABLE `admins_info`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `announcements`
@@ -45138,13 +45257,19 @@ ALTER TABLE `announcements`
 -- AUTO_INCREMENT for table `application`
 --
 ALTER TABLE `application`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `approval_date`
 --
 ALTER TABLE `approval_date`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `education_info`
+--
+ALTER TABLE `education_info`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `eefap`
@@ -45162,13 +45287,19 @@ ALTER TABLE `eefapgv`
 -- AUTO_INCREMENT for table `faquestions`
 --
 ALTER TABLE `faquestions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `guardian_info`
+--
+ALTER TABLE `guardian_info`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `munbar`
@@ -45180,6 +45311,12 @@ ALTER TABLE `munbar`
 -- AUTO_INCREMENT for table `pcl`
 --
 ALTER TABLE `pcl`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `personal_info`
+--
+ALTER TABLE `personal_info`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -45222,7 +45359,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

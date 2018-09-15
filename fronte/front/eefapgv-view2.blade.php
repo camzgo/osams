@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-  <title>ADMINISTRATOR</title>
-  <!-- CSRF Token -->
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+    <title>Pampanga Capitol | Online Scholarship Application</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   <script src="{{asset('js/app.js')}}"></script>
-  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script> 
-  {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 
   
 </head>
@@ -161,347 +156,33 @@ button:focus {
 
 </style>
 
-<body class="hold-transition sidebar-mini">
-<div class="wrapper" id="app">
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
-    <!-- Left navbar links -->
-    {{-- <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
-      </li>
-    </ul> --}}
-
-    <!-- Right navbar links -->
-     <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fa fa-envelope"></i> 
-          <span class="badge badge-danger navbar-badge" style="font-size: 8px;">10</span>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark py-3" style="height: 6em;   position: relative;
+    background: linear-gradient(80deg, #004280 0, #001a33 100%)">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/added/img/icons/logo.png" class="mr-4" width="50px" alt="">
+            <strong>Online Scholarship Application</strong>
+            {{-- <img  class="mr-4" style="width: 50px;"> --}}
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-             <h1>fjsfj</h1>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fa fa-bell-o"></i>
-          <span class="badge badge-warning navbar-badge" style="font-size: 8px;">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fa fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fa fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fa fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
-            class="fa fa-th-large"></i></a>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="" class="brand-link">
-      <span class="brand-text font-weight-bold" style ="" id="role">ADMINISTRATOR</span>
-    </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{asset('images/user8-128x128.jpg')}}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
-        </div>
-      </div>
+</div>
+</nav>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-dashboard"></i>
-              <p>
-                Dashboard
-              </p>
-            </a>
-          </li>
-           <li class="nav-item">
-            <a href="/tracking" class="nav-link">
-              <i class="nav-icon fa fa-map-marker"></i>
-              <p>
-                Tracking
-              </p>
-            </a>
-          </li>
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-exchange"></i>
-              <p>
-                Transactions
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/reg" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-sign-in nav-icon"></i>
-                  <p>Register</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/apply" class="nav-link active">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-paper-plane nav-icon"></i>
-                  <p>Apply</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/approve" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-check nav-icon"></i>
-                  <p>Approve</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-cog"></i>
-              <p>
-                File Maintenance
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/announcement" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-bullhorn nav-icon"></i>
-                  <p>Announcement</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/applicant" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-user nav-icon"></i>
-                  <p>Applicant</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/application" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-folder nav-icon"></i>
-                  <p>Application</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/faqs" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-question nav-icon"></i>
-                  <p>FAQs</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/scholarship" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-graduation-cap nav-icon"></i>
-                  <p>Scholarship</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/users" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-users nav-icon"></i>
-                  <p>Employee</p>
-                </a>
-              </li>
-              
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-wrench"></i>
-              <p>
-                Utilities
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-history nav-icon"></i>
-                  <p>Audit Log</p>
-                </a>
-              </li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-archive nav-icon"></i>
-                  <p>Archive
-                    <i class="right fa fa-angle-left"></i>
-                  </p>
-                  
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="/archive/announcement" class="nav-link">
-                          &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <i class="fa fa-bullhorn nav-icon"></i>
-                        <p>Announcement</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/archive/applicant" class="nav-link">
-                          &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <i class="fa fa-user nav-icon"></i>
-                        <p>Applicant</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/archive/application" class="nav-link">
-                          &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <i class="fa fa-folder nav-icon"></i>
-                        <p>Application</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/archive/faqs" class="nav-link">
-                          &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <i class="fa fa-question nav-icon"></i>
-                        <p>FAQs</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/archive/users" class="nav-link">
-                          &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <i class="fa fa-users nav-icon"></i>
-                        <p>Employee</p>
-                        </a>
-                    </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-hdd-o nav-icon"></i>
-                  <p>Backup and Restore</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-lock nav-icon"></i>
-                  <p>Level of Access</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-bar-chart"></i>
-              <p>
-                Reports
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p> Master List of Scholars</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p>Scholarship Programs</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p>Application Forms</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-left">
-              <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">Transactions</li>
-              <li class="breadcrumb-item active">Apply</li>
-            </ol>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <a href="/apply" class="btn btn-secondary btn-rounded flt-right"><i class="fa fa-arrow-left"></i> Go Back</a>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+
+
 
     <!-- Main content -->
-     <div class="content">
-      <div class="container-fluid">
+     <div class="content mt-5">
+      <div class="container">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h4 class="boldtx" id="title_scholar"></h4>
+              <h4 class="boldtx"><strong>SCHOLARSHIP APPLICATION</strong></h4>
           </div>
           <div class="card-body">
-    <form action="{{ action('ScholarshipCatController@eefapgvStore') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
+    <form action="{{ action('FrontendController@storedEefapgv') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
       {{csrf_field()}}
 
 
@@ -521,16 +202,16 @@ button:focus {
         </div>
         <div class="row form-group">
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$users->surname}}" required/>
+          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$eefapgv->surname}}" required/>
           </div>
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$users->first_name}}" required/>
+          <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$eefapgv->first_name}}" required/>
           </div>
           <div class = "col-md-2">
-          <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$users->middle_name}}"/>
+          <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$eefapgv->middle_name}}"/>
           </div>
           <div class = "col-md-2">
-          <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$users->suffix}}"/>
+          <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$eefapgv->suffix}}"/>
           </div>
         </div>
         <div class="row form-group">
@@ -551,23 +232,19 @@ button:focus {
           </div>
           <div class="col-md-6">
             <label for="street">Street</label>
-            <input type="text" class="form-control" id="street" name="street" placeholder='(Street, Village Subdivision)'/>
+            <input type="text" class="form-control" id="street" name="street" value="{{$eefapgv->street}}" placeholder='(Street, Village Subdivision)'/>
           </div>
         </div>
          <div class="row form-group">
-          <div class="col-md-3">
+          <div class="col-md-4">
             <label for="mobile_no">* Mobile Number</label>
             <div class="input-group">
               <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+63</span>
               </div>
-            <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required value="{{$users->mobile_number}}"/>
+            <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required value="{{$eefapgv->mobile_number}}"/>
             </div>
             
-          </div>
-          <div class="col-md-4">
-            <label for="email">* Facebook Account</label>
-            <input type="text" class="form-control req" id="fb_account" name="fb_account" placeholder='facebook.com/username' required/>
           </div>
         </div>
 
@@ -588,29 +265,34 @@ button:focus {
         <div class="row form-group">
             <div class="col-md-5">
                 <label>* College/University Name <small>(No Abbreviation)</small></label>
-                <input name="college_name" type="text" class="form-control req" placeholder="College/University Name"/>
+                <input name="college_name" type="text" class="form-control req" value="{{$eefapgv->college_name}}" placeholder="College/University Name"/>
             </div>
             <div class="col-md-5">
                 <label>* College/University Address</label>
-                <input name="college_address" type="text" class="form-control req" placeholder ="(Building no., Street, City Municipality, Province)">
+                <input name="college_address" type="text" class="form-control req" value="{{$eefapgv->college_address}}"  placeholder ="(Building no., Street, City Municipality, Province)">
             </div>
             <div class="col-md-2">
                 <label>* Year Level</label>
-                <input name="yr_lvl" type="text" class="form-control req" placeholder ="Year Level">
+                <div class="input-group">
+                  <input name="yr_lvl" type="text" class="form-control req"  value="{{$eefapgv->year_level}}" placeholder ="1st">
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon1">YEAR</span>
+                  </div>
+                </div>
             </div>
         </div>
         <div class="row form-group">
             <div class="col-md-4">
                 <label>* Course/Program <small>(No Abbreviation)</small></label>
-                <input name="course" type="text" class="form-control req" placeholder ="Course/Program">
+                <input name="course" type="text" class="form-control req" value="{{$eefapgv->course}}" placeholder ="Course/Program">
             </div>
             <div class="col-md-3">
                 <label>* Major <small>(No Abbreviation)</small></label>
-                <input name="major" type="text" class="form-control req" placeholder ="Major">
+                <input name="major" type="text" class="form-control req" value="{{$eefapgv->major}}" placeholder ="Major">
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average" type="text" class="form-control req" placeholder ="General Average">
+                <input name="gen_average" type="text" class="form-control req" value="{{$eefapgv->general_average}}" placeholder ="General Average">
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -625,7 +307,7 @@ button:focus {
         <div class="row form-group">
           <div class="col-md-2">
             <label>* Graduating: </label>
-            <select name="grad" id="grad" class="form-control">
+            <select name="grad" id="grad" class="form-control req">
               <option value="" selected disabled>--Select--</option>
               <option value="YES">YES</option>
               <option value="NO">NO</option>
@@ -633,7 +315,7 @@ button:focus {
           </div>
           <div class="col-md-3">
             <label>* I certify that: </label>
-            <select name="spes" id="spes" class="form-control">
+            <select name="spes" id="spes" class="form-control req">
               <option value="" selected disabled>--Select--</option>
               <option value="YES">Yes, I am SPES Recipient</option>
               <option value="NO">No, I am not SPES Recipient</option>
@@ -673,7 +355,7 @@ button:focus {
             <input class="ghost" id="sid" name="sid" type="hidden" value=""/>
             <input class="ghost" id="award" name="award" type="hidden" value=""/>
           </div>
-          <div class="ghost">
+          {{-- <div class="ghost">
             {!! Form::open(['action' => ['AnnounceMainController@update',  $scholar_id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
             <div class = "form-group col-md-8 ghost">
             {{Form::text('title_id', $scholar_id, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
@@ -681,7 +363,7 @@ button:focus {
             {{Form::text('barcode', $barcode, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
             </div>
             {!! Form::close() !!}
-          </div>
+          </div> --}}
           	
         </div>
 
@@ -748,14 +430,21 @@ $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
 
-    var pathname = window.location.pathname;
-  var parts = pathname.split('/');
-  console.log(parts[5]);
+  document.getElementById('educ_prog').value="{{$eefapgv->program_type}}";
+  document.getElementById('grad').value="{{$eefapgv->graduating}}";
+  document.getElementById('spes').value="{{$eefapgv->spes}}";
+  var rb = "{{$eefapgv->awards}}";
 
-  $('#sid').val(parts[5]);
-
-  var id = $('input[name=title]').val();
-  $('#title_scholar').text(id);
+  // switch (rb) {
+  //   case 'Highest Honors' :
+  //     document.getElementById('rb5').checked;
+  //     break;
+  //   default:
+  //   console.log(
+  //     'Error'
+  //   );
+  // }
+  
 
 });
 

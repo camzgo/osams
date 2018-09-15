@@ -306,7 +306,7 @@ class ScholarshipCatController extends Controller
 
             
         ]);
-        return redirect('/apply/send');
+        return redirect('/admin/apply/send');
     }
 
     public function eefapgvStore(Request $request)
@@ -360,7 +360,7 @@ class ScholarshipCatController extends Controller
 
             
         ]);
-        return redirect('/apply/send');
+        return redirect('/admin/apply/send');
     }
 
 
@@ -440,7 +440,7 @@ class ScholarshipCatController extends Controller
 
             
         ]);
-        return redirect('/apply/send');
+        return redirect('/admin/apply/send');
     }
 
 

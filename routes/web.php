@@ -195,9 +195,20 @@ Route::prefix('/')->group(function()
     Route::get('/profile/education-information/edit', 'FrontendController@educationEdit');
     Route::get('/account', 'FrontendController@account');
     Route::post('/profile/personal-information/fetch', 'FrontendController@fetch')->name('profile.fetch');
+    // Route::post('/scholarship/details/eefap-gv/fetch', 'FrontendController@gvfetch')->name('eefapgv.fetch');
+    
     Route::post('/profile/personal-information', 'FrontendController@storedPersonal');
     Route::post('/profile/guardian-information', 'FrontendController@storedGuardian');
     Route::post('/profile/education-information', 'FrontendController@storedEducation');
+    Route::post('/account', 'FrontendController@accountEdit');
+    Route::post('/account/change-password', 'FrontendController@changePassword');
+    Route::get('/scholarship/details/eefap-gv', 'FrontendController@viewEefapgv');
+    Route::post('/scholarship/details/eefap-gv', 'FrontendController@storedEefapgv');
+    Route::get('/scholarship/details/eefap', 'FrontendController@viewEefap');
+    Route::post('/scholarship/details/eefap', 'FrontendController@storedEefap');
+    Route::get('/scholarship/details/pcl', 'FrontendController@viewPcl');
+    Route::post('/scholarship/details/pcl/fetch', 'FrontendController@pclfetch')->name('pcl2.fetch');
+    Route::post('/scholarship/details/pcl', 'FrontendController@storedPcl');
 });
 // Route::prefix('fronte')->group(function()
 // {

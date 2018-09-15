@@ -10,61 +10,26 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script src="{{asset('js/app.js')}}"></script>
 </head>
+<style>
+#image_preview{
 
- 
-    <nav class="navbar navbar-expand-lg navbar-dark py-3" style="height: 6em;   position: relative;
-    background: linear-gradient(80deg, #004280 0, #001a33 100%)
-    ">
-    <div class="container">
- <a class="navbar-brand" href="#">
-    <img src="/added/img/icons/logo.png" class="mr-4" width="50px" alt="">
-    <strong>Online Scholarship Application</strong>
-     {{-- <img  class="mr-4" style="width: 50px;"> --}}
-  </a>
+      border: 1px solid black;
 
+      padding: 5px;
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    }
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>Home</strong><span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>About Us</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>FAQs</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>Site Map</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><strong>Contact Us</strong></a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto align-items-lg-center">
-      <li class="nav-item mr-0">
-          {{-- <a data-toggle="modal" data-target="#sign-up-modal" class="btn  d-none d-lg-inline-flex text-white" role="button"><strong>Sign up</strong></a> --}}
-         <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-10px;">1</span> 
-        <a href="#"><i class="fa fa-envelope-o"></i></a>
-      </li>
-      <li class="nav-item mr-0">
-          {{-- <a data-toggle="modal" data-target="#sign-up-modal" class="btn  d-none d-lg-inline-flex text-white" role="button"><strong>Sign up</strong></a> --}}
-         <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-10px;">1</span> 
-        <a href="#"><i class="fa fa-globe"></i></a>
-      </li>
-      {{-- <li class="nav-item mr-0">
-          <a data-toggle="modal" data-target="#login-modal" style="width: 8em;  font-size: .90rem;" class="btn btn-sm btn-white btn-rounded " role="button">
-              <i class="fa fa-sign-in"></i>&nbsp <strong>Sign In</strong>
-          </a>
-      </li> --}}
-    </ul>
-  </div>
-</div>
-</nav>
+    #image_preview img{
+
+      width: 144px;
+      height: 144px;
+
+      /* padding: 5px; */
+
+    }
+
+</style>
+@include('inc.nav');
 <main>
     <section class="slice">
       <div class="container-fluid">
@@ -98,84 +63,134 @@
             <div class="card">
               <div class="card-body">
                   <div class="card-title"><div class="alert alert-info boldtx" role="alert"><i class="fa fa-cog"></i> Account Information</div></div><hr>
-
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                   <div>
                    <div class="container">
-                     <form action="" id="regForm" method="post" enctype="multipart/form-data" class="container">
-                    {{csrf_field()}}
+                    
                       <div class="form-row">
-                        <div class="col-md-4">
-                          <div class="card" style="width: 260px; height: 320px;">
-                            <div class="card-body" >
-                              <img src="{{asset('images/avatar5.png')}}" alt=""><hr>
+                        <div class="col-md-4 border-right ">
+                          <div class="card" style="width: 260px; height: 325px;">
+                            <div class="card-body">
+                              {{-- <img src="{{asset('images/avatar5.png')}}" alt=""><hr> --}}
+                              <div id="image_preview">
+                                <img src="{{asset('images/user.jpg')}}" alt="" >
+                              </div><hr>
                               {{-- <button class="btn btn-primary btn-rounded" style="width: 15em; ">Upload</button> --}}
-                              <div class="custom-file">
+                              {{-- <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customFile">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
+                              </div> --}}
+                              <div class="clamp-name clamp-lines" >
+                                <input type="file" id="uploadFile" name="uploadFile"/>
+                              </div>
+                              <hr>
+                              <div>
+                                <button class="btn btn-outline-primary btn-rounded btn-block mb-0 chngePass">Upload</button>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-8 mt-4">
+                        <div class="col-md-8">
+                           <div class="card">
+                            <div class="card-body">
+                              <div class="container ml-4 mt-2 mb-0">
+                          <form action="{{ action('FrontendController@accountEdit')}}" id="regForm" method="post" enctype="multipart/form-data">
+                          {{csrf_field()}}
+                         
                           <div class="form-row form-group">
-                            <div class="col-md-5">
+                            <div class="col-md-5" id="emailform" name="emailform">
                               <label>Email Address</label>
-                              <input type="text" class="form-control-plaintext border-bottom " readonly name="email1" id="email1" placeholder="sample@email">
+                              <input id="email1" type="email" class="form-control-plaintext border-bottom {{ $errors->has('email1') ? ' is-invalid' : '' }}" readonly name="email1"  value="{{Auth::user()->email}}" placeholder="Email Address" required>
+                              @if ($errors->has('email1'))
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $errors->first('email1') }}</strong>
+                                  </span>
+                              @endif
                             </div>
-                            <div class="col-md-5 ghost" id="address">
-                              <label>Email Address</label>
-                              <input type="text" class="form-control" name ="email2" id="email2" required>
-                            </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5" id="mobile" name="mobile">
                               <label>Mobile Number</label>
-                              <input type="text" class="form-control-plaintext border-bottom" readonly placeholder="sample@email">
-                            </div>
-                            <div class="col-md-5 ghost" id="mobile">
-                              <label>Mobile Number</label>
-                              <div class="input-group">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">+63</span>
-                                </div>
-                                <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required/>
-                              </div> 
+                              <input id="mobile_no" type="text" class="form-control-plaintext border-bottom {{ $errors->has('mobile_no') ? ' is-invalid' : '' }}" readonly name="mobile_no" value="{{Auth::user()->mobile_number}}"  placeholder="9XXXXXXXXX" required >
+                              @if ($errors->has('mobile_no'))
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $errors->first('mobile_no') }}</strong>
+                                  </span>
+                              @endif
                             </div>
                           </div>
-                          <div class="form-row form-group" style="display: none;" id="current">
+                          <div class="form-row  form-group " id="action1">
+                            
+                            <div class="col-md-10">
+                              <button type="button" class="btn btn-info pull-right edit" id='edit1'>Edit Account</button>
+                            </div>
+                          </div>
+                          <div class="form-row form-group mt-0"  id="actions">
+                            <div class="col-md-5" id="btncancel" style="display: none;">
+                              <button  type="button" class="btn btn-outline-danger cancel">Discard Changes</button>
+                            </div>
+                            <div class="col-md-5" id="btnsave" style="display: none;">
+                              <button type="submit" class="btn btn-primary pull-right">Save Changes</button>  
+                            </div>
+                          </div>
+                             
+                        </form>
+                        <form action="{{ action('FrontendController@changePassword')}}" method='POST'>
+                        {{csrf_field()}}
+                                <div class="form-row form-group" style="display: block;">
                            <div class="mt-2">
                               <p>To change password, enter your current password and new password below</p>
                            </div>
                             <div class="col-md-5">
                               <label>Current Password</label>
-                              <input type="password" class="form-control" name="current" id="current" placeholder="Current Password" required> 
+                              <input type="password" class="form-control-plaintext" name="current" id="current"  readonly placeholder="Current Password" > 
                             </div>
                           </div>
-                          <div class="form-row form-group mb-4" style="display: none;" id="new">
-                            <div class="col-md-5">
+                          <div class="form-row form-group mb-4"  id="new">
+                            <div class="col-md-5" >
                               <label>New Password</label>
-                              <input type="password" class="form-control" name="new_password" id="new_password" placeholder="New Password" required> 
+                              <input type="password" class="form-control-plaintext" name="new_password" id="new_password" readonly placeholder="New Password" > 
                             </div>
-                             <div class="col-md-5">
-                              <label>Retype New Password</label>
-                              <input type="password" class="form-control" name="rtype" id="rtype" placeholder="Retype New Password" required> 
+                             <div class="col-md-5" id ="new3" >
+                              <label>Confirm Password</label>
+                              <input type="password" class="form-control-plaintext" name="rtype" id="rtype" readonly placeholder="Retype New Password" > 
+                            </div>
+                          </div>
+                          <div class="form-row  form-group " id="edit2">
+                            
+                            <div class="col-md-10">
+                              <button type="button" class="btn btn-info pull-right edit2" >Edit Account</button>
+                            </div>
+                          </div>
+                          <div class="form-row form-group mt-0"  id="actions">
+                            <div class="col-md-5" id="btncancel2" style="display: none;">
+                              <button  type="button" class="btn btn-outline-danger cancel2">Discard Changes</button>
+                            </div>
+                            <div class="col-md-5" id="btnsave2" style="display: none;">
+                              <button type="submit" class="btn btn-primary pull-right changePass">Save Changes</button>  
                             </div>
                           </div>
 
-                          <div class="form-row mt-4">
-                            <div class="col-md-5 offset-8">
-                              <a href="#" class="btn btn-info">Edit Account</a>
+                        </form>
+
+                         </div>
                             </div>
                           </div>
-                          <div class="form-row mt-2" style="display: none;" id="actions">
-                            <div class="col-md-5">
-                              <a href="#" class="btn btn-secondary">Back to My Profile</a>
-                            </div>
-                            <div class="col-md-5">
-                              <input type="submit" class="btn btn-primary pull-right" value="Save Changes"/>  
-                            </div>
-                          </div>
+                        
+                        
+                        {{-- <form action="{{ action('FrontendController@changePassword')}}" id="regForm" method="post" enctype="multipart/form-data" class="container">
+                          {{csrf_field()}}
+
+                        </form> --}}
                         </div>
                       </div>
-                    </form>
                    </div>
                   </div>
               </div>
@@ -185,6 +200,29 @@
       </div>
     </section>
    
+
+
+{{-- <div class="form-row form-group" id="current" style="display: none;">
+                           <div class="mt-2">
+                              <p>To change password, enter your current password and new password below</p>
+                           </div>
+                            <div class="col-md-5">
+                              <label>Current Password</label>
+                              <input type="password" class="form-control" name="current" id="current" placeholder="Current Password" > 
+                            </div>
+                          </div>
+                          <div class="form-row form-group mb-4"  id="new">
+                            <div class="col-md-5" id ="new2" style="display: none;">
+                              <label>New Password</label>
+                              <input type="password" class="form-control" name="new_password" id="new_password" placeholder="New Password" > 
+                            </div>
+                             <div class="col-md-5" id ="new3" style="display: none;">
+                              <label>Retype New Password</label>
+                              <input type="password" class="form-control" name="rtype" id="rtype" placeholder="Retype New Password" > 
+                            </div>
+                          </div> --}}
+
+
 </main>
 <footer class="footer2">
   <div class="container mt-4">
@@ -203,6 +241,113 @@
 <script>
   $(document).ready(function(){
     $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
+  });
+
+  $(document).on('click', '.edit', function(){
+    $('#email1').prop('readonly', false);
+    document.getElementById("email1").className = "form-control";
+    $('#mobile_no').prop('readonly', false);
+    document.getElementById("mobile_no").className = "form-control";
+
+    var x = document.getElementById('edit1');
+    x.style.display = "none";
+
+    var y = document.getElementById('btnsave');
+    y.style.display = "block";
+
+    var y = document.getElementById('btncancel');
+    y.style.display = "block";
+
+  });
+
+  $(document).on('click', '.edit2', function()
+  {
+    $('#new_password').prop('readonly', false);
+    document.getElementById("new_password").className = "form-control";
+    $('#rtype').prop('readonly', false);
+    document.getElementById("rtype").className = "form-control";
+    $('#current').prop('readonly', false);
+    document.getElementById("current").className = "form-control";
+    
+    var y = document.getElementById('btnsave2');
+    y.style.display = "block";
+
+    var y = document.getElementById('btncancel2');
+    y.style.display = "block";
+
+    var x = document.getElementById('edit2');
+    x.style.display = "none";
+
+  });
+  
+  $(document).on('click', '.cancel2', function()
+  {
+    $('#new_password').prop('readonly', true);
+    $('#new_password').val("");
+    $('#rtype').val("");
+    $('#current').val("");
+    document.getElementById("new_password").className = "form-control-plaintext border-bottom";
+    $('#rtype').prop('readonly', true);
+    document.getElementById("rtype").className = "form-control-plaintext border-bottom";
+    $('#current').prop('readonly', true);
+    document.getElementById("current").className = "form-control-plaintext border-bottom";
+    
+    var y = document.getElementById('btnsave2');
+    y.style.display = "none";
+
+    var y = document.getElementById('btncancel2');
+    y.style.display = "none";
+
+    var x = document.getElementById('edit2');
+    x.style.display = "block";
+  });
+
+  $(document).on('click', '.cancel', function()
+  {
+
+    $('#email1').prop('readonly', true);
+    $('#email1').val("{{Auth::user()->email}}");
+    document.getElementById("email1").className = "form-control-plaintext {{ $errors->has('email1') ? ' is-invalid' : '' }} border-bottom";
+    $('#mobile_no').prop('readonly', true);
+    $('#mobile_no').val("{{Auth::user()->mobile_number}}");
+    document.getElementById("mobile_no").className = "form-control-plaintext {{ $errors->has('email1') ? ' is-invalid' : '' }} border-bottom";
+
+    var y = document.getElementById('btnsave');
+    y.style.display = "none";
+
+    var y = document.getElementById('btncancel');
+    y.style.display = "none";
+
+    var x = document.getElementById('edit1');
+    x.style.display = "block";
+  });
+
+
+
+  $("#uploadFile").change(function(){
+
+     $('#image_preview').html("");
+    
+     var chk = $('#uploadFile').val();
+     if(document.getElementById("uploadFile").files.length != 0)
+     {
+      
+      var total_file=document.getElementById("uploadFile").files.length;
+
+      for(var i=0;i<total_file;i++)
+
+      {
+
+        $('#image_preview').append("<img src='"+URL.createObjectURL(event.target.files[i])+"'>");
+
+      }
+     }
+     else
+     {
+       console.log('error!');
+       $('#image_preview').append("<img src='"+"{{asset('images/user.jpg')}}"+"'>");
+     }
+
   });
 </script>
 </html>

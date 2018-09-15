@@ -52,7 +52,7 @@
                         <div class="card-body">
                           <div class="card-title text-center text-bold" style="font-size: 17px;">Personal Information</div>
                           <div class="card-text">
-                            <a href="{{$perUrl[0]}}" class="btn btn-primary btn-rounded text-center" style="width: 12em; margin-left:4em;"><strong>{{$perUrl[1]}}</strong></a>
+                            <a href="{{$takti[0]}}" class="btn btn-primary btn-rounded text-center " style="width: 12em; margin-left:4em;"><strong>{{$takti[1]}}</strong></a>
                           </div>
                         </div>
                       </div>

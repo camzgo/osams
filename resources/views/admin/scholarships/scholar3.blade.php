@@ -774,9 +774,9 @@ $(document).ready(function(){
   document.getElementById('gender').value=gen;
   var pathname = window.location.pathname;
   var parts = pathname.split('/');
-  console.log(parts[4]);
+  console.log(parts[5]);
 
-  $('#sid').val(parts[4]);
+  $('#sid').val(parts[5]);
 
   var id = $('input[name=title]').val();
   $('#title_scholar').text(id);

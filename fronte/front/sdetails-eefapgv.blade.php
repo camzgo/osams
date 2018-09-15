@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script src="{{asset('js/app.js')}}"></script>
 </head>
+
 @include('inc.nav')
 <main>
     <section class="slice">
@@ -52,36 +53,8 @@
 
                   <div class="form-row mb-2">
                     <div class="col-md-6 ">
-                    {{-- <ul class="list-group">
-                      <li class="list-group-item active"><i class="fa fa-folder-open"></i><strong> Application Details</strong></li>
-                      <li class="list-group-item">
-                        <div class="row no-gutters">
-                          <div class="col-md-6">
-                            <ul class="list-group list-group-flush">
-                              <li class="list-group-item">Application Code</li>
-                              <li class="list-group-item">Full Name</li>
-                              <li class="list-group-item">Address</li>
-                              <li class="list-group-item">Mobile Number</li>
-                              <li class="list-group-item">Course/Program</li>
-                              <li class="list-group-item">Applied on</li>
-                            </ul>  
-                          </div>
-                          <div class="col-md-6">
-                            <ul class="list-group list-group-flush">
-                              <li class="list-group-item">{{$applicant->barcode_number}}</li>
-                              <li class="list-group-item">{{Auth::user()->first_name}} {{Auth::user()->middle_name}} {{Auth::user()->surname}} {{Auth::user()->suffix}}</li>
-                              <li class="list-group-item"> {{$eefap->street}} {{$eefap->barangay}}, {{$eefap->municipality}}</li>
-                              <li class="list-group-item">fsffdsfds</li>
-                              <li class="list-group-item">fsffdsfds</li>
-                              <li class="list-group-item">fsffdsfds</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-
-                    </ul> --}}
                       <div class="row">
-                        <div class="card" style="width:530px;">
+                        <div class="card">
                       <div class="card-header bg-primary">
                         <i class="fa fa-folder-open"></i><strong> Application Details</strong>
                       </div>
@@ -97,7 +70,7 @@
                           </tr>
                           <tr>
                             <td>Address</td>
-                            <td>{{$eefap->street}} {{$eefap->barangay}}, {{$eefap->municipality}}</td>
+                            <td>{{$eefapgv->street}} {{$eefapgv->barangay}}, {{$eefapgv->municipality}}</td>
                           </tr>
                           <tr>
                             <td>Mobile Number</td>
@@ -105,7 +78,7 @@
                           </tr>
                           <tr>
                             <td>Course/Program</td>
-                            <td>{{$eefap->course}}</td>
+                            <td>{{$eefapgv->course}}</td>
                           </tr>
                           <tr>
                             <td>Applied On</td>
@@ -120,7 +93,7 @@
                     </div>  
                       </div> 
                       <div class="row">
-                        <div class="card" style="width:530px;">
+                        <div class="card" style="width:525px;">
                           <div class="card-body">
                               <div class="card" >
                                 <div class="card-header  bg-primary">
@@ -135,7 +108,7 @@
                                   <a href="#" class="btn btn-block btn-primary">Upload Files</a>
                                 </div>
                                 <div class="col-md-4">
-                                  <a href="/scholarship/details/eefap" class="btn btn-block text-white btn-warning">Edit Application</a>
+                                  <a href="/scholarship/details/eefap-gv" class="btn btn-block text-white btn-warning">Edit Application</a>
                                 </div>
                                 <div class="col-md-4">
                                   <a href="#" class="btn btn-block btn-danger">Delete Application</a>
@@ -144,8 +117,7 @@
                           </div>
                         </div>
                       </div>
-
-                  </div>
+                    </div>
 
                   <div class="col-md-6">
                     {{-- <ul class="list-group" id="eefap">
@@ -176,12 +148,13 @@
                       </li>
 
                     </ul> --}}
-
+                  
                     <div class="card">
                       <div class="card-header bg-primary">
                         <i class="fa fa-folder-open"></i><strong> Requirements</strong>
                       </div>
                       <div class="card-body py-0">
+                      @if($scholar->scholarship_name=="VG DHVTSU")
                         <table class="table " id="eefap">
                           <tr>
                             <td>Bio-data with 2x2 Picture</td>
@@ -208,8 +181,8 @@
                             <td>Not Submitted</td>
                           </tr>
                         </table>
-
-                        <table class="table ghost" id="eefap-gv">
+                      @else
+                        <table class="table" id="eefap-gv">
                           <tr>
                             <td>Bio-data with 2x2 Picture</td>
                             <td>Not Submitted</td>
@@ -239,7 +212,7 @@
                             <td>Not Submitted</td>
                           </tr>
                         </table>
-
+                        @endif
                       </div>
                     </div>
                   </div>
@@ -269,6 +242,7 @@
 
 
                 </div><hr>
+                @if($applicant->application_status== "Approved")
                 <div class="form-row">
                   <div class="card" style="width: 100%;">
                     <div class="card-header boldtx bg-warning text-white">
@@ -330,6 +304,8 @@
                 </div>
 
               </div>
+              @else
+              @endif
             </div>
           </div>
         </div>
