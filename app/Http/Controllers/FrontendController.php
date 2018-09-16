@@ -14,13 +14,34 @@ use App\Pcl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-
+use App\SendCode;
+use Mail;
+use App\Mail\Welcome;
 class FrontendController extends Controller
 {
     //
     public function fronte()
     {
-        return view ('sas');
+        $ncw = DB::table('scholarships')->where('id', 1)->first();
+        $gad = DB::table('scholarships')->where('id', 2)->first();
+        $vg = DB::table('scholarships')->where('id', 3)->first();
+        $gp = DB::table('scholarships')->where('id', 4)->first();
+        $gpr = DB::table('scholarships')->where('id', 5)->first();
+        $pcl = DB::table('scholarships')->where('id', 6)->first();
+        $vgd = DB::table('scholarships')->where('id', 7)->first();
+        $hr = DB::table('scholarships')->where('id', 8)->first();
+        // $applicant = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
+        // $ck;
+        // if($applicant)
+        // {
+        //     $ck=1;
+        // }
+        // else
+        // {
+        //     $ck=0;
+        // }
+        return view ('sas')->with('ncw', $ncw)->with('gad', $gad)->with('vg', $vg)->with('gp', $gp)->with('gpr', $gpr)
+        ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr);
     }
     function faq()
     {
@@ -387,6 +408,35 @@ class FrontendController extends Controller
         // $user->save();
     }
 
+    function uploadprofile(Request $request)
+    {
+         $this -> validate($request, [
+            'uploadFile' => 'image|nullable|max:1999'
+        ]);
+
+        if($request->hasFile('uploadFile'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('uploadFile')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('uploadFile')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('uploadFile')->storeAs('public/profile_images', $fileNameToStore);
+        }
+        else
+        {
+             $fileNameToStore = 'noimage.jpg';
+        }
+
+        $user = User::find(Auth::user()->id);
+        $user->profile_photo = $fileNameToStore;
+        $user->save();
+        return redirect ('/account');
+    }
     
     function viewEefapgv()
     {
@@ -548,5 +598,25 @@ class FrontendController extends Controller
             $output .= '<option value="'.$row->$dependent2.'">'.$row->$dependent2.'</option>';
         }
         echo $output;
+    }
+
+    function send()
+    {
+        // $nos = array('639360426646', '639059462732');
+
+        // foreach($nos as $no)
+        // {
+        //     SendCode::sendCode('HELLO IM JOSHUA OCAMPO! ', $no);
+        // }
+
+        // Mail::send(['text'=>'mail'], ['name', 'Pampanga Capitol'], function($message)
+        // {
+        //     $message->to('guintoproductions@gmail.com', 'To Pampanga')->subject('Sample Email');
+        //     $message->from('capitolpampanga@gmail.com', 'Pampanga');
+        // });
+        $sc = "ALBERT!";
+        \Mail::to('guintoproductions@gmail.com')->send(new Welcome ($sc));
+
+       
     }
 }

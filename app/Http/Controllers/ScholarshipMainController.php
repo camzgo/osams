@@ -204,6 +204,12 @@ class ScholarshipMainController extends Controller
                 $scholarship->save();
                 $success_output = '<div class="alert alert-success">Success!</div>';
 
+                // $stat = DB::table('tracking')->insert([
+                //     'log' => 'Your application is approved',
+                //     'scholarship_id'  => $request->get('scholarship_id'),
+                //     'stage'
+                // ]);
+
             }
             
         }

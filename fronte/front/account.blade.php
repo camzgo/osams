@@ -36,21 +36,21 @@
         <div class="row">
           <div class="col-lg-2 ml-4">
             <div class="card ">
-              <div class="card-header bg-primary"><strong>Dashboard</strong></div>
+              <div class="card-header"><strong>Dashboard</strong></div>
               <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
+                <a href="/profile" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
                   <div class="text-bold">
                     <span class="fa fa-user"></span> &nbsp;
                     <span>My Profile</span>
                   </div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
+                <a href="/scholarship" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
                   <div class="text-bold">
                     <span class="fa fa-graduation-cap"></span>
                     <span>My Scholarship</span>
                   </div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4 bg-secondary">
+                <a href="/account" class="list-group-item list-group-item-action d-flex justify-content-between px-4 active">
                   <div class="text-bold">
                     <span class="fa fa-cog"></span> &nbsp;
                     <span>Account Settings</span>
@@ -82,19 +82,26 @@
                             <div class="card-body">
                               {{-- <img src="{{asset('images/avatar5.png')}}" alt=""><hr> --}}
                               <div id="image_preview">
-                                <img src="{{asset('images/user.jpg')}}" alt="" >
+                                <img src="/storage/profile_images/{{Auth::user()->profile_photo}}" alt="" >
                               </div><hr>
                               {{-- <button class="btn btn-primary btn-rounded" style="width: 15em; ">Upload</button> --}}
                               {{-- <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customFile">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
                               </div> --}}
+                              {!! Form::open(['action' => 'FrontendController@uploadprofile', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
                               <div class="clamp-name clamp-lines" >
-                                <input type="file" id="uploadFile" name="uploadFile"/>
+                               {{-- <input type="file" id="uploadFile" name="uploadFile"/> --}}
+                                 {{Form::file('uploadFile')}}
                               </div>
                               <hr>
                               <div>
-                                <button class="btn btn-outline-primary btn-rounded btn-block mb-0 chngePass">Upload</button>
+                                {{-- <button class="btn btn-outline-primary btn-rounded btn-block mb-0 chngePass">Upload</button> --}}
+                                <div class="form-group">
+                                   
+                                </div>
+                                {{Form::submit('Upload', ['class' => 'btn btn-outline-primary btn-rounded btn-block mb-0'])}}
+                            {!! Form::close() !!}
                               </div>
                             </div>
                           </div>

@@ -17,21 +17,21 @@
         <div class="row">
           <div class="col-lg-2 ml-4">
             <div class="card ">
-              <div class="card-header bg-primary"><strong>Dashboard</strong></div>
+              <div class="card-header"><strong>Dashboard</strong></div>
               <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4 bg-secondary">
+                <a href="/profile" class="list-group-item list-group-item-action d-flex justify-content-between px-4 active">
                   <div class="text-bold">
                     <span class="fa fa-user"></span> &nbsp;
                     <span>My Profile</span>
                   </div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
+                <a href="/scholarship" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
                   <div class="text-bold">
                     <span class="fa fa-graduation-cap"></span>
                     <span>My Scholarship</span>
                   </div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
+                <a href="/account" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
                   <div class="text-bold">
                     <span class="fa fa-cog"></span> &nbsp;
                     <span>Account Settings</span>
@@ -47,7 +47,7 @@
 
                   <div>
                     <div class="card-deck">
-                      <div class="card shdow">
+                      <div class="card">
                         <img src="{{asset('images/user1.jpg')}}" alt="Card-Image" class="card-img-top" style="width:100%">
                         <div class="card-body">
                           <div class="card-title text-center text-bold" style="font-size: 17px;">Personal Information</div>
@@ -57,7 +57,7 @@
                         </div>
                       </div>
                       
-                      <div class="card shdow">
+                      <div class="card">
                         <img src="{{asset('images/guardian.jpg')}}" alt="Card-Image" class="card-img-top" style="width:100%">
                         <div class="card-body">
                           <div class="card-title text-center text-bold" style="font-size: 17px;"><strong>Parents / Guardian Information </strong></div>
@@ -67,7 +67,7 @@
                         </div>
                       </div>
 
-                      <div class="card shdow">
+                      <div class="card">
                         <img src="{{asset('images/school1.jpg')}}" alt="Card-Image" class="card-img-top" style="width:100%">
                         <div class="card-body">
                           <div class="card-title text-center text-bold" style="font-size: 17px;">Educational Information </div>

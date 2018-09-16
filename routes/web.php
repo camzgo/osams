@@ -202,6 +202,10 @@ Route::prefix('/')->group(function()
     Route::post('/profile/education-information', 'FrontendController@storedEducation');
     Route::post('/account', 'FrontendController@accountEdit');
     Route::post('/account/change-password', 'FrontendController@changePassword');
+    Route::post('/account/upload-profile', 'FrontendController@uploadprofile');
+
+
+
     Route::get('/scholarship/details/eefap-gv', 'FrontendController@viewEefapgv');
     Route::post('/scholarship/details/eefap-gv', 'FrontendController@storedEefapgv');
     Route::get('/scholarship/details/eefap', 'FrontendController@viewEefap');
@@ -209,6 +213,13 @@ Route::prefix('/')->group(function()
     Route::get('/scholarship/details/pcl', 'FrontendController@viewPcl');
     Route::post('/scholarship/details/pcl/fetch', 'FrontendController@pclfetch')->name('pcl2.fetch');
     Route::post('/scholarship/details/pcl', 'FrontendController@storedPcl');
+
+    Route::get('/send/sample', 'FrontendController@send');
+});
+
+Route::prefix('/admin/tracking')->group(function(){
+    Route::get('/', 'TrackingController@viewTrack');
+    Route::get('/getdata', 'TrackingController@getdata')->name('track.getdata');;
 });
 // Route::prefix('fronte')->group(function()
 // {
@@ -226,6 +237,31 @@ Route::prefix('/')->group(function()
 //     Route::post('/profile/personal-information/fetch', 'FrontendController@fetch')->name('profile.fetch');
 // });
 
+Route::prefix('/scholarship')->group(function(){
+
+    
+    Route::get('/eefap2', 'ScholarshipFrontController@shoW');
+    Route::post('/eefap/fetch', 'ScholarshipFrontController@fetch')->name('eefap.fetch');
+    
+    Route::post('/pcl/fetch', 'ScholarshipFrontController@pfetch')->name('pcl4.fetch');
+    Route::get('/eefap-gv/{id}', 'ScholarshipFrontController@gvShow');
+    Route::post('/eefap', 'ScholarshipFrontController@eefapStore');
+    Route::post('/eefap-gv', 'ScholarshipFrontController@eefapgvStore');
+    Route::post('/pcl', 'ScholarshipFrontController@pclStore');
+// });
+
+    Route::get('/gad', 'ScholarshipFrontController@gadShow');
+    Route::get('/graduate-private', 'ScholarshipFrontController@gradprivate');
+    Route::get('/graduate-public', 'ScholarshipFrontController@gradpublic');
+    Route::get('/ncw', 'ScholarshipFrontController@ncw');
+    Route::get('/vg-oldnew', 'ScholarshipFrontController@oldnew');
+
+
+    Route::get('/honor-rank', 'ScholarshipFrontController@honors');
+    Route::get('/vg-dhvtsu', 'ScholarshipFrontController@dhvtsu');
+
+    Route::get('/pcl', 'ScholarshipFrontController@pclShow');
+});
 
 
 Route::get('/pampanga','AddressController@municipal');

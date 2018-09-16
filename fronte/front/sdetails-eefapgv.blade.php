@@ -18,21 +18,21 @@
         <div class="row">
           <div class="col-lg-2 ml-4">
             <div class="card ">
-              <div class="card-header bg-primary"><strong>Dashboard</strong></div>
+              <div class="card-header"><strong>Dashboard</strong></div>
               <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
+                <a href="/profile" class="list-group-item list-group-item-action d-flex justify-content-between px-4 active">
                   <div class="text-bold">
                     <span class="fa fa-user"></span> &nbsp;
                     <span>My Profile</span>
                   </div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4 bg-secondary">
+                <a href="/scholarship" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
                   <div class="text-bold">
                     <span class="fa fa-graduation-cap"></span>
                     <span>My Scholarship</span>
                   </div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
+                <a href="/account" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
                   <div class="text-bold">
                     <span class="fa fa-cog"></span> &nbsp;
                     <span>Account Settings</span>
@@ -54,7 +54,7 @@
                   <div class="form-row mb-2">
                     <div class="col-md-6 ">
                       <div class="row">
-                        <div class="card">
+                        <div class="card" style="width:525px;">
                       <div class="card-header bg-primary">
                         <i class="fa fa-folder-open"></i><strong> Application Details</strong>
                       </div>
@@ -108,7 +108,7 @@
                                   <a href="#" class="btn btn-block btn-primary">Upload Files</a>
                                 </div>
                                 <div class="col-md-4">
-                                  <a href="/scholarship/details/eefap-gv" class="btn btn-block text-white btn-warning">Edit Application</a>
+                                  <a href="/scholarship/details/eefap-gv" class="btn btn-block text-white btn-success">Edit Application</a>
                                 </div>
                                 <div class="col-md-4">
                                   <a href="#" class="btn btn-block btn-danger">Delete Application</a>

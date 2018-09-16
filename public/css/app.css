@@ -15128,8 +15128,8 @@ select.selectpicker {
 }
 
 .shdow {
-  -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
-          box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+  -webkit-box-shadow: 0 4rem 8rem 0 rgba(0, 0, 0, 0.175) !important;
+          box-shadow: 0 4rem 8rem 0 rgba(0, 0, 0, 0.175) !important;
 }
 
 .bg-grad1 {
@@ -15270,6 +15270,25 @@ select.selectpicker {
 
 body {
   padding-right: 0 !important;
+}
+
+.inset {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  -webkit-box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.6), 0 1px 1px rgba(0, 0, 0, 0.1);
+          box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.6), 0 1px 1px rgba(0, 0, 0, 0.1);
+  background-color: transparent !important;
+  z-index: 999;
+}
+
+.inset img {
+  border-radius: inherit;
+  width: inherit;
+  height: inherit;
+  display: block;
+  position: relative;
+  z-index: 998;
 }
 
 /* unset bs3 setting */

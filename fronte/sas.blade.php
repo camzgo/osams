@@ -73,7 +73,7 @@
                       </div>
                   </div>
                 <p class="text-center text-muted mt-2"><a class="btn btn-link" href="{{ route('password.request') }}">Forgot Your Password?</a></p>
-                <p class="text-center text-muted">Don't have an account? <a href=""><strong>Register now</strong></a></p>
+                <p class="text-center text-muted">Don't have an account? <a href="/signup"><strong>Register now</strong></a></p>
               </div>
           </div>
       </div>
@@ -320,14 +320,15 @@
                 <div class="carousel-item active">
                   <div style="width: 100%">
                     <div class="row no-gutters">
-                      <div class="col-md-3">
-                        <div class="card" style="width:250px; height:400px;">
+                      <div class="card-deck">
+  
+                        <div class="card" >
                           <img class="card-img-top" src="{{asset('images/fa4.jpg')}}" alt="Card image" style="width: 100%;">
                           <div class="card-body">
                               <div class="container">
                                 <div class="row clamp-name clamp-lines">
-                                  <h5 class="card-title"><strong>Graduate from public</strong></h5>
-                                  <div class="card-subtitle">fddsfdsjfsfsfjsdjfsjffjsjfk</div>
+                                  <h5 class="card-title"><strong>{{$ncw->scholarship_name}}</strong></h5>
+                                  <div class="card-subtitle">{{$ncw->scholarship_desc}}</div>
 
                                 </div>
                               </div>
@@ -335,30 +336,62 @@
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong></strong></li>
-                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong></strong></li>
+                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong> {{$ncw->slot}} </strong></li>
+                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$ncw->amount}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong> {{$ncw->deadline}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$ncw->status}}</strong></li>
                               </ul>
                              </div>
-                             @guest
-                             @else
+                             @if(Auth::check())
+                             @if($ncw->status == "OPEN")
                              <div class="card-footer">
                               <div>
-                                <a href="#" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="/scholarship/ncw" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
-                             @endguest
+                             @endif
+                             @endif
                           </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="card" style="width:250px; height:400px;">
+
+
+                        <div class="card" >
                           <img class="card-img-top" src="{{asset('images/fa4.jpg')}}" alt="Card image" style="width: 100%;">
                           <div class="card-body">
                               <div class="container">
                                 <div class="row clamp-name clamp-lines">
-                                  <h5 class="card-title"><strong>Graduate from public</strong></h5>
-                                  <div class="card-subtitle">fddsfdsjfsfsfjsdjfsjffjsjfk</div>
+                                  <h5 class="card-title"><strong>{{$gad->scholarship_name}} </strong></h5>
+                                  <div class="card-subtitle">{{$gad->scholarship_desc}}</div>
+                                </div>
+                              </div>
+                             
+                            </div>
+                             <div class="card-body">
+                              <ul class="list-group list-group-flush">
+                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$gad->slot}} </strong></li>
+                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$gad->amount}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$gad->deadline}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$gad->status}}</strong></li>
+                              </ul>
+                             </div>
+                            @if(Auth::check())
+                            @if($gad->status == "OPEN")
+                             <div class="card-footer">
+                              <div>
+                                <a href="/scholarship/gad" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                              </div>
+                             </div>
+                             @endif
+                             @endif
+                          </div>
+       
+            
+                        <div class="card" >
+                          <img class="card-img-top" src="{{asset('images/fa4.jpg')}}" alt="Card image" style="width: 100%;">
+                          <div class="card-body">
+                              <div class="container">
+                                <div class="row clamp-name clamp-lines">
+                                  <h5 class="card-title"><strong>{{$vg->scholarship_name}}</strong></h5>
+                                  <div class="card-subtitle clamp-name clamp-lines">{{$vg->scholarship_desc}}</div>
 
                                 </div>
                               </div>
@@ -366,83 +399,55 @@
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong></strong></li>
-                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong></strong></li>
+                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$vg->slot}} </strong></li>
+                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$vg->amount}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$vg->deadline}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$vg->status}}</strong></li>
                               </ul>
                              </div>
-                             @guest
-                             @else
+                             @if(Auth::check())
+                             @if($vg->status == "OPEN")
+                          
                              <div class="card-footer">
                               <div>
-                                <a href="#" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="/scholarship/vg-oldnew" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
-                             @endguest
+                             @endif
+                             @endif
                           </div>
-                      </div>
-                       <div class="col-md-3">
-                        <div class="card" style="width:250px; height:400px;">
+    
+
+                        <div class="card">
                           <img class="card-img-top" src="{{asset('images/fa4.jpg')}}" alt="Card image" style="width: 100%;">
                           <div class="card-body">
                               <div class="container">
                                 <div class="row clamp-name clamp-lines">
-                                  <h5 class="card-title"><strong>Graduate from public</strong></h5>
-                                  <div class="card-subtitle">fddsfdsjfsfsfjsdjfsjffjsjfk</div>
-
+                                  <h5 class="card-title"><strong>{{$gp->scholarship_name}}</strong></h5>
+                                  <div class="card-subtitle">{{$gp->scholarship_desc}}</div>
                                 </div>
                               </div>
                              
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong></strong></li>
-                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong></strong></li>
+                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$gp->slot}} </strong></li>
+                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$gp->amount}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$gp->deadline}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$gp->status}}</strong></li>
                               </ul>
                              </div>
-                             @guest
-                             @else
+                            @if(Auth::check())
+                            @if($gp->status == "OPEN")
                              <div class="card-footer">
                               <div>
-                                <a href="#" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="/scholarship/graduate-public" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
-                             @endguest
+                             @endif
+                             @endif
                           </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="card" style="width:250px; height:400px;">
-                          <img class="card-img-top" src="{{asset('images/fa4.jpg')}}" alt="Card image" style="width: 100%;">
-                          <div class="card-body">
-                              <div class="container">
-                                <div class="row clamp-name clamp-lines">
-                                  <h5 class="card-title"><strong>Graduate from public</strong></h5>
-                                  <div class="card-subtitle">fddsfdsjfsfsfjsdjfsjffjsjfk</div>
 
-                                </div>
-                              </div>
-                             
-                            </div>
-                             <div class="card-body">
-                              <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong></strong></li>
-                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong></strong></li>
-                              </ul>
-                             </div>
-                            @guest
-                             @else
-                             <div class="card-footer">
-                              <div>
-                                <a href="#" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
-                              </div>
-                             </div>
-                             @endguest
-                          </div>
                       </div>
                   </div>
                   </div>
@@ -452,131 +457,127 @@
                 <div class="carousel-item">
                   <div style="width: 100%">
                     <div class="row no-gutters">
-                      <div class="col-md-3">
-                        <div class="card" style="width:250px; height:400px;">
+                      <div class="card-deck">
+                        <div class="card">
                           <img class="card-img-top" src="{{asset('images/fa4.jpg')}}" alt="Card image" style="width: 100%;">
                           <div class="card-body">
                               <div class="container">
                                 <div class="row clamp-name clamp-lines">
-                                  <h5 class="card-title"><strong>Graduate from public</strong></h5>
-                                  <div class="card-subtitle">fddsfdsjfsfsfjsdjfsjffjsjfk</div>
-
+                                 <h5 class="card-title"><strong>{{$gpr->scholarship_name}}</strong></h5>
+                                  <div class="card-subtitle">{{$gpr->scholarship_desc}}</div>
                                 </div>
                               </div>
                              
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong></strong></li>
-                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong></strong></li>
+                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$gpr->slot}} </strong></li>
+                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$gpr->amount}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$gpr->deadline}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$gpr->status}}</strong></li>
                               </ul>
                              </div>
-                             @guest
-                             @else
+                             @if(Auth::check())
+                             @if($gpr->status == "OPEN")
                              <div class="card-footer">
                               <div>
-                                <a href="#" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="/scholarship/graduate-private" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
-                             @endguest
+                             @endif
+                             @endif
                           </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="card" style="width:250px; height:400px;">
+                        <div class="card">
                           <img class="card-img-top" src="{{asset('images/fa4.jpg')}}" alt="Card image" style="width: 100%;">
                           <div class="card-body">
                               <div class="container">
                                 <div class="row clamp-name clamp-lines">
-                                  <h5 class="card-title"><strong>Graduate from public</strong></h5>
-                                  <div class="card-subtitle">fddsfdsjfsfsfjsdjfsjffjsjfk</div>
-
+                                  <h5 class="card-title"><strong>{{$pcl->scholarship_name}}</strong></h5>
+                                  <div class="card-subtitle">{{$pcl->scholarship_desc}}</div>
                                 </div>
                               </div>
                              
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong></strong></li>
-                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong></strong></li>
+                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$pcl->slot}} </strong></li>
+                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$pcl->amount}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$pcl->deadline}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$pcl->status}}</strong></li>
                               </ul>
                              </div>
-                             @guest
-                             @else
+                            @if(Auth::check())
+                            @if($pcl->status == "OPEN")
+                      
                              <div class="card-footer">
                               <div>
-                                <a href="#" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="/scholarship/pcl" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
-                             @endguest
+
+                             @endif
+                             @endif
                           </div>
-                      </div>
-                       <div class="col-md-3">
-                        <div class="card" style="width:250px; height:400px;">
+                        <div class="card" >
                           <img class="card-img-top" src="{{asset('images/fa4.jpg')}}" alt="Card image" style="width: 100%;">
                           <div class="card-body">
                               <div class="container">
                                 <div class="row clamp-name clamp-lines">
-                                  <h5 class="card-title"><strong>Graduate from public</strong></h5>
-                                  <div class="card-subtitle">fddsfdsjfsfsfjsdjfsjffjsjfk</div>
-
+                                  <h5 class="card-title"><strong>{{$vgd->scholarship_name}}</strong></h5>
+                                  <div class="card-subtitle">{{$vgd->scholarship_desc}}</div>
                                 </div>
                               </div>
                              
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong></strong></li>
-                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong></strong></li>
+                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$vgd->slot}} </strong></li>
+                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$vgd->amount}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$vgd->deadline}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$vgd->status}}</strong></li>
                               </ul>
                              </div>
-                            @guest
-                             @else
+                            @if(Auth::check())
+                            @if($vgd->status == "OPEN")
                              <div class="card-footer">
                               <div>
-                                <a href="#" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="/scholarship/vg-dhvtsu" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
-                             @endguest
+                             @endif
+                             @endif
                           </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="card" style="width:250px; height:400px;">
+                        <div class="card">
                           <img class="card-img-top" src="{{asset('images/fa4.jpg')}}" alt="Card image" style="width: 100%;">
                           <div class="card-body">
                               <div class="container">
                                 <div class="row clamp-name clamp-lines">
-                                  <h5 class="card-title"><strong>Graduate from public</strong></h5>
-                                  <div class="card-subtitle">fddsfdsjfsfsfjsdjfsjffjsjfk</div>
-
+                                  <h5 class="card-title"><strong>{{$hr->scholarship_name}}</strong></h5>
+                                  <div class="card-subtitle">{{$hr->scholarship_desc}}</div>
                                 </div>
                               </div>
                              
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong></strong></li>
-                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong> </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong></strong></li>
+                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$hr->slot}} </strong></li>
+                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$hr->amount}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$hr->deadline}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$hr->status}}</strong></li>
                               </ul>
                              </div>
-                             @guest
-                             @else
+                             @if(Auth::check())
+                             @if($hr->status == "OPEN")
                              <div class="card-footer">
                               <div>
-                                <a href="#" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="/scholarship/honor-rank" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
-                             @endguest
+                             @endif
+                             @endif
                           </div>
                       </div>
-                  </div>
+                    </div>
                   </div>
                   
                 </div>
@@ -631,6 +632,12 @@
   $(document).ready(function(){
     $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   });
+// function autoRefreshPage()
+//     {
+//         window.location = window.location.href;
+//     }
+//     setInterval('autoRefreshPage()', 10000);
+   
 
 </script>
 </html>

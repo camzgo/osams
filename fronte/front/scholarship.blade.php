@@ -20,19 +20,19 @@
             <div class="card ">
               <div class="card-header bg-primary"><strong>Dashboard</strong></div>
               <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
+                <a href="/profile" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
                   <div class="text-bold">
                     <span class="fa fa-user"></span> &nbsp;
                     <span>My Profile</span>
                   </div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4 bg-secondary">
+                <a href="/scholarship" class="list-group-item list-group-item-action d-flex justify-content-between px-4 active">
                   <div class="text-bold">
                     <span class="fa fa-graduation-cap"></span>
                     <span>My Scholarship</span>
                   </div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
+                <a href="/account" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
                   <div class="text-bold">
                     <span class="fa fa-cog"></span> &nbsp;
                     <span>Account Settings</span>

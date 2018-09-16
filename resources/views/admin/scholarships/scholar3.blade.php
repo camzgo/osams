@@ -769,17 +769,17 @@ $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   $('#emobile_no').mask('0000000000', {"clearIncomplete": true});
   
-  var gen = $('#gender2').val();
+  // var gen = $('#gender2').val();
   
-  document.getElementById('gender').value=gen;
-  var pathname = window.location.pathname;
-  var parts = pathname.split('/');
-  console.log(parts[5]);
+  // document.getElementById('gender').value=gen;
+  // var pathname = window.location.pathname;
+  // var parts = pathname.split('/');
+  // console.log(parts[5]);
 
-  $('#sid').val(parts[5]);
+  // $('#sid').val(parts[5]);
 
-  var id = $('input[name=title]').val();
-  $('#title_scholar').text(id);
+  // var id = $('input[name=title]').val();
+  // $('#title_scholar').text(id);
 
 });
 

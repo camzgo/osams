@@ -18,21 +18,21 @@
         <div class="row">
           <div class="col-lg-2 ml-4">
             <div class="card ">
-              <div class="card-header bg-primary"><strong>Dashboard</strong></div>
+              <div class="card-header"><strong>Dashboard</strong></div>
               <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4 bg-secondary">
+                <a href="/profile" class="list-group-item list-group-item-action d-flex justify-content-between px-4 active">
                   <div class="text-bold">
                     <span class="fa fa-user"></span> &nbsp;
                     <span>My Profile</span>
                   </div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
+                <a href="/scholarship" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
                   <div class="text-bold">
                     <span class="fa fa-graduation-cap"></span>
                     <span>My Scholarship</span>
                   </div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
+                <a href="/account" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
                   <div class="text-bold">
                     <span class="fa fa-cog"></span> &nbsp;
                     <span>Account Settings</span>
@@ -58,11 +58,11 @@
                         <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" value="{{Auth::user()->first_name}}">
                       </div>
                       <div class="col-md-3">
-                        <label>Middle Name <small>(required)</small></label>
+                        <label>Middle Name </label>
                         <input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Middle Name" value="{{Auth::user()->middle_name}}">
                       </div>
                       <div class="col-md-3">
-                        <label>Suffix <small>(required)</small></label>
+                        <label>Suffix </label>
                         <input type="text" class="form-control" name="suffix" id="suffix" placeholder="Suffix (e.g., Jr. Sr. III)" value="{{Auth::user()->suffix}}">
                       </div>
                     </div>
