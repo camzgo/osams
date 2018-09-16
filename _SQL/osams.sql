@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2018 at 08:56 PM
+-- Generation Time: Sep 16, 2018 at 11:07 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -167,10 +167,9 @@ CREATE TABLE `application` (
 --
 
 INSERT INTO `application` (`id`, `application_status`, `renew`, `barcode_image`, `barcode_number`, `applicant_id`, `scholar_id`, `application_isdel`, `created_at`, `updated_at`) VALUES
-(1, 'Pending', 0, 'NONE', 'PjGoU6prHf', 3, 6, NULL, '2018-09-08 07:52:40', '2018-09-08 10:08:49'),
-(2, 'Approved', 0, 'NONE', '8wUpDQauxp', 1, 4, NULL, '2018-09-08 08:01:28', '2018-09-08 09:01:25'),
-(3, 'Approved', 0, 'NONE', 'dQ6cmjqlfK', 2, 8, NULL, '2018-09-08 08:04:54', '2018-09-08 09:01:44'),
-(4, 'Pending', 0, 'NONE', '0zjPuNEWfP', 5, 6, NULL, '2018-09-15 09:49:46', '2018-09-15 09:49:46');
+(1, 'Pending', 0, 'NONE', 'IIY3fuIqlM', 1, 2, NULL, '2018-09-16 11:17:52', '2018-09-16 11:17:52'),
+(3, 'Pending', 0, 'NONE', 'xKDWFDmXw4', 2, 8, NULL, '2018-09-16 12:03:33', '2018-09-16 12:03:33'),
+(4, 'Pending', 0, 'NONE', 'dO9Nt2ikiM', 5, 6, NULL, '2018-09-16 12:24:48', '2018-09-16 12:24:48');
 
 -- --------------------------------------------------------
 
@@ -220,7 +219,9 @@ CREATE TABLE `education_info` (
 --
 
 INSERT INTO `education_info` (`id`, `course`, `yr_lvl`, `yr_entered`, `duration`, `college_name`, `college_address`, `applicant_id`, `created_at`, `updated_at`) VALUES
-(1, 'Bachelor of Science in Information System', '2nd', '2017', 4, 'Our Lady of Fatima University', 'San Fernando, Pampanga', 5, NULL, '2018-09-14 12:17:29');
+(1, 'Bachelor of Science in Information System', '2nd', '2017', 4, 'Our Lady of Fatima University', 'San Fernando, Pampanga', 5, NULL, '2018-09-14 12:17:29'),
+(2, 'Bachelor of Science in Information Technology', '4th', '2015', 4, 'STI College', 'San Fernando, Pampanga', 1, NULL, NULL),
+(3, 'Bachelor of Science in Information Technology', '4th', '2015', 4, 'STI College', 'San Fernando, Pampanga', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -265,7 +266,7 @@ CREATE TABLE `eefap` (
 --
 
 INSERT INTO `eefap` (`id`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `fb_account`, `gsurname`, `gfirst_name`, `gmiddle_name`, `gsuffix`, `gmobile_number`, `municipality`, `barangay`, `street`, `college_name`, `college_address`, `course`, `major`, `program_type`, `year_level`, `graduating`, `general_average`, `spes`, `scholarship_id`, `applicant_id`, `application_id`, `created_at`, `updated_at`) VALUES
-(1, 'Ocampo', 'Albert', 'Gold', 'Jr.', '9051241420', 'facebook.com/asadas', 'dsds', 'sds', 'ss', NULL, '1111111111', 'MEXICO', 'Parian (Poblacion)', 'example street', 'STI', 'JASA', 'dfd', 'General', '2 Years Course', '4th', 'YES', 'df', 'YES', 4, 1, 2, NULL, '2018-09-15 09:38:49');
+(1, 'Ocampo', 'Albert', 'Gold', 'Jr.', '9051241420', 'facebook.com/ago', 'Ocampo', 'Mercy', 'Guinto', NULL, '9172550100', 'MACABEBE', 'Santo Rosario (Poblacion)', 'example street', 'STI College', 'San Fernando, Pampanga', 'Bachelor of Science in Information Technology', 'General', 'Bachelor\'s Degree', '4th', 'YES', '2.0', 'NO', 2, 1, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -305,7 +306,7 @@ CREATE TABLE `eefapgv` (
 --
 
 INSERT INTO `eefapgv` (`id`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `municipality`, `barangay`, `street`, `college_name`, `college_address`, `course`, `major`, `program_type`, `year_level`, `graduating`, `general_average`, `spes`, `awards`, `scholarship_id`, `applicant_id`, `application_id`) VALUES
-(1, NULL, '2018-09-15 08:58:32', 'Ocampo', 'Camille', 'Fierro', NULL, '9051124520', 'MEXICO', 'Parian (Poblacion)', 'dfd', 'STi College', 'JASA', 'BSIT', 'General', 'Bachelor\'s Degree', '4th', 'YES', 'gg', 'YES', 'Highest Honors', 8, 2, 3);
+(1, NULL, NULL, 'Ocampo', 'Camille', 'Fierro', NULL, '9051124520', 'MEXICO', 'Parian (Poblacion)', 'example street', 'STI College', 'San Fernando, Pampanga', 'Bachelor of Science in Information Technology', 'General', 'Bachelor\'s Degree', '4th', 'YES', '2.0', 'NO', 'Highest Honors', 8, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -364,7 +365,9 @@ CREATE TABLE `guardian_info` (
 --
 
 INSERT INTO `guardian_info` (`id`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `gender`, `nationality`, `occupation`, `civil_status`, `municipality`, `barangay`, `street`, `bday`, `relationship`, `applicant_id`, `created_at`, `updated_at`) VALUES
-(1, 'Khan', 'Cong', 'Low', NULL, '9172564236', 'Male', 'Chinese', 'Businessman', 'Married', 'CITY OF SAN FERNANDO (Capital)', 'Sindalan', 'example street', '2018-09-15', 'Father', 5, NULL, '2018-09-14 11:40:50');
+(1, 'Khan', 'Cong', 'Low', NULL, '9172564236', 'Male', 'Chinese', 'Businessman', 'Married', 'CITY OF SAN FERNANDO (Capital)', 'Sindalan', 'example street', '2018-09-15', 'Father', 5, NULL, '2018-09-14 11:40:50'),
+(2, 'Ocampo', 'Mercy', 'Guinto', NULL, '9172550100', 'Female', 'Filipino', 'Housewife', 'Married', 'MACABEBE', 'Santo Rosario (Poblacion)', 'example street', '2018-09-17', 'Mother', 1, NULL, NULL),
+(3, 'Fierro', 'Jenalyn', 'Solomon', NULL, '9172005421', 'Female', 'Filipino', 'Radiologist', 'Married', 'MEXICO', 'Parian (Poblacion)', 'example street', '2018-09-17', 'Mother', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -401,7 +404,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (54, '2018_09_08_042342_create_approval_date_table', 11),
 (55, '2018_09_14_151449_create_table_personal_info', 12),
 (56, '2018_09_14_152021_create_table_guardian_info', 12),
-(57, '2018_09_14_153325_create_table_education_info', 12);
+(57, '2018_09_14_153325_create_table_education_info', 12),
+(58, '2018_09_16_135323_create_notifications_table', 13),
+(59, '2018_09_16_162352_create_table_tracking', 14);
 
 -- --------------------------------------------------------
 
@@ -966,6 +971,23 @@ INSERT INTO `munbar` (`id`, `municipality`, `barangay`, `district`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notifiable_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notifiable_id` bigint(20) UNSIGNED NOT NULL,
+  `data` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `read_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pcl`
 --
 
@@ -1016,7 +1038,8 @@ CREATE TABLE `pcl` (
 INSERT INTO `pcl` (`id`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `district`, `municipality`, `barangay`, `street`, `school_enrolled`, `course`, `year_level`, `gender`, `birthdate`, `nationality`, `religion`, `civil_status`, `birth_place`, `fsurname`, `ffirst_name`, `fmiddle_name`, `fsuffix`, `foccupation`, `msurname`, `mfirst_name`, `mmiddle_name`, `msuffix`, `moccupation`, `address`, `emergency`, `emobile_number`, `scholarship_id`, `applicant_id`, `application_id`) VALUES
 (1, NULL, NULL, 'Cong', 'King', 'Ca', NULL, '9172245112', '3rd District', 'MEXICO', 'Nueva Victoria', 'cv', 'dfdfd', 'dfdf', 'df', 'Male', '1998-02-05', 'Filipino', 'The Church of Jesus Christ of Latter-day Saints', 'Single', 'fdsfsdfsdf', 'dfdf', 'dfd', 'fd', NULL, 'dfdf', 'fdf', 'ddfd', 'fd', NULL, 'dfdf', 'dfdfdfd', 'fdfdfd', '9172245112', 6, 3, 4),
 (2, NULL, NULL, 'Cong', 'King', 'Ca', NULL, '9172245112', '1st District', 'ANGELES CITY', 'Agapito del Rosario', 'sample street', 'fdfd', 'dfdf', 'df', 'Male', '1998-02-05', 'Filipino', 'Roman Catholic', 'Single', 'sample birth place', 'fdgdfg', 'dfgfdg', 'gfg', NULL, 'fgf', 'fgfg', 'fgfg', 'fgfg', NULL, 'fgf', 'fgff', 'dfdf', '9172245112', 6, 3, 1),
-(3, NULL, '2018-09-15 10:54:05', 'Khan', 'Seng', 'Sy', NULL, '9172516220', '1st District', 'ANGELES CITY', 'Balibago', 'example street', 'STI', 'JASAASA', '2nd', 'Female', '1997-02-02', 'Filipino', 'Roman Catholic', 'Single', 'example bplace', 'wew', 'hew', NULL, NULL, 'dfcvxh', 'ewed', 'dsg', NULL, NULL, 'fhghs', 'qwewe', 'emersfdfdsf', '9172516220', 6, 5, 4);
+(3, NULL, '2018-09-15 10:54:05', 'Khan', 'Seng', 'Sy', NULL, '9172516220', '1st District', 'ANGELES CITY', 'Balibago', 'example street', 'STI', 'JASAASA', '2nd', 'Female', '1997-02-02', 'Filipino', 'Roman Catholic', 'Single', 'example bplace', 'wew', 'hew', NULL, NULL, 'dfcvxh', 'ewed', 'dsg', NULL, NULL, 'fhghs', 'qwewe', 'emersfdfdsf', '9172516220', 6, 5, 4),
+(4, NULL, NULL, 'Khan', 'Seng', 'Sy', NULL, '9172516220', '2nd District', 'PORAC', 'Balubad', 'Example', 'Our Lady of Fatima University', 'Bachelor of Science in Information System', '2nd', 'Female', '1997-02-02', 'Filipino', 'Roman Catholic', 'Single', 'aa', 'fsdfdsf', 'fsdfdsfs', 'fdsf', 'fdf', 'dfd', 'fdsf', 'sdfsdfds', 'dfdsf', 'ddf', 'dfdf', 'dfd', 'fdsfds', '9172516220', 6, 5, 4);
 
 -- --------------------------------------------------------
 
@@ -1044,7 +1067,8 @@ CREATE TABLE `personal_info` (
 
 INSERT INTO `personal_info` (`id`, `nationality`, `religion`, `civil_status`, `birth_place`, `municipality`, `barangay`, `street`, `applicant_id`, `created_at`, `updated_at`) VALUES
 (1, 'Filipino', 'Roman Catholic', 'Single', 'aa', 'APALIT', 'Balucuc (Nuestra Señora de la Divina Pastora)', 'Example', 5, NULL, '2018-09-14 10:51:17'),
-(2, 'Filipino', 'Roman Catholic', 'Married', 'example birth place', 'MEXICO', 'Parian (Poblacion)', 'example street', 2, NULL, NULL);
+(2, 'Filipino', 'Roman Catholic', 'Single', 'example birth place', 'MEXICO', 'Parian (Poblacion)', 'example street', 2, NULL, '2018-09-16 11:54:34'),
+(3, 'Filipino', 'Roman Catholic', 'Single', 'example bplace', 'MACABEBE', 'Santo Rosario (Poblacion)', 'example street', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -45006,13 +45030,13 @@ CREATE TABLE `scholarships` (
 
 INSERT INTO `scholarships` (`id`, `scholarship_name`, `scholarship_desc`, `amount`, `deadline`, `slot`, `status`, `created_at`, `updated_at`, `type`) VALUES
 (1, 'NCW', 'Nanay Community Workers', 5000, '2018-08-27', 500, 'OPEN', NULL, '2018-09-03 10:05:30', 'eefap'),
-(2, 'GAD', 'Gender and Development', 3000, '2018-08-25', 1000, 'OPEN', NULL, '2018-09-03 10:06:03', 'eefap'),
-(3, 'VG OLD and NEW', 'Vice Governor Old and New Applicant', 5000, '2018-10-09', 200, 'OPEN', NULL, '2018-09-03 10:32:59', 'eefap'),
-(4, 'GRADUATE FROM PUBLIC', 'Students who are graduated in public schools', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 10:14:48', 'eefap'),
-(5, 'GRADUATE FROM PRIVATE', 'Students who are graduated in private schools', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 10:14:42', 'eefap'),
+(2, 'GAD', 'Gender and Development Scholars', 3000, '2018-08-25', 1000, 'OPEN', NULL, '2018-09-03 10:06:03', 'eefap'),
+(3, 'VG OLD and NEW', 'Vice Governor Old and New', 5000, '2018-10-09', 200, 'OPEN', NULL, '2018-09-03 10:32:59', 'eefap'),
+(4, 'GRADUATE FROM PUBLIC', 'Students from public', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 10:14:48', 'eefap'),
+(5, 'GRADUATE FROM PRIVATE', 'Students from private ', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 10:14:42', 'eefap'),
 (6, 'PCL', 'Pampanga Councilors League', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 11:12:14', 'pcl'),
 (7, 'VG DHVTSU', 'Scholars from DHVTSU', 5000, '2018-09-06', 500, 'OPEN', NULL, NULL, 'eefap-gv'),
-(8, 'HONORS and RANKS', 'Students who have honors or ranks', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 11:12:22', 'eefap-gv');
+(8, 'HONORS and RANKS', 'Students with honors or ranks', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 11:12:22', 'eefap-gv');
 
 -- --------------------------------------------------------
 
@@ -45050,6 +45074,21 @@ INSERT INTO `students` (`id`, `first_name`, `last_name`, `created_at`, `updated_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tracking`
+--
+
+CREATE TABLE `tracking` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `log` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stage` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `scholarship_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -45076,10 +45115,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `gender`, `bday`, `applicant_isdel`, `suffix`, `mobile_number`, `profile_photo`) VALUES
-(1, 'gold@mail.com', '$2y$10$XI.K4/qIMsyUQ6Q49.uhuOocu4CyeGxBaZQ59vqCLrRinbig63wi6', 'zeKL2OPfQLpEjcOYaNklQ3lFTAguL48Vh0sIc2ok85SELLTYyR3mW4kMXOab', '2018-08-08 06:04:07', '2018-08-16 08:17:54', 'Ocampo', 'Albert', 'Gold', 'Male', '1999-04-04', '0', 'Jr.', '9051241420', NULL),
-(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', '0J71wuv2UPY2cGJVP9XrEvB4fom5toIFeF3clKSW1zGZohv8lpojcznn2qx6', '2018-08-09 15:16:18', '2018-08-16 08:17:58', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', NULL, '9051124520', NULL),
+(1, 'gold@mail.com', '$2y$10$XI.K4/qIMsyUQ6Q49.uhuOocu4CyeGxBaZQ59vqCLrRinbig63wi6', '0hD6KnI1TSmFDfAbcoep74voEDmJUxPWuTv7Sxohb0kEGhAaKYKKvCdOR1LU', '2018-08-08 06:04:07', '2018-08-16 08:17:54', 'Ocampo', 'Albert', 'Gold', 'Male', '1999-04-04', '0', 'Jr.', '9051241420', NULL),
+(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', 'aSqO9EcKies32RuYtHrjG8HyTwHLZGb3T0myrhrIvgtiOQAYkg7L4U9wAazJ', '2018-08-09 15:16:18', '2018-08-16 08:17:58', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', NULL, '9051124520', NULL),
 (3, 'cong@mail.com', '$2y$10$9luqQ659uIm1WurOBMMTQO1d8xFwKNf4CpBbJCV290ALkGLF5UG8K', 'xYd77OqpHEXPD7ZO1bTxfvSrmCBMVCaZPiKlZZbqGFRpjjSoVDD3z5LFUAo1', '2018-08-18 09:12:14', '2018-08-18 09:12:14', 'Cong', 'King', 'Ca', 'Male', '1998-02-05', '0', NULL, '9172245112', NULL),
-(5, 'khan@mail.com', '$2y$10$KS9I/Myw4Q1FJ0jYgsn86.q7iUkRcOg0RoQC/I6tiTBTE1U6s1NmC', 'woSI1O7IVZXGwmoRjycgCRjo3igFLwG6PCxHW5aUaxubeV5RbQFCuwxQOKDs', '2018-09-14 05:33:49', '2018-09-14 23:58:18', 'Khan', 'Seng', 'Sy', 'Female', '1997-02-02', '0', NULL, '9172516220', NULL);
+(5, 'khan@mail.com', '$2y$10$KS9I/Myw4Q1FJ0jYgsn86.q7iUkRcOg0RoQC/I6tiTBTE1U6s1NmC', 'TovBaqNBQ9zZ7Fdzj9korYJaIO7m8CvlsaHxZpkTWszxzI62YKtJHVwZVh9p', '2018-09-14 05:33:49', '2018-09-16 12:58:29', 'Khan', 'Seng', 'Sy', 'Female', '1997-02-02', '0', NULL, '9172516220', 'avatar5_1537131509.png');
 
 --
 -- Indexes for dumped tables
@@ -45165,6 +45204,13 @@ ALTER TABLE `munbar`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `notifications_notifiable_type_notifiable_id_index` (`notifiable_type`,`notifiable_id`);
+
+--
 -- Indexes for table `pcl`
 --
 ALTER TABLE `pcl`
@@ -45219,6 +45265,12 @@ ALTER TABLE `students`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tracking`
+--
+ALTER TABLE `tracking`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -45269,13 +45321,13 @@ ALTER TABLE `approval_date`
 -- AUTO_INCREMENT for table `education_info`
 --
 ALTER TABLE `education_info`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `eefap`
 --
 ALTER TABLE `eefap`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `eefapgv`
@@ -45293,13 +45345,13 @@ ALTER TABLE `faquestions`
 -- AUTO_INCREMENT for table `guardian_info`
 --
 ALTER TABLE `guardian_info`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `munbar`
@@ -45311,13 +45363,13 @@ ALTER TABLE `munbar`
 -- AUTO_INCREMENT for table `pcl`
 --
 ALTER TABLE `pcl`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `personal_info`
 --
 ALTER TABLE `personal_info`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `refbrgy`
@@ -45354,6 +45406,12 @@ ALTER TABLE `scholarships`
 --
 ALTER TABLE `students`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `tracking`
+--
+ALTER TABLE `tracking`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
