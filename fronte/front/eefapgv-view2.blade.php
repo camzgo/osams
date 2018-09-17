@@ -435,15 +435,39 @@ $(document).ready(function(){
   document.getElementById('spes').value="{{$eefapgv->spes}}";
   var rb = "{{$eefapgv->awards}}";
 
-  // switch (rb) {
-  //   case 'Highest Honors' :
-  //     document.getElementById('rb5').checked;
-  //     break;
-  //   default:
-  //   console.log(
-  //     'Error'
-  //   );
+  // if(rb == "Highest Honors")
+  // {
+  //   document.getElementById("rb1").checked=true;
   // }
+  // else if(rb == "Highest Honors")
+  // {
+  //   document.getElementById("rb1").checked=true;
+  // }
+
+  switch (rb) {
+    case 'Highest Honors' :
+      document.getElementById("rb1").checked=true;
+      break;
+    case 'High Honors' :
+      document.getElementById("rb2").checked=true;
+      break;
+    case 'Honors' :
+      document.getElementById("rb3").checked=true;
+      break;
+    case 'SK Chairman' :
+      document.getElementById("rb4").checked=true;
+      break;
+    case 'SK Councilors' :
+      document.getElementById("rb5").checked=true;
+      break;
+    case 'None/VG DHVTSU' :
+      document.getElementById("rb6").checked=true;
+      break;
+    default:
+    console.log(
+      'Error'
+    );
+  }
   
 
 });

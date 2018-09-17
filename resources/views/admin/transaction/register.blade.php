@@ -112,7 +112,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/" class="nav-link">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Dashboard
@@ -120,7 +120,7 @@
             </a>
           </li>
            <li class="nav-item">
-            <a href="/tracking" class="nav-link">
+            <a href="/admin/tracking" class="nav-link">
               <i class="nav-icon fa fa-map-marker"></i>
               <p>
                 Tracking
@@ -137,22 +137,22 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/reg" class="nav-link active">
-                  &nbsp
+                <a href="/admin/reg" class="nav-link active">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-sign-in nav-icon"></i>
                   <p>Register</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/apply" class="nav-link">
-                  &nbsp
+                <a href="/admin/apply" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/approve" class="nav-link">
-                  &nbsp
+                <a href="/admin/approve" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-check nav-icon"></i>
                   <p>Approve</p>
                 </a>
@@ -169,43 +169,43 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/announcement" class="nav-link">
-                  &nbsp
+                <a href="/admin/announcement" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-bullhorn nav-icon"></i>
                   <p>Announcement</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/applicant" class="nav-link">
-                  &nbsp
+                <a href="/admin/applicant" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-user nav-icon"></i>
                   <p>Applicant</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/application" class="nav-link">
-                  &nbsp
+                <a href="/admin/application" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-folder nav-icon"></i>
                   <p>Application</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/faqs" class="nav-link">
-                  &nbsp
+                <a href="/admin/faqs" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-question nav-icon"></i>
                   <p>FAQs</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/scholarship" class="nav-link">
-                  &nbsp
+                <a href="/admin/scholarship" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
                   <p>Scholarship</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/employee" class="nav-link">
-                  &nbsp
+                <a href="/admin/employee" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-users nav-icon"></i>
                   <p>Employee</p>
                 </a>
@@ -223,15 +223,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  &nbsp
+                <a href="/admin/audit-log" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-history nav-icon"></i>
                   <p>Audit Log</p>
                 </a>
               </li>
               <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
-                  &nbsp
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-archive nav-icon"></i>
                   <p>Archive
                     <i class="right fa fa-angle-left"></i>
@@ -240,36 +240,36 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="/archive/announcement" class="nav-link">
-                          &nbsp &nbsp &nbsp
+                        <a href="/admin/archive/announcement" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-bullhorn nav-icon"></i>
                         <p>Announcement</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/archive/applicant" class="nav-link">
-                          &nbsp &nbsp &nbsp
+                        <a href="/admin/archive/applicant" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-user nav-icon"></i>
                         <p>Applicant</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/archive/application" class="nav-link">
-                          &nbsp &nbsp &nbsp
+                        <a href="/admin/archive/application" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-folder nav-icon"></i>
                         <p>Application</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/archive/faqs" class="nav-link">
-                          &nbsp &nbsp &nbsp
+                        <a href="/admin/archive/faqs" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-question nav-icon"></i>
                         <p>FAQs</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/archive/employee" class="nav-link">
-                          &nbsp &nbsp &nbsp
+                        <a href="/admin/archive/employee" class="nav-link">
+                          &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-users nav-icon"></i>
                         <p>Employee</p>
                         </a>
@@ -277,15 +277,15 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  &nbsp
+                <a href="/admin/backup-restore" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-hdd-o nav-icon"></i>
                   <p>Backup and Restore</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  &nbsp
+                <a href="/admin/permission" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-lock nav-icon"></i>
                   <p>Level of Access</p>
                 </a>
@@ -302,22 +302,22 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  &nbsp
+                <a href="/admin/reports/master-list" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p> Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  &nbsp
+                <a href="/admin/reports/scholarship-programs" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Scholarship Programs</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  &nbsp
+                <a href="/admin/reports/application-forms" class="nav-link">
+                  &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Application Forms</p>
                 </a>

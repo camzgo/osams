@@ -344,11 +344,20 @@
                              </div>
                              @if(Auth::check())
                              @if($ncw->status == "OPEN")
+                             @if($ck==0)
                              <div class="card-footer">
                               <div>
                                 <a href="/scholarship/ncw" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
+                             @else
+                             <div class="card-footer">
+                              <div>
+                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                              </div>
+                             </div>
+
+                             @endif
                              @endif
                              @endif
                           </div>
@@ -375,11 +384,20 @@
                              </div>
                             @if(Auth::check())
                             @if($gad->status == "OPEN")
+                            @if($ck==0)
                              <div class="card-footer">
                               <div>
                                 <a href="/scholarship/gad" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
+                             @else
+                             <div class="card-footer">
+                              <div>
+                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                              </div>
+                             </div>
+
+                             @endif
                              @endif
                              @endif
                           </div>
@@ -407,12 +425,20 @@
                              </div>
                              @if(Auth::check())
                              @if($vg->status == "OPEN")
-                          
+                             @if($ck==0)
                              <div class="card-footer">
                               <div>
                                 <a href="/scholarship/vg-oldnew" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
+                             @else
+                             <div class="card-footer">
+                              <div>
+                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                              </div>
+                             </div>
+
+                             @endif
                              @endif
                              @endif
                           </div>
@@ -439,11 +465,20 @@
                              </div>
                             @if(Auth::check())
                             @if($gp->status == "OPEN")
+                            @if($ck==0)
                              <div class="card-footer">
                               <div>
                                 <a href="/scholarship/graduate-public" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
+                             @else
+                             <div class="card-footer">
+                              <div>
+                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                              </div>
+                             </div>
+
+                             @endif
                              @endif
                              @endif
                           </div>
@@ -479,11 +514,20 @@
                              </div>
                              @if(Auth::check())
                              @if($gpr->status == "OPEN")
+                             @if($ck==0)
                              <div class="card-footer">
                               <div>
                                 <a href="/scholarship/graduate-private" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
+                             @else
+                             <div class="card-footer">
+                              <div>
+                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                              </div>
+                             </div>
+
+                             @endif
                              @endif
                              @endif
                           </div>
@@ -508,13 +552,19 @@
                              </div>
                             @if(Auth::check())
                             @if($pcl->status == "OPEN")
-                      
+                            @if($ck==0)
                              <div class="card-footer">
                               <div>
                                 <a href="/scholarship/pcl" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
-
+                             @else
+                             <div class="card-footer">
+                              <div>
+                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                              </div>
+                             </div>
+                             @endif
                              @endif
                              @endif
                           </div>
@@ -539,11 +589,20 @@
                              </div>
                             @if(Auth::check())
                             @if($vgd->status == "OPEN")
+                            @if($ck==0)
                              <div class="card-footer">
                               <div>
                                 <a href="/scholarship/vg-dhvtsu" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
+                             @else
+                             <div class="card-footer">
+                              <div>
+                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                              </div>
+                             </div>
+
+                             @endif
                              @endif
                              @endif
                           </div>
@@ -568,11 +627,19 @@
                              </div>
                              @if(Auth::check())
                              @if($hr->status == "OPEN")
+                             @if($ck==0)
                              <div class="card-footer">
                               <div>
                                 <a href="/scholarship/honor-rank" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
+                             @else
+                             <div class="card-footer">
+                              <div>
+                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                              </div>
+                             </div>
+                             @endif
                              @endif
                              @endif
                           </div>

@@ -7,7 +7,12 @@ use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Scholarship;
 use DataTables;
-
+use App\Tracking;
+use Itexmo;
+use App\User;
+use Auth;
+use Mail;
+use App\Mail\Awarding;
 class TrackingController extends Controller
 {
     //
@@ -20,7 +25,8 @@ class TrackingController extends Controller
 
      function getdata()
     {
-        $scholarships = Scholarship::select('id','scholarship_name', 'scholarship_desc', 'amount', 'deadline', 'slot', 'status')->where('status', 'CLOSED');
+        $scholarships = DB::table('tracking')->Join('scholarships', 'scholarships.id', '=', 'tracking.scholarship_id')->select('tracking.id','scholarships.scholarship_name', 'tracking.stage')
+        ->where('scholarships.status', 'CLOSED')->where('tracking.status', '!=', 'RELEASED')->get();
         return DataTables::of($scholarships)
 
         ->addColumn('action', function($scholarships){
@@ -29,36 +35,20 @@ class TrackingController extends Controller
                 
             
         })
-        ->addColumn('badge', function($scholarships){
-            // return '<button class="btn btn-primary" >'.$scholarships->status.'</button>';
-            if($scholarships->status=="OPEN")
-            {
-                return '<h4><span class="badge badge-success">'.$scholarships->status.'</span></h4>';
-            }
-            else
-            {
-                return '<h4><span class="badge badge-danger">'.$scholarships->status.'</span></h4>';
-            }
-            
-        })
-        
-        // ->addColumn('checkbox', '<input type="checkbox" name="student_checkbox[]" class="student_checkbox" value="{{$id}}"/>')
-        // ->rawColumns(['checkbox', 'action'])
-        ->rawColumns(['badge', 'action'])
         ->make(true);
 
     }
     function fetchdata(Request $request)
     {
         $id = $request->input('id');
-        $scholarship = Scholarship::find($id);
+        $tracking = Tracking::find($id);
         $output = array(
-            'scholarship_name'    =>  $scholarship->scholarship_name,
-            'scholarship_desc'     =>  $scholarship->scholarship_desc,
-            'amount'              =>   $scholarship->amount,
-            'deadline'             => $scholarship->deadline,
-            'slot'                => $scholarship->slot,
-            'status'               =>$scholarship->status
+            'stage'    =>  $tracking->stage,
+            'status'     =>  $tracking->status
+            // 'amount'              =>   $scholarship->amount,
+            // 'deadline'             => $scholarship->deadline,
+            // 'slot'                => $scholarship->slot,
+            // 'status'               =>$scholarship->status
         );
         echo json_encode($output);
         //eval ($goback);
@@ -67,15 +57,17 @@ class TrackingController extends Controller
     function postdata(Request $request)
     {
         
-    //     protected $rules =
-    // [
-    //     'title' => 'required|min:2|max:32|regex:/^[a-z ,.\'-]+$/i',
-    //     'content' => 'required|min:2|max:128|regex:/^[a-z ,.\'-]+$/i'
-    // ];
-
+         $validation = Validator::make($request->all(), [
+            'scholarship_id' => 'required',
+            'status'  => 'required',
+            // 'amount'            => 'required',
+            // 'deadline'         => 'required',
+            // 'slot'            => 'required',
+            //'status'          => 'required'
+        
+        ]);
         $error_array = array();
         $success_output = '';
-        $refresh = "return redirect('/scholarship');";
         
         if ($validation->fails())
         {
@@ -89,15 +81,140 @@ class TrackingController extends Controller
 
             if($request->get('button_action') == 'update')
             {
-                $scholarship = Scholarship::find($request->get('scholarship_id'));
-                $scholarship->scholarship_name = $request->get('scholarship_name');
-                $scholarship->scholarship_desc = $request->get('scholarship_desc');
-                $scholarship->amount = $request->get('amount');
-                $scholarship->deadline =$request->get('deadline');
-                $scholarship->slot = $request->get('slot');
-                $scholarship->save();
+                $track = Tracking::find($request->get('scholarship_id'));
+                $track->stage = $request->get('status');
+                $track->save();
                 $success_output = '<div class="alert alert-success">Success!</div>';
+                
+                $stat =  $request->get('status');
+                
+                if($stat == 'Approved')
+                {
+                    $log = DB::table('log')->insert([
+                        'desc' => 'Your application has been approved.',
+                        'scholar_id' => $request->get('scholarship_id'),
+                        'tracking_id' => $request->get('scholarship_id'),
+                        'created_at' => date('Y-m-d H:i:s')
+                    ]);
+                }
+                else if($stat == 'Re-Checking')
+                {
+                    $log = DB::table('log')->insert([
+                        'desc' => 'Your application is being re-check.',
+                        'scholar_id' => $request->get('scholarship_id'),
+                        'tracking_id' => $request->get('scholarship_id'),
+                        'created_at' => date('Y-m-d H:i:s')
+                    ]);
+                }
+                else if($stat == 'Consolidation')
+                {
+                    $log = DB::table('log')->insert([
+                        'desc' => 'Your application is being consolidate to ensure that there are no duplicate entry.',
+                        'scholar_id' => $request->get('scholarship_id'),
+                        'tracking_id' => $request->get('scholarship_id'),
+                        'created_at' => date('Y-m-d H:i:s')
+                    ]);
+                }
+                else if($stat == 'Payroll')
+                {
+                    $log = DB::table('log')->insert([
+                        'desc' => 'Printing of cheques.',
+                        'scholar_id' => $request->get('scholarship_id'),
+                        'tracking_id' => $request->get('scholarship_id'),
+                        'created_at' => date('Y-m-d H:i:s')
+                    ]);
+                }
+                else if($stat == 'Awarding')
+                {
+                    $log = DB::table('log')->insert([
+                        'desc' => 'Releasing of Cheques',
+                        'scholar_id' => $request->get('scholarship_id'),
+                        'tracking_id' => $request->get('scholarship_id'),
+                        'created_at' => date('Y-m-d H:i:s')
+                    ]);
 
+                    $track = Tracking::find($request->get('scholarship_id'));
+                    $track->status = 'RELEASED';
+                    $track->save();
+
+                    
+                    
+                    $scid = $request->get('scholarship_id');
+                    $scholar = DB::table('scholarships')->where('id', $scid)->first();
+                    
+                    $app = DB::table('application')->select('applicant_id')->where('scholar_id', $scid)
+                    ->where('application_status', 'Approved')->get();
+                    $user = DB::table('users')->where('id', $app)->get();
+
+                    if($scholar->type == "eefap")
+                    {
+                        $eefap = DB::table('eefap')->where('scholarship_id', $scid)->get();
+                        
+                        foreach($eefap->mobile_number as $no)
+                        {
+                            //$name = $eefap
+                            $res = Itexmo::to('0'.$no)->message('Hello '.$eefap->first_name.' you have been awarded a scholarship!' )->send();
+                           
+                            if($res == '0') {
+                                //
+                            }
+
+                            
+                        }
+
+                        foreach($user->email as $email)
+                        {
+                            \Mail::to($email)->send(new Awarding ($user));
+                        }
+                    }
+
+                    else if($scholar->type == "eefap-gv")
+                    {
+                        $eefap = DB::table('eefapgv')->where('scholarship_id', $scid)->get();
+                        
+                        foreach($eefapgv->mobile_number as $no)
+                        {
+                            //$name = $eefap
+                            $res = Itexmo::to('0'.$no)->message('Hello '.$eefapgv->first_name.' you have been awarded a scholarship!' )->send();
+                           
+                            if($res == '0') {
+                                //
+                            }
+                        }
+
+                        foreach($user->email as $email)
+                        {
+                            \Mail::to($email)->send(new Awarding ($user));
+                        }
+                    }
+
+                    else if($scholar->type == "pcl")
+                    {
+                        $eefap = DB::table('pcl')->where('scholarship_id', $scid)->get();
+                        
+                        foreach($pcl->mobile_number as $no)
+                        {
+                            //$name = $eefap
+                            $res = Itexmo::to('0'.$no)->message('Hello '.$pcl->first_name.' you have been awarded a scholarship!' )->send();
+                           
+                            if($res == '0') {
+                                //
+                            }
+                        }
+
+                        foreach($user->email as $email)
+                        {
+                            \Mail::to($email)->send(new Awarding ($user));
+                        }
+                    }
+
+                }
+
+
+            }
+            else if($request->get('button_action') == 'close')
+            {
+                return 'ERROR!';
             }
             
         }

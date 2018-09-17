@@ -98,7 +98,7 @@ class ApproveController extends Controller
 
             ]);
 
-            return redirect('/approve');
+            return redirect('/admin/approve');
 
         }
         else if ($request->get('action') == 'disapproved')
@@ -120,7 +120,7 @@ class ApproveController extends Controller
 
             // ]);
 
-            return redirect('/approve');
+            return redirect('/admin/approve');
         }
 
     }

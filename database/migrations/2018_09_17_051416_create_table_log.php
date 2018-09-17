@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableTracking extends Migration
+class CreateTableLog extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateTableTracking extends Migration
      */
     public function up()
     {
-        Schema::create('tracking', function (Blueprint $table) {
+        Schema::create('log', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('stage', 20);
-            $table->string('status', 20);
-            $table->integer('scholarship_id');
+            $table->string('desc', 250);
+            $table->integer('scholar_id');
+            $table->integer('tracking_id');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateTableTracking extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tracking');
+        Schema::dropIfExists('log');
     }
 }

@@ -75,7 +75,7 @@ class RegisterController extends Controller
             'bday'=>$data['bday'],
             'applicant_isdel' => 0,
             'mobile_number' => $data['mobile_no'],
-            // 'profile_photo' =>0,
+            'profile_photo' => 'noimage.jpg',
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
              

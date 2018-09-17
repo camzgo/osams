@@ -110,7 +110,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/" class="nav-link">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Dashboard
@@ -118,7 +118,7 @@
             </a>
           </li>
            <li class="nav-item">
-            <a href="/tracking" class="nav-link active">
+            <a href="/admin/tracking" class="nav-link bg-white">
               <i class="nav-icon fa fa-map-marker"></i>
               <p>
                 Tracking
@@ -135,21 +135,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/reg" class="nav-link">
+                <a href="/admin/reg" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-sign-in nav-icon"></i>
                   <p>Register</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/apply" class="nav-link">
+                <a href="/admin/apply" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/approve" class="nav-link">
+                <a href="/admin/approve" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-check nav-icon"></i>
                   <p>Approve</p>
@@ -167,42 +167,42 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/announcement" class="nav-link">
+                <a href="/admin/announcement" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-bullhorn nav-icon"></i>
                   <p>Announcement</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/applicant" class="nav-link">
+                <a href="/admin/applicant" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-user nav-icon"></i>
                   <p>Applicant</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/application" class="nav-link">
+                <a href="/admin/application" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-folder nav-icon"></i>
                   <p>Application</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/faqs" class="nav-link">
+                <a href="/admin/faqs" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-question nav-icon"></i>
                   <p>FAQs</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/scholarship" class="nav-link">
+                <a href="/admin/scholarship" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
                   <p>Scholarship</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/employee" class="nav-link">
+                <a href="/admin/employee" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-users nav-icon"></i>
                   <p>Employee</p>
@@ -221,7 +221,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/admin/audit-log" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-history nav-icon"></i>
                   <p>Audit Log</p>
@@ -238,35 +238,35 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="/archive/announcement" class="nav-link">
+                        <a href="/admin/archive/announcement" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-bullhorn nav-icon"></i>
                         <p>Announcement</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/archive/applicant" class="nav-link">
+                        <a href="/admin/archive/applicant" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-user nav-icon"></i>
                         <p>Applicant</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/archive/application" class="nav-link">
+                        <a href="/admin/archive/application" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-folder nav-icon"></i>
                         <p>Application</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/archive/faqs" class="nav-link">
+                        <a href="/admin/archive/faqs" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-question nav-icon"></i>
                         <p>FAQs</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/archive/employee" class="nav-link">
+                        <a href="/admin/archive/employee" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-users nav-icon"></i>
                         <p>Employee</p>
@@ -275,14 +275,14 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/admin/backup-restore" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-hdd-o nav-icon"></i>
                   <p>Backup and Restore</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/admin/permission" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-lock nav-icon"></i>
                   <p>Level of Access</p>
@@ -300,21 +300,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/admin/reports/master-list" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p> Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/admin/reports/scholarship-programs" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Scholarship Programs</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/admin/reports/application-forms" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
                   <p>Application Forms</p>
@@ -361,8 +361,9 @@
                <thead class="th-cl1">
                   <tr>
                      <th>Name</th>
-                     <th>Total Applications</th>
-                     <th>Amount</th>
+                     {{-- <th>Total Applications</th>
+                     <th>Amount</th> --}}
+                     <th>Status</th>
                      <th>Actions</th>
                      {{-- <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></button></th> --}}
                   </tr>
@@ -385,12 +386,12 @@
                   <div id="editForm">
                       <div class="col-md-8 justify-content-center">
                         <select name="status" id="status" class="form-control form-control-lg">
-                        <option value="Approved">Approved</option>
-                        <option value="Re-Checking">Re-Checking</option>
-                        <option value="Consolidaton">Consolidation</option>
-                        <option value="Payroll">Payroll</option>
-                        <option value="Releasing">Releasing</option>
-                      </select>
+                          <option value="Approved">Approved</option>
+                          <option value="Re-Checking">Re-Checking</option>
+                          <option value="Consolidation">Consolidation</option>
+                          <option value="Payroll">Payroll</option>
+                          <option value="Awarding">Awarding</option>
+                        </select>
                       </div>
                   </div>
 
@@ -452,8 +453,9 @@
                ajax: '{{ route('track.getdata') }}',
                columns: [
                         { data: 'scholarship_name', name: 'scholarship_name' },
-                        { data: 'scholarship_desc', name: 'scholarship_desc' },
-                        { data: 'amount', name: 'amount'},
+                        { data: 'stage', name: 'stage'},
+                        // { data: 'scholarship_desc', name: 'scholarship_desc' },
+                        // { data: 'amount', name: 'amount'},
                         { width: '20%', data: 'action', orderable:false, searchable: false}
                         
                         // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
@@ -473,7 +475,7 @@
         event.preventDefault();
         var form_data = $(this).serialize();
         $.ajax({
-            url:"{{ route('scholar.postdata') }}",
+            url:"{{ route('track.postdata') }}",
             method:"POST",
             data:form_data,
             dataType:"json",
@@ -493,30 +495,30 @@
                     $('#main_form')[0].reset();
                     $('#table').DataTable().ajax.reload();
                     $('#mainModal').modal('hide');
-                    if($('#action').val() == 'Edit')
+                    if($('#action').val() == 'Update')
                     {
                       swal(
                         'Success!',
-                        'Your data is updated',
+                        'Status has been updated',
                         'success'
                       )
                     }
-                    else if (($('#action').val() == 'Close'))
-                    {
-                      swal(
-                        'Success!',
-                        'You have successfully close the program',
-                        'success'
-                      )
-                    }
-                    else if (($('#action').val() == 'Open'))
-                    {
-                      swal(
-                        'Success!',
-                        'You have successfully open the program',
-                        'success'
-                      )
-                    }
+                    // else if (($('#action').val() == 'Close'))
+                    // {
+                    //   swal(
+                    //     'Success!',
+                    //     'You have successfully close the program',
+                    //     'success'
+                    //   )
+                    // }
+                    // else if (($('#action').val() == 'Open'))
+                    // {
+                    //   swal(
+                    //     'Success!',
+                    //     'You have successfully open the program',
+                    //     'success'
+                    //   )
+                    // }
                 }
             }
         })
@@ -526,18 +528,19 @@
         var id = $(this).attr("id");
         $('#form_output').html('');
         $.ajax({
-            url:"{{route('scholar.fetchdata')}}",
+            url:"{{route('track.fetchdata')}}",
             method:'get',
             data:{id:id},
             dataType:'json',
             success:function(data)
             {
              
-              $('#scholarship_name').val(data.scholarship_name);
-              $('#scholarship_desc').val(data.scholarship_desc);
-              $('#amount').val(data.amount);
-              $('#slot').val(data.slot);
-              $('#deadline').val(data.deadline);
+              // $('#scholarship_name').val(data.scholarship_name);
+              // $('#scholarship_desc').val(data.scholarship_desc);
+              // $('#amount').val(data.amount);
+              // $('#slot').val(data.slot);
+              // $('#deadline').val(data.deadline);
+              document.getElementById('status').value=data.stage;
               $('#scholarship_id').val(id);
               $('#mainModal').modal('show');
               $('#action').val('Update');

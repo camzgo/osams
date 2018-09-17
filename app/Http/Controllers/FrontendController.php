@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Hash;
 use App\SendCode;
 use Mail;
 use App\Mail\Welcome;
+use App\Mail\Awarding;
+use Itexmo;
 class FrontendController extends Controller
 {
     //
@@ -30,7 +32,7 @@ class FrontendController extends Controller
         $pcl = DB::table('scholarships')->where('id', 6)->first();
         $vgd = DB::table('scholarships')->where('id', 7)->first();
         $hr = DB::table('scholarships')->where('id', 8)->first();
-        // $applicant = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
+        
         // $ck;
         // if($applicant)
         // {
@@ -40,8 +42,27 @@ class FrontendController extends Controller
         // {
         //     $ck=0;
         // }
-        return view ('sas')->with('ncw', $ncw)->with('gad', $gad)->with('vg', $vg)->with('gp', $gp)->with('gpr', $gpr)
-        ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr);
+        
+        if(Auth::check())
+        {
+            $applicant = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
+            if($applicant)
+            {
+                $ck=1;
+            }
+            else
+            {
+                $ck=0;
+            }
+            return view ('sas')->with('ncw', $ncw)->with('gad', $gad)->with('vg', $vg)->with('gp', $gp)->with('gpr', $gpr)
+            ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr)->with('ck', $ck);   
+        }
+        
+        else
+        {
+            return view ('sas')->with('ncw', $ncw)->with('gad', $gad)->with('vg', $vg)->with('gp', $gp)->with('gpr', $gpr)
+            ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr);
+        }
     }
     function faq()
     {
@@ -126,37 +147,45 @@ class FrontendController extends Controller
         {
             $ck="show";
             $scholar = DB::table('scholarships')->where('id', $applicant->scholar_id)->first();
+             return view('front.scholarship')->with('ck', $ck)->with('scholar', $scholar);
         }
         else
         {
             $ck="none";
+            return view('front.scholarship')->with('ck', $ck);
         }
-        return view('front.scholarship')->with('ck', $ck)->with('scholar', $scholar);
+        
     }
 
     function sdetails()
     {
         $applicant = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
+       
 
         
         if($applicant)
         {
            $scholar = DB::table('scholarships')->where('id', $applicant->scholar_id)->first();
+           $tracking = DB::table('tracking')->where('scholarship_id', $scholar->id)->first(); 
+           $log = DB::table('log')->where('scholar_id', $scholar->id)->orderBy('created_at', 'desc')->get();
 
            if($scholar->type == "eefap")
            {
                $eefap = DB::table('eefap')->where('application_id', $applicant->id)->first();
-               return view('front.sdetails')->with('eefap', $eefap)->with('applicant', $applicant)->with('scholar', $scholar);
+               return view('front.sdetails')->with('eefap', $eefap)->with('applicant', $applicant)->with('scholar', $scholar)
+               ->with('tracking', $tracking)->with('log', $log);
            }
            else if($scholar->type == "eefap-gv")
            {
                $eefapgv = DB::table('eefapgv')->where('application_id', $applicant->id)->first();
-               return view('front.sdetails-eefapgv')->with('eefapgv', $eefapgv)->with('applicant', $applicant)->with('scholar', $scholar);
+               return view('front.sdetails-eefapgv')->with('eefapgv', $eefapgv)->with('applicant', $applicant)->with('scholar', $scholar)
+               ->with('tracking', $tracking)->with('log', $log);
            }
            else if($scholar->type == "pcl")
            {
                $pcl = DB::table('pcl')->where('application_id', $applicant->id)->first();
-               return view('front.sdetails-pcl')->with('pcl', $pcl)->with('applicant', $applicant)->with('scholar', $scholar);
+               return view('front.sdetails-pcl')->with('pcl', $pcl)->with('applicant', $applicant)->with('scholar', $scholar)
+               ->with('tracking', $tracking)->with('log', $log);
            }
         }
         else
@@ -483,7 +512,7 @@ class FrontendController extends Controller
         $eefapgv->graduating = $request->get('grad');
         $eefapgv->general_average = $request->get('gen_average');
         $eefapgv->spes = $request->get('spes');
-        $eefapgv->awards ='Highest Honors';
+        $eefapgv->awards =$request->get('award');
         $eefapgv->save();
         return redirect ('/scholarship/details');
 
@@ -614,9 +643,24 @@ class FrontendController extends Controller
         //     $message->to('guintoproductions@gmail.com', 'To Pampanga')->subject('Sample Email');
         //     $message->from('capitolpampanga@gmail.com', 'Pampanga');
         // });
-        $sc = "ALBERT!";
-        \Mail::to('guintoproductions@gmail.com')->send(new Welcome ($sc));
 
+
+        // $sc = "ALBERT!";
+        // \Mail::to('guintoproductions@gmail.com')->send(new Welcome ($sc));
+
+        // $res = Itexmo::to('09059462732')->message('Hello World!')->send();
+
+        // if($res == '0') {
+        // // Success message or logic. Refer to the return codes below.
+        //     return 'success!';
+        // }
+         //\Mail::to('guintoproductions@gmail.com')->send(new Awarding);
+         $no = '9059462732';
+$res = Itexmo::to('0'.$no)->message('Hello  you have been awarded a scholarship!' )->send();
+                           
+                            if($res == '0') {
+                                //
+                            }
        
     }
 }

@@ -52,34 +52,7 @@
 
                   <div class="form-row mb-2">
                     <div class="col-md-6 ">
-                    {{-- <ul class="list-group">
-                      <li class="list-group-item active"><i class="fa fa-folder-open"></i><strong> Application Details</strong></li>
-                      <li class="list-group-item">
-                        <div class="row no-gutters">
-                          <div class="col-md-6">
-                            <ul class="list-group list-group-flush">
-                              <li class="list-group-item">Application Code</li>
-                              <li class="list-group-item">Full Name</li>
-                              <li class="list-group-item">Address</li>
-                              <li class="list-group-item">Mobile Number</li>
-                              <li class="list-group-item">Course/Program</li>
-                              <li class="list-group-item">Applied on</li>
-                            </ul>  
-                          </div>
-                          <div class="col-md-6">
-                            <ul class="list-group list-group-flush">
-                              <li class="list-group-item">{{$applicant->barcode_number}}</li>
-                              <li class="list-group-item">{{Auth::user()->first_name}} {{Auth::user()->middle_name}} {{Auth::user()->surname}} {{Auth::user()->suffix}}</li>
-                              <li class="list-group-item"> {{$eefap->street}} {{$eefap->barangay}}, {{$eefap->municipality}}</li>
-                              <li class="list-group-item">fsffdsfds</li>
-                              <li class="list-group-item">fsffdsfds</li>
-                              <li class="list-group-item">fsffdsfds</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
 
-                    </ul> --}}
                       <div class="row">
                         <div class="card" style="width:530px;">
                       <div class="card-header bg-primary">
@@ -119,6 +92,7 @@
                       </div>
                     </div>  
                       </div> 
+                      
                       <div class="row">
                         <div class="card" style="width:530px;">
                           <div class="card-body">
@@ -130,20 +104,26 @@
                                   <h1 class="tx4">PHP {{$scholar->amount}}.00</h1>
                                 </div>
                               </div>
+                              @if($applicant->application_status !="Approved" && $tracking->stage!="Approved")
                               <div class="form-row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                  <a href="#" class="btn btn-block text-white btn-dark">Print</a>
+                                </div>
+                                <div class="col-md-3">
                                   <a href="#" class="btn btn-block btn-primary">Upload Files</a>
                                 </div>
-                                <div class="col-md-4">
-                                  <a href="/scholarship/details/eefap" class="btn btn-block text-white btn-success">Edit Application</a>
+                                <div class="col-md-3">
+                                  <a href="/scholarship/details/eefap" class="btn btn-block text-white btn-success">Edit</a>
                                 </div>
-                                <div class="col-md-4">
-                                  <a href="#" class="btn btn-block btn-danger">Delete Application</a>
+                                <div class="col-md-3">
+                                  <a href="#" class="btn btn-block btn-danger">Cancel</a>
                                 </div>
                               </div>
+                              @endif
                           </div>
                         </div>
                       </div>
+                      
 
                   </div>
 
@@ -245,34 +225,159 @@
                   </div>
 
 
-
-
-                  {{-- <div class="col-md-3">
-                   <div class="row">
-                    <div class="card">
-                     <div class="card-header bg-danger text-center">
-                       <h5><strong>Graduate From Private</strong></h5>
-                     </div>
-                     <div class="card-body py-2">
-                      <div class="text-center">
-                        <p class="mb-0"><strong>AMOUNT</strong></p>
-                        <h3 class="tx1">PHP 3000.00</h3>
-                      </div>
-                     </div>
-                    </div>
-
-                    
-                  </div>
-
-                  </div> --}}
-
-
-
                 </div><hr>
                 <div class="form-row">
+
                   @if($applicant->application_status=="Approved")
-                   @include('inc.track')
-                   @endif
+                  @if($tracking->stage=="Approved")
+                  <div class="card" style="width: 100%;">
+                    <div class="card-header boldtx bg-warning text-white">
+                      Application Track
+                    </div>
+                    <div class="card-body">
+                       <div class="container" >
+                        @include('inc.track')
+
+                         @if(count($log) > 0)
+                          @foreach($log as $logs)
+                            <div class="form-row">
+                              <div class="col-md-2">
+                                <p>{{$logs->created_at}}:</p>
+                              </div>
+                              <div class="col-md-8">
+                                <p>{{$logs->desc}}</p>
+                              </div>
+                              
+                            </div>
+                          @endforeach
+                          @else
+                              <p>No logs found!</p>
+                          @endif
+                       </div>
+                  </div>
+                </div>
+                @endif
+
+
+                @if($tracking->stage=="Re-Checking")
+                  <div class="card" style="width: 100%;">
+                    <div class="card-header boldtx bg-warning text-white">
+                      Application Track
+                    </div>
+                    <div class="card-body">
+                       <div class="container" >
+                        @include('inc.recheck')
+
+                         @if(count($log) > 0)
+                          @foreach($log as $logs)
+                            <div class="form-row">
+                              <div class="col-md-2">
+                                <p>{{$logs->created_at}}:</p>
+                              </div>
+                              <div class="col-md-8">
+                                <p>{{$logs->desc}}</p>
+                              </div>
+                              
+                            </div>
+                          @endforeach
+                          @else
+                              <p>No logs found!</p>
+                          @endif
+                       </div>
+                  </div>
+                </div>
+                @endif
+
+                @if($tracking->stage=="Consolidation")
+                  <div class="card" style="width: 100%;">
+                    <div class="card-header boldtx bg-warning text-white">
+                      Application Track
+                    </div>
+                    <div class="card-body">
+                       <div class="container" >
+                        @include('inc.consolo')
+
+                         @if(count($log) > 0)
+                          @foreach($log as $logs)
+                            <div class="form-row">
+                              <div class="col-md-2">
+                                <p>{{$logs->created_at}}:</p>
+                              </div>
+                              <div class="col-md-8">
+                                <p>{{$logs->desc}}</p>
+                              </div>
+                              
+                            </div>
+                          @endforeach
+                          @else
+                              <p>No logs found!</p>
+                          @endif
+                       </div>
+                  </div>
+                </div>
+                @endif
+
+
+                @if($tracking->stage=="Payroll")
+                  <div class="card" style="width: 100%;">
+                    <div class="card-header boldtx bg-warning text-white">
+                      Application Track
+                    </div>
+                    <div class="card-body">
+                       <div class="container" >
+                        @include('inc.payroll')
+
+                         @if(count($log) > 0)
+                          @foreach($log as $logs)
+                            <div class="form-row">
+                              <div class="col-md-2">
+                                <p>{{$logs->created_at}}:</p>
+                              </div>
+                              <div class="col-md-8">
+                                <p>{{$logs->desc}}</p>
+                              </div>
+                              
+                            </div>
+                          @endforeach
+                          @else
+                              <p>No logs found!</p>
+                          @endif
+                       </div>
+                  </div>
+                </div>
+                @endif
+
+                @if($tracking->stage=="Awarding")
+                  <div class="card" style="width: 100%;">
+                    <div class="card-header boldtx bg-warning text-white">
+                      Application Track
+                    </div>
+                    <div class="card-body">
+                       <div class="container" >
+                        @include('inc.award')
+
+                         @if(count($log) > 0)
+                          @foreach($log as $logs)
+                            <div class="form-row">
+                              <div class="col-md-2">
+                                <p>{{$logs->created_at}}:</p>
+                              </div>
+                              <div class="col-md-8">
+                                <p>{{$logs->desc}}</p>
+                              </div>
+                              
+                            </div>
+                          @endforeach
+                          @else
+                              <p>No logs found!</p>
+                          @endif
+                       </div>
+                  </div>
+                </div>
+                @endif
+                @endif
+
+
               </div>
             </div>
           </div>

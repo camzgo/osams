@@ -114,7 +114,7 @@
               @if(count($faq) > 0)
                 @foreach($faq as $faqs)
                   <div class="py-3 border-bottom">
-                  <h5 class="mb-3">Q: {{$faqs->question}}</h5>
+                  <h5 class="mb-3"><strong>Q: {{$faqs->question}}</strong></h5>
                       <p class=" mb-0"> {{$faqs->answer}}</p>
                   </div>
                 @endforeach

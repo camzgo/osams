@@ -13,6 +13,7 @@
         "laravelcollective/html": "^5.4.0",
         "milon/barcode": "^5.3",
         "nexmo/laravel": "^1.1",
+        "woenel/itexmo": "^0.3",
         "yajra/laravel-datatables-oracle": "~8.0"
     },
     "require-dev": {

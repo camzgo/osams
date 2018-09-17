@@ -5,14 +5,14 @@
                         <div class="form-row" style="margin-left: 4em;">
                           <div class="tr-progress-bar">
                             <div class="bar-item tr-first tr-active">1</div>
-                            <span class="bar-item-bar "></span>
-                            <div class="bar-item  ">2</div>
+                            <span class="bar-item-bar tr-bib-active"></span>
+                            <div class="bar-item tr-active ">2</div>
 
-                            <span class="bar-item-bar "></span>
-                            <div class="bar-item ">3</div>
+                            <span class="bar-item-bar tr-bib-active"></span>
+                            <div class="bar-item tr-active ">3</div>
 
-                            <span class="bar-item-bar"></span>
-                            <div class="bar-item">4</div>
+                            <span class="bar-item-bar tr-bib-active"></span>
+                            <div class="bar-item tr-active">4</div>
 
                             <span class="bar-item-bar"></span>
                             <div class="bar-item">5</div>    

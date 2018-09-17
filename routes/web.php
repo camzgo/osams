@@ -164,7 +164,7 @@ Route::prefix('admin/approve')->group(function()
 });
 
 
-Route::prefix('admin/permission-access')->group(function(){
+Route::prefix('admin/permission')->group(function(){
     Route::get('/', 'UtilitiesController@permission');
     Route::get('/getdata', 'UtilitiesController@getdata')->name('permission.getdata');
     Route::post('/postdata', 'UtilitiesController@postdata')->name('permission.postdata');
@@ -219,7 +219,9 @@ Route::prefix('/')->group(function()
 
 Route::prefix('/admin/tracking')->group(function(){
     Route::get('/', 'TrackingController@viewTrack');
-    Route::get('/getdata', 'TrackingController@getdata')->name('track.getdata');;
+    Route::get('/getdata', 'TrackingController@getdata')->name('track.getdata');
+    Route::post('/postdata', 'TrackingController@postdata')->name('track.postdata');
+    Route::get('/fetchdata', 'TrackingController@fetchdata')->name('track.fetchdata');
 });
 // Route::prefix('fronte')->group(function()
 // {

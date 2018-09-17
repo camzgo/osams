@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Scholarship;
 use DataTables;
+use App\Tracking;
 
 
 class ScholarshipMainController extends Controller
@@ -203,13 +204,39 @@ class ScholarshipMainController extends Controller
                 $scholarship->status = $request->get('status');
                 $scholarship->save();
                 $success_output = '<div class="alert alert-success">Success!</div>';
+                
+               
+                if($request->get('status') == "OPEN")
+                {
+                    $scholar_id = DB::table('tracking')->where('scholarship_id', $request->get('scholarship_id'))->first();
+                    $tr_id =$scholar_id->id;
+                    $tracking = Tracking::find($tr_id);
+                    $tracking->stage ="Open";
+                    $tracking->status = "OPEN";
+                    $tracking->save();
+                }
 
-                // $stat = DB::table('tracking')->insert([
-                //     'log' => 'Your application is approved',
-                //     'scholarship_id'  => $request->get('scholarship_id'),
-                //     'stage'
-                // ]);
+                else if($request->get('status') == "CLOSED")
+                {
 
+                    $scholar_id = DB::table('tracking')->where('scholarship_id', $request->get('scholarship_id'))->first();
+                    $tr_id =$scholar_id->id;
+                    $tracking = Tracking::find($tr_id);
+                    $tracking->stage ="Approved";
+                    $tracking->status = "CLOSED";
+                    $tracking->save();
+
+                    $log = DB::table('log')->insert([
+                    'desc' => 'Your application has been approved.',
+                    'scholar_id' => $request->get('scholarship_id'),
+                    'tracking_id' => $tr_id,
+                     'created_at' => date('Y-m-d H:i:s'),
+                     'updated_at' => date('Y-m-d H:i:s')
+                    ]);
+
+                    
+                }
+                
             }
             
         }
