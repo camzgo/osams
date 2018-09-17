@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2018 at 11:07 PM
+-- Generation Time: Sep 17, 2018 at 07:59 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -47,7 +47,7 @@ CREATE TABLE `account_type` (
 
 INSERT INTO `account_type` (`id`, `account_name`, `account_desc`, `file_maintenance`, `tracking`, `transactions`, `utilities`, `reports`, `created_at`, `updated_at`) VALUES
 (2, 'Admin', 'admin', 'Grant', 'Grant', 'Grant', 'Grant', 'Grant', '2018-09-09 01:42:54', '2018-09-09 01:48:08'),
-(3, 'Another', 'another', 'Grant', 'Deny', 'Deny', 'Grant', 'Deny', '2018-09-09 02:38:46', '2018-09-09 02:38:46'),
+(3, 'Another', 'another', 'Grant', 'Grant', 'Deny', 'Grant', 'Deny', '2018-09-09 02:38:46', '2018-09-17 04:42:24'),
 (4, 'Encoder', 'Encoder', 'Deny', 'Deny', 'Grant', 'Deny', 'Grant', '2018-09-09 02:57:58', '2018-09-09 02:57:58');
 
 -- --------------------------------------------------------
@@ -167,7 +167,7 @@ CREATE TABLE `application` (
 --
 
 INSERT INTO `application` (`id`, `application_status`, `renew`, `barcode_image`, `barcode_number`, `applicant_id`, `scholar_id`, `application_isdel`, `created_at`, `updated_at`) VALUES
-(1, 'Pending', 0, 'NONE', 'IIY3fuIqlM', 1, 2, NULL, '2018-09-16 11:17:52', '2018-09-16 11:17:52'),
+(1, 'Approved', 0, 'NONE', 'IIY3fuIqlM', 1, 2, NULL, '2018-09-16 11:17:52', '2018-09-16 11:17:52'),
 (3, 'Pending', 0, 'NONE', 'xKDWFDmXw4', 2, 8, NULL, '2018-09-16 12:03:33', '2018-09-16 12:03:33'),
 (4, 'Pending', 0, 'NONE', 'dO9Nt2ikiM', 5, 6, NULL, '2018-09-16 12:24:48', '2018-09-16 12:24:48');
 
@@ -193,7 +193,8 @@ CREATE TABLE `approval_date` (
 
 INSERT INTO `approval_date` (`id`, `date_approved`, `status`, `applicant_id`, `application_id`, `scholarship_id`, `employee_id`) VALUES
 (1, '2018-09-08', 'Approved', 1, 2, 4, 0),
-(2, '2018-09-08', 'Approved', 2, 3, 8, 0);
+(2, '2018-09-08', 'Approved', 2, 3, 8, 0),
+(3, '2018-09-17', 'Approved', 1, 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -306,7 +307,7 @@ CREATE TABLE `eefapgv` (
 --
 
 INSERT INTO `eefapgv` (`id`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `municipality`, `barangay`, `street`, `college_name`, `college_address`, `course`, `major`, `program_type`, `year_level`, `graduating`, `general_average`, `spes`, `awards`, `scholarship_id`, `applicant_id`, `application_id`) VALUES
-(1, NULL, NULL, 'Ocampo', 'Camille', 'Fierro', NULL, '9051124520', 'MEXICO', 'Parian (Poblacion)', 'example street', 'STI College', 'San Fernando, Pampanga', 'Bachelor of Science in Information Technology', 'General', 'Bachelor\'s Degree', '4th', 'YES', '2.0', 'NO', 'Highest Honors', 8, 2, 3);
+(1, NULL, '2018-09-16 21:26:33', 'Ocampo', 'Camille', 'Fierro', NULL, '9051124520', 'MEXICO', 'Parian (Poblacion)', 'example street', 'STI College', 'San Fernando, Pampanga', 'Bachelor of Science in Information Technology', 'General', 'Bachelor\'s Degree', '4th', 'YES', '2.0', 'NO', 'Highest Honors', 8, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -372,6 +373,32 @@ INSERT INTO `guardian_info` (`id`, `surname`, `first_name`, `middle_name`, `suff
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `log`
+--
+
+CREATE TABLE `log` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `desc` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `scholar_id` int(11) NOT NULL,
+  `tracking_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `log`
+--
+
+INSERT INTO `log` (`id`, `desc`, `scholar_id`, `tracking_id`, `created_at`, `updated_at`) VALUES
+(1, 'Your application has been approved.', 2, 2, '2018-09-17 07:35:09', '2018-09-17 07:35:09'),
+(2, 'Your application is being re-check.', 2, 2, '2018-09-17 07:35:26', NULL),
+(3, 'Your application is being consolidate to ensure that there are no duplicate entry.', 2, 2, '2018-09-17 09:44:03', NULL),
+(4, 'Printing of cheques.', 2, 2, '2018-09-17 09:44:19', NULL),
+(5, 'Releasing of Cheques', 2, 2, '2018-09-17 09:44:32', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -406,7 +433,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (56, '2018_09_14_152021_create_table_guardian_info', 12),
 (57, '2018_09_14_153325_create_table_education_info', 12),
 (58, '2018_09_16_135323_create_notifications_table', 13),
-(59, '2018_09_16_162352_create_table_tracking', 14);
+(62, '2018_09_16_162352_create_table_tracking', 14),
+(63, '2018_09_17_051416_create_table_log', 14);
 
 -- --------------------------------------------------------
 
@@ -45030,10 +45058,10 @@ CREATE TABLE `scholarships` (
 
 INSERT INTO `scholarships` (`id`, `scholarship_name`, `scholarship_desc`, `amount`, `deadline`, `slot`, `status`, `created_at`, `updated_at`, `type`) VALUES
 (1, 'NCW', 'Nanay Community Workers', 5000, '2018-08-27', 500, 'OPEN', NULL, '2018-09-03 10:05:30', 'eefap'),
-(2, 'GAD', 'Gender and Development Scholars', 3000, '2018-08-25', 1000, 'OPEN', NULL, '2018-09-03 10:06:03', 'eefap'),
+(2, 'GAD', 'Gender and Development Scholars', 3000, '2018-08-25', 1000, 'CLOSED', NULL, '2018-09-17 07:35:09', 'eefap'),
 (3, 'VG OLD and NEW', 'Vice Governor Old and New', 5000, '2018-10-09', 200, 'OPEN', NULL, '2018-09-03 10:32:59', 'eefap'),
-(4, 'GRADUATE FROM PUBLIC', 'Students from public', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 10:14:48', 'eefap'),
-(5, 'GRADUATE FROM PRIVATE', 'Students from private ', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 10:14:42', 'eefap'),
+(4, 'GRADUATE FROM PUBLIC', 'Students from public', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-17 05:43:11', 'eefap'),
+(5, 'GRADUATE FROM PRIVATE', 'Students from private', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-17 07:25:43', 'eefap'),
 (6, 'PCL', 'Pampanga Councilors League', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 11:12:14', 'pcl'),
 (7, 'VG DHVTSU', 'Scholars from DHVTSU', 5000, '2018-09-06', 500, 'OPEN', NULL, NULL, 'eefap-gv'),
 (8, 'HONORS and RANKS', 'Students with honors or ranks', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 11:12:22', 'eefap-gv');
@@ -45079,12 +45107,26 @@ INSERT INTO `students` (`id`, `first_name`, `last_name`, `created_at`, `updated_
 
 CREATE TABLE `tracking` (
   `id` int(10) UNSIGNED NOT NULL,
-  `log` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `stage` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `scholarship_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tracking`
+--
+
+INSERT INTO `tracking` (`id`, `stage`, `status`, `scholarship_id`, `created_at`, `updated_at`) VALUES
+(1, 'Open', 'OPEN', 1, NULL, NULL),
+(2, 'Awarding', 'RELEASED', 2, NULL, '2018-09-17 09:44:32'),
+(3, 'Open', 'OPEN', 3, NULL, NULL),
+(4, 'Open', 'OPEN', 4, NULL, '2018-09-17 05:43:11'),
+(5, 'Open', 'OPEN', 5, NULL, '2018-09-17 05:49:18'),
+(6, 'Open', 'OPEN', 6, NULL, NULL),
+(7, 'Open', 'OPEN', 7, NULL, NULL),
+(8, 'Open', 'OPEN', 8, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -45115,10 +45157,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `gender`, `bday`, `applicant_isdel`, `suffix`, `mobile_number`, `profile_photo`) VALUES
-(1, 'gold@mail.com', '$2y$10$XI.K4/qIMsyUQ6Q49.uhuOocu4CyeGxBaZQ59vqCLrRinbig63wi6', '0hD6KnI1TSmFDfAbcoep74voEDmJUxPWuTv7Sxohb0kEGhAaKYKKvCdOR1LU', '2018-08-08 06:04:07', '2018-08-16 08:17:54', 'Ocampo', 'Albert', 'Gold', 'Male', '1999-04-04', '0', 'Jr.', '9051241420', NULL),
-(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', 'aSqO9EcKies32RuYtHrjG8HyTwHLZGb3T0myrhrIvgtiOQAYkg7L4U9wAazJ', '2018-08-09 15:16:18', '2018-08-16 08:17:58', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', NULL, '9051124520', NULL),
-(3, 'cong@mail.com', '$2y$10$9luqQ659uIm1WurOBMMTQO1d8xFwKNf4CpBbJCV290ALkGLF5UG8K', 'xYd77OqpHEXPD7ZO1bTxfvSrmCBMVCaZPiKlZZbqGFRpjjSoVDD3z5LFUAo1', '2018-08-18 09:12:14', '2018-08-18 09:12:14', 'Cong', 'King', 'Ca', 'Male', '1998-02-05', '0', NULL, '9172245112', NULL),
-(5, 'khan@mail.com', '$2y$10$KS9I/Myw4Q1FJ0jYgsn86.q7iUkRcOg0RoQC/I6tiTBTE1U6s1NmC', 'TovBaqNBQ9zZ7Fdzj9korYJaIO7m8CvlsaHxZpkTWszxzI62YKtJHVwZVh9p', '2018-09-14 05:33:49', '2018-09-16 12:58:29', 'Khan', 'Seng', 'Sy', 'Female', '1997-02-02', '0', NULL, '9172516220', 'avatar5_1537131509.png');
+(1, 'guintoproductions@gmail.com', '$2y$10$XI.K4/qIMsyUQ6Q49.uhuOocu4CyeGxBaZQ59vqCLrRinbig63wi6', 'X8fBt29SSBKP7KPDwucs4281OHEnZm4NBQZVx77obY4aMScWTIhBLzvWE9uo', '2018-08-08 06:04:07', '2018-09-16 20:53:50', 'Ocampo', 'Albert', 'Gold', 'Male', '1999-04-04', '0', 'Jr.', '9059462732', 'noimage.jpg'),
+(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', '4uKKr5VLQ1ZgOy7jdIg4rkrg8W11lEhaIY5wlZK6UAEvFmUnODLozoQOssoq', '2018-08-09 15:16:18', '2018-09-16 21:22:57', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', NULL, '9051124520', 'noimage.jpg'),
+(3, 'cong@mail.com', '$2y$10$9luqQ659uIm1WurOBMMTQO1d8xFwKNf4CpBbJCV290ALkGLF5UG8K', 'xYd77OqpHEXPD7ZO1bTxfvSrmCBMVCaZPiKlZZbqGFRpjjSoVDD3z5LFUAo1', '2018-08-18 09:12:14', '2018-08-18 09:12:14', 'Cong', 'King', 'Ca', 'Male', '1998-02-05', '0', NULL, '9172245112', 'noimage.jpg'),
+(5, 'khan@mail.com', '$2y$10$KS9I/Myw4Q1FJ0jYgsn86.q7iUkRcOg0RoQC/I6tiTBTE1U6s1NmC', 'TovBaqNBQ9zZ7Fdzj9korYJaIO7m8CvlsaHxZpkTWszxzI62YKtJHVwZVh9p', '2018-09-14 05:33:49', '2018-09-16 12:58:29', 'Khan', 'Seng', 'Sy', 'Female', '1997-02-02', '0', NULL, '9172516220', 'avatar5_1537131509.png'),
+(6, 'salas@mail.com', '$2y$10$Z4K3wN57UcegG3vGAGwa2.akUMzkRRA3AwuX/bZhjcSVWxiZWFGQm', 'u0nf3nav2jz4V5WAlJ7KojsNTSA32VnGiTYokCkK5h5TwEKxcjJZ7LBMr1xf', '2018-09-16 22:37:55', '2018-09-16 22:37:55', 'Salas', 'Louis Vincent', 'Nogoy', 'Male', '1999-06-20', '0', NULL, '9172504502', 'noimage.jpg');
 
 --
 -- Indexes for dumped tables
@@ -45189,6 +45232,12 @@ ALTER TABLE `faquestions`
 -- Indexes for table `guardian_info`
 --
 ALTER TABLE `guardian_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `log`
+--
+ALTER TABLE `log`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -45315,7 +45364,7 @@ ALTER TABLE `application`
 -- AUTO_INCREMENT for table `approval_date`
 --
 ALTER TABLE `approval_date`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `education_info`
@@ -45327,7 +45376,7 @@ ALTER TABLE `education_info`
 -- AUTO_INCREMENT for table `eefap`
 --
 ALTER TABLE `eefap`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `eefapgv`
@@ -45348,10 +45397,16 @@ ALTER TABLE `guardian_info`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `log`
+--
+ALTER TABLE `log`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `munbar`
@@ -45411,13 +45466,13 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `tracking`
 --
 ALTER TABLE `tracking`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
