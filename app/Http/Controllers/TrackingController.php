@@ -139,76 +139,76 @@ class TrackingController extends Controller
 
                     
                     
-                    $scid = $request->get('scholarship_id');
-                    $scholar = DB::table('scholarships')->where('id', $scid)->first();
-                    
-                    $app = DB::table('application')->select('applicant_id')->where('scholar_id', $scid)
-                    ->where('application_status', 'Approved')->get();
-                    $user = DB::table('users')->where('id', $app)->get();
-
-                    if($scholar->type == "eefap")
-                    {
-                        $eefap = DB::table('eefap')->where('scholarship_id', $scid)->get();
+                    // $scid = $request->get('scholarship_id');
+                    // $scholar = DB::table('scholarships')->where('id', $scid)->first();
                         
-                        foreach($eefap->mobile_number as $no)
-                        {
-                            //$name = $eefap
-                            $res = Itexmo::to('0'.$no)->message('Hello '.$eefap->first_name.' you have been awarded a scholarship!' )->send();
+                    // $app = DB::table('application')->select('applicant_id')->where('scholar_id', $scid)
+                    // ->where('application_status', 'Approved')->get();
+                    // $user = DB::table('users')->where('id', $app)->get();
+
+                    // if($scholar->type == "eefap")
+                    // {
+                    //     $eefap = DB::table('eefap')->where('scholarship_id', $scid)->get();
+                        
+                    //     foreach($eefap->mobile_number as $no)
+                    //     {
+                    //         //$name = $eefap
+                    //         $res = Itexmo::to('0'.$no)->message('Hello '.$eefap->first_name.' you have been awarded a scholarship!' )->send();
                            
-                            if($res == '0') {
-                                //
-                            }
+                    //         if($res == '0') {
+                    //             //
+                    //         }
 
                             
-                        }
+                    //     }
 
-                        foreach($user->email as $email)
-                        {
-                            \Mail::to($email)->send(new Awarding ($user));
-                        }
-                    }
+                    //     foreach($user->email as $email)
+                    //     {
+                    //         \Mail::to($email)->send(new Awarding ($user));
+                    //     }
+                    // }
 
-                    else if($scholar->type == "eefap-gv")
-                    {
-                        $eefap = DB::table('eefapgv')->where('scholarship_id', $scid)->get();
+                //     else if($scholar->type == "eefap-gv")
+                //     {
+                //         $eefap = DB::table('eefapgv')->where('scholarship_id', $scid)->get();
                         
-                        foreach($eefapgv->mobile_number as $no)
-                        {
-                            //$name = $eefap
-                            $res = Itexmo::to('0'.$no)->message('Hello '.$eefapgv->first_name.' you have been awarded a scholarship!' )->send();
+                //         foreach($eefapgv->mobile_number as $no)
+                //         {
+                //             //$name = $eefap
+                //             $res = Itexmo::to('0'.$no)->message('Hello '.$eefapgv->first_name.' you have been awarded a scholarship!' )->send();
                            
-                            if($res == '0') {
-                                //
-                            }
-                        }
+                //             if($res == '0') {
+                //                 //
+                //             }
+                //         }
 
-                        foreach($user->email as $email)
-                        {
-                            \Mail::to($email)->send(new Awarding ($user));
-                        }
-                    }
+                //         foreach($user->email as $email)
+                //         {
+                //             \Mail::to($email)->send(new Awarding ($user));
+                //         }
+                //     }
 
-                    else if($scholar->type == "pcl")
-                    {
-                        $eefap = DB::table('pcl')->where('scholarship_id', $scid)->get();
+                //     else if($scholar->type == "pcl")
+                //     {
+                //         $eefap = DB::table('pcl')->where('scholarship_id', $scid)->get();
                         
-                        foreach($pcl->mobile_number as $no)
-                        {
-                            //$name = $eefap
-                            $res = Itexmo::to('0'.$no)->message('Hello '.$pcl->first_name.' you have been awarded a scholarship!' )->send();
+                //         foreach($pcl->mobile_number as $no)
+                //         {
+                //             //$name = $eefap
+                //             $res = Itexmo::to('0'.$no)->message('Hello '.$pcl->first_name.' you have been awarded a scholarship!' )->send();
                            
-                            if($res == '0') {
-                                //
-                            }
-                        }
+                //             if($res == '0') {
+                //                 //
+                //             }
+                //         }
 
-                        foreach($user->email as $email)
-                        {
-                            \Mail::to($email)->send(new Awarding ($user));
-                        }
-                    }
+                //         foreach($user->email as $email)
+                //         {
+                //             \Mail::to($email)->send(new Awarding ($user));
+                //         }
+                //     }
 
-                }
+                // }
 
 
             }
@@ -226,4 +226,6 @@ class TrackingController extends Controller
         echo json_encode($output);
         //eval ($goback);
     }
+}
+
 }

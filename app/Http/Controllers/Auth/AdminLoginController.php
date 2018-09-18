@@ -35,12 +35,13 @@ class AdminLoginController extends Controller
         }
 
         //if unsuccesfull, then redirect back to the login with the form data
-        return redirect()->back()->withInput($request->only('email', 'remember'));
+        return redirect()->back()->withInput($request->only('email', 'remember'))->with("error", "Wrong Credentials!");
     }
     
     public function logout()
     {
         Auth::guard('admin')->logout();
-        return redirect('/');
+        return redirect('/admin/login');
+        
     }
 }

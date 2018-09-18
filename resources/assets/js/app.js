@@ -16,7 +16,7 @@ require('../../../node_modules/jquery-mask-plugin/dist/jquery.mask.min.js');
 require('../../../node_modules/bootstrap-select/dist/js/bootstrap-select.min.js');
 require('../../../node_modules/jquery-validation/dist/jquery.validate.js');
 require('../../../node_modules/jquery-validation/dist/jquery.validate.min.js');
-
+require('../../../node_modules/chart.js/dist/Chart.bundle.js');
 // require('../../../node_modules/admin-lte/dist/js/adminlte.js');
 // // require('../../../node_modules/admin-lte/plugins/sparkline/jquery.sparkline.min.js');
 // require('../../../node_modules/admin-lte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js');
