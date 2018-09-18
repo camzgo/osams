@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>ADMINISTRATOR</title>
+  <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+  <title>Pampanga Capitol | Online Scholarship Application and Management System</title>
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -22,72 +23,7 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
-    <!-- Left navbar links -->
-    {{-- <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
-      </li>
-    </ul> --}}
-
-    <!-- Right navbar links -->
-     <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fa fa-envelope"></i> 
-          <span class="badge badge-danger navbar-badge" style="font-size: 8px;">10</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-             <h1>fjsfj</h1>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fa fa-bell-o"></i>
-          <span class="badge badge-warning navbar-badge" style="font-size: 8px;">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fa fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fa fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fa fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
-            class="fa fa-th-large"></i></a>
-      </li>
-    </ul>
-  </nav>
+@include('inc.admin-nav')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
@@ -160,7 +96,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>
@@ -205,7 +141,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/employee" class="nav-link active">
+                <a href="/admin/employee" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-users nav-icon"></i>
                   <p>Employee</p>
@@ -339,13 +275,12 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">File Maintenance</li>
-              <li class="breadcrumb-item active">Employee</li>
+              <li class="breadcrumb-item active">Profile</li>
             </ol>
           </div><!-- /.col -->
-          <div class="col-sm-6">
+          {{-- <div class="col-sm-6">
             <a href="/admin/employee" class="btn btn-secondary btn-rounded flt-right"><i class="fa fa-arrow-left"></i> Go Back</a>
-          </div><!-- /.col -->
+          </div><!-- /.col --> --}}
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -354,79 +289,61 @@
     <!-- Main content -->
      <div class="content">
       <div class="container-fluid">
-        <div class="card">
-          <div class="card-header" id="th-cl1">
-              <h4 class="boldtx">Register Employee</h4>
-          </div>
-          <div class="card-body">
-    <form action="{{ action('UsersMainController@store') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
-      {{csrf_field()}}
-      <div class="row mt-2 form-group">
-          <h4 class="tx1">Account</h4>
-        </div>
-        <hr/>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <label for="user_type">* Account Type</label> <br>
-            <select name="user_type" id="user_type" class="selectpicker show-tick "  required >
-              <option value="" selected disabled>--Select--</option>
-              @foreach ($accnt as $accnt_list)
-                  <option value="{{$accnt_list->id}}">{{$accnt_list->account_name}}</option>
-              @endforeach
-            </select>
-          </div>
-        </div> 
-        <div class="row form-group mt-4">
-          <h4 class="tx1">Personal Information</h4>
-        </div>
-        <hr/>
+        <div class="card card-primary">  
+            <div class="card-body box-profile">
+              <div class="container">
+                <div class="row justify-content-center">
+                <h2>Profile</h2>
+              </div>
+              <hr>
         <div class="row">
           <label for="fullname">* Full Name</label>
         </div>
-        <div class="row form-group">
-          <div class = "col-md-4">
-            <input type="text" class="form-control req" id="surname" name="surname" placeholder='Surname' required/>
-          </div>
-          <div class = "col-md-4">
-            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='First Name' required/>
-          </div>
-          <div class = "col-md-2">
-            <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name'/>
-          </div>
-          <div class = "col-md-2">
-            <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
-          </div>
-        </div>
-        <div class="row form-group">
+                  <div class="form-row form-group">
+                    <div class = "col-md-4">
+                      <input type="text" class="form-control  " id="surname" name="surname" placeholder='Surname' required/>
+                    </div>
+                    <div class = "col-md-4">
+                      <input type="text" class="form-control  " id="first_name" name="first_name" placeholder='First Name' required/>
+                    </div>
+                    <div class = "col-md-2">
+                      <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name'/>
+                    </div>
+                    <div class = "col-md-2">
+                      <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+                    </div>
+                  </div>
+        
+        <div class="form-row form-group">
           <div class="col-md-2">
-              <label for="gender">* Gender</label>
-              <select name="gender" id="gender" class=" form-control req"  required>
+              <label for="gender">Gender</label>
+              <select name="gender" id="gender" class=" form-control  "  required>
                 <option value="" selected disabled>--Select--</option>
                 <option value="Male">MALE</option>
                 <option value="Female">FEMALE</option>
               </select>
           </div>
           <div class="col-md-2">
-            <label for="bdate">* Birth Date</label>
-            <input type="date" name="bday" id="bday" class="form-control req" data-provide="datepicker" required/>
+            <label for="bdate">Birth Date</label>
+            <input type="date" name="bday" id="bday" class="form-control  " data-provide="datepicker" required/>
           </div>
           <div class="col-md-3">
-              <label for="nationality">* Nationality</label>
-              <select name="nationality" id="nationality" class="form-control req" required>
+              <label for="nationality">Nationality</label>
+              <select name="nationality" id="nationality" class="form-control  " required>
                 <option value="" selected disabled>--Select--</option>
                 <option value="Filipino">Filipino</option>
                 <option value="Foreigner">Foreigner</option>
               </select>
           </div>
           <div class="col-md-3">
-            <label for="religion">* Religion</label>
-            <select name="religion" id="religion" class="form-control req"  required>
+            <label for="religion">Religion</label>
+            <select name="religion" id="religion" class="form-control  "  required>
               <option value="" selected disabled>--Select--</option>
             </select>
           </div>
           <div class="col-md-2">
-            <label for="civils">* Civil Status</label>
-            <select name="civil_status" id="civil_status" class="form-control req"  required>
+            <label for="civils">Civil Status</label>
+            <select name="civil_status" id="civil_status" class="form-control"  required>
               <option value="" selected disabled>--Select--</option>
               <option value="Single">Single</option>
               <option value="Married">Married</option>
@@ -435,10 +352,7 @@
             </select>
           </div>
         </div>
-        {{-- <div class="row mt-5 form-group">
-          <h4 class="tx1">Address Information</h4>
-        </div>
-        <hr/> --}}
+
         <div class="row form-group">
           <div class="col-md-3">
             <label for="municipality">* Municipality</label>
@@ -460,10 +374,7 @@
             <input type="text" class="form-control" id="_street" name="_street" placeholder='Street'/>
           </div>
         </div>
-        {{-- <div class="row mt-5 form-group">
-          <h4 class="tx1">Contact Information</h4>
-        </div>
-        <hr/> --}}
+
         <div class="row form-group">
           <div class="col-md-3">
             <label for="mobile_no">* Mobile Number</label>
@@ -480,14 +391,31 @@
             <input type="email" class="form-control req" id="email" name="email" placeholder='example@mail.com' required/>
           </div>
         </div>
-        <div class="flt-right mt-4">
-          <input type="submit" value="Register" class="material-button-raised"/>
-        </div> 
-    </form>
 
 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
+
+      
+
+      
+        {{-- <div class="card">
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <h2>Profile</h2>
+            </div>
+            <hr>
+            <div class="row">
+
+            </div>
+
+          </div>
+        </div> --}}
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->

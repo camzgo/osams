@@ -11,6 +11,8 @@ use App\Municipality;
 use App\Eefapgv;
 use App\Eefap;
 use App\Pcl;
+use App\Reqgv;
+use App\Reqeefap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -19,6 +21,8 @@ use Mail;
 use App\Mail\Welcome;
 use App\Mail\Awarding;
 use Itexmo;
+
+
 class FrontendController extends Controller
 {
     //
@@ -42,7 +46,8 @@ class FrontendController extends Controller
         // {
         //     $ck=0;
         // }
-        
+        $announce = DB::table('announcements')->where('a_isdel', 0)->get();
+
         if(Auth::check())
         {
             $applicant = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
@@ -55,13 +60,13 @@ class FrontendController extends Controller
                 $ck=0;
             }
             return view ('sas')->with('ncw', $ncw)->with('gad', $gad)->with('vg', $vg)->with('gp', $gp)->with('gpr', $gpr)
-            ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr)->with('ck', $ck);   
+            ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr)->with('ck', $ck)->with('announce', $announce);   
         }
         
         else
         {
             return view ('sas')->with('ncw', $ncw)->with('gad', $gad)->with('vg', $vg)->with('gp', $gp)->with('gpr', $gpr)
-            ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr);
+            ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr)->with('announce', $announce);
         }
     }
     function faq()
@@ -147,7 +152,7 @@ class FrontendController extends Controller
         {
             $ck="show";
             $scholar = DB::table('scholarships')->where('id', $applicant->scholar_id)->first();
-             return view('front.scholarship')->with('ck', $ck)->with('scholar', $scholar);
+             return view('front.scholarship')->with('ck', $ck)->with('scholar', $scholar)->with('applicant', $applicant);
         }
         else
         {
@@ -160,7 +165,7 @@ class FrontendController extends Controller
     function sdetails()
     {
         $applicant = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
-       
+        
 
         
         if($applicant)
@@ -172,20 +177,24 @@ class FrontendController extends Controller
            if($scholar->type == "eefap")
            {
                $eefap = DB::table('eefap')->where('application_id', $applicant->id)->first();
+               $reqeefap = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->first();
                return view('front.sdetails')->with('eefap', $eefap)->with('applicant', $applicant)->with('scholar', $scholar)
-               ->with('tracking', $tracking)->with('log', $log);
+               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap);
            }
            else if($scholar->type == "eefap-gv")
            {
                $eefapgv = DB::table('eefapgv')->where('application_id', $applicant->id)->first();
+               $reqgv = DB::table('reqgv')->where('applicant_id', Auth::user()->id)->first();
+               $reqeefap = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->first();
                return view('front.sdetails-eefapgv')->with('eefapgv', $eefapgv)->with('applicant', $applicant)->with('scholar', $scholar)
-               ->with('tracking', $tracking)->with('log', $log);
+               ->with('tracking', $tracking)->with('log', $log)->with('reqgv', $reqgv)->with('reqeefap', $reqeefap);
            }
            else if($scholar->type == "pcl")
            {
                $pcl = DB::table('pcl')->where('application_id', $applicant->id)->first();
+               $reqeefap = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->first();
                return view('front.sdetails-pcl')->with('pcl', $pcl)->with('applicant', $applicant)->with('scholar', $scholar)
-               ->with('tracking', $tracking)->with('log', $log);
+               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap);
            }
         }
         else
@@ -439,7 +448,7 @@ class FrontendController extends Controller
 
     function uploadprofile(Request $request)
     {
-         $this -> validate($request, [
+        $this -> validate($request, [
             'uploadFile' => 'image|nullable|max:1999'
         ]);
 
@@ -514,7 +523,10 @@ class FrontendController extends Controller
         $eefapgv->spes = $request->get('spes');
         $eefapgv->awards =$request->get('award');
         $eefapgv->save();
+
         return redirect ('/scholarship/details');
+
+
 
     }
 
@@ -655,12 +667,387 @@ class FrontendController extends Controller
         //     return 'success!';
         // }
          //\Mail::to('guintoproductions@gmail.com')->send(new Awarding);
-         $no = '9059462732';
-$res = Itexmo::to('0'.$no)->message('Hello  you have been awarded a scholarship!' )->send();
+         //$no = '9059462732';
+        
+         $dbal = array('090');
+         $res = Itexmo::to('0'.$no)->message('Hello  you have been awarded a scholarship!' )->send();
                            
                             if($res == '0') {
                                 //
                             }
        
+    }
+
+    public function uploadgv()
+    {
+        return view('upload.uploadgv');
+    }
+
+    public function storeduploadgv(Request $request)
+    {
+        $this -> validate($request, [
+            'biodata' => 'file|nullable',
+            'grades' => 'image|nullable',
+            'cor' => 'image|nullable',
+            'brgy' => 'image|nullable',
+            'or' => 'image|nullable',
+            'oid' => 'image|nullable',
+            'honor' => 'image|nullable'
+        ]);
+
+
+        if($request->hasFile('biodata'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('biodata')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('biodata')->getClientOriginalExtension();
+            //Filename to store
+            $biodata = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('biodata')->storeAs('public/uploads', $biodata);
+        }
+        else
+        {
+            $biodata = "";
+        }
+        if($request->hasFile('grades'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('grades')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('grades')->getClientOriginalExtension();
+            //Filename to store
+            $grades = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('grades')->storeAs('public/uploads', $grades);
+        }
+        else
+        {
+             $grades = "";
+        }
+        if($request->hasFile('cor'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('cor')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('cor')->getClientOriginalExtension();
+            //Filename to store
+            $cor = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('cor')->storeAs('public/uploads', $cor);
+        }
+        else
+        {
+            $cor = "";
+        }
+        if($request->hasFile('brgy'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('brgy')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('brgy')->getClientOriginalExtension();
+            //Filename to store
+            $brgy = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('brgy')->storeAs('public/uploads', $brgy);
+        }
+        else
+        {
+             $brgy = "";
+        }
+        if($request->hasFile('or'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('or')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('or')->getClientOriginalExtension();
+            //Filename to store
+            $or = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('or')->storeAs('public/uploads', $or);
+        }
+        else
+        {
+            $or = "";
+        }
+        if ($request->hasFile('oid'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('oid')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('oid')->getClientOriginalExtension();
+            //Filename to store
+            $oid = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('oid')->storeAs('public/uploads', $oid);
+        }
+        else
+        {
+             $oid = "";
+        }
+        if ($request->hasFile('honor'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('honor')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('honor')->getClientOriginalExtension();
+            //Filename to store
+            $honor = $filename.'_'.time().'.'.$extension;
+            $path = $request->file('honor')->storeAs('public/uploads', $honor);
+        }
+        else
+        {
+             $honor = "";
+        }
+       
+        // else
+        // {
+        //      $fileNameToStore = 'noimage.jpg';
+        // }
+        $rid = DB::table('reqgv')->where('applicant_id', Auth::user()->id)->first();
+        $id = $rid->id;
+
+
+        $reqgv = Reqgv::find($id);
+        $reqgv->biodata = $biodata;
+        $reqgv->cor = $cor;
+        $reqgv->or = $or;
+        $reqgv->grades = $grades;
+        $reqgv->brgy = $brgy;
+        $reqgv->oid = $oid;
+        $reqgv->honor = $honor;
+
+
+        $reqgv->biodata_sub = 'Submitted';
+        $reqgv->cor_sub = 'Submitted';
+        $reqgv->or_sub = 'Submitted';
+        $reqgv->grades_sub = 'Submitted';
+        $reqgv->brgy_sub = 'Submitted';
+        $reqgv->oid_sub = 'Submitted';
+        $reqgv->honor_sub = 'Submitted';
+
+        $reqgv->save();
+        return redirect ('/scholarship/details');;
+    }
+
+    public function uploadeefap()
+    {
+        return view('upload.uploadeefap');
+    }
+
+    public function storeduploadeefap(Request $request)
+    {
+        $this -> validate($request, [
+            'biodata' => 'file|nullable',
+            'grades' => 'image|nullable',
+            'cor' => 'image|nullable',
+            'brgy' => 'image|nullable',
+            'or' => 'image|nullable',
+            'oid' => 'image|nullable'
+        ]);
+
+
+        if($request->hasFile('biodata'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('biodata')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('biodata')->getClientOriginalExtension();
+            //Filename to store
+            $biodata = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('biodata')->storeAs('public/uploads', $biodata);
+        }
+        else
+        {
+            $biodata = "";
+        }
+        if($request->hasFile('grades'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('grades')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('grades')->getClientOriginalExtension();
+            //Filename to store
+            $grades = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('grades')->storeAs('public/uploads', $grades);
+        }
+        else
+        {
+             $grades = "";
+        }
+        if($request->hasFile('cor'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('cor')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('cor')->getClientOriginalExtension();
+            //Filename to store
+            $cor = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('cor')->storeAs('public/uploads', $cor);
+        }
+        else
+        {
+            $cor = "";
+        }
+        if($request->hasFile('brgy'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('brgy')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('brgy')->getClientOriginalExtension();
+            //Filename to store
+            $brgy = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('brgy')->storeAs('public/uploads', $brgy);
+        }
+        else
+        {
+             $brgy = "";
+        }
+        if($request->hasFile('or'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('or')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('or')->getClientOriginalExtension();
+            //Filename to store
+            $or = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('or')->storeAs('public/uploads', $or);
+        }
+        else
+        {
+            $or = "";
+        }
+        if ($request->hasFile('oid'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('oid')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('oid')->getClientOriginalExtension();
+            //Filename to store
+            $oid = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('oid')->storeAs('public/uploads', $oid);
+        }
+        else
+        {
+             $oid = "";
+        }
+        if ($request->hasFile('honor'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('honor')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('honor')->getClientOriginalExtension();
+            //Filename to store
+            $honor = $filename.'_'.time().'.'.$extension;
+            $path = $request->file('honor')->storeAs('public/uploads', $honor);
+        }
+        else
+        {
+             $honor = "";
+        }
+       
+       
+        // else
+        // {
+        //      $fileNameToStore = 'noimage.jpg';
+        // }
+        $rid = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->first();
+        $id = $rid->id;
+
+
+        $reqeefap = Reqeefap::find($id);
+        $reqeefap->biodata = $biodata;
+        $reqeefap->cor = $cor;
+        $reqeefap->or = $or;
+        $reqeefap->grades = $grades;
+        $reqeefap->brgy = $brgy;
+        $reqeefap->oid = $oid;
+
+        $reqeefap->biodata_sub = 'Submitted';
+        $reqeefap->cor_sub = 'Submitted';
+        $reqeefap->or_sub = 'Submitted';
+        $reqeefap->grades_sub = 'Submitted';
+        $reqeefap->brgy_sub = 'Submitted';
+        $reqeefap->oid_sub = 'Submitted';
+
+        $reqeefap->save();
+        return redirect ('/scholarship/details');;
+    }
+
+    function eefapdel()
+    {
+        
+        $app = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
+        $scholar = DB::table('scholarships')->where('id', $app->scholar_id)->first();
+        
+        if($scholar->type == "eefap")
+        {
+            $eefap = DB::table('eefap')->where('applicant_id', Auth::user()->id)->delete();
+            $reqe = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->delete();
+            $app2 = DB::table('application')->where('applicant_id', Auth::user()->id)->delete();
+        }
+        else if($scholar->type == "eefap-gv")
+        {
+            if($sholar->id == 7)
+            {
+                $gv = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->delete();
+                $reqe = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->delete();
+                $app2 = DB::table('application')->where('applicant_id', Auth::user()->id)->delete();
+            }
+            else
+            {
+                $gv = DB::table('gv')->where('applicant_id', Auth::user()->id)->delete();
+                $reqgv = DB::table('refgv')->where('applicant_id', Auth::user()->id)->delete();
+                $app2 = DB::table('application')->where('applicant_id', Auth::user()->id)->delete();
+            }
+        }
+        else if($scholar->type == "pcl")
+        {
+            $pcl = DB::table('pcl')->where('applicant_id', Auth::user()->id)->delete();
+            $reqe = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->delete();
+            $app2 = DB::table('application')->where('applicant_id', Auth::user()->id)->delete();
+        }
+        return redirect('/profile');
+    }
+
+    public function announcement($id)
+    {
+        $ann = DB::table('announcements')->where('id', $id)->first();
+        return view('news')->with('ann', $ann);
     }
 }

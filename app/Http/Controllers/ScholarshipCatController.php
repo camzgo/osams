@@ -306,6 +306,14 @@ class ScholarshipCatController extends Controller
 
             
         ]);
+        
+        $reqeefap = DB::table('reqeefap')->insert([
+            'scholar_id' =>  $request->title_id,
+            'applicant_id' => $request->sid,
+            'application_id' => $id,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+            
         return redirect('/admin/apply/send');
     }
 
@@ -360,6 +368,26 @@ class ScholarshipCatController extends Controller
 
             
         ]);
+        
+        if($request->title_id == 8)
+        {
+            $reqgv = DB::table('reqgv')->insert([
+                'scholar_id' =>  $request->title_id,
+                'applicant_id' => $request->sid,
+                'application_id' => $id,
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
+        }
+        else
+        {
+            $reqeefap = DB::table('reqeefap')->insert([
+            'scholar_id' =>  $request->title_id,
+            'applicant_id' => $request->sid,
+            'application_id' => $id,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+        }
+        
         return redirect('/admin/apply/send');
     }
 
@@ -440,6 +468,14 @@ class ScholarshipCatController extends Controller
 
             
         ]);
+
+        $reqeefap = DB::table('reqeefap')->insert([
+            'scholar_id' => 6,
+            'applicant_id' => $request->sid,
+            'application_id' => $id,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+
         return redirect('/admin/apply/send');
     }
 

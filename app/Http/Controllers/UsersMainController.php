@@ -14,6 +14,12 @@ use App\AccountType;
 
 class UsersMainController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -241,5 +247,12 @@ class UsersMainController extends Controller
         $output .= '<option value="'.$row->$dependent.'">'.$row->$dependent.'</option>';
         }
         echo $output;
+    }
+
+
+    function profile()
+    {
+        $municipal_list = DB::select('select municipality from `munbar` group by municipality');
+        return view ('admin.file_maintenance.users.emprofile')->with('municipal_list', $municipal_list);
     }
 }

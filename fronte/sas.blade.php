@@ -289,9 +289,14 @@
               <strong> ANNOUNCEMENT</strong>
             </div>
             <div class="card-body">
-              <h5>SAMPLE</h5>
-              <h5>sAMPLE</h5>
-              <h5>SAMPLE</h5>
+              @foreach($announce as $a)
+              <div class="clamp-name clamp-lines">
+                <ul>
+                  <li><h5><a href="/announcement/{{$a->id}}" class="text-muted"> {{$a->title}}</a></h5></li>
+                </ul>
+                
+              </div>
+              @endforeach
             </div>
           </div>
 

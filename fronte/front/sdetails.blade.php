@@ -110,13 +110,18 @@
                                   <a href="#" class="btn btn-block text-white btn-dark">Print</a>
                                 </div>
                                 <div class="col-md-3">
-                                  <a href="#" class="btn btn-block btn-primary">Upload Files</a>
+                                  <a href="/scholarship/upload/eefap" class="btn btn-block btn-primary">Upload Files</a>
                                 </div>
                                 <div class="col-md-3">
                                   <a href="/scholarship/details/eefap" class="btn btn-block text-white btn-success">Edit</a>
                                 </div>
                                 <div class="col-md-3">
-                                  <a href="#" class="btn btn-block btn-danger">Cancel</a>
+                                  <a href="/scholarship/delete" class="btn btn-block btn-danger" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">Cancel</a>
+
+                                  <form id="logout-form" action="{{action('FrontendController@eefapdel')}}" method="POST" style="display: none;">
+                                      @csrf
+                                  </form>
                                 </div>
                               </div>
                               @endif
@@ -165,27 +170,27 @@
                         <table class="table " id="eefap">
                           <tr>
                             <td>Bio-data with 2x2 Picture</td>
-                            <td>Not Submitted</td>
+                            <td>{{$reqeefap->biodata_sub}}</td>
                           </tr>
                           <tr>
                             <td>Grades / Form 138 <small>(Photocopy)</small></td>
-                            <td>Not Submitted</td>
+                            <td>{{$reqeefap->grades_sub}}</td>
                           </tr>
                           <tr>
                             <td>Certificate of Registration / Assessment Form <small>(Photocopy)</small></td>
-                            <td>Not Submitted</td>
+                            <td>{{$reqeefap->cor_sub}}</td>
                           </tr>
                           <tr>
                             <td>Barangay / Residency / Indigency <small>(Photocopy)</small></td>
-                            <td>Not Submitted</td>
+                            <td>{{$reqeefap->brgy_sub}}</td>
                           </tr>
                           <tr>
                             <td>Official Receipt <small>(Photocopy)</small></td>
-                            <td>Not Submitted</td>
+                            <td>{{$reqeefap->or_sub}}</td>
                           </tr>
                           <tr>
                             <td>School ID <small>(Photocopy)</small></td>
-                            <td>Not Submitted</td>
+                            <td>{{$reqeefap->oid_sub}}</td>
                           </tr>
                         </table>
 

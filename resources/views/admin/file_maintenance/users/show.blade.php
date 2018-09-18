@@ -356,7 +356,7 @@
           <div class="card-body"> 
         <br>
          <div class="flt-right">
-            <a href="/employee/create" class="btn btn-success">
+            <a href="/admin/employee/create" class="btn btn-success">
                 <i class="fa fa-plus"></i>
                 Add New
             </a>

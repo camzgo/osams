@@ -52,9 +52,19 @@
                       <div class="col-md-8">
                         <h5 class="boldtx"><strong>{{$scholar->scholarship_name}}</strong></h5>
                       </div>
+                      @if($applicant->application_status == "Pending")
                       <div class="col-md-4">
-                        <h4><span class="badge badge-warning text-white pull-right">Pending</span></h4>
+                        <h4><span class="badge badge-warning text-white pull-right">{{$applicant->application_status}}</span></h4>
                       </div>
+                      @elseif($applicant->application_status == "Approved")
+                      <div class="col-md-4">
+                        <h4><span class="badge badge-success text-white pull-right">{{$applicant->application_status}}</span></h4>
+                      </div>
+                      @else
+                      <div class="col-md-4">
+                        <h4><span class="badge badge-warning text-white pull-right">{{$applicant->application_status}}</span></h4>
+                      </div>
+                      @endif
                     </div>
                     
                     

@@ -309,6 +309,16 @@ class ScholarshipFrontController extends Controller
 
             
         ]);
+
+        $reqeefap = DB::table('reqeefap')->insert([
+            'scholar_id' =>  $request->scholar_id,
+            'applicant_id' => $request->sid,
+            'application_id' => $id,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+
+        return redirect('/scholarship/details');
+
         // $applicant = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
         // return redirect('/scholarship/details')->with('applicant', $application);
     }
@@ -364,6 +374,15 @@ class ScholarshipFrontController extends Controller
 
             
         ]);
+
+        $reqgv = DB::table('reqgv')->insert([
+            'scholar_id' =>  $request->scholar_id,
+            'applicant_id' => $request->sid,
+            'application_id' => $id,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+        
+
         return redirect('/scholarship/details');
     }
 
@@ -426,6 +445,15 @@ class ScholarshipFrontController extends Controller
 
             
         ]);
+
+         $reqeefap = DB::table('reqeefap')->insert([
+            'scholar_id' =>  $request->scholar_id,
+            'applicant_id' => $request->sid,
+            'application_id' => $id,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+
+
         return redirect('/scholarship/details');
     }
 

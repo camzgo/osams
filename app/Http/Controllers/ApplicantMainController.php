@@ -65,7 +65,7 @@ class ApplicantMainController extends Controller
 
         ]);
         $users->save();
-        return redirect('/applicant');
+        return redirect('/admin/applicant');
     }
 
     // /**

@@ -108,15 +108,9 @@
                                 <div class="col-md-3">
                                   <a href="#" class="btn btn-block text-white btn-dark">Print</a>
                                 </div>
-                                @if($scholar->id== 7)
                                 <div class="col-md-3">
                                   <a href="/scholarship/upload/eefap" class="btn btn-block btn-primary">Upload Files</a>
                                 </div>
-                                @else
-                                <div class="col-md-3">
-                                  <a href="/scholarship/upload/eefapgv" class="btn btn-block btn-primary">Upload Files</a>
-                                </div>
-                                @endif
                                 <div class="col-md-3">
                                   <a href="/scholarship/details/eefap" class="btn btn-block text-white btn-success">Edit</a>
                                 </div>
@@ -165,7 +159,6 @@
                         <i class="fa fa-folder-open"></i><strong> Requirements</strong>
                       </div>
                       <div class="card-body py-0">
-                      @if($scholar->id== 7)
                         <table class="table " id="eefap">
                           <tr>
                             <td>Bio-data with 2x2 Picture</td>
@@ -192,38 +185,7 @@
                             <td>{{$reqeefap->oid_sub}}</td>
                           </tr>
                         </table>
-                      @else
-                        <table class="table" id="eefap-gv">
-                          <tr>
-                            <td>Bio-data with 2x2 Picture</td>
-                            <td>{{$reqgv->biodata_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Certificate of Honor <small>(Photocopy)</small></td>
-                            <td>{{$reqgv->honor_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Grades / Class Cards / Form 138 <small>(Photocopy)</small></td>
-                            <td>{{$reqgv->grades_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Certificate of Registration / Assessment Form <small>(Photocopy)</small></td>
-                            <td>{{$reqgv->cor_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Barangay / Residency / Indigency Certificate <small>(Photocopy)</small></td>
-                            <td>{{$reqgv->brgy_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Official Receipt <small>(Photocopy)</small></td>
-                            <td>{{$reqgv->or_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>School ID <small>(Photocopy)</small></td>
-                            <td>{{$reqgv->oid_sub}}</td>
-                          </tr>
-                        </table>
-                        @endif
+                      
                       </div>
                     </div>
                   </div>

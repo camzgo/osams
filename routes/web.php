@@ -213,7 +213,14 @@ Route::prefix('/')->group(function()
     Route::get('/scholarship/details/pcl', 'FrontendController@viewPcl');
     Route::post('/scholarship/details/pcl/fetch', 'FrontendController@pclfetch')->name('pcl2.fetch');
     Route::post('/scholarship/details/pcl', 'FrontendController@storedPcl');
+    
+    Route::get('/scholarship/upload/eefapgv', 'FrontendController@uploadgv');
+    Route::post('/scholarship/upload/eefapgv', 'FrontendController@storeduploadgv');
+    Route::get('/scholarship/upload/eefap', 'FrontendController@uploadeefap');
+    Route::post('/scholarship/upload/eefap', 'FrontendController@storeduploadeefap');
+    Route::post('/scholarship/delete', 'FrontendController@eefapdel');
 
+    Route::get('/announcement/{$id}', 'FrontendController@announcement');
     Route::get('/send/sample', 'FrontendController@send');
 });
 
@@ -311,6 +318,7 @@ Route::prefix('admin')->group(function(){
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+    Route::get('/profile', 'UsersMainController@profile');
 });
 
 

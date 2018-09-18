@@ -65,7 +65,7 @@ class AnnounceMainController extends Controller
             'a_isdel'   => $isdl
         ]);
         $announce->save();
-        return redirect('/announcement');
+        return redirect('/admin/announcement');
         // else
         // {
         //     $announce = new Announcement;

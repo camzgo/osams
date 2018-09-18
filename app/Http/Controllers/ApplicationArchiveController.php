@@ -131,16 +131,27 @@ class ApplicationArchiveController extends Controller
         if ($sc_name == "eefap")
         {
             DB::table('eefap')->where('application_id', $app_id)->delete();
+            $reqe = DB::table('reqeefap')->where('application_id', $app_id) ->delete();
         }
 
         else if ($sc_name == "eefap-gv")
         {
             DB::table('eefapgv')->where('application_id', $app_id)->delete();
+
+            if($scholarship->id == 7)
+            {
+                $reqe = DB::table('reqeefap')->where('application_id', $app_id) ->delete();;
+            }
+            else
+            {
+                $reqgv = DB::table('reqgv')->where('application_id', $app_id) ->delete();
+            }
         }
 
         else if ($sc_name == "pcl")
         {
             DB::table('pcl')->where('application_id', $app_id)->delete();
+            $reqe = DB::table('reqeefap')->where('application_id', $app_id) ->delete();
         }
 
         $application = Application::find($request->input('id'));
