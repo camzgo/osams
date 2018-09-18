@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2018 at 07:59 PM
+-- Generation Time: Sep 18, 2018 at 08:42 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -141,7 +141,8 @@ CREATE TABLE `announcements` (
 INSERT INTO `announcements` (`id`, `title`, `body`, `cover_photo`, `a_isdel`, `created_at`, `updated_at`) VALUES
 (1, 'Sample', 'Sample Description', 'none', 0, '2018-08-14 08:56:24', '2018-08-15 23:04:21'),
 (2, 'Sample 02', 'Sample Description two', 'none', 0, '2018-08-14 08:57:58', '2018-08-15 06:11:52'),
-(3, 'Sample 03', 'This is a example body number 3.', 'none', 1, '2018-08-14 09:08:43', '2018-08-15 23:05:11');
+(3, 'Sample 03', 'This is a example body number 3.', 'none', 1, '2018-08-14 09:08:43', '2018-08-15 23:05:11'),
+(4, 'Awarding of Vice Governor Scholars', 'dfsfffjdfdjfdjfdsfjjfdjfkjfdsjfjkjjjdfjsdajfjjsjfjfjfkjfjnmnvnvjfjfjdjfjfdkjdjdfsfffjdfdjfdjfdsfjjfdjfkjfdsjfjkjjjdfjsdajfjjsjfjfjfkjfjnmnvnvjfjfjdjfjfdkjdjdfsfffjdfdjfdjfdsfjjfdjfkjfdsjfjkjjjdfjsdajfjjsjfjfjfkjfjnmnvnvjfjfjdjfjfdkjdj', 'none', 0, '2018-09-18 10:13:27', '2018-09-18 10:13:27');
 
 -- --------------------------------------------------------
 
@@ -167,9 +168,8 @@ CREATE TABLE `application` (
 --
 
 INSERT INTO `application` (`id`, `application_status`, `renew`, `barcode_image`, `barcode_number`, `applicant_id`, `scholar_id`, `application_isdel`, `created_at`, `updated_at`) VALUES
-(1, 'Approved', 0, 'NONE', 'IIY3fuIqlM', 1, 2, NULL, '2018-09-16 11:17:52', '2018-09-16 11:17:52'),
-(3, 'Pending', 0, 'NONE', 'xKDWFDmXw4', 2, 8, NULL, '2018-09-16 12:03:33', '2018-09-16 12:03:33'),
-(4, 'Pending', 0, 'NONE', 'dO9Nt2ikiM', 5, 6, NULL, '2018-09-16 12:24:48', '2018-09-16 12:24:48');
+(2, 'Pending', 0, 'NONE', 'i5DsMdPuxr', 2, 8, NULL, '2018-09-18 06:28:11', '2018-09-18 06:28:11'),
+(4, 'Pending', 0, 'NONE', 'YRxJK1lRlQ', 6, 7, NULL, '2018-09-18 08:31:45', '2018-09-18 08:31:45');
 
 -- --------------------------------------------------------
 
@@ -186,15 +186,6 @@ CREATE TABLE `approval_date` (
   `scholarship_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `approval_date`
---
-
-INSERT INTO `approval_date` (`id`, `date_approved`, `status`, `applicant_id`, `application_id`, `scholarship_id`, `employee_id`) VALUES
-(1, '2018-09-08', 'Approved', 1, 2, 4, 0),
-(2, '2018-09-08', 'Approved', 2, 3, 8, 0),
-(3, '2018-09-17', 'Approved', 1, 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -262,13 +253,6 @@ CREATE TABLE `eefap` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `eefap`
---
-
-INSERT INTO `eefap` (`id`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `fb_account`, `gsurname`, `gfirst_name`, `gmiddle_name`, `gsuffix`, `gmobile_number`, `municipality`, `barangay`, `street`, `college_name`, `college_address`, `course`, `major`, `program_type`, `year_level`, `graduating`, `general_average`, `spes`, `scholarship_id`, `applicant_id`, `application_id`, `created_at`, `updated_at`) VALUES
-(1, 'Ocampo', 'Albert', 'Gold', 'Jr.', '9051241420', 'facebook.com/ago', 'Ocampo', 'Mercy', 'Guinto', NULL, '9172550100', 'MACABEBE', 'Santo Rosario (Poblacion)', 'example street', 'STI College', 'San Fernando, Pampanga', 'Bachelor of Science in Information Technology', 'General', 'Bachelor\'s Degree', '4th', 'YES', '2.0', 'NO', 2, 1, 1, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -307,7 +291,8 @@ CREATE TABLE `eefapgv` (
 --
 
 INSERT INTO `eefapgv` (`id`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `municipality`, `barangay`, `street`, `college_name`, `college_address`, `course`, `major`, `program_type`, `year_level`, `graduating`, `general_average`, `spes`, `awards`, `scholarship_id`, `applicant_id`, `application_id`) VALUES
-(1, NULL, '2018-09-16 21:26:33', 'Ocampo', 'Camille', 'Fierro', NULL, '9051124520', 'MEXICO', 'Parian (Poblacion)', 'example street', 'STI College', 'San Fernando, Pampanga', 'Bachelor of Science in Information Technology', 'General', 'Bachelor\'s Degree', '4th', 'YES', '2.0', 'NO', 'Highest Honors', 8, 2, 3);
+(1, NULL, NULL, 'Ocampo', 'Camille', 'Fierro', NULL, '9051124520', 'MEXICO', 'Parian (Poblacion)', 'example street', 'STI College', 'San Fernando, Pampanga', 'Bachelor of Science in Information Technology', 'General', 'Bachelor\'s Degree', '4th', 'YES', '2.0', 'YES', 'Highest Honors', 8, 2, 2),
+(3, NULL, NULL, 'Salas', 'Louis Vincent', 'Nogoy', NULL, '9172504502', 'SAN LUIS', 'Santo Rosario', 'dfdsfdsf', 'dsfsd', 'dffd', 'fdfs', 'fdf', 'Bachelor\'s Degree', '2nd', 'YES', '2.0', 'YES', 'None/VG DHVTSU', 7, 6, 4);
 
 -- --------------------------------------------------------
 
@@ -366,7 +351,7 @@ CREATE TABLE `guardian_info` (
 --
 
 INSERT INTO `guardian_info` (`id`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `gender`, `nationality`, `occupation`, `civil_status`, `municipality`, `barangay`, `street`, `bday`, `relationship`, `applicant_id`, `created_at`, `updated_at`) VALUES
-(1, 'Khan', 'Cong', 'Low', NULL, '9172564236', 'Male', 'Chinese', 'Businessman', 'Married', 'CITY OF SAN FERNANDO (Capital)', 'Sindalan', 'example street', '2018-09-15', 'Father', 5, NULL, '2018-09-14 11:40:50'),
+(1, 'Khan', 'Cong', 'Low', NULL, '9172564236', 'Male', 'Chinese', 'Businessman', 'Married', 'CITY OF SAN FERNANDO (Capital)', 'Sindalan', 'example street', '2018-09-15', 'Father', 5, NULL, '2018-09-14 03:40:50'),
 (2, 'Ocampo', 'Mercy', 'Guinto', NULL, '9172550100', 'Female', 'Filipino', 'Housewife', 'Married', 'MACABEBE', 'Santo Rosario (Poblacion)', 'example street', '2018-09-17', 'Mother', 1, NULL, NULL),
 (3, 'Fierro', 'Jenalyn', 'Solomon', NULL, '9172005421', 'Female', 'Filipino', 'Radiologist', 'Married', 'MEXICO', 'Parian (Poblacion)', 'example street', '2018-09-17', 'Mother', 2, NULL, NULL);
 
@@ -384,17 +369,6 @@ CREATE TABLE `log` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `log`
---
-
-INSERT INTO `log` (`id`, `desc`, `scholar_id`, `tracking_id`, `created_at`, `updated_at`) VALUES
-(1, 'Your application has been approved.', 2, 2, '2018-09-17 07:35:09', '2018-09-17 07:35:09'),
-(2, 'Your application is being re-check.', 2, 2, '2018-09-17 07:35:26', NULL),
-(3, 'Your application is being consolidate to ensure that there are no duplicate entry.', 2, 2, '2018-09-17 09:44:03', NULL),
-(4, 'Printing of cheques.', 2, 2, '2018-09-17 09:44:19', NULL),
-(5, 'Releasing of Cheques', 2, 2, '2018-09-17 09:44:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -430,11 +404,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (53, '2018_09_03_192445_create_application_table', 11),
 (54, '2018_09_08_042342_create_approval_date_table', 11),
 (55, '2018_09_14_151449_create_table_personal_info', 12),
-(56, '2018_09_14_152021_create_table_guardian_info', 12),
 (57, '2018_09_14_153325_create_table_education_info', 12),
 (58, '2018_09_16_135323_create_notifications_table', 13),
 (62, '2018_09_16_162352_create_table_tracking', 14),
-(63, '2018_09_17_051416_create_table_log', 14);
+(66, '2018_09_14_152021_create_table_guardian_info', 15),
+(67, '2018_09_17_051416_create_table_log', 15),
+(68, '2018_09_18_131755_create_table_reqgv', 15),
+(69, '2018_09_18_131955_create_table_reqeefap', 15);
 
 -- --------------------------------------------------------
 
@@ -1058,16 +1034,6 @@ CREATE TABLE `pcl` (
   `applicant_id` int(11) NOT NULL,
   `application_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `pcl`
---
-
-INSERT INTO `pcl` (`id`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `suffix`, `mobile_number`, `district`, `municipality`, `barangay`, `street`, `school_enrolled`, `course`, `year_level`, `gender`, `birthdate`, `nationality`, `religion`, `civil_status`, `birth_place`, `fsurname`, `ffirst_name`, `fmiddle_name`, `fsuffix`, `foccupation`, `msurname`, `mfirst_name`, `mmiddle_name`, `msuffix`, `moccupation`, `address`, `emergency`, `emobile_number`, `scholarship_id`, `applicant_id`, `application_id`) VALUES
-(1, NULL, NULL, 'Cong', 'King', 'Ca', NULL, '9172245112', '3rd District', 'MEXICO', 'Nueva Victoria', 'cv', 'dfdfd', 'dfdf', 'df', 'Male', '1998-02-05', 'Filipino', 'The Church of Jesus Christ of Latter-day Saints', 'Single', 'fdsfsdfsdf', 'dfdf', 'dfd', 'fd', NULL, 'dfdf', 'fdf', 'ddfd', 'fd', NULL, 'dfdf', 'dfdfdfd', 'fdfdfd', '9172245112', 6, 3, 4),
-(2, NULL, NULL, 'Cong', 'King', 'Ca', NULL, '9172245112', '1st District', 'ANGELES CITY', 'Agapito del Rosario', 'sample street', 'fdfd', 'dfdf', 'df', 'Male', '1998-02-05', 'Filipino', 'Roman Catholic', 'Single', 'sample birth place', 'fdgdfg', 'dfgfdg', 'gfg', NULL, 'fgf', 'fgfg', 'fgfg', 'fgfg', NULL, 'fgf', 'fgff', 'dfdf', '9172245112', 6, 3, 1),
-(3, NULL, '2018-09-15 10:54:05', 'Khan', 'Seng', 'Sy', NULL, '9172516220', '1st District', 'ANGELES CITY', 'Balibago', 'example street', 'STI', 'JASAASA', '2nd', 'Female', '1997-02-02', 'Filipino', 'Roman Catholic', 'Single', 'example bplace', 'wew', 'hew', NULL, NULL, 'dfcvxh', 'ewed', 'dsg', NULL, NULL, 'fhghs', 'qwewe', 'emersfdfdsf', '9172516220', 6, 5, 4),
-(4, NULL, NULL, 'Khan', 'Seng', 'Sy', NULL, '9172516220', '2nd District', 'PORAC', 'Balubad', 'Example', 'Our Lady of Fatima University', 'Bachelor of Science in Information System', '2nd', 'Female', '1997-02-02', 'Filipino', 'Roman Catholic', 'Single', 'aa', 'fsdfdsf', 'fsdfdsfs', 'fdsf', 'fdf', 'dfd', 'fdsf', 'sdfsdfds', 'dfdsf', 'ddf', 'dfdf', 'dfd', 'fdsfds', '9172516220', 6, 5, 4);
 
 -- --------------------------------------------------------
 
@@ -45012,6 +44978,76 @@ INSERT INTO `refregion` (`id`, `psgcCode`, `regDesc`, `regCode`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reqeefap`
+--
+
+CREATE TABLE `reqeefap` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `biodata` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cor` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `or` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `grades` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `brgy` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `oid` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `biodata_sub` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Submitted',
+  `cor_sub` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Submitted',
+  `or_sub` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Submitted',
+  `grades_sub` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Submitted',
+  `brgy_sub` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Submitted',
+  `oid_sub` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Submitted',
+  `scholar_id` int(11) NOT NULL,
+  `applicant_id` int(11) NOT NULL,
+  `application_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `reqeefap`
+--
+
+INSERT INTO `reqeefap` (`id`, `biodata`, `cor`, `or`, `grades`, `brgy`, `oid`, `biodata_sub`, `cor_sub`, `or_sub`, `grades_sub`, `brgy_sub`, `oid_sub`, `scholar_id`, `applicant_id`, `application_id`, `created_at`, `updated_at`) VALUES
+(2, 'IMG_20180716_0004_1537288404.pdf', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0001_1537288404.jpg', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 7, 6, 4, '2018-09-18 08:31:45', '2018-09-18 08:33:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reqgv`
+--
+
+CREATE TABLE `reqgv` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `biodata` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cor` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `or` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `grades` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `brgy` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `oid` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `honor` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `biodata_sub` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Submitted',
+  `cor_sub` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Submitted',
+  `or_sub` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Submitted',
+  `grades_sub` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Submitted',
+  `brgy_sub` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Submitted',
+  `oid_sub` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Submitted',
+  `honor_sub` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Submitted',
+  `scholar_id` int(11) NOT NULL,
+  `applicant_id` int(11) NOT NULL,
+  `application_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `reqgv`
+--
+
+INSERT INTO `reqgv` (`id`, `biodata`, `cor`, `or`, `grades`, `brgy`, `oid`, `honor`, `biodata_sub`, `cor_sub`, `or_sub`, `grades_sub`, `brgy_sub`, `oid_sub`, `honor_sub`, `scholar_id`, `applicant_id`, `application_id`, `created_at`, `updated_at`) VALUES
+(1, 'IMG_20180716_0004_1537286780.pdf', 'IMG_20180716_0002_1537286781.jpg', 'IMG_20180710_0002_1537286781.jpg', 'IMG_20180716_0001_1537286781.jpg', 'IMG_20180716_0003_1537286781.jpg', 'IMG_20180818_0019_1537286781.jpg', 'IMG_20180818_0021_1537284649.jpg', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 8, 2, 2, '2018-09-18 06:28:11', '2018-09-18 08:06:21');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `requirements`
 --
 
@@ -45064,7 +45100,7 @@ INSERT INTO `scholarships` (`id`, `scholarship_name`, `scholarship_desc`, `amoun
 (5, 'GRADUATE FROM PRIVATE', 'Students from private', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-17 07:25:43', 'eefap'),
 (6, 'PCL', 'Pampanga Councilors League', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 11:12:14', 'pcl'),
 (7, 'VG DHVTSU', 'Scholars from DHVTSU', 5000, '2018-09-06', 500, 'OPEN', NULL, NULL, 'eefap-gv'),
-(8, 'HONORS and RANKS', 'Students with honors or ranks', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 11:12:22', 'eefap-gv');
+(8, 'HONORS and RANKS', 'Students with honors or ranks', 5000, '2018-09-27', 20, 'OPEN', NULL, '2018-09-18 00:56:07', 'eefap-gv');
 
 -- --------------------------------------------------------
 
@@ -45120,7 +45156,7 @@ CREATE TABLE `tracking` (
 
 INSERT INTO `tracking` (`id`, `stage`, `status`, `scholarship_id`, `created_at`, `updated_at`) VALUES
 (1, 'Open', 'OPEN', 1, NULL, NULL),
-(2, 'Awarding', 'RELEASED', 2, NULL, '2018-09-17 09:44:32'),
+(2, 'Awarding', 'RELEASED', 2, NULL, '2018-09-18 01:07:56'),
 (3, 'Open', 'OPEN', 3, NULL, NULL),
 (4, 'Open', 'OPEN', 4, NULL, '2018-09-17 05:43:11'),
 (5, 'Open', 'OPEN', 5, NULL, '2018-09-17 05:49:18'),
@@ -45157,11 +45193,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `gender`, `bday`, `applicant_isdel`, `suffix`, `mobile_number`, `profile_photo`) VALUES
-(1, 'guintoproductions@gmail.com', '$2y$10$XI.K4/qIMsyUQ6Q49.uhuOocu4CyeGxBaZQ59vqCLrRinbig63wi6', 'X8fBt29SSBKP7KPDwucs4281OHEnZm4NBQZVx77obY4aMScWTIhBLzvWE9uo', '2018-08-08 06:04:07', '2018-09-16 20:53:50', 'Ocampo', 'Albert', 'Gold', 'Male', '1999-04-04', '0', 'Jr.', '9059462732', 'noimage.jpg'),
-(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', '4uKKr5VLQ1ZgOy7jdIg4rkrg8W11lEhaIY5wlZK6UAEvFmUnODLozoQOssoq', '2018-08-09 15:16:18', '2018-09-16 21:22:57', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', NULL, '9051124520', 'noimage.jpg'),
+(1, 'guintoproductions@gmail.com', '$2y$10$XI.K4/qIMsyUQ6Q49.uhuOocu4CyeGxBaZQ59vqCLrRinbig63wi6', 'i9mH0QpvWMOvfIk3dZyKH35AvKnJnwnEYePwuQH0VPmP1CN60w2MdgM8IAV4', '2018-08-08 06:04:07', '2018-09-16 20:53:50', 'Ocampo', 'Albert', 'Gold', 'Male', '1999-04-04', '0', 'Jr.', '9059462732', 'noimage.jpg'),
+(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', '6iuLLGoFLvvlJcdpJ0BT9qAM4UadWuGG348H3V7rPKoYd69hfOkiH0e5kcWD', '2018-08-09 15:16:18', '2018-09-16 21:22:57', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', NULL, '9051124520', 'noimage.jpg'),
 (3, 'cong@mail.com', '$2y$10$9luqQ659uIm1WurOBMMTQO1d8xFwKNf4CpBbJCV290ALkGLF5UG8K', 'xYd77OqpHEXPD7ZO1bTxfvSrmCBMVCaZPiKlZZbqGFRpjjSoVDD3z5LFUAo1', '2018-08-18 09:12:14', '2018-08-18 09:12:14', 'Cong', 'King', 'Ca', 'Male', '1998-02-05', '0', NULL, '9172245112', 'noimage.jpg'),
-(5, 'khan@mail.com', '$2y$10$KS9I/Myw4Q1FJ0jYgsn86.q7iUkRcOg0RoQC/I6tiTBTE1U6s1NmC', 'TovBaqNBQ9zZ7Fdzj9korYJaIO7m8CvlsaHxZpkTWszxzI62YKtJHVwZVh9p', '2018-09-14 05:33:49', '2018-09-16 12:58:29', 'Khan', 'Seng', 'Sy', 'Female', '1997-02-02', '0', NULL, '9172516220', 'avatar5_1537131509.png'),
-(6, 'salas@mail.com', '$2y$10$Z4K3wN57UcegG3vGAGwa2.akUMzkRRA3AwuX/bZhjcSVWxiZWFGQm', 'u0nf3nav2jz4V5WAlJ7KojsNTSA32VnGiTYokCkK5h5TwEKxcjJZ7LBMr1xf', '2018-09-16 22:37:55', '2018-09-16 22:37:55', 'Salas', 'Louis Vincent', 'Nogoy', 'Male', '1999-06-20', '0', NULL, '9172504502', 'noimage.jpg');
+(5, 'khan@mail.com', '$2y$10$KS9I/Myw4Q1FJ0jYgsn86.q7iUkRcOg0RoQC/I6tiTBTE1U6s1NmC', 'SteK1bn6a5KoGpuxMU0yRn6FG2znpz2IVE3HbUePyo0We77YaaD615st6dfI', '2018-09-14 05:33:49', '2018-09-16 12:58:29', 'Khan', 'Seng', 'Sy', 'Female', '1997-02-02', '0', NULL, '9172516220', 'avatar5_1537131509.png'),
+(6, 'salas@mail.com', '$2y$10$Z4K3wN57UcegG3vGAGwa2.akUMzkRRA3AwuX/bZhjcSVWxiZWFGQm', 'Qc3j2i5oxkrIR7f4qVqxPPpuu1u6UtiHi6LQX91p1AvMaswJakz8efcgO3e6', '2018-09-16 22:37:55', '2018-09-16 22:37:55', 'Salas', 'Louis Vincent', 'Nogoy', 'Male', '1999-06-20', '0', NULL, '9172504502', 'noimage.jpg');
 
 --
 -- Indexes for dumped tables
@@ -45296,6 +45332,18 @@ ALTER TABLE `refregion`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `reqeefap`
+--
+ALTER TABLE `reqeefap`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reqgv`
+--
+ALTER TABLE `reqgv`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `requirements`
 --
 ALTER TABLE `requirements`
@@ -45352,7 +45400,7 @@ ALTER TABLE `admins_info`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `application`
@@ -45364,7 +45412,7 @@ ALTER TABLE `application`
 -- AUTO_INCREMENT for table `approval_date`
 --
 ALTER TABLE `approval_date`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `education_info`
@@ -45376,13 +45424,13 @@ ALTER TABLE `education_info`
 -- AUTO_INCREMENT for table `eefap`
 --
 ALTER TABLE `eefap`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `eefapgv`
 --
 ALTER TABLE `eefapgv`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `faquestions`
@@ -45400,13 +45448,13 @@ ALTER TABLE `guardian_info`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `munbar`
@@ -45418,7 +45466,7 @@ ALTER TABLE `munbar`
 -- AUTO_INCREMENT for table `pcl`
 --
 ALTER TABLE `pcl`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `personal_info`
@@ -45449,6 +45497,18 @@ ALTER TABLE `refprovince`
 --
 ALTER TABLE `refregion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `reqeefap`
+--
+ALTER TABLE `reqeefap`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `reqgv`
+--
+ALTER TABLE `reqgv`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `scholarships`
