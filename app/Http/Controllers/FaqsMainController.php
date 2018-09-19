@@ -9,6 +9,12 @@ use DataTables;
 
 class FaqsMainController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +23,11 @@ class FaqsMainController extends Controller
     public function index()
     {
         //
-        return view('admin.file_maintenance.faqs.show');
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+
+        return view('admin.file_maintenance.faqs.show')->with('role', $role);
     }
 
     // /**

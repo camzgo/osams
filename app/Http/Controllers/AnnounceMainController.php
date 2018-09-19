@@ -11,6 +11,8 @@ use Validator;
 
 class AnnounceMainController extends Controller
 {
+
+    
     /**
      * Create a new controller instance.
      *
@@ -32,7 +34,11 @@ class AnnounceMainController extends Controller
     public function index()
     {
         //
-        return view('admin.file_maintenance.announcement.show');
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+
+        return view('admin.file_maintenance.announcement.show')->with('role', $role);
     }
 
     /**
@@ -43,7 +49,11 @@ class AnnounceMainController extends Controller
     public function create()
     {
         //
-        return view('admin.file_maintenance.announcement.create');
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+
+        return view('admin.file_maintenance.announcement.create')->with('role', $role);
     }
 
     /**
@@ -100,8 +110,11 @@ class AnnounceMainController extends Controller
     public function edit($id)
     {
         //
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         $announce =  Announcement::find($id);
-        return view('admin.file_maintenance.announcement.edit')->with('announce', $announce);
+        return view('admin.file_maintenance.announcement.edit')->with('announce', $announce)->with('role', $role);
     }
 
     /**
@@ -118,7 +131,7 @@ class AnnounceMainController extends Controller
         $announce -> title = $request->input('title');
         $announce -> body = $request->input('body');
         $announce->save();
-        return redirect('/announcement');
+        return redirect('/admin/announcement');
     }
 
     /**

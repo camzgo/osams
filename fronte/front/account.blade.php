@@ -13,7 +13,7 @@
 <style>
 #image_preview{
 
-      border: 1px solid black;
+      /* border: 1px solid black; */
 
       padding: 5px;
 
@@ -81,8 +81,8 @@
                           <div class="card" style="width: 260px; height: 325px;">
                             <div class="card-body">
                               {{-- <img src="{{asset('images/avatar5.png')}}" alt=""><hr> --}}
-                              <div id="image_preview">
-                                <img src="/storage/profile_images/{{Auth::user()->profile_photo}}" alt="" >
+                              <div id="image_preview" class="text-center">
+                                <img src="/storage/profile_images/{{Auth::user()->profile_photo}}" alt="" class="img-fluid img-circle">
                               </div><hr>
                               {{-- <button class="btn btn-primary btn-rounded" style="width: 15em; ">Upload</button> --}}
                               {{-- <div class="custom-file">

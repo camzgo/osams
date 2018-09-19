@@ -8,5 +8,5 @@ class AccountType extends Model
 {
     //
     protected $table = 'account_type';
-    protected $fillable = ['account_name', 'account_desc', 'file_maintenance', 'tracking', 'transactions', 'utilities', 'reports'];
+    protected $fillable = ['account_name', 'account_desc', 'file_maintenance', 'tracking', 'transactions', 'utilities', 'reports' , 'submission'];
 }

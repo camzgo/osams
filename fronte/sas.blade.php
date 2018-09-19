@@ -292,7 +292,7 @@
               @foreach($announce as $a)
               <div class="clamp-name clamp-lines">
                 <ul>
-                  <li><h5><a href="/announcement/{{$a->id}}" class="text-muted"> {{$a->title}}</a></h5></li>
+                  <li><h5><a href="{{URL('/announcement/', [$a->id] )}}" class="text-muted"> {{$a->title}}</a></h5></li>
                 </ul>
                 
               </div>

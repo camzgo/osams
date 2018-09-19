@@ -11,10 +11,17 @@ use App\AccountType;
 class UtilitiesController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
 
     public function permission ()
     {
-        return view ('admin.utilities.permission');
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+        return view ('admin.utilities.permission')->with('role', $role);
     }
 
     function getdata()
@@ -82,15 +89,27 @@ class UtilitiesController extends Controller
             }
             
         })
+        ->addColumn('chk6', function($permission)
+        {
+            if($permission->submission == 'Grant')
+            {
+                return '<strong><i class="fa fa-check"></i> Grant</strong>';
+            }
+            else
+            {
+                return '<strong><i class="fa fa-close"></i> Deny</strong>';
+            }
+            
+        })
         ->addColumn('action', function($permission){
-            if($permission->account_name == "Admin" || $permission->account_name == "ADMIN" )
+            if($permission->account_name == "Admin" || $permission->account_name == "ADMIN" || $permission->account_name == "ADMINISTRATOR" || $permission->account_name == "Administrator" )
             {
                 return '';
             }
             return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$permission->id.'"><i class="fa fa-edit"></i> </a>
                     <a href="#" class="btn btn-sm btn-danger delete" id="'.$permission->id.'"><i class="fa fa-trash"></i> </a> ';
         })
-        ->rawColumns(['chk1', 'chk2', 'chk3', 'chk4', 'chk5', 'action'])
+        ->rawColumns(['chk1', 'chk2', 'chk3', 'chk4', 'chk5', 'chk6', 'action'])
         ->make(true);
 
     }
@@ -106,7 +125,8 @@ class UtilitiesController extends Controller
             'tracking'         => $permissions->tracking,
             'transactions'     => $permissions->transactions,
             'utilities'        => $permissions->utilities,
-            'reports'          => $permissions->reports
+            'reports'          => $permissions->reports,
+            'submission'       => $permissions->submission
         );
         echo json_encode($output);
     }
@@ -142,7 +162,8 @@ class UtilitiesController extends Controller
                     'tracking'         => $act[1],
                     'transactions'     => $act[2],
                     'utilities'        => $act[3],
-                    'reports'          => $act[4]
+                    'reports'          => $act[4],
+                    'submission'       => $act[5]
                     //   'account_desc'     =>  $request->get('accnt_desc'),
                     //    'account_desc'     =>  $request->get('accnt_desc'),
                     //     'account_desc'     =>  $request->get('accnt_desc'),
@@ -163,6 +184,7 @@ class UtilitiesController extends Controller
                 $account->transactions    =  $act[2];
                 $account->utilities        = $act[3];
                 $account->reports          = $act[4];
+                $account->submission       = $act[5];
                 $account->save();
                 $success_output = '';
 

@@ -398,7 +398,7 @@
           </div>
         </div>
         <div class="row form-group">
-          <div class="col-md-2">
+          <div class="col-md-4">
               <label for="gender">* Gender</label>
               <select name="gender" id="gender" class=" form-control req"  required>
                 <option value="" selected disabled>--Select--</option>
@@ -406,25 +406,11 @@
                 <option value="Female">FEMALE</option>
               </select>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-4">
             <label for="bdate">* Birth Date</label>
             <input type="date" name="bday" id="bday" class="form-control req" data-provide="datepicker" required/>
           </div>
-          <div class="col-md-3">
-              <label for="nationality">* Nationality</label>
-              <select name="nationality" id="nationality" class="form-control req" required>
-                <option value="" selected disabled>--Select--</option>
-                <option value="Filipino">Filipino</option>
-                <option value="Foreigner">Foreigner</option>
-              </select>
-          </div>
-          <div class="col-md-3">
-            <label for="religion">* Religion</label>
-            <select name="religion" id="religion" class="form-control req"  required>
-              <option value="" selected disabled>--Select--</option>
-            </select>
-          </div>
-          <div class="col-md-2">
+          <div class="col-md-4">
             <label for="civils">* Civil Status</label>
             <select name="civil_status" id="civil_status" class="form-control req"  required>
               <option value="" selected disabled>--Select--</option>

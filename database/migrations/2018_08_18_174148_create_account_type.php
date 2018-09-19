@@ -19,6 +19,7 @@ class CreateAccountType extends Migration
             $table->string('account_desc');
             $table->string('file_maintenance', 10);
             $table->string('tracking', 10);
+            $table->string('submission', 10);
             $table->string('transactions', 10);
             $table->string('utilities', 10);
             $table->string('reports', 10);

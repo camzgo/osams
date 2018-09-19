@@ -14,6 +14,13 @@ use App\Municipality;
 class ScholarshipCatController extends Controller
 {
     //
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
+    
     public function generateRandomString($length = 12) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -52,8 +59,13 @@ class ScholarshipCatController extends Controller
         $scholar3 = str_replace("\"id\":", '', $scholar2);
         $scholar_id = $scholar3;
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
+
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+
         return  view ('admin.scholarships.scholar1')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
-        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users);
+        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users)->with('role', $role);
 
         // return view ('admin.file_maintenance.users.create-step-2');
     }
@@ -78,8 +90,13 @@ class ScholarshipCatController extends Controller
         $scholar3 = str_replace("\"id\":", '', $scholar2);
         $scholar_id = $scholar3;
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
+
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+
          return  view ('admin.scholarships.scholar1')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
-        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users);
+        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users)->with('role', $role);
     }
 
     public function gradpublic($id)
@@ -101,8 +118,13 @@ class ScholarshipCatController extends Controller
         $scholar3 = str_replace("\"id\":", '', $scholar2);
         $scholar_id = $scholar3;
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
+
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+
         return  view ('admin.scholarships.scholar1')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
-        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users);
+        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users)->with('role', $role);
     }
 
     public function ncw($id)
@@ -124,8 +146,13 @@ class ScholarshipCatController extends Controller
         $scholar3 = str_replace("\"id\":", '', $scholar2);
         $scholar_id = $scholar3;
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
+
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+
          return  view ('admin.scholarships.scholar1')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
-        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users);
+        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users)->with('role', $role);
     }
     
     public function oldnew($id)
@@ -147,8 +174,13 @@ class ScholarshipCatController extends Controller
         $scholar3 = str_replace("\"id\":", '', $scholar2);
         $scholar_id = $scholar3;
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
+
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+
         return  view ('admin.scholarships.scholar1')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
-        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users);
+        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users)->with('role', $role);
     }
 
 
@@ -173,8 +205,13 @@ class ScholarshipCatController extends Controller
         $scholar3 = str_replace("\"id\":", '', $scholar2);
         $scholar_id = $scholar3;
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
+
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+
         return  view ('admin.scholarships.scholar2')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
-        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users);
+        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users)->with('role', $role);
 
     }
 
@@ -198,8 +235,13 @@ class ScholarshipCatController extends Controller
         $scholar3 = str_replace("\"id\":", '', $scholar2);
         $scholar_id = $scholar3;
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
+
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+
         return  view ('admin.scholarships.scholar2')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
-        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users);
+        ->with('scholar_name', $scholar_name)->with('barcode', $barcode)->with('users', $users)->with('role', $role);
 
     }
 
@@ -224,7 +266,11 @@ class ScholarshipCatController extends Controller
         $users =  User::find($id);
 
         $district_list = DB::select('select district FROM `munbar` GROUP BY district');
-        return view ('admin.scholarships.scholar3')->with('district_list', $district_list)
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+
+        return view ('admin.scholarships.scholar3')->with('district_list', $district_list)->with('role', $role)
         ->with('barcode', $barcode)->with('users', $users); 
 
     }

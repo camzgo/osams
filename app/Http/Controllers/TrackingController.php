@@ -16,6 +16,15 @@ use App\Mail\Awarding;
 class TrackingController extends Controller
 {
     //
+
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
+
+    
     function viewTrack()
     {
         return view('admin.tracking.show');
@@ -23,7 +32,7 @@ class TrackingController extends Controller
 
 
 
-     function getdata()
+    function getdata()
     {
         $scholarships = DB::table('tracking')->Join('scholarships', 'scholarships.id', '=', 'tracking.scholarship_id')->select('tracking.id','scholarships.scholarship_name', 'tracking.stage')
         ->where('scholarships.status', 'CLOSED')->where('tracking.status', '!=', 'RELEASED')->get();

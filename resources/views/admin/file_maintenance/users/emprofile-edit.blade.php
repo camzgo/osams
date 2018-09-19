@@ -1,15 +1,35 @@
-@extends('layouts.admin')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+  <title>Pampanga Capitol | Online Scholarship Application and Management System</title>
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  <script src="{{asset('js/app.js')}}"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script> 
+  {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
+
+  
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper" id="app">
   <!-- Navbar -->
- @include('inc.admin-nav')
-  </nav>
+@include('inc.admin-nav')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="" class="brand-link text-center">
-      <span class="brand-text font-weight-bold" style ="" >OSAMS</span>
+    <a href="" class="brand-link">
+      <span class="brand-text font-weight-bold" style ="" id="role">ADMINISTRATOR</span>
     </a>
 
     <!-- Sidebar -->
@@ -17,10 +37,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="/storage/profile_images/{{Auth::user()->user_photo}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('images/user8-128x128.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="/admin/profile" class="d-block">{{Auth::user()->first_name}} {{Auth::user()->surname}}</a>
+          <a href="#" class="d-block">Alexander Pierce</a>
         </div>
       </div>
 
@@ -40,14 +60,6 @@
               <i class="nav-icon fa fa-map-marker"></i>
               <p>
                 Tracking
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/admin/submission" class="nav-link">
-              <i class="nav-icon fa fa-file"></i>
-              <p>
-                Submission
               </p>
             </a>
           </li>
@@ -83,7 +95,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>
@@ -93,7 +105,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/announcement" class="nav-link active">
+                <a href="/admin/announcement" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-bullhorn nav-icon"></i>
                   <p>Announcement</p>
@@ -262,13 +274,12 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">File Maintenance</li>
-              <li class="breadcrumb-item active">Announcement</li>
+              <li class="breadcrumb-item active">Profile</li>
             </ol>
           </div><!-- /.col -->
-          <div class="col-sm-6">
-            <a href="/admin/announcement" class="btn btn-secondary btn-rounded flt-right"><i class="fa fa-arrow-left"></i> Go Back</a>
-          </div><!-- /.col -->
+          {{-- <div class="col-sm-6">
+            <a href="/admin/employee" class="btn btn-secondary btn-rounded flt-right"><i class="fa fa-arrow-left"></i> Go Back</a>
+          </div><!-- /.col --> --}}
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -277,113 +288,191 @@
     <!-- Main content -->
      <div class="content">
       <div class="container-fluid">
-        <div class="card">
-          <div class="card-header" id="th-cl1">
-              <h3 class="boldtx">Edit Announcement</h3>
+        
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card card-primary">  
+            <div class="card-body box-profile">
+                        @foreach ($errors->all() as $error)
+                          <div class="alert alert-danger">
+                            {{ $error }}
+                        </div>
+                        @endforeach
+          <form action="{{ action('UsersMainController@editstored') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
+             {{csrf_field()}}
+        <div class="row form-group mt-4">
+          <h4 class="tx1">Personal Information</h4>
+        </div>
+        <hr/>
+        <div class="row">
+          <label for="fullname">* Full Name</label>
+        </div>
+        <div class="row form-group">
+          <div class = "col-md-4">
+            <input type="text" class="form-control req" id="surname" name="surname" placeholder='Surname' value="{{Auth::user()->surname}}" required/>
           </div>
-          <div class="card-body">
-
-            {{-- <div class="col-md-8 order-md-1"> --}}
-          <h4 class="mb-3"></h4>
-          {{-- <form class="needs-validation" novalidate>
-            <div class="row">
-              <div class="mb-3">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" placeholder="" value="" required>
-              </div>
-            </div> --}}
-
-            {{-- <div class="mb-3">
-              <label for="title">Title</label>
-              <div class="form-group">
-                <input type="text" class="form-control" id="title" placeholder="Title" required>
-              </div>
-              <div class="mb-3">
-              <label for="title">Body</label>
-              <div class="form-group">
-                <textarea name="body" id="body" cols="20" rows="10"></textarea>
-              </div> --}}
-            {{-- <span id="form_output"></span>  
-            {!! Form::open(['action' => 'AnnounceMainController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-                <div class = "form-group">
-                    {{Form::label('title', 'Title')}}
-                    {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Title'])}}
-                     @if ($errors->has('title'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                    @endif
-                </div>
-                <div class = "form-group">
-                    {{Form::label('body', 'Body')}}
-                    {{Form::textarea('body', '', ['id' => 'editor', 'class' => 'form-control ', 'placeholder' => 'Body here...'])}}
-                </div>
-                <div class="form-group">
-                    {{Form::file('cover_photo')}}
-                </div>
-                <div class="flt-right">
-                    {{Form::submit('Submit', ['class' => 'btn btn-primary btn-lg'])}}
-                </div>
-            {!! Form::close() !!} --}}
-
-
-            @if(count($errors) > 0)
-              <div class="alert alert-danger">
-              <ul>
-              @foreach($errors->all() as $error)
-                <li>{{$error}}</li>
+          <div class = "col-md-4">
+            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='First Name' value="{{Auth::user()->first_name}}"required/>
+          </div>
+          <div class = "col-md-2">
+          <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{Auth::user()->middle_name}}" placeholder='Middle Name' />
+          </div>
+          <div class = "col-md-2">
+            <input type="text" class="form-control" id="suffix" name="suffix" value="{{Auth::user()->suffix}}" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-4">
+              <label for="gender">* Gender</label>
+              <select name="gender" id="gender" class=" form-control req"  required>
+                <option value="" selected disabled>--Select--</option>
+                <option value="Male">MALE</option>
+                <option value="Female">FEMALE</option>
+              </select>
+          </div>
+          <div class="col-md-4">
+            <label for="bdate">* Birth Date</label>
+            <input type="date" name="bday" id="bday" class="form-control req" data-provide="datepicker" value="{{$info->birthdate}}" required/>
+          </div>
+          <div class="col-md-4">
+            <label for="civils">* Civil Status</label>
+            <select name="civil_status" id="civil_status" class="form-control req"  required>
+              <option value="" selected disabled>--Select--</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Separated">Separated</option>
+              <option value="Widowed">Widowed</option>
+            </select>
+          </div>
+        </div>
+        {{-- <div class="row mt-5 form-group">
+          <h4 class="tx1">Address Information</h4>
+        </div>
+        <hr/> --}}
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label for="municipality">* Municipality</label>
+            <select name="municipality" id="municipality" data-val="true"  data-val-required="Please select Municipality" data-dependent="barangay" class="form-control dynamic req" required >
+              <option value="" selected disabled>--Select--</option>
+              @foreach ($municipal_list as $municipal)
+                  <option value="{{$municipal->municipality}}">{{$municipal->municipality}}</option>
               @endforeach
-              </ul>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label for="barangay">* Barangay</label>
+            <select name="barangay" id="barangay" class="form-control dynamic req" required >
+              <option value="" selected disabled>--Select--</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="street">Street</label>
+            <input type="text" class="form-control" id="street" name="street" value="{{$info->street}}"placeholder='Street'/>
+          </div>
+        </div>
+        {{-- <div class="row mt-5 form-group">
+          <h4 class="tx1">Contact Information</h4>
+        </div>
+        <hr/> --}}
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label for="mobile_no">* Mobile Number</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">+63</span>
               </div>
-            @endif
-
-            {!! Form::open(['action' => ['AnnounceMainController@update', $announce->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-              <div class="container">
-                <div class = "form-group col-md-8">
-                {{Form::label('title', 'Title')}}
-                {{Form::text('title', $announce->title, ['class' => 'form-control', 'placeholder' => 'Title', 'required'])}}
-                </div>
-                <div class = "form-group col-md-8">
-                  {{Form::label('body', 'Body')}}
-                  {{Form::textarea('body', $announce->body, ['id' => 'editor', 'class' => 'form-control ', 'placeholder' => 'Body here...', 'required'])}}
-                </div>
-                {{-- <div class="form-group">
-                  {{Form::file('cover_photo')}}
-                </div> --}}
-                <div class="col-md-8">
-                  {{Form::hidden('_method', 'PUT')}}
-                  {{Form::submit('Update', ['class' => 'btn btn-success '])}} 
-                </div>
-              </div>  
+              <input type="text" class="form-control req" id="mobile_no" name="mobile_no" value="{{$info->mobile_number}}" placeholder='9xxxxxxxxx' required/>
+            </div>
             
-          {!! Form::close() !!}
+          </div>
+          <div class="col-md-4">
+            <label for="email">* Email</label>
+          <input type="email" class="form-control req" id="email" name="email" placeholder='example@mail.com' value="{{Auth::user()->email}}" required/>
+          </div>
+        </div>
+        <br>
+        <div class="row form-group">
+         <div class="col-md-3 offset-md-9">
+           <input type="submit" value="Update" class="btn btn-block btn-success"/>
+         </div>
+        </div>
+    </form>
 
+              
 
-
-
-{{-- 
-            <form>
-              {{csrf_field()}}
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" value="$announce->title" placeholder="Title" required>
-                </div>
-                <div class="form-group">
-                    <label for="body">Body</label>
-                    <textarea name="body" class="form-control" id="body" placeholder="Body..." rows="10" required></textarea>
-                </div>
-                <div class ="flt-right">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form> --}}
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-</div>
-</div>
+      
+
+      
+        {{-- <div class="card">
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <h2>Profile</h2>
+            </div>
+            <hr>
+            <div class="row">
+
+            </div>
+
+          </div>
+        </div> --}}
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
   </div>
         
 </div>
-@endsection
+<script>
+
+$(document).ready(function(){
+  $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
+  document.getElementById('gender').value="{{$info->gender}}";
+  document.getElementById('civil_status').value="{{$info->civil_status}}";
+
+});
+
+
+$(document).ready(function(){
+  $('.dynamic').change(function(){
+    var x = $('#municipality').val();
+    console.log(x);
+    console.log($('#barangay').val());
+    if($(this).val() != '')
+    {
+    var select = $(this).attr("id");
+    var value = $(this).val();
+    var dependent = $(this).data('dependent');
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+      url:"{{ route('users.fetch') }}",
+      method:"POST",
+      data:{select:select, value:value, _token:_token, dependent:dependent},
+      success:function(result)
+      {
+      $('#'+dependent).html(result);
+      }
+
+    })
+    }
+  });
+
+  $('#municipality').change(function(){
+    $('#barangay').val('');
+  });
+
+});
+
+
+</script>
+<script src="{{ URL::asset('data/religion.js') }}" type="text/javascript"></script>
+</body>
+</html>

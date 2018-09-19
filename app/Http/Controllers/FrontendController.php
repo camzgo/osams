@@ -13,6 +13,7 @@ use App\Eefap;
 use App\Pcl;
 use App\Reqgv;
 use App\Reqeefap;
+use App\Announcement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -21,6 +22,7 @@ use Mail;
 use App\Mail\Welcome;
 use App\Mail\Awarding;
 use Itexmo;
+
 
 
 class FrontendController extends Controller
@@ -1045,9 +1047,10 @@ class FrontendController extends Controller
         return redirect('/profile');
     }
 
-    public function announcement($id)
+    public function news($id)
     {
-        $ann = DB::table('announcements')->where('id', $id)->first();
-        return view('news')->with('ann', $ann);
+        // $ann = DB::table('announcements')->where('id', $id)->first();
+        //$ann = Announcement::find($id);
+        return $id;
     }
 }

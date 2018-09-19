@@ -6,9 +6,16 @@ use Illuminate\Http\Request;
 use App\Faquestion;
 use DataTables;
 use Validator;
-
+use DB;
+use Auth;
 class FaqArchiveController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +24,10 @@ class FaqArchiveController extends Controller
     public function index()
     {
         //
-        return view ('admin.archive.faqs.show');
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+        return view ('admin.archive.faqs.show')->with('role', $role);
     }
 
     // /**

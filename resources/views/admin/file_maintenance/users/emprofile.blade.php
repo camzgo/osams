@@ -19,7 +19,24 @@
 
   
 </head>
+<style>
+  #image_preview{
 
+      /* border: 1px solid black; */
+
+      padding: 5px;
+
+    }
+
+    #image_preview img{
+
+      width: 220px;
+      height: 220px;
+
+      /* padding: 5px; */
+
+    }
+</style>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
   <!-- Navbar -->
@@ -289,111 +306,96 @@
     <!-- Main content -->
      <div class="content">
       <div class="container-fluid">
-        <div class="card card-primary">  
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card card-primary" style="height: 455px;">
+              <div class="card-body box-profile">
+                <div class="container">
+                  <div class="card-body text-center">
+                              {{-- <img src="{{asset('images/avatar5.png')}}" alt=""><hr> --}}
+                      <div id="image_preview">
+                        <img src="/storage/profile_images/{{Auth::user()->user_photo}}" alt="" class=" img-fluid img-circle" >
+                      </div><hr>
+
+                      <form action="{{action ('UsersMainController@uploadProfile')}}" method="POST" enctype="multipart/form-data">
+                        {{csrf_field()}}
+                        <div class="clamp-name clamp-lines" >
+                          {{-- <input type="file" id="uploadFile" name="uploadFile"/> --}}
+                          <input type="file" name="uploadfile" required accept="image/*">
+                        </div>
+                        <hr>
+                          <input type="submit" value="Upload" class="btn btn-outline-primary btn-rounded btn-block mb-0 change" name="uploadfile">
+                        </form>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card card-primary">  
             <div class="card-body box-profile">
               <div class="container">
                 <div class="row justify-content-center">
-                <h2>Profile</h2>
+                <h2>Personal Information</h2>
               </div>
               <hr>
-        <div class="row">
-          <label for="fullname">* Full Name</label>
+
+          {{-- <label for="fullname">Full Name</label>
+        </div> --}}
+        <div class="form-row form-group">
+          <div class = "col-md-12">
+            Full Name
+          <input type="text" class="form-control-plaintext" readonly id="fullname" name="fullname" value="{{Auth::user()->first_name}} {{Auth::user()->middle_name}} {{Auth::user()->surname}}"required/>
+          </div>
         </div>
-                  <div class="form-row form-group">
-                    <div class = "col-md-4">
-                      <input type="text" class="form-control  " id="surname" name="surname" placeholder='Surname' required/>
-                    </div>
-                    <div class = "col-md-4">
-                      <input type="text" class="form-control  " id="first_name" name="first_name" placeholder='First Name' required/>
-                    </div>
-                    <div class = "col-md-2">
-                      <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name'/>
-                    </div>
-                    <div class = "col-md-2">
-                      <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
-                    </div>
-                  </div>
         
         <div class="form-row form-group">
-          <div class="col-md-2">
-              <label for="gender">Gender</label>
-              <select name="gender" id="gender" class=" form-control  "  required>
-                <option value="" selected disabled>--Select--</option>
-                <option value="Male">MALE</option>
-                <option value="Female">FEMALE</option>
-              </select>
+          <div class = "col-md-3">
+            Gender
+          <input type="text" class="form-control-plaintext" readonly id="gender" name="gender" value="{{$info->gender}}" required/>
           </div>
-          <div class="col-md-2">
-            <label for="bdate">Birth Date</label>
-            <input type="date" name="bday" id="bday" class="form-control  " data-provide="datepicker" required/>
+          <div class = "col-md-3">
+            Birth Date
+          <input type="text" class="form-control-plaintext" readonly id="fullname" name="fullname" value="{{$info->birthdate}}" required/>
           </div>
-          <div class="col-md-3">
-              <label for="nationality">Nationality</label>
-              <select name="nationality" id="nationality" class="form-control  " required>
-                <option value="" selected disabled>--Select--</option>
-                <option value="Filipino">Filipino</option>
-                <option value="Foreigner">Foreigner</option>
-              </select>
-          </div>
-          <div class="col-md-3">
-            <label for="religion">Religion</label>
-            <select name="religion" id="religion" class="form-control  "  required>
-              <option value="" selected disabled>--Select--</option>
-            </select>
-          </div>
-          <div class="col-md-2">
-            <label for="civils">Civil Status</label>
-            <select name="civil_status" id="civil_status" class="form-control"  required>
-              <option value="" selected disabled>--Select--</option>
-              <option value="Single">Single</option>
-              <option value="Married">Married</option>
-              <option value="Separated">Separated</option>
-              <option value="Widowed">Widowed</option>
-            </select>
+          <div class = "col-md-3">
+            Civil Status
+          <input type="text" class="form-control-plaintext" readonly id="fullname" name="fullname" value="{{$info->civil_status}}" required/>
           </div>
         </div>
 
         <div class="row form-group">
-          <div class="col-md-3">
-            <label for="municipality">* Municipality</label>
-            <select name="municipality" id="municipality" data-val="true"  data-val-required="Please select Municipality" data-dependent="barangay" class="form-control dynamic req" required >
-              <option value="" selected disabled>--Select--</option>
-              @foreach ($municipal_list as $municipal)
-                  <option value="{{$municipal->municipality}}">{{$municipal->municipality}}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="col-md-3">
-            <label for="barangay">* Barangay</label>
-            <select name="barangay" id="barangay" class="form-control dynamic req" required >
-              <option value="" selected disabled>--Select--</option>
-            </select>
-          </div>
-          <div class="col-md-6">
-            <label for="street">Street</label>
-            <input type="text" class="form-control" id="_street" name="_street" placeholder='Street'/>
+          <div class = "col-md-8">
+            Address
+          <input type="text" class="form-control-plaintext" readonly id="fullname" name="fullname" value="{{$info->street}} {{$info->barangay}}, {{$info->municipality}}" required/>
           </div>
         </div>
 
         <div class="row form-group">
-          <div class="col-md-3">
-            <label for="mobile_no">* Mobile Number</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">+63</span>
-              </div>
-              <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required/>
-            </div>
+          <div class = "col-md-4">
+            Mobile Number
+            <input type="text" class="form-control-plaintext" readonly id="fullname" name="fullname" value="0{{$info->mobile_number}}" required/>
+          </div>
+          <div class = "col-md-5">
+            Email Address
+            <input type="text" class="form-control-plaintext" readonly id="fullname" name="fullname" value="{{Auth::user()->email}}" required/>
+          </div>
             
           </div>
-          <div class="col-md-4">
-            <label for="email">* Email</label>
-            <input type="email" class="form-control req" id="email" name="email" placeholder='example@mail.com' required/>
+        </div>
+        
+<div class="form-row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <a href="profile/edit" class="btn btn-primary">Edit Information</a>
+      <a href="profile/password" class="btn btn-info">Change Password</a>
+    </div>
+  </div>
+</div>
+            </div>
           </div>
         </div>
-
-
-            </div>
           </div>
         </div>
       </div>

@@ -11,6 +11,7 @@ use Validator;
 use DB;
 use App\Municipality;
 use App\AccountType;
+use Auth;
 
 class UsersMainController extends Controller
 {
@@ -29,7 +30,10 @@ class UsersMainController extends Controller
     {
         //
 
-        return view ('admin.file_maintenance.users.show');
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+        return view ('admin.file_maintenance.users.show')->with('role', $role);
     }
 
     // /**
@@ -42,9 +46,12 @@ class UsersMainController extends Controller
         //
         
         // $municipal_list = DB::table('munbar')->groupBy('municipality')->get();
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
         $accnt = DB::select('select account_name, id from account_type WHERE account_name != "Admin"');
-        return view ('admin.file_maintenance.users.create-step-3')->with('municipal_list', $municipal_list)->with('accnt', $accnt);
+        return view ('admin.file_maintenance.users.create-step-3')->with('municipal_list', $municipal_list)->with('accnt', $accnt)->with('role', $role);
     }
 
     /**
@@ -102,8 +109,6 @@ class UsersMainController extends Controller
         $adminsInfo = new AdminInfo ([
             'gender' => $request->gender,
             'birthdate' => $request->bday,
-            'nationality' => $request->nationality,
-            'religion' => $request->religion,
             'civil_status' => $request->civil_status,
             'mobile_number' => $request->mobile_no,
             'municipality' => $request->municipality,
@@ -113,7 +118,7 @@ class UsersMainController extends Controller
         ]);
         $adminsInfo->save();
         
-        return redirect('/employee/');
+        return redirect('/admin/employee/');
 
     }
 
@@ -253,6 +258,117 @@ class UsersMainController extends Controller
     function profile()
     {
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
-        return view ('admin.file_maintenance.users.emprofile')->with('municipal_list', $municipal_list);
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+        $info = DB::table('admins_info')->where('admins_id', Auth::user()->id)->first();
+        return view ('admin.file_maintenance.users.emprofile')->with('municipal_list', $municipal_list)->with('info', $info)->with('role', $role);
+    }
+
+    function uploadProfile(Request $request)
+    {
+         $this -> validate($request, [
+            'uploadfile' => 'image|nullable'
+        ]);
+
+        if($request->hasFile('uploadfile'))
+        {
+            //Get filename with extension
+            $filenameWithExt = $request->file('uploadfile')->getClientOriginalName();
+            //Get just file
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('uploadfile')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //Upload image 
+            $path = $request->file('uploadfile')->storeAs('public/profile_images', $fileNameToStore);
+        }
+        else
+        {
+             $fileNameToStore = 'noimage.jpg';
+        }
+
+        $admins = Admin::find(Auth::user()->id);
+        $admins->user_photo = $fileNameToStore;
+        $admins->save();
+        return redirect ('/admin/profile');
+    }
+
+    function editprofile()
+    {
+        $municipal_list = DB::select('select municipality from `munbar` group by municipality');
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+        $info = DB::table('admins_info')->where('admins_id', Auth::user()->id)->first();
+        return view ('admin.file_maintenance.users.emprofile-edit')->with('municipal_list', $municipal_list)->with('info', $info)->with('role', $role);
+    }
+
+    function editStored(Request $request)
+    {
+        $adid = DB::table('admins_info')->where('admins_id', Auth::user()->id)->first();
+        $id = $adid->id;
+
+        if(Auth::user()->email != $request->get('email'))
+        {
+            $this -> validate($request, [
+                'email' => 'required|string|email|max:255|unique:admins'
+            ]);
+        }
+
+        $admins = Admin::find(Auth::user()->id);
+        $admins->surname=  $request->get('surname');
+        $admins->first_name= $request->get('first_name');
+        $admins->middle_name= $request->get('middle_name');
+        $admins->suffix= $request->get('suffix');
+        $admins->email= $request->get('email');
+        $admins->save();
+
+        
+        $stored = AdminInfo::find($id);
+        $stored->gender = $request->get('gender');
+        $stored->birthdate=$request->get('bday');
+        $stored->civil_status=$request->get('civil_status');
+        $stored->municipality= $request->get('municipality');
+        $stored->barangay = $request->get('barangay');
+        $stored->street = $request->get('street');
+        $stored->mobile_number = $request->get('mobile_no');
+        $stored->save();
+        return redirect('/admin/profile');
+    }
+
+    function editpass()
+    {
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+        return view ('admin.file_maintenance.users.emprofile-pass')->with('role', $role);
+    }
+    function storedpass(Request $request)
+    {
+       if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+            // The passwords matches
+            return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
+        }
+ 
+        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+            //Current password and new password are same
+            return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
+        }
+ 
+        $validatedData = $request->validate([
+            'current-password' => 'required',
+            'new-password' => 'required|string|min:8|confirmed',
+        ]);
+ 
+        //Change Password
+        $user = Auth::user();
+        $user->password = bcrypt($request->get('new-password'));
+        $user->save();
+ 
+       // return redirect()->back()->with("success","Password changed successfully !");
+       return redirect('/admin/profile');
+
     }
 }

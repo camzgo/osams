@@ -220,7 +220,7 @@ Route::prefix('/')->group(function()
     Route::post('/scholarship/upload/eefap', 'FrontendController@storeduploadeefap');
     Route::post('/scholarship/delete', 'FrontendController@eefapdel');
 
-    Route::get('/announcement/{$id}', 'FrontendController@announcement');
+    Route::get('/announcement/{$id}', 'FrontendController@news');
     Route::get('/send/sample', 'FrontendController@send');
 });
 
@@ -230,21 +230,14 @@ Route::prefix('/admin/tracking')->group(function(){
     Route::post('/postdata', 'TrackingController@postdata')->name('track.postdata');
     Route::get('/fetchdata', 'TrackingController@fetchdata')->name('track.fetchdata');
 });
-// Route::prefix('fronte')->group(function()
-// {
-//     Route::get('/', 'FrontendController@fronte');
-//     Route::get('/faqs', 'FrontendController@faq');
-//     Route::get('/about-us', 'FrontendController@about');
-//     Route::get('/contact', 'FrontendController@contact');
-//     Route::get('/profile', 'FrontendController@profile');
-//     Route::get('/scholarship', 'FrontendController@scholarship');
-//     Route::get('/scholarship/details', 'FrontendController@sdetails');
-//     Route::get('/profile/personal-information', 'FrontendController@myProfile');
-//     Route::get('/profile/guardian-information', 'FrontendController@guardian');
-//     Route::get('/profile/education-information', 'FrontendController@education');
-//     Route::get('/account', 'FrontendController@account');
-//     Route::post('/profile/personal-information/fetch', 'FrontendController@fetch')->name('profile.fetch');
-// });
+
+
+Route::prefix('admin/submission')->group(function()
+{
+    Route::get('/', 'SubController@show');
+    Route::get('/getdata', 'SubController@getdata')->name('sub.getdata');
+    Route::get('/details', 'SubController@details');
+});
 
 Route::prefix('/scholarship')->group(function(){
 
@@ -319,6 +312,11 @@ Route::prefix('admin')->group(function(){
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     Route::get('/profile', 'UsersMainController@profile');
+    Route::get('/profile/edit', 'UsersMainController@editprofile');
+    Route::get('/profile/password', 'UsersMainController@editpass');
+    Route::post('/profile/edit', 'UsersMainController@editstored');
+    Route::post('/profile', 'UsersMainController@uploadProfile');
+    Route::post('/profile/password', 'UsersMainController@storedpass');
 });
 
 

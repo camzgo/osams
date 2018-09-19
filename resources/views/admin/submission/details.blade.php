@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-<link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+  <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
   <title>Pampanga Capitol | Online Scholarship Application and Management System</title>
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.11/dist/sweetalert2.min.css"> --}}
   <script src="{{asset('js/app.js')}}"></script>
   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>  
-  
+  {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.11/dist/sweetalert2.min.js"></script>   --}}
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
@@ -25,8 +25,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="" class="brand-link text-center">
-      <span class="brand-text font-weight-bold" style ="" >OSAMS</span>
+    <a href="" class="brand-link">
+      <span class="brand-text font-weight-bold" style ="" id="role">ADMINISTRATOR</span>
     </a>
 
     <!-- Sidebar -->
@@ -34,15 +34,15 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="/storage/profile_images/{{Auth::user()->user_photo}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('images/user8-128x128.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="/admin/profile" class="d-block">{{Auth::user()->first_name}} {{Auth::user()->surname}}</a>
+          <a href="#" class="d-block">Alexander Pierce</a>
         </div>
       </div>
 
       <!-- Sidebar Menu -->
-             <nav class="mt-2">
+      <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="/" class="nav-link">
@@ -52,7 +52,6 @@
               </p>
             </a>
           </li>
-          @if($role->tracking == "Grant")
            <li class="nav-item">
             <a href="/admin/tracking" class="nav-link">
               <i class="nav-icon fa fa-map-marker"></i>
@@ -61,18 +60,14 @@
               </p>
             </a>
           </li>
-          @endif
-          @if($role->submission == "Grant")
           <li class="nav-item">
-            <a href="/admin/submission" class="nav-link">
+            <a href="/admin/submission" class="nav-link bg-white">
               <i class="nav-icon fa fa-file"></i>
               <p>
                 Submission
               </p>
             </a>
           </li>
-          @endif
-          @if($role->transactions == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
@@ -105,8 +100,6 @@
               </li>
             </ul>
           </li>
-          @endif
-          @if($role->file_maintenance == "Grant")
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
@@ -161,9 +154,7 @@
               
             </ul>
           </li>
-          @endif
-          @if($role->utilities == "Grant")
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
               <p>
@@ -179,7 +170,7 @@
                   <p>Audit Log</p>
                 </a>
               </li>
-              <li class="nav-item has-treeview menu-open">
+              <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-archive nav-icon"></i>
@@ -197,7 +188,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/archive/applicant" class="nav-link active">
+                        <a href="/admin/archive/applicant" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
                         <i class="fa fa-user nav-icon"></i>
                         <p>Applicant</p>
@@ -242,8 +233,6 @@
               </li>
             </ul>
           </li>
-          @endif
-          @if($role->reports == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-bar-chart"></i>
@@ -257,7 +246,7 @@
                 <a href="/admin/reports/master-list" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
-                  <p> Master List of Scholars</p>
+                  <p>Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -276,7 +265,6 @@
               </li>
             </ul>
           </li>
-          @endif
         </ul>
       </nav>
     </div>
@@ -291,9 +279,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">Utilities</li>
-              <li class="breadcrumb-item active">Archive</li>
-              <li class="breadcrumb-item active">Applicant</li>
+              <li class="breadcrumb-item active">Submission</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -307,103 +293,129 @@
      <div class="content">
       <div class="container-fluid">
         <div class="card">
-          <div class="card-header" id="th-cl2">
-              <h3 class="boldtx">Applicant Archive</h3>
+          <div class="card-header" id="th-cl1">
+              <h3 class="boldtx">Submission</h3>
           </div>
           <div class="card-body"> 
-         <div class="flt-right">
-            {{-- <a href="#" class="btn btn-success" id="add_data" data-backdrop="static" data-keyboard="false">
-                <i class="fa fa-plus"></i>
-                Add New
-            </a> --}}
-          </div>
-
         <br>
         <div class="container">
-    <br />
+    
      <table class=" table table-hover" style="width:100%" id="table">
-               <thead class="th-cl2">
+               <thead class="th-cl1">
                   <tr>
                      <th>Name</th>
-                     <th>Email</th>
-                     <th>Gender</th>
+                     <th>Scholarship</th>
                      <th>Actions</th>
-                     {{-- <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></button></th> --}}
                   </tr>
                </thead>
             </table>
             <br>
 </div>
 
-    <div id="mainModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered" id="md-form">
-            <div class="modal-content">
-                <form method="post" id="main_form">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
-                    </div>
-                    <div class="modal-body">
-                      {{csrf_field()}}             
-                      <div id="delForm">
-                        <span id="del_output"> </span>
-                        <div class="form-group" id="dvh2">
-                            <h5 class="brand-text font-weight-bold" id="hddel"></h5>
-                            {{-- <h2 class="brand-text font-weight-bold ghost" id="hddel2">Are you sure?</h2> --}}
-                            <p class="ghost" id="sec">You will not be able to recover this file</p>
-                        </div>
-                        <div class="form-group ghost">
-                          {{-- <input type="hidden" name="del_question" id="del_question" value="" class="ghost"/>
-                          <input type="hidden" name="del_answer" id="del_answer" value="" class="ghost"/> --}}
-                          <input type="hidden" name="a_isdel" id="a_isdel" value="" class="ghost"/>
-                          <input type="hidden" name="a_id" id="a_id" value="" class="ghost"/>
-                          <input type="hidden" name="confirm" id="confirm" value="" class="ghost"/>
-                        </div>
+<div id="mainModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" id="md-form">
+        <div class="modal-content">
+            <form method="post" id="main_form">
+                <div class="modal-header">
+                   <h4 class="modal-title">Add Data</h4>
+                   <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+                </div>
+                <div class="modal-body">
+                  {{csrf_field()}} 
+                  <span id="form_output"></span>                 
+                  <div id="editForm">
+                      <div class="col-md-8 justify-content-center">
+                        <select name="status" id="status" class="form-control form-control-lg">
+                          <option value="Approved">Approved</option>
+                          <option value="Re-Checking">Re-Checking</option>
+                          <option value="Consolidation">Consolidation</option>
+                          <option value="Payroll">Payroll</option>
+                          <option value="Awarding">Awarding</option>
+                        </select>
                       </div>
-                    </div>
-                      <div class="modal-footer">
-                          <input type="hidden" name="button_action" id="button_action" value="insert" />
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
-                            <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
-                          <div class="" id="condel" name="condel">
-                            <button class="btn btn-danger" value="" id="del" onclick="confirmDel()">Delete</button>
-                          </div>
-                      </div>
-                </form>
-            </div>
+                  </div>
+
+                </div>
+                  <div class="modal-footer">
+                      <input type="hidden" name="scholarship_id" id="scholarship_id" value="" />
+                      <input type="hidden" name="button_action" id="button_action" value="insert" />
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
+                      <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
+                  </div>
+            </form>
         </div>
     </div>
+</div>
 
+{{-- <div id="delModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" id="del_form">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+              </div>
+                <div class="modal-body">
+                    {{csrf_field()}}
+                    <span id="del_output"> </span>
+                    <div class="form-group">
+                        <h5 class="brand-text font-weight-bold">Are you sure you want to close it?</h5>
+                    </div>
+                    <div class="form-group">
+                      <input type="hidden" name="del_id" id="del_id" value="" />
+                      <input type="hidden" name="status" id="status" value="">
+                    </div>
+                     <div class="form-group" style="float:right;">
+                       <input type="submit" class="btn btn-danger" id="close_this" name="submit" value="Close"/>
+                       <button type="button" class="btn btn-danger" id="close_this" name="close_this" onclick="archiveData()"> Close </button>
+                       <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
+                    </div>
+                        
+                  </div>
+            </form>
+        </div>
+    </div>
+</div> --}}
 
 </div>
 </div>
-       
+
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-        
   </div>
+        
 </div>
 <script>
-
      $(function() {
                $('#table').DataTable({
                processing: true,
                serverSide: true,
-               ajax: '{{ route('archiveapplicant.getdata') }}',
+               ajax: '{{ route('sub.getdata') }}',
                columns: [
                         { data: 'fullname', name: 'fullname' },
-                        { data: 'email', name: 'email' },
-                        { data: 'gender', name: 'gender' },
+                        { data: 'scholarship_name', name: 'scholarship_name'},
+                        // { data: 'scholarship_desc', name: 'scholarship_desc' },
+                        // { data: 'amount', name: 'amount'},
                         { width: '20%', data: 'action', orderable:false, searchable: false}
+                        
                         // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
-                  ] 
+                  ]
             });
+
+        $('#add_data').click(function(){
+        $('#formModal').modal('show');
+        $('#main_form')[0].reset();
+        $('#form_output').html('');
+        $('#button_action').val('insert');
+        $('#action').val('Add');
+        $('.modal-title').text('Add Question');
+    });
 
     $('#main_form').on('submit', function(event){
         event.preventDefault();
         var form_data = $(this).serialize();
         $.ajax({
-            url:"{{ route('archiveapplicant.postdata') }}",
+            url:"{{ route('track.postdata') }}",
             method:"POST",
             data:form_data,
             dataType:"json",
@@ -420,137 +432,69 @@
                 }
                 else
                 {
-                   // $('#form_output').html(data.success);
                     $('#main_form')[0].reset();
                     $('#table').DataTable().ajax.reload();
                     $('#mainModal').modal('hide');
-                    if($('#action').val() == 'Restore')
+                    if($('#action').val() == 'Update')
                     {
                       swal(
                         'Success!',
-                        'Your data has been successfully restored',
+                        'Status has been updated',
                         'success'
                       )
                     }
+                    // else if (($('#action').val() == 'Close'))
+                    // {
+                    //   swal(
+                    //     'Success!',
+                    //     'You have successfully close the program',
+                    //     'success'
+                    //   )
+                    // }
+                    // else if (($('#action').val() == 'Open'))
+                    // {
+                    //   swal(
+                    //     'Success!',
+                    //     'You have successfully open the program',
+                    //     'success'
+                    //   )
+                    // }
                 }
             }
         })
     });
-
 
     $(document).on('click', '.edit', function(){
         var id = $(this).attr("id");
         $('#form_output').html('');
         $.ajax({
-            url:"{{route('archiveapplicant.fetchdata')}}",
+            url:"{{route('track.fetchdata')}}",
             method:'get',
             data:{id:id},
             dataType:'json',
             success:function(data)
             {
-                if(data.applicant_isdel==1)
-                {
-                    $('#a_isdel').val(0);
-                }
-
-                // $('#del_question').val(data.question);
-                // $('#del_answer').val(data.answer);
-                $('#a_id').val(id);
-
-                $('#button_action').val('update');
-                $('#mainModal').modal('show');
-                $('#action').val('Restore');
-                $('#hddel').text('Are you sure you want to restore it?');
-                document.getElementById("action").className = "btn btn-success";
-                document.getElementById("condel").className = "ghost";
-                document.getElementById("sec").className = "ghost";
-                document.getElementById("hddel").classList.remove("ghost");
-                if($('#confirm').val()=='true')
-                {
-                    var parent = document.getElementById("dvh2");
-                    var child = document.getElementById("hddel2");
-                    parent.removeChild(child);
-                     $('#confirm').val('');
-                }
-                
-                //console.log(id + ' ' + data.faq_isdel + ' ' + data.answer + ' ' +data.question);
+             
+              // $('#scholarship_name').val(data.scholarship_name);
+              // $('#scholarship_desc').val(data.scholarship_desc);
+              // $('#amount').val(data.amount);
+              // $('#slot').val(data.slot);
+              // $('#deadline').val(data.deadline);
+              document.getElementById('status').value=data.stage;
+              $('#scholarship_id').val(id);
+              $('#mainModal').modal('show');
+              $('#action').val('Update');
+              document.getElementById("action").className = "btn btn-info";
+              document.getElementById("md-form").classList.add('modal-lg');
+              $('#button_action').val('update');
+              $('.modal-title').text('Update Status');
             }
     });   
     });
     
- $(document).on('click', '.delete', function(){
-        var id = $(this).attr('id');
-
-        $('#mainModal').modal('show');
-        //$('#hddel').text('Are you sure you want to delete it?');
-        document.getElementById("action").className = "ghost";
-        document.getElementById("condel").className = "";
-        document.getElementById("sec").className = "";
-        document.getElementById("hddel").classList.add("ghost");
-        $('#del').val(id);
-        $('#confirm').val('true');
-        document.getElementById("sec").style.textAlign = "center";
-        // var para = document.createElement("h2");
-        // var node = document.createTextNode("Are you sure?");
-        // para.appendChild(node);
-        // var element = document.getElementById("dvh2");
-        // var child = document.getElementById("hddel");
-        // element.insertBefore(para, child);
-        //document.getElementById("hddel2").style.textAlign = "center";
-        //document.getElementById("hddel2").classList.remove("ghost");
-
-        var para = document.createElement("h2");
-        var node = document.createTextNode("Are you sure?");
-        para.appendChild(node);
-        // para.id = "hddel2";
-        // par.classList.add("brand-text font-weight-bold");
-        var element = document.getElementById("dvh2");
-        var child = document.getElementById("hddel");
-        element.insertBefore(para, child);
-        para.setAttribute("id", "hddel2");
-        para.setAttribute("class", "brand-text font-weight-bold");
-        document.getElementById("hddel2").style.textAlign = "center";
-
-    });
+  
 });
-function confirmDel()
-{
-    var id = $('#del').val();
-    var confirm = $('#confirm').val();
-    
-    $('#mainModal').modal('hide');
-    
-    if(confirm=='true')
-    {
-        
-        $.ajax({
-            url:"{{route('archiveapplicant.removedata')}}",
-            method:"get",
-            data:{id:id},
-            success:function(data)
-            { 
-                var x = data
-                $('#table').DataTable().ajax.reload();
-                swal("Done!", ""+ data, "success");
-            }
-        })
 
-        
-    }
-    else
-    {
-        return false;
-    }
-    
-    document.getElementById("sec").className = "ghost";
-    document.getElementById("hddel").classList.remove("ghost");
-    var parent = document.getElementById("dvh2");
-    var child = document.getElementById("hddel2");
-    parent.removeChild(child);
-   
-}
 </script>
 </body>
 </html>
-
-

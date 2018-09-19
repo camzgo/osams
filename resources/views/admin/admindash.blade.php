@@ -22,8 +22,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="" class="brand-link">
-      <span class="brand-text font-weight-bold" style ="" id="role">ADMINISTRATOR</span>
+    <a href="" class="brand-link text-center">
+      <span class="brand-text font-weight-bold" style ="" >OSAMS</span>
     </a>
 
     <!-- Sidebar -->
@@ -31,10 +31,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('images/user8-128x128.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="/storage/profile_images/{{Auth::user()->user_photo}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->first_name}} {{Auth::user()->surname}}</a>
+          <a href="/admin/profile" class="d-block">{{Auth::user()->first_name}} {{Auth::user()->surname}}</a>
         </div>
       </div>
 
@@ -54,6 +54,14 @@
               <i class="nav-icon fa fa-map-marker"></i>
               <p>
                 Tracking
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/submission" class="nav-link">
+              <i class="nav-icon fa fa-file"></i>
+              <p>
+                Submission
               </p>
             </a>
           </li>
