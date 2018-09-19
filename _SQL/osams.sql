@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 18, 2018 at 08:42 PM
+-- Generation Time: Sep 19, 2018 at 10:11 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -34,6 +34,7 @@ CREATE TABLE `account_type` (
   `account_desc` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `file_maintenance` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tracking` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `submission` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `transactions` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `utilities` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `reports` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -45,10 +46,9 @@ CREATE TABLE `account_type` (
 -- Dumping data for table `account_type`
 --
 
-INSERT INTO `account_type` (`id`, `account_name`, `account_desc`, `file_maintenance`, `tracking`, `transactions`, `utilities`, `reports`, `created_at`, `updated_at`) VALUES
-(2, 'Admin', 'admin', 'Grant', 'Grant', 'Grant', 'Grant', 'Grant', '2018-09-09 01:42:54', '2018-09-09 01:48:08'),
-(3, 'Another', 'another', 'Grant', 'Grant', 'Deny', 'Grant', 'Deny', '2018-09-09 02:38:46', '2018-09-17 04:42:24'),
-(4, 'Encoder', 'Encoder', 'Deny', 'Deny', 'Grant', 'Deny', 'Grant', '2018-09-09 02:57:58', '2018-09-09 02:57:58');
+INSERT INTO `account_type` (`id`, `account_name`, `account_desc`, `file_maintenance`, `tracking`, `submission`, `transactions`, `utilities`, `reports`, `created_at`, `updated_at`) VALUES
+(1, 'Administrator', 'The one who controls the overall', 'Deny', 'Deny', 'Deny', 'Grant', 'Grant', 'Deny', NULL, NULL),
+(2, 'Encoder', 'Example Description', 'Deny', 'Deny', 'Grant', 'Grant', 'Deny', 'Grant', '2018-09-19 11:29:01', '2018-09-19 11:29:01');
 
 -- --------------------------------------------------------
 
@@ -77,7 +77,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `email`, `password`, `user_photo`, `user_isdel`, `remember_token`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `suffix`, `account_id`) VALUES
-(1, 'admin@mail.com', '$2y$10$xtc5OEr7YlfCe9BAAQaZ7u7NEy03BRKmBaM5AERcY6g467n8qS/3u', 'none', '0', 'Vj5xScMUrHQjEex0fHkhw2Cj5eFVoQYayWtSx9cuTlCM4dHgBd71jYgLDPgj', '2018-08-17 06:37:27', '2018-08-17 06:37:27', 'admin', 'admin', '', ' ', 0),
+(1, 'admin@mail.com', '$2y$10$L6s3.dok0bxP/q/kk.i1UO.mGK4tfTku.hZza2VqBeVBLLzZEhUPy', 'avatar5_1537342307.png', '0', 'Vj5xScMUrHQjEex0fHkhw2Cj5eFVoQYayWtSx9cuTlCM4dHgBd71jYgLDPgj', '2018-08-17 06:37:27', '2018-09-19 09:12:21', 'astrator', 'Admin', NULL, NULL, 1),
 (4, 'sean@mail.com', '$2y$10$Cuu7tI0WhMN7QnYyKRHype31iPCO3v4.Wkm2uSLcWSj9/csTuwPJu', 'None', '0', NULL, '2018-08-29 22:33:20', '2018-08-29 22:33:20', 'Chong', 'Sean', 'Go', ' ', 0),
 (5, 'fdd@mail.com', '$2y$10$goByD7gybklCsAs0AsuNKeVakCwruRTkSTMyWNClPqGkYczZnm0Ou', 'None', '0', NULL, '2018-09-09 02:43:18', '2018-09-09 02:56:21', 'Sample', 'Sample', NULL, NULL, 3);
 
@@ -108,12 +108,7 @@ CREATE TABLE `admins_info` (
 --
 
 INSERT INTO `admins_info` (`id`, `gender`, `birthdate`, `nationality`, `religion`, `civil_status`, `mobile_number`, `municipality`, `barangay`, `street`, `admins_id`, `created_at`, `updated_at`) VALUES
-(1, 'Male', '2018-08-29', 'Filipino', 'Unión Espiritista Cristiana de Filipinas, Inc.', 'Single', '9132323232', 'ANGELES CITY', 'Balibago', 'ssssddwwwd', 1, '2018-08-28 19:29:36', '2018-08-28 19:29:36'),
-(2, 'Male', '2018-08-29', 'Filipino', 'Iglesia Ni Cristo', 'Single', '9111111111', 'MACABEBE', 'San Gabriel (Poblacion)', 'sssdwwewwqewewq', 1, '2018-08-28 23:42:08', '2018-08-28 23:42:08'),
-(3, 'Male', '2018-08-29', 'Filipino', 'Iglesia Ni Cristo', 'Single', '9111111111', 'MACABEBE', 'San Gabriel (Poblacion)', 'sssdwwewwqewewq', 1, '2018-08-28 23:42:36', '2018-08-28 23:42:36'),
-(4, 'Male', '2018-08-29', 'Filipino', 'Iglesia Ni Cristo', 'Single', '9111111111', 'MACABEBE', 'San Gabriel (Poblacion)', 'sssdwwewwqewewq', 1, '2018-08-28 23:42:51', '2018-08-28 23:42:51'),
-(5, 'Male', '2018-08-29', 'Filipino', 'Iglesia Ni Cristo', 'Single', '9111111111', 'MACABEBE', 'San Gabriel (Poblacion)', 'sssdwwewwqewewq', 1, '2018-08-28 23:43:09', '2018-08-28 23:43:09'),
-(6, 'Male', '2018-08-30', 'Filipino', 'Iglesia Ni Cristo', 'Single', '9999999999', 'APALIT', 'Balucuc (Nuestra Señora de la Divina Pastora)', 'dfdfdf', 1, '2018-08-29 21:50:55', '2018-08-29 21:50:55'),
+(1, 'Male', '2018-08-29', 'Filipino', 'Unión Espiritista Cristiana de Filipinas, Inc.', 'Single', '9132323232', 'PORAC', 'Pias', 'street street', 1, '2018-08-28 19:29:36', '2018-09-19 08:30:05'),
 (7, 'Male', '2018-08-30', 'Filipino', 'Roman Catholic', 'Single', '9999999999', 'CANDABA', 'Bambang', 'Example Street', 3, '2018-08-29 22:22:50', '2018-08-29 22:22:50'),
 (8, 'Female', '2018-08-30', 'Foreigner', 'Jesus Is Lord Church Worldwide', 'Single', '9172553422', 'CITY OF SAN FERNANDO (Capital)', 'Lourdes', 'Example Street', 4, '2018-08-29 22:33:20', '2018-08-29 22:33:20'),
 (9, 'Male', '2018-09-09', 'Filipino', 'Roman Catholic', 'Single', '0000000000', 'ANGELES CITY', 'Balibago', 'rwrwrwerwerwer', 5, '2018-09-09 02:43:18', '2018-09-09 02:43:18');
@@ -142,7 +137,8 @@ INSERT INTO `announcements` (`id`, `title`, `body`, `cover_photo`, `a_isdel`, `c
 (1, 'Sample', 'Sample Description', 'none', 0, '2018-08-14 08:56:24', '2018-08-15 23:04:21'),
 (2, 'Sample 02', 'Sample Description two', 'none', 0, '2018-08-14 08:57:58', '2018-08-15 06:11:52'),
 (3, 'Sample 03', 'This is a example body number 3.', 'none', 1, '2018-08-14 09:08:43', '2018-08-15 23:05:11'),
-(4, 'Awarding of Vice Governor Scholars', 'dfsfffjdfdjfdjfdsfjjfdjfkjfdsjfjkjjjdfjsdajfjjsjfjfjfkjfjnmnvnvjfjfjdjfjfdkjdjdfsfffjdfdjfdjfdsfjjfdjfkjfdsjfjkjjjdfjsdajfjjsjfjfjfkjfjnmnvnvjfjfjdjfjfdkjdjdfsfffjdfdjfdjfdsfjjfdjfkjfdsjfjkjjjdfjsdajfjjsjfjfjfkjfjnmnvnvjfjfjdjfjfdkjdj', 'none', 0, '2018-09-18 10:13:27', '2018-09-18 10:13:27');
+(4, 'Awarding of Vice Governor Scholars', 'example body body example', 'none', 0, '2018-09-18 10:13:27', '2018-09-19 10:53:14'),
+(5, 'example5', 'fsdfsdfsdfsdf', 'none', 0, '2018-09-19 10:53:55', '2018-09-19 10:53:55');
 
 -- --------------------------------------------------------
 
@@ -397,7 +393,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2018_08_17_043055_create_admins_table', 8),
 (19, '2018_08_17_165847_add_to_admin', 9),
 (20, '2018_08_18_144419_create_admins_info_table', 9),
-(21, '2018_08_18_174148_create_account_type', 9),
 (42, '2018_09_02_074615_create_eefap_table', 10),
 (43, '2018_09_02_075607_create_eefapgv_table', 10),
 (44, '2018_09_02_075715_create_pcl_table', 10),
@@ -410,7 +405,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (66, '2018_09_14_152021_create_table_guardian_info', 15),
 (67, '2018_09_17_051416_create_table_log', 15),
 (68, '2018_09_18_131755_create_table_reqgv', 15),
-(69, '2018_09_18_131955_create_table_reqeefap', 15);
+(69, '2018_09_18_131955_create_table_reqeefap', 15),
+(72, '2018_08_18_174148_create_account_type', 16),
+(73, '2018_09_19_171854_add_to_reqeefap', 16),
+(74, '2018_09_19_172108_add_to_reqgv', 16);
 
 -- --------------------------------------------------------
 
@@ -44999,15 +44997,16 @@ CREATE TABLE `reqeefap` (
   `applicant_id` int(11) NOT NULL,
   `application_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `submit` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `reqeefap`
 --
 
-INSERT INTO `reqeefap` (`id`, `biodata`, `cor`, `or`, `grades`, `brgy`, `oid`, `biodata_sub`, `cor_sub`, `or_sub`, `grades_sub`, `brgy_sub`, `oid_sub`, `scholar_id`, `applicant_id`, `application_id`, `created_at`, `updated_at`) VALUES
-(2, 'IMG_20180716_0004_1537288404.pdf', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0001_1537288404.jpg', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 7, 6, 4, '2018-09-18 08:31:45', '2018-09-18 08:33:24');
+INSERT INTO `reqeefap` (`id`, `biodata`, `cor`, `or`, `grades`, `brgy`, `oid`, `biodata_sub`, `cor_sub`, `or_sub`, `grades_sub`, `brgy_sub`, `oid_sub`, `scholar_id`, `applicant_id`, `application_id`, `created_at`, `updated_at`, `submit`) VALUES
+(2, 'IMG_20180716_0004_1537288404.pdf', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0001_1537288404.jpg', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 7, 6, 4, '2018-09-18 08:31:45', '2018-09-18 08:33:24', 0);
 
 -- --------------------------------------------------------
 
@@ -45035,15 +45034,16 @@ CREATE TABLE `reqgv` (
   `applicant_id` int(11) NOT NULL,
   `application_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `submit` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `reqgv`
 --
 
-INSERT INTO `reqgv` (`id`, `biodata`, `cor`, `or`, `grades`, `brgy`, `oid`, `honor`, `biodata_sub`, `cor_sub`, `or_sub`, `grades_sub`, `brgy_sub`, `oid_sub`, `honor_sub`, `scholar_id`, `applicant_id`, `application_id`, `created_at`, `updated_at`) VALUES
-(1, 'IMG_20180716_0004_1537286780.pdf', 'IMG_20180716_0002_1537286781.jpg', 'IMG_20180710_0002_1537286781.jpg', 'IMG_20180716_0001_1537286781.jpg', 'IMG_20180716_0003_1537286781.jpg', 'IMG_20180818_0019_1537286781.jpg', 'IMG_20180818_0021_1537284649.jpg', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 8, 2, 2, '2018-09-18 06:28:11', '2018-09-18 08:06:21');
+INSERT INTO `reqgv` (`id`, `biodata`, `cor`, `or`, `grades`, `brgy`, `oid`, `honor`, `biodata_sub`, `cor_sub`, `or_sub`, `grades_sub`, `brgy_sub`, `oid_sub`, `honor_sub`, `scholar_id`, `applicant_id`, `application_id`, `created_at`, `updated_at`, `submit`) VALUES
+(1, 'IMG_20180716_0004_1537286780.pdf', 'IMG_20180716_0002_1537286781.jpg', 'IMG_20180710_0002_1537286781.jpg', 'IMG_20180716_0001_1537286781.jpg', 'IMG_20180716_0003_1537286781.jpg', 'IMG_20180818_0019_1537286781.jpg', 'IMG_20180818_0021_1537284649.jpg', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 8, 2, 2, '2018-09-18 06:28:11', '2018-09-18 08:06:21', 0);
 
 -- --------------------------------------------------------
 
@@ -45194,7 +45194,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `gender`, `bday`, `applicant_isdel`, `suffix`, `mobile_number`, `profile_photo`) VALUES
 (1, 'guintoproductions@gmail.com', '$2y$10$XI.K4/qIMsyUQ6Q49.uhuOocu4CyeGxBaZQ59vqCLrRinbig63wi6', 'i9mH0QpvWMOvfIk3dZyKH35AvKnJnwnEYePwuQH0VPmP1CN60w2MdgM8IAV4', '2018-08-08 06:04:07', '2018-09-16 20:53:50', 'Ocampo', 'Albert', 'Gold', 'Male', '1999-04-04', '0', 'Jr.', '9059462732', 'noimage.jpg'),
-(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', '6iuLLGoFLvvlJcdpJ0BT9qAM4UadWuGG348H3V7rPKoYd69hfOkiH0e5kcWD', '2018-08-09 15:16:18', '2018-09-16 21:22:57', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', NULL, '9051124520', 'noimage.jpg'),
+(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', '6iuLLGoFLvvlJcdpJ0BT9qAM4UadWuGG348H3V7rPKoYd69hfOkiH0e5kcWD', '2018-08-09 15:16:18', '2018-09-18 23:09:34', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', NULL, '9051124520', '40773622_219539158920512_449788156561063936_n_1537340973.jpg'),
 (3, 'cong@mail.com', '$2y$10$9luqQ659uIm1WurOBMMTQO1d8xFwKNf4CpBbJCV290ALkGLF5UG8K', 'xYd77OqpHEXPD7ZO1bTxfvSrmCBMVCaZPiKlZZbqGFRpjjSoVDD3z5LFUAo1', '2018-08-18 09:12:14', '2018-08-18 09:12:14', 'Cong', 'King', 'Ca', 'Male', '1998-02-05', '0', NULL, '9172245112', 'noimage.jpg'),
 (5, 'khan@mail.com', '$2y$10$KS9I/Myw4Q1FJ0jYgsn86.q7iUkRcOg0RoQC/I6tiTBTE1U6s1NmC', 'SteK1bn6a5KoGpuxMU0yRn6FG2znpz2IVE3HbUePyo0We77YaaD615st6dfI', '2018-09-14 05:33:49', '2018-09-16 12:58:29', 'Khan', 'Seng', 'Sy', 'Female', '1997-02-02', '0', NULL, '9172516220', 'avatar5_1537131509.png'),
 (6, 'salas@mail.com', '$2y$10$Z4K3wN57UcegG3vGAGwa2.akUMzkRRA3AwuX/bZhjcSVWxiZWFGQm', 'Qc3j2i5oxkrIR7f4qVqxPPpuu1u6UtiHi6LQX91p1AvMaswJakz8efcgO3e6', '2018-09-16 22:37:55', '2018-09-16 22:37:55', 'Salas', 'Louis Vincent', 'Nogoy', 'Male', '1999-06-20', '0', NULL, '9172504502', 'noimage.jpg');
@@ -45382,7 +45382,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `account_type`
 --
 ALTER TABLE `account_type`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -45400,7 +45400,7 @@ ALTER TABLE `admins_info`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `application`
@@ -45454,7 +45454,7 @@ ALTER TABLE `log`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `munbar`
@@ -45466,7 +45466,7 @@ ALTER TABLE `munbar`
 -- AUTO_INCREMENT for table `pcl`
 --
 ALTER TABLE `pcl`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_info`
@@ -45508,7 +45508,7 @@ ALTER TABLE `reqeefap`
 -- AUTO_INCREMENT for table `reqgv`
 --
 ALTER TABLE `reqgv`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `scholarships`
