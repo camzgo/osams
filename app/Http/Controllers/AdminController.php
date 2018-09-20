@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\User;
+use Auth;
+
 
 class AdminController extends Controller
 {
@@ -131,10 +133,13 @@ class AdminController extends Controller
         
         $all = array($ave, $over, $approve, $pending, $disapprove);
         // return $all;
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.account_name', 'account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
          
         // $check = array ('sample', 'dfdfdf', 'dfdfdfd', 'dfdfdf', 'dfdfdfd');
         return view('admin.admindash')->with('list', $list)->with('sadd', $sadd)->with('tr', $tr)->with('mod', $mod)->with('gen', $gen)->with('price', $price)
-        ->with('total', $total)->with('status', $status)->with('slot', $slot)->with('all', $all);
+        ->with('total', $total)->with('status', $status)->with('slot', $slot)->with('all', $all)->with('role', $role);
       // return $price;
     }
 }

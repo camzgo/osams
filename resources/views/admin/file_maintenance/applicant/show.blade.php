@@ -45,13 +45,14 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/admin" class="nav-link">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
+          @if($role->tracking == "Grant")
            <li class="nav-item">
             <a href="/admin/tracking" class="nav-link">
               <i class="nav-icon fa fa-map-marker"></i>
@@ -60,6 +61,8 @@
               </p>
             </a>
           </li>
+          @endif
+          @if($role->submission == "Grant")
           <li class="nav-item">
             <a href="/admin/submission" class="nav-link">
               <i class="nav-icon fa fa-file"></i>
@@ -68,6 +71,8 @@
               </p>
             </a>
           </li>
+          @endif
+          @if($role->transactions == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
@@ -100,6 +105,8 @@
               </li>
             </ul>
           </li>
+          @endif
+          @if($role->file_maintenance == "Grant")
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
@@ -154,6 +161,8 @@
               
             </ul>
           </li>
+          @endif
+          @if($role->utilities == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
@@ -233,6 +242,8 @@
               </li>
             </ul>
           </li>
+          @endif
+          @if($role->reports == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-bar-chart"></i>
@@ -265,6 +276,7 @@
               </li>
             </ul>
           </li>
+          @endif
         </ul>
       </nav>
     </div>
@@ -327,31 +339,64 @@
             <div class="modal-content">
                 <form method="post" id="main_form">
                     <div class="modal-header">
-                      <h4 class="modal-title">Applicant</h4>
+                      <h4 class="modal-title">Applicant Information</h4>
                       <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
                     </div>
                     <div class="modal-body">
                       {{csrf_field()}}    
                       <span id="form_output"></span>              
                       <div id="viewForm">
-                       
-                            <div>
-                              <label>FULL NAME:</label> <label id="lbl_name">
+                       <div class="row">
+                         <div class="col-md-4">
+                           <div class="text-center">
+                             <img src="/storage/profile_images/{{Auth::user()->user_photo}}" alt="" class="img-fluid img-circle ml-2 mt-5" style=" width: 160px; height: 160px;">
+                           </div>
+                         </div>
+                         <div class="col-md-8">
+                            <div class="row">
+                              <div class="col-md-8">
+                                <label>Full Name</label>
+                                <input type="text" class="form-control-plaintext" readonly id="name" name="name">
+                              </div>
                             </div>
-                            <div>
-                              <label>EMAIL:</label> <label id="lbl_email">
+                            <div class="form-row">
+                              <div class="col-md-3">
+                                <label>Gender</label>
+                                <input type="text" class="form-control-plaintext" readonly id="gender" name="gender">
+                              </div>
+                              <div class="col-md-3">
+                                <label>Nationality</label>
+                                <input type="text" class="form-control-plaintext" readonly id="nationality" name="nationality">
+                              </div>
+                              <div class="col-md-3">
+                                <label>Civil Status</label>
+                                <input type="text" class="form-control-plaintext" readonly id="civil" name="civil">
+                              </div>
+                              <div class="col-md-3">
+                                <label>Religion</label>
+                                <input type="text" class="form-control-plaintext" readonly id="religion" name="religion">
+                              </div>
                             </div>
-                            <div>
-                              <label>GENDER:</label> <label id="lbl_email">
+                            <div class="form-row">
+                              <div class="col-md-4">
+                                <label>Mobile Number</label>
+                                <input type="text" class="form-control-plaintext" readonly id="mobile_number" name="mobile_number">
+                              </div>
+                              <div class="col-md-3">
+                                <label>Birth Date</label>
+                                <input type="text" class="form-control-plaintext" readonly id="bday" name="bday">
+                              </div>
+                              <div class="col-md-5">
+                                <label>Birth Place</label>
+                                <input type="text" class="form-control-plaintext" readonly id="bplace" name="bplace">
+                              </div>
                             </div>
-                         
-                          {{-- <div class="form-group">
-                              <label>Question</label> <label>Question</label>
-                          </div> --}}
-                          <div class="form-group">
-                              <label>Answer</label>
-                              <textarea type="text" name="answer" id="answer" class="form-control noresize" rows="7"></textarea>
-                          </div>
+                            <div class="form-row">
+                              <label>Address</label>
+                              <input type="text" class="form-control-plaintext" readonly id="address" name="address">
+                            </div>
+                         </div>
+                       </div>
                       </div>
 
 
@@ -412,8 +457,32 @@
 
             });
     $(document).on('click', '.view', function(){
-        $('#mainModal').modal('show');
-        $('#lbl_email').text('SAMPLE');
+        var id = $(this).attr("id");
+        $('#form_output').html('');
+        $.ajax({
+            url:"{{route('applicant.fetchdata')}}",
+            method:'get',
+            data:{id:id},
+            dataType:'json',
+            success:function(data)
+            {
+              $('#mainModal').modal('show');
+              $('#name').val(data.fullname);
+              $('#gender').val(data.gender);
+              $('#nationality').val(data.nationality);
+              $('#civil').val(data.civil_status);
+              $('#religion').val(data.religion);
+              $('#bday').val(data.bday);
+              $('#mobile_number').val('0'+data.mobile_number);
+              $('#bplace').val(data.birth_place);
+              $('#address').val(data.address);
+              
+              view_Form();
+            }
+        });
+
+        
+        
 
     });
     $('#main_form').on('submit', function(event){

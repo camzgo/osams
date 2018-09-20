@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2018 at 10:11 PM
+-- Generation Time: Sep 20, 2018 at 10:13 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -47,7 +47,7 @@ CREATE TABLE `account_type` (
 --
 
 INSERT INTO `account_type` (`id`, `account_name`, `account_desc`, `file_maintenance`, `tracking`, `submission`, `transactions`, `utilities`, `reports`, `created_at`, `updated_at`) VALUES
-(1, 'Administrator', 'The one who controls the overall', 'Deny', 'Deny', 'Deny', 'Grant', 'Grant', 'Deny', NULL, NULL),
+(1, 'Administrator', 'The one who controls the overall', 'Grant', 'Grant', 'Grant', 'Grant', 'Grant', 'Grant', NULL, NULL),
 (2, 'Encoder', 'Example Description', 'Deny', 'Deny', 'Grant', 'Grant', 'Deny', 'Grant', '2018-09-19 11:29:01', '2018-09-19 11:29:01');
 
 -- --------------------------------------------------------
@@ -77,9 +77,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `email`, `password`, `user_photo`, `user_isdel`, `remember_token`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `suffix`, `account_id`) VALUES
-(1, 'admin@mail.com', '$2y$10$L6s3.dok0bxP/q/kk.i1UO.mGK4tfTku.hZza2VqBeVBLLzZEhUPy', 'avatar5_1537342307.png', '0', 'Vj5xScMUrHQjEex0fHkhw2Cj5eFVoQYayWtSx9cuTlCM4dHgBd71jYgLDPgj', '2018-08-17 06:37:27', '2018-09-19 09:12:21', 'astrator', 'Admin', NULL, NULL, 1),
-(4, 'sean@mail.com', '$2y$10$Cuu7tI0WhMN7QnYyKRHype31iPCO3v4.Wkm2uSLcWSj9/csTuwPJu', 'None', '0', NULL, '2018-08-29 22:33:20', '2018-08-29 22:33:20', 'Chong', 'Sean', 'Go', ' ', 0),
-(5, 'fdd@mail.com', '$2y$10$goByD7gybklCsAs0AsuNKeVakCwruRTkSTMyWNClPqGkYczZnm0Ou', 'None', '0', NULL, '2018-09-09 02:43:18', '2018-09-09 02:56:21', 'Sample', 'Sample', NULL, NULL, 3);
+(1, 'capitolpampanga@gmail.com', '$2y$10$dfrqFjXFsU4f/LjnYt6dWujfxbmWgOO8QezDcgx5l/1gQ2sKxT9.W', 'avatar5_1537131277.png', '0', 'c1DHfWtA19Omh2NbDGp1i5hMTaCHtzKlc5bLF74FAWAdsOfTMHj76cktvvvk', '2018-09-20 06:34:49', '2018-09-20 06:34:49', 'Ocampo', 'Albert', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -91,8 +89,6 @@ CREATE TABLE `admins_info` (
   `id` int(10) UNSIGNED NOT NULL,
   `gender` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `birthdate` date NOT NULL,
-  `nationality` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `religion` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `civil_status` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mobile_number` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `municipality` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -102,16 +98,6 @@ CREATE TABLE `admins_info` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `admins_info`
---
-
-INSERT INTO `admins_info` (`id`, `gender`, `birthdate`, `nationality`, `religion`, `civil_status`, `mobile_number`, `municipality`, `barangay`, `street`, `admins_id`, `created_at`, `updated_at`) VALUES
-(1, 'Male', '2018-08-29', 'Filipino', 'Unión Espiritista Cristiana de Filipinas, Inc.', 'Single', '9132323232', 'PORAC', 'Pias', 'street street', 1, '2018-08-28 19:29:36', '2018-09-19 08:30:05'),
-(7, 'Male', '2018-08-30', 'Filipino', 'Roman Catholic', 'Single', '9999999999', 'CANDABA', 'Bambang', 'Example Street', 3, '2018-08-29 22:22:50', '2018-08-29 22:22:50'),
-(8, 'Female', '2018-08-30', 'Foreigner', 'Jesus Is Lord Church Worldwide', 'Single', '9172553422', 'CITY OF SAN FERNANDO (Capital)', 'Lourdes', 'Example Street', 4, '2018-08-29 22:33:20', '2018-08-29 22:33:20'),
-(9, 'Male', '2018-09-09', 'Filipino', 'Roman Catholic', 'Single', '0000000000', 'ANGELES CITY', 'Balibago', 'rwrwrwerwerwer', 5, '2018-09-09 02:43:18', '2018-09-09 02:43:18');
 
 -- --------------------------------------------------------
 
@@ -137,7 +123,7 @@ INSERT INTO `announcements` (`id`, `title`, `body`, `cover_photo`, `a_isdel`, `c
 (1, 'Sample', 'Sample Description', 'none', 0, '2018-08-14 08:56:24', '2018-08-15 23:04:21'),
 (2, 'Sample 02', 'Sample Description two', 'none', 0, '2018-08-14 08:57:58', '2018-08-15 06:11:52'),
 (3, 'Sample 03', 'This is a example body number 3.', 'none', 1, '2018-08-14 09:08:43', '2018-08-15 23:05:11'),
-(4, 'Awarding of Vice Governor Scholars', 'example body body example', 'none', 0, '2018-09-18 10:13:27', '2018-09-19 10:53:14'),
+(4, 'Awarding of Vice Governor Scholars', 'example body body example example body body example example body body example', 'none', 0, '2018-09-18 10:13:27', '2018-09-20 12:08:42'),
 (5, 'example5', 'fsdfsdfsdfsdf', 'none', 0, '2018-09-19 10:53:55', '2018-09-19 10:53:55');
 
 -- --------------------------------------------------------
@@ -164,8 +150,8 @@ CREATE TABLE `application` (
 --
 
 INSERT INTO `application` (`id`, `application_status`, `renew`, `barcode_image`, `barcode_number`, `applicant_id`, `scholar_id`, `application_isdel`, `created_at`, `updated_at`) VALUES
-(2, 'Pending', 0, 'NONE', 'i5DsMdPuxr', 2, 8, NULL, '2018-09-18 06:28:11', '2018-09-18 06:28:11'),
-(4, 'Pending', 0, 'NONE', 'YRxJK1lRlQ', 6, 7, NULL, '2018-09-18 08:31:45', '2018-09-18 08:31:45');
+(2, 'Approved', 0, 'NONE', 'i5DsMdPuxr', 2, 8, NULL, '2018-09-18 06:28:11', '2018-09-20 09:13:27'),
+(4, 'Pending', 0, 'NONE', 'YRxJK1lRlQ', 6, 7, NULL, '2018-09-18 08:31:45', '2018-09-20 08:45:26');
 
 -- --------------------------------------------------------
 
@@ -182,6 +168,13 @@ CREATE TABLE `approval_date` (
   `scholarship_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `approval_date`
+--
+
+INSERT INTO `approval_date` (`id`, `date_approved`, `status`, `applicant_id`, `application_id`, `scholarship_id`, `employee_id`) VALUES
+(1, '2018-09-20', 'Approved', 2, 2, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -366,6 +359,14 @@ CREATE TABLE `log` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `log`
+--
+
+INSERT INTO `log` (`id`, `desc`, `scholar_id`, `tracking_id`, `created_at`, `updated_at`) VALUES
+(1, 'Your application has been approved.', 8, 8, '2018-09-20 00:09:45', '2018-09-20 00:09:45'),
+(2, 'Your application is being re-check.', 8, 8, '2018-09-20 00:10:24', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -392,7 +393,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (11, '2018_08_14_163501_create_announcements_table', 7),
 (12, '2018_08_17_043055_create_admins_table', 8),
 (19, '2018_08_17_165847_add_to_admin', 9),
-(20, '2018_08_18_144419_create_admins_info_table', 9),
 (42, '2018_09_02_074615_create_eefap_table', 10),
 (43, '2018_09_02_075607_create_eefapgv_table', 10),
 (44, '2018_09_02_075715_create_pcl_table', 10),
@@ -408,7 +408,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (69, '2018_09_18_131955_create_table_reqeefap', 15),
 (72, '2018_08_18_174148_create_account_type', 16),
 (73, '2018_09_19_171854_add_to_reqeefap', 16),
-(74, '2018_09_19_172108_add_to_reqgv', 16);
+(74, '2018_09_19_172108_add_to_reqgv', 16),
+(75, '2018_08_18_144419_create_admins_info_table', 17);
 
 -- --------------------------------------------------------
 
@@ -45006,7 +45007,7 @@ CREATE TABLE `reqeefap` (
 --
 
 INSERT INTO `reqeefap` (`id`, `biodata`, `cor`, `or`, `grades`, `brgy`, `oid`, `biodata_sub`, `cor_sub`, `or_sub`, `grades_sub`, `brgy_sub`, `oid_sub`, `scholar_id`, `applicant_id`, `application_id`, `created_at`, `updated_at`, `submit`) VALUES
-(2, 'IMG_20180716_0004_1537288404.pdf', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0001_1537288404.jpg', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 7, 6, 4, '2018-09-18 08:31:45', '2018-09-18 08:33:24', 0);
+(2, 'IMG_20180716_0004_1537288404.pdf', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0002_1537288404.jpg', 'IMG_20180716_0001_1537288404.jpg', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 7, 6, 4, '2018-09-18 08:31:45', '2018-09-18 08:33:24', 1);
 
 -- --------------------------------------------------------
 
@@ -45043,7 +45044,7 @@ CREATE TABLE `reqgv` (
 --
 
 INSERT INTO `reqgv` (`id`, `biodata`, `cor`, `or`, `grades`, `brgy`, `oid`, `honor`, `biodata_sub`, `cor_sub`, `or_sub`, `grades_sub`, `brgy_sub`, `oid_sub`, `honor_sub`, `scholar_id`, `applicant_id`, `application_id`, `created_at`, `updated_at`, `submit`) VALUES
-(1, 'IMG_20180716_0004_1537286780.pdf', 'IMG_20180716_0002_1537286781.jpg', 'IMG_20180710_0002_1537286781.jpg', 'IMG_20180716_0001_1537286781.jpg', 'IMG_20180716_0003_1537286781.jpg', 'IMG_20180818_0019_1537286781.jpg', 'IMG_20180818_0021_1537284649.jpg', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 8, 2, 2, '2018-09-18 06:28:11', '2018-09-18 08:06:21', 0);
+(1, 'IMG_20180716_0004_1537286780.pdf', 'IMG_20180716_0002_1537286781.jpg', 'IMG_20180710_0002_1537286781.jpg', 'IMG_20180716_0001_1537286781.jpg', 'IMG_20180716_0003_1537286781.jpg', 'IMG_20180818_0019_1537286781.jpg', 'IMG_20180818_0021_1537284649.jpg', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 'Submitted', 8, 2, 2, '2018-09-18 06:28:11', '2018-09-18 08:06:21', 1);
 
 -- --------------------------------------------------------
 
@@ -45100,7 +45101,7 @@ INSERT INTO `scholarships` (`id`, `scholarship_name`, `scholarship_desc`, `amoun
 (5, 'GRADUATE FROM PRIVATE', 'Students from private', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-17 07:25:43', 'eefap'),
 (6, 'PCL', 'Pampanga Councilors League', 5000, '2018-09-06', 500, 'OPEN', NULL, '2018-09-03 11:12:14', 'pcl'),
 (7, 'VG DHVTSU', 'Scholars from DHVTSU', 5000, '2018-09-06', 500, 'OPEN', NULL, NULL, 'eefap-gv'),
-(8, 'HONORS and RANKS', 'Students with honors or ranks', 5000, '2018-09-27', 20, 'OPEN', NULL, '2018-09-18 00:56:07', 'eefap-gv');
+(8, 'HONORS and RANKS', 'Students with honors or ranks', 5000, '2018-09-27', 20, 'CLOSED', NULL, '2018-09-20 00:09:45', 'eefap-gv');
 
 -- --------------------------------------------------------
 
@@ -45162,7 +45163,7 @@ INSERT INTO `tracking` (`id`, `stage`, `status`, `scholarship_id`, `created_at`,
 (5, 'Open', 'OPEN', 5, NULL, '2018-09-17 05:49:18'),
 (6, 'Open', 'OPEN', 6, NULL, NULL),
 (7, 'Open', 'OPEN', 7, NULL, NULL),
-(8, 'Open', 'OPEN', 8, NULL, NULL);
+(8, 'Re-Checking', 'CLOSED', 8, NULL, '2018-09-20 00:10:24');
 
 -- --------------------------------------------------------
 
@@ -45193,11 +45194,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `surname`, `first_name`, `middle_name`, `gender`, `bday`, `applicant_isdel`, `suffix`, `mobile_number`, `profile_photo`) VALUES
-(1, 'guintoproductions@gmail.com', '$2y$10$XI.K4/qIMsyUQ6Q49.uhuOocu4CyeGxBaZQ59vqCLrRinbig63wi6', 'i9mH0QpvWMOvfIk3dZyKH35AvKnJnwnEYePwuQH0VPmP1CN60w2MdgM8IAV4', '2018-08-08 06:04:07', '2018-09-16 20:53:50', 'Ocampo', 'Albert', 'Gold', 'Male', '1999-04-04', '0', 'Jr.', '9059462732', 'noimage.jpg'),
-(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', '6iuLLGoFLvvlJcdpJ0BT9qAM4UadWuGG348H3V7rPKoYd69hfOkiH0e5kcWD', '2018-08-09 15:16:18', '2018-09-18 23:09:34', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', NULL, '9051124520', '40773622_219539158920512_449788156561063936_n_1537340973.jpg'),
+(1, 'guintoproductions@gmail.com', '$2y$10$XI.K4/qIMsyUQ6Q49.uhuOocu4CyeGxBaZQ59vqCLrRinbig63wi6', '5D49fpFRH0lq0rB3ZCQUpd5fy7h6iDio04NXS7SjXRJ9jdChqKnYzE3GbElv', '2018-08-08 06:04:07', '2018-09-16 20:53:50', 'Ocampo', 'Albert', 'Gold', 'Male', '1999-04-04', '0', 'Jr.', '9059462732', 'noimage.jpg'),
+(2, 'camille@mail.com', '$2y$10$qHNnhwUTdGYqM30k/93a2eRsNWMMO4BU59d3LhNw5yn.IPwriZePO', 'F2lI2RYcFW79fUGyKCCcwX8VnnY2wsTMIwzfc4oL4mVqJAsQPR479yTRM0HN', '2018-08-09 15:16:18', '2018-09-18 23:09:34', 'Ocampo', 'Camille', 'Fierro', 'Female', '1998-12-22', '0', NULL, '9051124520', '40773622_219539158920512_449788156561063936_n_1537340973.jpg'),
 (3, 'cong@mail.com', '$2y$10$9luqQ659uIm1WurOBMMTQO1d8xFwKNf4CpBbJCV290ALkGLF5UG8K', 'xYd77OqpHEXPD7ZO1bTxfvSrmCBMVCaZPiKlZZbqGFRpjjSoVDD3z5LFUAo1', '2018-08-18 09:12:14', '2018-08-18 09:12:14', 'Cong', 'King', 'Ca', 'Male', '1998-02-05', '0', NULL, '9172245112', 'noimage.jpg'),
 (5, 'khan@mail.com', '$2y$10$KS9I/Myw4Q1FJ0jYgsn86.q7iUkRcOg0RoQC/I6tiTBTE1U6s1NmC', 'SteK1bn6a5KoGpuxMU0yRn6FG2znpz2IVE3HbUePyo0We77YaaD615st6dfI', '2018-09-14 05:33:49', '2018-09-16 12:58:29', 'Khan', 'Seng', 'Sy', 'Female', '1997-02-02', '0', NULL, '9172516220', 'avatar5_1537131509.png'),
-(6, 'salas@mail.com', '$2y$10$Z4K3wN57UcegG3vGAGwa2.akUMzkRRA3AwuX/bZhjcSVWxiZWFGQm', 'Qc3j2i5oxkrIR7f4qVqxPPpuu1u6UtiHi6LQX91p1AvMaswJakz8efcgO3e6', '2018-09-16 22:37:55', '2018-09-16 22:37:55', 'Salas', 'Louis Vincent', 'Nogoy', 'Male', '1999-06-20', '0', NULL, '9172504502', 'noimage.jpg');
+(6, 'salas@mail.com', '$2y$10$Z4K3wN57UcegG3vGAGwa2.akUMzkRRA3AwuX/bZhjcSVWxiZWFGQm', 'Y62n8xI0iXXD6JyU6G5jkzBdC3iQx07PJE6zVxVKyR8ZyeuxgX8aGpAqR9bc', '2018-09-16 22:37:55', '2018-09-16 22:37:55', 'Salas', 'Louis Vincent', 'Nogoy', 'Male', '1999-06-20', '0', NULL, '9172504502', 'noimage.jpg');
 
 --
 -- Indexes for dumped tables
@@ -45388,13 +45389,13 @@ ALTER TABLE `account_type`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `admins_info`
 --
 ALTER TABLE `admins_info`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `announcements`
@@ -45412,7 +45413,7 @@ ALTER TABLE `application`
 -- AUTO_INCREMENT for table `approval_date`
 --
 ALTER TABLE `approval_date`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `education_info`
@@ -45448,13 +45449,13 @@ ALTER TABLE `guardian_info`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `munbar`

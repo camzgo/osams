@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Announcement;
 // use App\Http\Controllers\DB;
-use App\Http\Controllers\Facades\DB;
+// use App\Http\Controllers\Facades\DB;
 use DataTables;
 use Validator;
+use Auth;
+use DB;
 
 class AnnounceMainController extends Controller
 {

@@ -44,13 +44,14 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/admin" class="nav-link">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
+          @if($role->tracking == "Grant")
            <li class="nav-item">
             <a href="/admin/tracking" class="nav-link">
               <i class="nav-icon fa fa-map-marker"></i>
@@ -59,6 +60,8 @@
               </p>
             </a>
           </li>
+          @endif
+          @if($role->submission == "Grant")
           <li class="nav-item">
             <a href="/admin/submission" class="nav-link">
               <i class="nav-icon fa fa-file"></i>
@@ -67,6 +70,8 @@
               </p>
             </a>
           </li>
+          @endif
+          @if($role->transactions == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
@@ -99,6 +104,8 @@
               </li>
             </ul>
           </li>
+          @endif
+          @if($role->file_maintenance == "Grant")
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
@@ -153,6 +160,8 @@
               
             </ul>
           </li>
+          @endif
+          @if($role->utilities == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
@@ -232,6 +241,8 @@
               </li>
             </ul>
           </li>
+          @endif
+          @if($role->reports == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-bar-chart"></i>
@@ -264,6 +275,7 @@
               </li>
             </ul>
           </li>
+          @endif
         </ul>
       </nav>
     </div>
@@ -380,7 +392,7 @@
                ajax: '{{ route('announce.getdata') }}',
                columns: [
                         { data: 'title', name: 'title' },
-                        { data: 'body', name: 'body' },
+                        { width: '50%', data: 'body', name: 'body' },
                         { width: '20%', data: 'action', orderable:false, searchable: false},
                         // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
                   ]

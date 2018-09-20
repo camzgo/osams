@@ -154,6 +154,9 @@ Route::prefix('admin/application')->group(function()
     Route::get('/getdata2', 'ApplicationMainController@getdata2')->name('application.getdata2');
     Route::post('/postdata', 'ApplicationMainController@postdata')->name('application.postdata');
     Route::get('/fetchdata', 'ApplicationMainController@fetchdata')->name('application.fetchdata');
+    Route::get('/details/{app}/{scid}', 'ApplicationMainController@scdetails');
+
+
 });
 Route::prefix('admin/approve')->group(function()
 {
@@ -220,7 +223,7 @@ Route::prefix('/')->group(function()
     Route::post('/scholarship/upload/eefap', 'FrontendController@storeduploadeefap');
     Route::post('/scholarship/delete', 'FrontendController@eefapdel');
 
-    Route::get('/announcement/{$id}', 'FrontendController@news');
+    Route::get('/announcement/{id}', 'FrontendController@news');
     Route::get('/send/sample', 'FrontendController@send');
 });
 
@@ -236,7 +239,9 @@ Route::prefix('admin/submission')->group(function()
 {
     Route::get('/', 'SubController@show');
     Route::get('/getdata', 'SubController@getdata')->name('sub.getdata');
-    Route::get('/details', 'SubController@details');
+    Route::get('/details/{id}', 'SubController@details');
+    Route::get('/details/uploads/{upload}', 'SubController@uploadreq');
+    Route::post('/details/uploads', 'SubController@approvedreq');
 });
 
 Route::prefix('/scholarship')->group(function(){
@@ -306,7 +311,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/user/logout', 'Auth\LoginController@user_logout')->name('user.logout');
 
-Route::prefix('admin')->group(function(){
+Route::prefix('/admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/', 'AdminController@index')->name('admin.dashboard');

@@ -713,7 +713,7 @@ class FrontendController extends Controller
         }
         else
         {
-            $biodata = "";
+            $biodata = NULL;
         }
         if($request->hasFile('grades'))
         {
@@ -730,7 +730,7 @@ class FrontendController extends Controller
         }
         else
         {
-             $grades = "";
+             $grades = NULL;
         }
         if($request->hasFile('cor'))
         {
@@ -747,7 +747,7 @@ class FrontendController extends Controller
         }
         else
         {
-            $cor = "";
+            $cor = NULL;
         }
         if($request->hasFile('brgy'))
         {
@@ -764,7 +764,7 @@ class FrontendController extends Controller
         }
         else
         {
-             $brgy = "";
+             $brgy = NULL;
         }
         if($request->hasFile('or'))
         {
@@ -781,7 +781,7 @@ class FrontendController extends Controller
         }
         else
         {
-            $or = "";
+            $or = NULL;
         }
         if ($request->hasFile('oid'))
         {
@@ -798,7 +798,7 @@ class FrontendController extends Controller
         }
         else
         {
-             $oid = "";
+             $oid = NULL;
         }
         if ($request->hasFile('honor'))
         {
@@ -814,7 +814,7 @@ class FrontendController extends Controller
         }
         else
         {
-             $honor = "";
+             $honor = NULL;
         }
        
         // else
@@ -879,7 +879,7 @@ class FrontendController extends Controller
         }
         else
         {
-            $biodata = "";
+            $biodata = NULL;
         }
         if($request->hasFile('grades'))
         {
@@ -896,7 +896,7 @@ class FrontendController extends Controller
         }
         else
         {
-             $grades = "";
+             $grades = NULL;
         }
         if($request->hasFile('cor'))
         {
@@ -913,7 +913,7 @@ class FrontendController extends Controller
         }
         else
         {
-            $cor = "";
+            $cor = NULL;
         }
         if($request->hasFile('brgy'))
         {
@@ -930,7 +930,7 @@ class FrontendController extends Controller
         }
         else
         {
-             $brgy = "";
+             $brgy = NULL;
         }
         if($request->hasFile('or'))
         {
@@ -947,7 +947,7 @@ class FrontendController extends Controller
         }
         else
         {
-            $or = "";
+            $or = NUll;
         }
         if ($request->hasFile('oid'))
         {
@@ -964,7 +964,7 @@ class FrontendController extends Controller
         }
         else
         {
-             $oid = "";
+             $oid = NULL;
         }
         if ($request->hasFile('honor'))
         {
@@ -980,7 +980,7 @@ class FrontendController extends Controller
         }
         else
         {
-             $honor = "";
+             $honor = NULL;
         }
        
        
@@ -1049,8 +1049,8 @@ class FrontendController extends Controller
 
     public function news($id)
     {
-        // $ann = DB::table('announcements')->where('id', $id)->first();
-        //$ann = Announcement::find($id);
-        return $id;
+        $ann = DB::table('announcements')->where('id', $id)->first();
+        // $ann = Announcement::find($id);
+        return view ('news')->with('ann', $ann);
     }
 }

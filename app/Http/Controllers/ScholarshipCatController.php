@@ -8,6 +8,7 @@ use DB;
 use App\Scholarship;
 use App\User;
 use App\Municipality;
+use Auth;
 
 
 

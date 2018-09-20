@@ -9,6 +9,7 @@ use DataTables;
 // use App\Http\Controllers\Facades\DB;
 use Illuminate\Support\Facades\DB;
 use Validator;
+use Auth;
 
 class ApplyController extends Controller
 {

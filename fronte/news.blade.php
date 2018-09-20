@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="text-center mt-3">
-                        <p></p>
+                        <p>{{$ann->body}}</p>
                     </div>
 
                 </div>

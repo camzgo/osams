@@ -25,8 +25,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="" class="brand-link">
-      <span class="brand-text font-weight-bold" style ="" id="role">ADMINISTRATOR</span>
+    <a href="" class="brand-link text-center">
+      <span class="brand-text font-weight-bold" style ="" >OSAMS</span>
     </a>
 
     <!-- Sidebar -->
@@ -34,10 +34,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('images/user8-128x128.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="/storage/profile_images/{{Auth::user()->user_photo}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="/admin/profile" class="d-block">{{Auth::user()->first_name}} {{Auth::user()->surname}}</a>
         </div>
       </div>
 
@@ -45,13 +45,14 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/admin" class="nav-link">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
+          @if($role->tracking == "Grant")
            <li class="nav-item">
             <a href="/admin/tracking" class="nav-link">
               <i class="nav-icon fa fa-map-marker"></i>
@@ -60,6 +61,8 @@
               </p>
             </a>
           </li>
+          @endif
+          @if($role->submission == "Grant")
           <li class="nav-item">
             <a href="/admin/submission" class="nav-link bg-white">
               <i class="nav-icon fa fa-file"></i>
@@ -68,6 +71,8 @@
               </p>
             </a>
           </li>
+          @endif
+          @if($role->transactions == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
@@ -100,6 +105,8 @@
               </li>
             </ul>
           </li>
+          @endif
+          @if($role->file_maintenance == "Grant")
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
@@ -154,6 +161,8 @@
               
             </ul>
           </li>
+          @endif
+          @if($role->utilities == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
@@ -233,6 +242,8 @@
               </li>
             </ul>
           </li>
+          @endif
+          @if($role->reports == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-bar-chart"></i>
@@ -246,7 +257,7 @@
                 <a href="/admin/reports/master-list" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
-                  <p>Master List of Scholars</p>
+                  <p> Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -265,6 +276,7 @@
               </li>
             </ul>
           </li>
+          @endif
         </ul>
       </nav>
     </div>
@@ -312,7 +324,7 @@
             <br>
 </div>
 
-<div id="mainModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+{{-- <div id="mainModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" id="md-form">
         <div class="modal-content">
             <form method="post" id="main_form">
@@ -345,7 +357,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> --}}
 
 {{-- <div id="delModal" class="modal fade" role="dialog">
     <div class="modal-dialog">

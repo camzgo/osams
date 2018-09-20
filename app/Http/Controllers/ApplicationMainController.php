@@ -7,6 +7,7 @@ use Validator;
 use DB;
 use Illuminate\Http\Request;
 use App\Application;
+use Auth;
 
 class ApplicationMainController extends Controller
 {
@@ -106,10 +107,11 @@ class ApplicationMainController extends Controller
             ->Join('users', 'application.applicant_id', '=', 'users.id')
             ->Join('scholarships', 'application.scholar_id', '=', 'scholarships.id')
             ->where('application.application_status', $pending)
-            ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"), 'application.id', 'users.email', 'application.created_at', 'scholarships.scholarship_name')->get();
+            ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"), 'application.id', 'users.email', 'application.created_at', 'scholarships.id as scid', 'scholarships.scholarship_name')->get();
             return DataTables::of($users)
             ->addColumn('action', function($users){
-                return '<a href="#" class="btn btn-sm btn-danger delete " id="'.$users->id.'"><i class="fa fa-trash"></i> Delete</a>';
+                return '<a href="/admin/application/details/'.$users->id.'/'.$users->scid.'" class="btn btn-sm btn-success edit " id="'.$users->id.'"><i class="fa fa-eye"></i> View</a>
+                <a href="#" class="btn btn-sm btn-danger delete " id="'.$users->id.'"><i class="fa fa-trash"></i> Delete</a>';
             })
             ->make(true);
 
@@ -121,11 +123,16 @@ class ApplicationMainController extends Controller
         $users = DB::table('application')
             ->Join('users', 'application.applicant_id', '=', 'users.id')
             ->Join('scholarships', 'application.scholar_id', '=', 'scholarships.id')
+            ->Join('approval_date', 'approval_date.application_id', '=', 'application.id')
+            ->Join('admins', 'admins.id',  '=', 'approval_date.employee_id')
             ->where('application.application_status', $pending)
-            ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"), 'application.id', 'users.email', 'application.created_at', 'scholarships.scholarship_name')->get();
+            ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"), 
+            DB::raw("CONCAT_WS('', admins.surname,', ', admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as empfullname"), 
+            'application.id', 'scholarships.id as scid', 'users.email', 'application.created_at', 'scholarships.scholarship_name', 'approval_date.date_approved')->get();
             return DataTables::of($users)
             ->addColumn('action', function($users){
-                return '<a href="#" class="btn btn-sm btn-danger delete " id="'.$users->id.'"><i class="fa fa-trash"></i> Delete</a>';
+                return '<a href="/admin/application/details/'.$users->id.'/'.$users->scid.'" class="btn btn-sm btn-success edit " id="'.$users->id.'"><i class="fa fa-eye"></i> View</a>
+                <a href="#" class="btn btn-sm btn-danger delete " id="'.$users->id.'"><i class="fa fa-trash"></i> Delete</a>';
             })
             ->make(true);
 
@@ -182,6 +189,32 @@ class ApplicationMainController extends Controller
         );
         echo json_encode($output);
         //eval ($goback);
+    }
+
+    function scdetails($app, $scid)
+    {
+
+        $application = DB::table('application')->where('id', $app)->first();
+        $scholar = DB::table('scholarships')->where('id', $scid)->first();
+
+        if($scholar->type=="eefap")
+        {
+            $eefap = DB::table('eefap')->where('application_id', $app)->first();
+            return view('admin.file_maintenance.application.details')->with('eefap', $eefap)->with('application', $application)->with('scholar', $scholar);
+        }
+        else if ($scholar->type == "eefap-gv")
+        {
+            $eefapgv = DB::table('eefapgv')->where('application_id', $app)->first();
+            return view('admin.file_maintenance.application.details')->with('eefapgv', $eefapgv)->with('application', $application)->with('scholar', $scholar);
+        }
+        else if($scholar->type == "pcl")
+        {
+            $pcl = DB::table('pcl')->where('application_id', $app)->first();
+            return view('admin.file_maintenance.application.details')->with('pcl', $pcl)->with('application', $application)->with('scholar', $scholar);   
+        }
+
+
+        
     }
 
 }

@@ -17,8 +17,6 @@ class CreateAdminsInfoTable extends Migration
             $table->increments('id');
             $table->string('gender', 20);
             $table->date('birthdate');
-            $table->string('nationality', 50);
-            $table->string('religion', 50)->nullable();
             $table->string('civil_status', 50);
             $table->string('mobile_number', 20);
             $table->string('municipality', 50);

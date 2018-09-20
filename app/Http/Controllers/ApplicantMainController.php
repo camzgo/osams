@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Personal;
 use Illuminate\Http\Request;
 // use App\Http\Controllers\Facades\DB;
-use Illuminate\Support\Facades\DB;
+use DB;
 use Illuminate\Support\Facades\Hash;
 use DataTables;
 use Validator;
+use Auth;
 
 class ApplicantMainController extends Controller
 {
@@ -131,7 +133,6 @@ class ApplicantMainController extends Controller
         return DataTables::of($users)
         ->addColumn('action', function($users){
             return '<a href="#" class="btn btn-sm btn-success view" id="'.$users->id.'"><i class="fa fa-eye"></i> View</a> 
-                    <a href="#" class="btn btn-sm btn-primary edit" id="'.$users->id.'"><i class="fa fa-edit"></i> Edit</a>
                     <a href="#" class="btn btn-sm btn-danger delete" id="'.$users->id.'"><i class="fa fa-trash"></i> Delete</a> ';
         })
         ->make(true);
@@ -141,10 +142,24 @@ class ApplicantMainController extends Controller
     {
         $id = $request->input('id');
         $user = User::find($id);
+        $pid = DB::table('personal_info')->where('applicant_id', $id)->first();
+        $ppid= $pid->id;
+        $personal = Personal::find($ppid);
+
         $output = array(
             'surname'    =>  $user->surname,
             'first_name'     =>  $user->first_name,
-            'applicant_isdel' => $user->applicant_isdel
+            'applicant_isdel' => $user->applicant_isdel,
+            'nationality'   => $personal->nationality,
+            'religion'     => $personal->religion,
+            'civil_status' => $personal->civil_status,
+            'birth_place' => $personal->birth_place,
+            'gender'     => $user->gender,
+            'bday'       => $user->bday,
+            'mobile_number' => $user->mobile_number,
+            'fullname'   => $user->first_name.' '.$user->middle_name.' '.$user->surname.' '.$user->suffix,
+            'address'    =>$personal->street.' '.$personal->barangay.', '.$personal->municipality
+
         );
         echo json_encode($output);
         //eval ($goback);

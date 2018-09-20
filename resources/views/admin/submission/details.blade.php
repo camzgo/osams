@@ -25,8 +25,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="" class="brand-link">
-      <span class="brand-text font-weight-bold" style ="" id="role">ADMINISTRATOR</span>
+     <a href="" class="brand-link text-center">
+      <span class="brand-text font-weight-bold" style ="" >OSAMS</span>
     </a>
 
     <!-- Sidebar -->
@@ -34,24 +34,25 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('images/user8-128x128.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="/storage/profile_images/{{Auth::user()->user_photo}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="/admin/profile" class="d-block">{{Auth::user()->first_name}} {{Auth::user()->surname}}</a>
         </div>
       </div>
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
+             <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/admin" class="nav-link">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
+          @if($role->tracking == "Grant")
            <li class="nav-item">
             <a href="/admin/tracking" class="nav-link">
               <i class="nav-icon fa fa-map-marker"></i>
@@ -60,6 +61,8 @@
               </p>
             </a>
           </li>
+          @endif
+          @if($role->submission == "Grant")
           <li class="nav-item">
             <a href="/admin/submission" class="nav-link bg-white">
               <i class="nav-icon fa fa-file"></i>
@@ -68,6 +71,8 @@
               </p>
             </a>
           </li>
+          @endif
+          @if($role->transactions == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
@@ -100,6 +105,8 @@
               </li>
             </ul>
           </li>
+          @endif
+          @if($role->file_maintenance == "Grant")
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
@@ -154,6 +161,8 @@
               
             </ul>
           </li>
+          @endif
+          @if($role->utilities == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
@@ -233,6 +242,8 @@
               </li>
             </ul>
           </li>
+          @endif
+          @if($role->reports == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-bar-chart"></i>
@@ -246,7 +257,7 @@
                 <a href="/admin/reports/master-list" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-file nav-icon"></i>
-                  <p>Master List of Scholars</p>
+                  <p> Master List of Scholars</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -265,6 +276,7 @@
               </li>
             </ul>
           </li>
+          @endif
         </ul>
       </nav>
     </div>
@@ -280,6 +292,7 @@
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">Submission</li>
+              <li class="breadcrumb-item active">Requirements</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -294,87 +307,61 @@
       <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h3 class="boldtx">Submission</h3>
+              <h3 class="boldtx">Requirements</h3>
           </div>
           <div class="card-body"> 
         <br>
         <div class="container">
     
      <table class=" table table-hover" style="width:100%" id="table">
-               <thead class="th-cl1">
-                  <tr>
-                     <th>Name</th>
-                     <th>Scholarship</th>
-                     <th>Actions</th>
-                  </tr>
-               </thead>
-            </table>
-            <br>
-</div>
+        <tr>
+          <td><a href="/admin/submission/details/uploads/{{$req->biodata}}"  target="_blank" class="d-block"><strong>Bio-data with 2x2 picture</strong></a></td>
+        </tr>
+        @if($scholarships->id == 8)
+        <tr>
+          <td><a href="/admin/submission/details/uploads/{{$req->honor}}" target="_blank" class="d-block"><strong>Certificate of Honor</strong></a></td>
+        </tr>
+        @endif
+        <tr>
+          <td><a href="/admin/submission/details/uploads/{{$req->cor}}" target="_blank" class="d-block"><strong>Certificate of Registration / Assessment Form</strong></a></td>
+        </tr>
+        <tr>
+          <td><a href="/admin/submission/details/uploads/{{$req->or}}"  target="_blank" class="d-block"><strong>Official Receipt</strong></a></td>
+        </tr>
+        <tr>
+          <td><a href="/admin/submission/details/uploads/{{$req->grades}}" target="_blank"  class="d-block"><strong>Grades / Form 138</strong></a></td>
+        </tr>
+        <tr>
+          <td><a href="/admin/submission/details/uploads/{{$req->brgy}}" target="_blank" class="d-block"><strong>Barangay / Residency / Indigency</strong></a></td>
+        </tr>
+        <tr>
+          <td><a href="/admin/submission/details/uploads/{{$req->oid}}" target="_blank" class="d-block"><strong>School ID</strong></a></td>
+        </tr>
+        
+      </table>
+      <br>
 
-<div id="mainModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" id="md-form">
-        <div class="modal-content">
-            <form method="post" id="main_form">
-                <div class="modal-header">
-                   <h4 class="modal-title">Add Data</h4>
-                   <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
-                </div>
-                <div class="modal-body">
-                  {{csrf_field()}} 
-                  <span id="form_output"></span>                 
-                  <div id="editForm">
-                      <div class="col-md-8 justify-content-center">
-                        <select name="status" id="status" class="form-control form-control-lg">
-                          <option value="Approved">Approved</option>
-                          <option value="Re-Checking">Re-Checking</option>
-                          <option value="Consolidation">Consolidation</option>
-                          <option value="Payroll">Payroll</option>
-                          <option value="Awarding">Awarding</option>
-                        </select>
-                      </div>
-                  </div>
-
-                </div>
-                  <div class="modal-footer">
-                      <input type="hidden" name="scholarship_id" id="scholarship_id" value="" />
-                      <input type="hidden" name="button_action" id="button_action" value="insert" />
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
-                      <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
-                  </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-{{-- <div id="delModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="post" id="del_form">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-right">
+            <form action="{{action('SubController@approvedreq')}}" method="POST" id="main_form" name="main_form">
+              {{csrf_field()}}
+              <div class="ghost">
+                <input type="hidden" id="app_id" name="app_id" value={{$app->id}}>
+                <input type="hidden" id="applicant_id" name="applicant_id" value={{$app->applicant_id}}>
+                <input type="hidden" id="action" name="action" >
+                <input type="hidden" id="sc_id" name="sc_id" value="{{$scholarships->id}}">
               </div>
-                <div class="modal-body">
-                    {{csrf_field()}}
-                    <span id="del_output"> </span>
-                    <div class="form-group">
-                        <h5 class="brand-text font-weight-bold">Are you sure you want to close it?</h5>
-                    </div>
-                    <div class="form-group">
-                      <input type="hidden" name="del_id" id="del_id" value="" />
-                      <input type="hidden" name="status" id="status" value="">
-                    </div>
-                     <div class="form-group" style="float:right;">
-                       <input type="submit" class="btn btn-danger" id="close_this" name="submit" value="Close"/>
-                       <button type="button" class="btn btn-danger" id="close_this" name="close_this" onclick="archiveData()"> Close </button>
-                       <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
-                    </div>
-                        
-                  </div>
+
+              <button class="btn btn-danger" id="btn-disapproved" name="btn-disapproved">Disapproved</button>
+              <button class="btn btn-success" id="btn-approved" name="btn-approved">Approved</button>
             </form>
+          </div>
         </div>
-    </div>
-</div> --}}
+      </div>
+</div>
+
+
 
 </div>
 </div>
@@ -386,115 +373,25 @@
         
 </div>
 <script>
-     $(function() {
-               $('#table').DataTable({
-               processing: true,
-               serverSide: true,
-               ajax: '{{ route('sub.getdata') }}',
-               columns: [
-                        { data: 'fullname', name: 'fullname' },
-                        { data: 'scholarship_name', name: 'scholarship_name'},
-                        // { data: 'scholarship_desc', name: 'scholarship_desc' },
-                        // { data: 'amount', name: 'amount'},
-                        { width: '20%', data: 'action', orderable:false, searchable: false}
-                        
-                        // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
-                  ]
-            });
-
-        $('#add_data').click(function(){
-        $('#formModal').modal('show');
-        $('#main_form')[0].reset();
-        $('#form_output').html('');
-        $('#button_action').val('insert');
-        $('#action').val('Add');
-        $('.modal-title').text('Add Question');
-    });
-
-    $('#main_form').on('submit', function(event){
-        event.preventDefault();
-        var form_data = $(this).serialize();
-        $.ajax({
-            url:"{{ route('track.postdata') }}",
-            method:"POST",
-            data:form_data,
-            dataType:"json",
-            success:function(data)
-            {
-                if(data.error.length > 0)
-                {
-                    var error_html = '';
-                    for(var count = 0; count < data.error.length; count++)
-                    {
-                        error_html += '<div class="alert alert-danger">'+data.error[count]+'</div>';
-                    }
-                    $('#form_output').html(error_html);
-                }
-                else
-                {
-                    $('#main_form')[0].reset();
-                    $('#table').DataTable().ajax.reload();
-                    $('#mainModal').modal('hide');
-                    if($('#action').val() == 'Update')
-                    {
-                      swal(
-                        'Success!',
-                        'Status has been updated',
-                        'success'
-                      )
-                    }
-                    // else if (($('#action').val() == 'Close'))
-                    // {
-                    //   swal(
-                    //     'Success!',
-                    //     'You have successfully close the program',
-                    //     'success'
-                    //   )
-                    // }
-                    // else if (($('#action').val() == 'Open'))
-                    // {
-                    //   swal(
-                    //     'Success!',
-                    //     'You have successfully open the program',
-                    //     'success'
-                    //   )
-                    // }
-                }
-            }
-        })
-    });
-
-    $(document).on('click', '.edit', function(){
-        var id = $(this).attr("id");
-        $('#form_output').html('');
-        $.ajax({
-            url:"{{route('track.fetchdata')}}",
-            method:'get',
-            data:{id:id},
-            dataType:'json',
-            success:function(data)
-            {
-             
-              // $('#scholarship_name').val(data.scholarship_name);
-              // $('#scholarship_desc').val(data.scholarship_desc);
-              // $('#amount').val(data.amount);
-              // $('#slot').val(data.slot);
-              // $('#deadline').val(data.deadline);
-              document.getElementById('status').value=data.stage;
-              $('#scholarship_id').val(id);
-              $('#mainModal').modal('show');
-              $('#action').val('Update');
-              document.getElementById("action").className = "btn btn-info";
-              document.getElementById("md-form").classList.add('modal-lg');
-              $('#button_action').val('update');
-              $('.modal-title').text('Update Status');
-            }
-    });   
-    });
-    
+$('#btn-approved').click(function(event)
+{
+ // $( "form:main_form" ).trigger( "submit" );
+ //event.preventDefault();
+ 
+  $('#action').val('approved');
+  document.getElementById("main_form").submit();
   
 });
 
+$('#btn-disapproved').click(function(event)
+{
+ // $( "form:main_form" ).trigger( "submit" );
+ //event.preventDefault();
+  $('#action').val('disapproved');
+  document.getElementById("main_form").submit();
+  
+
+});
 </script>
 </body>
 </html>

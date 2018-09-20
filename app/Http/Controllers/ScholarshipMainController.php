@@ -8,7 +8,7 @@ use Validator;
 use App\Scholarship;
 use DataTables;
 use App\Tracking;
-
+use Auth;
 
 class ScholarshipMainController extends Controller
 {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use DataTables;
+use Auth;
 
 class SubController extends Controller
 {
@@ -40,9 +41,90 @@ class SubController extends Controller
         ->make(true);
 
     }
-    public function details()
+    public function details($id)
     {
-      ///  $scholarships = DB::table('scholarships')->where('id', $id)->first();
-        echo 'scholarships';
+        $scholarships = DB::table('scholarships')->where('id', $id)->first();
+        $app = DB::table('application')->where('scholar_id', $id)->where('application_status', "Pending")->first();
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+       if($scholarships->type == "eefap")
+       {
+            $req = DB::table('reqeefap')->where('submit', 1)->where('application_id', $app->id)->first();  
+            return view('admin.submission.details')->with('req', $req)->with('role', $role)->with('scholarships', $scholarships)->with('app', $app);
+       }
+       else if($scholarships->type == "eefap-gv")
+       {
+           if($scholarships->id == 7)
+           {
+                $req = DB::table('reqeefap')->where('submit', 1)->where('application_id', $app->id)->first();  
+                return view('admin.submission.details')->with('req', $req)->with('role', $role)->with('scholarships', $scholarships)->with('app', $app);
+           }
+           else
+           {
+                $req = DB::table('reqgv')->where('submit', 1)->where('application_id', $app->id)->first();  
+                return view('admin.submission.details')->with('req', $req)->with('role', $role)->with('scholarships', $scholarships)->with('app', $app);
+           }
+       } 
+       else if ($scholarships->type == "pcl")
+       {
+           $req = DB::table('pcl')->where('submit', 1)->where('application_id', $app->id)->first();  
+            return view('admin.submission.details')->with('pcl', $pcl)->with('role', $role)->with('scholarships', $scholarships)->with('app', $app);
+       }
+
     }
+    public function uploadreq($upload)
+    {
+        $up = $upload;
+        return view('admin.submission.upload')->with('up', $up);
+    }
+
+    public function approvedreq(Request $request)
+    {
+        if($request->get('action') == 'approved')
+        {
+            $id = $request->get('app_id');
+            $approve =  'Approved';
+            DB::table('application')->where('id', $id)
+            ->update([
+                'application_status' => $approve
+            ]);
+
+            $approval = DB::table('approval_date')->insert([
+            'status' => $approve,
+            'application_id' => $id,
+            'date_approved' => date('Y-m-d'),
+            'applicant_id' => $request->get('applicant_id'),
+            'scholarship_id' => $request->get('sc_id'),
+            'employee_id' => Auth::user()->id
+
+            ]);
+
+            return redirect('/admin/submission');
+
+        }
+        else if ($request->get('action') == 'disapproved')
+        {
+            $id = $request->get('app_id');
+            $approve =  'Disapproved';
+            DB::table('application')->where('id', $id)
+            ->update([
+                'application_status' => $approve
+            ]);
+
+            // $approval = DB::table('approval_date')->insert([
+            // 'status' => $approve,
+            // 'application_id' => $id,
+            // 'date_approved' => date('Y-m-d'),
+            // 'applicant_id' => $request->get('applicant_id'),
+            // 'scholarship_id' => $request->get('sc_id'),
+            // 'employee_id' => '0'
+
+            // ]);
+
+            return redirect('/admin/submission');
+        }
+        
+    }
+
 }

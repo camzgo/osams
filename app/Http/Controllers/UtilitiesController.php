@@ -7,6 +7,7 @@ use Validator;
 use DataTables;
 use DB;
 use App\AccountType;
+use Auth;
 
 class UtilitiesController extends Controller
 {

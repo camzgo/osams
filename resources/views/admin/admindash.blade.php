@@ -42,7 +42,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="/" class="nav-link bg-white">
+            <a href="admin" class="nav-link bg-white">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Dashboard
@@ -311,8 +311,9 @@
                 <h5><span class="info-box-text"><i class="badge badge-warning text-white">Slots are full!</i></span></h5>
                 @endif
               </div>
-              
+              @if($role->account_name == "Administrator")
               <a href="/admin/scholarship" class="small-box-footer">View</a>
+              @endif
 
               </div>
               <!-- /.info-box-content -->
@@ -340,8 +341,9 @@
                 <h5><span class="info-box-text"><i class="badge badge-warning text-white">Slots are full!</i></span></h5>
                 @endif
               </div>
-              
+              @if($role->account_name == "Administrator")
               <a href="/admin/scholarship" class="small-box-footer">View</a>
+              @endif
 
               </div>
               <!-- /.info-box-content -->
@@ -426,7 +428,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Total Canceled Applications</span>
-                <span class="info-box-number">{{$all[4]}}</span>
+                <span class="info-box-number"><strong>{{$all[4]}}</strong></span>
               </div>
               <!-- /.info-box-content -->
             </div>

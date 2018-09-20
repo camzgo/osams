@@ -6,6 +6,7 @@ use Validator;
 use App\Application;
 use Illuminate\Http\Request;
 use DataTables;
+use Auth;
 
 class ApproveController extends Controller
 {

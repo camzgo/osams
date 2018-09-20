@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Faquestion;
 use DataTables;
+use DB;
+use Auth;
 
 class FaqsMainController extends Controller
 {
