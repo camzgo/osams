@@ -15,10 +15,10 @@ use Auth;
 
 class ScholarshipFrontController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:admin');
+    // }
 
     public function gadShow()
     {
@@ -308,7 +308,8 @@ class ScholarshipFrontController extends Controller
             'scholar_id' =>  $request->scholar_id,
             'applicant_id' => $request->sid,
             'application_id' => $id,
-            'created_at' => date('Y-m-d H:i:s')
+            'created_at' => date('Y-m-d H:i:s'),
+            'submit'     => '0'
         ]);
 
         return redirect('/scholarship/details');
@@ -373,7 +374,8 @@ class ScholarshipFrontController extends Controller
             'scholar_id' =>  $request->scholar_id,
             'applicant_id' => $request->sid,
             'application_id' => $id,
-            'created_at' => date('Y-m-d H:i:s')
+            'created_at' => date('Y-m-d H:i:s'),
+            'submit'     => '0'
         ]);
         
 
@@ -444,7 +446,8 @@ class ScholarshipFrontController extends Controller
             'scholar_id' =>  $request->scholar_id,
             'applicant_id' => $request->sid,
             'application_id' => $id,
-            'created_at' => date('Y-m-d H:i:s')
+            'created_at' => date('Y-m-d H:i:s'),
+            'submit'     => '0'
         ]);
 
 

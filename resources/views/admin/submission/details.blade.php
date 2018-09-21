@@ -315,7 +315,7 @@
     
      <table class=" table table-hover" style="width:100%" id="table">
         <tr>
-          <td><a href="/admin/submission/details/uploads/{{$req->biodata}}"  target="_blank" class="d-block"><strong>Bio-data with 2x2 picture</strong></a></td>
+          <td><a href="/storage/uploads/{{$req->biodata}}"  target="_blank" class="d-block"><strong>Bio-data with 2x2 picture</strong></a></td>
         </tr>
         @if($scholarships->id == 8)
         <tr>

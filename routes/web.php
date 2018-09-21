@@ -164,6 +164,7 @@ Route::prefix('admin/approve')->group(function()
     Route::get('/fetchdata', 'ApproveController@searchData')->name('search.fetchdata');
     Route::post('/', 'ApproveController@approved')->name('approved.postdata');
     Route::get('/getdata', 'ApproveController@listapproved')->name('list.getdata');
+    Route::get('/getdata2', 'ApproveController@listapproved2')->name('list.getdata2');
 });
 
 
@@ -242,6 +243,7 @@ Route::prefix('admin/submission')->group(function()
     Route::get('/details/{id}', 'SubController@details');
     Route::get('/details/uploads/{upload}', 'SubController@uploadreq');
     Route::post('/details/uploads', 'SubController@approvedreq');
+    Route::get('/details/uploads/pdf/{upload}', 'SubController@uploadpdf');
 });
 
 Route::prefix('/scholarship')->group(function(){

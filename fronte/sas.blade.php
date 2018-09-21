@@ -352,7 +352,7 @@
                              @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="/scholarship/ncw" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/ncw" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -392,7 +392,7 @@
                             @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="/scholarship/gad" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/gad" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -433,7 +433,7 @@
                              @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="/scholarship/vg-oldnew" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/vg-oldnew" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -473,7 +473,7 @@
                             @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="/scholarship/graduate-public" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/graduate-public" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -522,7 +522,7 @@
                              @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="/scholarship/graduate-private" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/graduate-private" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -560,7 +560,7 @@
                             @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="/scholarship/pcl" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/pcl" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -597,7 +597,7 @@
                             @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="/scholarship/vg-dhvtsu" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/vg-dhvtsu" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -635,7 +635,7 @@
                              @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="/scholarship/honor-rank" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/honor-rank" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else

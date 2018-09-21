@@ -28,6 +28,7 @@ use Itexmo;
 class FrontendController extends Controller
 {
     //
+
     public function fronte()
     {
         $ncw = DB::table('scholarships')->where('id', 1)->first();
@@ -469,7 +470,7 @@ class FrontendController extends Controller
         }
         else
         {
-             $fileNameToStore = 'noimage.jpg';
+            $fileNameToStore = 'noimage.jpg';
         }
 
         $user = User::find(Auth::user()->id);
@@ -671,12 +672,45 @@ class FrontendController extends Controller
          //\Mail::to('guintoproductions@gmail.com')->send(new Awarding);
          //$no = '9059462732';
         
-         $dbal = array('090');
-         $res = Itexmo::to('0'.$no)->message('Hello  you have been awarded a scholarship!' )->send();
+        //  $dbal = array('09360426646', '09059462732');
+        //  $vv = count($dbal);
+        //  $vv-=1;
+        //  for($x=0; $x<=$vv; $x++)
+        //  {
+        //     $res = Itexmo::to($dbal[$x])->message('Hello  you have been awarded a scholarship!' )->send();
+        //     // if($res == '0') {
+        //     //     return 'Success!';
+        //     // }
+        // //  }
+        // $dbal = array('guintoproductions@gmail', 'tilun@1blackmoon.com');
+        //  $vv = count($dbal);
+        //  $vv-=1;
+
+
+         $emails = array('guintoproductions@gmail.com', 'yimipi@dim-coin.com');
+
+        Mail::send('emails.awarding', [], function($message) use ($emails)
+        {    
+            $message->to($emails)->subject('This is test e-mail');    
+        });
+        var_dump( Mail:: failures());
+        exit;
+
+        // $arr = array();
+        // $chunk = array('sample1', 'sample2', 'sample3','sample4', 'sample5');
+        // foreach($chunk as $ch)
+        // {
+        //     array_push($arr, $ch);
+
+        // }
+        // return $arr;
+        //  Mail::send(['text'=>'mail'], ['name', 'Pampanga Capitol'], function($message)
+        //     {
+        //         $message->to($dbal)->subject('Sample Email');
+        //         $message->from('capitolpampanga@gmail.com', 'Pampanga');
+        //     });
                            
-                            if($res == '0') {
-                                //
-                            }
+                           
        
     }
 
@@ -1025,7 +1059,7 @@ class FrontendController extends Controller
         }
         else if($scholar->type == "eefap-gv")
         {
-            if($sholar->id == 7)
+            if($scholar->id == 7)
             {
                 $gv = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->delete();
                 $reqe = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->delete();
@@ -1052,5 +1086,10 @@ class FrontendController extends Controller
         $ann = DB::table('announcements')->where('id', $id)->first();
         // $ann = Announcement::find($id);
         return view ('news')->with('ann', $ann);
+    }
+
+    public function contactus()
+    {
+        \Mail::to('guintoproductions@gmail.com')->send(new Welcome ($sc));
     }
 }

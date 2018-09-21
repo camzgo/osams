@@ -121,7 +121,12 @@
                                   <a href="/scholarship/details/eefap" class="btn btn-block text-white btn-success">Edit</a>
                                 </div>
                                 <div class="col-md-3">
-                                  <a href="#" class="btn btn-block btn-danger">Cancel</a>
+                                  <a href="/scholarship/delete" class="btn btn-block btn-danger" onclick="event.preventDefault();
+                                        document.getElementById('del-form').submit();">Cancel</a>
+
+                                  <form id="del-form" action="{{action('FrontendController@eefapdel')}}" method="POST" style="display: none;">
+                                      @csrf
+                                  </form>
                                 </div>
                               </div>
                               @endif

@@ -114,7 +114,14 @@
           <p class="container">Capitol Building, Capitol Boulevard, Capitol Compound <br>Sto. Niño City of San Fernando, Pampanga 2000</p>
           <br>
           <h4 class="tx1"><i class="fa fa-phone"></i> PHONE</h4>
-          <p class="container">Capitol Compound, City of San Fernando, Pampanga 2000</p>
+          <div class="container">
+            <p class="text-bold mb-0">Office of the Governor</p>
+            <p>(045)435-2577</p>
+            <p class="text-bold mb-0">Office of the Vice Governor</p>
+            <p>(045)435-3966</p>
+            <p class="text-bold mb-0">Provincial Information Office (PIO)</p>
+            <p>09174626585</p>
+          </div>
           <br>
           <h4 class="tx1"><i class="fa fa-clock-o"></i> HOURS</h4>
           <div class="container">

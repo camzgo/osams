@@ -316,115 +316,123 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <div class="row ml-4 " >
-                                <div class="col-md-10">
-                                    <input type="text" class="form-control" id="search" name="search" oninput="search()" readonly/>
+                            <div class="row ml-5" >
+                                <div class="col-md-11">
+                                    <input type="text" class="form-control" id="search" name="search" oninput="search()" autofocus />
                                 </div>
-                                <div class="mr-4">
+                                {{-- <div class="mr-4">
                                     <button class="btn btn-info" id="btn-srch" onclick="typeli()"> TYPE</button>
-                                </div>
+                                </div> --}}
                             </div>
                             <hr/>
                         </div>
-                        <form id="main_form" method="post" form="{{ action('ApproveController@approved') }}">
-                          {{csrf_field()}}  
-                        <div class="container">
-                            <div class="row form-group">
-                                <h4 class="tx1">Application Information</h4>
-                            </div>
-                            <div class="row form-group">
-                                <div class = "col-md-6">
-                                    <label>Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder='' disabled value="NONE" />
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Scholarship</label>
-                                    <input type="text" class="form-control" id="scholarship" name="scholarship" placeholder='' disabled value="NONE" />
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col-md-6">
-                                    <label>Address</label>
-                                    <input type="text" class="form-control" id="address" name="address" placeholder='' disabled value="NONE" />
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Mobile Number</label>
-                                    <div class="input-group">
-                                    <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">+63</span>
-                                    </div>
-                                    <input type="text" class="form-control" id="mobile_no" name="mobile_no"  disabled placeholder='xxxxxxxxxx' required/>
-                                    </div>
-                                    
-                                </div>
+                        <div id="view" name="view">
+                          <form id="main_form" method="post" form="{{ action('ApproveController@approved') }}">
+                            {{csrf_field()}}  
+                          <div class="container">
+                              <div class="row form-group">
+                                  <h4 class="tx1">Application Information</h4>
+                              </div>
+                              <div class="row form-group">
+                                  <div class = "col-md-6">
+                                      <label>Name</label>
+                                      <input type="text" class="form-control" id="name" name="name" placeholder='' disabled value="NONE" />
+                                  </div>
+                                  <div class="col-md-4">
+                                      <label>Scholarship</label>
+                                      <input type="text" class="form-control" id="scholarship" name="scholarship" placeholder='' disabled value="NONE" />
+                                  </div>
+                              </div>
+                              <div class="row form-group">
+                                  <div class="col-md-6">
+                                      <label>Address</label>
+                                      <input type="text" class="form-control" id="address" name="address" placeholder='' disabled value="NONE" />
+                                  </div>
+                                  <div class="col-md-4">
+                                      <label>Mobile Number</label>
+                                      <input type="text" class="form-control" id="mobile_no" name="mobile_no"  disabled placeholder='+63XXXXXXXXXX' required/>
+                                      
+                                  </div>
+                              </div>
+
+                              <div class="row form-group">
+                                  <div class="col-md-6" id="eefap" style="display:none;">
+                                      <ul class="list-group mt-4">
+                                          <li class="list-group-item active"><strong>Requirements</strong></li>
+                                          <li class="list-group-item"><i id="chk1"></i> Bio-data with/ 2x2 Picture</li>
+                                          <li class="list-group-item"><i id="chk2"></i> Grades/ Form 138 (Photocopy)</li>
+                                          <li class="list-group-item"><i id="chk3"></i> Certificate of Registration/ Assessment Form (Photocopy)</li>
+                                          <li class="list-group-item"><i id="chk4"></i> Barangay/ Residency/ Indigency Certificate</li>
+                                          <li class="list-group-item"><i id="chk5"></i> Official Receipt (Photocopy)</li>
+                                          <li class="list-group-item"><i id="chk6"></i> School ID (Photocopy)</li>
+                                      </ul>
+                                  </div>
+
+                                  <div class="col-md-6" id="eefapgv" style="display:none;">
+                                      <ul class="list-group mt-4">
+                                          <li class="list-group-item active"><strong>Requirements</strong></li>
+                                          <li class="list-group-item"><i id="chk21"></i> Bio-data with 2x2 Picture</li>
+                                          <li class="list-group-item"><i id="chk22"></i> Certificate of Honor (Photocopy)</li>
+                                          <li class="list-group-item"><i id="chk23"></i> Grades/ Class Cards/ Form 138 (Photocopy)</li>
+                                          <li class="list-group-item"><i id="chk24"></i> Barangay/ Residency/ Indigency Certificate</li>
+                                          <li class="list-group-item"><i id="chk25"></i> Official Receipt (Photocopy)</li>
+                                          <li class="list-group-item"><i id="chk26"></i> Certificate of Registration/ Assessment Form (Photocopy)</li>
+                                          <li class="list-group-item"><i id="chk27"></i> School ID (Photocopy)</li>
+                                      </ul>
+                                  </div>
+
+                                  <div class="col-md-6" id="eefapgv2" style="display:none;">
+                                      <ul class="list-group mt-4">
+                                          <li class="list-group-item active"><strong>Requirements</strong></li>
+                                          <li class="list-group-item"><i id="chk31"></i> Bio-data with 2x2 Picture</li>
+                                          <li class="list-group-item"><i id="chk32"></i> Grades/ Form 138 (Photocopy)</li>
+                                          <li class="list-group-item"><i id="chk33"></i> Barangay/ Residency/ Indigency Certificate</li>
+                                          <li class="list-group-item"><i id="chk34"></i> Official Receipt (Photocopy)</li>
+                                          <li class="list-group-item"><i id="chk35"></i> Certificate of Registration/ Assessment Form (Photocopy)</li>
+                                          <li class="list-group-item"><i id="chk36"></i> School ID (Photocopy)</li>
+                                      </ul>
+                                  </div>
+
+                                  <div class="col-md-6" id="pcl" style="display:none;">
+                                      <ul class="list-group mt-4">
+                                          <li class="list-group-item active"><strong>Requirements</strong></li>
+                                          <li class="list-group-item"><i id="chk41"></i> Bio-data with/ 2x2 Picture</li>
+                                          <li class="list-group-item"><i id="chk42"></i> Grades/ Form 138 (Photocopy)</li>
+                                          <li class="list-group-item"><i id="chk43"></i> Certificate of Registration/ Assessment Form (Photocopy)</li>
+                                          <li class="list-group-item"><i id="chk44"></i> Barangay/ Residency/ Indigency Certificate</li>
+                                          <li class="list-group-item"><i id="chk45"></i> Official Receipt (Photocopy)</li>
+                                          <li class="list-group-item"><i id="chk46"></i> School ID (Photocopy)</li>
+                                      </ul>
+                                  </div>
+
+                                  
+                              </div>
+                            
+                            </form>
+                              <div class="row form-group pull-right">
+                                  <button class="btn btn-danger" id="btn-disapproved"  disabled><i class="fa fa-close"></i> DISAPPROVED</button> &nbsp &nbsp
+                                  <button class="btn btn-success" id="btn-approved"   disabled><i class="fa fa-check"></i> APPROVED</button>
+                                  <div class="ghost">
+                                    <input type="hidden" class="ghost" id="applicant_id" name="applicant_id" value=""/>
+                                    <input type="hidden" class="ghost" id="sc_id" name="sc_id" value=""/>
+                                    <input type="hidden" class="ghost" id="aid" name="aid" value=""/>
+                                    <input type="hidden" class="ghost" id="action" name="action"/>
+                                    {{-- <input type="submit" name="submit" id="submit"  class="btn btn-info ghost" disabled /> --}}
+                                  </div>
+                                  
+                              </div>
                             </div>
 
-                            <div class="row form-group">
-                                <div class="col-md-6" id="eefap" style="display:none;">
-                                    <ul class="list-group mt-4">
-                                        <li class="list-group-item active"><strong>Requirements</strong></li>
-                                        <li class="list-group-item"><i id="chk1"></i> Bio-data with/ 2x2 Picture</li>
-                                        <li class="list-group-item"><i id="chk2"></i> Grades/ Form 138 (Photocopy)</li>
-                                        <li class="list-group-item"><i id="chk3"></i> Certificate of Registration/ Assessment Form (Photocopy)</li>
-                                        <li class="list-group-item"><i id="chk4"></i> Barangay/ Residency/ Indigency Certificate</li>
-                                        <li class="list-group-item"><i id="chk5"></i> Official Receipt (Photocopy)</li>
-                                        <li class="list-group-item"><i id="chk6"></i> School ID (Photocopy)</li>
-                                    </ul>
-                                </div>
+                            <!--END-->
+                            
+                        </div>
 
-                                <div class="col-md-6" id="eefapgv" style="display:none;">
-                                    <ul class="list-group mt-4">
-                                        <li class="list-group-item active"><strong>Requirements</strong></li>
-                                        <li class="list-group-item"><i id="chk21"></i> Bio-data with 2x2 Picture</li>
-                                        <li class="list-group-item"><i id="chk22"></i> Certificate of Honor (Photocopy)</li>
-                                        <li class="list-group-item"><i id="chk23"></i> Grades/ Class Cards/ Form 138 (Photocopy)</li>
-                                        <li class="list-group-item"><i id="chk24"></i> Barangay/ Residency/ Indigency Certificate</li>
-                                        <li class="list-group-item"><i id="chk25"></i> Official Receipt (Photocopy)</li>
-                                        <li class="list-group-item"><i id="chk26"></i> Certificate of Registration/ Assessment Form (Photocopy)</li>
-                                        <li class="list-group-item"><i id="chk27"></i> School ID (Photocopy)</li>
-                                    </ul>
-                                </div>
-
-                                <div class="col-md-6" id="eefapgv2" style="display:none;">
-                                    <ul class="list-group mt-4">
-                                        <li class="list-group-item active"><strong>Requirements</strong></li>
-                                        <li class="list-group-item"><i id="chk31"></i> Bio-data with 2x2 Picture</li>
-                                        <li class="list-group-item"><i id="chk32"></i> Grades/ Form 138 (Photocopy)</li>
-                                        <li class="list-group-item"><i id="chk33"></i> Barangay/ Residency/ Indigency Certificate</li>
-                                        <li class="list-group-item"><i id="chk34"></i> Official Receipt (Photocopy)</li>
-                                        <li class="list-group-item"><i id="chk35"></i> Certificate of Registration/ Assessment Form (Photocopy)</li>
-                                        <li class="list-group-item"><i id="chk36"></i> School ID (Photocopy)</li>
-                                    </ul>
-                                </div>
-
-                                <div class="col-md-6" id="pcl" style="display:none;">
-                                    <ul class="list-group mt-4">
-                                        <li class="list-group-item active"><strong>Requirements</strong></li>
-                                        <li class="list-group-item"><i id="chk41"></i> Bio-data with/ 2x2 Picture</li>
-                                        <li class="list-group-item"><i id="chk42"></i> Grades/ Form 138 (Photocopy)</li>
-                                        <li class="list-group-item"><i id="chk43"></i> Certificate of Registration/ Assessment Form (Photocopy)</li>
-                                        <li class="list-group-item"><i id="chk44"></i> Barangay/ Residency/ Indigency Certificate</li>
-                                        <li class="list-group-item"><i id="chk45"></i> Official Receipt (Photocopy)</li>
-                                        <li class="list-group-item"><i id="chk46"></i> School ID (Photocopy)</li>
-                                    </ul>
-                                </div>
-
-                                
+                        <div id="scan" name="scan">
+                          <div class="container">
+                            <div class="text-center ">
+                              <h1>Please scan the barcode</h1>
                             </div>
-                           
-                          </form>
-                            <div class="row form-group pull-right">
-                                <button class="btn btn-danger" id="btn-disapproved"  disabled><i class="fa fa-close"></i> DISAPPROVED</button> &nbsp &nbsp
-                                <button class="btn btn-success" id="btn-approved"   disabled><i class="fa fa-check"></i> APPROVED</button>
-                                <div class="ghost">
-                                  <input type="hidden" class="ghost" id="applicant_id" name="applicant_id" value=""/>
-                                  <input type="hidden" class="ghost" id="sc_id" name="sc_id" value=""/>
-                                  <input type="hidden" class="ghost" id="aid" name="aid" value=""/>
-                                  <input type="hidden" class="ghost" id="action" name="action"/>
-                                  {{-- <input type="submit" name="submit" id="submit"  class="btn btn-info ghost" disabled /> --}}
-                                </div>
-                                
-                            </div>
+                          </div>
                         </div>
                     </div>
                     
@@ -443,6 +451,26 @@
                             <th>Name</th>
                             <th>Scholarship</th>
                             <th>Date Approved</th>
+                            <th>Received by</th>          
+                        </tr>
+                      </thead>
+                    </table>  
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card mt-4">
+                  <div class="card-body">
+                    <div class="card-title">
+                      <strong>List of disapproved applications</strong>
+                    </div><hr/>
+                    <div class="container">
+                      <table class="table table-hover" style="width:100%" id="table2">
+                      <thead >
+                        <tr>
+                            <th>Name</th>
+                            <th>Scholarship</th>
+                            <th>Date Disapproved</th>
                             <th>Received by</th>          
                         </tr>
                       </thead>
@@ -474,7 +502,27 @@
     columns: [
             { data: 'fullname', name: 'fullname' },
             { data: 'scholarship_name', name: 'scholarship_name' },
-            { data: 'date_approved', name: 'date_approved'}
+            { data: 'date_approved', name: 'date_approved'},
+            { data: 'empfullname', name: 'empfullname'}
+
+            // { data: 'surname', name: 'surname' },
+            // { data: 'first_name', name: 'first_name' },
+            // { data: 'middle_name', name: 'middle_name'},
+          //  { width: '20%', data: 'action', orderable:false, searchable: false}
+            // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
+      ] 
+    });
+
+     $('#table2').DataTable({
+    processing: true,
+    serverSide: true,
+    lengthChange: false,
+    ajax: '{{ route('list.getdata2') }}',
+    columns: [
+            { data: 'fullname', name: 'fullname' },
+            { data: 'scholarship_name', name: 'scholarship_name' },
+            { data: 'date_approved', name: 'date_approved'},
+            { data: 'empfullname', name: 'empfullname'}
 
             // { data: 'surname', name: 'surname' },
             // { data: 'first_name', name: 'first_name' },
@@ -497,6 +545,9 @@ $(document).ready(function(){
   z.style.display = "none"; 
   var w = document.getElementById("pcl");
   w.style.display = "none"; 
+  var t = document.getElementById("view");
+  t.style.display = "none"; 
+
 
 });
 function search()
@@ -508,7 +559,7 @@ function search()
 
         // document.getElementById("btn-disapproved").disabled = false;
         // document.getElementById("btn-approved").disabled = false;
-
+        
         $.ajax({
           url:"{{route('search.fetchdata')}}",
           method:'get',
@@ -516,8 +567,9 @@ function search()
           dataType:'json',
           success:function(data)
           {
+              view_form();
               $('#name').val(data.name);
-              $('#mobile_no').val(data.mobile_number);
+              $('#mobile_no').val("+63"+data.mobile_number);
               $('#address').val(data.address);
               $('#scholarship').val(data.scholarship);
               $('#aid').val(data.aid);
@@ -581,6 +633,7 @@ function search()
               }
               
           }
+         
 
         });
         
@@ -591,6 +644,8 @@ function search()
           $('#mobile_no').val(reset);
           $('#address').val('NONE');
           $('#scholarship').val('NONE');
+
+          no_form();
         if (id == "")
         {
           var reset = null;
@@ -607,7 +662,7 @@ function search()
           z.style.display = "none"; 
           var w = document.getElementById("pcl");
           w.style.display = "none"; 
-
+           no_form();
           document.getElementById("btn-disapproved").disabled = true;
           document.getElementById("btn-approved").disabled = true;
 
@@ -630,6 +685,7 @@ $('#btn-approved').click(function(event)
  //event.preventDefault();
   document.getElementById("main_form").submit();
   $('#action').val('approved');
+  no_form();
 
 });
 
@@ -639,6 +695,7 @@ $('#btn-disapproved').click(function(event)
  //event.preventDefault();
   document.getElementById("main_form").submit();
   $('#action').val('disapproved');
+  no_form();
 
 });
 
@@ -677,6 +734,26 @@ function typeli()
 
   // $('#search').val('OIzy8ol2ae'); 
   // search();
+}
+
+function view_form()
+{
+   var x = document.getElementById("view");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    }
+    var y = document.getElementById("scan");
+    y.style.display = "none";
+}
+
+function no_form()
+{
+   var x = document.getElementById("scan");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    }
+    var y = document.getElementById("view");
+    y.style.display = "none";
 }
 
 </script>

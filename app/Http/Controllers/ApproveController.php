@@ -105,7 +105,7 @@ class ApproveController extends Controller
             'date_approved' => date('Y-m-d'),
             'applicant_id' => $request->get('applicant_id'),
             'scholarship_id' => $request->get('sc_id'),
-            'employee_id' => '0'
+            'employee_id' => Auth::user()->id
 
             ]);
 
@@ -119,8 +119,18 @@ class ApproveController extends Controller
             DB::table('application')->where('id', $id)
             ->update([
                 'application_status' => $approve
+
             ]);
 
+            $approval = DB::table('approval_date')->insert([
+            'status' => $approve,
+            'application_id' => $id,
+            'date_approved' => date('Y-m-d'),
+            'applicant_id' => $request->get('applicant_id'),
+            'scholarship_id' => $request->get('sc_id'),
+            'employee_id' => Auth::user()->id
+
+            ]);
             // $approval = DB::table('approval_date')->insert([
             // 'status' => $approve,
             // 'application_id' => $id,
@@ -142,8 +152,10 @@ class ApproveController extends Controller
         $approve = DB::table('approval_date')
         ->Join('users', 'users.id', '=',  'approval_date.applicant_id')
         ->Join('scholarships', 'scholarships.id', '=',  'approval_date.scholarship_id')
+        ->Join('admins', 'admins.id',  '=', 'approval_date.employee_id')
         ->where('approval_date.status', $stat)
-        ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"), 'scholarships.scholarship_name', 'approval_date.date_approved' )->get();
+        ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"),
+        DB::raw("CONCAT_WS('', admins.surname,', ', admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as empfullname"), 'scholarships.scholarship_name', 'approval_date.date_approved' )->get();
         return DataTables::of($approve)
         ->addColumn('action', function($approve){
             return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$approve->fullname.'"><i class="fa fa-edit"></i>Apply</a>';
@@ -151,8 +163,26 @@ class ApproveController extends Controller
         ->make(true);
     }
 
+    function listapproved2()
+    {   
+        $stat = "Disapproved";
+        $approve = DB::table('approval_date')
+        ->Join('users', 'users.id', '=',  'approval_date.applicant_id')
+        ->Join('scholarships', 'scholarships.id', '=',  'approval_date.scholarship_id')
+        ->Join('admins', 'admins.id',  '=', 'approval_date.employee_id')
+        ->where('approval_date.status', $stat)
+        ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"),
+        DB::raw("CONCAT_WS('', admins.surname,', ', admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as empfullname"), 'scholarships.scholarship_name', 'approval_date.date_approved' )->get();
+        return DataTables::of($approve)
+        ->addColumn('action', function($approve){
+            return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$approve->fullname.'"><i class="fa fa-edit"></i>Apply</a>';
+        })
+        ->make(true);
+    }
+
+
     function admindash()
     {
-        return view('admin.admindash');
+        return "none!";
     }
 }

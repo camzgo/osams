@@ -48,6 +48,9 @@ class SubController extends Controller
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
         ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+
+
+        
        if($scholarships->type == "eefap")
        {
             $req = DB::table('reqeefap')->where('submit', 1)->where('application_id', $app->id)->first();  
@@ -77,6 +80,11 @@ class SubController extends Controller
     {
         $up = $upload;
         return view('admin.submission.upload')->with('up', $up);
+    }
+    public function uploadpdf($upload)
+    {
+        $up = $upload;
+        return view('admin.submission.uploadpdf')->with('up', $up);
     }
 
     public function approvedreq(Request $request)

@@ -139,13 +139,8 @@
   </div>
     <div class="row row-grid border-bottom">
       <div class="container">
-        <p>Pampanga was founded by the Spanish conquistador, Martín de Goiti, in 1571. The name was derived from the native Kapampangan words 
-        "pangpang ilog" meaning "riverside" where the early Malayan settlements were concentrated along the Rio Grande de la Pampanga. Kapampangan 
-        men are known for their gallantry and leadership while Kapampangan women are famous for their beauty and skill in culinary arts. Pampanga,
-        one of the richest provinces in the Philippines, was re-organized as a province by the Spaniards on December 11, 1571. For governmental 
-        control and taxation purposes, the Spanish authorities subdivided Pampanga into towns (pueblos), which were further subdivided into districts
-        (barrios) and in some cases, into royal and private estates (encomiendas). Ancient Pampanga's territorial area used to include portions of the 
-        provinces of Bataan, Bulacan, Nueva Ecija, Pangasinan, Tarlac, and Zambales in the big Island of Luzon of the Philippine Archipelago</p>
+        <p>“We envision Pampanga as a competitive province that is effective, transparent and responsive, duly governed and managed by competent and committed human resource where peace, love and respect to the environment reign in the heart of every Kapampangan.”</p>
+        <br>
       </div>
       
     </div>
@@ -161,13 +156,7 @@
   </div>
     <div class="row row-grid border-bottom">
       <div class="container">
-        <p>Pampanga was founded by the Spanish conquistador, Martín de Goiti, in 1571. The name was derived from the native Kapampangan words 
-        "pangpang ilog" meaning "riverside" where the early Malayan settlements were concentrated along the Rio Grande de la Pampanga. Kapampangan 
-        men are known for their gallantry and leadership while Kapampangan women are famous for their beauty and skill in culinary arts. Pampanga,
-        one of the richest provinces in the Philippines, was re-organized as a province by the Spaniards on December 11, 1571. For governmental 
-        control and taxation purposes, the Spanish authorities subdivided Pampanga into towns (pueblos), which were further subdivided into districts
-        (barrios) and in some cases, into royal and private estates (encomiendas). Ancient Pampanga's territorial area used to include portions of the 
-        provinces of Bataan, Bulacan, Nueva Ecija, Pangasinan, Tarlac, and Zambales in the big Island of Luzon of the Philippine Archipelago</p>
+        <p>The Provincial Government of Pampanga adheres to uphold effective and comprehensive delivery of social services, role model in terms of good governance, environment protection, promotion of culture, peace and catalyst of change through sustainable trade and investment, quality and affordable education, availability of needed infrastructures and public utilities where its public officials, private sectors and the Kapampangans are partners and committed to the principles of common, unity, love of country, and dedicated service God Almighty.</p>
       </div>
       
     </div>
