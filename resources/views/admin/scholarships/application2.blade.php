@@ -87,7 +87,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/apply" class="nav-link active">
+                <a href="/admin/apply" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
@@ -101,7 +101,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/renew" class="nav-link">
+                <a href="/admin/renew" class="nav-link active">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-refresh nav-icon"></i>
                   <p>Renew</p>
@@ -313,7 +313,7 @@
                 <div class="card-body">
                     <h1 class="card-title"><i class="fa fa-paper-plane"></i> MESSAGE</h1>
                     <hr/>
-                    <p>Your application has been sent.</p>
+                    <p>Your application has been renewed.</p>
                     {{-- <br>    --}}
                     <div class="pull-right">
                         <a href="/admin/approve" class="btn btn-success"> Proceed to Approve</a>

@@ -134,15 +134,26 @@
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body shdow">
+              @if (session('error'))
+                  <div class="alert alert-danger">
+                      {{ session('error') }}
+                  </div>
+              @endif
+                  @if (session('success'))
+                      <div class="alert alert-success">
+                          {{ session('success') }}
+                      </div>
+                  @endif
               <div class="card-title"><h1 class="tx2 text-center">Get In Touch With Us!</h1></div>
 
-              <form action="">
+              <form action="{{action('FrontendController@contactus')}}" method="POST">
+                {{csrf_field()}}
                 <div class="container mt-4">
                   <div class="row form-group">
                     <input type="text" name="name" id="name" class="form-control text-bold" placeholder="Your Name" required />
                   </div>
                   <div class="row form-group">
-                    <input type="email" name="email" id="email" class="form-control text-bold" placeholder="Your Email" required />
+                    <input type="email" name="email2" id="email2" class="form-control text-bold" placeholder="Your Email" required />
                   </div>
                   <div class="row form-group">
                     <textarea name="message" id="message" class="form-control noresize" rows="7" placeholder="How can we help?" required></textarea>

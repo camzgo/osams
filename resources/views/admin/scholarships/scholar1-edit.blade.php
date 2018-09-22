@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  
- <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+  <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
   <title>Pampanga Capitol | Online Scholarship Application and Management System</title>
-
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -190,7 +188,7 @@ button:focus {
       </div>
 
       <!-- Sidebar Menu -->
-            <nav class="mt-2">
+       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="/admin" class="nav-link">
@@ -238,7 +236,7 @@ button:focus {
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/apply" class="nav-link active">
+                <a href="/admin/apply" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
@@ -249,6 +247,13 @@ button:focus {
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-check nav-icon"></i>
                   <p>Approve</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/renew" class="nav-link active">
+                  &nbsp &nbsp &nbsp
+                  <i class="fa fa-refresh nav-icon"></i>
+                  <p>Renew</p>
                 </a>
               </li>
             </ul>
@@ -302,7 +307,7 @@ button:focus {
               <li class="nav-item">
                 <a href="/admin/employee" class="nav-link">
                   &nbsp &nbsp &nbsp
-                  <i class="fa fa-users nav-icon"></i>
+                  <i class="fa fa-eefap nav-icon"></i>
                   <p>Employee</p>
                 </a>
               </li>
@@ -368,7 +373,7 @@ button:focus {
                     <li class="nav-item">
                         <a href="/admin/archive/employee" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <i class="fa fa-users nav-icon"></i>
+                        <i class="fa fa-eefap nav-icon"></i>
                         <p>Employee</p>
                         </a>
                     </li>
@@ -440,7 +445,7 @@ button:focus {
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">Transactions</li>
-              <li class="breadcrumb-item active">Apply</li>
+              <li class="breadcrumb-item active">Renew</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -459,10 +464,13 @@ button:focus {
               <h4 class="boldtx" id="title_scholar"></h4>
           </div>
           <div class="card-body">
-    <form action="{{ action('ScholarshipCatController@eefapgvStore') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
+            
+          {{-- <img src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode, 'C39')}}" alt="barcode" /> --}}
+          {{-- <small>{{$barcode}}</small> --}}
+    <form action="{{ action('RenewController@editeefap') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
       {{csrf_field()}}
 
-
+      
       <div class="tab">
 
         {{-- <h5><strong>Step 1 of 3</strong></h5> --}}
@@ -479,16 +487,16 @@ button:focus {
         </div>
         <div class="row form-group">
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$users->surname}}" required/>
+          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$eefap->surname}}" required/>
           </div>
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$users->first_name}}" required/>
+            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$eefap->first_name}}" required/>
           </div>
           <div class = "col-md-2">
-          <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$users->middle_name}}"/>
+          <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{$eefap->middle_name}}" placeholder='Middle Name'/>
           </div>
           <div class = "col-md-2">
-          <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$users->suffix}}"/>
+            <input type="text" class="form-control" id="suffix" name="suffix" value="{{$eefap->suffix}}" placeholder='Suffix (e.g., Jr. Sr. III)'/>
           </div>
         </div>
         <div class="row form-group">
@@ -519,24 +527,63 @@ button:focus {
               <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+63</span>
               </div>
-            <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required value="{{$users->mobile_number}}"/>
+              <input type="text" class="form-control req" id="mobile_no" name="mobile_no" value="{{$eefap->mobile_number}}" placeholder='9xxxxxxxxx' required/>
             </div>
             
           </div>
-          <div class="col-md-4 ghost">
+          <div class="col-md-4">
             <label for="email">* Facebook Account</label>
-            <input type="text" class="form-control" id="fb_account" name="fb_account" placeholder='facebook.com/username' />
+            <input type="text" class="form-control req" id="fb_account" name="fb_account" placeholder='facebook.com/username' value="{{$eefap->fb_account}}" required/>
           </div>
         </div>
 
 
       </div>
     
-    
+      <div class="tab">
+        <div class="progress mt-2">
+          <div class="progress-bar bg-info" role="progressbar" style="width: 66.6666666667%" aria-valuenow="66.6666666667" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 3</strong></div>
+        </div>
+
+        <div class="row mt-5 form-group">
+          <h4 class="tx1">Guardian Information</h4>
+        </div>
+        <hr/>
+        <div class="row">
+          <label for="fullname">* Full Name</label>
+        </div>
+        <div class="row form-group">
+          <div class = "col-md-4">
+            <input type="text" class="form-control req" id="gsurname" name="gsurname" placeholder='* Surname' value="{{$eefap->gsurname}}" required/>
+          </div>
+          <div class = "col-md-4">
+            <input type="text" class="form-control req" id="gfirst_name" name="gfirst_name" placeholder='* First Name' value="{{$eefap->gfirst_name}}"  required/>
+          </div>
+          <div class = "col-md-2">
+            <input type="text" class="form-control" id="gmiddle_name" name="gmiddle_name" placeholder='Middle Name' value="{{$eefap->gmiddle_name}}" />
+          </div>
+          <div class = "col-md-2">
+            <input type="text" class="form-control" id="gsuffix" name="gsuffix" placeholder='Suffix (e.g., Jr. Sr. III)'value="{{$eefap->suffix}}"  />
+          </div>
+        </div>
+        <div class="row form-group">
+
+            <div class="col-md-4">
+            <label for="mobile_no">* Mobile Number</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">+63</span>
+              </div>
+              <input type="text" class="form-control req" id="gmobile_no" name="gmobile_no" placeholder='9xxxxxxxxx' value="{{$eefap->gmobile_number}}" required/>
+            </div>
+        </div>
+        </div>
+      </div>
+
       <div class="tab">
 
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 66.66666666666667%" aria-valuenow="66.66666666666667" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 3</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -546,29 +593,29 @@ button:focus {
         <div class="row form-group">
             <div class="col-md-5">
                 <label>* College/University Name <small>(No Abbreviation)</small></label>
-                <input name="college_name" type="text" class="form-control req" placeholder="College/University Name"/>
+                <input name="college_name" type="text" class="form-control req" placeholder="College/University Name" value="{{$eefap->college_name}}" />
             </div>
             <div class="col-md-5">
                 <label>* College/University Address</label>
-                <input name="college_address" type="text" class="form-control req" placeholder ="(Building no., Street, City Municipality, Province)">
+                <input name="college_address" type="text" class="form-control req" placeholder ="(Building no., Street, City Municipality, Province)" value="{{$eefap->college_address}}" >
             </div>
             <div class="col-md-2">
                 <label>* Year Level</label>
-                <input name="yr_lvl" type="text" class="form-control req" placeholder ="Year Level">
+                <input name="yr_lvl" type="text" class="form-control req" placeholder ="Year Level" value="{{$eefap->year_level}} ">
             </div>
         </div>
         <div class="row form-group">
             <div class="col-md-4">
                 <label>* Course/Program <small>(No Abbreviation)</small></label>
-                <input name="course" type="text" class="form-control req" placeholder ="Course/Program">
+                <input name="course" type="text" class="form-control req" placeholder ="Course/Program" value="{{$eefap->course}}">
             </div>
             <div class="col-md-3">
                 <label>* Major <small>(No Abbreviation)</small></label>
-                <input name="major" type="text" class="form-control req" placeholder ="Major">
+                <input name="major" type="text" class="form-control req" placeholder ="Major" value="{{$eefap->major}}">
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average" type="text" class="form-control req" placeholder ="General Average">
+                <input name="gen_average" type="text" class="form-control req" placeholder ="General Average" value="{{$eefap->general_average}}">
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -597,54 +644,26 @@ button:focus {
               <option value="NO">No, I am not SPES Recipient</option>
             </select>
           </div>
-
-        </div>
-    </div>
-
-    <div class="tab">
-      <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 3</strong></div>
-        </div>
-
-        <div class="row mt-5 form-group">
-          <h4 class="tx1">Awards Received/Rank</h4>
-        </div>
-        <hr/>
-        <div class="row form-group">
-          <div class="col-md-3">
-            <ul class="list-group" style="padding-top:10px;">
-              <li class="list-group-item active"><strong>Awards Received</strong></li>
-              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb1" id="rb1" value="Highest Honors"> <span> with Highest Honors </span> </label></li>
-              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb1" id="rb2" value="High Honors"> <span> with High Honors </span></li>
-              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb1" id="rb3" value="Honors"> <span> with Honors </span></li>
-            </ul>					
-          </div>
-          <div class="col-md-3">
-            <ul class="list-group" style="padding-top:10px;">
-              <li class="list-group-item active"><strong>Rank</strong></li>
-              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb1" id="rb4" value="SK Chairman"> <span> SK Chairman </span></li>
-              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb1" id="rb5" value="SK Councilor"> <span> SK Councilor </span></li>
-                <li class="list-group-item list-group-item-secondary"> <label class="rad inline"> <input type="radio" name="rb1" id="rb6" value="None/VG DHVTSU"> <span> None/VG DHVTSU </span></li>
-            </ul>					
-          </div>
           <div class="ghost">
             <input class="ghost" id="sid" name="sid" type="hidden" value=""/>
-            <input class="ghost" id="award" name="award" type="hidden" value=""/>
+            <input type="hidden" id="educ" name="educ">
           </div>
           <div class="ghost">
-            {!! Form::open(['action' => ['AnnounceMainController@update',  $scholar_id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+            {{-- {!! Form::open(['action' => ['AnnounceMainController@update',  $scholar_id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
             <div class = "form-group col-md-8 ghost">
             {{Form::text('title_id', $scholar_id, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
             {{Form::text('title', $scholar_name, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
             {{Form::text('barcode', $barcode, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
             </div>
-            {!! Form::close() !!}
+            {!! Form::close() !!} --}}
           </div>
-          	
         </div>
+        </div>
+        
+        
 
 
-    </div>
+   
 
       <div style="overflow:auto;" class="mt-4">
         <div style="float:right;">
@@ -659,10 +678,14 @@ button:focus {
         <span class="step"></span>
       </div>
     </form>
-
-
+  </div>
+ </div>
+  {{-- </div>
 </div>
 </div>
+
+</div>
+</div> --}}
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -671,50 +694,31 @@ button:focus {
 </div>
 <script>
 
-  $('input[type="radio"]').click(function(){
-
-    var award;
-    if (document.getElementById('rb1').checked) {
-      award = document.getElementById('rb1').value;
-    }
-    else if (document.getElementById('rb2').checked)
-    {
-      award = document.getElementById('rb2').value;
-    }
-    else if (document.getElementById('rb3').checked)
-    {
-      award = document.getElementById('rb3').value;
-    }
-    else if (document.getElementById('rb4').checked)
-    {
-      award = document.getElementById('rb4').value;
-    }
-    else if (document.getElementById('rb5').checked)
-    {
-      award = document.getElementById('rb5').value;
-    }
-    else if (document.getElementById('rb6').checked)
-    {
-      award = document.getElementById('rb6').value;
-    }
-     $('#award').val(award);
-
-    //console.log(award);
-    });
-
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
-
-    var pathname = window.location.pathname;
+  
+  var pathname = window.location.pathname;
   var parts = pathname.split('/');
-  console.log(parts[5]);
+  console.log(parts[4]);
 
-  $('#sid').val(parts[5]);
+  $('#sid').val(parts[4]);
 
   var id = $('input[name=title]').val();
   $('#title_scholar').text(id);
 
+  $('#street').val("{{$eefap->street}}");
+  var muni = "{{$eefap->program_type}}";
+
+  if(muni == "Bachelor&#039;s Degree")
+  {
+    muni = "Bachelor's Degree";
+  }
+  document.getElementById('educ_prog').value = muni;
+  document.getElementById('grad').value = "{{$eefap->graduating}}";
+  document.getElementById('spes').value = "{{$eefap->spes}}";
+
+  
 });
 
 var v = $("#regForm").validate({
@@ -828,7 +832,7 @@ $(document).ready(function(){
     var dependent = $(this).data('dependent');
     var _token = $('input[name="_token"]').val();
     $.ajax({
-      url:"{{ route('users.fetch') }}",
+      url:"{{ route('eefap.fetch') }}",
       method:"POST",
       data:{select:select, value:value, _token:_token, dependent:dependent},
       success:function(result)

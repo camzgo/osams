@@ -16,10 +16,10 @@ class ScholarshipCatController extends Controller
 {
     //
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:admin');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
 
     
     public function generateRandomString($length = 12) {
@@ -358,7 +358,8 @@ class ScholarshipCatController extends Controller
             'scholar_id' =>  $request->title_id,
             'applicant_id' => $request->sid,
             'application_id' => $id,
-            'created_at' => date('Y-m-d H:i:s')
+            'created_at' => date('Y-m-d H:i:s'),
+            'submit'   => 0
         ]);
             
         return redirect('/admin/apply/send');
@@ -422,7 +423,8 @@ class ScholarshipCatController extends Controller
                 'scholar_id' =>  $request->title_id,
                 'applicant_id' => $request->sid,
                 'application_id' => $id,
-                'created_at' => date('Y-m-d H:i:s')
+                'created_at' => date('Y-m-d H:i:s'),
+                'submit'   => 0
             ]);
         }
         else
@@ -431,7 +433,8 @@ class ScholarshipCatController extends Controller
             'scholar_id' =>  $request->title_id,
             'applicant_id' => $request->sid,
             'application_id' => $id,
-            'created_at' => date('Y-m-d H:i:s')
+            'created_at' => date('Y-m-d H:i:s'),
+            'submit'   => 0
         ]);
         }
         
@@ -520,7 +523,8 @@ class ScholarshipCatController extends Controller
             'scholar_id' => 6,
             'applicant_id' => $request->sid,
             'application_id' => $id,
-            'created_at' => date('Y-m-d H:i:s')
+            'created_at' => date('Y-m-d H:i:s'),
+            'submit'   => 0
         ]);
 
         return redirect('/admin/apply/send');

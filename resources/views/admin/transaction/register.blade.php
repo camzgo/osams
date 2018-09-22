@@ -511,7 +511,12 @@
                         </div>
                         <div class="col-md-3">
                           <label for="mobile_number">* Mobile Number</label>
-                          <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder='09xx-xxx-xxxx' required/>
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">+63</span>
+                              </div>
+                              <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required/>
+                          </div>
                         </div>
                         <div class="col-md-4">
                           <label for="email">* Email</label>
@@ -540,7 +545,7 @@
 <script>
 
 $(document).ready(function(){
-  $('#mobile_no').mask('0000-000-0000');
+  $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
 });
 
 </script>

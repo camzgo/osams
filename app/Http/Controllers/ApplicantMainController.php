@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use DataTables;
 use Validator;
 use Auth;
+use Mail;
+use App\Mail\RegSuccess;
 
 class ApplicantMainController extends Controller
 {
@@ -78,6 +80,13 @@ class ApplicantMainController extends Controller
 
         ]);
         $users->save();
+        $email = $request->email;
+        $name =  $request->first_name.' '.$request->middle_name.' '.$request->surname.' '.$request->suffix;
+
+
+       // Mail::to($request->get('email'))->send(new RegSuccess($name));
+          Mail::to('bixixi@spindl-e.com')->send(new RegSuccess($name));
+
         return redirect('/admin/applicant');
     }
 

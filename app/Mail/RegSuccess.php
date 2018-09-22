@@ -7,19 +7,19 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Awarding extends Mailable
+class RegSuccess extends Mailable
 {
     use Queueable, SerializesModels;
-    public $user;
+    public $name;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($name)
     {
         //
-        $this->user = $user;
+        $this->name = $name;
     }
 
     /**
@@ -29,6 +29,6 @@ class Awarding extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.awarding');
+        return $this->markdown('emails.regsuccess');
     }
 }

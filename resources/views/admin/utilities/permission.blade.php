@@ -304,7 +304,7 @@
 
     <!-- Main content -->
      <div class="content">
-      <div class="container-fluid">
+      <div class="container-fluid"> 
         <div class="card">
           <div class="card-header" id="th-cl1">
               <h3 class="boldtx">Level of access</h3>
@@ -319,6 +319,16 @@
 
         <br>
         <div class="container">
+           @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
     <br />
     <br />
      <table class=" table table-hover" style="width:100%" id="table">
@@ -730,11 +740,24 @@ function confirmDel()
             url:"{{route('permission.removedata')}}",
             method:"get",
             data:{id:id},
+            dataType:"json",
             success:function(data)
             {
+
+              if(data.chk == "error")
+              {
                 var x = data
-                swal("Done!", ""+data, "success");
+                swal("Error!", ""+data.success, 'error');
                 $('#table').DataTable().ajax.reload();
+              }
+              else
+              {
+                var x = data
+                swal("Done!", ""+data.success, 'success');
+                $('#table').DataTable().ajax.reload();
+              }
+                
+              
                 
             }
         })

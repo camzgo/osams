@@ -201,10 +201,38 @@ class UtilitiesController extends Controller
 
     function removedata(Request $request)
     {
-        $account = AccountType::find($request->input('id'));
-        if($account->delete())
+        $account2 = AccountType::find($request->input('id'));
+
+
+        $admins = DB::table('admins')->select('id')->where('account_id', $account2->id)->count();
+
+        if($admins != 0 )
         {
-            echo 'It was successfully deleted!';
+            $pass = array(
+            'chk'     =>  "error",
+            'success'   =>  "You cannot delete this data, <br> there are data used it!"
+            );
+
+            // echo '';
+            echo json_encode($pass);
+           // return redirect()->back()->with("error","");
         }
+        else
+        {
+            $pass = array(
+            'chk'     =>  "success",
+            'success'   =>  "It was successfully deleted!"
+            );
+
+            $account= AccountType::find($request->input('id'));
+            if($account->delete())
+            {
+               // echo 'It was successfully deleted!';
+                echo json_encode($pass);
+            }
+            
+        }
+
+        
     }
 }

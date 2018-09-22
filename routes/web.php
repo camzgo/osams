@@ -217,6 +217,15 @@ Route::prefix('/')->group(function()
     Route::get('/scholarship/details/pcl', 'FrontendController@viewPcl');
     Route::post('/scholarship/details/pcl/fetch', 'FrontendController@pclfetch')->name('pcl2.fetch');
     Route::post('/scholarship/details/pcl', 'FrontendController@storedPcl');
+
+
+    Route::get('/scholarship/details/renew/eefap-gv', 'FrontendController@viewEefapgv_edit');
+    Route::post('/scholarship/details/renew/eefap-gv', 'FrontendController@storedEefapgv_edit');
+    Route::get('/scholarship/details/renew/eefap', 'FrontendController@viewEefap_edit');
+    Route::post('/scholarship/details/renew/eefap', 'FrontendController@storedEefap_edit');
+    Route::get('/scholarship/details/renew/pcl', 'FrontendController@viewPcl_edit');
+    //Route::post('/scholarship/details/pcl/fetch', 'FrontendController@pclfetch')->name('pcl2.fetch');
+    Route::post('/scholarship/details/renew/pcl', 'FrontendController@storedPcl_edit');
     
     Route::get('/scholarship/upload/eefapgv', 'FrontendController@uploadgv');
     Route::post('/scholarship/upload/eefapgv', 'FrontendController@storeduploadgv');
@@ -225,6 +234,7 @@ Route::prefix('/')->group(function()
     Route::post('/scholarship/delete', 'FrontendController@eefapdel');
 
     Route::get('/announcement/{id}', 'FrontendController@news');
+    Route::post('/contact', 'FrontendController@contactus');
     Route::get('/send/sample', 'FrontendController@send');
 });
 
@@ -272,6 +282,31 @@ Route::prefix('/scholarship')->group(function(){
     Route::get('/pcl', 'ScholarshipFrontController@pclShow');
 });
 
+
+
+Route::prefix('admin/renew')->group(function()
+{
+    Route::get('/', 'RenewController@show');
+    Route::get('/getdata', 'RenewController@getdata')->name('renew.getdata');
+    Route::get('/eefap/{id}', 'RenewController@vieweefap');
+    Route::post('/eefap', 'RenewController@editeefap');
+    Route::get('/eefapgv/{id}', 'RenewController@vieweefapgv');
+    Route::post('/eefapgv', 'RenewController@editeefapgv');
+    Route::get('/pcl/{id}', 'RenewController@viewpcl');
+    Route::post('/pcl', 'RenewController@editpcl');
+    Route::get('/send', 'RenewController@showsend');
+    Route::post('/fetch', 'RenewController@pclfetch')->name('pcl5.fetch');
+   // Route::get('/getdata2', 'ApplyController@getdata')->name('apply.e');
+    // Route::get('/getdata3', 'ApplyController@scholardata')->name('apply.scholardata');
+    // Route::get('/scholarship-category', 'ApplyController@showCat');
+    // Route::get('/send', 'ApplyController@showsend');
+});
+
+Route::get('/mailable', function () {
+
+    $name ="TUKMOL";
+    return new App\Mail\RegSuccess($name);
+});
 
 Route::get('/pampanga','AddressController@municipal');
 Route::get('/json-barangay','AddressController@barangay');

@@ -14,6 +14,7 @@ use App\Pcl;
 use App\Reqgv;
 use App\Reqeefap;
 use App\Announcement;
+use App\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -21,6 +22,7 @@ use App\SendCode;
 use Mail;
 use App\Mail\Welcome;
 use App\Mail\Awarding;
+use App\Mail\Contact;
 use Itexmo;
 
 
@@ -687,15 +689,16 @@ class FrontendController extends Controller
         //  $vv-=1;
 
 
-         $emails = array('guintoproductions@gmail.com', 'yimipi@dim-coin.com');
+        //  $emails = array('guintoproductions@gmail.com', 'yimipi@dim-coin.com');
 
-        Mail::send('emails.awarding', [], function($message) use ($emails)
-        {    
-            $message->to($emails)->subject('This is test e-mail');    
-        });
-        var_dump( Mail:: failures());
-        exit;
+        // Mail::send('emails.awarding', [], function($message) use ($emails)
+        // {    
+        //     $message->to($emails)->subject('This is test e-mail');    
+        // });
+        // var_dump( Mail:: failures());
+        // exit;
 
+        return view('sample1');  
         // $arr = array();
         // $chunk = array('sample1', 'sample2', 'sample3','sample4', 'sample5');
         // foreach($chunk as $ch)
@@ -1088,8 +1091,208 @@ class FrontendController extends Controller
         return view ('news')->with('ann', $ann);
     }
 
-    public function contactus()
+    public function contactus(Request $request)
     {
-        \Mail::to('guintoproductions@gmail.com')->send(new Welcome ($sc));
+        
+        $msg = array('name' => $request->get('name'), 
+        'email' => $request->get('email2'), 
+        'msga' => $request->get('message'));
+
+        // 
+        
+        Mail::send('emails.contact', $msg, function($message) use($msg)
+        {
+            
+            $message->from($msg['email']);
+            $message->to('capitolpampanga@gmail.com');
+        });
+
+        return redirect()->back()->with("success","Email is successfully sent!");
+       // return $msg;
     }
+
+    function viewEefapgv_edit()
+    {
+        $municipal_list = DB::select('select municipality from `munbar` group by municipality');
+        $eefapgv = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->first();
+        return view('front.eefapgv-view2-edit')->with('eefapgv', $eefapgv)->with('municipal_list', $municipal_list);
+    }
+
+    function viewEefap_edit()
+    {
+        $municipal_list = DB::select('select municipality from `munbar` group by municipality');
+        $eefap = DB::table('eefap')->where('applicant_id', Auth::user()->id)->first();
+        return view('front.eefap-view-edit')->with('eefap', $eefap)->with('municipal_list', $municipal_list);
+    }
+
+    function viewPcl_edit()
+    {
+        $district_list = DB::select('select district FROM `munbar` GROUP BY district');
+        $pcl = DB::table('pcl')->where('applicant_id', Auth::user()->id)->first();
+        return view('front.pcl-view-edit')->with('pcl', $pcl)->with('district_list', $district_list);
+    }
+
+
+    function storedEefapgv_edit(Request $request)
+    {
+        $eefapgvId = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->first();
+        $id = $eefapgvId->id;
+        
+        $eefapgv = Eefapgv::find($id);
+        $eefapgv->surname = $request->get('surname');
+        $eefapgv->first_name = $request->get('first_name');
+        $eefapgv->middle_name = $request->get('middle_name');
+        $eefapgv->suffix = $request->get('suffix');
+        $eefapgv->mobile_number = $request->get('mobile_no');
+        $eefapgv->municipality = $request->get('municipality');
+        $eefapgv->barangay = $request->get('barangay');
+        $eefapgv->street = $request->get('street');
+        $eefapgv->college_name = $request->get('college_name');
+        $eefapgv->college_address = $request->get('college_address');
+        $eefapgv->course = $request->get('course');
+        $eefapgv->major = $request->get('major');
+        $eefapgv->program_type = $request->get('educ_prog');
+        $eefapgv->year_level = $request->get('yr_lvl');
+        $eefapgv->graduating = $request->get('grad');
+        $eefapgv->general_average = $request->get('gen_average');
+        $eefapgv->spes = $request->get('spes');
+        $eefapgv->awards =$request->get('award');
+        $eefapgv->save();
+
+        $appId = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
+        $app = Application::find($appId->id);
+        $app->application_status = "Pending";
+        $app->renew = "0";
+        $app->save();
+
+        return redirect ('/scholarship/details');
+
+
+
+    }
+
+    function storedEefap_edit(Request $request)
+    {
+        $eefapId = DB::table('eefap')->where('applicant_id', Auth::user()->id)->first();
+        $id = $eefapId->id;
+        
+        $eefap = Eefap::find($id);
+        $eefap->surname = $request->get('surname');
+        $eefap->first_name = $request->get('first_name');
+        $eefap->middle_name = $request->get('middle_name');
+        $eefap->suffix = $request->get('suffix');
+        $eefap->mobile_number = $request->get('mobile_no');
+        $eefap->municipality = $request->get('municipality');
+        $eefap->barangay = $request->get('barangay');
+        $eefap->street = $request->get('street');
+        $eefap->college_name = $request->get('college_name');
+        $eefap->college_address = $request->get('college_address');
+        $eefap->course = $request->get('course');
+        $eefap->major = $request->get('major');
+        $eefap->program_type = $request->get('educ_prog');
+        $eefap->year_level = $request->get('yr_lvl');
+        $eefap->graduating = $request->get('grad');
+        $eefap->general_average = $request->get('gen_average');
+        $eefap->spes = $request->get('spes');
+        $eefap->fb_account = $request->get('fb_account');
+        $eefap->gsurname = $request->get('gsurname');
+        $eefap->gfirst_name = $request->get('gfirst_name');
+        $eefap->gmiddle_name = $request->get('gmiddle_name');
+        $eefap->gsuffix = $request->get('gsuffix');
+        $eefap->gmobile_number = $request->get('gmobile_no');
+        $eefap->save();
+
+        $appId = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
+        $app = Application::find($appId->id);
+        $app->application_status = "Pending";
+        $app->renew = "0";
+        $app->save();
+
+        return redirect ('/scholarship/details');
+
+    }
+
+    function storedPcl_edit(Request $request)
+    {
+        $pclId = DB::table('pcl')->where('applicant_id', Auth::user()->id)->first();
+        $id = $pclId->id;
+        
+        $pcl = Pcl::find($id);
+        $pcl->surname = $request->get('surname');
+        $pcl->first_name = $request->get('first_name');
+        $pcl->middle_name = $request->get('middle_name');
+        $pcl->suffix = $request->get('suffix');
+        $pcl->mobile_number = $request->get('mobile_no');
+        $pcl->district = $request->get('district');
+        $pcl->municipality = $request->get('municipality');
+        $pcl->barangay = $request->get('barangay');
+        $pcl->street = $request->get('street');
+        $pcl->school_enrolled = $request->get('college_name');
+        $pcl->course = $request->get('course');
+        $pcl->year_level = $request->get('yr_lvl');
+        $pcl->fsurname = $request->get('fsurname');
+        $pcl->ffirst_name = $request->get('ffirst_name');
+        $pcl->fmiddle_name = $request->get('fmiddle_name');
+        $pcl->fsuffix = $request->get('fsuffix');
+        $pcl->foccupation = $request->get('foccupation');
+        $pcl->msurname = $request->get('msurname');
+        $pcl->mfirst_name = $request->get('mfirst_name');
+        $pcl->mmiddle_name = $request->get('mmiddle_name');
+        $pcl->msuffix = $request->get('msuffix');
+        $pcl->moccupation = $request->get('moccupation');
+        $pcl->address = $request->get('gaddress');
+        $pcl->emergency = $request->get('emergency');
+        $pcl->emobile_number = $request->get('emobile_no');
+        $pcl->gender  = $request->get('gender');
+        $pcl->birthdate = $request->get('bday');
+        $pcl->nationality = $request->get('nationality');
+        $pcl->religion = $request->get('religion');
+        $pcl->civil_status = $request->get('civil_status');
+        $pcl->birth_place = $request->get('birth_place');
+        $pcl->save();
+
+        $appId = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
+        $app = Application::find($appId->id);
+        $app->application_status = "Pending";
+        $app->renew = "0";
+        $app->save();
+
+        return redirect ('/scholarship/details');
+
+    }
+
+
+    // function gvfetch(Request $request)
+    // {
+    //     $select2 = $request->get('select2');
+    //     $value2 = $request->get('value2');
+    //     $dependent2 = $request->get('dependent2');
+    //     $data = DB::table('munbar')
+    //     ->where($select2, $value2)
+    //     ->groupBy($dependent2)
+    //     ->get();
+    //     $output = '<option value="" selected disabled>--Select--</option>';
+    //     foreach($data as $row)
+    //     {
+    //         $output .= '<option value="'.$row->$dependent2.'">'.$row->$dependent2.'</option>';
+    //     }
+    //     echo $output;
+    // }
+
+    // function pclfetch(Request $request)
+    // {
+    //     $select2 = $request->get('select');
+    //     $value2 = $request->get('value');
+    //     $dependent2 = $request->get('dependent');
+    //     $data = DB::table('munbar')
+    //     ->where($select2, $value2)
+    //     ->groupBy($dependent2)
+    //     ->get();
+    //     $output = '<option value="" selected disabled>--Select--</option>';
+    //     foreach($data as $row)
+    //     {
+    //         $output .= '<option value="'.$row->$dependent2.'">'.$row->$dependent2.'</option>';
+    //     }
+    //     echo $output;
+    // }
 }

@@ -102,23 +102,26 @@ class ScholarshipMainController extends Controller
         return DataTables::of($scholarships)
 
         ->addColumn('action', function($scholarships){
+            $date = $scholarships->deadline;
+            $date2 = date("Y-m-d");
+
             if($scholarships->status=="OPEN")
             {
-                // return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$scholarships->id.'"><i class="fa fa-edit"></i> Edit</a>
-                //     <a href="#" class="btn btn-sm btn-danger delete" id="'.$scholarships->id.'"><i class="fa fa-close"></i> Closed</a>';
-                
                 return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$scholarships->id.'"><i class="fa fa-edit"></i> Edit</a>
                      <a href="#" class="btn btn-sm btn-danger delete" id="'.$scholarships->id.'"><i class="fa fa-close"></i> Closed</a>';
-                
-                // {!!Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
-                //                             {{Form::hidden('_method', 'DELETE')}}
-                //                             {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-                //                         {!!Form::close()!!}
             }
             else
             {
-                return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$scholarships->id.'"><i class="fa fa-edit"></i> Edit</a>
+               if($date >= $date2)
+               {
+                    return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$scholarships->id.'"><i class="fa fa-edit"></i> Edit</a>
                     <a href="#" class="btn btn-sm btn-success delete" id="'.$scholarships->id.'"><i class="fa fa-check"></i> Open</a>';
+               }
+               else
+               {
+                    return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$scholarships->id.'"><i class="fa fa-edit"></i> Edit</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-secondary" id="'.$scholarships->id.'"><i class="fa fa-check"></i> Open</a>';
+               }
             }
             
         })
@@ -222,6 +225,8 @@ class ScholarshipMainController extends Controller
                     $tracking->stage ="Open";
                     $tracking->status = "OPEN";
                     $tracking->save();
+
+                    $log = DB::table('log')->where('scholar_id', $request->get('scholarship_id'))->delete();
                 }
 
                 else if($request->get('status') == "CLOSED")

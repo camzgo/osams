@@ -6,6 +6,7 @@
     <script src="{{asset('js/app.js')}}"></script>
 </head>
 <body>
-    <h2></h2>
+    <h2>From: {{$name}}</h2>
+    <p>{{$msga}}</p>
 </body>
 </html>

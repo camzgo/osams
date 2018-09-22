@@ -113,7 +113,7 @@
                                   <a href="/scholarship/upload/eefap" class="btn btn-block btn-primary">Upload Files</a>
                                 </div>
                                 <div class="col-md-3">
-                                  <a href="/scholarship/details/eefap" class="btn btn-block text-white btn-success">Edit</a>
+                                  <a href="/scholarship/details/pcl" class="btn btn-block text-white btn-success">Edit</a>
                                 </div>
                                 <div class="col-md-3">
                                   <a href="/scholarship/delete" class="btn btn-block btn-danger" onclick="event.preventDefault();

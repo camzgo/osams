@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  
- <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+  <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
   <title>Pampanga Capitol | Online Scholarship Application and Management System</title>
-
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -190,7 +188,7 @@ button:focus {
       </div>
 
       <!-- Sidebar Menu -->
-            <nav class="mt-2">
+             <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="/admin" class="nav-link">
@@ -302,7 +300,7 @@ button:focus {
               <li class="nav-item">
                 <a href="/admin/employee" class="nav-link">
                   &nbsp &nbsp &nbsp
-                  <i class="fa fa-users nav-icon"></i>
+                  <i class="fa fa-pcl nav-icon"></i>
                   <p>Employee</p>
                 </a>
               </li>
@@ -368,7 +366,7 @@ button:focus {
                     <li class="nav-item">
                         <a href="/admin/archive/employee" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <i class="fa fa-users nav-icon"></i>
+                        <i class="fa fa-pcl nav-icon"></i>
                         <p>Employee</p>
                         </a>
                     </li>
@@ -456,10 +454,10 @@ button:focus {
       <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h4 class="boldtx" id="title_scholar"></h4>
+              <h4 class="boldtx">PCL</h4>
           </div>
           <div class="card-body">
-    <form action="{{ action('ScholarshipCatController@eefapgvStore') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
+    <form action="{{ action('RenewController@editpcl') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
       {{csrf_field()}}
 
 
@@ -479,26 +477,32 @@ button:focus {
         </div>
         <div class="row form-group">
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$users->surname}}" required/>
+            <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$pcl->surname}}" required/>
           </div>
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$users->first_name}}" required/>
+            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$pcl->first_name}}" required/>
           </div>
           <div class = "col-md-2">
-          <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$users->middle_name}}"/>
+            <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$pcl->middle_name}}"/>
           </div>
           <div class = "col-md-2">
-          <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$users->suffix}}"/>
+            <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$pcl->suffix}}"/>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-3">
+            <label>* District</label>
+            <select name="district" id="district" data-val="true"  data-val-required="Please select District" data-dependent="municipality" class="form-control dynamic req" required >
+              <option value="" selected disabled>--Select--</option>
+                @foreach ($district_list as $district)
+                  <option value="{{$district->district}}">{{$district->district}}</option>
+                @endforeach
+            </select>
+          </div>
+          <div class="col-md-3">
             <label for="municipality">* Municipality</label>
             <select name="municipality" id="municipality" data-val="true"  data-val-required="Please select Municipality" data-dependent="barangay" class="form-control dynamic req" required >
               <option value="" selected disabled>--Select--</option>
-              @foreach ($municipal_list as $municipal)
-                  <option value="{{$municipal->municipality}}">{{$municipal->municipality}}</option>
-              @endforeach
             </select>
           </div>
           <div class="col-md-3">
@@ -507,141 +511,188 @@ button:focus {
               <option value="" selected disabled>--Select--</option>
             </select>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <label for="street">Street</label>
-            <input type="text" class="form-control" id="street" name="street" placeholder='(Street, Village Subdivision)'/>
+            <input type="text" class="form-control" id="street" name="street" placeholder='Street' value="{{$pcl->street}}" />
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-2">
+              <label for="gender">* Gender</label>
+              <select name="gender" id="gender" class=" form-control req"  required>
+                <option value="" selected disabled>--Select--</option>
+                <option value="Male">MALE</option>
+                <option value="Female">FEMALE</option>
+              </select>
+          </div>
+          <div class="col-md-2">
+            <label>* Civil Status</label>
+            <select name="civil_status" id="civil_status" class="form-control req"  required>
+              <option value="" selected disabled>--Select--</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Separated">Separated</option>
+              <option value="Widowed">Widowed</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+              <label for="nationality">* Nationality</label>
+              <select name="nationality" id="nationality" class="form-control req" required>
+                <option value="" selected disabled>--Select--</option>
+                <option value="Filipino">Filipino</option>
+                <option value="Foreigner">Foreigner</option>
+              </select>
+          </div>
+          <div class="col-md-3">
+            <label for="religion">* Religion</label>
+            <select name="religion" id="religion" class="form-control req"  required>
+              <option value="" selected disabled>--Select--</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="bdate">* Birth Date</label>
+            <input type="date" name="bday" id="bday" class="form-control req" data-provide="datepicker" value="{{$pcl->birthdate}}" required/>
           </div>
         </div>
          <div class="row form-group">
+           <div class="col-md-4">
+            <label>* Place of Birth</label>
+           <input type="text" class="form-control req" id="birth_place" name="birth_place" placeholder='Place of Birth' value="{{$pcl->birth_place}}" required/>
+          </div>
           <div class="col-md-3">
             <label for="mobile_no">* Mobile Number</label>
             <div class="input-group">
               <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+63</span>
               </div>
-            <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required value="{{$users->mobile_number}}"/>
-            </div>
-            
+            <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required value="{{$pcl->mobile_number}}"/>
+            </div>  
           </div>
-          <div class="col-md-4 ghost">
-            <label for="email">* Facebook Account</label>
-            <input type="text" class="form-control" id="fb_account" name="fb_account" placeholder='facebook.com/username' />
-          </div>
+          
         </div>
 
 
       </div>
     
-    
       <div class="tab">
-
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 66.66666666666667%" aria-valuenow="66.66666666666667" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 66.6666666667%" aria-valuenow="66.6666666667" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 3</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
-          <h4 class="tx1">Educational Information</h4>
+          <h4 class="tx1">Guardian Information</h4>
         </div>
         <hr/>
-        <div class="row form-group">
-            <div class="col-md-5">
-                <label>* College/University Name <small>(No Abbreviation)</small></label>
-                <input name="college_name" type="text" class="form-control req" placeholder="College/University Name"/>
-            </div>
-            <div class="col-md-5">
-                <label>* College/University Address</label>
-                <input name="college_address" type="text" class="form-control req" placeholder ="(Building no., Street, City Municipality, Province)">
-            </div>
-            <div class="col-md-2">
-                <label>* Year Level</label>
-                <input name="yr_lvl" type="text" class="form-control req" placeholder ="Year Level">
-            </div>
+        <div class="row">
+          <label for="fullname">* Father's Full Name</label>
         </div>
         <div class="row form-group">
-            <div class="col-md-4">
-                <label>* Course/Program <small>(No Abbreviation)</small></label>
-                <input name="course" type="text" class="form-control req" placeholder ="Course/Program">
+          <div class = "col-md-4">
+            <input type="text" class="form-control req" id="fsurname" name="fsurname" placeholder='* Surname' value="{{$pcl->fsurname}}" required/>
+          </div>
+          <div class = "col-md-4">
+            <input type="text" class="form-control req" id="ffirst_name" name="ffirst_name" placeholder='* First Name' value="{{$pcl->ffirst_name}}" required/>
+          </div>
+          <div class = "col-md-2">
+            <input type="text" class="form-control" id="fmiddle_name" name="fmiddle_name" placeholder='Middle Name' value="{{$pcl->fmiddle_name}}"/>
+          </div>
+          <div class = "col-md-2">
+            <input type="text" class="form-control" id="fsuffix" name="fsuffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$pcl->fsuffix}}"/>
+          </div>
+        </div>
+        <div class="row">
+          <label for="fullname">* Mother's Full Name</label>
+        </div>
+        <div class="row form-group">
+          <div class = "col-md-4">
+            <input type="text" class="form-control req" id="msurname" name="msurname" placeholder='* Surname' required value="{{$pcl->msurname}}"/>
+          </div>
+          <div class = "col-md-4">
+            <input type="text" class="form-control req" id="mfirst_name" name="mfirst_name" placeholder='* First Name' required  value="{{$pcl->mfirst_name}}"/>
+          </div>
+          <div class = "col-md-2">
+            <input type="text" class="form-control" id="mmiddle_name" name="mmiddle_name" placeholder='Middle Name' value="{{$pcl->mmiddle_name}}"/>
+          </div>
+          <div class = "col-md-2">
+            <input type="text" class="form-control" id="msuffix" name="msuffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$pcl->msuffix}}"/>
+          </div>
+        </div>
+        <div class="row form-group">
+            
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>* Father's Occupation</label>
+                    <input type="text" class="form-control" id="foccupation" name="foccupation" placeholder="Father's Occupation" required value="{{$pcl->foccupation}}"/>
+                </div>
             </div>
             <div class="col-md-3">
-                <label>* Major <small>(No Abbreviation)</small></label>
-                <input name="major" type="text" class="form-control req" placeholder ="Major">
+                <div class="form-group">
+                    <label>* Mother's Occupation</label>
+                    <input type="text" class="form-control" id="moccupation" name="moccupation" placeholder="Mother's Occupation" value="{{$pcl->moccupation}}"required/>
+                </div>
             </div>
-            <div class="col-md-2">
-                <label>* General Average</label>
-                <input name="gen_average" type="text" class="form-control req" placeholder ="General Average">
-            </div>
-            <div class="col-md-3">
-              <label>* Education Program</label>
-              <select name="educ_prog" id="educ_prog" class="form-control req">
-                <option value="" selected disabled>--Select--</option>
-                <option value="2 Years Course">2 Years Course</option>
-                <option value="Bachelor's Degree">Bachelor's Degree</option>
-                <option value="Ladderized">Ladderized</option>
-              </select>
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label>* Address</label>
+                  <input type="text" class="form-control" id="gaddress" name="gaddress" placeholder="Address (Street, Village Subdivision, Municipality)" value="{{$pcl->address}}" required/>
+              </div>
             </div>
         </div>
-        <div class="row form-group">
-          <div class="col-md-2">
-            <label>* Graduating: </label>
-            <select name="grad" id="grad" class="form-control">
-              <option value="" selected disabled>--Select--</option>
-              <option value="YES">YES</option>
-              <option value="NO">NO</option>
-            </select>
-          </div>
-          <div class="col-md-3">
-            <label>* I certify that: </label>
-            <select name="spes" id="spes" class="form-control">
-              <option value="" selected disabled>--Select--</option>
-              <option value="YES">Yes, I am SPES Recipient</option>
-              <option value="NO">No, I am not SPES Recipient</option>
-            </select>
-          </div>
+      </div>
 
-        </div>
-    </div>
+      <div class="tab">
 
-    <div class="tab">
-      <div class="progress mt-2">
+        <div class="progress mt-2">
           <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 3</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
-          <h4 class="tx1">Awards Received/Rank</h4>
+          <h4 class="tx1">Other Information</h4>
         </div>
         <hr/>
-        <div class="row form-group">
-          <div class="col-md-3">
-            <ul class="list-group" style="padding-top:10px;">
-              <li class="list-group-item active"><strong>Awards Received</strong></li>
-              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb1" id="rb1" value="Highest Honors"> <span> with Highest Honors </span> </label></li>
-              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb1" id="rb2" value="High Honors"> <span> with High Honors </span></li>
-              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb1" id="rb3" value="Honors"> <span> with Honors </span></li>
-            </ul>					
-          </div>
-          <div class="col-md-3">
-            <ul class="list-group" style="padding-top:10px;">
-              <li class="list-group-item active"><strong>Rank</strong></li>
-              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb1" id="rb4" value="SK Chairman"> <span> SK Chairman </span></li>
-              <li class="list-group-item"> <label class="rad inline"> <input type="radio" name="rb1" id="rb5" value="SK Councilor"> <span> SK Councilor </span></li>
-                <li class="list-group-item list-group-item-secondary"> <label class="rad inline"> <input type="radio" name="rb1" id="rb6" value="None/VG DHVTSU"> <span> None/VG DHVTSU </span></li>
-            </ul>					
-          </div>
-          <div class="ghost">
-            <input class="ghost" id="sid" name="sid" type="hidden" value=""/>
-            <input class="ghost" id="award" name="award" type="hidden" value=""/>
-          </div>
-          <div class="ghost">
-            {!! Form::open(['action' => ['AnnounceMainController@update',  $scholar_id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-            <div class = "form-group col-md-8 ghost">
-            {{Form::text('title_id', $scholar_id, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            {{Form::text('title', $scholar_name, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            {{Form::text('barcode', $barcode, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            </div>
-            {!! Form::close() !!}
-          </div>
-          	
+        <div class="row">
+          <h5><strong>Educational Information</strong></h5>
         </div>
+        <div class="row form-group">
+            <div class="col-md-5">
+                <label>* School Enrolled <small>(No Abbreviation)</small></label>
+                <input name="college_name" type="text" class="form-control req" value="{{$pcl->school_enrolled}}" placeholder="School Enrolled"/>
+            </div>
+            <div class="col-md-4">
+                <label>* Course/Program <small>(No Abbreviation)</small></label>
+                <input name="course" type="text" class="form-control req" placeholder="Course/Program" value="{{$pcl->course}}">
+            </div>
+            <div class="col-md-2">
+                <label>* Year Level</label>
+                <input name="yr_lvl" type="text" class="form-control req" placeholder ="Year Level" value="{{$pcl->year_level}}">
+            </div>
+        </div>
+        <div class="row">
+          <h5><strong>In Case of Emergency</strong></h5>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-5">
+                <label>* Person to be contacted in case of emergency</label>
+                <input name="emergency" type="text" class="form-control req" placeholder ="Full Name" value="{{$pcl->emergency}}">
+            </div>
+            <div class="col-md-3">
+            <label for="mobile_no">* Mobile Number</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">+63</span>
+              </div>
+              <input type="text" class="form-control req" id="emobile_no" name="emobile_no" placeholder='9xxxxxxxxx'value="{{$pcl->emobile_number}}"  required/>
+            </div>  
+          </div>
+            {{-- <div class="ghost">
+              
+              <input type="hidden" class="ghost" id="barcode" name="barcode" value="{{$barcode}}"/>
+              <input type="hidden" class="ghost" id="gender2" name="gender2" value="{{$pcl->gender}}"/>
+            </div> --}}
+            <input class="ghost" type="hidden" name="sid" id="sid"/>
+        </div>
+        
+        
 
 
     </div>
@@ -669,51 +720,28 @@ button:focus {
   </div>
         
 </div>
+<script src="{{ URL::asset('data/religion.js') }}" type="text/javascript"></script>
 <script>
-
-  $('input[type="radio"]').click(function(){
-
-    var award;
-    if (document.getElementById('rb1').checked) {
-      award = document.getElementById('rb1').value;
-    }
-    else if (document.getElementById('rb2').checked)
-    {
-      award = document.getElementById('rb2').value;
-    }
-    else if (document.getElementById('rb3').checked)
-    {
-      award = document.getElementById('rb3').value;
-    }
-    else if (document.getElementById('rb4').checked)
-    {
-      award = document.getElementById('rb4').value;
-    }
-    else if (document.getElementById('rb5').checked)
-    {
-      award = document.getElementById('rb5').value;
-    }
-    else if (document.getElementById('rb6').checked)
-    {
-      award = document.getElementById('rb6').value;
-    }
-     $('#award').val(award);
-
-    //console.log(award);
-    });
 
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
-  $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
-
-    var pathname = window.location.pathname;
+  $('#emobile_no').mask('0000000000', {"clearIncomplete": true});
+  
+  var gen = $('#gender2').val();
+  
+  document.getElementById('gender').value=gen;
+  var pathname = window.location.pathname;
   var parts = pathname.split('/');
-  console.log(parts[5]);
+  console.log(parts[4]);
 
-  $('#sid').val(parts[5]);
+  $('#sid').val(parts[4]);
 
   var id = $('input[name=title]').val();
   $('#title_scholar').text(id);
+  document.getElementById('gender').value="{{$pcl->gender}}";
+  document.getElementById('civil_status').value="{{$pcl->civil_status}}";
+  document.getElementById('religion').value="{{$pcl->religion}}";
+  document.getElementById('nationality').value="{{$pcl->nationality}}";
 
 });
 
@@ -828,7 +856,7 @@ $(document).ready(function(){
     var dependent = $(this).data('dependent');
     var _token = $('input[name="_token"]').val();
     $.ajax({
-      url:"{{ route('users.fetch') }}",
+      url:"{{ route('pcl5.fetch') }}",
       method:"POST",
       data:{select:select, value:value, _token:_token, dependent:dependent},
       success:function(result)
@@ -840,6 +868,10 @@ $(document).ready(function(){
     }
   });
 
+ $('#district').change(function(){
+				$('#municipality').val('');
+				$('#barangay').val('');
+			});
   $('#municipality').change(function(){
     $('#barangay').val('');
   });
@@ -848,6 +880,6 @@ $(document).ready(function(){
 
 
 </script>
-<script src="{{ URL::asset('data/religion.js') }}" type="text/javascript"></script>
+
 </body>
 </html>

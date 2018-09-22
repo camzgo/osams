@@ -326,10 +326,10 @@
                             </div>
                             <hr/>
                         </div>
-                        <div id="view" name="view">
+                        <div id="view" name="view" class="">
                           <form id="main_form" method="post" form="{{ action('ApproveController@approved') }}">
                             {{csrf_field()}}  
-                          <div class="container">
+                          <div class="container justify-content-center">
                               <div class="row form-group">
                                   <h4 class="tx1">Application Information</h4>
                               </div>

@@ -6,7 +6,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   
- <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+  <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
   <title>Pampanga Capitol | Online Scholarship Application and Management System</title>
 
   <!-- CSRF Token -->
@@ -238,7 +238,7 @@ button:focus {
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/apply" class="nav-link active">
+                <a href="/admin/apply" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
@@ -249,6 +249,13 @@ button:focus {
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-check nav-icon"></i>
                   <p>Approve</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/renew" class="nav-link active">
+                  &nbsp &nbsp &nbsp
+                  <i class="fa fa-refresh nav-icon"></i>
+                  <p>Renew</p>
                 </a>
               </li>
             </ul>
@@ -302,7 +309,7 @@ button:focus {
               <li class="nav-item">
                 <a href="/admin/employee" class="nav-link">
                   &nbsp &nbsp &nbsp
-                  <i class="fa fa-users nav-icon"></i>
+                  <i class="fa fa-eefapgv nav-icon"></i>
                   <p>Employee</p>
                 </a>
               </li>
@@ -368,7 +375,7 @@ button:focus {
                     <li class="nav-item">
                         <a href="/admin/archive/employee" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <i class="fa fa-users nav-icon"></i>
+                        <i class="fa fa-eefapgv nav-icon"></i>
                         <p>Employee</p>
                         </a>
                     </li>
@@ -440,7 +447,7 @@ button:focus {
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">Transactions</li>
-              <li class="breadcrumb-item active">Apply</li>
+              <li class="breadcrumb-item active">Renew</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -459,7 +466,7 @@ button:focus {
               <h4 class="boldtx" id="title_scholar"></h4>
           </div>
           <div class="card-body">
-    <form action="{{ action('ScholarshipCatController@eefapgvStore') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
+    <form action="{{ action('RenewController@editeefapgv') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
       {{csrf_field()}}
 
 
@@ -479,16 +486,16 @@ button:focus {
         </div>
         <div class="row form-group">
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$users->surname}}" required/>
+          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$eefapgv->surname}}" required/>
           </div>
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$users->first_name}}" required/>
+          <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$eefapgv->first_name}}" required/>
           </div>
           <div class = "col-md-2">
-          <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$users->middle_name}}"/>
+          <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$eefapgv->middle_name}}"/>
           </div>
           <div class = "col-md-2">
-          <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$users->suffix}}"/>
+          <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$eefapgv->suffix}}"/>
           </div>
         </div>
         <div class="row form-group">
@@ -509,7 +516,7 @@ button:focus {
           </div>
           <div class="col-md-6">
             <label for="street">Street</label>
-            <input type="text" class="form-control" id="street" name="street" placeholder='(Street, Village Subdivision)'/>
+            <input type="text" class="form-control" id="street" name="street" placeholder='(Street, Village Subdivision)' value="{{$eefapgv->street}}"/>
           </div>
         </div>
          <div class="row form-group">
@@ -519,13 +526,13 @@ button:focus {
               <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+63</span>
               </div>
-            <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required value="{{$users->mobile_number}}"/>
+            <input type="text" class="form-control req" id="mobile_no" name="mobile_no" placeholder='9xxxxxxxxx' required value="{{$eefapgv->mobile_number}}"/>
             </div>
             
           </div>
           <div class="col-md-4 ghost">
             <label for="email">* Facebook Account</label>
-            <input type="text" class="form-control" id="fb_account" name="fb_account" placeholder='facebook.com/username' />
+            <input type="text" class="form-control" id="fb_account" name="fb_account" placeholder='facebook.com/username'/>
           </div>
         </div>
 
@@ -546,29 +553,29 @@ button:focus {
         <div class="row form-group">
             <div class="col-md-5">
                 <label>* College/University Name <small>(No Abbreviation)</small></label>
-                <input name="college_name" type="text" class="form-control req" placeholder="College/University Name"/>
+                <input name="college_name" type="text" class="form-control req" value="{{$eefapgv->college_name}}" placeholder="College/University Name"/>
             </div>
             <div class="col-md-5">
                 <label>* College/University Address</label>
-                <input name="college_address" type="text" class="form-control req" placeholder ="(Building no., Street, City Municipality, Province)">
+                <input name="college_address" type="text" class="form-control req"  value="{{$eefapgv->college_address}}" placeholder ="(Building no., Street, City Municipality, Province)">
             </div>
             <div class="col-md-2">
                 <label>* Year Level</label>
-                <input name="yr_lvl" type="text" class="form-control req" placeholder ="Year Level">
+                <input name="yr_lvl" type="text" class="form-control req" placeholder ="Year Level"  value="{{$eefapgv->year_level}}">
             </div>
         </div>
         <div class="row form-group">
             <div class="col-md-4">
                 <label>* Course/Program <small>(No Abbreviation)</small></label>
-                <input name="course" type="text" class="form-control req" placeholder ="Course/Program">
+                <input name="course" type="text" class="form-control req" placeholder ="Course/Program"  value="{{$eefapgv->course}}">
             </div>
             <div class="col-md-3">
                 <label>* Major <small>(No Abbreviation)</small></label>
-                <input name="major" type="text" class="form-control req" placeholder ="Major">
+                <input name="major" type="text" class="form-control req" placeholder ="Major"  value="{{$eefapgv->major}}">
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average" type="text" class="form-control req" placeholder ="General Average">
+                <input name="gen_average" type="text" class="form-control req" placeholder ="General Average"  value="{{$eefapgv->general_average}}">
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -630,15 +637,6 @@ button:focus {
           <div class="ghost">
             <input class="ghost" id="sid" name="sid" type="hidden" value=""/>
             <input class="ghost" id="award" name="award" type="hidden" value=""/>
-          </div>
-          <div class="ghost">
-            {!! Form::open(['action' => ['AnnounceMainController@update',  $scholar_id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-            <div class = "form-group col-md-8 ghost">
-            {{Form::text('title_id', $scholar_id, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            {{Form::text('title', $scholar_name, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            {{Form::text('barcode', $barcode, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            </div>
-            {!! Form::close() !!}
           </div>
           	
         </div>
@@ -708,12 +706,50 @@ $(document).ready(function(){
 
     var pathname = window.location.pathname;
   var parts = pathname.split('/');
-  console.log(parts[5]);
+  console.log(parts[4]);
 
-  $('#sid').val(parts[5]);
+  $('#sid').val(parts[4]);
 
+  var muni = "{{$eefapgv->program_type}}";
+
+  if(muni == "Bachelor&#039;s Degree")
+  {
+    muni = "Bachelor's Degree";
+  }
+  document.getElementById('educ_prog').value = muni;
+  document.getElementById('grad').value = "{{$eefapgv->graduating}}";
+  document.getElementById('spes').value = "{{$eefapgv->spes}}";
   var id = $('input[name=title]').val();
-  $('#title_scholar').text(id);
+ $('#title_scholar').text(id); 
+ var rb = "{{$eefapgv->awards}}";
+ $('#award').val("{{$eefapgv->awards}}");
+
+
+ switch (rb) {
+    case 'Highest Honors' :
+      document.getElementById("rb1").checked=true;
+      break;
+    case 'High Honors' :
+      document.getElementById("rb2").checked=true;
+      break;
+    case 'Honors' :
+      document.getElementById("rb3").checked=true;
+      break;
+    case 'SK Chairman' :
+      document.getElementById("rb4").checked=true;
+      break;
+    case 'SK Councilors' :
+      document.getElementById("rb5").checked=true;
+      break;
+    case 'None/VG DHVTSU' :
+      document.getElementById("rb6").checked=true;
+      break;
+    default:
+    console.log(
+      'Error'
+    );
+  }
+  
 
 });
 
@@ -828,7 +864,7 @@ $(document).ready(function(){
     var dependent = $(this).data('dependent');
     var _token = $('input[name="_token"]').val();
     $.ajax({
-      url:"{{ route('users.fetch') }}",
+      url:"{{ route('eefap.fetch') }}",
       method:"POST",
       data:{select:select, value:value, _token:_token, dependent:dependent},
       success:function(result)

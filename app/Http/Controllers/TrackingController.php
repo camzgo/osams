@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use DB;
 use Validator;
 use App\Scholarship;
 use DataTables;
@@ -155,148 +155,18 @@ class TrackingController extends Controller
                     $scid = $request->get('scholarship_id');
                     $scholar = DB::table('scholarships')->where('id', $scid)->first();
                         
-                    $app = DB::table('application')->where('scholar_id', $scid)
-                    ->where('application_status', 'Approved')->get();
-                    $user = DB::table('users')->where('id', $app->applicant_id)->get();
-
-                   // return "none";
-                    // if($scholar->type == "eefap")
-                    // {
-                    //     $eefap = DB::table('eefap')->where('scholarship_id', $scid)->get();
+                    $app2 = DB::table('application')->get();
+                    
+                    $user = DB::table('users')->get();
+                    
+                    if($scholar->type == "eefap-gv")
+                    {
+                        $track = Tracking::find($request->get('scholarship_id'));
+                        $track->status = "Success";
+                        $track->save();
+                    }
                         
-
-                    //     $nos = array();
-                    //     $noss = count($nos);
-                    //     $noss-=1;
-
-                    //     $names = array();
-                    //     $namess = count($names);
-                    //     $namess-=1;
-
-                    //     foreach($eefap->mobile_number as $no)
-                    //     {
-                    //         array_push($nos, $no);
-                    //     }
-
-                    //     foreach($eefap->first_name as $first)
-                    //     {
-                    //         array_push($names, $first);
-                    //     }
-
-                    //     for($x=0; $x<=$noss; $x++)
-                    //     {
-                    //         $res = Itexmo::to('0'.$nos[$x])->message('Hello '.$names[$x].' you have been awarded a scholarship!' )->send();
-                    //         if($res == '0') {
-                    //             //
-                    //         }
-                    //     }
-
-
-                    //     $emails = array();
-                    //     foreach($user->email as $email)
-                    //     {
-                    //         array_push($emails, $email);
-                    //     }
-
-                    //     Mail::send('emails.awarding', [], function($message) use ($emails)
-                    //     {    
-                    //         $message->to($emails)->subject('This is test e-mail');    
-                    //     });
-                    //     var_dump( Mail:: failures());
-                    //     exit;
-                    // }
-
-                    // else if($scholar->type == "eefap-gv")
-                    // {
-                    //     $eefap = DB::table('eefapgv')->where('scholarship_id', $scid)->get();
-                        
-                    //     $nos = array();
-                    //     $noss = count($nos);
-                    //     $noss-=1;
-
-                    //     $names = array();
-                    //     $namess = count($names);
-                    //     $namess-=1;
-
-                    //     foreach($eefap->mobile_number as $no)
-                    //     {
-                    //         array_push($nos, $no);
-                    //     }
-
-                    //     foreach($eefap->first_name as $first)
-                    //     {
-                    //         array_push($names, $first);
-                    //     }
-
-                    //     for($x=0; $x<=$noss; $x++)
-                    //     {
-                    //         $res = Itexmo::to('0'.$nos[$x])->message('Hello '.$names[$x].' you have been awarded a scholarship!' )->send();
-                    //         if($res == '0') {
-                    //             //
-                    //         }
-                    //     }
-
-
-                    //     $emails = array();
-                    //     foreach($user->email as $email)
-                    //     {
-                    //         array_push($emails, $email);
-                    //     }
-
-                    //     Mail::send('emails.awarding', [], function($message) use ($emails)
-                    //     {    
-                    //         $message->to($emails)->subject('This is test e-mail');    
-                    //     });
-                    //     var_dump( Mail:: failures());
-                    //     exit;
-                    // }
-
-                    // else if($scholar->type == "pcl")
-                    // {
-                    //     $eefap = DB::table('pcl')->where('scholarship_id', $scid)->get();
-                        
-                    //     $nos = array();
-                    //     $noss = count($nos);
-                    //     $noss-=1;
-
-                    //     $names = array();
-                    //     $namess = count($names);
-                    //     $namess-=1;
-
-                    //     foreach($eefap->mobile_number as $no)
-                    //     {
-                    //         array_push($nos, $no);
-                    //     }
-
-                    //     foreach($eefap->first_name as $first)
-                    //     {
-                    //         array_push($names, $first);
-                    //     }
-
-                    //     for($x=0; $x<=$noss; $x++)
-                    //     {
-                    //         $res = Itexmo::to('0'.$nos[$x])->message('Hello '.$names[$x].' you have been awarded a scholarship!' )->send();
-                    //         if($res == '0') {
-                    //             //
-                    //         }
-                    //     }
-
-
-                    //     $emails = array();
-                    //     foreach($user->email as $email)
-                    //     {
-                    //         array_push($emails, $email);
-                    //     }
-
-                    //     Mail::send('emails.awarding', [], function($message) use ($emails)
-                    //     {    
-                    //         $message->to($emails)->subject('This is test e-mail');    
-                    //     });
-                    //     var_dump( Mail:: failures());
-                    //     exit;
-                    // }
-
-
+                   
 
 
             }

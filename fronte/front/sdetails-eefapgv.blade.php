@@ -20,13 +20,13 @@
             <div class="card ">
               <div class="card-header"><strong>Dashboard</strong></div>
               <div class="list-group list-group-flush">
-                <a href="/profile" class="list-group-item list-group-item-action d-flex justify-content-between px-4 active">
+                <a href="/profile" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
                   <div class="text-bold">
                     <span class="fa fa-user"></span> &nbsp;
                     <span>My Profile</span>
                   </div>
                 </a>
-                <a href="/scholarship" class="list-group-item list-group-item-action d-flex justify-content-between px-4">
+                <a href="/scholarship" class="list-group-item list-group-item-action d-flex justify-content-between px-4 active">
                   <div class="text-bold">
                     <span class="fa fa-graduation-cap"></span>
                     <span>My Scholarship</span>
@@ -103,7 +103,7 @@
                                   <h1 class="tx4">PHP {{$scholar->amount}}.00</h1>
                                 </div>
                               </div>
-                              @if($applicant->application_status !="Approved" && $tracking->stage!="Approved")
+                              @if($applicant->application_status =="Pending" && $tracking->stage!="Approved" )
                               <div class="form-row">
                                 <div class="col-md-3">
                                   <a href="#" class="btn btn-block text-white btn-dark">Print</a>
@@ -118,7 +118,7 @@
                                 </div>
                                 @endif
                                 <div class="col-md-3">
-                                  <a href="/scholarship/details/eefap" class="btn btn-block text-white btn-success">Edit</a>
+                                  <a href="/scholarship/details/eefap-gv" class="btn btn-block text-white btn-success">Edit</a>
                                 </div>
                                 <div class="col-md-3">
                                   <a href="/scholarship/delete" class="btn btn-block btn-danger" onclick="event.preventDefault();
@@ -127,6 +127,13 @@
                                   <form id="del-form" action="{{action('FrontendController@eefapdel')}}" method="POST" style="display: none;">
                                       @csrf
                                   </form>
+                                </div>
+                              </div>
+                              @endif
+                              @if($applicant->application_status == "Renew" && $applicant->renew == 1)
+                              <div class="form-row">
+                                <div class="col-md-6">
+                                  <a href="/scholarship/details/renew/eefap-gv" class="btn btn-block text-white btn-primary">Renew</a>
                                 </div>
                               </div>
                               @endif

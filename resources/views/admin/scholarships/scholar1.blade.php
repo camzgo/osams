@@ -442,7 +442,7 @@ button:focus {
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <a href="/apply" class="btn btn-secondary btn-rounded flt-right"><i class="fa fa-arrow-left"></i> Go Back</a>
+            <a href="/admin/apply" class="btn btn-secondary btn-rounded flt-right"><i class="fa fa-arrow-left"></i> Go Back</a>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
