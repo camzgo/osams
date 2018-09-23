@@ -106,6 +106,13 @@
                   <p>Approve</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/admin/renew" class="nav-link">
+                  &nbsp &nbsp &nbsp
+                  <i class="fa fa-refresh nav-icon"></i>
+                  <p>Renew</p>
+                </a>
+              </li>
             </ul>
           </li>
           @endif
@@ -314,16 +321,16 @@
             <div class="card card-primary">  
             <div class="card-body box-profile">
               @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-          <form action="{{ action('UsersMainController@storedpass') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
+                  <div class="alert alert-danger">
+                      {{ session('error') }}
+                  </div>
+              @endif
+                  @if (session('success'))
+                      <div class="alert alert-success">
+                          {{ session('success') }}
+                      </div>
+                  @endif
+        <form action="{{ action('UsersMainController@storedpass') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
              {{csrf_field()}}
         <div class="row form-group mt-4">
           <h5 class="tx1">To change password, enter your current password and new password below</h5>

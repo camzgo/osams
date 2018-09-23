@@ -135,6 +135,14 @@
                                 <div class="col-md-6">
                                   <a href="/scholarship/details/renew/eefap-gv" class="btn btn-block text-white btn-primary">Renew</a>
                                 </div>
+                                <div class="col-md-6">
+                                  <a href="/scholarship/delete" class="btn btn-block btn-danger" onclick="event.preventDefault();
+                                        document.getElementById('del-form').submit();">Cancel</a>
+
+                                  <form id="del-form" action="{{action('FrontendController@eefapdel')}}" method="POST" style="display: none;">
+                                      @csrf
+                                  </form>
+                                </div>
                               </div>
                               @endif
                           </div>

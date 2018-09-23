@@ -164,6 +164,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,   
         Milon\Barcode\BarcodeServiceProvider::class,
         Nexmo\Laravel\NexmoServiceProvider::class,
+        Codedge\Fpdf\FpdfServiceProvider::class,
     ],
 
     /*
@@ -218,6 +219,7 @@ return [
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class,
+        'Fpdf' => Codedge\Fpdf\Facades\Fpdf::class,
 
     ],
 

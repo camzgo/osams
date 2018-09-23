@@ -138,6 +138,23 @@ class ApplicationMainController extends Controller
 
     }
 
+    function getdata3()
+    {
+        $pending = 'Renew';
+        $users = DB::table('application')
+            ->Join('users', 'application.applicant_id', '=', 'users.id')
+            ->Join('scholarships', 'application.scholar_id', '=', 'scholarships.id')
+            ->where('application.application_status', $pending)
+            ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"), 'application.id', 'users.email', 'application.created_at', 'scholarships.id as scid', 'scholarships.scholarship_name')->get();
+            return DataTables::of($users)
+            ->addColumn('action', function($users){
+                return '<a href="/admin/application/details/'.$users->id.'/'.$users->scid.'" class="btn btn-sm btn-success edit " id="'.$users->id.'"><i class="fa fa-eye"></i> View</a>
+                <a href="#" class="btn btn-sm btn-danger delete " id="'.$users->id.'"><i class="fa fa-trash"></i> Delete</a>';
+            })
+            ->make(true);
+
+    }
+
     function fetchdata(Request $request)
     {
         $id = $request->input('id');

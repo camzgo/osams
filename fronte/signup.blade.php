@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script src="{{asset('js/app.js')}}"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
  
@@ -27,7 +28,7 @@
 <main>
   <section>
       <div class="container">
-           <div class="card  shdow mt-4" style="width: 1000px; height: 620px; margin-left:4em;">
+           <div class="card  mt-4" style="width: 1000px; height: 700px; margin-left:4em;">
                 <div class="card-body">
                      <div class="row justify-content-center">
                         <div class="text-center">
@@ -148,6 +149,17 @@
                                             <label>Confirm Password</label>
                                             <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" placeholder="Retype Password" required>
                                             </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-8">
+                                                    <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}">
+                                                        @if($errors->has('g-recaptcha-response'))
+                                                            <span class="invalid-feedback" style="display:block">
+                                                                <strong>{{$errors->first('g-recaptcha-response')}}</strong>
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="form-row form-group mt-2">
                                             <div class="col-md-12">

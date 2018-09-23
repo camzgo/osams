@@ -182,7 +182,7 @@ button:focus {
               <h4 class="boldtx">PCL</h4>
           </div>
           <div class="card-body">
-    <form action="{{ action('FrontendController@storedPcl') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
+    <form action="{{ action('FrontendController@storedPcl_edit') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
       {{csrf_field()}}
 
 

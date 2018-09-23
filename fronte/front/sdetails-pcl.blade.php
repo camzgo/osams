@@ -104,7 +104,7 @@
                                   <h1 class="tx4">PHP {{$scholar->amount}}.00</h1>
                                 </div>
                               </div>
-                              @if($applicant->application_status !="Approved" && $tracking->stage!="Approved")
+                              @if($applicant->application_status == "Pending" && $tracking->stage!="Approved")
                               <div class="form-row">
                                 <div class="col-md-3">
                                   <a href="#" class="btn btn-block text-white btn-dark">Print</a>
@@ -116,6 +116,21 @@
                                   <a href="/scholarship/details/pcl" class="btn btn-block text-white btn-success">Edit</a>
                                 </div>
                                 <div class="col-md-3">
+                                  <a href="/scholarship/delete" class="btn btn-block btn-danger" onclick="event.preventDefault();
+                                        document.getElementById('del-form').submit();">Cancel</a>
+
+                                  <form id="del-form" action="{{action('FrontendController@eefapdel')}}" method="POST" style="display: none;">
+                                      @csrf
+                                  </form>
+                                </div>
+                              </div>
+                              @endif
+                              @if($applicant->application_status == "Renew" && $applicant->renew == 1)
+                              <div class="form-row">
+                                <div class="col-md-6">
+                                  <a href="/scholarship/details/renew/pcl" class="btn btn-block text-white btn-primary">Renew</a>
+                                </div>
+                                <div class="col-md-6">
                                   <a href="/scholarship/delete" class="btn btn-block btn-danger" onclick="event.preventDefault();
                                         document.getElementById('del-form').submit();">Cancel</a>
 

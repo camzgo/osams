@@ -185,7 +185,7 @@ button:focus {
             
           {{-- <img src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode, 'C39')}}" alt="barcode" /> --}}
           {{-- <small>{{$barcode}}</small> --}}
-    <form action="{{ action('FrontendController@storedEefap') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
+    <form action="{{ action('FrontendController@storedEefap_edit') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
       {{csrf_field()}}
 
       

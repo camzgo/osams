@@ -114,7 +114,7 @@
           </li>
           @endif
           @if($role->file_maintenance == "Grant")
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>
@@ -145,7 +145,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/faqs" class="nav-link active">
+                <a href="/admin/faqs" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-question nav-icon"></i>
                   <p>FAQs</p>
@@ -170,7 +170,7 @@
           </li>
           @endif
           @if($role->utilities == "Grant")
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
               <p>
@@ -180,7 +180,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/audit-log" class="nav-link">
+                <a href="/admin/audit-log" class="nav-link active">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-history nav-icon"></i>
                   <p>Audit Log</p>
@@ -298,8 +298,8 @@
           <div class="col-sm-6">
              <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">File Maintenance</li>
-              <li class="breadcrumb-item active">FAQS</li>
+              <li class="breadcrumb-item active">Utilities</li>
+              <li class="breadcrumb-item active">Audit Log</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -311,29 +311,40 @@
 
     <!-- Main content -->
      <div class="content">
-      <div class="container-fluid">
+      <div class="container-fluid"> 
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h3 class="boldtx">Frequently Ask Questions (FAQs)</h3>
+              <h3 class="boldtx">Audit Log</h3>
           </div>
           <div class="card-body"> 
-         <div class="flt-right">
+         {{-- <div class="flt-right">
             <a href="#" class="btn btn-success" id="add_data" data-backdrop="static" data-keyboard="false">
                 <i class="fa fa-plus"></i>
                 Add New
             </a>
-          </div>
+          </div> --}}
 
         <br>
         <div class="container">
+           @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
     <br />
     <br />
      <table class=" table table-hover" style="width:100%" id="table">
                <thead class="th-cl1">
                   <tr>
-                     <th>Question</th>
-                     <th>Answer</th>
-                     <th>Actions</th>
+                     <th>Name</th>
+                     <th>Action</th>
+                     <th>Date</th>
+                     <th>Time</th>
                   </tr>
                </thead>
             </table>
@@ -352,38 +363,104 @@
                       {{csrf_field()}}    
                       <span id="form_output"></span>              
                       <div id="editForm">
-                          <div class="form-group">
-                              <label>Question</label>
-                              <input type="text" name="question" id="question" class="form-control" />
+                        <div class="row form-group">
+                          <div class="col-md-12">
+                            <label>Account Name <small>(required)</small></label>
+                            <input type="text" name="accnt_name" id="accnt_name" class="form-control" required/>
                           </div>
-                          <div class="form-group">
-                              <label>Answer</label>
-                              <textarea type="text" name="answer" id="answer" class="form-control noresize" rows="7"></textarea>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col-md-12">
+                            <label>Description <small>(required)</small></label>
+                            <textarea type="text" name="accnt_desc" id="accnt_desc" class="form-control noresize" rows="7" required></textarea>
                           </div>
+                        </div>
+                        <div class="row form-group no-gutters">
+                          <div class="col-md-4">
+                            <ul class="list-group">
+                              <li class="list-group-item ">      
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                  <input type="checkbox" class="custom-control-input" id="fm" onchange="fmaction(this)">
+                                  <label class="custom-control-label" for="fm">File Maintenance</label>
+                                </div> 
+                              </li>
+                              <li class="list-group-item ">      
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                  <input type="checkbox" class="custom-control-input" id="trans" onchange="transaction(this)">
+                                  <label class="custom-control-label" for="trans">Transactions</label>
+                                </div> 
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="col-md-4">
+                            <ul class="list-group">
+                              <li class="list-group-item ">      
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                  <input type="checkbox" class="custom-control-input" id="tr" onchange="traction(this)">
+                                  <label class="custom-control-label" for="tr">Tracking</label>
+                                </div> 
+                              </li>
+                              <li class="list-group-item">      
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                  <input type="checkbox" class="custom-control-input" id="util" onchange="utilaction(this)">
+                                  <label class="custom-control-label" for="util">Utilities</label>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="col-md-4">
+                            <ul class="list-group">
+                              <li class="list-group-item ">      
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                  <input type="checkbox" class="custom-control-input" id="sub" onchange="subaction(this)">
+                                  <label class="custom-control-label" for="sub">Submission</label>
+                                </div> 
+                              </li>
+                              <li class="list-group-item">      
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                  <input type="checkbox" class="custom-control-input" id="rep" onchange="repaction(this)">
+                                  <label class="custom-control-label" for="rep">Reports</label>
+                                </div>
+                              </li>
+                              
+                            </ul>
+                          </div>                        
+                        </div>
+                         
                       </div>
                       <div id="delForm">
                         <span id="del_output"> </span>
-                        <div class="form-group">
-                            <h5 class="brand-text font-weight-bold" id="hddel">Are you sure you want to delete it?</h5>
+                        <div class="form-group" id="dvh2">
+                            <h5 class="brand-text font-weight-bold" id="hddel"></h5>
+                            {{-- <h2 class="brand-text font-weight-bold ghost" id="hddel2">Are you sure?</h2> --}}
+                            <p class="ghost" id="sec">You will not be able to recover this file</p>
                         </div>
                         <div class="form-group">
                           <input type="hidden" name="del_id" id="del_id" value="" />
-                          <input type="hidden" name="faq_isdel" id="faq_isdel" value=""/>
+                          <input type="hidden" name="confirm" id="confirm" value="" class="ghost"/>
                         </div>
                       </div>
                     </div>
                       <div class="modal-footer">
-                          <input type="hidden" name="faq_id" id="faq_id" value="" />
+                          <input type="hidden" name="accnt_id" id="accnt_id" value="" />
                           <input type="hidden" name="button_action" id="button_action" value="insert" />
                           <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
                           <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
+                          <div class="" id="condel" name="condel">
+                            <button class="btn btn-danger" value="" id="del" onclick="confirmDel()">Delete</button>
+                          </div>
+                          <div class="ghost">
+                            <input type="hidden" name="tx_fm" id="tx_fm" class="ghost" value="Deny"/>
+                          </div>
+
+
                       </div>
                 </form>
             </div>
         </div>
     </div>
 
-
+    
 </div>
 </div>
        
@@ -398,11 +475,13 @@
                $('#table').DataTable({
                processing: true,
                serverSide: true,
-               ajax: '{{ route('faqs.getdata') }}',
+               ajax: '{{ route('audit.getdata') }}',
                columns: [
-                        { data: 'question', name: 'question' },
-                        { data: 'answer', name: 'answer' },
-                        { width: '20%', data: 'action', orderable:false, searchable: false}
+                        { data: 'employee_id', name: 'employee_id' },
+                        { data: 'action', name: 'action' },
+                        { data: 'date', name: 'date' },
+                        { data: 'time', name: 'time' }
+                        
                   ] 
             });
     $('#add_data').click(function(){
@@ -411,65 +490,71 @@
         $('#form_output').html('');
         $('#button_action').val('insert');
         $('#action').val('Add');
-        $('.modal-title').text('Add Question');
+        $('.modal-title').text('Add Account');
         edit_Form();
     });
 
     $('#main_form').on('submit', function(event){
         event.preventDefault();
         var form_data = $(this).serialize();
-        $.ajax({
-            url:"{{ route('faqs.postdata') }}",
-            method:"POST",
-            data:form_data,
-            dataType:"json",
-            success:function(data)
-            {
-                if(data.error.length > 0)
-                {
-                    var error_html = '';
-                    for(var count = 0; count < data.error.length; count++)
-                    {
-                        error_html += '<div class="alert alert-danger">'+data.error[count]+'</div>';
-                    }
-                    $('#form_output').html(error_html);
-                }
-                else
-                {
-                   // $('#form_output').html(data.success);
-                    $('#main_form')[0].reset();
-                    //$('#action').val('Add');
-                    $('.modal-title').text('Add Question');
-                    //$('#button_action').val('insert');
-                    $('#table').DataTable().ajax.reload();
-                    $('#mainModal').modal('hide');
-                    if($('#action').val() == 'Edit')
-                    {
-                      swal(
-                        'Success!',
-                        'Your data has been successfully updated',
-                        'success'
-                      )
-                    }
-                    else if (($('#action').val() == 'Add'))
-                    {
-                      swal(
-                        'Success!',
-                        'You have successfully added a new data',
-                        'success'
-                      )
-                    }
-                    else if (($('#action').val() == 'Delete'))
-                    {
-                      swal(
-                        'Success!',
-                        'Your data is successfully deleted',
-                        'success'
-                      )
-                    }
-                }
-            }
-        })
+
+        if (fm == "Deny" && tr == "Deny" && trans == "Deny" && util == "Deny" && rep == "Deny" && sub == "Deny") alert('ERROR: You need to grant atleast one!'); 
+        //else alert('Success!');
+        else 
+        {
+          $.ajax({
+              url:"{{ route('permission.postdata') }}",
+              method:"POST",
+              data:form_data,
+              dataType:"json",
+              success:function(data)
+              {
+                  if(data.error.length > 0)
+                  {
+                      var error_html = '';
+                      for(var count = 0; count < data.error.length; count++)
+                      {
+                          error_html += '<div class="alert alert-danger">'+data.error[count]+'</div>';
+                      }
+                      $('#form_output').html(error_html);
+                  }
+                  else
+                  {
+                    // $('#form_output').html(data.success);
+                      $('#main_form')[0].reset();
+                      //$('#action').val('Add');
+                      $('.modal-title').text('Add');
+                      //$('#button_action').val('insert');
+                      $('#table').DataTable().ajax.reload();
+                      $('#mainModal').modal('hide');
+                      if($('#action').val() == 'Edit')
+                      {
+                        swal(
+                          'Success!',
+                          'Your data has been successfully updated',
+                          'success'
+                        )
+                      }
+                      else if (($('#action').val() == 'Add'))
+                      {
+                        swal(
+                          'Success!',
+                          'You have successfully added a new data',
+                          'success'
+                        )
+                      }
+                      else if (($('#action').val() == 'Delete'))
+                      {
+                        swal(
+                          'Success!',
+                          'Your data is successfully deleted',
+                          'success'
+                        )
+                      }
+                  }
+              }
+          })
+        }
     });
 
 
@@ -477,18 +562,28 @@
         var id = $(this).attr("id");
         $('#form_output').html('');
         $.ajax({
-            url:"{{route('faqs.fetchdata')}}",
+            url:"{{route('permission.fetchdata')}}",
             method:'get',
             data:{id:id},
             dataType:'json',
             success:function(data)
             {
-                $('#question').val(data.question);
-                $('#answer').val(data.answer);
-                $('#faq_id').val(id);
+                $('#accnt_name').val(data.account_name);
+                $('#accnt_desc').val(data.account_desc);
+                $('#accnt_id').val(id);
+
+
+                if(data.file_maintenance == 'Grant') document.getElementById("fm").checked = true;
+                if(data.tracking == 'Grant') document.getElementById("tr").checked = true;
+                if(data.transactions == 'Grant') document.getElementById("trans").checked = true; 
+                if(data.utilities == 'Grant') document.getElementById("util").checked = true; 
+                if(data.reports == 'Grant') document.getElementById("rep").checked = true;
+                if(data.submission == 'Grant') document.getElementById("sub").checked = true;
+
+
                 $('#formModal').modal('show');
                 $('#action').val('Edit');
-                $('.modal-title').text('Edit Question');
+                $('.modal-title').text('Edit');
                 $('#button_action').val('update');
                 edit_Form();
                 $('#mainModal').modal('show');
@@ -496,48 +591,105 @@
                 document.getElementById("action").className = "btn btn-info";
                 document.getElementById("md-form").classList.add('modal-lg');
                 $('#button_action').val('update');
-                $('.modal-title').text('Edit Question');
             }
     });   
     });
     
- $(document).on('click', '.delete', function(){
+$(document).on('click', '.delete', function(){
         var id = $(this).attr('id');
-         //$('#del_output').html('');
-         $.ajax({
-            url:"{{route('faqs.fetchdata')}}",
-            method:'get',
-            data:{id:id},
-            dataType:'json',
-            success:function(data)
-            {
-              // var smp=data.faq_isdel;
-              //   console.log(id + ' ' +smp);
-                $('#del_id').val(id);
-                if(data.faq_isdel == 0){
-                  $('#faq_isdel').val(1);
-                  $('#action').val('Delete');
-                  document.getElementById("action").className = "btn btn-danger";
-                  $("#hddel").text("Are you sure you want to delete it?");
-                }
-                del_Form();
-                $('#question').val(data.question);
-                $('#answer').val(data.answer);
-                $('#faq_id').val(id);
-                $('#mainModal').modal('show');
-                document.getElementById("md-form").classList.remove('modal-lg');
-                $('#button_action').val('delete');
-                $('.modal-title').text('');
-            }
-            }); 
+        $('#mainModal').modal('show');
+        //$('#hddel').text('Are you sure you want to delete it?');
+        document.getElementById("action").className = "ghost";
+        document.getElementById("condel").className = "";
+        document.getElementById("sec").className = "";
+        document.getElementById("hddel").classList.add("ghost");
+        $('#del').val(id);
+        $('#confirm').val('true');
+        document.getElementById("sec").style.textAlign = "center";
+        // var para = document.createElement("h2");
+        // var node = document.createTextNode("Are you sure?");
+        // para.appendChild(node);
+        // var element = document.getElementById("dvh2");
+        // var child = document.getElementById("hddel");
+        // element.insertBefore(para, child);
+        //document.getElementById("hddel2").style.textAlign = "center";
+        //document.getElementById("hddel2").classList.remove("ghost");
+
+        del_Form();
+        $('#accnt_id').val(id);
+        // $('#accnt_name').val(data.account_name);
+        // $('#accnt_desc').val(data.account_desc);
+        document.getElementById("md-form").classList.remove('modal-lg');
+        $('#button_action').val('delete');
+        $('.modal-title').text('');
+
+        var para = document.createElement("h2");
+        var node = document.createTextNode("Are you sure?");
+        para.appendChild(node);
+        // para.id = "hddel2";
+        // par.classList.add("brand-text font-weight-bold");
+        var element = document.getElementById("dvh2");
+        var child = document.getElementById("hddel");
+        element.insertBefore(para, child);
+        para.setAttribute("id", "hddel2");
+        para.setAttribute("class", "brand-text font-weight-bold");
+        document.getElementById("hddel2").style.textAlign = "center";
+
     });
 });
+function confirmDel()
+{
+    var id = $('#del').val();
+    var confirm = $('#confirm').val();
+    $('#mainModal').modal('hide');
+
+    if(confirm=='true')
+    {
+        $.ajax({
+            url:"{{route('permission.removedata')}}",
+            method:"get",
+            data:{id:id},
+            dataType:"json",
+            success:function(data)
+            {
+
+              if(data.chk == "error")
+              {
+                var x = data
+                swal("Error!", ""+data.success, 'error');
+                $('#table').DataTable().ajax.reload();
+              }
+              else
+              {
+                var x = data
+                swal("Done!", ""+data.success, 'success');
+                $('#table').DataTable().ajax.reload();
+              }
+                
+              
+                
+            }
+        })
+    }
+    else
+    {
+        return false;
+    }
+    
+    document.getElementById("hddel").classList.remove("ghost");
+    var parent = document.getElementById("dvh2");
+    var child = document.getElementById("hddel2");
+    parent.removeChild(child);
+}
+
 function edit_Form() { 
     var x = document.getElementById("editForm");
     if (x.style.display === "none") {
         x.style.display = "block";
     }
     var y = document.getElementById("delForm");
+    var z = document.getElementById("condel");
+    z.style.display = "none";
     y.style.display = "none";
 }
 function del_Form() {
@@ -545,6 +697,8 @@ function del_Form() {
     if (x.style.display === "none") {
         x.style.display = "block";
     }
+    var z = document.getElementById("condel");
+    z.style.display = "block";
     var y = document.getElementById("editForm");
     y.style.display = "none";
 }

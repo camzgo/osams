@@ -361,8 +361,13 @@
                                 <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
                               </div>
                              </div>
-
                              @endif
+                             @else
+                             <div class="card-footer bg-danger">
+                              <div class="text-center">
+                                <h5><strong>CLOSED</strong></h5>
+                              </div>
+                             </div>
                              @endif
                              @endif
                           </div>
@@ -403,6 +408,12 @@
                              </div>
 
                              @endif
+                             @else
+                             <div class="card-footer bg-danger">
+                              <div class="text-center">
+                                <h5><strong>CLOSED</strong></h5>
+                              </div>
+                             </div>
                              @endif
                              @endif
                           </div>
@@ -444,6 +455,12 @@
                              </div>
 
                              @endif
+                             @else
+                             <div class="card-footer bg-danger">
+                              <div class="text-center">
+                                <h5><strong>CLOSED</strong></h5>
+                              </div>
+                             </div>
                              @endif
                              @endif
                           </div>
@@ -484,6 +501,12 @@
                              </div>
 
                              @endif
+                             @else
+                             <div class="card-footer bg-danger">
+                              <div class="text-center">
+                                <h5><strong>CLOSED</strong></h5>
+                              </div>
+                             </div>
                              @endif
                              @endif
                           </div>
@@ -533,6 +556,12 @@
                              </div>
 
                              @endif
+                             @else
+                             <div class="card-footer bg-danger">
+                              <div class="text-center">
+                                <h5><strong>CLOSED</strong></h5>
+                              </div>
+                             </div>
                              @endif
                              @endif
                           </div>
@@ -570,6 +599,12 @@
                               </div>
                              </div>
                              @endif
+                             @else
+                             <div class="card-footer bg-danger">
+                              <div class="text-center">
+                                <h5><strong>CLOSED</strong></h5>
+                              </div>
+                             </div>
                              @endif
                              @endif
                           </div>
@@ -606,8 +641,13 @@
                                 <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
                               </div>
                              </div>
-
                              @endif
+                             @else
+                             <div class="card-footer bg-danger">
+                              <div class="text-center">
+                                <h5><strong>CLOSED</strong></h5>
+                              </div>
+                             </div>
                              @endif
                              @endif
                           </div>
@@ -645,6 +685,12 @@
                               </div>
                              </div>
                              @endif
+                             @else
+                             <div class="card-footer bg-danger">
+                              <div class="text-center">
+                                <h5><strong>CLOSED</strong></h5>
+                              </div>
+                             </div>
                              @endif
                              @endif
                           </div>

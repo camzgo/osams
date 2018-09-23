@@ -103,6 +103,13 @@
                   <p>Approve</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/admin/renew" class="nav-link">
+                  &nbsp &nbsp &nbsp
+                  <i class="fa fa-refresh nav-icon"></i>
+                  <p>Renew</p>
+                </a>
+              </li>
             </ul>
           </li>
           @endif

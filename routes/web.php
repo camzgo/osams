@@ -152,6 +152,7 @@ Route::prefix('admin/application')->group(function()
 {
     Route::get('/getdata', 'ApplicationMainController@getdata')->name('application.getdata');
     Route::get('/getdata2', 'ApplicationMainController@getdata2')->name('application.getdata2');
+    Route::get('/getdata3', 'ApplicationMainController@getdata3')->name('application.getdata3');
     Route::post('/postdata', 'ApplicationMainController@postdata')->name('application.postdata');
     Route::get('/fetchdata', 'ApplicationMainController@fetchdata')->name('application.fetchdata');
     Route::get('/details/{app}/{scid}', 'ApplicationMainController@scdetails');
@@ -188,6 +189,7 @@ Route::prefix('/')->group(function()
     Route::get('/about', 'FrontendController@about');
     Route::get('/contact', 'FrontendController@contact');
     Route::get('/signup', 'FrontendController@signup');
+    Route::get('/sitemap', 'FrontendController@sitemap');
     Route::get('/profile', 'FrontendController@profile');
     Route::get('/scholarship', 'FrontendController@scholarship');
     Route::get('/scholarship/details', 'FrontendController@sdetails');
@@ -246,6 +248,14 @@ Route::prefix('/admin/tracking')->group(function(){
 });
 
 
+Route::get('/reports', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
+
+    $fpdf->AddPage();
+    $fpdf->SetFont('Arial', '', 18);
+    $fpdf->Cell(50, 25, 'Hello World!');
+    $fpdf->Output();
+
+});
 Route::prefix('admin/submission')->group(function()
 {
     Route::get('/', 'SubController@show');
@@ -300,6 +310,12 @@ Route::prefix('admin/renew')->group(function()
     // Route::get('/getdata3', 'ApplyController@scholardata')->name('apply.scholardata');
     // Route::get('/scholarship-category', 'ApplyController@showCat');
     // Route::get('/send', 'ApplyController@showsend');
+});
+
+
+Route::prefix('admin/audit-log')->group(function(){
+    Route::get('/', 'AuditController@index');
+    Route::get('/getdata', 'AuditController@getdata')->name('audit.getdata');
 });
 
 Route::get('/mailable', function () {

@@ -25,12 +25,40 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function saved()
+    {
+        $audit = DB::table('audit_log')->insert([
+        'date' => date('Y-m-d'),
+        'time' => date('H:i:s'),
+        'action' => 'User Login',
+        'employee_id' => Auth::user()->id
+        ]);
+      //  return redirect()->intended(route('admin.dashboard'));
+    }
+
     public function index()
     {
 
+        
         // $eefap_mun_list = DB::table('eefap')->join('application', 'application.id', '=', 'eefap.application_id')
         // ->select('eefap.municipality')->where('application.application_status', 'Approved')->where('eefap.municipality', 'MASANTOL')->count();
+        $chk1 = DB::table('checker')->first();
+        if($chk1->chk == 0)
+        {
+            $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => date('H:i:s'),
+            'action' => 'User Login',
+            'employee_id' => Auth::user()->id
+            ]);
+            $chks = DB::table('checker')->update([
+                'chk' => 1
+            ]);
+        }
+            
 
+        
 
         $list =array('ANGELES CITY', 'APALIT', 'ARAYAT', 'BACOLOR',  'CANDABA', 'CITY OF SAN FERNANDO (Capital)', 'FLORIDABLANCA', 'GUAGUA', 'LUBAO', 
         'MABALACAT CITY', 'MACABEBE', 'MAGALANG', 'MASANTOL', 'MEXICO', 'MINALIN', 'PORAC', 'SAN LUIS', 'SAN SIMON', 'SANTA ANA', 'SANTA RITA',
@@ -129,7 +157,7 @@ class AdminController extends Controller
         $approve = DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->where('application.application_status', 'Approved')->select('scholarships.id')->count();
         $pending = DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->where('application.application_status', 'Pending')->select('scholarships.id')->count();
         $disapprove = DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->where('application.application_status', 'Disapproved')->select('scholarships.id')->count();
-        $over =DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->sum('scholarships.amount');
+        $over =DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->where('application.application_status', "Approved")->sum('scholarships.amount');
         
         $all = array($ave, $over, $approve, $pending, $disapprove);
         // return $all;

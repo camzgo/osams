@@ -103,6 +103,13 @@
                   <p>Approve</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/admin/renew" class="nav-link">
+                  &nbsp &nbsp &nbsp
+                  <i class="fa fa-refresh nav-icon"></i>
+                  <p>Renew</p>
+                </a>
+              </li>
             </ul>
           </li>
           @endif
@@ -324,7 +331,7 @@
     <!--pending table-->
     <div class="card">
       <div class="card-body">
-        <div class="card-title"><strong>Pending Application</strong></div><hr/>
+        <div class="card-title"><strong>Pending Applications</strong></div><hr/>
 
         <div class="container">
           <table class=" table table-hover" style="width:100%" id="table">
@@ -343,7 +350,7 @@
     <!--approve table-->
     <div class="card">
       <div class="card-body">
-        <div class="card-title"><strong>Approved Application</strong></div><hr/>
+        <div class="card-title"><strong>Approved Applications</strong></div><hr/>
         
         <div class="container">
           <table class=" table table-hover" style="width:100%" id="table2">
@@ -354,6 +361,24 @@
                   <th>Submitted at</th>
                   <th>Approved by</th>
                   <th>Date Approved</th>
+                  <th>Actions</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title"><strong>Renewing Applications</strong></div><hr/>
+        
+        <div class="container">
+          <table class=" table table-hover" style="width:100%" id="table3">
+            <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Scholarship</th>
                   <th>Actions</th>
               </tr>
             </thead>
@@ -435,6 +460,17 @@
           ] 
     });
 
+     $('#table3').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('application.getdata3') }}',
+        columns: [
+                { data: 'fullname', name: 'fullname' },
+                { data: 'scholarship_name', name: 'scholarship_name' },
+                { width: '20%', data: 'action', orderable:false, searchable: false}
+          ] 
+    });
+
 
             
     $('#add_data').click(function(){
@@ -475,6 +511,7 @@
                     //$('#button_action').val('insert');
                     $('#table').DataTable().ajax.reload();
                     $('#table2').DataTable().ajax.reload();
+                    $('#table3').DataTable().ajax.reload();
                     $('#mainModal').modal('hide');
                    
                    if (($('#action').val() == 'Delete'))

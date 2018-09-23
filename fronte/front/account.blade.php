@@ -89,19 +89,7 @@
                                 <input type="file" class="custom-file-input" id="customFile">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
                               </div> --}}
-                              {!! Form::open(['action' => 'FrontendController@uploadprofile', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-                              <div class="clamp-name clamp-lines" >
-                               {{-- <input type="file" id="uploadFile" name="uploadFile"/> --}}
-                                 {{Form::file('uploadFile')}}
-                              </div>
-                              <hr>
-                              <div>
-                                {{-- <button class="btn btn-outline-primary btn-rounded btn-block mb-0 chngePass">Upload</button> --}}
-                                <div class="form-group">
-                                   
-                                </div>
-                                {{Form::submit('Upload', ['class' => 'btn btn-outline-primary btn-rounded btn-block mb-0'])}}
-                            {!! Form::close() !!}
+                             
                               </div>
                             </div>
                           </div>
@@ -110,7 +98,7 @@
                            <div class="card">
                             <div class="card-body">
                               <div class="container ml-4 mt-2 mb-0">
-                          <form action="{{ action('FrontendController@accountEdit')}}" id="regForm" method="post" enctype="multipart/form-data">
+                          {{-- <form action="{{ action('FrontendController@accountEdit')}}" id="regForm" method="post" enctype="multipart/form-data">
                           {{csrf_field()}}
                          
                           <div class="form-row form-group">
@@ -148,7 +136,7 @@
                             </div>
                           </div>
                              
-                        </form>
+                        </form> --}}
                         <form action="{{ action('FrontendController@changePassword')}}" method='POST'>
                         {{csrf_field()}}
                                 <div class="form-row form-group" style="display: block;">
@@ -157,17 +145,17 @@
                            </div>
                             <div class="col-md-5">
                               <label>Current Password</label>
-                              <input type="password" class="form-control-plaintext" name="current" id="current"  readonly placeholder="Current Password" > 
+                              <input type="password" class="form-control-plaintext" name="current-password" id="current-password"  readonly placeholder="Current Password" required > 
                             </div>
                           </div>
                           <div class="form-row form-group mb-4"  id="new">
                             <div class="col-md-5" >
                               <label>New Password</label>
-                              <input type="password" class="form-control-plaintext" name="new_password" id="new_password" readonly placeholder="New Password" > 
+                              <input type="password" class="form-control-plaintext" name="new-password" id="new-password" readonly placeholder="New Password" required> 
                             </div>
                              <div class="col-md-5" id ="new3" >
                               <label>Confirm Password</label>
-                              <input type="password" class="form-control-plaintext" name="rtype" id="rtype" readonly placeholder="Retype New Password" > 
+                              <input type="password" class="form-control-plaintext" name="new-password-confirm" id="new-password-confirm" readonly placeholder="Retype New Password" required> 
                             </div>
                           </div>
                           <div class="form-row  form-group " id="edit2">
@@ -269,12 +257,12 @@
 
   $(document).on('click', '.edit2', function()
   {
-    $('#new_password').prop('readonly', false);
-    document.getElementById("new_password").className = "form-control";
-    $('#rtype').prop('readonly', false);
-    document.getElementById("rtype").className = "form-control";
-    $('#current').prop('readonly', false);
-    document.getElementById("current").className = "form-control";
+    $('#new-password').prop('readonly', false);
+    document.getElementById("new-password").className = "form-control";
+    $('#new-password-confirm').prop('readonly', false);
+    document.getElementById("new-password-confirm").className = "form-control";
+    $('#current-password').prop('readonly', false);
+    document.getElementById("current-password").className = "form-control";
     
     var y = document.getElementById('btnsave2');
     y.style.display = "block";
