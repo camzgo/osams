@@ -9,6 +9,7 @@ use App\Scholarship;
 use DataTables;
 use App\Tracking;
 use Auth;
+use App\Application;
 
 class ScholarshipMainController extends Controller
 {
@@ -246,6 +247,41 @@ class ScholarshipMainController extends Controller
                      'created_at' => date('Y-m-d H:i:s'),
                      'updated_at' => date('Y-m-d H:i:s')
                     ]);
+
+                    $delapp = DB::table('application')->where('application_status', 'Pending')->where('application_status', 'Renew')->where('scholar_id', $request->get('scholarship_id'))->get();
+                    $arr=$delapp->toJson();
+
+                    $json = json_decode($arr, true);
+
+                    $ctr = count($json);
+                    $ctr-=1;
+                    for($x = 0; $x<=$ctr; $x++)
+                    {
+                        $app = Application::find($json[$x]['id'])->delete();
+                    }
+
+                    $sc =DB::table('scholarships')->where('id', $request->get('scholarship_id'))->first();
+
+                    if($sc->type=="eefap")
+                    {
+                        $req = DB::table('reqeefap')->where('scholar_id', $request->get('scholarship_id'))->delete();
+                    }
+                    else if($sc->type == "eefap-gv")
+                    {
+                        if($sc->id == 7)
+                        {
+                            $req = DB::table('reqeefap')->where('scholar_id', $request->get('scholarship_id'))->delete();
+                        }
+                        else
+                        {
+                            $req = DB::table('reqgv')->where('scholar_id', $request->get('scholarship_id'))->delete();
+                        }
+                    }
+                    else if($sc->type == "pcl")
+                    {
+                        $req = DB::table('reqeefap')->where('scholar_id', $request->get('scholarship_id'))->delete();
+                    }
+
 
                     
                 }

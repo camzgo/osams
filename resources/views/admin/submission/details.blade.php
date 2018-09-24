@@ -326,23 +326,23 @@
         </tr>
         @if($scholarships->id == 8)
         <tr>
-          <td><a href="/admin/submission/details/uploads/{{$req->honor}}" target="_blank" class="d-block"><strong>Certificate of Honor</strong></a></td>
+          <td><a href="/storage/uploads/{{$req->honor}}" target="_blank" class="d-block"><strong>Certificate of Honor</strong></a></td>
         </tr>
         @endif
         <tr>
-          <td><a href="/admin/submission/details/uploads/{{$req->cor}}" target="_blank" class="d-block"><strong>Certificate of Registration / Assessment Form</strong></a></td>
+          <td><a href="/storage/uploads/{{$req->cor}}" target="_blank" class="d-block"><strong>Certificate of Registration / Assessment Form</strong></a></td>
         </tr>
         <tr>
-          <td><a href="/admin/submission/details/uploads/{{$req->or}}"  target="_blank" class="d-block"><strong>Official Receipt</strong></a></td>
+          <td><a href="/storage/uploads/{{$req->or}}"  target="_blank" class="d-block"><strong>Official Receipt</strong></a></td>
         </tr>
         <tr>
-          <td><a href="/admin/submission/details/uploads/{{$req->grades}}" target="_blank"  class="d-block"><strong>Grades / Form 138</strong></a></td>
+          <td><a href="/storage/uploads/{{$req->grades}}" target="_blank"  class="d-block"><strong>Grades / Form 138</strong></a></td>
         </tr>
         <tr>
-          <td><a href="/admin/submission/details/uploads/{{$req->brgy}}" target="_blank" class="d-block"><strong>Barangay / Residency / Indigency</strong></a></td>
+          <td><a href="/storage/uploads/{{$req->brgy}}" target="_blank" class="d-block"><strong>Barangay / Residency / Indigency</strong></a></td>
         </tr>
         <tr>
-          <td><a href="/admin/submission/details/uploads/{{$req->oid}}" target="_blank" class="d-block"><strong>School ID</strong></a></td>
+          <td><a href="/storage/uploads/{{$req->oid}}" target="_blank" class="d-block"><strong>School ID</strong></a></td>
         </tr>
         
       </table>

@@ -1,7 +1,7 @@
 @component('mail::message')
-# New Applicant
+# Welcome New Applicant
 
-Hi <strong>{{$name}}</strong>, you have successfully create your account. Change your password immediately.
+Hi <strong>{{$name}}</strong>, you have successfully created your account. Change your password immediately.
 
 @component('mail::panel')
 Your password is: <strong>pampangascholar</strong>

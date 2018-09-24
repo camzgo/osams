@@ -42,7 +42,7 @@
       </div>
 
       <!-- Sidebar Menu -->
-             <nav class="mt-2">
+      <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="/admin" class="nav-link">
@@ -343,6 +343,16 @@
                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
                 </div>
                 <div class="modal-body">
+                  @if (session('error'))
+                  <div class="alert alert-danger">
+                      {{ session('error') }}
+                  </div>
+              @endif
+                  @if (session('success'))
+                      <div class="alert alert-success">
+                          {{ session('success') }}
+                      </div>
+                  @endif
                   {{csrf_field()}} 
                   <span id="form_output"></span>                 
                   <div id="editForm">

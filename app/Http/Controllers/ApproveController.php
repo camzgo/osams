@@ -108,6 +108,15 @@ class ApproveController extends Controller
             'employee_id' => Auth::user()->id
 
             ]);
+            
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $history = DB::table('history_log')->insert([
+                'action'  => 'Application Approved',
+                'date'     => date('Y-m-d'),
+                'time'     =>$time,
+                'applicant_id' => $request->get('applicant_id')
+            ]);
 
             return redirect('/admin/approve');
 
@@ -140,6 +149,15 @@ class ApproveController extends Controller
             // 'employee_id' => '0'
 
             // ]);
+
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $history = DB::table('history_log')->insert([
+                'action'  => 'Application Disapproved',
+                'date'     => date('Y-m-d'),
+                'time'     =>$time,
+                'applicant_id' => $request->get('applicant_id')
+            ]);
 
             return redirect('/admin/approve');
         }

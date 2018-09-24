@@ -197,6 +197,16 @@ class ApplicationMainController extends Controller
                 // $faquestion->answer = $request->get('answer');
                 $application->save();
                 $success_output = '';
+
+
+                date_default_timezone_set("Asia/Manila");
+                $time = date('h:i:s', strtotime(now()));
+                $history = DB::table('history_log')->insert([
+                    'action'  => 'Application Disapproved',
+                    'date'     => date('Y-m-d'),
+                    'time'     =>$time,
+                    'applicant_id' => $request->get('applicant_id')
+                ]);
             }
         }
         

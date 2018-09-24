@@ -165,6 +165,7 @@ return [
         Milon\Barcode\BarcodeServiceProvider::class,
         Nexmo\Laravel\NexmoServiceProvider::class,
         Codedge\Fpdf\FpdfServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
     ],
 
     /*

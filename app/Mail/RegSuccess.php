@@ -29,6 +29,6 @@ class RegSuccess extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.regsuccess');
+        return $this->subject('Registration Success!')->markdown('emails.regsuccess');
     }
 }

@@ -309,7 +309,7 @@ class ScholarshipFrontController extends Controller
             'applicant_id' => $request->sid,
             'application_id' => $id,
             'created_at' => date('Y-m-d H:i:s'),
-            'submit'     => '0'
+            'submit'     => 0
         ]);
 
         return redirect('/scholarship/details');
@@ -375,7 +375,7 @@ class ScholarshipFrontController extends Controller
             'applicant_id' => $request->sid,
             'application_id' => $id,
             'created_at' => date('Y-m-d H:i:s'),
-            'submit'     => '0'
+            'submit'     => 0
         ]);
         
 
@@ -392,7 +392,7 @@ class ScholarshipFrontController extends Controller
             'barcode_number' => $request->barcode,
             'barcode_image' => 'NONE',
             'applicant_id' => $request->sid,
-            'scholar_id' => '6',
+            'scholar_id' => 6,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
@@ -443,11 +443,11 @@ class ScholarshipFrontController extends Controller
         ]);
 
          $reqeefap = DB::table('reqeefap')->insert([
-            'scholar_id' =>  $request->scholar_id,
+            'scholar_id' =>  6,
             'applicant_id' => $request->sid,
             'application_id' => $id,
             'created_at' => date('Y-m-d H:i:s'),
-            'submit'     => '0'
+            'submit'     => 0
         ]);
 
 

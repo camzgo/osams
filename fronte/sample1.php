@@ -18,7 +18,7 @@
 // {
 //     echo 'ERROR!';
 // date_default_timezone_set('Asia/Manila');
-echo $sample[1];
+echo $sample;
 $t = time();
 echo   date("H:i:s");
 ?>

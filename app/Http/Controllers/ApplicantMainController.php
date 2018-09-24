@@ -76,16 +76,18 @@ class ApplicantMainController extends Controller
             'applicant_isdel' => $isdel,
             'mobile_number' => $request->mobile_no,
             'email' => $request->email,
-            'password' => Hash::make($defpass)
+            'password' => Hash::make($defpass),
+            'chg'  => 1,
+            'new'  =>1
 
         ]);
         $users->save();
-        $email = $request->email;
+        $email = $request->get('email');
         $name =  $request->first_name.' '.$request->middle_name.' '.$request->surname.' '.$request->suffix;
 
 
        // Mail::to($request->get('email'))->send(new RegSuccess($name));
-          Mail::to('bixixi@spindl-e.com')->send(new RegSuccess($name));
+        \Mail::to($email)->send(new RegSuccess($name));
 
         return redirect('/admin/applicant');
     }

@@ -219,7 +219,7 @@
                     <div class="form-row form-group">
                         <div class="col-md-4">
                             <label>Date: </label>
-                            <input type="text" class="form-control-plaintext" readonly id="date" name="date" value="{{$applicant->created_at}}">
+                            <input type="text" class="form-control-plaintext" readonly id="date" name="date" value="{{$application->created_at}}">
                         </div>
                     </div>
                     <div class="form-row">
@@ -247,7 +247,7 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <label>School Enrolled: </label>
-                            <input type="text" class="form-control-plaintext" readonly id="college_name" value={{$pcl->college_name}} name="college_name">
+                            <input type="text" class="form-control-plaintext" readonly id="college_name" value={{$pcl->school_enrolled}} name="college_name">
                         </div>
                         <div class="col-md-6">
                             <label>Course: </label>

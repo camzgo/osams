@@ -80,6 +80,8 @@ class RegisterController extends Controller
             'profile_photo' => 'noimage.jpg',
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'new'  => 1,
+            'chg' => 0,
              
         ]);
     }

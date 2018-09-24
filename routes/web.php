@@ -177,6 +177,18 @@ Route::prefix('admin/permission')->group(function(){
     Route::get('/removedata', 'UtilitiesController@removedata')->name('permission.removedata'); 
 });
 
+Route::prefix('admin/reports')->group(function()
+{
+    Route::get('/master-list', 'ReportsController@index');
+});
+
+
+  // Backup routes
+        Route::get('backup', 'BackupController@index');
+        Route::get('backup/create', 'BackupController@create');
+        Route::get('backup/download/{file_name}', 'BackupController@download');
+        Route::get('backup/delete/{file_name}', 'BackupController@delete');
+        
 
 Route::get('admin/reg/success', 'RegisterMainController@send');
 Route::get('/admindash', 'ApproveController@admindash');
@@ -238,6 +250,8 @@ Route::prefix('/')->group(function()
     Route::get('/announcement/{id}', 'FrontendController@news');
     Route::post('/contact', 'FrontendController@contactus');
     Route::get('/send/sample', 'FrontendController@send');
+
+    Route::get('/scholarship/getdata', 'FrontendController@getdata')->name('logs.getdata');
 });
 
 Route::prefix('/admin/tracking')->group(function(){

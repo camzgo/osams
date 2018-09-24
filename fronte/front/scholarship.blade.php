@@ -60,20 +60,39 @@
                       <div class="col-md-4">
                         <h4><span class="badge badge-success text-white pull-right">{{$applicant->application_status}}</span></h4>
                       </div>
+                      @elseif($applicant->application_status == "Disapproved")
+                      <div class="col-md-4">
+                        <h4><span class="badge badge-danger text-white pull-right">{{$applicant->application_status}}</span></h4>
+                      </div>
                       @else
                       <div class="col-md-4">
-                        <h4><span class="badge badge-warning text-white pull-right">{{$applicant->application_status}}</span></h4>
+                        <h4><span class="badge badge-info text-white pull-right">{{$applicant->application_status}}</span></h4>
                       </div>
                       @endif
                     </div>
                     
-                    
 
                   </div>
                 </a>
+                <hr>
+                
                 @else
                 <h4>You don't have application!</h4>
-                    @endif
+                @endif
+
+                <div class="container mt-4">
+                  <h3><strong>History</strong></h3>
+                  <table class="" style="width:100%" id="table">
+                    <thead class="">
+                        <tr>
+                          <th>Date</th>
+                          <th>Time</th>
+                          <th>Action</th>
+                        </tr>
+                    </thead>
+                  </table>
+                </div>
+
               </div>
             </div>
           </div>
@@ -96,4 +115,23 @@
 </footer>
 
 </body>
+<script>
+$(function() {
+      $('#table').DataTable({
+      processing: true,
+      serverSide: true,
+      lengthChange: false,
+    //  scrollY: 300,
+      pageLength: 10,
+      pagingType: "simple",
+      ajax: '{{ route('logs.getdata') }}',
+      columns: [
+              { data: 'date', name: 'date' },
+              { data: 'time', name: 'time' },
+              { data: 'action', name: 'action' },
+              
+        ] 
+  });
+});
+</script>
 </html>

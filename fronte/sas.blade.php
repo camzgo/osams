@@ -356,9 +356,9 @@
                               </div>
                              </div>
                              @else
-                             <div class="card-footer">
-                              <div>
-                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                             <div class="card-footer bg-secondary">
+                              <div class="text-center">
+                                <h5><strong>APPLIED</strong></h5>
                               </div>
                              </div>
                              @endif
@@ -401,9 +401,9 @@
                               </div>
                              </div>
                              @else
-                             <div class="card-footer">
-                              <div>
-                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                             <div class="card-footer bg-secondary">
+                              <div class="text-center">
+                                <h5><strong>APPLIED</strong></h5>
                               </div>
                              </div>
 
@@ -448,9 +448,9 @@
                               </div>
                              </div>
                              @else
-                             <div class="card-footer">
-                              <div>
-                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                             <div class="card-footer bg-secondary">
+                              <div class="text-center">
+                                <h5><strong>APPLIED</strong></h5>
                               </div>
                              </div>
 
@@ -494,9 +494,9 @@
                               </div>
                              </div>
                              @else
-                             <div class="card-footer">
-                              <div>
-                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                             <div class="card-footer bg-secondary">
+                              <div class="text-center">
+                                <h5><strong>APPLIED</strong></h5>
                               </div>
                              </div>
 
@@ -549,9 +549,9 @@
                               </div>
                              </div>
                              @else
-                             <div class="card-footer">
-                              <div>
-                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                             <div class="card-footer bg-secondary">
+                              <div class="text-center">
+                                <h5><strong>APPLIED</strong></h5>
                               </div>
                              </div>
 
@@ -593,9 +593,9 @@
                               </div>
                              </div>
                              @else
-                             <div class="card-footer">
-                              <div>
-                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                             <div class="card-footer bg-secondary">
+                              <div class="text-center">
+                                <h5><strong>APPLIED</strong></h5>
                               </div>
                              </div>
                              @endif
@@ -636,9 +636,9 @@
                               </div>
                              </div>
                              @else
-                             <div class="card-footer">
-                              <div>
-                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                             <div class="card-footer bg-secondary">
+                              <div class="text-center">
+                                <h5><strong>APPLIED</strong></h5>
                               </div>
                              </div>
                              @endif
@@ -679,9 +679,9 @@
                               </div>
                              </div>
                              @else
-                             <div class="card-footer">
-                              <div>
-                                <a href="Javascript:void(0)" class="btn btn-secondary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLIED</a>
+                             <div class="card-footer bg-secondary">
+                              <div class="text-center">
+                                <h5><strong>APPLIED</strong></h5>
                               </div>
                              </div>
                              @endif

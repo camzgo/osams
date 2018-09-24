@@ -12,7 +12,7 @@ use DB;
 use App\Municipality;
 use App\AccountType;
 use Auth;
-
+use App\Mail\RegSuccessUser;
 class UsersMainController extends Controller
 {
 
@@ -79,7 +79,7 @@ class UsersMainController extends Controller
         $id = DB::table('admins')->insertGetId([
             'email' => $request->email,
             'password' => Hash::make($pass), 
-            'user_photo' => $user_photo,
+            'user_photo' => "avatar5_1537131277.png",
             'user_isdel' => $user_isdel,
             'surname' => $request->surname,
             'first_name' => $request->first_name,
@@ -117,7 +117,10 @@ class UsersMainController extends Controller
             'admins_id' => $id
         ]);
         $adminsInfo->save();
-        
+        $email = $request->get('email');
+        $name = $request->first_name.' '.$request->middle_name.' '.$request->surname.' '.$request->suffix;
+
+         \Mail::to($email)->send(new RegSuccessUser($name));
         return redirect('/admin/employee/');
 
     }
@@ -365,6 +368,7 @@ class UsersMainController extends Controller
         //Change Password
         $user = Auth::user();
         $user->password = bcrypt($request->get('new-password'));
+        $user->new = 0;
         $user->save();
  
        // return redirect()->back()->with("success","Password changed successfully !");

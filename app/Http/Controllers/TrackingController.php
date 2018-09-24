@@ -13,6 +13,8 @@ use App\User;
 use Auth;
 use Mail;
 use App\Mail\Awarding;
+use App\Mail\Awarding2;
+use App\Application;
 class TrackingController extends Controller
 {
     //
@@ -149,27 +151,300 @@ class TrackingController extends Controller
                     // $track = Tracking::find($request->get('scholarship_id'));
                     // $track->status = 'RELEASED';
                     // $track->save();
+                    date_default_timezone_set("Asia/Manila");
+                    $time = date('h:i:s', strtotime(now()));
+                    $history = DB::table('history_log')->insert([
+                        'action'  => 'Cheques Released',
+                        'date'     => date('Y-m-d'),
+                        'time'     =>$time,
+                        'applicant_id' => $request->get('applicant_id')
+                    ]);
+
+                    date_default_timezone_set("Asia/Manila");
+                    $time = date('h:i:s', strtotime(now()));
+                    $history = DB::table('history_log')->insert([
+                        'action'  => 'Application need to renew',
+                        'date'     => date('Y-m-d'),
+                        'time'     =>$time,
+                        'applicant_id' => $request->get('applicant_id')
+                    ]);
 
                     
-                    
+                    $data;
+                    $json;
+                    $ctr;
                     $scid = $request->get('scholarship_id');
                     $scholar = DB::table('scholarships')->where('id', $scid)->first();
-                        
-                    $app2 = DB::table('application')->get();
-                    
-                    $user = DB::table('users')->get();
                     
                     if($scholar->type == "eefap-gv")
                     {
-                        $track = Tracking::find($request->get('scholarship_id'));
-                        $track->status = "Success";
-                        $track->save();
-                    }
+                      
+
+                        $app2 = DB::table('application')->JOIN('users', 'users.id', '=', 'application.applicant_id')
+                        ->JOIN('eefapgv', 'eefapgv.application_id', '=', 'application.id')
+                        ->where('application.application_status', 'Approved')->select('users.email', 'users.mobile_number', 'users.surname',
+                         'users.first_name', 'users.middle_name', 'users.suffix')->get();
+                        $app2->where('application.scholar_id', $scid);
+
+                        // $userss = DB::table('users')->get();
+                        // $userss->where('id', $app2->applicant_id);
+
+                        for($z=0; $z<=$ctr; $z++)
+                        {
+                            $req = DB::table('reqgv')->where('application_id', $json[$z]['id'])->update([
+                                'biodata' => NULL,
+                                'cor'  => NULL,
+                                'or'    => NULL,
+                                'grades' => NULL,
+                                'brgy'   => NULL,
+                                'oid'      => NULL,
+                                'honor'   => NULL,
+                                'biodata_sub' => "Not Submitted",
+                                'cor_sub' => "Not Submitted",
+                                'or_sub' => "Not Submitted",
+                                'grades_sub' => "Not Submitted",
+                                'brgy_sub' => "Not Submitted",
+                                'oid_sub' => "Not Submitted",
+                                'honor_sub' => "Not Submitted",
+                                'submit'  => 0
+
+                            ]);
+                        }
                         
-                   
+                        
+                       // serialize($array)
+                        //return Redirect::route('/send/sample');
+                        $samp = $app2->toJson();
+
+                        $json = json_decode($samp, true);
+                        $ctr = count($json);
+                        $ctr-=1;
+                        
+                        // $nos = array();
+                        // $names = array();
 
 
+                        // for($y=0; $y<=$ctr; $y++)
+                        // {
+                        //     $res = Itexmo::to('0'.$json[$y]['mobile_number'])->message('Hello '.$json[$y]['first_name'].' you have been awarded a scholarship!' )->send();
+                        //     if($res == '0') {
+                        //         //
+                        //     }
+                        // }
+
+                        // $sec = DB::table('application')->where('scholar_id', $request->get('scholarship_id'))->get();
+                        // $data = $sec->toJson();
+                        // $secid = json_decode($data, true);
+                        // $cal = count($secid);
+                        // $cal-=1;
+
+                        // for($z=0; $z<=$cal; $z++)
+                        // {
+                        //     // $apps= Application::find($secid[$z]['id']);
+                        //     // $apps->application_status = "Renew";
+                        //     // $apps->renew = 1;
+                        //     // $apps->save(); 
+
+                            
+                        // }
+
+                        $apps = DB::table('application')->where('application_status', 'Approved')->update([
+                            'application_status' => 'Renew',
+                            'renew'  => 1
+                        ]);
+
+                        $track = Tracking::find($request->get('scholarship_id'));
+                        $track->status = "RELEASED";
+                        $track->save();
+                        
+                        
+                         
+
+                        $emails = array();
+                        for($x=0; $x<=$ctr; $x++)
+                        {
+                            array_push($emails, $json[$x]['email']);
+                        }
+
+                        Mail::send('emails.awarding', [], function($message) use ($emails)
+                        {    
+                            $message->to($emails)->subject('Awarding of Cheques');    
+                        });
+                        // var_dump( Mail:: failures());
+                        // exit;
+
+
+                    }
+                    else if($scholar->type == "eefap")
+                    {
+                      
+
+                        $app2 = DB::table('application')->JOIN('users', 'users.id', '=', 'application.applicant_id')
+                        ->JOIN('eefap', 'eefap.application_id', '=', 'application.id')
+                        ->where('application.application_status', 'Approved')->select('users.email', 'users.mobile_number', 'users.surname',
+                         'users.first_name', 'users.middle_name', 'users.suffix')->get();
+                        $app2->where('application.scholar_id', $scid);
+
+                        // $userss = DB::table('users')->get();
+                        // $userss->where('id', $app2->applicant_id);
+                        
+                        for($z=0; $z<=$ctr; $z++)
+                        {
+                            $req = DB::table('reqeefap')->where('application_id', $json[$z]['id'])->update([
+                                'biodata' => NULL,
+                                'cor'  => NULL,
+                                'or'    => NULL,
+                                'grades' => NULL,
+                                'brgy'   => NULL,
+                                'oid'      => NULL,
+                                'biodata_sub' => "Not Submitted",
+                                'cor_sub' => "Not Submitted",
+                                'or_sub' => "Not Submitted",
+                                'grades_sub' => "Not Submitted",
+                                'brgy_sub' => "Not Submitted",
+                                'oid_sub' => "Not Submitted",
+                                'submit'  => 0
+
+                            ]);
+                        }
+
+                        
+                        
+                       // serialize($array)
+                        //return Redirect::route('/send/sample');
+                        $samp = $app2->toJson();
+
+                        $json = json_decode($samp, true);
+                        $ctr = count($json);
+                        $ctr-=1;
+                        
+                        // $nos = array();
+                        // $names = array();
+
+
+                        // for($y=0; $y<=$ctr; $y++)
+                        // {
+                        //     $res = Itexmo::to('0'.$json[$y]['mobile_number'])->message('Hello '.$json[$y]['first_name'].' you have been awarded a scholarship!' )->send();
+                        //     if($res == '0') {
+                        //         //
+                        //     }
+                        // }
+
+                        $apps = DB::table('application')->where('application_status', 'Approved')->update([
+                            'application_status' => 'Renew',
+                            'renew'  => 1
+                        ]);
+
+                        $track = Tracking::find($request->get('scholarship_id'));
+                        $track->status = "RELEASED";
+                        $track->save();
+                        
+                         
+
+                        $emails = array();
+                        for($x=0; $x<=$ctr; $x++)
+                        {
+                            array_push($emails, $json[$x]['email']);
+                        }
+
+                        Mail::send('emails.awarding', [], function($message) use ($emails)
+                        {    
+                            $message->to($emails)->subject('Awarding of Cheques');    
+                        });
+                        // var_dump( Mail:: failures());
+                        // exit;
+
+
+                    }
+                    else if($scholar->type == "pcl")
+                    {
+                      
+
+                        $app2 = DB::table('application')->JOIN('users', 'users.id', '=', 'application.applicant_id')
+                        ->JOIN('pcl', 'pcl.application_id', '=', 'application.id')
+                        ->where('application.application_status', 'Approved')->select('users.email', 'users.mobile_number', 'users.surname',
+                         'users.first_name', 'users.middle_name', 'users.suffix', 'application.id')->get();
+                        $app2->where('application.scholar_id', $scid);
+
+                        // $userss = DB::table('users')->get();
+                        // $userss->where('id', $app2->applicant_id);
+
+                        
+                        
+                        
+                       // serialize($array)
+                        //return Redirect::route('/send/sample');
+                        $samp = $app2->toJson();
+
+                        $json = json_decode($samp, true);
+                        $ctr = count($json);
+                        $ctr-=1;
+
+                        for($z=0; $z<=$ctr; $z++)
+                        {
+                            $req = DB::table('reqeefap')->where('application_id', $json[$z]['id'])->update([
+                                'biodata' => NULL,
+                                'cor'  => NULL,
+                                'or'    => NULL,
+                                'grades' => NULL,
+                                'brgy'   => NULL,
+                                'oid'      => NULL,
+                                'biodata_sub' => "Not Submitted",
+                                'cor_sub' => "Not Submitted",
+                                'or_sub' => "Not Submitted",
+                                'grades_sub' => "Not Submitted",
+                                'brgy_sub' => "Not Submitted",
+                                'oid_sub' => "Not Submitted",
+                                'submit'  => 0
+
+                            ]);
+                        }
+
+
+                        
+                        // $nos = array();
+                        // $names = array();
+
+
+                        // for($y=0; $y<=$ctr; $y++)
+                        // {
+                        //     $res = Itexmo::to('0'.$json[$y]['mobile_number'])->message('Hello '.$json[$y]['first_name'].' you have been awarded a scholarship!' )->send();
+                        //     if($res == '0') {
+                        //         //
+                        //     }
+                        // }
+
+                        $apps = DB::table('application')->where('application_status', 'Approved')->update([
+                            'application_status' => 'Renew',
+                            'renew'  => 1
+                        ]);
+
+                        $track = Tracking::find($request->get('scholarship_id'));
+                        $track->status = "RELEASED";
+                        $track->save();
+                        
+                         
+
+                        $emails = array();
+                        for($x=0; $x<=$ctr; $x++)
+                        {
+                            array_push($emails, $json[$x]['email']);
+                        }
+
+                        Mail::send('emails.awarding', [], function($message) use ($emails)
+                        {    
+                            $message->to($emails)->subject('Awarding of Cheques');    
+                        });
+                        // var_dump( Mail:: failures());
+                        // exit;
+
+
+                    }
             }
+            // else
+            // {
+
+            // }
         }
             else if($request->get('button_action') == 'close')
             {

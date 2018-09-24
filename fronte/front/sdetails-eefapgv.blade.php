@@ -145,6 +145,18 @@
                                 </div>
                               </div>
                               @endif
+                              @if($applicant->application_status == "Disapproved")
+                              <div class="form-row">
+                                <div class="col-md-12">
+                                  <a href="/scholarship/delete" class="btn btn-block btn-danger" onclick="event.preventDefault();
+                                        document.getElementById('del-form').submit();">Cancel</a>
+
+                                  <form id="del-form" action="{{action('FrontendController@eefapdel')}}" method="POST" style="display: none;">
+                                      @csrf
+                                  </form>
+                                </div>
+                              </div>
+                              @endif
                           </div>
                         </div>
                       </div>

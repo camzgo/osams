@@ -84,6 +84,21 @@
                               <div id="image_preview" class="text-center">
                                 <img src="/storage/profile_images/{{Auth::user()->profile_photo}}" alt="" class="img-fluid img-circle">
                               </div><hr>
+                               {!! Form::open(['action' => 'FrontendController@uploadprofile', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                              {{csrf_field()}}
+                              <div class="clamp-name clamp-lines" >
+                               {{-- <input type="file" id="uploadFile" name="uploadFile"/> --}}
+                                 {{Form::file('uploadFile', ['class' => '', 'required'])}}
+                              </div>
+                              <hr>
+                              <div>
+                                {{-- <button class="btn btn-outline-primary btn-rounded btn-block mb-0 chngePass">Upload</button> --}}
+                                <div class="form-group">
+                                   
+                                </div>
+                                {{Form::submit('Upload', ['class' => 'btn btn-outline-primary btn-rounded btn-block mb-0'])}}
+                            {!! Form::close() !!}
+
                               {{-- <button class="btn btn-primary btn-rounded" style="width: 15em; ">Upload</button> --}}
                               {{-- <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customFile">
@@ -95,87 +110,57 @@
                           </div>
                         </div>
                         <div class="col-md-8">
-                           <div class="card">
+                          <div class="card">
                             <div class="card-body">
                               <div class="container ml-4 mt-2 mb-0">
-                          {{-- <form action="{{ action('FrontendController@accountEdit')}}" id="regForm" method="post" enctype="multipart/form-data">
-                          {{csrf_field()}}
-                         
-                          <div class="form-row form-group">
-                            <div class="col-md-5" id="emailform" name="emailform">
-                              <label>Email Address</label>
-                              <input id="email1" type="email" class="form-control-plaintext border-bottom {{ $errors->has('email1') ? ' is-invalid' : '' }}" readonly name="email1"  value="{{Auth::user()->email}}" placeholder="Email Address" required>
-                              @if ($errors->has('email1'))
-                                  <span class="invalid-feedback" role="alert">
-                                      <strong>{{ $errors->first('email1') }}</strong>
-                                  </span>
-                              @endif
-                            </div>
-                            <div class="col-md-5" id="mobile" name="mobile">
-                              <label>Mobile Number</label>
-                              <input id="mobile_no" type="text" class="form-control-plaintext border-bottom {{ $errors->has('mobile_no') ? ' is-invalid' : '' }}" readonly name="mobile_no" value="{{Auth::user()->mobile_number}}"  placeholder="9XXXXXXXXX" required >
-                              @if ($errors->has('mobile_no'))
-                                  <span class="invalid-feedback" role="alert">
-                                      <strong>{{ $errors->first('mobile_no') }}</strong>
-                                  </span>
-                              @endif
-                            </div>
-                          </div>
-                          <div class="form-row  form-group " id="action1">
-                            
-                            <div class="col-md-10">
-                              <button type="button" class="btn btn-info pull-right edit" id='edit1'>Edit Account</button>
-                            </div>
-                          </div>
-                          <div class="form-row form-group mt-0"  id="actions">
-                            <div class="col-md-5" id="btncancel" style="display: none;">
-                              <button  type="button" class="btn btn-outline-danger cancel">Discard Changes</button>
-                            </div>
-                            <div class="col-md-5" id="btnsave" style="display: none;">
-                              <button type="submit" class="btn btn-primary pull-right">Save Changes</button>  
-                            </div>
-                          </div>
-                             
-                        </form> --}}
-                        <form action="{{ action('FrontendController@changePassword')}}" method='POST'>
-                        {{csrf_field()}}
-                                <div class="form-row form-group" style="display: block;">
-                           <div class="mt-2">
-                              <p>To change password, enter your current password and new password below</p>
-                           </div>
-                            <div class="col-md-5">
-                              <label>Current Password</label>
-                              <input type="password" class="form-control-plaintext" name="current-password" id="current-password"  readonly placeholder="Current Password" required > 
-                            </div>
-                          </div>
-                          <div class="form-row form-group mb-4"  id="new">
-                            <div class="col-md-5" >
-                              <label>New Password</label>
-                              <input type="password" class="form-control-plaintext" name="new-password" id="new-password" readonly placeholder="New Password" required> 
-                            </div>
-                             <div class="col-md-5" id ="new3" >
-                              <label>Confirm Password</label>
-                              <input type="password" class="form-control-plaintext" name="new-password-confirm" id="new-password-confirm" readonly placeholder="Retype New Password" required> 
-                            </div>
-                          </div>
-                          <div class="form-row  form-group " id="edit2">
-                            
-                            <div class="col-md-10">
-                              <button type="button" class="btn btn-info pull-right edit2" >Edit Account</button>
-                            </div>
-                          </div>
-                          <div class="form-row form-group mt-0"  id="actions">
-                            <div class="col-md-5" id="btncancel2" style="display: none;">
-                              <button  type="button" class="btn btn-outline-danger cancel2">Discard Changes</button>
-                            </div>
-                            <div class="col-md-5" id="btnsave2" style="display: none;">
-                              <button type="submit" class="btn btn-primary pull-right changePass">Save Changes</button>  
-                            </div>
-                          </div>
+                                 @foreach ($errors->all() as $error)
+                                    <div class="alert alert-danger">
+                                      {{ $error }}
+                                  </div>
+                                  @endforeach
 
-                        </form>
-
-                         </div>
+                                <form method="post" action="{{ action('FrontendController@accountEdit')}}" id="editAccount">
+                                  {{csrf_field()}}
+                                  <div class="form-row form-group">
+                                    <div class="col-md-5">
+                                      <input type="email" name="email" id="email" class="form-control form-control-lg" required placeholder="Email Address">
+                                    </div>
+                                    <div class="col-md-5">
+                                      <input type="text" name="mobile_no" id="mobile_no" class="form-control form-control-lg" required placeholder="9XXXXXXXXX">
+                                    </div>
+                                  </div>
+                                  <div class="form-row form-group">
+                                    <div class="col-md-4 offset-md-0">
+                                      <button type="button"  class="btn btn-outline-danger cancel">Discard Changes</button>
+                                    </div>
+                                    <div class="col-md-4 offset-md-2">
+                                      <input type="submit" class="btn btn-primary btn-block" value="Save Changes">
+                                    </div>
+                                  </div>    
+                                  
+                                </form>
+                                <div id="viewAccount">
+                                  <div class="form-row form-group">
+                                    <div class="col-md-5">
+                                      <label>Email Address</label>
+                                      <input class="form-control-plaintext border-bottom"  value="{{Auth::user()->email}}">
+                                    </div>
+                                    <div class="col-md-5">
+                                      <label>Mobile Number</label>
+                                      <input class="form-control-plaintext border-bottom"  value="{{Auth::user()->mobile_number}}">
+                                    </div>
+                                  </div>
+                                  <div class="form-row form-group">
+                                    <div class="col-md-4 offset-md-0">
+                                      <a href="/account/password"  class="btn btn-warning text-white" >Change Password</a>
+                                    </div>
+                                    <div class="col-md-4 offset-md-2">
+                                      <button type="button" class="btn btn-info pull-right edit" id='edit1'>Edit Account</button>
+                                    </div>
+                                  </div>
+                                </div>
+                          
+                              </div>
                             </div>
                           </div>
                         
@@ -236,42 +221,36 @@
 <script>
   $(document).ready(function(){
     $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
+
+    var x = document.getElementById('editAccount');
+    x.style.display = "none";
   });
 
   $(document).on('click', '.edit', function(){
-    $('#email1').prop('readonly', false);
-    document.getElementById("email1").className = "form-control";
-    $('#mobile_no').prop('readonly', false);
-    document.getElementById("mobile_no").className = "form-control";
-
-    var x = document.getElementById('edit1');
-    x.style.display = "none";
-
-    var y = document.getElementById('btnsave');
-    y.style.display = "block";
-
-    var y = document.getElementById('btncancel');
-    y.style.display = "block";
-
+    
+    var x = document.getElementById('editAccount');
+    x.style.display = "block";
+    var y = document.getElementById('viewAccount');
+    y.style.display = "none";
   });
 
   $(document).on('click', '.edit2', function()
   {
-    $('#new-password').prop('readonly', false);
-    document.getElementById("new-password").className = "form-control";
-    $('#new-password-confirm').prop('readonly', false);
-    document.getElementById("new-password-confirm").className = "form-control";
-    $('#current-password').prop('readonly', false);
-    document.getElementById("current-password").className = "form-control";
+    // $('#new-password').prop('readonly', false);
+    // document.getElementById("new-password").className = "form-control";
+    // $('#new-password-confirm').prop('readonly', false);
+    // document.getElementById("new-password-confirm").className = "form-control";
+    // $('#current-password').prop('readonly', false);
+    // document.getElementById("current-password").className = "form-control";
     
-    var y = document.getElementById('btnsave2');
-    y.style.display = "block";
+    // var y = document.getElementById('btnsave2');
+    // y.style.display = "block";
 
-    var y = document.getElementById('btncancel2');
-    y.style.display = "block";
+    // var y = document.getElementById('btncancel2');
+    // y.style.display = "block";
 
-    var x = document.getElementById('edit2');
-    x.style.display = "none";
+    // var x = document.getElementById('edit2');
+    // x.style.display = "none";
 
   });
   
@@ -299,22 +278,10 @@
 
   $(document).on('click', '.cancel', function()
   {
-
-    $('#email1').prop('readonly', true);
-    $('#email1').val("{{Auth::user()->email}}");
-    document.getElementById("email1").className = "form-control-plaintext {{ $errors->has('email1') ? ' is-invalid' : '' }} border-bottom";
-    $('#mobile_no').prop('readonly', true);
-    $('#mobile_no').val("{{Auth::user()->mobile_number}}");
-    document.getElementById("mobile_no").className = "form-control-plaintext {{ $errors->has('email1') ? ' is-invalid' : '' }} border-bottom";
-
-    var y = document.getElementById('btnsave');
-    y.style.display = "none";
-
-    var y = document.getElementById('btncancel');
-    y.style.display = "none";
-
-    var x = document.getElementById('edit1');
-    x.style.display = "block";
+      var x = document.getElementById('editAccount');
+      x.style.display = "none";
+      var y = document.getElementById('viewAccount');
+      y.style.display = "block";
   });
 
 

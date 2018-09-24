@@ -23,7 +23,9 @@ use Mail;
 use App\Mail\Welcome;
 use App\Mail\Awarding;
 use App\Mail\Contact;
+use App\Mail\RegSuccess;
 use Itexmo;
+use DataTables;
 
 
 
@@ -52,7 +54,7 @@ class FrontendController extends Controller
         //     $ck=0;
         // }
         $announce = DB::table('announcements')->where('a_isdel', 0)->get();
-
+        $view;
         if(Auth::check())
         {
             $applicant = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
@@ -64,8 +66,67 @@ class FrontendController extends Controller
             {
                 $ck=0;
             }
-            return view ('sas')->with('ncw', $ncw)->with('gad', $gad)->with('vg', $vg)->with('gp', $gp)->with('gpr', $gpr)
-            ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr)->with('ck', $ck)->with('announce', $announce);   
+
+            if(Auth::user()->chg == 0)
+            {
+                if(Auth::user()->new==1)
+                {
+                    $tak = DB::table('personal_info')->where('applicant_id', Auth::user()->id)->first();
+                    $guardian = DB::table('guardian_info')->where('applicant_id', Auth::user()->id)->first();
+                    $education = DB::table('education_info')->where('applicant_id', Auth::user()->id)->first();
+
+                    
+                    $gurUrl = array ();
+                    $eduUrl = array ();
+                    $takti =  array();
+
+                    if($guardian)
+                    {
+                        $gurUrl[] = 'profile/guardian-information/edit';
+                        $gurUrl[] = "Edit Guardian";
+                    }
+                    else
+                    {
+                        $gurUrl[] = 'profile/guardian-information';
+                        $gurUrl[] = "Who's your guardian?";
+                    }
+
+                    if($education)
+                    {
+                        $eduUrl[] = "/profile/education-information/edit";
+                        $eduUrl[] = "Edit Education";
+                    }
+                    else
+                    {
+                        $eduUrl[] = 'profile/education-information';
+                        $eduUrl[] = 'Where do you study?';
+                    }
+
+                    if($tak)
+                    {
+                        $takti[] = "/profile/personal-information/edit";
+                        $takti[] = "Edit Profile";
+                    }
+                    else
+                    {
+                        $takti[] = "/profile/personal-information";
+                        $takti[] = "Complete My Profile";
+                    }
+                    $view = 1;
+
+                    return view('front.profile')->with('takti', $takti)->with('gurUrl', $gurUrl)->with('eduUrl', $eduUrl)->with('view', $view);
+                }
+                else
+                {
+                    return view ('sas')->with('ncw', $ncw)->with('gad', $gad)->with('vg', $vg)->with('gp', $gp)->with('gpr', $gpr)
+                    ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr)->with('ck', $ck)->with('announce', $announce); 
+                }
+            }
+            else
+            {
+                return view('front.account-del');
+            }
+              
         }
         
         else
@@ -136,8 +197,19 @@ class FrontendController extends Controller
             $takti[] = "/profile/personal-information";
             $takti[] = "Complete My Profile";
         }
+        
+        if(Auth::user()->new == 1)
+        {
+            $view = 1;
+        }
+        else
+        {
+            $view=0;
+        }
 
-        return view('front.profile')->with('takti', $takti)->with('gurUrl', $gurUrl)->with('eduUrl', $eduUrl);
+        
+
+        return view('front.profile')->with('takti', $takti)->with('gurUrl', $gurUrl)->with('eduUrl', $eduUrl)->with('view', $view);
     }
     function myProfile()
     {
@@ -162,7 +234,7 @@ class FrontendController extends Controller
         {
             $ck="show";
             $scholar = DB::table('scholarships')->where('id', $applicant->scholar_id)->first();
-             return view('front.scholarship')->with('ck', $ck)->with('scholar', $scholar)->with('applicant', $applicant);
+            return view('front.scholarship')->with('ck', $ck)->with('scholar', $scholar)->with('applicant', $applicant);
         }
         else
         {
@@ -397,8 +469,14 @@ class FrontendController extends Controller
                 'duration'  => $request->duration,
                 'college_name' => $request->college_name,
                 'college_address' => $request->college_address,
-                'applicant_id' => Auth::user()->id
+                'applicant_id' => Auth::user()->id,
+                
             ]);
+
+            $user = User::find(Auth::user()->id);
+            $user->new = 0;
+            $user->save();
+
             return redirect ('/profile');
         }
     }
@@ -412,12 +490,16 @@ class FrontendController extends Controller
         ]);	
 
         $user = User::find(Auth::user()->id);
-        $user->email = $request->get('email1');
+        $user->email = $request->get('email');
         $user->mobile_number = $request->get('mobile_no');
         $user->save();
         return redirect('/account');
     }
 
+    function accountpass()
+    {
+        return view('front.account-del');
+    }
     function changePassword(Request $request)
     {
         // $cur = Hash::make('register');
@@ -446,8 +528,10 @@ class FrontendController extends Controller
         //Change Password
         $user = Auth::user();
         $user->password = bcrypt($request->get('new-password'));
+        $user->chg = 0;
         $user->save();
- 
+        
+
         return redirect()->back()->with("success","Password changed successfully !");
 
         
@@ -703,8 +787,87 @@ class FrontendController extends Controller
         // });
         // var_dump( Mail:: failures());
         // exit;
-        $sample = array('sample', 'smaple2', 'sample3');
-        return view('sample1')->with('sample', $sample);  
+        $sample = array();
+         $scid = 6;
+                    $scholar = DB::table('scholarships')->where('id', $scid)->first();
+
+        // $app2 = DB::table('application')->JOIN('users', 'users.id', '=', 'application.applicant_id')
+        // ->JOIN('pcl', 'pcl.application_id', '=', 'application.id')
+        // ->where('application.application_status', 'Approved')->select('users.email', 'users.mobile_number', 'users.surname',
+        //     'users.first_name', 'users.middle_name', 'users.suffix', 'application.id')->get();
+        // $app2->where('application.scholar_id', $scid);
+
+        $app = DB::table('application')->where('application_status', 'Pending')->where('scholar_id', 6)->get();
+
+       
+
+        // foreach($app2 as $emails)
+        // {
+        //   array_push($sample, $emails);
+        // }
+        
+        // 
+    
+          //  $app22 = $app2->toArray();
+        $samp = $app->toJson();
+        
+            // $sum=count($app22);
+      //dd($app22);
+      //return $app22[0]->email;
+    //   for($x=0; $x<=$sum; $x++)
+    //   {
+    //       echo $app22[$x]->email;
+    //   }
+
+// $arr = array();
+ $json = json_decode($samp, true);
+// $ctr = count($json);
+// return $json;
+// if($ctr==1)
+// {
+//     $ctr-=1;
+// // }
+// $mysqldate = date( 'Y-m-d H:i:s', $phpdate );
+// $phpdate = strtotime( $mysqldate );
+date_default_timezone_set("Asia/Manila");
+// return now();
+return view('backup_restore');
+// echo date('h:i:s a', strtotime(now()));
+
+
+// for($x=0; $x<=$ctr; $x++)
+// {
+//     echo $json[$x]['email'].'<br>';
+//     echo '0'.$json[$x]['mobile_number'].'<br>';
+//     //array_push($arr, $json[$x]['email']);
+// }
+// return $arr[0];
+
+
+
+    // $emails = array();
+    // for($x=0; $x<=$ctr; $x++)
+    // {
+    //     array_push($emails, $json[$x]['email']);
+    // }
+
+    // Mail::send('emails.regsuccess', [], function($message) use ($emails)
+    // {    
+    // $message->to($emails)->subject('This is test e-mail');    
+    // });
+    // var_dump( Mail:: failures());
+    // exit;
+    // $name="ALBERT OCAMPO";
+    //  Mail::to('guintoproductions@gmail.com')->send(new RegSuccess($name));
+
+
+    //  for($y=0; $y<=$ctr; $y++)
+    //                     {
+    //                         $res = Itexmo::to('0'.$json[$y]['mobile_number'])->message('Hello '.$json[$y]['first_name'].' you have been awarded a scholarship!' )->send();
+    //                         if($res == '0') {
+    //                             //
+    //                         }
+    //                     }
         // $arr = array();
         // $chunk = array('sample1', 'sample2', 'sample3','sample4', 'sample5');
         // foreach($chunk as $ch)
@@ -721,6 +884,30 @@ class FrontendController extends Controller
                            
                            
        
+    }
+    public function sendMail($data)
+    {   
+        
+        $samp = $app2->toJson();
+
+        $json = json_decode($samp, true);
+        $ctr = count($json);
+        $ctr-=1;
+
+        $emails = array();
+        for($x=0; $x<=$ctr; $x++)
+        {
+            array_push($emails, $json[$x]['email']);
+        }
+
+        Mail::send('emails.awarding', [], function($message) use ($emails)
+        {    
+        $message->to($emails)->subject('Awarding of Cheques');    
+        });
+        var_dump( Mail:: failures());
+        exit;
+
+        return redirect('/admin/tracking');
     }
 
     public function uploadgv()
@@ -885,6 +1072,7 @@ class FrontendController extends Controller
         $reqgv->brgy_sub = 'Submitted';
         $reqgv->oid_sub = 'Submitted';
         $reqgv->honor_sub = 'Submitted';
+        $reqgv->submit = 1;
 
         $reqgv->save();
         return redirect ('/scholarship/details');;
@@ -1049,6 +1237,7 @@ class FrontendController extends Controller
         $reqeefap->grades_sub = 'Submitted';
         $reqeefap->brgy_sub = 'Submitted';
         $reqeefap->oid_sub = 'Submitted';
+        $reqeefap->id = 1;
 
         $reqeefap->save();
         return redirect ('/scholarship/details');;
@@ -1301,4 +1490,17 @@ class FrontendController extends Controller
     //     }
     //     echo $output;
     // }
+
+    function getdata()
+    {
+        $logs = DB::table('history_log')->where('applicant_id', Auth::user()->id)->get();
+        return DataTables::of($logs)
+        ->addColumn('ss', function($logs){
+            return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$logs->id.'"><i class="fa fa-edit"></i> Edit</a>
+                    <a href="#" class="btn btn-sm btn-danger delete" id="'.$logs->id.'"><i class="fa fa-trash"></i> Delete</a> ';
+        })
+        ->make(true);
+
+    }
+
 }

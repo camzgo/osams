@@ -71,8 +71,8 @@ class SubController extends Controller
        } 
        else if ($scholarships->type == "pcl")
        {
-           $req = DB::table('pcl')->where('submit', 1)->where('application_id', $app->id)->first();  
-            return view('admin.submission.details')->with('pcl', $pcl)->with('role', $role)->with('scholarships', $scholarships)->with('app', $app);
+           $req = DB::table('reqeefap')->where('submit', 1)->where('application_id', $app->id)->first();  
+            return view('admin.submission.details')->with('req', $req)->with('role', $role)->with('scholarships', $scholarships)->with('app', $app);
        }
 
     }
@@ -108,6 +108,14 @@ class SubController extends Controller
 
             ]);
 
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $history = DB::table('history_log')->insert([
+                'action'  => 'Application Approved',
+                'date'     => date('Y-m-d'),
+                'time'     =>$time,
+                'applicant_id' => $request->get('applicant_id')
+            ]);
             return redirect('/admin/submission');
 
         }
@@ -120,6 +128,14 @@ class SubController extends Controller
                 'application_status' => $approve
             ]);
 
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $history = DB::table('history_log')->insert([
+                'action'  => 'Application Disapproved',
+                'date'     => date('Y-m-d'),
+                'time'     =>$time,
+                'applicant_id' => $request->get('applicant_id')
+            ]);
             // $approval = DB::table('approval_date')->insert([
             // 'status' => $approve,
             // 'application_id' => $id,

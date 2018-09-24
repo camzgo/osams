@@ -16,6 +16,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-2 ml-4">
+            @if(Auth::user()->new ==0)
             <div class="card ">
               <div class="card-header"><strong>Dashboard</strong></div>
               <div class="list-group list-group-flush">
@@ -39,11 +40,17 @@
                 </a>
               </div>
             </div>
+            @endif
           </div>
           <div class="col-lg-9">
             <div class="card">
               <div class="card-body">
-                  <div class="card-title"><div class="alert alert-info" role="alert">My Profile</div></div><hr>
+                @if(Auth::user()->new==1)
+                  <div class="alert alert-info" role="alert">You need to complete all of these information for you to able to apply for a scholarship category.</div>
+                @else
+                <div class="card-title"><div class="alert alert-info" role="alert">My Profile</div></div><hr>
+                @endif
+                
 
                   <div>
                     <div class="card-deck">

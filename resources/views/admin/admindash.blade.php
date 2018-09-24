@@ -43,13 +43,14 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="admin" class="nav-link bg-white">
+            <a href="/admin" class="nav-link bg-white">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
+          @if($role->tracking == "Grant")
            <li class="nav-item">
             <a href="/admin/tracking" class="nav-link">
               <i class="nav-icon fa fa-map-marker"></i>
@@ -58,6 +59,8 @@
               </p>
             </a>
           </li>
+          @endif
+          @if($role->submission == "Grant")
           <li class="nav-item">
             <a href="/admin/submission" class="nav-link">
               <i class="nav-icon fa fa-file"></i>
@@ -66,6 +69,8 @@
               </p>
             </a>
           </li>
+          @endif
+          @if($role->transactions == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
@@ -105,6 +110,8 @@
               </li>
             </ul>
           </li>
+          @endif
+          @if($role->file_maintenance == "Grant")
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
@@ -159,6 +166,8 @@
               
             </ul>
           </li>
+          @endif
+          @if($role->utilities == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
@@ -238,6 +247,8 @@
               </li>
             </ul>
           </li>
+          @endif
+          @if($role->reports == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-bar-chart"></i>
@@ -270,6 +281,7 @@
               </li>
             </ul>
           </li>
+          @endif
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -370,14 +382,31 @@
           <!-- Left col -->
           <div class="col-md-8">
             <!-- MAP & BOX PANE -->
-            <div class="card card-danger">
-              <div class="card-header">
-                <h3 class="card-title">Scholarship Program Chart <small>(Approved Applications)</small></h3>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card card-danger">
+                <div class="card-header">
+                  <h3 class="card-title">Scholarship Program Chart <small>(Approved Applications)</small></h3>
+                </div>
+                <div class="card-body">
+                  <canvas id="scholarChart" style="height:250px"></canvas>
+                </div>
+                <!-- /.card-body -->
               </div>
-              <div class="card-body">
-                <canvas id="scholarChart" style="height:250px"></canvas>
               </div>
-              <!-- /.card-body -->
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card card-warning">
+                <div class="card-header">
+                  <h3 class="card-title text-white">Municipalities Chart <small>(Approved Applications)</small></h3>
+                </div>
+                <div class="card-body">
+                  <canvas id="pieChart" style="height:250px"></canvas>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              </div>
             </div>
             </div>
 
@@ -421,7 +450,7 @@
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
-            <div class="info-box mb-3 bg-info">
+            <div class="info-box mb-3 bg-primary">
               <span class="info-box-icon"><i class="fa fa-pause-circle"></i></span>
 
               <div class="info-box-content">
@@ -440,22 +469,24 @@
               </div>
               <!-- /.info-box-content -->
             </div>
+            
+            <div class="info-box mb-3 bg-info">
+              <span class="info-box-icon"><i class="fa fa-refresh"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Total Renew Applications</span>
+                <span class="info-box-number"><strong>{{$all[5]}}</strong></span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
             <!-- /.info-box -->
     </div>
           <!-- /.col -->
         </div>
         <div class="row mb-4">
-          <div class="col-md-12">
+          <div class="col-md-8">
             <!-- MAP & BOX PANE -->
-            <div class="card card-warning">
-              <div class="card-header">
-                <h3 class="card-title text-white">Municipalities Chart <small>(Approved Applications)</small></h3>
-              </div>
-              <div class="card-body">
-                <canvas id="pieChart" style="height:250px"></canvas>
-              </div>
-              <!-- /.card-body -->
-            </div>
+            
             </div>
             {{-- <div class="col-md-4">
             <!-- MAP & BOX PANE -->
