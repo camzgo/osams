@@ -30,4 +30,5 @@ class ReportsController extends Controller
          return view ('admin.reports.repo')->with('sample', $sample);
        // include(app_path() . '\repo.php');
     }
+    
 }

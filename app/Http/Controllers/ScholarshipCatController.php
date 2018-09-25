@@ -438,8 +438,8 @@ class ScholarshipCatController extends Controller
             'submit'   => 0
         ]);
         }
-        
-        return redirect('/admin/apply/send');
+        $ids=$id;
+        return redirect('/admin/apply/send/'.$ids);
     }
 
 
@@ -528,7 +528,8 @@ class ScholarshipCatController extends Controller
             'submit'   => 0
         ]);
 
-        return redirect('/admin/apply/send');
+        $ids=$id;
+        return redirect('/admin/apply/send/'.$ids);
     }
 
 
@@ -580,6 +581,7 @@ class ScholarshipCatController extends Controller
 
     function printeefap($id)
     {
+        
         $app = DB::table('application')->where('id', $id)->first();
         $scholar_id = DB::table('scholarships')->where('id', $app->scholar_id)->first();
 
@@ -587,6 +589,7 @@ class ScholarshipCatController extends Controller
         {
             $eefap = DB::table('eefap')->where('application_id', $app->id)->first();
             $req = DB::table('reqeefap')->where('application_id', $app->id)->first();
+            return view('admin.reports.repo')->with('app',$app)->with('scholar_id', $scholar_id)->with('eefap', $eefap)->with('req', $req);
         }
         else if($scholar_id->type == "eefap-gv")
         {
@@ -594,10 +597,12 @@ class ScholarshipCatController extends Controller
             if($scholar_id->id == 7)
             {
                 $req = DB::table('reqeefap')->where('application_id', $app->id)->first();
+                return view('admin.reports.repogv2')->with('app',$app)->with('scholar_id', $scholar_id)->with('eefap', $eefap)->with('req', $req);
             }
             else
             {
                 $req = DB::table('reqgv')->where('application_id', $app->id)->first();
+                return view('admin.reports.repogv2')->with('app',$app)->with('scholar_id', $scholar_id)->with('eefap', $eefap)->with('req', $req);
             }
             
         }
@@ -605,9 +610,15 @@ class ScholarshipCatController extends Controller
         {
             $eefap = DB::table('pcl')->where('application_id', $app->id)->first();
             $req = DB::table('reqeefap')->where('application_id', $app->id)->first();
+            return view('admin.reports.repopcl2')->with('app',$app)->with('scholar_id', $scholar_id)->with('eefap', $eefap)->with('req', $req);
         }
 
-        return view('admin.reports.repo')->with('app',$app)->with('scholar_id', $scholar_id)->with('eefap', $eefap)->with('req', $req);
+       
     }
+
+    // function printeefapgv($id)
+    // {
+
+    // }
 
 }

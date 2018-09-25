@@ -21,7 +21,7 @@ $pdf->SetY(15);
     // $con=mysqli_connect('localhost', 'root', '','osams');
     //     $query=mysqli_query($con,"SELECT * FROM eefap LIMIT 1");
     //     while($reports=mysqli_fetch_assoc($query)){
-if ($app->renew == 1 && $app->application_status == "Renew"){
+    if($app->renew == 1 && $app->application_status == "Renew"){
         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',66,28,6);
     }else{
         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',135.5,28,6);    //$pdf->Cell(1,0,'',0,0);
@@ -112,7 +112,7 @@ if ($app->renew == 1 && $app->application_status == "Renew"){
     }else if($eefap->program_type == "Ladderized"){
         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',155,137,6);
     }
-    $pdf->Cell(10,7,"(   ) 2 year's course",0,0,'L');
+    $pdf->Cell(10,7,"(   ) 2 Year's Course",0,0,'L');
     $pdf->Cell(80,7,"(   ) Bachelor's Degree",0,0,'R');
     $pdf->Cell(60,7,"(   ) Ladderized",0,1,'R');
     $pdf->Cell(9);
@@ -163,19 +163,54 @@ if ($app->renew == 1 && $app->application_status == "Renew"){
     $pdf->SetFont('Arial','',10);
     $pdf->Cell(85,-38,'___ Bio-data w/2x2 picture', 0, 0,'C');
     if($req->biodata_sub == "Submitted"){
-        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',32,186,6);
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',31,186,6);
     }
    
     $pdf->Cell(110,-38,'___ Nanay Community Workers (NCW)', 0, 1,'C');
-    $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',119,186,6);
+    if($scholar_id->id == 1)
+    {
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',119,186,6);
+    }
+   
     $pdf->Cell(78,48,'___ Grades/ Form 138', 0, 0,'C');
+    if($req->grades_sub == "Submitted"){
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',31,191,6);
+    }
     $pdf->Cell(120,48,'___ Gender and Development (GAD)', 0, 1,'C');
+    if($scholar_id->id == 2)
+    {
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',119,191,6);
+    }
     $pdf->Cell(120,-38,'___ Certificate of Registration / Assessment Form', 0, 0,'C');
+    if($req->cor_sub == "Submitted"){
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',31,196,6);
+    }
     $pdf->Cell(20,-38,'___ Graduated from Public', 0, 1,'C');
+    if($scholar_id->id == 4)
+    {
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',119,196,6);
+    }
     $pdf->Cell(99,48,'___ Barangay/ Residency/Indigency', 0, 0,'C');
+    if($req->brgy_sub == "Submitted"){
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',31,201,6);
+    }
+    if($scholar_id->id == 5)
+    {
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',119,201,6);
+    }
     $pdf->Cell(64,48,'___ Graduated from Private', 0, 1,'C');
+    if($req->or_sub == "Submitted"){
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',31,206,6);
+    }
     $pdf->Cell(73,-38,'___ Official Receipt', 0, 0,'C');
+    if($scholar_id->id == 3)
+    {
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',119,206,6);
+    }
     $pdf->Cell(105,-38,'___ VG Old and New', 0, 1,'C');
+    if($req->oid_sub == "Submitted"){
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',31,211,6);
+    }
     $pdf->Cell(65,48,'___ School ID', 0, 0,'C');
     $pdf->Cell(93,48,'', 0, 1,'C');
 
@@ -193,8 +228,7 @@ if ($app->renew == 1 && $app->application_status == "Renew"){
 
 //A,C,B sets
 
-$code='123456aswrr78';
-$pdf->Code128(144,255,$code,60,8);
+$pdf->Code128(144,255,$app->barcode_number,60,8);
 //pdf->Ln(5);
 $pdf->SetXY(184,263);
 //$pdf->Cell(163);
