@@ -144,7 +144,8 @@ Route::prefix('admin/apply')->group(function(){
     Route::get('/getdata2', 'ApplyController@applydata')->name('apply.data');
     Route::get('/getdata3', 'ApplyController@scholardata')->name('apply.scholardata');
     Route::get('/scholarship-category', 'ApplyController@showCat');
-    Route::get('/send', 'ApplyController@showsend');
+    Route::get('/send/{id}', 'ApplyController@showsend');
+    Route::get('/application/form/{id}', 'ScholarshipCatController@printeefap');
 });
 
 
@@ -262,12 +263,13 @@ Route::prefix('/admin/tracking')->group(function(){
 });
 
 
-Route::get('/reports', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
+Route::get('/reports', function () {
 
-    $fpdf->AddPage();
-    $fpdf->SetFont('Arial', '', 18);
-    $fpdf->Cell(50, 25, 'Hello World!');
-    $fpdf->Output();
+    Fpdf::AddPage();
+    Fpdf::SetFont('Courier', 'B', 18);
+    Fpdf::Cell(50, 25, 'Hello World!');
+    Fpdf::Output();
+    exit;
 
 });
 Route::prefix('admin/submission')->group(function()

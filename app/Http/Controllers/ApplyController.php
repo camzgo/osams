@@ -106,9 +106,10 @@ class ApplyController extends Controller
         return view ('admin.transaction.applycat');
     }
 
-    function showsend()
+    function showsend($id)
     {
-         return view ('admin.scholarships.application');
+        $name =$id;
+         return view ('admin.scholarships.application')->with('name', $name);
     }
     function getdata()
     {

@@ -831,7 +831,9 @@ class FrontendController extends Controller
 // $phpdate = strtotime( $mysqldate );
 date_default_timezone_set("Asia/Manila");
 // return now();
-return view('backup_restore');
+$id=2;
+        return redirect('/admin/apply/send/'.$id);
+//return Redirect::route('admin.reports.repo', $id)->with(['data' => $data]);
 // echo date('h:i:s a', strtotime(now()));
 
 

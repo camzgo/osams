@@ -315,7 +315,11 @@
                     <hr/>
                     <p>Your application has been sent.</p>
                     {{-- <br>    --}}
+                    <div class="ghost">
+                    <input type="hidden" value="{{$name}}">
+                    </div>
                     <div class="pull-right">
+                        <a href="/admin/apply/application/form/{{$name}}" class="btn btn-primary"> Print Application</a> &nbsp;
                         <a href="/admin/approve" class="btn btn-success"> Proceed to Approve</a>
                     </div>
                 </div>
