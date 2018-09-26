@@ -255,12 +255,6 @@ $pdf->SetY(15);
 
 //A,C,B sets
 
-$code='123456aswrr78';
-$pdf->Code128(120,255,$code,80,8);
-//pdf->Ln(5);
-$pdf->SetXY(174,263);
-//$pdf->Cell(163);
-$pdf->Write(5, $code);
 
 $pdf->Output();
 exit;

@@ -208,6 +208,7 @@ class ApplicationMainController extends Controller
                     'applicant_id' => $request->get('applicant_id')
                 ]);
             }
+            
         }
         
         $output = array(

@@ -178,7 +178,7 @@ $pdf->SetY(15);
     $pdf->Cell(184,48,'_____Grades/Class Cards/Form 138', 0, 1,'C');
     $pdf->Cell(49,-38,'_____ SK CHAIRMAN', 0, 0,'C');
     $pdf->Cell(177,-38,'_____BRGY.Residency/Indigency (Cert.)', 0, 1,'C');
-    $pdf->Cell(50,48,'_____SK COUNCILOR', 0, 0,'C');
+    $pdf->Cell(50,48,'_____ SK COUNCILOR', 0, 0,'C');
     $pdf->Cell(143,48,'_____Official Receipt', 0, 1,'C');
     $pdf->Cell(65,-38,'', 0, 0,'C');
     $pdf->Cell(140,-38,'_____Registration/ Assessment Form ', 0, 1,'C');
@@ -207,12 +207,6 @@ $pdf->SetY(15);
 
 //A,C,B sets
 
-$code='123456aswrr78';
-$pdf->Code128(120,255,$code,80,8);
-//pdf->Ln(5);
-$pdf->SetXY(174,263);
-//$pdf->Cell(163);
-$pdf->Write(5, $code);
 
 $pdf->Output();
 exit;

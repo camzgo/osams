@@ -24,7 +24,7 @@
       </div>
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
+     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="/admin" class="nav-link">
@@ -34,6 +34,7 @@
               </p>
             </a>
           </li>
+          @if($role->tracking == "Grant")
            <li class="nav-item">
             <a href="/admin/tracking" class="nav-link">
               <i class="nav-icon fa fa-map-marker"></i>
@@ -42,6 +43,8 @@
               </p>
             </a>
           </li>
+          @endif
+          @if($role->submission == "Grant")
           <li class="nav-item">
             <a href="/admin/submission" class="nav-link">
               <i class="nav-icon fa fa-file"></i>
@@ -50,6 +53,8 @@
               </p>
             </a>
           </li>
+          @endif
+          @if($role->transactions == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
@@ -89,6 +94,8 @@
               </li>
             </ul>
           </li>
+          @endif
+          @if($role->file_maintenance == "Grant")
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
@@ -143,6 +150,8 @@
               
             </ul>
           </li>
+          @endif
+          @if($role->utilities == "Grant")
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
@@ -222,38 +231,17 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          @endif
+          @if($role->reports == "Grant")
+          <li class="nav-item">
+            <a href="/admin/reports/master-list" class="nav-link">
               <i class="nav-icon fa fa-bar-chart"></i>
               <p>
                 Reports
-                <i class="right fa fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/reports/master-list" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p> Master List of Scholars</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/reports/scholarship-programs" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p>Scholarship Programs</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/reports/application-forms" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p>Application Forms</p>
-                </a>
-              </li>
-            </ul>
           </li>
+          @endif
         </ul>
       </nav>
     </div>

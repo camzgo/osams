@@ -399,37 +399,13 @@ button:focus {
           </li>
           @endif
           @if($role->reports == "Grant")
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item">
+            <a href="/admin/reports/master-list" class="nav-link">
               <i class="nav-icon fa fa-bar-chart"></i>
               <p>
                 Reports
-                <i class="right fa fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/reports/master-list" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p> Master List of Scholars</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/reports/scholarship-programs" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p>Scholarship Programs</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/reports/application-forms" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p>Application Forms</p>
-                </a>
-              </li>
-            </ul>
           </li>
           @endif
         </ul>

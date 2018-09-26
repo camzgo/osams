@@ -181,6 +181,15 @@ Route::prefix('admin/permission')->group(function(){
 Route::prefix('admin/reports')->group(function()
 {
     Route::get('/master-list', 'ReportsController@index');
+    Route::get('/master-list/applicant/{data}', 'ReportsController@appreports');
+    Route::get('/master-list/applied/{data}', 'ReportsController@appreports2');
+    Route::get('/master-list/applicant/municipality/{data}', 'ReportsController@appmuni');
+    Route::get('/master-list/applied/municipality/{data}', 'ReportsController@appmuni2');
+    Route::get('/master-list/applicant/scholarship/{data}', 'ReportsController@appsc');
+    Route::get('/master-list/scholarship', 'ReportsController@screpo');
+    Route::get('/master-list/form-1', 'ReportsController@af1');
+    Route::get('/master-list/form-2', 'ReportsController@af2');
+    Route::get('/master-list/form-3', 'ReportsController@af3');
 });
 
 
@@ -213,6 +222,7 @@ Route::prefix('/')->group(function()
     Route::get('/profile/education-information', 'FrontendController@education');
     Route::get('/profile/education-information/edit', 'FrontendController@educationEdit');
     Route::get('/account', 'FrontendController@account');
+    Route::get('/account/password', 'FrontendController@accountpass');
     Route::post('/profile/personal-information/fetch', 'FrontendController@fetch')->name('profile.fetch');
     // Route::post('/scholarship/details/eefap-gv/fetch', 'FrontendController@gvfetch')->name('eefapgv.fetch');
     

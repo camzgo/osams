@@ -477,7 +477,7 @@ class FrontendController extends Controller
             $user->new = 0;
             $user->save();
 
-            return redirect ('/profile');
+            return redirect ('/');
         }
     }
 
@@ -1239,7 +1239,7 @@ $id=2;
         $reqeefap->grades_sub = 'Submitted';
         $reqeefap->brgy_sub = 'Submitted';
         $reqeefap->oid_sub = 'Submitted';
-        $reqeefap->id = 1;
+        $reqeefap->submit = 1;
 
         $reqeefap->save();
         return redirect ('/scholarship/details');;

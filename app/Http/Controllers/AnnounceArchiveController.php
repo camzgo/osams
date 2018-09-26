@@ -141,6 +141,12 @@ class AnnounceArchiveController extends Controller
             $announce->save();
             $success_output = '';
 
+            $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => date('H:i:s'),
+            'action' => 'Announcement Restored',
+            'employee_id' => Auth::user()->id
+            ]);
         }
         else if($request->get('button_action') == 'delete')
         {
@@ -167,6 +173,12 @@ class AnnounceArchiveController extends Controller
         $announce = Announcement::find($request->input('id'));
         if($announce->delete())
         {
+            $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => date('H:i:s'),
+            'action' => 'Announcement Deleted',
+            'employee_id' => Auth::user()->id
+            ]);
             echo 'It was successfully deleted!';
         }
     }

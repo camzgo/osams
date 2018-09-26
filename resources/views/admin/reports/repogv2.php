@@ -258,7 +258,7 @@ $pdf->SetY(15);
 $pdf->SetFont('Arial','',10);
 $pdf->Code128(144,255,$app->barcode_number,60,8);
 //pdf->Ln(5);
-$pdf->SetXY(184,263);
+$pdf->SetXY(179,263);
 //$pdf->Cell(163);
 $pdf->Write(5, $app->barcode_number);
 

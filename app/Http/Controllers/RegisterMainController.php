@@ -102,6 +102,8 @@ class RegisterMainController extends Controller
         $user->bday = $request->input('bday');
         $user->applicant_isdel = 0;
         $user->profile_photo = "noimage.jpg";
+        $user->chg = 1;
+        $user->new =1;
         $user -> save();
 
 

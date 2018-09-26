@@ -151,28 +151,28 @@ class TrackingController extends Controller
                     // $track = Tracking::find($request->get('scholarship_id'));
                     // $track->status = 'RELEASED';
                     // $track->save();
-                    date_default_timezone_set("Asia/Manila");
-                    $time = date('h:i:s', strtotime(now()));
-                    $history = DB::table('history_log')->insert([
-                        'action'  => 'Cheques Released',
-                        'date'     => date('Y-m-d'),
-                        'time'     =>$time,
-                        'applicant_id' => $request->get('applicant_id')
-                    ]);
+                    // date_default_timezone_set("Asia/Manila");
+                    // $time = date('h:i:s', strtotime(now()));
+                    // $history = DB::table('history_log')->insert([
+                    //     'action'  => 'Cheques Released',
+                    //     'date'     => date('Y-m-d'),
+                    //     'time'     =>$time,
+                    //     'applicant_id' => $request->get('applicant_id')
+                    // ]);
 
-                    date_default_timezone_set("Asia/Manila");
-                    $time = date('h:i:s', strtotime(now()));
-                    $history = DB::table('history_log')->insert([
-                        'action'  => 'Application need to renew',
-                        'date'     => date('Y-m-d'),
-                        'time'     =>$time,
-                        'applicant_id' => $request->get('applicant_id')
-                    ]);
+                    // date_default_timezone_set("Asia/Manila");
+                    // $time = date('h:i:s', strtotime(now()));
+                    // $history = DB::table('history_log')->insert([
+                    //     'action'  => 'Application need to renew',
+                    //     'date'     => date('Y-m-d'),
+                    //     'time'     =>$time,
+                    //     'applicant_id' => $request->get('applicant_id')
+                    // ]);
 
                     
-                    $data;
-                    $json;
-                    $ctr;
+                    // $data;
+                    // $json;
+                    // $ctr;
                     $scid = $request->get('scholarship_id');
                     $scholar = DB::table('scholarships')->where('id', $scid)->first();
                     
@@ -188,6 +188,17 @@ class TrackingController extends Controller
 
                         // $userss = DB::table('users')->get();
                         // $userss->where('id', $app2->applicant_id);
+
+                        
+                        
+                        
+                       // serialize($array)
+                        //return Redirect::route('/send/sample');
+                        $samp = $app2->toJson();
+
+                        $json = json_decode($samp, true);
+                        $ctr = count($json);
+                        $ctr-=1;
 
                         for($z=0; $z<=$ctr; $z++)
                         {
@@ -211,26 +222,17 @@ class TrackingController extends Controller
                             ]);
                         }
                         
-                        
-                       // serialize($array)
-                        //return Redirect::route('/send/sample');
-                        $samp = $app2->toJson();
-
-                        $json = json_decode($samp, true);
-                        $ctr = count($json);
-                        $ctr-=1;
-                        
                         // $nos = array();
                         // $names = array();
 
 
-                        // for($y=0; $y<=$ctr; $y++)
-                        // {
-                        //     $res = Itexmo::to('0'.$json[$y]['mobile_number'])->message('Hello '.$json[$y]['first_name'].' you have been awarded a scholarship!' )->send();
-                        //     if($res == '0') {
-                        //         //
-                        //     }
-                        // }
+                        for($y=0; $y<=$ctr; $y++)
+                        {
+                            $res = Itexmo::to('0'.$json[$y]['mobile_number'])->message('Hello '.$json[$y]['first_name'].' you have been awarded a scholarship!' )->send();
+                            if($res == '0') {
+                                //
+                            }
+                        }
 
                         // $sec = DB::table('application')->where('scholar_id', $request->get('scholarship_id'))->get();
                         // $data = $sec->toJson();
@@ -288,6 +290,17 @@ class TrackingController extends Controller
                         // $userss = DB::table('users')->get();
                         // $userss->where('id', $app2->applicant_id);
                         
+                        
+                        
+                        
+                       // serialize($array)
+                        //return Redirect::route('/send/sample');
+                        $samp = $app2->toJson();
+
+                        $json = json_decode($samp, true);
+                        $ctr = count($json);
+                        $ctr-=1;
+
                         for($z=0; $z<=$ctr; $z++)
                         {
                             $req = DB::table('reqeefap')->where('application_id', $json[$z]['id'])->update([
@@ -309,26 +322,17 @@ class TrackingController extends Controller
                         }
 
                         
-                        
-                       // serialize($array)
-                        //return Redirect::route('/send/sample');
-                        $samp = $app2->toJson();
-
-                        $json = json_decode($samp, true);
-                        $ctr = count($json);
-                        $ctr-=1;
-                        
                         // $nos = array();
                         // $names = array();
 
 
-                        // for($y=0; $y<=$ctr; $y++)
-                        // {
-                        //     $res = Itexmo::to('0'.$json[$y]['mobile_number'])->message('Hello '.$json[$y]['first_name'].' you have been awarded a scholarship!' )->send();
-                        //     if($res == '0') {
-                        //         //
-                        //     }
-                        // }
+                        for($y=0; $y<=$ctr; $y++)
+                        {
+                            $res = Itexmo::to('0'.$json[$y]['mobile_number'])->message('Hello '.$json[$y]['first_name'].' you have been awarded a scholarship!' )->send();
+                            if($res == '0') {
+                                //
+                            }
+                        }
 
                         $apps = DB::table('application')->where('application_status', 'Approved')->update([
                             'application_status' => 'Renew',
@@ -406,13 +410,13 @@ class TrackingController extends Controller
                         // $names = array();
 
 
-                        // for($y=0; $y<=$ctr; $y++)
-                        // {
-                        //     $res = Itexmo::to('0'.$json[$y]['mobile_number'])->message('Hello '.$json[$y]['first_name'].' you have been awarded a scholarship!' )->send();
-                        //     if($res == '0') {
-                        //         //
-                        //     }
-                        // }
+                        for($y=0; $y<=$ctr; $y++)
+                        {
+                            $res = Itexmo::to('0'.$json[$y]['mobile_number'])->message('Hello '.$json[$y]['first_name'].' you have been awarded a scholarship!' )->send();
+                            if($res == '0') {
+                                //
+                            }
+                        }
 
                         $apps = DB::table('application')->where('application_status', 'Approved')->update([
                             'application_status' => 'Renew',

@@ -54,7 +54,6 @@ class AnnounceMainController extends Controller
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
         ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
-
         return view('admin.file_maintenance.announcement.create')->with('role', $role);
     }
 
@@ -77,6 +76,13 @@ class AnnounceMainController extends Controller
             'a_isdel'   => $isdl
         ]);
         $announce->save();
+
+        $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => date('H:i:s'),
+            'action' => 'Announcement Created',
+            'employee_id' => Auth::user()->id
+        ]);
         return redirect('/admin/announcement');
         // else
         // {
@@ -133,6 +139,13 @@ class AnnounceMainController extends Controller
         $announce -> title = $request->input('title');
         $announce -> body = $request->input('body');
         $announce->save();
+
+        $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => date('H:i:s'),
+            'action' => 'Announcement Updated',
+            'employee_id' => Auth::user()->id
+        ]);
         return redirect('/admin/announcement');
     }
 
@@ -215,6 +228,13 @@ class AnnounceMainController extends Controller
                 $announce->a_isdel = $request->get('del_isdel');
                 $announce->save();
                 $success_output = '';
+
+                $audit = DB::table('audit_log')->insert([
+                'date' => date('Y-m-d'),
+                'time' => date('H:i:s'),
+                'action' => 'Announcement Archived',
+                'employee_id' => Auth::user()->id
+                ]);
 
             }
         }

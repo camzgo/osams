@@ -251,37 +251,13 @@
           </li>
           @endif
           @if($role->reports == "Grant")
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item">
+            <a href="/admin/reports/master-list" class="nav-link">
               <i class="nav-icon fa fa-bar-chart"></i>
               <p>
                 Reports
-                <i class="right fa fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/reports/master-list" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p> Master List of Scholars</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/reports/scholarship-programs" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p>Scholarship Programs</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/reports/application-forms" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p>Application Forms</p>
-                </a>
-              </li>
-            </ul>
           </li>
           @endif
         </ul>
@@ -366,6 +342,7 @@
                           <input type="hidden" name="app_id" id="app_id" value="" class="ghost"/>
                           <input type="hidden" name="scholar_id" id="scholar_id" value="" class="ghost"/>
                           <input type="hidden" name="confirm" id="confirm" value="" class="ghost"/>
+                          <input type="hidden" name="applicant_id" id="applicant_id" class="ghost">
                         </div>
                       </div>
                     </div>
@@ -467,6 +444,7 @@
                 $('#app_id').val(id);
                 $('#scholar_id').val(data.scholar_id);
                 $('#app_status').val(data.application_status);
+                $('#applicant_id').val(data.applicant_id);
 
                 $('#button_action').val('update');
                 $('#mainModal').modal('show');
