@@ -198,14 +198,17 @@ class ApplicationMainController extends Controller
                 $application->save();
                 $success_output = '';
 
-
+                $app = DB::table('application')->where('id', $request->get('app_id'))->first();
+                $aid=$app->id;
                 date_default_timezone_set("Asia/Manila");
                 $time = date('h:i:s', strtotime(now()));
                 $history = DB::table('history_log')->insert([
                     'action'  => 'Application Disapproved',
                     'date'     => date('Y-m-d'),
                     'time'     =>$time,
-                    'applicant_id' => $request->get('applicant_id')
+                    'applicant_id' => $request->get('applicant_id'),
+                    'scholar_id' => $aid
+
                 ]);
             }
             

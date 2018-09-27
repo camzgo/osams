@@ -110,6 +110,8 @@
     <div class="row row-grid">
 
       <div class="container">
+    
+        @if(Auth::check())
         <div class="row">
           <div class="mr-2 col-md-3 text-center">
             <h2><strong>MAIN</strong></h2>
@@ -125,6 +127,7 @@
             <br>
             <h4><a href="/contact" class="text-muted">Contact Us</a></h4>
           </div>
+         
           <div class="col-md-5 text-center">
             <h2><strong>SCHOLARSHIPS</strong></h2>
             <hr>
@@ -152,6 +155,24 @@
             </div>
 
           </div>
+          @else 
+          <div class="row text-center">
+          <div class="col justify-content-center">
+            <h2><strong>MAIN</strong></h2>
+            <hr>
+            <br>
+            <h4><a href="/home" class="text-muted">Home</a></h4>
+            <br>
+            <h4><a href="/about-us" class="text-muted">About Us</a></h4>
+            <br>
+            <h4><a href="/faqs" class="text-muted">FAQs</a></h4>
+            <br>
+            <h4><a href="/sitemap" class="text-muted">Site Map</a></h4>
+            <br>
+            <h4><a href="/contact" class="text-muted">Contact Us</a></h4>
+          </div>   
+        </div>
+          @endif
           </div>  
         </div>
     </div>

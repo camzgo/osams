@@ -292,7 +292,7 @@ button:focus {
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average" type="text" class="form-control req" value="{{$eefapgv->general_average}}" placeholder ="General Average">
+                <input name="gen_average" id="gen_average" type="text" class="form-control req" value="{{$eefapgv->general_average}}" placeholder ="General Average">
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -429,6 +429,7 @@ button:focus {
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
+  $('#gen_average').mask('0.00', {"clearIncomplete": true});
 
   document.getElementById('educ_prog').value="{{$eefapgv->program_type}}";
   document.getElementById('grad').value="{{$eefapgv->graduating}}";
@@ -471,6 +472,25 @@ document.getElementById('award').value="{{$eefapgv->awards}}";
   }
   
 
+});
+
+
+
+$('#surname').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#first_name').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#middle_name').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#suffix').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
 });
 
 var v = $("#regForm").validate({

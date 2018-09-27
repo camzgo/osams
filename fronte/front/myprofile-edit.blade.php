@@ -53,19 +53,39 @@
                     <div class="form-row form-group">
                       <div class="col-md-3">
                         <label>Surname <small>(required)</small></label>
-                        <input type="text" class="form-control" name="surname" id="surname" placeholder="Surname" value="{{Auth::user()->surname}}">
+                        <input type="text" class="form-control {{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" id="surname" placeholder="Surname" value="{{Auth::user()->surname}}">
+                        @if ($errors->has('surname'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('surname') }}</strong>
+                        </span>
+                        @endif
                       </div>
                       <div class="col-md-3">
                         <label>First Name <small>(required)</small></label>
-                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" value="{{Auth::user()->first_name}}">
+                        <input type="text" class="form-control {{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" id="first_name" placeholder="First Name" value="{{Auth::user()->first_name}}">
+                        @if ($errors->has('first_name'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('first_name') }}</strong>
+                        </span>
+                        @endif
                       </div>
                       <div class="col-md-3">
                         <label>Middle Name</label>
-                        <input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Middle Name" value="{{Auth::user()->middle_name}}">
+                        <input type="text" class="form-control{{ $errors->has('middle_name') ? ' is-invalid' : '' }}" name="middle_name" id="middle_name" placeholder="Middle Name" value="{{Auth::user()->middle_name}}">
+                        @if ($errors->has('middle_name'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('middle_name') }}</strong>
+                        </span>
+                        @endif
                       </div>
                       <div class="col-md-3">
                         <label>Suffix</label>
-                        <input type="text" class="form-control" name="suffix" id="suffix" placeholder="Suffix (e.g., Jr. Sr. III)" value="{{Auth::user()->suffix}}">
+                        <input type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}" name="suffix" id="suffix" placeholder="Suffix (e.g., Jr. Sr. III)" value="{{Auth::user()->suffix}}">
+                        @if ($errors->has('suffix'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('suffix') }}</strong>
+                        </span>
+                        @endif
                       </div>
                     </div>
                     <div class="form-row form-group">

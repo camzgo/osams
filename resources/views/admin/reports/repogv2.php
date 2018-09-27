@@ -23,7 +23,7 @@ $pdf->SetY(15);
     //     while($reports=mysqli_fetch_assoc($query)){
 
     $pdf->Cell(55);
-    if($app->renew == 1 && $app->application_status == "Renew"){
+    if($app->renew == 1 && $app->renew == 1){
         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',66,28,6);
     }else{
         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',135.5,28,6);    //$pdf->Cell(1,0,'',0,0);
@@ -130,9 +130,9 @@ $pdf->SetY(15);
     $pdf->Cell(-13);
      if ($eefap->graduating == "YES"){
          //$pdf->Image('check_mark.png',kaliwa-kanan,taas-baba,laki)
-         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',85,142,6);
+         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',83,142,6);
          }else{
-         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',102,142,6);
+         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',100,142,6);
          $pdf->Cell(1,0,'',0,0);
          }    
     $pdf->Cell(16,0,'(    ) YES',0,0);
@@ -222,16 +222,20 @@ $pdf->SetY(15);
     $pdf->Cell(50,48,'_____ SK COUNCILOR', 0, 0,'C');
     if($req->or_sub == "Submitted")
     {
-        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',117,196,6);
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',117,191,6);
     }
     $pdf->Cell(143,48,'_____ Official Receipt', 0, 1,'C');
     $pdf->Cell(65,-38,'', 0, 0,'C');
+    if($req->cor_sub == "Submitted")
+    {
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',117,196,6);
+    }
+    $pdf->Cell(140,-38,'_____ Registration/ Assessment Form ', 0, 1,'C');
+    $pdf->Cell(65,48,'', 0, 0,'C');
     if($req->oid_sub == "Submitted")
     {
         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',117,201,6);
     }
-    $pdf->Cell(140,-38,'_____ Registration/ Assessment Form ', 0, 1,'C');
-    $pdf->Cell(65,48,'', 0, 0,'C');
     $pdf->Cell(106,48,'_____ Official ID ', 0, 1,'C');
     $pdf->Cell(93,48,'', 0, 1,'C');
 

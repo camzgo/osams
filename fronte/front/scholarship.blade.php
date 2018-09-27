@@ -87,6 +87,7 @@
                         <tr>
                           <th>Date</th>
                           <th>Time</th>
+                          <th>Scholarship</th>
                           <th>Action</th>
                         </tr>
                     </thead>
@@ -128,6 +129,7 @@ $(function() {
       columns: [
               { data: 'date', name: 'date' },
               { data: 'time', name: 'time' },
+              { data: 'scholarship_name', name: 'scholarship_name' },
               { data: 'action', name: 'action' },
               
         ] 

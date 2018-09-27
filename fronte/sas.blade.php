@@ -269,7 +269,11 @@
        </div>
      </div>
       </div>
-      <div class="col-lg-4 mt-4">
+
+
+
+      <!--here-->
+      {{-- <div class="col-lg-4 mt-4">
         <div class="row">
         <div class="col-md-8" style="margin-left:120px; margin-top: 50px;">
          <div class="card shdow rounded"> 
@@ -289,6 +293,7 @@
               <strong> ANNOUNCEMENT</strong>
             </div>
             <div class="card-body">
+              @if(count($announce) > 0)
               @foreach($announce as $a)
               <div class="clamp-name clamp-lines">
                 <ul>
@@ -297,13 +302,45 @@
                 
               </div>
               @endforeach
+              @else
+              <p>No Announcement!</p>
+              @endif
+            </div>
+          </div>
+
+        </div>
+      </div>
+      </div> <!--end--> --}}
+
+      <div class="col-lg-4 mt-4">
+      <div class="row">
+        <div class="col-md-8"  style="margin-left:120px; margin-top: 50px;">
+          <div class="card rounded">
+            <div class="card-header bg-grad1 text-white" style="font-size: 18px;">
+              <strong> ANNOUNCEMENT</strong>
+            </div>
+            <div class="card-body">
+              @if(count($announce) > 0)
+              @foreach($announce as $a)
+              <div class="clamp-name clamp-lines">
+                <ul>
+                  <li><h5><a href="/announcement/{{$a->id}}" class="text-muted"> {{$a->title}}</a></h5></li>
+                </ul>
+                
+              </div>
+              @endforeach
+              @else
+              <p>No Announcement!</p>
+              @endif
             </div>
           </div>
 
         </div>
       </div>
       
-      </div> 
+      </div>
+      
+      
     
    </section>
      </div>

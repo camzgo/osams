@@ -104,6 +104,7 @@
                                   <h1 class="tx4">PHP {{$scholar->amount}}.00</h1>
                                 </div>
                               </div>
+                              @if($scholar->status == "OPEN")
                               @if($applicant->application_status == "Pending" && $tracking->stage!="Approved")
                               <div class="form-row">
                                 <div class="col-md-3">
@@ -115,18 +116,18 @@
                                 <div class="col-md-3">
                                   <a href="/scholarship/details/eefap" class="btn btn-block text-white btn-success">Edit</a>
                                 </div>
-                                <div class="col-md-3">
+                                 <div class="col-md-3">
                                   <a href="/scholarship/delete" class="btn btn-block btn-danger" onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">Cancel</a>
+                                        document.getElementById('del-form').submit();">Cancel</a>
 
-                                  <form id="logout-form" action="{{action('FrontendController@eefapdel')}}" method="POST" style="display: none;">
+                                  <form id="del-form" action="{{action('FrontendController@eefapdel')}}" method="POST" style="display: none;">
                                       @csrf
                                   </form>
                                 </div>
                               </div>
                               @endif
-                              @if($scholar->status == "OPEN")
-                              @if($applicant->application_status == "Renew" && $applicant->renew == 1)
+                              
+                              @if($applicant->application_status == "Renew")
                               <div class="form-row">
                                 <div class="col-md-6">
                                   <a href="/scholarship/details/renew/eefap" class="btn btn-block text-white btn-primary">Renew</a>

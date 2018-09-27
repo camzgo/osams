@@ -222,7 +222,8 @@ class TrackingController extends Controller
                                 'action'  => 'Application need to renew',
                                 'date'     => date('Y-m-d'),
                                 'time'     =>$time,
-                                'applicant_id' =>  $json[$z]['user_id']
+                                'applicant_id' =>  $json[$z]['user_id'],
+                                'scholar_id'  => $scholar->id
                             ]);
                         }
                         
@@ -339,7 +340,8 @@ class TrackingController extends Controller
                                 'action'  => 'Application need to renew',
                                 'date'     => date('Y-m-d'),
                                 'time'     =>$time,
-                                'applicant_id' =>  $json[$z]['user_id']
+                                'applicant_id' =>  $json[$z]['user_id'],
+                                'scholar_id'  => $scholar->id
                             ]);
                         }
 
@@ -440,7 +442,8 @@ class TrackingController extends Controller
                                 'action'  => 'Application need to renew',
                                 'date'     => date('Y-m-d'),
                                 'time'     =>$time,
-                                'applicant_id' =>  $json[$z]['user_id']
+                                'applicant_id' =>  $json[$z]['user_id'],
+                                'scholar_id'  => $scholar->id
                             ]);
                         }
 

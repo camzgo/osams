@@ -133,7 +133,7 @@
 <script>
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
-  $('#year_entered').mask('0000', {"clearIncomplete": true});
+  $('#yr_entered').mask('0000', {"clearIncomplete": true});
   $('#duration').mask('00', {"clearIncomplete": true});
 });
 

@@ -334,11 +334,11 @@ button:focus {
             </div>
             <div class="col-md-3">
                 <label>* Major <small>(No Abbreviation)</small></label>
-                <input name="major" type="text" class="form-control req" value="{{$eefap->major}}" placeholder ="Major">
+                <input name="major" name="major" type="text" class="form-control req" value="{{$eefap->major}}" placeholder ="Major">
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average" type="text" class="form-control req" value="{{$eefap->general_average}}" placeholder ="General Average">
+                <input name="gen_average" id="gen_average" type="text" class="form-control req" value="{{$eefap->general_average}}" placeholder ="1.25">
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -407,6 +407,7 @@ button:focus {
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
+  $('#gen_average').mask('0.00', {"clearIncomplete": true});
   
   document.getElementById('educ_prog').value="{{$eefap->program_type}}";
   document.getElementById('grad').value="{{$eefap->graduating}}";
@@ -414,6 +415,38 @@ $(document).ready(function(){
 
 });
 
+$('#surname').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#first_name').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#middle_name').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#suffix').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#gsurname').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#gfirst_name').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#gmiddle_name').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#gsuffix').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
 var v = $("#regForm").validate({
     rules: {
       religion: {

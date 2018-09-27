@@ -30,8 +30,7 @@ class RenewController extends Controller
     {
       
         $users = DB::table('users')
-        ->leftJoin('application', 'application.applicant_id', '=', 'users.id')
-        ->where('application.renew', 1)->where('application.application_status', 'Renew')
+        ->leftJoin('application', 'application.applicant_id', '=', 'users.id')->where('application.application_status', 'Renew')
         //->where(DB::raw("application.applicant_id IS NULL"))
         ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"), 'users.id', 'users.email', 'application.id as app_id', 'application.scholar_id as scid')->get();
         return DataTables::of($users)
@@ -101,7 +100,18 @@ class RenewController extends Controller
         DB::table('application')->where('id', $request->get('sid'))
         ->update([
             'application_status' => $approve,
-            'renew'     => 0
+            'renew'     => 1
+        ]);
+
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $history = DB::table('history_log')->insert([
+            'action'  => 'Application Renewed',
+            'date'     => date('Y-m-d'),
+            'time'     =>$time,
+            'applicant_id' => $request->get('applicant_id'),
+            'scholar_id' => $eefapId->scholarship_id
+
         ]);
 
        $ids=$request->get('sid');
@@ -149,9 +159,20 @@ class RenewController extends Controller
         DB::table('application')->where('id', $request->get('sid'))
         ->update([
             'application_status' => $approve,
-            'renew'     => 0
+            'renew'     => 1
         ]);
+        
+        
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $history = DB::table('history_log')->insert([
+            'action'  => 'Application Renewed',
+            'date'     => date('Y-m-d'),
+            'time'     =>$time,
+            'applicant_id' => $request->get('applicant_id'),
+            'scholar_id' => $eefapgvId->scholarship_id
 
+        ]);
         $ids=$request->get('sid');
         return redirect ('admin/renew/send/'.$ids);
     }
@@ -214,7 +235,18 @@ class RenewController extends Controller
         DB::table('application')->where('id', $request->get('sid'))
         ->update([
             'application_status' => $approve,
-            'renew'     => 0
+            'renew'     => 1
+        ]);
+
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $history = DB::table('history_log')->insert([
+            'action'  => 'Application Renewed',
+            'date'     => date('Y-m-d'),
+            'time'     =>$time,
+            'applicant_id' => $request->get('applicant_id'),
+            'scholar_id' => 6
+
         ]);
 
         $ids=$request->get('sid');

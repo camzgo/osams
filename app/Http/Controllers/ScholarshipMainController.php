@@ -264,22 +264,26 @@ class ScholarshipMainController extends Controller
 
                     if($sc->type=="eefap")
                     {
-                        $req = DB::table('reqeefap')->where('scholar_id', $request->get('scholarship_id'))->delete();
+                        $req = DB::table('reqeefap')->JOIN('application', 'application.id', '=', 'reqeefap.applicant_id')->where('scholar_id', $request->get('scholarship_id'))->where('application.application_status', 'Pending')
+                        ->where('application.application_status', 'Renew')->delete();
                     }
                     else if($sc->type == "eefap-gv")
                     {
                         if($sc->id == 7)
                         {
-                            $req = DB::table('reqeefap')->where('scholar_id', $request->get('scholarship_id'))->delete();
+                            $req = DB::table('reqeefap')->JOIN('application', 'application.id', '=', 'reqeefap.applicant_id')->where('scholar_id', $request->get('scholarship_id'))->where('application.application_status', 'Pending')
+                        ->where('application.application_status', 'Renew')->delete();
                         }
                         else
                         {
-                            $req = DB::table('reqgv')->where('scholar_id', $request->get('scholarship_id'))->delete();
+                            $req = DB::table('reqgv')->JOIN('application', 'application.id', '=', 'reqeefap.applicant_id')->where('scholar_id', $request->get('scholarship_id'))->where('application.application_status', 'Pending')
+                        ->where('application.application_status', 'Renew')->delete();
                         }
                     }
                     else if($sc->type == "pcl")
                     {
-                        $req = DB::table('reqeefap')->where('scholar_id', $request->get('scholarship_id'))->delete();
+                       $req = DB::table('reqeefap')->JOIN('application', 'application.id', '=', 'reqeefap.applicant_id')->where('scholar_id', $request->get('scholarship_id'))->where('application.application_status', 'Pending')
+                        ->where('application.application_status', 'Renew')->delete();
                     }
 
 

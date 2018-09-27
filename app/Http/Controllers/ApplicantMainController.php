@@ -59,6 +59,15 @@ class ApplicantMainController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this -> validate($request, [
+            'surname' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',  
+            'first_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',
+            'middle_name' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
+            'suffix' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
+        ]);	
+
+
         if($request->get('gender') == 'Male')
         {
             $none ='male.png';
@@ -85,6 +94,7 @@ class ApplicantMainController extends Controller
             'mobile_number' => $request->mobile_no,
             'email' => $request->email,
             'password' => Hash::make($defpass),
+            'school_id' => $request->school_id,
             'chg'  => 1,
             'new'  =>1
 

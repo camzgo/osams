@@ -54,19 +54,39 @@
                     <div class="form-row form-group">
                       <div class="col-md-3">
                         <label>Surname <small>(required)</small></label>
-                        <input type="text" class="form-control" name="surname" id="surname" value="{{$guardian->surname}}" placeholder="Surname">
+                        <input type="text" class="form-control {{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" id="surname" value="{{$guardian->surname}}" placeholder="Surname">
+                        @if ($errors->has('surname'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('surname') }}</strong>
+                        </span>
+                        @endif
                       </div>
                       <div class="col-md-3">
                         <label>First Name <small>(required)</small></label>
-                        <input type="text" class="form-control" name="first_name" id="first_name" value="{{$guardian->first_name}}" placeholder="First Name">
+                        <input type="text" class="form-control {{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" id="first_name" value="{{$guardian->first_name}}" placeholder="First Name">
+                        @if ($errors->has('first_name'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('first_name') }}</strong>
+                        </span>
+                        @endif
                       </div>
                       <div class="col-md-3">
                         <label>Middle Name </label>
-                        <input type="text" class="form-control" name="middle_name" id="middle_name" value="{{$guardian->middle_name}}" placeholder="Middle Name">
+                        <input type="text" class="form-control {{ $errors->has('middle_name') ? ' is-invalid' : '' }}" name="middle_name" id="middle_name" value="{{$guardian->middle_name}}" placeholder="Middle Name">
+                        @if ($errors->has('middle_name'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('middle_name') }}</strong>
+                        </span>
+                        @endif
                       </div>
                       <div class="col-md-3">
                         <label>Suffix</label>
-                        <input type="text" class="form-control" name="suffix" id="suffix" value="{{$guardian->suffix}}" placeholder="Suffix (e.g., Jr. Sr. III)">
+                        <input type="text" class="form-control {{ $errors->has('suffix') ? ' is-invalid' : '' }}" name="suffix" id="suffix" value="{{$guardian->suffix}}" placeholder="Suffix (e.g., Jr. Sr. III)">
+                        @if ($errors->has('suffix'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('suffix') }}</strong>
+                        </span>
+                        @endif
                       </div>
                     </div>
                     <div class="form-row form-group">
@@ -90,11 +110,21 @@
                         </div>
                         <div class="col-md-3">
                           <label for="nationality">Nationality <small>(required)</small></label>
-                          <input type="text" name="nationality" id="nationality" class="form-control" value="{{$guardian->nationality}}" placeholder="Nationality" required/>
+                          <input type="text" name="nationality" id="nationality" class="form-control {{ $errors->has('nationality') ? ' is-invalid' : '' }}" value="{{$guardian->nationality}}" placeholder="Nationality" required/>
+                          @if ($errors->has('nationality'))
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $errors->first('nationality') }}</strong>
+                          </span>
+                          @endif
                         </div>
                         <div class="col-md-4">
                           <label>Occupation <small>(required)</small></label>
-                          <input type="text" name="occupation" id="occupation" class="form-control"  placeholder="Occupation" value="{{$guardian->occupation}}" required/>
+                          <input type="text" name="occupation" id="occupation" class="form-control {{ $errors->has('occupation') ? ' is-invalid' : '' }}"  placeholder="Occupation" value="{{$guardian->occupation}}" required/>
+                          @if ($errors->has('occupation'))
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $errors->first('occupation') }}</strong>
+                          </span>
+                          @endif
                         </div>
                       </div>
                       <div class="form-row form-group">

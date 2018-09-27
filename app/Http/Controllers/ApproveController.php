@@ -115,7 +115,8 @@ class ApproveController extends Controller
                 'action'  => 'Application Approved',
                 'date'     => date('Y-m-d'),
                 'time'     =>$time,
-                'applicant_id' => $request->get('applicant_id')
+                'applicant_id' => $request->get('applicant_id'),
+                'scholar_id' => $request->get('sc_id'),
             ]);
 
             return redirect('/admin/approve');
@@ -156,7 +157,9 @@ class ApproveController extends Controller
                 'action'  => 'Application Disapproved',
                 'date'     => date('Y-m-d'),
                 'time'     =>$time,
-                'applicant_id' => $request->get('applicant_id')
+                'applicant_id' => $request->get('applicant_id'),
+                'scholar_id' => $request->get('sc_id')
+
             ]);
 
             return redirect('/admin/approve');
@@ -169,9 +172,10 @@ class ApproveController extends Controller
         $stat = "Approved";
         $approve = DB::table('approval_date')
         ->Join('users', 'users.id', '=',  'approval_date.applicant_id')
+        ->JOIN('application', 'application.id', '=', 'approval_date.application_id')
         ->Join('scholarships', 'scholarships.id', '=',  'approval_date.scholarship_id')
         ->Join('admins', 'admins.id',  '=', 'approval_date.employee_id')
-        ->where('approval_date.status', $stat)
+        ->where('application.application_status', $stat)
         ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"),
         DB::raw("CONCAT_WS('', admins.surname,', ', admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as empfullname"), 'scholarships.scholarship_name', 'approval_date.date_approved' )->get();
         return DataTables::of($approve)

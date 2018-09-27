@@ -462,24 +462,44 @@
                     <form action="{{ action('ApplicantMainController@store') }}" method="POST" >
                     {{csrf_field()}}
                     <div class="container">
-                      <div class="row">
+                      <div class="form-row">
                         <label for="fullname">* Full Name</label>
                       </div>
                       <div class="row form-group">
                         <div class = "col-md-4">
-                          <input type="text" class="form-control" id="surname" name="surname" placeholder='Surname' required/>
+                          <input type="text" class="form-control {{ $errors->has('surname') ? ' is-invalid' : '' }}" id="surname" name="surname" placeholder='Surname' required/>
+                          @if ($errors->has('surname'))
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $errors->first('surname') }}</strong>
+                          </span>
+                          @endif
                         </div>
                         <div class = "col-md-4">
-                          <input type="text" class="form-control" id="first_name" name="first_name" placeholder='First Name' required/>
+                          <input type="text" class="form-control {{ $errors->has('first_name') ? ' is-invalid' : '' }}" id="first_name" name="first_name" placeholder='First Name' required/>
+                           @if ($errors->has('first_name'))
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $errors->first('first_name') }}</strong>
+                          </span>
+                          @endif
                         </div>
                         <div class = "col-md-2">
-                          <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name'/>
+                          <input type="text" class="form-control  {{ $errors->has('middle_name') ? ' is-invalid' : '' }}" id="middle_name" name="middle_name" placeholder='Middle Name'/>
+                          @if ($errors->has('middle_name'))
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $errors->first('middle_name') }}</strong>
+                          </span>
+                          @endif
                         </div>
                         <div class = "col-md-2">
-                          <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+                          <input type="text" class="form-control  {{ $errors->has('suffix') ? ' is-invalid' : '' }}" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+                          @if ($errors->has('suffix'))
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $errors->first('suffix') }}</strong>
+                          </span>
+                          @endif
                         </div>
                       </div>
-                      <div class="row form-group">
+                      <div class="form-row form-group">
                         <div class="col-md-2">
                             <label for="gender">* Gender</label>
                             <select name="gender" id="gender" class="selectpicker show-tick form-control" data-style="selCol" required>
@@ -504,6 +524,12 @@
                         <div class="col-md-4">
                           <label for="email">* Email</label>
                           <input type="email" class="form-control" id="email" name="email" placeholder='example@mail.com' required/>
+                        </div>
+                      </div>
+                      <div class="form-row form-group">
+                        <div class="col-md-4">
+                          <label for="email">* Student ID Number / Student Number</label>
+                          <input type="text" class="form-control" id="school_id" name="school_id" placeholder='Student ID Number / Student Number' required/>
                         </div>
                       </div>
                     </div>

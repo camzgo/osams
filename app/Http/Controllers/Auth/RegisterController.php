@@ -50,8 +50,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'surname' => 'required|string|max:50',  
-            'first_name' => 'required|string|max:50',
+            'surname' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',  
+            'first_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',
+            'middle_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',
+            'suffix' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',
             'gender' => 'required|string|max:10',
             'bday' =>'required',
             'mobile_no' =>'required',
@@ -69,7 +71,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if($request->get('gender') == 'Male')
+        if($data['gender'] == 'Male')
         {
             $none ='male.png';
         }
@@ -78,9 +80,10 @@ class RegisterController extends Controller
             $none = 'female.png';
         }
         return User::create([
-            'surname' => $data['surname'],
-            'first_name' =>$data['first_name'],
-            'middle_name'=>$data['middle_name'],
+            'surname' => ucfirst($data['surname']),
+            'first_name' => ucfirst($data['first_name']),
+            'middle_name'=> ucfirst($data['middle_name']),
+            'suffix' => ucfirst($data['suffix']),
             'gender'=>$data['gender'],
             'bday'=>$data['bday'],
             'applicant_isdel' => 0,
@@ -88,6 +91,7 @@ class RegisterController extends Controller
             'profile_photo' => $none,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'school_id' => $data['school_id'],
             'new'  => 1,
             'chg' => 0,
              

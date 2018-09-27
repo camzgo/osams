@@ -28,8 +28,13 @@
 <main>
   <section>
       <div class="container">
-           <div class="card  mt-4" style="width: 1000px; height: 700px; margin-left:4em;">
+           <div class="card  mt-4" style="width: 1000px; height: 800px; margin-left:4em;">
                 <div class="card-body">
+                    {{-- @foreach ($errors->all() as $error)
+                          <div class="alert alert-danger">
+                            {{ $error }}
+                        </div>
+                        @endforeach --}}
                      <div class="row justify-content-center">
                         <div class="text-center">
                             <h2 class="tx4">CREATE AN ACCOUNT</h2>
@@ -131,6 +136,17 @@
                                                     <strong>{{ $errors->first('email') }}</strong>
                                                 </span>
                                             @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-row form-group">
+                                            <div class="col-md-12">
+                                            <label>Student ID Number / Student Number</label>
+                                            <input id="school_id" type="text" class="form-control{{ $errors->has('school_id') ? ' is-invalid' : '' }} form-control-lg" placeholder="Student ID Number / Student Number" name="school_id" required>
+                                                @if ($errors->has('school_id'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                </span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-row form-group">

@@ -16,7 +16,7 @@ use App\Reqeefap;
 use App\Announcement;
 use App\Application;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Validator;
 use Illuminate\Support\Facades\Hash;
 use App\SendCode;
 use Mail;
@@ -342,8 +342,16 @@ class FrontendController extends Controller
     {
 
         $personal = DB::table('personal_info')->where('applicant_id', Auth::user()->id)->first();
+        $this -> validate($request, [
+            'surname' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',  
+            'first_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',
+            'middle_name' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
+            'suffix' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
+        ]);	
         
         if ($personal) { 
+            
+
 
             $id = $personal->id;
             $personals = Personal::find($id);
@@ -397,18 +405,28 @@ class FrontendController extends Controller
     {
         $guardian = DB::table('guardian_info')->where('applicant_id', Auth::user()->id)->first();
 
+        $this -> validate($request, [
+            'surname' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',  
+            'first_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',
+            'middle_name' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
+            'suffix' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
+            'nationality' => 'string|regex:/^[a-zA-Z]+$/u|max:50',
+            'occupation' => 'string|regex:/^[a-zA-Z]+$/u|max:50',
+        ]);	
+        
+        
         if($guardian)
         {
             $id = $guardian->id;
             $guardians = Guardian::find($id);
-            $guardians->surname = $request->get('surname');
-            $guardians->first_name = $request->get('first_name');
-            $guardians->middle_name = $request->get('middle_name');
-            $guardians->suffix = $request->get('suffix');
+            $guardians->surname = ucfirst($request->get('surname'));
+            $guardians->first_name = ucfirst($request->get('first_name'));
+            $guardians->middle_name = ucfirst($request->get('middle_name'));
+            $guardians->suffix = ucfirst($request->get('suffix'));
             $guardians->mobile_number = $request->get('mobile_no');
             $guardians->gender = $request->get('gender');
-            $guardians->nationality = $request->get('nationality');
-            $guardians->occupation = $request->get('occupation');
+            $guardians->nationality = ucfirst($request->get('nationality'));
+            $guardians->occupation = ucfirst($request->get('occupation'));
             $guardians->civil_status = $request->get('civil_status');
             $guardians->municipality = $request->get('municipality');
             $guardians->barangay = $request->get('barangay');
@@ -422,14 +440,14 @@ class FrontendController extends Controller
         else
         {
             $guardians = DB::table('guardian_info')->insert([
-                'surname' => $request->surname,
-                'first_name' => $request->first_name,
-                'middle_name' => $request->middle_name,
-                'suffix' => $request->suffix,
+                'surname' => ucfirst($request->surname),
+                'first_name' => ucfirst($request->first_name),
+                'middle_name' => ucfirst($request->middle_name),
+                'suffix' => ucfirst($request->suffix),
                 'mobile_number'  => $request->mobile_no,
                 'gender' => $request->gender,
-                'nationality' => $request->nationality,
-                'occupation' => $request->occupation,
+                'nationality' => ucfirst($request->nationality),
+                'occupation' => ucfirst($request->occupation),
                 'civil_status' => $request->civil_status,
                 'municipality' => $request->municipality,
                 'barangay'  => $request->barangay,
@@ -599,18 +617,18 @@ class FrontendController extends Controller
         $id = $eefapgvId->id;
         
         $eefapgv = Eefapgv::find($id);
-        $eefapgv->surname = $request->get('surname');
-        $eefapgv->first_name = $request->get('first_name');
-        $eefapgv->middle_name = $request->get('middle_name');
-        $eefapgv->suffix = $request->get('suffix');
+        $eefapgv->surname = ucfirst($request->get('surname'));
+        $eefapgv->first_name = ucfirst($request->get('first_name'));
+        $eefapgv->middle_name = ucfirst($request->get('middle_name'));
+        $eefapgv->suffix = ucfirst($request->get('suffix'));
         $eefapgv->mobile_number = $request->get('mobile_no');
         $eefapgv->municipality = $request->get('municipality');
         $eefapgv->barangay = $request->get('barangay');
         $eefapgv->street = $request->get('street');
         $eefapgv->college_name = $request->get('college_name');
         $eefapgv->college_address = $request->get('college_address');
-        $eefapgv->course = $request->get('course');
-        $eefapgv->major = $request->get('major');
+        $eefapgv->course = ucfirst($request->get('course'));
+        $eefapgv->major = ucfirst($request->get('major'));
         $eefapgv->program_type = $request->get('educ_prog');
         $eefapgv->year_level = $request->get('yr_lvl');
         $eefapgv->graduating = $request->get('grad');
@@ -631,18 +649,18 @@ class FrontendController extends Controller
         $id = $eefapId->id;
         
         $eefap = Eefap::find($id);
-        $eefap->surname = $request->get('surname');
-        $eefap->first_name = $request->get('first_name');
-        $eefap->middle_name = $request->get('middle_name');
-        $eefap->suffix = $request->get('suffix');
+        $eefap->surname = ucfirst($request->get('surname'));
+        $eefap->first_name = ucfirst($request->get('first_name'));
+        $eefap->middle_name = ucfirst($request->get('middle_name'));
+        $eefap->suffix = ucfirst($request->get('suffix'));
         $eefap->mobile_number = $request->get('mobile_no');
         $eefap->municipality = $request->get('municipality');
         $eefap->barangay = $request->get('barangay');
         $eefap->street = $request->get('street');
         $eefap->college_name = $request->get('college_name');
         $eefap->college_address = $request->get('college_address');
-        $eefap->course = $request->get('course');
-        $eefap->major = $request->get('major');
+        $eefap->course = ucfirst($request->get('course'));
+        $eefap->major = ucfirst($request->get('major'));
         $eefap->program_type = $request->get('educ_prog');
         $eefap->year_level = $request->get('yr_lvl');
         $eefap->graduating = $request->get('grad');
@@ -665,10 +683,10 @@ class FrontendController extends Controller
         $id = $pclId->id;
         
         $pcl = Pcl::find($id);
-        $pcl->surname = $request->get('surname');
-        $pcl->first_name = $request->get('first_name');
-        $pcl->middle_name = $request->get('middle_name');
-        $pcl->suffix = $request->get('suffix');
+        $pcl->surname = ucfirst($request->get('surname'));
+        $pcl->first_name = ucfirst($request->get('first_name'));
+        $pcl->middle_name = ucfirst($request->get('middle_name'));
+        $pcl->suffix = ucfirst($request->get('suffix'));
         $pcl->mobile_number = $request->get('mobile_no');
         $pcl->district = $request->get('district');
         $pcl->municipality = $request->get('municipality');
@@ -677,16 +695,16 @@ class FrontendController extends Controller
         $pcl->school_enrolled = $request->get('college_name');
         $pcl->course = $request->get('course');
         $pcl->year_level = $request->get('yr_lvl');
-        $pcl->fsurname = $request->get('fsurname');
-        $pcl->ffirst_name = $request->get('ffirst_name');
-        $pcl->fmiddle_name = $request->get('fmiddle_name');
-        $pcl->fsuffix = $request->get('fsuffix');
-        $pcl->foccupation = $request->get('foccupation');
-        $pcl->msurname = $request->get('msurname');
-        $pcl->mfirst_name = $request->get('mfirst_name');
-        $pcl->mmiddle_name = $request->get('mmiddle_name');
-        $pcl->msuffix = $request->get('msuffix');
-        $pcl->moccupation = $request->get('moccupation');
+        $pcl->fsurname = ucfirst($request->get('fsurname'));
+        $pcl->ffirst_name = ucfirst($request->get('ffirst_name'));
+        $pcl->fmiddle_name = ucfirst($request->get('fmiddle_name'));
+        $pcl->fsuffix = ucfirst($request->get('fsuffix'));
+        $pcl->foccupation = ucfirst($request->get('foccupation'));
+        $pcl->msurname = ucfirst($request->get('msurname'));
+        $pcl->mfirst_name = ucfirst($request->get('mfirst_name'));
+        $pcl->mmiddle_name = ucfirst($request->get('mmiddle_name'));
+        $pcl->msuffix = ucfirst($request->get('msuffix'));
+        $pcl->moccupation = ucfirst($request->get('moccupation'));
         $pcl->address = $request->get('gaddress');
         $pcl->emergency = $request->get('emergency');
         $pcl->emobile_number = $request->get('emobile_no');
@@ -1267,8 +1285,8 @@ $id=2;
             }
             else
             {
-                $gv = DB::table('gv')->where('applicant_id', Auth::user()->id)->delete();
-                $reqgv = DB::table('refgv')->where('applicant_id', Auth::user()->id)->delete();
+                $gv = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->delete();
+                $reqgv = DB::table('reqgv')->where('applicant_id', Auth::user()->id)->delete();
                 $app2 = DB::table('application')->where('applicant_id', Auth::user()->id)->delete();
             }
         }
@@ -1278,7 +1296,19 @@ $id=2;
             $reqe = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->delete();
             $app2 = DB::table('application')->where('applicant_id', Auth::user()->id)->delete();
         }
-        return redirect('/profile');
+
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $history = DB::table('history_log')->insert([
+            'action'  => 'Application Cancelled',
+            'date'     => date('Y-m-d'),
+            'time'     =>$time,
+            'applicant_id' => Auth::user()->id,
+            'scholar_id'  =>$app->scholar_id
+        ]);
+        return redirect('/scholarship');
+
+
     }
 
     public function news($id)
@@ -1495,7 +1525,7 @@ $id=2;
 
     function getdata()
     {
-        $logs = DB::table('history_log')->where('applicant_id', Auth::user()->id)->get();
+        $logs = DB::table('history_log')->JOIN('scholarships', 'scholarships.id', '=', 'history_log.scholar_id')->where('applicant_id', Auth::user()->id)->get();
         return DataTables::of($logs)
         ->addColumn('ss', function($logs){
             return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$logs->id.'"><i class="fa fa-edit"></i> Edit</a>

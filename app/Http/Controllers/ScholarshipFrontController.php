@@ -243,6 +243,15 @@ class ScholarshipFrontController extends Controller
 
     public function eefapStore(Request $request)
     {
+
+        $this -> validate($request, [
+            'surname' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50' 
+            // 'first_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',
+            // 'middle_name' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
+            // 'suffix' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
+            // 'nationality' => 'string|regex:/^[a-zA-Z]+$/u|max:50',
+            // 'occupation' => 'string|regex:/^[a-zA-Z]+$/u|max:50',
+        ]);	
         
         $id = DB::table('application')->insertGetId([
             'application_status' => 'Pending',
@@ -274,25 +283,25 @@ class ScholarshipFrontController extends Controller
         //     $street=" ";
         // }
         $eefap = DB::table('eefap')->insert([
-            'surname' => $request->surname,
-            'first_name' => $request->first_name,
-            'middle_name' => $request->middle_name,
-            'suffix' => $request->suffix,
+            'surname' => ucfirst($request->surname),
+            'first_name' => ucfirst($request->first_name),
+            'middle_name' => ucfirst($request->middle_name),
+            'suffix' => ucfirst($request->suffix),
             'municipality' => $request->municipality,
             'barangay' => $request->barangay,
             'street' => $request->street,
             'mobile_number' => $request->mobile_no,
             'fb_account' => $request->fb_account,
-            'gsurname' => $request->gsurname,
-            'gmiddle_name' => $request->gmiddle_name,
-            'gfirst_name' => $request->gfirst_name,
-            'gsuffix' => $request->gsuffix,
+            'gsurname' => ucfirst($request->gsurname),
+            'gmiddle_name' => ucfirst($request->gmiddle_name),
+            'gfirst_name' => ucfirst($request->gfirst_name),
+            'gsuffix' => ucfirst($request->gsuffix),
             'gmobile_number' =>$request->gmobile_no,
             'college_name' => $request->college_name,
             'college_address' => $request->college_address,
             'year_level' => $request->yr_lvl,
             'course' => $request->course,
-            'major' => $request->major, 
+            'major' => ucfirst($request->major), 
             'general_average' => $request->gen_average,
             'program_type' => $request->educ_prog,
             'graduating' => $request->grad,
@@ -345,10 +354,10 @@ class ScholarshipFrontController extends Controller
         //     $street=" ";
         // }
         $eefap = DB::table('eefapgv')->insert([
-            'surname' => $request->surname,
-            'first_name' => $request->first_name,
-            'middle_name' => $request->middle_name,
-            'suffix' => $request->suffix,
+            'surname' => ucfirst($request->surname),
+            'first_name' => ucfirst($request->first_name),
+            'middle_name' => ucfirst($request->middle_name),
+            'suffix' => ucfirst($request->suffix),
             'municipality' => $request->municipality,
             'barangay' => $request->barangay,
             'street' => $request->street,
@@ -356,8 +365,8 @@ class ScholarshipFrontController extends Controller
             'college_name' => $request->college_name,
             'college_address' => $request->college_address,
             'year_level' => $request->yr_lvl,
-            'course' => $request->course,
-            'major' => $request->major, 
+            'course' => ucfirst($request->course),
+            'major' => ucfirst($request->major), 
             'general_average' => $request->gen_average,
             'program_type' => $request->educ_prog,
             'graduating' => $request->grad,
@@ -398,35 +407,35 @@ class ScholarshipFrontController extends Controller
         ]);
 
         $eefap = DB::table('pcl')->insert([
-            'surname' => $request->surname,
-            'first_name' => $request->first_name,
-            'middle_name' => $request->middle_name,
-            'suffix' => $request->suffix,
+            'surname' => ucfirst($request->surname),
+            'first_name' => ucfirst($request->first_name),
+            'middle_name' => ucfirst($request->middle_name),
+            'suffix' => ucfirst($request->suffix),
             'district' =>$request->district,
             'municipality' => $request->municipality,
             'barangay' => $request->barangay,
             'street' => $request->street,
             'mobile_number' => $request->mobile_no,
 
-            'fsurname' => $request->fsurname,
-            'fmiddle_name' => $request->fmiddle_name,
-            'ffirst_name' => $request->ffirst_name,
-            'fsuffix' => $request->fsuffix,
-            'foccupation' => $request->foccupation,
+            'fsurname' => ucfirst($request->fsurname),
+            'fmiddle_name' => ucfirst($request->fmiddle_name),
+            'ffirst_name' => ucfirst($request->ffirst_name),
+            'fsuffix' => ucfirst($request->fsuffix),
+            'foccupation' => ucfirst($request->foccupation),
 
-            'msurname' => $request->msurname,
-            'mmiddle_name' => $request->mmiddle_name,
-            'mfirst_name' => $request->mfirst_name,
-            'msuffix' => $request->msuffix,
-            'moccupation' => $request->moccupation,
+            'msurname' => ucfirst($request->msurname),
+            'mmiddle_name' => ucfirst($request->mmiddle_name),
+            'mfirst_name' => ucfirst($request->mfirst_name),
+            'msuffix' => ucfirst($request->msuffix),
+            'moccupation' => ucfirst($request->moccupation),
 
             'address' => $request->gaddress,
 
             'school_enrolled' => $request->college_name,
             'year_level' => $request->yr_lvl,
-            'course' => $request->course,
+            'course' => ucfirst($request->course),
 
-            'emergency' =>$request->emergency,
+            'emergency' => ucfirst($request->emergency),
             'emobile_number' => $request->mobile_no,
 
             'birthdate' =>$request->bday,

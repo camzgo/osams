@@ -205,7 +205,12 @@ button:focus {
         </div>
         <div class="row form-group">
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{Auth::user()->surname}}" required/>
+          <input type="text" class="form-control req {{ $errors->has('nationality') ? ' is-invalid' : '' }}"  id="surname" name="surname" placeholder='* Surname' value="{{Auth::user()->surname}}" required/>
+          @if ($errors->has('surname'))
+          <span class="invalid-feedback" role="alert">
+              <strong>{{ $errors->first('surname') }}</strong>
+          </span>
+          @endif
           </div>
           <div class = "col-md-4">
             <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{Auth::user()->first_name}}" required/>
@@ -338,7 +343,7 @@ button:focus {
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average" type="text" class="form-control req"  placeholder ="General Average">
+                <input name="gen_average" id="gen_average" type="text" class="form-control  req"  placeholder ="1.25">
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -411,6 +416,7 @@ button:focus {
 
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
+  $('#gen_average').mask('0.00', {"clearIncomplete": true});
   $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
 
   // var pathname = window.location.pathname;
@@ -421,10 +427,45 @@ $(document).ready(function(){
 
 });
 
+$('#surname').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#first_name').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#middle_name').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#suffix').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#gsurname').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#gfirst_name').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#gmiddle_name').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+$('#gsuffix').keyup(function() {
+    var $th = $(this);
+    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+});
+
+
 var v = $("#regForm").validate({
     rules: {
-      religion: {
+      surname: {
         required: true
+
       },
       nationality: {
         required: true

@@ -21,7 +21,7 @@ $pdf->SetY(15);
     // $con=mysqli_connect('localhost', 'root', '','osams');
     //     $query=mysqli_query($con,"SELECT * FROM eefap LIMIT 1");
     //     while($reports=mysqli_fetch_assoc($query)){
-    if($app->renew == 1 && $app->application_status == "Renew"){
+    if($app->renew == 1 && $app->renew==1){
         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',66,28,6);
     }else{
         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',135.5,28,6);    //$pdf->Cell(1,0,'',0,0);
