@@ -46,7 +46,7 @@
             <div class="card">
               <div class="card-body">
                 @if(Auth::user()->new==1)
-                  <div class="alert alert-info" role="alert">You need to complete all of these information for you to able to apply for a scholarship category.</div>
+                  <div class="alert alert-info" role="alert">You need to complete all of these information for you to able to apply for a scholarship category. <br> Personal Information <i class="fa fa-arrow-right"></i> Parent / Guardian Information <i class="fa fa-arrow-right"></i> Education Information <i class="fa fa-arrow-right"></i> Done</div>
                 @else
                 <div class="card-title"><div class="alert alert-info" role="alert">My Profile</div></div><hr>
                 @endif
@@ -67,7 +67,7 @@
                       <div class="card">
                         <img src="{{asset('images/guardian.jpg')}}" alt="Card-Image" class="card-img-top" style="width:100%">
                         <div class="card-body">
-                          <div class="card-title text-center text-bold" style="font-size: 17px;"><strong>Parents / Guardian Information </strong></div>
+                          <div class="card-title text-center text-bold" style="font-size: 17px;">Parents / Guardian Information</div>
                           <div class="card-text mt-2">
                             <a href="{{$gurUrl[0]}}" class="btn btn-primary btn-rounded text-center " style="width: 12em; margin-left:4em;"><strong>{{$gurUrl[1]}}</strong></a>
                           </div>

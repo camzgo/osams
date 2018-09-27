@@ -451,6 +451,7 @@
                $('#table').DataTable({
                processing: true,
                serverSide: true,
+               searching: false,
                ajax: '{{ route('audit.getdata') }}',
                columns: [
                         { data: 'employee_id', name: 'employee_id' },

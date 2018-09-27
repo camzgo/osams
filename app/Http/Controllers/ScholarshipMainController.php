@@ -255,32 +255,32 @@ class ScholarshipMainController extends Controller
 
                     $ctr = count($json);
                     $ctr-=1;
-                    // for($x = 0; $x<=$ctr; $x++)
-                    // {
-                    //     $app = Application::find($json[$x]['id'])->delete();
-                    // }
+                    for($x = 0; $x<=$ctr; $x++)
+                    {
+                        $app = Application::find($json[$x]['id'])->delete();
+                    }
 
-                    // $sc =DB::table('scholarships')->where('id', $request->get('scholarship_id'))->first();
+                    $sc =DB::table('scholarships')->where('id', $request->get('scholarship_id'))->first();
 
-                    // if($sc->type=="eefap")
-                    // {
-                    //     $req = DB::table('reqeefap')->where('scholar_id', $request->get('scholarship_id'))->delete();
-                    // }
-                    // else if($sc->type == "eefap-gv")
-                    // {
-                    //     if($sc->id == 7)
-                    //     {
-                    //         $req = DB::table('reqeefap')->where('scholar_id', $request->get('scholarship_id'))->delete();
-                    //     }
-                    //     else
-                    //     {
-                    //         $req = DB::table('reqgv')->where('scholar_id', $request->get('scholarship_id'))->delete();
-                    //     }
-                    // }
-                    // else if($sc->type == "pcl")
-                    // {
-                    //     $req = DB::table('reqeefap')->where('scholar_id', $request->get('scholarship_id'))->delete();
-                    // }
+                    if($sc->type=="eefap")
+                    {
+                        $req = DB::table('reqeefap')->where('scholar_id', $request->get('scholarship_id'))->delete();
+                    }
+                    else if($sc->type == "eefap-gv")
+                    {
+                        if($sc->id == 7)
+                        {
+                            $req = DB::table('reqeefap')->where('scholar_id', $request->get('scholarship_id'))->delete();
+                        }
+                        else
+                        {
+                            $req = DB::table('reqgv')->where('scholar_id', $request->get('scholarship_id'))->delete();
+                        }
+                    }
+                    else if($sc->type == "pcl")
+                    {
+                        $req = DB::table('reqeefap')->where('scholar_id', $request->get('scholarship_id'))->delete();
+                    }
 
 
                     

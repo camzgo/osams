@@ -56,6 +56,7 @@ Route::prefix('admin/applicant')->group(function(){
     Route::get('/getdata', 'ApplicantMainController@getdata')->name('applicant.getdata');
     Route::post('/postdata', 'ApplicantMainController@postdata')->name('applicant.postdata');
     Route::get('/fetchdata', 'ApplicantMainController@fetchdata')->name('applicant.fetchdata');
+    Route::get('/reg/success', 'ApplicantMainController@sendsuccess');
 });
 
 
@@ -261,6 +262,7 @@ Route::prefix('/')->group(function()
     Route::get('/announcement/{id}', 'FrontendController@news');
     Route::post('/contact', 'FrontendController@contactus');
     Route::get('/send/sample', 'FrontendController@send');
+    Route::get('/scholarship/form/{id}', 'FrontendController@printaf');
 
     Route::get('/scholarship/getdata', 'FrontendController@getdata')->name('logs.getdata');
 });
@@ -330,7 +332,7 @@ Route::prefix('admin/renew')->group(function()
     Route::post('/eefapgv', 'RenewController@editeefapgv');
     Route::get('/pcl/{id}', 'RenewController@viewpcl');
     Route::post('/pcl', 'RenewController@editpcl');
-    Route::get('/send', 'RenewController@showsend');
+    Route::get('/send/{data}', 'RenewController@showsend');
     Route::post('/fetch', 'RenewController@pclfetch')->name('pcl5.fetch');
    // Route::get('/getdata2', 'ApplyController@getdata')->name('apply.e');
     // Route::get('/getdata3', 'ApplyController@scholardata')->name('apply.scholardata');

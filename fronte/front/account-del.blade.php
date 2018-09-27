@@ -88,7 +88,7 @@
                                   @endforeach
                                 @if(Auth::user()->chg ==1)
                                 <div class="alert alert-info">
-                                    You need to change your password before you access the website.
+                                    You need to change your password before you can access your account.
                                 </div>
                                 @endif
                                 <form method="post" action="{{ action('FrontendController@changePassword')}}" >

@@ -148,26 +148,11 @@ class TrackingController extends Controller
                         'created_at' => date('Y-m-d H:i:s')
                     ]);
 
-                    // $track = Tracking::find($request->get('scholarship_id'));
-                    // $track->status = 'RELEASED';
-                    // $track->save();
-                    // date_default_timezone_set("Asia/Manila");
-                    // $time = date('h:i:s', strtotime(now()));
-                    // $history = DB::table('history_log')->insert([
-                    //     'action'  => 'Cheques Released',
-                    //     'date'     => date('Y-m-d'),
-                    //     'time'     =>$time,
-                    //     'applicant_id' => $request->get('applicant_id')
-                    // ]);
+                    
 
-                    // date_default_timezone_set("Asia/Manila");
-                    // $time = date('h:i:s', strtotime(now()));
-                    // $history = DB::table('history_log')->insert([
-                    //     'action'  => 'Application need to renew',
-                    //     'date'     => date('Y-m-d'),
-                    //     'time'     =>$time,
-                    //     'applicant_id' => $request->get('applicant_id')
-                    // ]);
+                    $track = Tracking::find($request->get('scholarship_id'));
+                    $track->status = 'RELEASED';
+                    $track->save();
 
                     
                     // $data;
@@ -183,7 +168,7 @@ class TrackingController extends Controller
                         $app2 = DB::table('application')->JOIN('users', 'users.id', '=', 'application.applicant_id')
                         ->JOIN('eefapgv', 'eefapgv.application_id', '=', 'application.id')
                         ->where('application.application_status', 'Approved')->select('users.email', 'users.mobile_number', 'users.surname',
-                         'users.first_name', 'users.middle_name', 'users.suffix')->get();
+                         'users.first_name', 'users.middle_name', 'users.suffix', 'application.id', 'users.id as user_id')->get();
                         $app2->where('application.scholar_id', $scid);
 
                         // $userss = DB::table('users')->get();
@@ -219,6 +204,25 @@ class TrackingController extends Controller
                                 'honor_sub' => "Not Submitted",
                                 'submit'  => 0
 
+                            ]);
+
+                            
+                            date_default_timezone_set("Asia/Manila");
+                            $time = date('h:i:s', strtotime(now()));
+                            $history = DB::table('history_log')->insert([
+                                'action'  => 'Cheques Released',
+                                'date'     => date('Y-m-d'),
+                                'time'     =>$time,
+                                'applicant_id' => $json[$z]['user_id']
+                            ]);
+
+                            date_default_timezone_set("Asia/Manila");
+                            $time = date('h:i:s', strtotime(now()));
+                            $history = DB::table('history_log')->insert([
+                                'action'  => 'Application need to renew',
+                                'date'     => date('Y-m-d'),
+                                'time'     =>$time,
+                                'applicant_id' =>  $json[$z]['user_id']
                             ]);
                         }
                         
@@ -284,7 +288,7 @@ class TrackingController extends Controller
                         $app2 = DB::table('application')->JOIN('users', 'users.id', '=', 'application.applicant_id')
                         ->JOIN('eefap', 'eefap.application_id', '=', 'application.id')
                         ->where('application.application_status', 'Approved')->select('users.email', 'users.mobile_number', 'users.surname',
-                         'users.first_name', 'users.middle_name', 'users.suffix')->get();
+                         'users.first_name', 'users.middle_name', 'users.suffix', 'application.id', 'users.id as user_id')->get();
                         $app2->where('application.scholar_id', $scid);
 
                         // $userss = DB::table('users')->get();
@@ -318,6 +322,24 @@ class TrackingController extends Controller
                                 'oid_sub' => "Not Submitted",
                                 'submit'  => 0
 
+                            ]);
+
+                            date_default_timezone_set("Asia/Manila");
+                            $time = date('h:i:s', strtotime(now()));
+                            $history = DB::table('history_log')->insert([
+                                'action'  => 'Cheques Released',
+                                'date'     => date('Y-m-d'),
+                                'time'     =>$time,
+                                'applicant_id' => $json[$z]['user_id']
+                            ]);
+
+                            date_default_timezone_set("Asia/Manila");
+                            $time = date('h:i:s', strtotime(now()));
+                            $history = DB::table('history_log')->insert([
+                                'action'  => 'Application need to renew',
+                                'date'     => date('Y-m-d'),
+                                'time'     =>$time,
+                                'applicant_id' =>  $json[$z]['user_id']
                             ]);
                         }
 
@@ -367,7 +389,7 @@ class TrackingController extends Controller
                         $app2 = DB::table('application')->JOIN('users', 'users.id', '=', 'application.applicant_id')
                         ->JOIN('pcl', 'pcl.application_id', '=', 'application.id')
                         ->where('application.application_status', 'Approved')->select('users.email', 'users.mobile_number', 'users.surname',
-                         'users.first_name', 'users.middle_name', 'users.suffix', 'application.id')->get();
+                         'users.first_name', 'users.middle_name', 'users.suffix', 'application.id', 'users.id as user_id')->get();
                         $app2->where('application.scholar_id', $scid);
 
                         // $userss = DB::table('users')->get();
@@ -401,6 +423,24 @@ class TrackingController extends Controller
                                 'oid_sub' => "Not Submitted",
                                 'submit'  => 0
 
+                            ]);
+
+                            date_default_timezone_set("Asia/Manila");
+                            $time = date('h:i:s', strtotime(now()));
+                            $history = DB::table('history_log')->insert([
+                                'action'  => 'Cheques Released',
+                                'date'     => date('Y-m-d'),
+                                'time'     =>$time,
+                                'applicant_id' => $json[$z]['user_id']
+                            ]);
+
+                            date_default_timezone_set("Asia/Manila");
+                            $time = date('h:i:s', strtotime(now()));
+                            $history = DB::table('history_log')->insert([
+                                'action'  => 'Application need to renew',
+                                'date'     => date('Y-m-d'),
+                                'time'     =>$time,
+                                'applicant_id' =>  $json[$z]['user_id']
                             ]);
                         }
 

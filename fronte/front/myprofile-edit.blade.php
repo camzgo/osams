@@ -17,6 +17,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-2 ml-4">
+            @if(Auth::user()->new == 0)
             <div class="card ">
               <div class="card-header"><strong>Dashboard</strong></div>
               <div class="list-group list-group-flush">
@@ -40,6 +41,7 @@
                 </a>
               </div>
             </div>
+            @endif
           </div>
           <div class="col-lg-9">
             <div class="card">

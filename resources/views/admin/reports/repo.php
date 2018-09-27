@@ -124,7 +124,7 @@ $pdf->SetY(15);
         //$pdf->Image('check_mark.png',kaliwa-kanan,taas-baba,laki)
         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',103,144,6);
        }else{
-        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',118.5,144,6);
+        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',117,144,6);
         //$pdf->Cell(1,0,'',0,0);
        }    
     $pdf->Cell(88,7,'(   ) Yes  (   ) No',0,0);
@@ -230,7 +230,7 @@ $pdf->SetY(15);
 
 $pdf->Code128(144,255,$app->barcode_number,60,8);
 //pdf->Ln(5);
-$pdf->SetXY(179,263);
+$pdf->SetXY(182,263);
 //$pdf->Cell(163);
 $pdf->Write(5, $app->barcode_number);
 

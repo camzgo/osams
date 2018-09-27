@@ -59,7 +59,15 @@ class ApplicantMainController extends Controller
      */
     public function store(Request $request)
     {
-        $none ='none';
+        if($request->get('gender') == 'Male')
+        {
+            $none ='male.png';
+        }
+        else
+        {
+            $none = 'female.png';
+        }
+        
         $isdel = 0;
         $defpass = 'pampangascholar';
         // $mobile = $request->mobile_no;
@@ -89,7 +97,7 @@ class ApplicantMainController extends Controller
        // Mail::to($request->get('email'))->send(new RegSuccess($name));
         \Mail::to($email)->send(new RegSuccess($name));
 
-        return redirect('/admin/applicant');
+        return redirect('/admin/reg/success');
     }
 
     // /**

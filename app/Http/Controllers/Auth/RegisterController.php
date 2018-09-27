@@ -69,6 +69,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if($request->get('gender') == 'Male')
+        {
+            $none ='male.png';
+        }
+        else
+        {
+            $none = 'female.png';
+        }
         return User::create([
             'surname' => $data['surname'],
             'first_name' =>$data['first_name'],
@@ -77,7 +85,7 @@ class RegisterController extends Controller
             'bday'=>$data['bday'],
             'applicant_isdel' => 0,
             'mobile_number' => $data['mobile_no'],
-            'profile_photo' => 'noimage.jpg',
+            'profile_photo' => $none,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'new'  => 1,

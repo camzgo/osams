@@ -104,7 +104,8 @@ class RenewController extends Controller
             'renew'     => 0
         ]);
 
-        return redirect ('admin/renew/send');
+       $ids=$request->get('sid');
+        return redirect ('admin/renew/send/'.$ids);
     }
 
     public function vieweefapgv($id)
@@ -151,7 +152,8 @@ class RenewController extends Controller
             'renew'     => 0
         ]);
 
-        return redirect ('admin/renew/send');
+        $ids=$request->get('sid');
+        return redirect ('admin/renew/send/'.$ids);
     }
 
 
@@ -215,11 +217,16 @@ class RenewController extends Controller
             'renew'     => 0
         ]);
 
-        return redirect ('admin/renew/send');
+        $ids=$request->get('sid');
+        return redirect ('admin/renew/send/'.$ids);
     }
-    function showsend()
+    function showsend($data)
     {
-        return view('admin.scholarships.application2');
+        $name =$data;
+         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+         return view ('admin.scholarships.application2')->with('name', $name)->with('role', $role);
     }
 
 

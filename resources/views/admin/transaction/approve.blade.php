@@ -393,7 +393,8 @@
                             
                             </form>
                               <div class="row form-group pull-right">
-                                  <button class="btn btn-danger" id="btn-disapproved"  disabled><i class="fa fa-close"></i> DISAPPROVED</button> &nbsp &nbsp
+                                  <a href="#" class="btn btn-primary" target="_blank" id="print" nae="print"><i class="fa fa-print"></i> PRINT</a> &nbsp; &nbsp;
+                                  <button class="btn btn-danger" id="btn-disapproved"  disabled><i class="fa fa-close"></i> DISAPPROVED</button> &nbsp; &nbsp;
                                   <button class="btn btn-success" id="btn-approved"   disabled><i class="fa fa-check"></i> APPROVED</button>
                                   <div class="ghost">
                                     <input type="hidden" class="ghost" id="applicant_id" name="applicant_id" value=""/>
@@ -558,6 +559,7 @@ function search()
               $('#aid').val(data.aid);
               $('#sc_id').val(data.sc_id);
               $('#applicant_id').val(data.applicant_id);
+              $('#print').attr("href", "/admin/apply/application/form/"+data.applicant_id);
 
               var name = data.name;
               var mobile_no = data.mobile_number;

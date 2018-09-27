@@ -85,7 +85,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/reg" class="nav-link">
+                <a href="/admin/reg" class="nav-link active">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-sign-in nav-icon"></i>
                   <p>Register</p>
@@ -106,7 +106,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/renew" class="nav-link active">
+                <a href="/admin/renew" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-refresh nav-icon"></i>
                   <p>Renew</p>
@@ -277,7 +277,7 @@
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">Transactions</li>
-              <li class="breadcrumb-item active">Apply</li>
+              <li class="breadcrumb-item active">Register</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -301,11 +301,10 @@
                 <div class="card-body">
                     <h1 class="card-title"><i class="fa fa-paper-plane"></i> MESSAGE</h1>
                     <hr/>
-                    <p>Your application has been renewed.</p>
+                    <p>You have successfully created an account!</p>
                     {{-- <br>    --}}
                     <div class="pull-right">
-                        <a href="/admin/apply/application/form/{{$name}}" class="btn btn-primary" target="_blank"> Print Application</a> &nbsp;
-                        <a href="/admin/approve" class="btn btn-success"> Proceed to Approve</a>
+                        <a href="/admin/apply" class="btn btn-success"> Proceed to Apply</a>
                     </div>
                 </div>
             </div>

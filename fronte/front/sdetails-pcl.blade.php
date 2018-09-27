@@ -107,7 +107,7 @@
                               @if($applicant->application_status == "Pending" && $tracking->stage!="Approved")
                               <div class="form-row">
                                 <div class="col-md-3">
-                                  <a href="#" class="btn btn-block text-white btn-dark">Print</a>
+                                  <a href="/scholarship/form/{{Auth::user()->id}}" target="_blank" class="btn btn-block text-white btn-dark">Print</a>
                                 </div>
                                 <div class="col-md-3">
                                   <a href="/scholarship/upload/eefap" class="btn btn-block btn-primary">Upload Files</a>
@@ -125,6 +125,7 @@
                                 </div>
                               </div>
                               @endif
+                              @if($scholar->status == "OPEN")
                               @if($applicant->application_status == "Renew" && $applicant->renew == 1)
                               <div class="form-row">
                                 <div class="col-md-6">
@@ -137,6 +138,16 @@
                                   <form id="del-form" action="{{action('FrontendController@eefapdel')}}" method="POST" style="display: none;">
                                       @csrf
                                   </form>
+                                </div>
+                              </div>
+                              @endif
+                              @else
+                              <div class="form-row">
+                                <div class="col-md-12 ">
+                                  <div class="alert alert-danger">
+                                    <h5 class="text-center">{{$scholar->scholarship_name}} is closed. You can't renew.</h5>
+                                  </div>
+                                  
                                 </div>
                               </div>
                               @endif
@@ -252,7 +263,7 @@
 
                 </div><hr>
                 <div class="form-row">
-                  @if($applicant->application_status=="Approved")
+                  @if($tracking->status=="CLOSED" || $applicant->application_status=="Renew")
                   @if($tracking->stage=="Approved")
                   <div class="card" style="width: 100%;">
                     <div class="card-header boldtx bg-warning text-white">
