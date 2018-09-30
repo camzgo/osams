@@ -41,7 +41,7 @@
                         <h3><strong>{{$ann->title}}</strong></h3>
                     </div>
 
-                    <div class="text-center mt-3">
+                    <div class="mt-3">
                         <p>{{$ann->body}}</p>
                     </div>
 

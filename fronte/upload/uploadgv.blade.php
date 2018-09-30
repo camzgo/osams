@@ -20,7 +20,7 @@
 <main>
   <section>
       <div class="container">
-           <div class="card mt-4" style="width: 1000px; height: 610px; margin-left:4em;">
+           <div class="card mt-4" style="width: 1000px; height: 720px; margin-left:4em;">
                 <div class="card-body">
                      <div class="row justify-content-center">
                         <div class="text-center">
@@ -38,6 +38,7 @@
                                     <div class="clamp-name clamp-lines" >
                                         <input type="file" name="biodata" required>
                                     </div>
+                                    <p class="d-block mb-0 mt-1"><a href="/storage/sample/resume.pdf" target= "_blank" class="text-muted mb-0">Sample Biodata with 2x2 Picture</a></p>
                                     <small id="fileHelp" class="form-text text-muted">Please upload a valid bio-data, it must be in pdf format.</small>
                                </div>
                                <div class="col-md-6">
@@ -45,6 +46,7 @@
                                     <div class="clamp-name clamp-lines" >
                                         <input type="file" name="grades" required accept="image/*">
                                     </div>
+                                    <p class="d-block mb-0 mt-1"><a href="/storage/sample/grades.jpg" target= "_blank" class="text-muted mb-0">Sample Form</a></p>
                                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file.</small>
                                </div>
                             </div>
@@ -55,6 +57,7 @@
                                     <div class="clamp-name clamp-lines" >
                                         <input type="file" name="cor" accept="image/*">
                                     </div>
+                                    <p class="d-block mb-0 mt-1"><a href="/storage/sample/cor.jpg" target= "_blank" class="text-muted mb-0">Sample Form</a></p>
                                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file.</small>
                                </div>
                                <div class="col-md-6">
@@ -62,6 +65,7 @@
                                     <div class="clamp-name clamp-lines" >
                                         <input type="file" name="brgy" required accept="image/*">
                                     </div>
+                                    <p class="d-block mb-0 mt-1"><a href="/storage/sample/brgy.jpg" target= "_blank" class="text-muted mb-0">Sample Form</a></p>
                                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file.</small>
                                </div>
                             </div>
@@ -72,6 +76,7 @@
                                     <div class="clamp-name clamp-lines" >
                                         <input type="file" name="or" required accept="image/*">
                                     </div>
+                                    <p class="d-block mb-0 mt-1"><a href="/storage/sample/or.jpg" target= "_blank" class="text-muted mb-0">Sample Form</a></p>
                                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file.</small>
                                </div>
                                <div class="col-md-6">
@@ -79,6 +84,7 @@
                                     <div class="clamp-name clamp-lines" >
                                         <input type="file" name="oid" required accept="image/*">
                                     </div>
+                                    <p class="d-block mb-0 mt-1"><a href="/storage/sample/id.jpg" target= "_blank" class="text-muted mb-0">Sample Form</a></p>
                                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file.</small>
                                </div>
                             </div>
@@ -89,6 +95,7 @@
                                     <div class="clamp-name clamp-lines" >
                                         <input type="file" name="honor" required accept="image/*">
                                     </div>
+                                    <p class="d-block mb-0 mt-1"><a href="/storage/sample/honors.jpg" target= "_blank" class="text-muted mb-0">Sample Form</a></p>
                                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file.</small>
                                 </div>
                             </div>

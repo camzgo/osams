@@ -260,31 +260,31 @@ class ScholarshipMainController extends Controller
                         $app = Application::find($json[$x]['id'])->delete();
                     }
 
-                    $sc =DB::table('scholarships')->where('id', $request->get('scholarship_id'))->first();
+                    // $sc =DB::table('scholarships')->where('id', $request->get('scholarship_id'))->first();
 
-                    if($sc->type=="eefap")
-                    {
-                        $req = DB::table('reqeefap')->JOIN('application', 'application.id', '=', 'reqeefap.applicant_id')->where('scholar_id', $request->get('scholarship_id'))->where('application.application_status', 'Pending')
-                        ->where('application.application_status', 'Renew')->delete();
-                    }
-                    else if($sc->type == "eefap-gv")
-                    {
-                        if($sc->id == 7)
-                        {
-                            $req = DB::table('reqeefap')->JOIN('application', 'application.id', '=', 'reqeefap.applicant_id')->where('scholar_id', $request->get('scholarship_id'))->where('application.application_status', 'Pending')
-                        ->where('application.application_status', 'Renew')->delete();
-                        }
-                        else
-                        {
-                            $req = DB::table('reqgv')->JOIN('application', 'application.id', '=', 'reqeefap.applicant_id')->where('scholar_id', $request->get('scholarship_id'))->where('application.application_status', 'Pending')
-                        ->where('application.application_status', 'Renew')->delete();
-                        }
-                    }
-                    else if($sc->type == "pcl")
-                    {
-                       $req = DB::table('reqeefap')->JOIN('application', 'application.id', '=', 'reqeefap.applicant_id')->where('scholar_id', $request->get('scholarship_id'))->where('application.application_status', 'Pending')
-                        ->where('application.application_status', 'Renew')->delete();
-                    }
+                    // if($sc->type=="eefap")
+                    // {
+                    //     $req = DB::table('reqeefap')->JOIN('application', 'application.id', '=', 'reqeefap.applicant_id')->where('scholar_id', $request->get('scholarship_id'))->where('application.application_status', 'Pending')
+                    //     ->where('application.application_status', 'Renew')->delete();
+                    // }
+                    // else if($sc->type == "eefap-gv")
+                    // {
+                    //     if($sc->id == 7)
+                    //     {
+                    //         $req = DB::table('reqeefap')->JOIN('application', 'application.id', '=', 'reqeefap.applicant_id')->where('scholar_id', $request->get('scholarship_id'))->where('application.application_status', 'Pending')
+                    //         ->where('application.application_status', 'Renew')->delete();
+                    //     }
+                    //     else
+                    //     {
+                    //         $req = DB::table('reqgv')->JOIN('application', 'application.id', '=', 'reqeefap.applicant_id')->where('scholar_id', $request->get('scholarship_id'))->where('application.application_status', 'Pending')
+                    //         ->where('application.application_status', 'Renew')->delete();
+                    //     }
+                    // }
+                    // else if($sc->type == "pcl")
+                    // {
+                    //    $req = DB::table('reqeefap')->JOIN('application', 'application.id', '=', 'reqeefap.applicant_id')->where('scholar_id', $request->get('scholarship_id'))->where('application.application_status', 'Pending')
+                    //     ->where('application.application_status', 'Renew')->delete();
+                    // }
 
 
                     

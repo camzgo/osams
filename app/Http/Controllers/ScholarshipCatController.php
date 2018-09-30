@@ -582,8 +582,9 @@ class ScholarshipCatController extends Controller
     function printeefap($id)
     {
         
-        $app = DB::table('application')->where('id', $id)->first();
-        $scholar_id = DB::table('scholarships')->where('id', $app->scholar_id)->first();
+        $app = DB::table('application')->where('applicant_id', $id)->first();
+        $ssid = $app->scholar_id;
+        $scholar_id = DB::table('scholarships')->where('id', $ssid)->first();
 
         if($scholar_id->type == "eefap")
         {

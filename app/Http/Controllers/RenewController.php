@@ -109,7 +109,7 @@ class RenewController extends Controller
             'action'  => 'Application Renewed',
             'date'     => date('Y-m-d'),
             'time'     =>$time,
-            'applicant_id' => $request->get('applicant_id'),
+            'applicant_id' => $request->get('sid'),
             'scholar_id' => $eefapId->scholarship_id
 
         ]);
@@ -169,7 +169,7 @@ class RenewController extends Controller
             'action'  => 'Application Renewed',
             'date'     => date('Y-m-d'),
             'time'     =>$time,
-            'applicant_id' => $request->get('applicant_id'),
+            'applicant_id' => $request->get('sid'),
             'scholar_id' => $eefapgvId->scholarship_id
 
         ]);

@@ -11,7 +11,15 @@
     <script src="{{asset('js/app.js')}}"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
+<style>
+.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg{
+    color: red;
+}
 
+.hidden {
+     visibility:hidden;
+}
+</style>
  
 <nav class="navbar navbar-expand-lg navbar-dark py-3" style="height: 6em;   position: relative;
     background: linear-gradient(80deg, #004280 0, #001a33 100%)">
@@ -28,7 +36,7 @@
 <main>
   <section>
       <div class="container">
-           <div class="card  mt-4" style="width: 1000px; height: 800px; margin-left:4em;">
+           <div class="card  mt-4" style="width: 1100px; height: 850px; margin-left:2em;">
                 <div class="card-body">
                     {{-- @foreach ($errors->all() as $error)
                           <div class="alert alert-danger">
@@ -51,9 +59,10 @@
                                     <form method="POST" action="{{ route('register') }}">
                                     @csrf
                                         <label>Full Name</label>
-                                        <div class="form-row form-group">
+                                        <div class="form-row ">
                                             <div class="col-md-6">
-                                                <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }} form-control-lg " name="first_name" value="{{ old('first_name') }}"  placeholder="First Name" required autofocus>
+                                                <input id="first_name" type="text" class="form-control first_name form-control-lg {{ $errors->has('first_name') ? ' is-invalid' : '' }} " name="first_name" placeholder="First Name" required autofocus>
+                                               <p class="first_namemsg hidden">Please Enter a Valid First Name</p>
                                                 @if ($errors->has('first_name'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('first_name') }}</strong>
@@ -61,7 +70,8 @@
                                                 @endif
                                             </div>
                                             <div class="col-md-6">
-                                                <input id="middle_name" type="text" class="form-control{{ $errors->has('middle_name') ? ' is-invalid' : '' }} form-control-lg " name="middle_name" value="{{ old('middle_name') }}"  placeholder="Middle Name"  autofocus>
+                                                <input id="middle_name" type="text" class="form-control middle_name form-control-lg {{ $errors->has('middle_name') ? ' is-invalid' : '' }}" name="middle_name" placeholder="Middle Name"  autofocus>
+                                                <p class="middle_namemsg hidden">Please Enter a Valid Middle Name</p>
                                                 @if ($errors->has('middle_name'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('middle_name') }}</strong>
@@ -69,9 +79,10 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="form-row form-group">
+                                        <div class="form-row ">
                                             <div class="col-md-6">
-                                                <input id="surname" type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }} form-control-lg" name="surname" value="{{ old('surname') }}" placeholder="Surname" required autofocus>
+                                                <input id="surname" type="text" class="form-control surname form-control-lg {{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname"  placeholder="Surname" required autofocus>
+                                                <p class="surnamemsg hidden">Please Enter a Valid Surname</p>
                                                 @if ($errors->has('surname'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('surname') }}</strong>
@@ -79,7 +90,8 @@
                                                 @endif
                                             </div>
                                             <div class="col-md-6">
-                                            <input id="suffix" type="text" class="form-control{{ $errors->has('suffix') ? ' is-invalid' : '' }} form-control-lg " name="suffix" value="{{ old('suffix') }}"  placeholder="Suffix (e.g., Jr. III)" autofocus>
+                                            <input id="suffix" type="text" class="form-control suffix form-control-lg {{ $errors->has('suffix') ? ' is-invalid' : '' }}" name="suffix"   placeholder="Suffix (e.g., Jr. III)" autofocus>
+                                                <p class="suffixmsg hidden">Please Enter a Valid Suffix</p>
                                                 @if ($errors->has('suffix'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('suffix') }}</strong>
@@ -141,12 +153,12 @@
                                         <div class="form-row form-group">
                                             <div class="col-md-12">
                                             <label>Student ID Number / Student Number</label>
-                                            <input id="school_id" type="text" class="form-control{{ $errors->has('school_id') ? ' is-invalid' : '' }} form-control-lg" placeholder="Student ID Number / Student Number" name="school_id" required>
-                                                @if ($errors->has('school_id'))
+                                            <input id="school_id" type="text" class="form-control form-control-lg" placeholder="Student ID Number / Student Number" name="school_id" required>
+                                                {{-- @if ($errors->has('school_id'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('password') }}</strong>
                                                 </span>
-                                                @endif
+                                                @endif --}}
                                             </div>
                                         </div>
                                         <div class="form-row form-group">
@@ -177,7 +189,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-row form-group mt-2">
+                                            <div class="form-row  mt-2">
                                             <div class="col-md-12">
                                                 <button type="submit" class="btn btn-warning btn-block btn-lg text-white">
                                                     <strong>Create My Account</strong>
@@ -219,6 +231,61 @@
   $(document).ready(function(){
     $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   });
+  
+
+    var $regexname=/^([a-zA-Z]{2,30})$/;
+    $('.surname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.surnamemsg').removeClass('hidden');
+        $('.surnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.surnamemsg').addClass('hidden');
+        }
+    });
+
+var regexname1=/^([a-zA-Z]{2,30})$/;
+    $('.first_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname1)) {
+    // there is a mismatch, hence show the error message
+        $('.first_namemsg').removeClass('hidden');
+        $('.first_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.first_namemsg').addClass('hidden');
+        }
+    });
+
+
+var regexname2=/^([a-zA-Z]{2,30})$/;
+    $('.middle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname1)) {
+    // there is a mismatch, hence show the error message
+        $('.middle_namemsg').removeClass('hidden');
+        $('.middle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.middle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.suffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname1)) {
+    // there is a mismatch, hence show the error message
+        $('.suffixmsg').removeClass('hidden');
+        $('.suffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.suffixmsg').addClass('hidden');
+        }
+    });
+
+
 
 </script>
 </html>

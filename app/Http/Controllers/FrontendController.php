@@ -260,23 +260,72 @@ class FrontendController extends Controller
            {
                $eefap = DB::table('eefap')->where('application_id', $applicant->id)->first();
                $reqeefap = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->first();
+               $amount = $scholar->amount;
+               $ctr =  strlen ($amount);
+               if($ctr == 4)
+               {
+                 $amount = substr($amount,0,1).','.substr($amount,1,3);
+               }
+               else if ($ctr == 5)
+               {
+                    $amount = substr($amount,0,2).','.substr($amount,2,3);
+               }
+               else if ($ctr == 6)
+               {
+                    $amount = substr($amount,0,3).','.substr($amount,3,3);
+               }
+               
+               
+
                return view('front.sdetails')->with('eefap', $eefap)->with('applicant', $applicant)->with('scholar', $scholar)
-               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap);
+               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap)->with('amount', $amount);
            }
            else if($scholar->type == "eefap-gv")
            {
                $eefapgv = DB::table('eefapgv')->where('application_id', $applicant->id)->first();
                $reqgv = DB::table('reqgv')->where('applicant_id', Auth::user()->id)->first();
                $reqeefap = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->first();
+
+               $amount = $scholar->amount;
+               $ctr =  strlen ($amount);
+               if($ctr == 4)
+               {
+                 $amount = substr($amount,0,1).','.substr($amount,1,3);
+               }
+               else if ($ctr == 5)
+               {
+                    $amount = substr($amount,0,2).','.substr($amount,2,3);
+               }
+               else if ($ctr == 6)
+               {
+                    $amount = substr($amount,0,3).','.substr($amount,3,3);
+               }
+
                return view('front.sdetails-eefapgv')->with('eefapgv', $eefapgv)->with('applicant', $applicant)->with('scholar', $scholar)
-               ->with('tracking', $tracking)->with('log', $log)->with('reqgv', $reqgv)->with('reqeefap', $reqeefap);
+               ->with('tracking', $tracking)->with('log', $log)->with('reqgv', $reqgv)->with('reqeefap', $reqeefap)->with('amount', $amount);
            }
            else if($scholar->type == "pcl")
            {
                $pcl = DB::table('pcl')->where('application_id', $applicant->id)->first();
                $reqeefap = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->first();
+
+               $amount = $scholar->amount;
+               $ctr =  strlen ($amount);
+               if($ctr == 4)
+               {
+                 $amount = substr($amount,0,1).','.substr($amount,1,3);
+               }
+               else if ($ctr == 5)
+               {
+                    $amount = substr($amount,0,2).','.substr($amount,2,3);
+               }
+               else if ($ctr == 6)
+               {
+                    $amount = substr($amount,0,3).','.substr($amount,3,3);
+               }
+
                return view('front.sdetails-pcl')->with('pcl', $pcl)->with('applicant', $applicant)->with('scholar', $scholar)
-               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap);
+               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap)->with('amount', $amount);
            }
         }
         else
@@ -847,10 +896,9 @@ class FrontendController extends Controller
 // // }
 // $mysqldate = date( 'Y-m-d H:i:s', $phpdate );
 // $phpdate = strtotime( $mysqldate );
-date_default_timezone_set("Asia/Manila");
-// return now();
-$id=2;
-        return redirect('/admin/apply/send/'.$id);
+$str = '5000';
+$str = substr($str,0,1).','.substr($str,1,3);
+print $str;
 //return Redirect::route('admin.reports.repo', $id)->with(['data' => $data]);
 // echo date('h:i:s a', strtotime(now()));
 

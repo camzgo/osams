@@ -100,7 +100,7 @@
                                   <strong>{{$scholar->scholarship_name}}</strong>
                                 </div>
                                 <div class="card-body">
-                                  <h1 class="tx4">PHP {{$scholar->amount}}.00</h1>
+                                  <h1 class="tx4">PHP {{$amount}}.00</h1>
                                 </div>
                               </div>
                               @if($scholar->status == "OPEN")
