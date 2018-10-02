@@ -295,7 +295,7 @@ class ScholarshipCatController extends Controller
     {
         
         $id = DB::table('application')->insertGetId([
-            'application_status' => 'Pending',
+            'application_status' => 'Pre-Approved',
             'renew' => '0',
             'barcode_number' => $request->barcode,
             'barcode_image' => 'NONE',
@@ -370,7 +370,7 @@ class ScholarshipCatController extends Controller
     {
         
         $id = DB::table('application')->insertGetId([
-            'application_status' => 'Pending',
+            'application_status' => 'Pre-Approved',
             'renew' => '0',
             'barcode_number' => $request->barcode,
             'barcode_image' => 'NONE',
@@ -447,7 +447,7 @@ class ScholarshipCatController extends Controller
     {
         
         $id = DB::table('application')->insertGetId([
-            'application_status' => 'Pending',
+            'application_status' => 'Pre-Approved',
             'renew' => '0',
             'barcode_number' => $request->barcode,
             'barcode_image' => 'NONE',

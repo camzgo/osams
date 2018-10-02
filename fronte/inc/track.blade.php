@@ -16,20 +16,21 @@
 
                             <span class="bar-item-bar"></span>
                             <div class="bar-item">5</div>    
+                            
                           </div>
                         </div>
                         <div class="form-row" style="margin-left: 2em; margin-right: 2em;">
-                          <div class="col-md-2 ml-2">
-                            <p>Approved</p>
+                          <div class="col-md-2 ">
+                            <p>Pre-Approved</p>
                           </div>
-                          <div class="col-md-2 text-center ml-2">
+                          <div class="col-md-2 text-center ml-3">
                             <p>Re-Checking</p>
                           </div>
                           <div class="col-md-2 text-center" style="margin-left: 3em;">
                             <p>Consolidation</p>
                           </div>
                           <div class="col-md-2 text-center" style="margin-left: 3.2em;">
-                            <p>Payroll</p>
+                            <p>Approved</p>
                          </div>
                          <div class="col-md-2 text-center" style="margin-left: 3.2em;">   
                             <p>Releasing</p>

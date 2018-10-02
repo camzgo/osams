@@ -896,9 +896,11 @@ class FrontendController extends Controller
 // // }
 // $mysqldate = date( 'Y-m-d H:i:s', $phpdate );
 // $phpdate = strtotime( $mysqldate );
-$str = '5000';
-$str = substr($str,0,1).','.substr($str,1,3);
-print $str;
+// $str = '5000';
+// $str = substr($str,0,1).','.substr($str,1,3);
+// print $str;
+
+
 //return Redirect::route('admin.reports.repo', $id)->with(['data' => $data]);
 // echo date('h:i:s a', strtotime(now()));
 
@@ -1618,4 +1620,9 @@ print $str;
 
     }
 
+    function spes($id)
+    {
+        return view('scholarship.spes');
+    }
 }
+

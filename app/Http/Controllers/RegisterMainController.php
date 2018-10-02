@@ -53,7 +53,7 @@ class RegisterMainController extends Controller
         $this -> validate($request, [
             'surname' => 'required',
             'first_name' => 'required',
-            'middlename' => 'required',
+            'middlename' => 'nullable',
             'email' => 'required',
             'bday' => 'required',
             'gender' => 'required|between:Male,Female',

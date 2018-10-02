@@ -9,7 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
      {{-- <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800" rel="stylesheet"> --}}
 
-      <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="/js/src/mini-event-calendar.min.css">
   <script src="{{asset('js/app.js')}}"></script>
 </head>
 
@@ -276,19 +277,17 @@
       {{-- <div class="col-lg-4 mt-4">
         <div class="row">
         <div class="col-md-8" style="margin-left:120px; margin-top: 50px;">
-         <div class="card shdow rounded"> 
+         <div class="card rounded"> 
            <div class="card-header bg-grad1 text-white" style="font-size: 18px;">
             <strong> CALENDAR </strong>
            </div>
-           <div class="card-body">
-             <h5>September 12, 2018</h5>
-           </div>
+           <div id="calendar2" style="width: 100%;"></div>
          </div>
       </div>
       </div>
       <div class="row">
         <div class="col-md-8"  style="margin-left:120px; margin-top: 50px;">
-          <div class="card shdow rounded">
+          <div class="card rounded">
             <div class="card-header bg-grad1 text-white" style="font-size: 18px;">
               <strong> ANNOUNCEMENT</strong>
             </div>
@@ -315,7 +314,7 @@
       <div class="col-lg-4 mt-4">
       <div class="row">
         <div class="col-md-8"  style="margin-left:120px; margin-top: 50px;">
-          <div class="card rounded">
+          <div class="card rounded shadow-sm">
             <div class="card-header bg-grad1 text-white" style="font-size: 18px;">
               <strong> ANNOUNCEMENT</strong>
             </div>
@@ -389,7 +388,7 @@
                              @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="scholarship/ncw" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/check/1" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -434,7 +433,7 @@
                             @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="scholarship/gad" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/check/2" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -481,7 +480,7 @@
                              @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="scholarship/vg-oldnew" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/check/3" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -527,7 +526,7 @@
                             @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="scholarship/graduate-public" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/check/4" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -582,7 +581,7 @@
                              @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="scholarship/graduate-private" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/check/5" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -626,7 +625,7 @@
                             @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="scholarship/pcl" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/check/6" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -669,7 +668,7 @@
                             @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="scholarship/vg-dhvtsu" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/check/7" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -712,7 +711,7 @@
                              @if($ck==0)
                              <div class="card-footer">
                               <div>
-                                <a href="scholarship/honor-rank" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
+                                <a href="scholarship/check/8" class="btn btn-primary btn-rounded" style="width: 8em;  font-size: .90rem; margin-left:3em;"> APPLY</a>
                               </div>
                              </div>
                              @else
@@ -787,6 +786,11 @@
   $(document).ready(function(){
     $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   });
+  $(document).ready(function(){
+
+			//if you don't have events, use
+			$("#calendar2").MEC();
+		});
 // function autoRefreshPage()
 //     {
 //         window.location = window.location.href;
@@ -795,4 +799,6 @@
    
 
 </script>
+<script src="/js/src/java.js"></script>
+<script src="js/src/mini-event-calendar.min.js"></script>
 </html>

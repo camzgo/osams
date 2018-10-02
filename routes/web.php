@@ -265,6 +265,7 @@ Route::prefix('/')->group(function()
     Route::get('/scholarship/form/{id}', 'FrontendController@printaf');
 
     Route::get('/scholarship/getdata', 'FrontendController@getdata')->name('logs.getdata');
+    Route::get('/scholarship/check/{id}', 'FrontendController@spes');
 });
 
 Route::prefix('/admin/tracking')->group(function(){

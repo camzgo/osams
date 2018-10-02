@@ -301,14 +301,14 @@
                 <div class="card-body">
                     <h1 class="card-title"><i class="fa fa-paper-plane"></i> MESSAGE</h1>
                     <hr/>
-                    <p>Your application has been sent.</p>
+                    <p>Your application has been sent and pre-approved.</p>
                     {{-- <br>    --}}
                     <div class="ghost">
                     <input type="hidden" value="{{$name}}">
                     </div>
                     <div class="pull-right">
                         <a href="/admin/apply/application/form/{{$name}}" class="btn btn-primary" target="_blank"> Print Application</a> &nbsp;
-                        <a href="/admin/approve" class="btn btn-success"> Proceed to Approve</a>
+                        {{-- <a href="/admin/approve" class="btn btn-success"> </a> --}}
                     </div>
                 </div>
             </div>

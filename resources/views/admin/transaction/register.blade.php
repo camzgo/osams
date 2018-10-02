@@ -19,6 +19,12 @@
 
   
 </head>
+<style>
+
+.hidden {
+     visibility:hidden;
+}
+</style>
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
@@ -465,7 +471,7 @@
                       <div class="form-row">
                         <label for="fullname">* Full Name</label>
                       </div>
-                      <div class="row form-group">
+                      <div class="form-row form-group">
                         <div class = "col-md-4">
                           <input type="text" class="form-control {{ $errors->has('surname') ? ' is-invalid' : '' }}" id="surname" name="surname" placeholder='Surname' required/>
                           @if ($errors->has('surname'))
@@ -499,7 +505,7 @@
                           @endif
                         </div>
                       </div>
-                      <div class="form-row form-group">
+                      <div class="form-row">
                         <div class="col-md-2">
                             <label for="gender">* Gender</label>
                             <select name="gender" id="gender" class="selectpicker show-tick form-control" data-style="selCol" required>
@@ -510,7 +516,8 @@
                         </div>
                         <div class="col-md-3">
                           <label for="bdate">* Birth Date</label>
-                          <input type="date" name="bday" id="bday" class="form-control" data-provide="datepicker" required/>
+                          <input type="text" name="bday" id="bday" class="form-control" placeholder="dd/mm/yyyy" required/>
+                          <p class="bdaymsg hidden">Please Enter a valid birth date</p>
                         </div>
                         <div class="col-md-3">
                           <label for="mobile_number">* Mobile Number</label>
@@ -557,6 +564,55 @@ $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
 });
 
+  var d = new Date();
+var year = d.getFullYear() - 18;
+d.setFullYear(year);
+var age;
+$("#bday").datepicker({ dateFormat: "dd/mm/yy",
+		    changeMonth: true,
+		    changeYear: true,
+		    maxDate: year,
+		    minDate: "-40Y",
+            yearRange: '-40:' + year + '',
+            defaultDate: d
+		 });
+
+$("#bday").change(function(){
+        var dob = $("#bday").val();
+        var now = new Date();
+        var birthdate = dob.split("/");
+        var born = new Date(birthdate[2], birthdate[1]-1, birthdate[0]);
+        age=get_age(born,now);
+     
+        console.log(birthdate[2]+" : "+birthdate[1]+" : "+birthdate[0]);
+        console.log(age);
+    
+        if (age<18)
+        {
+            $('.bdaymsg').removeClass('hidden');
+            $('.bdaymsg').show();
+             $('.bdaymsg').css({'color': 'red'});
+            $('.bdaymsg').text("Invalid Age: " +age);
+            return false;
+        }
+        else
+        {
+            $('.bdaymsg').removeClass('hidden');
+            $('.bdaymsg').show();
+            $('.bdaymsg').css({'color': 'green'});
+            $('.bdaymsg').text("Valid Age: " +age);
+            
+        }
+});
+
+
+    function get_age(born, now) {
+      var birthday = new Date(now.getFullYear(), born.getMonth(), born.getDate());
+      if (now >= birthday) 
+        return now.getFullYear() - born.getFullYear();
+      else
+        return now.getFullYear() - born.getFullYear() - 1;
+    }
 </script>
 </body>
 </html>

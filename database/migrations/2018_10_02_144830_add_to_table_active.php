@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddToUsers extends Migration
+class AddToTableActive extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,8 @@ class AddToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('school_id', 250);
+            $table->integer('code')->nullable();
+            $table->integer('active')->default(0);
         });
     }
 
@@ -28,7 +29,8 @@ class AddToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('school_id');
+            $table->dropColumn('code');
+            $table->dropColumn('active');
         });
     }
 }
