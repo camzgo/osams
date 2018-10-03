@@ -353,7 +353,7 @@ var regexname2=/^([a-zA-Z ]{2,30})*$/;
 //   }
 
 
-  var d = new Date();
+var d = new Date();
 var year = d.getFullYear() - 18;
 d.setFullYear(year);
 var age;
@@ -361,8 +361,8 @@ $("#lastReporteddate").datepicker({ dateFormat: "dd/mm/yy",
 		    changeMonth: true,
 		    changeYear: true,
 		    maxDate: year,
-		    minDate: "-40Y",
-            yearRange: '-40:' + year + '',
+		    minDate: "-80Y",
+            yearRange: '-80:' + year + '',
             defaultDate: d
 		 });
 

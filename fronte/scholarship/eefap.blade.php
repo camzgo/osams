@@ -154,6 +154,13 @@ button:focus {
   background-color: #4CAF50;
 }
 
+.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg, .gsurnamemsg, .gfirst_namemsg, .gmiddle_namemsg, .gsuffixmsg{
+    color: red;
+}
+
+.hidden {
+     visibility:hidden;
+}
 </style>
 
 <body>
@@ -203,23 +210,27 @@ button:focus {
         <div class="row">
           <label for="fullname">* Full Name</label>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
           <div class = "col-md-4">
-          <input type="text" class="form-control req {{ $errors->has('nationality') ? ' is-invalid' : '' }}"  id="surname" name="surname" placeholder='* Surname' value="{{Auth::user()->surname}}" required/>
+          <input type="text" class="form-control req surname  id="surname" name="surname" placeholder='* Surname' value="{{Auth::user()->surname}}" required/>
           @if ($errors->has('surname'))
           <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('surname') }}</strong>
           </span>
           @endif
+          <p class="surnamemsg hidden">Please Enter a valid surname</p>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{Auth::user()->first_name}}" required/>
+            <input type="text" class="form-control req first_name" id="first_name" name="first_name" placeholder='* First Name' value="{{Auth::user()->first_name}}" required/>
+            <p class="first_namemsg hidden">Please Enter a valid first name</p>
           </div>
           <div class = "col-md-2">
-          <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{Auth::user()->middle_name}}" placeholder='Middle Name'/>
+            <input type="text" class="form-control middle_name mb-0" id="middle_name" name="middle_name" value="{{Auth::user()->middle_name}}" placeholder='Middle Name'/>
+            <p class="middle_namemsg hidden">Please Enter a valid middle name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="suffix" name="suffix" value="{{Auth::user()->suffix}}" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <input type="text" class="form-control suffix mb-0" id="suffix" name="suffix" value="{{Auth::user()->suffix}}" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <p class="suffixmsg hidden mb-0">Please Enter a valid suffix</p>
           </div>
         </div>
         <div class="row form-group">
@@ -275,18 +286,22 @@ button:focus {
         <div class="row">
           <label for="fullname">* Full Name</label>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="gsurname" name="gsurname" value="{{$guardian->surname}}" placeholder='* Surname' required/>
+            <input type="text" class="form-control req gsurname" id="gsurname" name="gsurname" value="{{$guardian->surname}}" placeholder='* Surname' required/>
+            <p class="gsurnamemsg hidden mb-0">Please Enter a valid surname</p>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="gfirst_name" name="gfirst_name" value="{{$guardian->first_name}}" placeholder='* First Name' required/>
+            <input type="text" class="form-control gfirst_name req" id="gfirst_name" name="gfirst_name" value="{{$guardian->first_name}}" placeholder='* First Name' required/>
+            <p class="gfirst_namemsg hidden mb-0">Please Enter a valid first name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="gmiddle_name" name="gmiddle_name" value="{{$guardian->middle_name}}" placeholder='Middle Name'/>
+            <input type="text" class="form-control gmiddle_name" id="gmiddle_name" name="gmiddle_name" value="{{$guardian->middle_name}}" placeholder='Middle Name'/>
+            <p class="gmiddle_namemsg hidden mb-0">Please Enter a valid middle name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="gsuffix" name="gsuffix" value="{{$guardian->suffix}}" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <input type="text" class="form-control gsuffix" id="gsuffix" name="gsuffix" value="{{$guardian->suffix}}" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <p class="gsuffixmsg hidden mb-0">Please Enter a valid suffix</p>
           </div>
         </div>
         <div class="row form-group">
@@ -343,7 +358,7 @@ button:focus {
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average" id="gen_average" type="text" class="form-control  req"  placeholder ="1.25">
+                <input name="gen_average" id="gen_average" type="text" class="form-control  req"  placeholder ="Average">
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -356,7 +371,7 @@ button:focus {
             </div>
         </div>
         <div class="row form-group">
-          <div class="col-md-2">
+          <div class="col-md-3">
             <label>* Graduating: </label>
             <select name="grad" id="grad" class="form-control">
               <option value="" selected disabled>--Select--</option>
@@ -364,16 +379,53 @@ button:focus {
               <option value="NO">NO</option>
             </select>
           </div>
-          <div class="col-md-3">
+          {{-- <div class="col-md-3">
             <label>* I certify that: </label>
             <select name="spes" id="spes" class="form-control">
               <option value="" selected disabled>--Select--</option>
               <option value="YES">Yes, I am SPES Recipient</option>
               <option value="NO">No, I am not SPES Recipient</option>
             </select>
+          </div> --}}
+        </div>
+        </div>
+        <div class="tab">
+          <div class="row mt-5 form-group">
+            <h4 class="tx1">Grades</h4>
           </div>
-        </div>
-        </div>
+          <hr/>
+          <br>
+          <div class="form-row">
+            <div class="col-md-3">
+              <label>Number of Courses/Subjects </label>
+              <select name="nos" id="nos" class="form-control" onchange="addInputs()">
+                <option value="" selected disabled>--Select--</option>
+                @for($i = 1; $i<=12; $i++)
+                <option value="{{$i}}">{{$i}}</option>
+                @endfor
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label>Semester</label>
+              <select name="sem" id="sem" class="form-control">
+                <option value="" selected disabled>--Select--</option>
+                <option value="1st">1st Semester</option>
+                <option value="2nd">2nd Semester</option>
+              </select>
+            </div>
+          </div>
+          <br><hr><br>
+          <div class="form-row" >
+            <div class="col-md-6" id="here">
+
+            </div>
+            <div class="col-md-2" id="here2">
+
+            </div>
+          </div>
+      </div>
+
+
         <div class="ghost">
           <input type="hidden" id="sid" name="sid" value="{{Auth::user()->id}}">
           <input type="hidden" id="scholar_id" name="scholar_id" value={{$scholar_id}}>
@@ -416,49 +468,48 @@ button:focus {
 
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
-  $('#gen_average').mask('0.00', {"clearIncomplete": true});
+ // $('#gen_average').mask('0.00', {"clearIncomplete": true});
   $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
 
   // var pathname = window.location.pathname;
   // var parts = pathname.split('/');
   // console.log(parts[3]);
-
   // $('#sid').val(parts[3]);
 
 });
 
-$('#surname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#first_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#middle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#suffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#gsurname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#gfirst_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#gmiddle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#gsuffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
+// $('#surname').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#first_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#middle_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#suffix').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#gsurname').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#gfirst_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#gmiddle_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#gsuffix').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
 
 
 var v = $("#regForm").validate({
@@ -591,6 +642,145 @@ $(document).ready(function(){
 
 });
 
+var $regexname=/^([a-zA-Z ]{2,30})$/;
+    $('.surname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.surnamemsg').removeClass('hidden');
+        $('.surnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.surnamemsg').addClass('hidden');
+        }
+    });
+
+    $('.first_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.first_namemsg').removeClass('hidden');
+        $('.first_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.first_namemsg').addClass('hidden');
+        }
+    });
+
+
+    $('.gsurname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.gsurnamemsg').removeClass('hidden');
+        $('.gsurnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.gsurnamemsg').addClass('hidden');
+        }
+    });
+
+    $('.gfirst_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.gfirst_namemsg').removeClass('hidden');
+        $('.gfirst_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.gfirst_name_sg').addClass('hidden');
+        }
+    });
+
+
+var $regexname2=/^([a-zA-Z ]{2,30})*$/;
+    $('.middle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.middle_namemsg').removeClass('hidden');
+        $('.middle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.middle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.suffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.suffixmsg').removeClass('hidden');
+        $('.suffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.suffixmsg').addClass('hidden');
+        }
+    });
+
+
+     $('.gmiddle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.gmiddle_namemsg').removeClass('hidden');
+        $('.gmiddle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.gmiddle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.gsuffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.gsuffixmsg').removeClass('hidden');
+        $('.gsuffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.gsuffixmsg').addClass('hidden');
+        }
+    });
+
+function addInputs()
+{
+  var no = document.getElementById("nos").value;
+  // Container <div> where dynamic content will be placed
+  var container = document.getElementById("here");
+  var container2 = document.getElementById("here2");
+  // Clear previous contents of the container
+  while (container.hasChildNodes()) {
+      container.removeChild(container.lastChild);
+  }
+  while (container2.hasChildNodes()) {
+      container2.removeChild(container2.lastChild);
+  }
+  for (i=0;i<no;i++){
+      // Append a node with a random text
+      container.appendChild(document.createTextNode("Subject Name " + (i+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "member" + i;
+      container.appendChild(input);
+      // Append a line break 
+      container.appendChild(document.createElement("br"));
+  }
+
+  for (y=0;y<no;y++){
+      // Append a node with a random text
+      container2.appendChild(document.createTextNode("Grade " + (y+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "member" + i;
+      container2.appendChild(input);
+      // Append a line break 
+      container2.appendChild(document.createElement("br"));
+  }
+        
+}
 
 </script>
 <script src="{{ URL::asset('data/religion.js') }}" type="text/javascript"></script>

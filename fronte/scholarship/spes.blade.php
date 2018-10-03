@@ -69,7 +69,7 @@
                   <div>
                     <div class=" mt-4" style="height: 150px; width:100%;">
                       <div class="alert alert-danger">
-                        <h4><i class="fa fa-warning"></i><strong> You are not allowed</strong> to apply for this scholarship category or any of this categories because you are an SPES recipients.</h4>
+                        <h4><i class="fa fa-warning"></i><strong> You are not allowed</strong> to apply for this scholarship category or any of these categories because you are an SPES recipients.</h4>
                       </div>
                       <a href="/" class="btn btn-secondary pull-right"><i class="fa fa-arrow-left"></i> Close</a>
                     </div>
@@ -104,7 +104,7 @@ function speschk()
 
   var sid = parts[3];
   
-  if(spes == "YES")
+  if(spes == "NO")
   {
     switch (sid){
       case "1" : 
@@ -136,7 +136,7 @@ function speschk()
     }
 
   }
-  else if (spes == "NO")
+  else if (spes == "YES")
   {
     $('#sp').addClass('ghost');
     $('#warn').removeClass('ghost');

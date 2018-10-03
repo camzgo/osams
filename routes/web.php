@@ -372,6 +372,10 @@ Route::get('/json-village', 'CountryController@villages');
 
 // Route::resource('admin', 'AdminPagesController');
 
+Route::get('/verify', 'VerifyController@getVerify')->name('getVerify');
+Route::post('/verify', 'VerifyController@postVerify')->name('verify');
+
+
 Route::resource('admin/applicant', 'ApplicantMainController');
 Route::resource('admin/application', 'ApplicationMainController');
 Route::resource('admin/announcement', 'AnnounceMainController');

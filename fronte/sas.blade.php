@@ -274,7 +274,7 @@
 
 
       <!--here-->
-      {{-- <div class="col-lg-4 mt-4">
+      <div class="col-lg-4 mt-4">
         <div class="row">
         <div class="col-md-8" style="margin-left:120px; margin-top: 50px;">
          <div class="card rounded"> 
@@ -309,9 +309,9 @@
 
         </div>
       </div>
-      </div> <!--end--> --}}
+      </div> <!--end-->
 
-      <div class="col-lg-4 mt-4">
+      {{-- <div class="col-lg-4 mt-4">
       <div class="row">
         <div class="col-md-8"  style="margin-left:120px; margin-top: 50px;">
           <div class="card rounded shadow-sm">
@@ -337,7 +337,7 @@
         </div>
       </div>
       
-      </div>
+      </div> --}}
       
       
     

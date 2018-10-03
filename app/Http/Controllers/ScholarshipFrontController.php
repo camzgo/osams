@@ -245,10 +245,14 @@ class ScholarshipFrontController extends Controller
     {
 
         $this -> validate($request, [
-            'surname' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50' 
-            // 'first_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',
-            // 'middle_name' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
-            // 'suffix' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
+            'surname' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',
+            'first_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',
+             'middle_name' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
+             'suffix' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
+             'gsurname' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',
+            'gfirst_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',
+             'gmiddle_name' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
+             'gsuffix' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
             // 'nationality' => 'string|regex:/^[a-zA-Z]+$/u|max:50',
             // 'occupation' => 'string|regex:/^[a-zA-Z]+$/u|max:50',
         ]);	

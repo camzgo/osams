@@ -112,6 +112,27 @@
                   <p>Renew</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/admin/recheck" class="nav-link">
+                  &nbsp &nbsp &nbsp
+                  <i class="fa fa-check-square nav-icon"></i>
+                  <p>Re-Checking</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/consolidation" class="nav-link">
+                  &nbsp &nbsp &nbsp
+                  <i class="fa fa-clone nav-icon"></i>
+                  <p>Consolidation</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/awarding" class="nav-link">
+                  &nbsp &nbsp &nbsp
+                  <i class="fa fa-trophy nav-icon"></i>
+                  <p>Awarding</p>
+                </a>
+              </li>
             </ul>
           </li>
           @endif
