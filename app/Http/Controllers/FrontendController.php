@@ -256,6 +256,9 @@ class FrontendController extends Controller
            $tracking = DB::table('tracking')->where('scholarship_id', $scholar->id)->first(); 
            $log = DB::table('log')->where('scholar_id', $scholar->id)->orderBy('created_at', 'desc')->get();
 
+           $grades = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->get();
+           $grades1 = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->first();
+
            if($scholar->type == "eefap")
            {
                $eefap = DB::table('eefap')->where('application_id', $applicant->id)->first();
@@ -278,7 +281,7 @@ class FrontendController extends Controller
                
 
                return view('front.sdetails')->with('eefap', $eefap)->with('applicant', $applicant)->with('scholar', $scholar)
-               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap)->with('amount', $amount);
+               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap)->with('amount', $amount)->with('grades', $grades)->with('grades1', $grades1);
            }
            else if($scholar->type == "eefap-gv")
            {
@@ -302,7 +305,7 @@ class FrontendController extends Controller
                }
 
                return view('front.sdetails-eefapgv')->with('eefapgv', $eefapgv)->with('applicant', $applicant)->with('scholar', $scholar)
-               ->with('tracking', $tracking)->with('log', $log)->with('reqgv', $reqgv)->with('reqeefap', $reqeefap)->with('amount', $amount);
+               ->with('tracking', $tracking)->with('log', $log)->with('reqgv', $reqgv)->with('reqeefap', $reqeefap)->with('amount', $amount)->with('grades', $grades)->with('grades1', $grades1);
            }
            else if($scholar->type == "pcl")
            {
@@ -325,7 +328,7 @@ class FrontendController extends Controller
                }
 
                return view('front.sdetails-pcl')->with('pcl', $pcl)->with('applicant', $applicant)->with('scholar', $scholar)
-               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap)->with('amount', $amount);
+               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap)->with('amount', $amount)->with('grades', $grades)->with('grades1', $grades1);
            }
         }
         else
@@ -1324,6 +1327,7 @@ class FrontendController extends Controller
             $eefap = DB::table('eefap')->where('applicant_id', Auth::user()->id)->delete();
             $reqe = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->delete();
             $app2 = DB::table('application')->where('applicant_id', Auth::user()->id)->delete();
+            $grad = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->delete();
         }
         else if($scholar->type == "eefap-gv")
         {
@@ -1332,12 +1336,15 @@ class FrontendController extends Controller
                 $gv = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->delete();
                 $reqe = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->delete();
                 $app2 = DB::table('application')->where('applicant_id', Auth::user()->id)->delete();
+                $grad = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->delete();
+                
             }
             else
             {
                 $gv = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->delete();
                 $reqgv = DB::table('reqgv')->where('applicant_id', Auth::user()->id)->delete();
                 $app2 = DB::table('application')->where('applicant_id', Auth::user()->id)->delete();
+                $grad = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->delete();
             }
         }
         else if($scholar->type == "pcl")
@@ -1345,6 +1352,7 @@ class FrontendController extends Controller
             $pcl = DB::table('pcl')->where('applicant_id', Auth::user()->id)->delete();
             $reqe = DB::table('reqeefap')->where('applicant_id', Auth::user()->id)->delete();
             $app2 = DB::table('application')->where('applicant_id', Auth::user()->id)->delete();
+            $grad = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->delete();
         }
 
         date_default_timezone_set("Asia/Manila");
@@ -1432,7 +1440,6 @@ class FrontendController extends Controller
         $eefapgv->year_level = $request->get('yr_lvl');
         $eefapgv->graduating = $request->get('grad');
         $eefapgv->general_average = $request->get('gen_average');
-        $eefapgv->spes = $request->get('spes');
         $eefapgv->awards =$request->get('award');
         $eefapgv->save();
 
@@ -1470,7 +1477,6 @@ class FrontendController extends Controller
         $eefap->year_level = $request->get('yr_lvl');
         $eefap->graduating = $request->get('grad');
         $eefap->general_average = $request->get('gen_average');
-        $eefap->spes = $request->get('spes');
         $eefap->fb_account = $request->get('fb_account');
         $eefap->gsurname = $request->get('gsurname');
         $eefap->gfirst_name = $request->get('gfirst_name');

@@ -346,7 +346,6 @@ class ScholarshipCatController extends Controller
             'general_average' => $request->gen_average,
             'program_type' => $request->educ_prog,
             'graduating' => $request->grad,
-            'spes' => $request->spes,
             'scholarship_id' => $request->title_id,
             'applicant_id' => $request->sid,
             'application_id' => $id
@@ -409,7 +408,6 @@ class ScholarshipCatController extends Controller
             'general_average' => $request->gen_average,
             'program_type' => $request->educ_prog,
             'graduating' => $request->grad,
-            'spes' => $request->spes,
             'awards'=> $request->award,
             'scholarship_id' => $request->title_id,
             'applicant_id' => $request->sid,

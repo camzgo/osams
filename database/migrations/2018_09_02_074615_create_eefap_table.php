@@ -37,7 +37,6 @@ class CreateEefapTable extends Migration
             $table->string('year_level', 50);
             $table->string('graduating', 5);
             $table->string('general_average', 5);
-            $table->string('spes', 5);
             $table->integer('scholarship_id');
             $table->integer('applicant_id');
             $table->integer('application_id');

@@ -194,13 +194,11 @@ button:focus {
           {{-- <small>{{$barcode}}</small> --}}
     <form action="{{ action('ScholarshipFrontController@eefapStore') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
       {{csrf_field()}}
-
-      
       <div class="tab">
 
         {{-- <h5><strong>Step 1 of 3</strong></h5> --}}
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 33.3333333333%" aria-valuenow="33.3333333333" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 4</strong></div>
         </div>
 
         <div class="row form-group mt-5">
@@ -276,7 +274,7 @@ button:focus {
     
       <div class="tab">
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 66.6666666667%" aria-valuenow="66.6666666667" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 4</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -320,8 +318,8 @@ button:focus {
 
       <div class="tab">
 
-        <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 3</strong></div>
+       <div class="progress mt-2">
+          <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 4</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -390,6 +388,9 @@ button:focus {
         </div>
         </div>
         <div class="tab">
+          <div class="progress mt-2">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 4 of 4</strong></div>
+          </div>
           <div class="row mt-5 form-group">
             <h4 class="tx1">Grades</h4>
           </div>
@@ -398,7 +399,7 @@ button:focus {
           <div class="form-row">
             <div class="col-md-3">
               <label>Number of Courses/Subjects </label>
-              <select name="nos" id="nos" class="form-control" onchange="addInputs()">
+              <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
                 <option value="" selected disabled>--Select--</option>
                 @for($i = 1; $i<=12; $i++)
                 <option value="{{$i}}">{{$i}}</option>
@@ -407,7 +408,7 @@ button:focus {
             </div>
             <div class="col-md-3">
               <label>Semester</label>
-              <select name="sem" id="sem" class="form-control">
+              <select name="sem" id="sem" class="form-control req" required>
                 <option value="" selected disabled>--Select--</option>
                 <option value="1st">1st Semester</option>
                 <option value="2nd">2nd Semester</option>
@@ -444,12 +445,14 @@ button:focus {
         </div>
       </div>
 
+    </form>
       <div style="text-align:center;margin-top:40px;">
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
+        <span class="step"></span>
       </div>
-    </form>
+    
   </div>
  </div>
   {{-- </div>
@@ -688,7 +691,7 @@ var $regexname=/^([a-zA-Z ]{2,30})$/;
     }
     else{
         // else, do not display message
-        $('.gfirst_name_sg').addClass('hidden');
+        $('.gfirst_namemsg').addClass('hidden');
         }
     });
 
@@ -762,7 +765,8 @@ function addInputs()
       // Create an <input> element, set its type and name attributes
       var input = document.createElement("input");
       input.type = "text";
-      input.name = "member" + i;
+      input.name = "subject" + i;
+      input.setAttribute("class", "req");
       container.appendChild(input);
       // Append a line break 
       container.appendChild(document.createElement("br"));
@@ -774,7 +778,8 @@ function addInputs()
       // Create an <input> element, set its type and name attributes
       var input = document.createElement("input");
       input.type = "text";
-      input.name = "member" + i;
+      input.name = "grade" + y;
+      input.setAttribute("class", "req");
       container2.appendChild(input);
       // Append a line break 
       container2.appendChild(document.createElement("br"));

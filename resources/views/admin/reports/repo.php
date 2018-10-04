@@ -136,11 +136,8 @@ $pdf->SetY(15);
     $pdf->Cell(9);
     $pdf->Cell(50,7,'I certify that :',0,1);
     $pdf->Cell(15);
-    if ($eefap->spes == "YES"){
-        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',25,155,9);
-       }else{
-        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',25,163,9);
-       }    
+    
+    $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',25,163,9);
     $pdf->Cell(9,7,'',1,0);
     $pdf->Cell(50,7,'Yes, I am SPES Recipient',0,1);
     $pdf->Ln(1);

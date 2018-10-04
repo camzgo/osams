@@ -51,10 +51,10 @@ class ApproveController extends Controller
         if ($type == "eefap")
         {
             $users = DB::table('eefap')
-            ->Join('application', 'application.id', '=',  'eefap.application_id')
+            ->Join('application', 'application.id', '=',  'eefap.application_id')->JOIN('users', 'users.id', '=', 'application.applicant_id')
             ->where('application.barcode_number', $id)->where('application.application_status', '=', 'Pending')->orwhere('application.application_status', '=', 'Authenticating')
             ->select(DB::raw("CONCAT_WS('', eefap.surname,', ', eefap.first_name, ' ', eefap.middle_name, ' ', eefap.suffix) as fullname"), 
-            DB::raw("CONCAT_WS('', eefap.street, ' ', eefap.barangay, ' ' , eefap.municipality ) as fulladdress"), 'eefap.mobile_number')->first();
+            DB::raw("CONCAT_WS('', eefap.street, ' ', eefap.barangay, ' ' , eefap.municipality ) as fulladdress"), 'eefap.mobile_number', 'users.school_id')->first();
         }
 
         else if($type == "eefap-gv")
@@ -83,7 +83,8 @@ class ApproveController extends Controller
             'aid' => $scholar->id,
             'mobile_number' => $users->mobile_number,
             'sc_id' => $scholar->sc_id,
-            'applicant_id' => $scholar->applicant_id
+            'applicant_id' => $scholar->applicant_id,
+            'school_id' => $users->school_id
         );
         echo json_encode($output);
     }
@@ -93,7 +94,7 @@ class ApproveController extends Controller
         if($request->get('action') == 'approved')
         {
             $id = $request->get('aid');
-            $approve =  'Approved';
+            $approve =  'Pre-Approved';
             DB::table('application')->where('id', $id)
             ->update([
                 'application_status' => $approve
@@ -169,7 +170,7 @@ class ApproveController extends Controller
 
     function listapproved()
     {   
-        $stat = "Approved";
+        $stat = "Pre-Approved";
         $approve = DB::table('approval_date')
         ->Join('users', 'users.id', '=',  'approval_date.applicant_id')
         ->JOIN('application', 'application.id', '=', 'approval_date.application_id')

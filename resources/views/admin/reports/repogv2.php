@@ -144,12 +144,10 @@ $pdf->SetY(15);
     $pdf->Cell(-1,-1,$eefap->general_average);
     $pdf->Cell(50,0,'____________',0,0);
     $pdf->ln(10);
-     if ($eefap->spes == "YES"){
-         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',35,152,6);
-     }else{
-         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',149,152,6);
-         $pdf->Cell(1,0,'',0,0);
-     }
+
+    $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',149,152,6);
+    $pdf->Cell(1,0,'',0,0);
+
 
     $pdf->SetFont('Arial','IB',10);
     $pdf->SetTextColor('28','134','238');

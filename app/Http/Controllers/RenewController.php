@@ -86,7 +86,6 @@ class RenewController extends Controller
         $eefap->year_level = $request->get('yr_lvl');
         $eefap->graduating = $request->get('grad');
         $eefap->general_average = $request->get('gen_average');
-        $eefap->spes = $request->get('spes');
         $eefap->fb_account = $request->get('fb_account');
         $eefap->gsurname = $request->get('gsurname');
         $eefap->gfirst_name = $request->get('gfirst_name');
@@ -150,7 +149,6 @@ class RenewController extends Controller
         $eefapgv->year_level = $request->get('yr_lvl');
         $eefapgv->graduating = $request->get('grad');
         $eefapgv->general_average = $request->get('gen_average');
-        $eefapgv->spes = $request->get('spes');
         $eefapgv->awards =$request->get('award');
         $eefapgv->save();
 

@@ -20,6 +20,9 @@
   
 </head>
 <style>
+.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg{
+    color: red;
+}
 
 .hidden {
      visibility:hidden;
@@ -492,38 +495,42 @@
                       <div class="form-row">
                         <label for="fullname">* Full Name</label>
                       </div>
-                      <div class="form-row form-group">
+                      <div class="form-row">
                         <div class = "col-md-4">
-                          <input type="text" class="form-control {{ $errors->has('surname') ? ' is-invalid' : '' }}" id="surname" name="surname" placeholder='Surname' required/>
+                          <input type="text" class="form-control {{ $errors->has('surname') ? ' is-invalid' : '' }} surname" id="surname" name="surname" placeholder='Surname' required/>
                           @if ($errors->has('surname'))
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $errors->first('surname') }}</strong>
                           </span>
                           @endif
+                          <p class="surnamemsg hidden">Please Enter a valid surname</p>
                         </div>
                         <div class = "col-md-4">
-                          <input type="text" class="form-control {{ $errors->has('first_name') ? ' is-invalid' : '' }}" id="first_name" name="first_name" placeholder='First Name' required/>
+                          <input type="text" class="form-control {{ $errors->has('first_name') ? ' is-invalid' : '' }} first_name" id="first_name" name="first_name" placeholder='First Name' required/>
                            @if ($errors->has('first_name'))
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $errors->first('first_name') }}</strong>
                           </span>
                           @endif
+                          <p class="first_namemsg hidden">Please Enter a valid first name</p>
                         </div>
                         <div class = "col-md-2">
-                          <input type="text" class="form-control  {{ $errors->has('middle_name') ? ' is-invalid' : '' }}" id="middle_name" name="middle_name" placeholder='Middle Name'/>
+                          <input type="text" class="form-control  {{ $errors->has('middle_name') ? ' is-invalid' : '' }} middle_name" id="middle_name" name="middle_name" placeholder='Middle Name'/>
                           @if ($errors->has('middle_name'))
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $errors->first('middle_name') }}</strong>
                           </span>
                           @endif
+                          <p class="middle_namemsg hidden">Please Enter a valid middle name</p>
                         </div>
                         <div class = "col-md-2">
-                          <input type="text" class="form-control  {{ $errors->has('suffix') ? ' is-invalid' : '' }}" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+                          <input type="text" class="form-control  {{ $errors->has('suffix') ? ' is-invalid' : '' }} suffix" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
                           @if ($errors->has('suffix'))
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $errors->first('suffix') }}</strong>
                           </span>
                           @endif
+                          <p class="suffixmsg hidden">Please Enter a valid suffix</p>
                         </div>
                       </div>
                       <div class="form-row">
@@ -585,16 +592,70 @@ $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
 });
 
+
+ var $regexname=/^([a-zA-Z ]{2,30})$/;
+    $('.surname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.surnamemsg').removeClass('hidden');
+        $('.surnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.surnamemsg').addClass('hidden');
+        }
+    });
+
+var regexname1=/^([a-zA-Z ]{2,30})$/;
+    $('.first_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname1)) {
+    // there is a mismatch, hence show the error message
+        $('.first_namemsg').removeClass('hidden');
+        $('.first_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.first_namemsg').addClass('hidden');
+        }
+    });
+
+
+var regexname2=/^([a-zA-Z ]{2,30})*$/;
+    $('.middle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.middle_namemsg').removeClass('hidden');
+        $('.middle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.middle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.suffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.suffixmsg').removeClass('hidden');
+        $('.suffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.suffixmsg').addClass('hidden');
+        }
+    });
+
+
   var d = new Date();
-var year = d.getFullYear() - 18;
+var year = d.getFullYear() - 17;
 d.setFullYear(year);
 var age;
 $("#bday").datepicker({ dateFormat: "dd/mm/yy",
 		    changeMonth: true,
 		    changeYear: true,
 		    maxDate: year,
-		    minDate: "-80Y",
-            yearRange: '-80:' + year + '',
+		    minDate: "-90Y",
+            yearRange: '-90:' + year + '',
             defaultDate: d
 		 });
 
@@ -608,7 +669,7 @@ $("#bday").change(function(){
         console.log(birthdate[2]+" : "+birthdate[1]+" : "+birthdate[0]);
         console.log(age);
     
-        if (age<18)
+        if (age<17)
         {
             $('.bdaymsg').removeClass('hidden');
             $('.bdaymsg').show();

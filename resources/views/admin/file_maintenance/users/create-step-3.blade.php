@@ -19,6 +19,15 @@
 
   
 </head>
+<style>
+  .surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg, .bdaymsg{
+    color: red;
+}
+
+.hidden {
+     visibility:hidden;
+}
+</style>
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
@@ -343,21 +352,25 @@
         <div class="row">
           <label for="fullname">* Full Name</label>
         </div>
-        <div class="row form-group">
+        <div class="form-row ">
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="surname" name="surname" placeholder='Surname' required/>
+            <input type="text" class="form-control surname" id="surname" name="surname" placeholder='Surname' required/>
+            <p class="surnamemsg hidden">Please Enter a valid surname</p>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='First Name' required/>
+            <input type="text" class="form-control first_name" id="first_name" name="first_name" placeholder='First Name' required/>
+            <p class="first_namemsg hidden">Please Enter a valid first name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name'/>
+            <input type="text" class="form-control middle_name" id="middle_name" name="middle_name" placeholder='Middle Name'/>
+            <p class="middle_namemsg hidden">Please Enter a valid middle name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <input type="text" class="form-control suffix" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <p class="suffixmsg hidden">Please Enter a valid suffix</p>
           </div>
         </div>
-        <div class="row form-group">
+        <div class="form-row form-group">
           <div class="col-md-4">
               <label for="gender">* Gender</label>
               <select name="gender" id="gender" class=" form-control req"  required>
@@ -368,7 +381,8 @@
           </div>
           <div class="col-md-4">
             <label for="bdate">* Birth Date</label>
-            <input type="date" name="bday" id="bday" class="form-control req" data-provide="datepicker" required/>
+            <input type="text" name="bday" id="bday" class="form-control req" placeholder="mm/dd/yyyy" required/>
+            <p class="bdaymsg hidden">Please Enter a valid birth date</p>
           </div>
           <div class="col-md-4">
             <label for="civils">* Civil Status</label>
@@ -385,7 +399,7 @@
           <h4 class="tx1">Address Information</h4>
         </div>
         <hr/> --}}
-        <div class="row form-group">
+        <div class="form-row form-group">
           <div class="col-md-3">
             <label for="municipality">* Municipality</label>
             <select name="municipality" id="municipality" data-val="true"  data-val-required="Please select Municipality" data-dependent="barangay" class="form-control dynamic req" required >
@@ -410,7 +424,7 @@
           <h4 class="tx1">Contact Information</h4>
         </div>
         <hr/> --}}
-        <div class="row form-group">
+        <div class="form-row form-group">
           <div class="col-md-3">
             <label for="mobile_no">* Mobile Number</label>
             <div class="input-group">
@@ -477,6 +491,109 @@ $(document).ready(function(){
 
 });
 
+
+ var $regexname=/^([a-zA-Z ]{2,30})$/;
+    $('.surname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.surnamemsg').removeClass('hidden');
+        $('.surnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.surnamemsg').addClass('hidden');
+        }
+    });
+
+var regexname1=/^([a-zA-Z ]{2,30})$/;
+    $('.first_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname1)) {
+    // there is a mismatch, hence show the error message
+        $('.first_namemsg').removeClass('hidden');
+        $('.first_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.first_namemsg').addClass('hidden');
+        }
+    });
+
+
+var regexname2=/^([a-zA-Z ]{2,30})*$/;
+    $('.middle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.middle_namemsg').removeClass('hidden');
+        $('.middle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.middle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.suffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.suffixmsg').removeClass('hidden');
+        $('.suffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.suffixmsg').addClass('hidden');
+        }
+    });
+
+
+    var d = new Date();
+var year = d.getFullYear() - 18;
+d.setFullYear(year);
+var age;
+$("#bday").datepicker({ dateFormat: "dd/mm/yy",
+		    changeMonth: true,
+		    changeYear: true,
+		    maxDate: year,
+		    minDate: "-90Y",
+            yearRange: '-90:' + year + '',
+            defaultDate: d
+		 });
+
+$("#bday").change(function(){
+        var dob = $("#bday").val();
+        var now = new Date();
+        var birthdate = dob.split("/");
+        var born = new Date(birthdate[2], birthdate[1]-1, birthdate[0]);
+        age=get_age(born,now);
+     
+        console.log(birthdate[2]+" : "+birthdate[1]+" : "+birthdate[0]);
+        console.log(age);
+    
+        if (age<18)
+        {
+            $('.bdaymsg').removeClass('hidden');
+            $('.bdaymsg').show();
+             $('.bdaymsg').css({'color': 'red'});
+            $('.bdaymsg').text("Invalid Age: " +age);
+            return false;
+        }
+        else
+        {
+            $('.bdaymsg').removeClass('hidden');
+            $('.bdaymsg').show();
+            $('.bdaymsg').css({'color': 'green'});
+            $('.bdaymsg').text("Valid Age: " +age);
+            
+        }
+});
+
+
+    function get_age(born, now) {
+      var birthday = new Date(now.getFullYear(), born.getMonth(), born.getDate());
+      if (now >= birthday) 
+        return now.getFullYear() - born.getFullYear();
+      else
+        return now.getFullYear() - born.getFullYear() - 1;
+    }
 
 </script>
 <script src="{{ URL::asset('data/religion.js') }}" type="text/javascript"></script>

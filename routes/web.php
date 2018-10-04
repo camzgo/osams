@@ -341,6 +341,10 @@ Route::prefix('admin/renew')->group(function()
     // Route::get('/send', 'ApplyController@showsend');
 });
 
+Route::prefix('admin/recheck')->group(function(){
+    Route::get('/', 'RecheckController@index');
+    Route::get('/fetchdata', 'RecheckController@researchData')->name('research.fetchdata');
+});
 
 Route::prefix('admin/audit-log')->group(function(){
     Route::get('/', 'AuditController@index');

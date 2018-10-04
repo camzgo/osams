@@ -54,7 +54,7 @@
                   <div class="form-row mb-2">
                     <div class="col-md-6 ">
                       <div class="row">
-                        <div class="card" style="width:525px;">
+                        <div class="card" style="width:505px;">
                       <div class="card-header bg-primary">
                         <i class="fa fa-folder-open"></i><strong> Application Details</strong>
                       </div>
@@ -92,8 +92,134 @@
                       </div>
                     </div>  
                       </div> 
+                      
                       <div class="row">
-                        <div class="card" style="width:525px;">
+                        <div class="card" style="width:505px;">
+                          <div class="card-header bg-primary">
+                            <i class="fa fa-folder-open"></i><strong> Grades</strong><small> ({{$grades1->semester}} semester)</small>
+                          </div>
+                          <div class="card-body py-0">
+                            <table class="table">
+                              @if(count($grades)>0)
+                              @foreach($grades as $grad)
+                                <tr>
+                                  <td>{{$grad->subject}}</td>
+                                  <td>{{$grad->grades}}</td>
+                                </tr>
+                                @endforeach
+                              @endif
+                            </table>
+                            <hr>
+                            <a href="#" class="btn btn-primary btn-block mb-4">Edit Grades</a>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+
+                  <div class="col-md-6">
+                    {{-- <ul class="list-group" id="eefap">
+                      <li class="list-group-item active"><i class="fa fa-folder-open"></i><strong> Requirements</strong></li>
+                      <li class="list-group-item">
+                        <div class="row no-gutters">
+                          <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item">Bio-data with 2x2 Picture</li>
+                              <li class="list-group-item">Grades / Form 138 <small>(Photocopy)</small></li>
+                              <li class="list-group-item">Certificate of Registration / Assessment Form</li>
+                              <li class="list-group-item">Barangay / Residency / Indigency</li>
+                              <li class="list-group-item">Official Receipt</li>
+                              <li class="list-group-item">School ID</li>
+                            </ul>  
+                          </div>
+                          <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item">Not Submitted</li>
+                              <li class="list-group-item">fsffdsfds</li>
+                              <li class="list-group-item">fsffdsfds</li>
+                              <li class="list-group-item">fsffdsfds</li>
+                              <li class="list-group-item">fsffdsfds</li>
+                              <li class="list-group-item">fsffdsfds</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </li>
+
+                    </ul> --}}
+                  
+                    <div class="row">
+                      <div class="card">
+                      <div class="card-header bg-primary">
+                        <i class="fa fa-folder-open"></i><strong> Requirements</strong>
+                      </div>
+                      <div class="card-body py-0">
+                      @if($scholar->id== 7)
+                        <table class="table " id="eefap">
+                          <tr>
+                            <td>Bio-data with 2x2 Picture</td>
+                            <td>{{$reqeefap->biodata_sub}}</td>
+                          </tr>
+                          <tr>
+                            <td>Grades / Form 138 <small>(Photocopy)</small></td>
+                            <td>{{$reqeefap->grades_sub}}</td>
+                          </tr>
+                          <tr>
+                            <td>Certificate of Registration / Assessment Form <small>(Photocopy)</small></td>
+                            <td>{{$reqeefap->cor_sub}}</td>
+                          </tr>
+                          <tr>
+                            <td>Barangay / Residency / Indigency <small>(Photocopy)</small></td>
+                            <td>{{$reqeefap->brgy_sub}}</td>
+                          </tr>
+                          <tr>
+                            <td>Official Receipt <small>(Photocopy)</small></td>
+                            <td>{{$reqeefap->or_sub}}</td>
+                          </tr>
+                          <tr>
+                            <td>School ID <small>(Photocopy)</small></td>
+                            <td>{{$reqeefap->oid_sub}}</td>
+                          </tr>
+                        </table>
+                      @else
+                        <table class="table" id="eefap-gv">
+                          <tr>
+                            <td>Bio-data with 2x2 Picture</td>
+                            <td>{{$reqgv->biodata_sub}}</td>
+                          </tr>
+                          <tr>
+                            <td>Certificate of Honor <small>(Photocopy)</small></td>
+                            <td>{{$reqgv->honor_sub}}</td>
+                          </tr>
+                          <tr>
+                            <td>Grades / Class Cards / Form 138 <small>(Photocopy)</small></td>
+                            <td>{{$reqgv->grades_sub}}</td>
+                          </tr>
+                          <tr>
+                            <td>Certificate of Registration / Assessment Form <small>(Photocopy)</small></td>
+                            <td>{{$reqgv->cor_sub}}</td>
+                          </tr>
+                          <tr>
+                            <td>Barangay / Residency / Indigency Certificate <small>(Photocopy)</small></td>
+                            <td>{{$reqgv->brgy_sub}}</td>
+                          </tr>
+                          <tr>
+                            <td>Official Receipt <small>(Photocopy)</small></td>
+                            <td>{{$reqgv->or_sub}}</td>
+                          </tr>
+                          <tr>
+                            <td>School ID <small>(Photocopy)</small></td>
+                            <td>{{$reqgv->oid_sub}}</td>
+                          </tr>
+                        </table>
+                        @endif
+                      </div>
+                    </div>
+
+                    </div>
+
+
+                      <div class="row">
+                        <div class="card" style="width:545px;">
                           <div class="card-body">
                               <div class="card" >
                                 <div class="card-header  bg-primary">
@@ -169,105 +295,7 @@
                                 </div>
                               </div>
                               @endif
-                          </div>
                         </div>
-                      </div>
-                    </div>
-
-                  <div class="col-md-6">
-                    {{-- <ul class="list-group" id="eefap">
-                      <li class="list-group-item active"><i class="fa fa-folder-open"></i><strong> Requirements</strong></li>
-                      <li class="list-group-item">
-                        <div class="row no-gutters">
-                          <div class="col-md-6">
-                            <ul class="list-group list-group-flush">
-                              <li class="list-group-item">Bio-data with 2x2 Picture</li>
-                              <li class="list-group-item">Grades / Form 138 <small>(Photocopy)</small></li>
-                              <li class="list-group-item">Certificate of Registration / Assessment Form</li>
-                              <li class="list-group-item">Barangay / Residency / Indigency</li>
-                              <li class="list-group-item">Official Receipt</li>
-                              <li class="list-group-item">School ID</li>
-                            </ul>  
-                          </div>
-                          <div class="col-md-6">
-                            <ul class="list-group list-group-flush">
-                              <li class="list-group-item">Not Submitted</li>
-                              <li class="list-group-item">fsffdsfds</li>
-                              <li class="list-group-item">fsffdsfds</li>
-                              <li class="list-group-item">fsffdsfds</li>
-                              <li class="list-group-item">fsffdsfds</li>
-                              <li class="list-group-item">fsffdsfds</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-
-                    </ul> --}}
-                  
-                    <div class="card">
-                      <div class="card-header bg-primary">
-                        <i class="fa fa-folder-open"></i><strong> Requirements</strong>
-                      </div>
-                      <div class="card-body py-0">
-                      @if($scholar->id== 7)
-                        <table class="table " id="eefap">
-                          <tr>
-                            <td>Bio-data with 2x2 Picture</td>
-                            <td>{{$reqeefap->biodata_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Grades / Form 138 <small>(Photocopy)</small></td>
-                            <td>{{$reqeefap->grades_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Certificate of Registration / Assessment Form <small>(Photocopy)</small></td>
-                            <td>{{$reqeefap->cor_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Barangay / Residency / Indigency <small>(Photocopy)</small></td>
-                            <td>{{$reqeefap->brgy_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Official Receipt <small>(Photocopy)</small></td>
-                            <td>{{$reqeefap->or_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>School ID <small>(Photocopy)</small></td>
-                            <td>{{$reqeefap->oid_sub}}</td>
-                          </tr>
-                        </table>
-                      @else
-                        <table class="table" id="eefap-gv">
-                          <tr>
-                            <td>Bio-data with 2x2 Picture</td>
-                            <td>{{$reqgv->biodata_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Certificate of Honor <small>(Photocopy)</small></td>
-                            <td>{{$reqgv->honor_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Grades / Class Cards / Form 138 <small>(Photocopy)</small></td>
-                            <td>{{$reqgv->grades_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Certificate of Registration / Assessment Form <small>(Photocopy)</small></td>
-                            <td>{{$reqgv->cor_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Barangay / Residency / Indigency Certificate <small>(Photocopy)</small></td>
-                            <td>{{$reqgv->brgy_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>Official Receipt <small>(Photocopy)</small></td>
-                            <td>{{$reqgv->or_sub}}</td>
-                          </tr>
-                          <tr>
-                            <td>School ID <small>(Photocopy)</small></td>
-                            <td>{{$reqgv->oid_sub}}</td>
-                          </tr>
-                        </table>
-                        @endif
                       </div>
                     </div>
                   </div>

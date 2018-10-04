@@ -97,7 +97,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/approve" class="nav-link active">
+                <a href="/admin/approve" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-check nav-icon"></i>
                   <p>Approve</p>
@@ -111,7 +111,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/recheck" class="nav-link">
+                <a href="/admin/recheck" class="nav-link active">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-check-square nav-icon"></i>
                   <p>Re-Checking</p>
@@ -296,7 +296,7 @@
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">Transactions</li>
-              <li class="breadcrumb-item active">Approve</li>
+              <li class="breadcrumb-item active">Re-Checking</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -311,13 +311,13 @@
       <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h3 class="boldtx">Pre-Approved</h3>
+              <h3 class="boldtx">Re-Checking</h3>
           </div>
           <div class="card-body"> 
             <br>
             <div class="container">
 
-                <div class="card">
+                <div class="card shadow-none">
                     <div class="card-body">
                         <div class="card-title">
                             <div class="row ml-5" >
@@ -357,12 +357,6 @@
                                       <input type="text" class="form-control" id="mobile_no" name="mobile_no"  disabled placeholder='+63XXXXXXXXXX' required/>
                                       
                                   </div>
-                              </div>
-                              <div class="row form-group">
-                                <div class="col-md-6">
-                                  <label>School ID</label>
-                                  <input type="text" class="form-control" id="school_id" name="school_id"  disabled placeholder='+63XXXXXXXXXX' required/>
-                                </div>
                               </div>
 
                               <div class="row form-group">
@@ -422,7 +416,7 @@
                               <div class="row form-group pull-right">
                                   <a href="#" class="btn btn-primary" target="_blank" id="print" nae="print"><i class="fa fa-print"></i> PRINT</a> &nbsp; &nbsp;
                                   <button class="btn btn-danger" id="btn-disapproved"  disabled><i class="fa fa-close"></i> DISAPPROVED</button> &nbsp; &nbsp;
-                                  <button class="btn btn-success" id="btn-approved"   disabled><i class="fa fa-check"></i> PRE-APPROVED</button>
+                                  <button class="btn btn-success" id="btn-approved"   disabled><i class="fa fa-check"></i> APPROVED</button>
                                   <div class="ghost">
                                     <input type="hidden" class="ghost" id="applicant_id" name="applicant_id" value=""/>
                                     <input type="hidden" class="ghost" id="sc_id" name="sc_id" value=""/>
@@ -449,46 +443,6 @@
                     
                 </div>
 
-
-                <div class="card mt-4">
-                  <div class="card-body">
-                    <div class="card-title">
-                      <strong>List of pre-approved applications</strong>
-                    </div><hr/>
-                    <div class="container">
-                      <table class="table table-hover" style="width:100%" id="table">
-                      <thead >
-                        <tr>
-                            <th>Name</th>
-                            <th>Scholarship</th>
-                            <th>Date Approved</th>
-                            <th>Received by</th>          
-                        </tr>
-                      </thead>
-                    </table>  
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card mt-4">
-                  <div class="card-body">
-                    <div class="card-title">
-                      <strong>List of disapproved applications</strong>
-                    </div><hr/>
-                    <div class="container">
-                      <table class="table table-hover" style="width:100%" id="table2">
-                      <thead >
-                        <tr>
-                            <th>Name</th>
-                            <th>Scholarship</th>
-                            <th>Date Disapproved</th>
-                            <th>Received by</th>          
-                        </tr>
-                      </thead>
-                    </table>  
-                    </div>
-                  </div>
-                </div>
                 <br>
             </div>
           </div>
@@ -587,7 +541,6 @@ function search()
               $('#sc_id').val(data.sc_id);
               $('#applicant_id').val(data.applicant_id);
               $('#print').attr("href", "/admin/apply/application/form/"+data.applicant_id);
-              $('#school_id').val(data.school_id);
 
               var name = data.name;
               var mobile_no = data.mobile_number;

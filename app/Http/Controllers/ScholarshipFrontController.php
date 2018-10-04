@@ -268,6 +268,31 @@ class ScholarshipFrontController extends Controller
             'updated_at' => date('Y-m-d H:i:s')
         ]);
 
+        $ctr = $request->get('nos');
+        $sub1 = array();
+        $grad1 = array();
+        for($x=0; $x<=$ctr-1; $x++)
+        {
+            $sub = "subject".$x;
+            $grad = "grade".$x;
+            array_push($sub1, $request->$sub);
+            array_push($grad1, $request->$grad);
+        }
+        
+
+        for($y=0; $y<=$ctr-1; $y++)
+        {
+            $grades = DB::table('grades')->insert([
+                'subject' => $sub1[$y],
+                'grades' => $grad1[$y],
+                'semester' => $request->sem,
+                'student_id' => Auth::user()->id,
+                'new'     => "1",
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+        }
+
         // $sf = $request->suffix;
         // if($sf=="")
         // {
@@ -309,7 +334,6 @@ class ScholarshipFrontController extends Controller
             'general_average' => $request->gen_average,
             'program_type' => $request->educ_prog,
             'graduating' => $request->grad,
-            'spes' => $request->spes,
             'scholarship_id' => $request->scholar_id,
             'applicant_id' => $request->sid,
             'application_id' => $id
@@ -357,6 +381,34 @@ class ScholarshipFrontController extends Controller
         // {
         //     $street=" ";
         // }
+
+        $ctr = $request->get('nos');
+        $sub1 = array();
+        $grad1 = array();
+        for($x=0; $x<=$ctr-1; $x++)
+        {
+            $sub = "subject".$x;
+            $grad = "grade".$x;
+            array_push($sub1, $request->$sub);
+            array_push($grad1, $request->$grad);
+        }
+        
+
+        for($y=0; $y<=$ctr-1; $y++)
+        {
+            $grades = DB::table('grades')->insert([
+                'subject' => $sub1[$y],
+                'grades' => $grad1[$y],
+                'semester' => $request->sem,
+                'student_id' => Auth::user()->id,
+                'new'     => "1",
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+        }
+
+
+
         $eefap = DB::table('eefapgv')->insert([
             'surname' => ucfirst($request->surname),
             'first_name' => ucfirst($request->first_name),
@@ -374,7 +426,6 @@ class ScholarshipFrontController extends Controller
             'general_average' => $request->gen_average,
             'program_type' => $request->educ_prog,
             'graduating' => $request->grad,
-            'spes' => $request->spes,
             'awards'=> $request->award,
             'scholarship_id' => $request->scholar_id,
             'applicant_id' => $request->sid,
@@ -383,13 +434,27 @@ class ScholarshipFrontController extends Controller
             
         ]);
 
-        $reqgv = DB::table('reqgv')->insert([
-            'scholar_id' =>  $request->scholar_id,
-            'applicant_id' => $request->sid,
-            'application_id' => $id,
-            'created_at' => date('Y-m-d H:i:s'),
-            'submit'     => 0
-        ]);
+        if($request->get('ids')=='vg-dhvtsu')
+        {
+            $reqeefap = DB::table('reqeefap')->insert([
+                'scholar_id' =>  6,
+                'applicant_id' => $request->sid,
+                'application_id' => $id,
+                'created_at' => date('Y-m-d H:i:s'),
+                'submit'     => 0
+            ]);
+        }
+        else
+        {
+            $reqgv = DB::table('reqgv')->insert([
+                'scholar_id' =>  $request->scholar_id,
+                'applicant_id' => $request->sid,
+                'application_id' => $id,
+                'created_at' => date('Y-m-d H:i:s'),
+                'submit'     => 0
+            ]);
+        }
+        
         
 
         return redirect('/scholarship/details');
@@ -409,6 +474,32 @@ class ScholarshipFrontController extends Controller
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
+
+
+        $ctr = $request->get('nos');
+        $sub1 = array();
+        $grad1 = array();
+        for($x=0; $x<=$ctr-1; $x++)
+        {
+            $sub = "subject".$x;
+            $grad = "grade".$x;
+            array_push($sub1, $request->$sub);
+            array_push($grad1, $request->$grad);
+        }
+        
+
+        for($y=0; $y<=$ctr-1; $y++)
+        {
+            $grades = DB::table('grades')->insert([
+                'subject' => $sub1[$y],
+                'grades' => $grad1[$y],
+                'semester' => $request->sem,
+                'student_id' => Auth::user()->id,
+                'new'     => "1",
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+        }
 
         $eefap = DB::table('pcl')->insert([
             'surname' => ucfirst($request->surname),

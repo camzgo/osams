@@ -354,15 +354,15 @@ var regexname2=/^([a-zA-Z ]{2,30})*$/;
 
 
 var d = new Date();
-var year = d.getFullYear() - 18;
+var year = d.getFullYear() - 17;
 d.setFullYear(year);
 var age;
 $("#lastReporteddate").datepicker({ dateFormat: "dd/mm/yy",
 		    changeMonth: true,
 		    changeYear: true,
 		    maxDate: year,
-		    minDate: "-80Y",
-            yearRange: '-80:' + year + '',
+		    minDate: "-90Y",
+            yearRange: '-90:' + year + '',
             defaultDate: d
 		 });
 
@@ -376,7 +376,7 @@ $("#lastReporteddate").change(function(){
         console.log(birthdate[2]+" : "+birthdate[1]+" : "+birthdate[0]);
         console.log(age);
     
-        if (age<18)
+        if (age<17)
         {
             $('.bdaymsg').removeClass('hidden');
             $('.bdaymsg').show();
