@@ -172,6 +172,17 @@ class UtilitiesController extends Controller
                     // 'faq_isdel' => $def
                 ]);
                 $account->save();
+
+                date_default_timezone_set("Asia/Manila");
+                $time = date('h:i:s', strtotime(now()));
+                $audit = DB::table('audit_log')->insert([
+                    'date' => date('Y-m-d'),
+                    'time' => $time,
+                    'action' => 'Account Type Added',
+                    'employee_id' => Auth::user()->id
+                ]);
+
+
                 $success_output = '';
             }
 
@@ -187,6 +198,16 @@ class UtilitiesController extends Controller
                 $account->reports          = $act[4];
                 $account->submission       = $act[5];
                 $account->save();
+
+                date_default_timezone_set("Asia/Manila");
+                $time = date('h:i:s', strtotime(now()));
+                $audit = DB::table('audit_log')->insert([
+                    'date' => date('Y-m-d'),
+                    'time' => $time,
+                    'action' => 'Account Type Updated',
+                    'employee_id' => Auth::user()->id
+                ]);
+                
                 $success_output = '';
 
             }
@@ -213,6 +234,14 @@ class UtilitiesController extends Controller
             'success'   =>  "You cannot delete this data, <br> there are data used it!"
             );
 
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $audit = DB::table('audit_log')->insert([
+                'date' => date('Y-m-d'),
+                'time' => $time,
+                'action' => 'Trying to delete an account type that is in used.',
+                'employee_id' => Auth::user()->id
+            ]);
             // echo '';
             echo json_encode($pass);
            // return redirect()->back()->with("error","");
@@ -228,6 +257,15 @@ class UtilitiesController extends Controller
             if($account->delete())
             {
                // echo 'It was successfully deleted!';
+
+                date_default_timezone_set("Asia/Manila");
+                $time = date('h:i:s', strtotime(now()));
+                $audit = DB::table('audit_log')->insert([
+                    'date' => date('Y-m-d'),
+                    'time' => $time,
+                    'action' => 'Account Type Deleted',
+                    'employee_id' => Auth::user()->id
+                ]);
                 echo json_encode($pass);
             }
             

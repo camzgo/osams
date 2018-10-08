@@ -152,7 +152,13 @@ class ApplicantArchiveController extends Controller
 
                 $user->save();
                 $success_output = '';
-
+                $time = date('h:i:s', strtotime(now()));
+                $audit = DB::table('audit_log')->insert([
+                'date' => date('Y-m-d'),
+                'time' => $time,
+                'action' => 'Applicant Restored',
+                'employee_id' => Auth::user()->id
+                ]);
 
             }
             else if($request->get('button_action') == 'delete')
@@ -172,7 +178,16 @@ class ApplicantArchiveController extends Controller
         $user = User::find($request->input('id'));
         if($user->delete())
         {
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Applicant Deleted',
+            'employee_id' => Auth::user()->id
+            ]);
             echo 'It was successfully deleted!';
+            
         }
     }
 

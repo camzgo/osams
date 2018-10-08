@@ -137,6 +137,8 @@ Route::prefix('admin/apply/scholarship-category')->group(function(){
     Route::get('/vg-dhvtsu/{id}', 'ScholarshipCatController@dhvtsu');
 
     Route::get('/pcl/{id}', 'ScholarshipCatController@pclShow');
+
+    
 });
 
 
@@ -147,6 +149,8 @@ Route::prefix('admin/apply')->group(function(){
     Route::get('/scholarship-category', 'ApplyController@showCat');
     Route::get('/send/{id}', 'ApplyController@showsend');
     Route::get('/application/form/{id}', 'ScholarshipCatController@printeefap');
+    Route::get('/invalid', 'ScholarshipCatController@spes3');
+    Route::get('/invalid2', 'ScholarshipCatController@spes4');
 });
 
 
@@ -266,6 +270,7 @@ Route::prefix('/')->group(function()
 
     Route::get('/scholarship/getdata', 'FrontendController@getdata')->name('logs.getdata');
     Route::get('/scholarship/check/{id}', 'FrontendController@spes');
+    Route::get('/scholarship/invalid', 'FrontendController@spes2');
 });
 
 Route::prefix('/admin/tracking')->group(function(){

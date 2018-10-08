@@ -120,6 +120,15 @@ class UsersMainController extends Controller
         $email = $request->get('email');
         $name = $request->first_name.' '.$request->middle_name.' '.$request->surname.' '.$request->suffix;
 
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Users added new data',
+            'employee_id' => Auth::user()->id
+        ]);
+
          \Mail::to($email)->send(new RegSuccessUser($name));
         return redirect('/admin/employee/');
 
@@ -225,6 +234,16 @@ class UsersMainController extends Controller
                 $admin->user_isdel = $request->get('emp_isdel');
                 // $faquestion->answer = $request->get('answer');
                 $admin->save();
+
+                date_default_timezone_set("Asia/Manila");
+                $time = date('h:i:s', strtotime(now()));
+                $audit = DB::table('audit_log')->insert([
+                    'date' => date('Y-m-d'),
+                    'time' => $time,
+                    'action' => 'Users Archived',
+                    'employee_id' => Auth::user()->id
+                ]);
+
                 $success_output = '';
             }
         }
@@ -295,6 +314,15 @@ class UsersMainController extends Controller
         $admins = Admin::find(Auth::user()->id);
         $admins->user_photo = $fileNameToStore;
         $admins->save();
+
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Users Uploaded a new profile photo',
+            'employee_id' => Auth::user()->id
+        ]);
         return redirect ('/admin/profile');
     }
 
@@ -338,6 +366,15 @@ class UsersMainController extends Controller
         $stored->street = $request->get('street');
         $stored->mobile_number = $request->get('mobile_no');
         $stored->save();
+
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Users Updated Information',
+            'employee_id' => Auth::user()->id
+        ]);
         return redirect('/admin/profile');
     }
 
@@ -370,6 +407,15 @@ class UsersMainController extends Controller
         $user->password = bcrypt($request->get('new-password'));
         $user->new = 0;
         $user->save();
+
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Users Change Password',
+            'employee_id' => Auth::user()->id
+        ]);
  
        // return redirect()->back()->with("success","Password changed successfully !");
        return redirect('/admin/profile');

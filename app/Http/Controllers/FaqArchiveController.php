@@ -136,6 +136,15 @@ class FaqArchiveController extends Controller
             // $faquestion->answer = $request->get('del_answer');
             $faquestion->faq_isdel = $request->get('faq_isdel');
             $faquestion->save();
+
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'FAQs Restored',
+            'employee_id' => Auth::user()->id
+            ]);
             $success_output = '';
 
         }
@@ -147,6 +156,8 @@ class FaqArchiveController extends Controller
             $faquestion->faq_isdel = $request->get('faq_isdel');
 
             $faquestion->save();
+
+            
             $success_output = '';
 
         }
@@ -164,6 +175,14 @@ class FaqArchiveController extends Controller
         $faquestion = Faquestion::find($request->input('id'));
         if($faquestion->delete())
         {
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'FAQs Deleted',
+            'employee_id' => Auth::user()->id
+            ]);
             echo 'It was successfully deleted!';
         }
     }

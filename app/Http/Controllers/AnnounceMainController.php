@@ -77,9 +77,10 @@ class AnnounceMainController extends Controller
         ]);
         $announce->save();
 
+        $time = date('h:i:s', strtotime(now()));
         $audit = DB::table('audit_log')->insert([
             'date' => date('Y-m-d'),
-            'time' => date('H:i:s'),
+            'time' => $time,
             'action' => 'Announcement Created',
             'employee_id' => Auth::user()->id
         ]);
@@ -140,9 +141,11 @@ class AnnounceMainController extends Controller
         $announce -> body = $request->input('body');
         $announce->save();
 
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
         $audit = DB::table('audit_log')->insert([
             'date' => date('Y-m-d'),
-            'time' => date('H:i:s'),
+            'time' => $time,
             'action' => 'Announcement Updated',
             'employee_id' => Auth::user()->id
         ]);
@@ -229,9 +232,11 @@ class AnnounceMainController extends Controller
                 $announce->save();
                 $success_output = '';
 
+                date_default_timezone_set("Asia/Manila");
+                $time = date('h:i:s', strtotime(now()));
                 $audit = DB::table('audit_log')->insert([
                 'date' => date('Y-m-d'),
-                'time' => date('H:i:s'),
+                'time' => $time,
                 'action' => 'Announcement Archived',
                 'employee_id' => Auth::user()->id
                 ]);

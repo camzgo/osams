@@ -294,240 +294,299 @@ class ScholarshipCatController extends Controller
     public function eefapStore(Request $request)
     {
         
-        $id = DB::table('application')->insertGetId([
-            'application_status' => 'Pre-Approved',
-            'renew' => '0',
-            'barcode_number' => $request->barcode,
-            'barcode_image' => 'NONE',
-            'applicant_id' => $request->sid,
-            'scholar_id' => $request->title_id,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
-        ]);
-
-        // $sf = $request->suffix;
-        // if($sf=="")
-        // {
-        //     $sf2=" ";
-        // }
-
-        // $gsf = $request->gsuffix;
-        // if($gsf=="")
-        // {
-        //     $gsf=" ";
-        // }
+        $user = DB::table('users')->where('id', $request->get('sid'))->first();
 
 
-        // $street =$request->street;
-        // if($street=="")
-        // {
-        //     $street=" ";
-        // }
-        $eefap = DB::table('eefap')->insert([
-            'surname' => $request->surname,
-            'first_name' => $request->first_name,
-            'middle_name' => $request->middle_name,
-            'suffix' => $request->suffix,
-            'municipality' => $request->municipality,
-            'barangay' => $request->barangay,
-            'street' => $request->street,
-            'mobile_number' => $request->mobile_no,
-            'fb_account' => $request->fb_account,
-            'gsurname' => $request->gsurname,
-            'gmiddle_name' => $request->gmiddle_name,
-            'gfirst_name' => $request->gfirst_name,
-            'gsuffix' => $request->gsuffix,
-            'gmobile_number' =>$request->gmobile_no,
-            'college_name' => $request->college_name,
-            'college_address' => $request->college_address,
-            'year_level' => $request->yr_lvl,
-            'course' => $request->course,
-            'major' => $request->major, 
-            'general_average' => $request->gen_average,
-            'program_type' => $request->educ_prog,
-            'graduating' => $request->grad,
-            'scholarship_id' => $request->title_id,
-            'applicant_id' => $request->sid,
-            'application_id' => $id
+        $spes = DB::table('spes_tbl')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
+        $school_id = DB::table('spes_tbl')->where('school_id', $user->school_id)->count();
 
-            
-        ]);
+        $app = DB::table('application')->where('applicant_id', $request->get('sid'))->count();
+        $app2 = DB::table('application')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
+
+        if($spes != 1 && $school_id != 1)
+        {
+            if($app != 1 && $app2 != 1)
+            {
+                $id = DB::table('application')->insertGetId([
+                    'application_status' => 'Pre-Approved',
+                    'renew' => '0',
+                    'barcode_number' => $request->barcode,
+                    'barcode_image' => 'NONE',
+                    'applicant_id' => $request->sid,
+                    'scholar_id' => $request->title_id,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+
+                $eefap = DB::table('eefap')->insert([
+                    'surname' => $request->surname,
+                    'first_name' => $request->first_name,
+                    'middle_name' => $request->middle_name,
+                    'suffix' => $request->suffix,
+                    'municipality' => $request->municipality,
+                    'barangay' => $request->barangay,
+                    'street' => $request->street,
+                    'mobile_number' => $request->mobile_no,
+                    'fb_account' => $request->fb_account,
+                    'gsurname' => $request->gsurname,
+                    'gmiddle_name' => $request->gmiddle_name,
+                    'gfirst_name' => $request->gfirst_name,
+                    'gsuffix' => $request->gsuffix,
+                    'gmobile_number' =>$request->gmobile_no,
+                    'college_name' => $request->college_name,
+                    'college_address' => $request->college_address,
+                    'year_level' => $request->yr_lvl,
+                    'course' => $request->course,
+                    'major' => $request->major, 
+                    'general_average' => $request->gen_average,
+                    'program_type' => $request->educ_prog,
+                    'graduating' => $request->grad,
+                    'scholarship_id' => $request->title_id,
+                    'applicant_id' => $request->sid,
+                    'application_id' => $id
+
+                    
+                ]);
+                
+                $reqeefap = DB::table('reqeefap')->insert([
+                    'scholar_id' =>  $request->title_id,
+                    'applicant_id' => $request->sid,
+                    'application_id' => $id,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'submit'   => 0
+                ]);
+
+                    date_default_timezone_set("Asia/Manila");
+                    $time = date('h:i:s', strtotime(now()));
+                    $audit = DB::table('audit_log')->insert([
+                        'date' => date('Y-m-d'),
+                        'time' => $time,
+                        'action' => 'Application Applied & Pre-approved',
+                        'employee_id' => Auth::user()->id
+                    ]);
+                
+                $ids=$id;
+                return redirect('/admin/apply/send/'.$ids);
+            }
+            else
+            {
+                return redirect('/admin/apply/invalid2');
+            }
+        }
+        else
+        {
+           return redirect('/admin/apply/invalid');
+        }
+
         
-        $reqeefap = DB::table('reqeefap')->insert([
-            'scholar_id' =>  $request->title_id,
-            'applicant_id' => $request->sid,
-            'application_id' => $id,
-            'created_at' => date('Y-m-d H:i:s'),
-            'submit'   => 0
-        ]);
-        
-        $ids=$id;
-        return redirect('/admin/apply/send/'.$ids);
     }
 
     public function eefapgvStore(Request $request)
     {
-        
-        $id = DB::table('application')->insertGetId([
-            'application_status' => 'Pre-Approved',
-            'renew' => '0',
-            'barcode_number' => $request->barcode,
-            'barcode_image' => 'NONE',
-            'applicant_id' => $request->sid,
-            'scholar_id' => $request->title_id,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
-        ]);
+     
 
-        // $sf2 = $request->suffix;
-        // if($sf2=="")
-        // {
-        //     $sf2=" ";
-        // }
+        $user = DB::table('users')->where('id', $request->get('sid'))->first();
 
 
-        // $street =$request->street;
-        // if($street=="")
-        // {
-        //     $street=" ";
-        // }
-        $eefap = DB::table('eefapgv')->insert([
-            'surname' => $request->surname,
-            'first_name' => $request->first_name,
-            'middle_name' => $request->middle_name,
-            'suffix' => $request->suffix,
-            'municipality' => $request->municipality,
-            'barangay' => $request->barangay,
-            'street' => $request->street,
-            'mobile_number' => $request->mobile_no,
-            'college_name' => $request->college_name,
-            'college_address' => $request->college_address,
-            'year_level' => $request->yr_lvl,
-            'course' => $request->course,
-            'major' => $request->major, 
-            'general_average' => $request->gen_average,
-            'program_type' => $request->educ_prog,
-            'graduating' => $request->grad,
-            'awards'=> $request->award,
-            'scholarship_id' => $request->title_id,
-            'applicant_id' => $request->sid,
-            'application_id' => $id
+        $spes = DB::table('spes_tbl')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
+        $school_id = DB::table('spes_tbl')->where('school_id', $user->school_id)->count();
 
-            
-        ]);
-        
-        if($request->title_id == 8)
+        $app = DB::table('application')->where('applicant_id', $request->get('sid'))->count();
+        $app2 = DB::table('application')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
+
+        if($spes != 1 && $school_id != 1)
         {
-            $reqgv = DB::table('reqgv')->insert([
-                'scholar_id' =>  $request->title_id,
-                'applicant_id' => $request->sid,
-                'application_id' => $id,
-                'created_at' => date('Y-m-d H:i:s'),
-                'submit'   => 0
-            ]);
+
+            if($app != 1 && $app2 != 1)
+            {
+                $id = DB::table('application')->insertGetId([
+                    'application_status' => 'Pre-Approved',
+                    'renew' => '0',
+                    'barcode_number' => $request->barcode,
+                    'barcode_image' => 'NONE',
+                    'applicant_id' => $request->sid,
+                    'scholar_id' => $request->title_id,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+
+                $eefap = DB::table('eefapgv')->insert([
+                    'surname' => $request->surname,
+                    'first_name' => $request->first_name,
+                    'middle_name' => $request->middle_name,
+                    'suffix' => $request->suffix,
+                    'municipality' => $request->municipality,
+                    'barangay' => $request->barangay,
+                    'street' => $request->street,
+                    'mobile_number' => $request->mobile_no,
+                    'college_name' => $request->college_name,
+                    'college_address' => $request->college_address,
+                    'year_level' => $request->yr_lvl,
+                    'course' => $request->course,
+                    'major' => $request->major, 
+                    'general_average' => $request->gen_average,
+                    'program_type' => $request->educ_prog,
+                    'graduating' => $request->grad,
+                    'awards'=> $request->award,
+                    'scholarship_id' => $request->title_id,
+                    'applicant_id' => $request->sid,
+                    'application_id' => $id
+
+                    
+                ]);
+                
+                if($request->title_id == 8)
+                {
+                    $reqgv = DB::table('reqgv')->insert([
+                        'scholar_id' =>  $request->title_id,
+                        'applicant_id' => $request->sid,
+                        'application_id' => $id,
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'submit'   => 0
+                    ]);
+                }
+                else
+                {
+                    $reqeefap = DB::table('reqeefap')->insert([
+                    'scholar_id' =>  $request->title_id,
+                    'applicant_id' => $request->sid,
+                    'application_id' => $id,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'submit'   => 0
+                ]);
+                }
+
+                date_default_timezone_set("Asia/Manila");
+                $time = date('h:i:s', strtotime(now()));
+                $audit = DB::table('audit_log')->insert([
+                    'date' => date('Y-m-d'),
+                    'time' => $time,
+                    'action' => 'Application Applied & Pre-approved',
+                    'employee_id' => Auth::user()->id
+                ]);
+                
+                $ids=$id;
+                return redirect('/admin/apply/send/'.$ids);
+            }
+            else
+            {
+                return redirect('/admin/apply/invalid2');
+            }
+            
         }
         else
         {
-            $reqeefap = DB::table('reqeefap')->insert([
-            'scholar_id' =>  $request->title_id,
-            'applicant_id' => $request->sid,
-            'application_id' => $id,
-            'created_at' => date('Y-m-d H:i:s'),
-            'submit'   => 0
-        ]);
+            return redirect('/admin/apply/invalid');
         }
-        $ids=$id;
-        return redirect('/admin/apply/send/'.$ids);
+        
+        
     }
 
 
     public function pclStore(Request $request)
     {
         
-        $id = DB::table('application')->insertGetId([
-            'application_status' => 'Pre-Approved',
-            'renew' => '0',
-            'barcode_number' => $request->barcode,
-            'barcode_image' => 'NONE',
-            'applicant_id' => $request->sid,
-            'scholar_id' => '6',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
-        ]);
 
-        // $sf2 = $request->suffix;
-        // if($sf2=="")
-        // {
-        //     $sf2=" ";
-        // }
-
-        // $gsf = $request->fsuffix;
-        // if($gsf=="")
-        // {
-        //     $gsf=" ";
-        // }
+        $user = DB::table('users')->where('id', $request->get('sid'))->first();
 
 
-        // $street =$request->street;
-        // if($street=="")
-        // {
-        //     $street=" ";
-        // }
-        $eefap = DB::table('pcl')->insert([
-            'surname' => $request->surname,
-            'first_name' => $request->first_name,
-            'middle_name' => $request->middle_name,
-            'suffix' => $request->suffix,
-            'district' =>$request->district,
-            'municipality' => $request->municipality,
-            'barangay' => $request->barangay,
-            'street' => $request->street,
-            'mobile_number' => $request->mobile_no,
+        $spes = DB::table('spes_tbl')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
+        $school_id = DB::table('spes_tbl')->where('school_id', $user->school_id)->count();
 
-            'fsurname' => $request->fsurname,
-            'fmiddle_name' => $request->fmiddle_name,
-            'ffirst_name' => $request->ffirst_name,
-            'fsuffix' => $request->fsuffix,
-            'foccupation' => $request->foccupation,
+        $app = DB::table('application')->where('applicant_id', $request->get('sid'))->count();
+        $app2 = DB::table('application')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
 
-            'msurname' => $request->msurname,
-            'mmiddle_name' => $request->mmiddle_name,
-            'mfirst_name' => $request->mfirst_name,
-            'msuffix' => $request->msuffix,
-            'moccupation' => $request->moccupation,
+        if($spes != 1 && $school_id != 1)
+        {
+            if($app != 1 && $app2 != 1)
+            {
+                $id = DB::table('application')->insertGetId([
+                    'application_status' => 'Pre-Approved',
+                    'renew' => '0',
+                    'barcode_number' => $request->barcode,
+                    'barcode_image' => 'NONE',
+                    'applicant_id' => $request->sid,
+                    'scholar_id' => '6',
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
 
-            'address' => $request->gaddress,
+                $eefap = DB::table('pcl')->insert([
+                    'surname' => $request->surname,
+                    'first_name' => $request->first_name,
+                    'middle_name' => $request->middle_name,
+                    'suffix' => $request->suffix,
+                    'district' =>$request->district,
+                    'municipality' => $request->municipality,
+                    'barangay' => $request->barangay,
+                    'street' => $request->street,
+                    'mobile_number' => $request->mobile_no,
 
-            'school_enrolled' => $request->college_name,
-            'year_level' => $request->yr_lvl,
-            'course' => $request->course,
+                    'fsurname' => $request->fsurname,
+                    'fmiddle_name' => $request->fmiddle_name,
+                    'ffirst_name' => $request->ffirst_name,
+                    'fsuffix' => $request->fsuffix,
+                    'foccupation' => $request->foccupation,
 
-            'emergency' =>$request->emergency,
-            'emobile_number' => $request->mobile_no,
+                    'msurname' => $request->msurname,
+                    'mmiddle_name' => $request->mmiddle_name,
+                    'mfirst_name' => $request->mfirst_name,
+                    'msuffix' => $request->msuffix,
+                    'moccupation' => $request->moccupation,
 
-            'birthdate' =>$request->bday,
-            'gender' =>$request->gender,
-            'nationality' => $request->nationality,
-            'religion' => $request->religion,
-            'civil_status' => $request->civil_status,
-            'birth_place' => $request->birth_place,
-            'scholarship_id' => '6',
-            'applicant_id' => $request->sid,
-            'application_id' => $id
+                    'address' => $request->gaddress,
 
+                    'school_enrolled' => $request->college_name,
+                    'year_level' => $request->yr_lvl,
+                    'course' => $request->course,
+
+                    'emergency' =>$request->emergency,
+                    'emobile_number' => $request->mobile_no,
+
+                    'birthdate' =>$request->bday,
+                    'gender' =>$request->gender,
+                    'nationality' => $request->nationality,
+                    'religion' => $request->religion,
+                    'civil_status' => $request->civil_status,
+                    'birth_place' => $request->birth_place,
+                    'scholarship_id' => '6',
+                    'applicant_id' => $request->sid,
+                    'application_id' => $id
+
+                    
+                ]);
+
+                $reqeefap = DB::table('reqeefap')->insert([
+                    'scholar_id' => 6,
+                    'applicant_id' => $request->sid,
+                    'application_id' => $id,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'submit'   => 0
+                ]);
+
+                date_default_timezone_set("Asia/Manila");
+                $time = date('h:i:s', strtotime(now()));
+                $audit = DB::table('audit_log')->insert([
+                    'date' => date('Y-m-d'),
+                    'time' => $time,
+                    'action' => 'Application Applied & Pre-approved',
+                    'employee_id' => Auth::user()->id
+                ]);
+
+                $ids=$id;
+                return redirect('/admin/apply/send/'.$ids);
+            }
+            else
+            {
+                return redirect('/admin/apply/invalid2');
+            }
             
-        ]);
-
-        $reqeefap = DB::table('reqeefap')->insert([
-            'scholar_id' => 6,
-            'applicant_id' => $request->sid,
-            'application_id' => $id,
-            'created_at' => date('Y-m-d H:i:s'),
-            'submit'   => 0
-        ]);
-
-        $ids=$id;
-        return redirect('/admin/apply/send/'.$ids);
+        }
+        else
+        {
+            return redirect('/admin/apply/invalid');
+        }
+        
     }
 
 
@@ -613,6 +672,23 @@ class ScholarshipCatController extends Controller
         }
 
        
+    }
+
+    function spes3()
+    {
+
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+        return view('admin.scholarships.invalid')->with('role', $role);
+    }
+    function spes4()
+    {
+
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+        return view('admin.scholarships.invalid2')->with('role', $role);
     }
 
     // function printeefapgv($id)

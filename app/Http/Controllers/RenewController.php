@@ -113,6 +113,16 @@ class RenewController extends Controller
 
         ]);
 
+
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Application Renewed',
+            'employee_id' => Auth::user()->id
+        ]);
+
        $ids=$request->get('sid');
         return redirect ('admin/renew/send/'.$ids);
     }
@@ -170,6 +180,15 @@ class RenewController extends Controller
             'applicant_id' => $request->get('sid'),
             'scholar_id' => $eefapgvId->scholarship_id
 
+        ]);
+
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Application Renewed',
+            'employee_id' => Auth::user()->id
         ]);
         $ids=$request->get('sid');
         return redirect ('admin/renew/send/'.$ids);
@@ -245,6 +264,15 @@ class RenewController extends Controller
             'applicant_id' => $request->get('applicant_id'),
             'scholar_id' => 6
 
+        ]);
+
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Application Renewed',
+            'employee_id' => Auth::user()->id
         ]);
 
         $ids=$request->get('sid');

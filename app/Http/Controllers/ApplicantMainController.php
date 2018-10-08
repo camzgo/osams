@@ -65,6 +65,7 @@ class ApplicantMainController extends Controller
             'first_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:50',
             'middle_name' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
             'suffix' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
+            'school_id' => 'required|unique:users',
         ]);	
 
 
@@ -103,9 +104,18 @@ class ApplicantMainController extends Controller
         $email = $request->get('email');
         $name =  $request->first_name.' '.$request->middle_name.' '.$request->surname.' '.$request->suffix;
 
-
+        
        // Mail::to($request->get('email'))->send(new RegSuccess($name));
         \Mail::to($email)->send(new RegSuccess($name));
+
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $audit = DB::table('audit_log')->insert([
+        'date' => date('Y-m-d'),
+        'time' => $time,
+        'action' => 'Registered new applicant',
+        'employee_id' => Auth::user()->id
+        ]);
 
         return redirect('/admin/reg/success');
     }
@@ -231,6 +241,15 @@ class ApplicantMainController extends Controller
 
                 $user->save();
                 $success_output = '';
+
+                date_default_timezone_set("Asia/Manila");
+                $time = date('h:i:s', strtotime(now()));
+                $audit = DB::table('audit_log')->insert([
+                'date' => date('Y-m-d'),
+                'time' => $time,
+                'action' => 'Applicant Archived',
+                'employee_id' => Auth::user()->id
+                ]);
 
             }
         

@@ -487,8 +487,6 @@
                             </div>
                         </div>
                     </form> --}}
-
-
                     <form action="{{ action('ApplicantMainController@store') }}" method="POST" >
                     {{csrf_field()}}
                     <div class="container">
@@ -564,7 +562,12 @@
                       <div class="form-row form-group">
                         <div class="col-md-4">
                           <label for="email">* Student ID Number / Student Number</label>
-                          <input type="text" class="form-control" id="school_id" name="school_id" placeholder='Student ID Number / Student Number' required/>
+                          <input type="text" class="form-control {{ $errors->has('school_id') ? ' is-invalid' : '' }} " id="school_id" name="school_id" placeholder='Student ID Number / Student Number' required/>
+                          @if ($errors->has('school_id'))
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $errors->first('school_id') }}</strong>
+                          </span>
+                          @endif
                         </div>
                       </div>
                     </div>

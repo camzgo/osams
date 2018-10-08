@@ -148,9 +148,13 @@
                           <label for="bdate">Birth Date <small>(required)</small></label>
                           <input type="date" name="bday" id="bday" class="form-control" data-provide="datepicker" value="{{Auth::user()->bday}}" required/>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                           <label for="bplace">Birth Place <small>(required)</small></label>
                           <input type="text" name="bplace" id="bplace" class="form-control" placeholder="Birth Place"  required/>
+                        </div>
+                        <div class="col-md-4">
+                          <label >School ID No. <small>(required)</small></label>
+                          <input type="text" name="school_id" id="school_id" class="form-control" placeholder="School ID No." value = "{{Auth::user()->school_id}}" required/>
                         </div>
                       </div>
                       <div class="form-row form-group">

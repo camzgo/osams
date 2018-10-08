@@ -202,6 +202,16 @@ class ScholarshipMainController extends Controller
                 $scholarship->deadline =$request->get('deadline');
                 $scholarship->slot = $request->get('slot');
                 $scholarship->save();
+
+                date_default_timezone_set("Asia/Manila");
+                $time = date('h:i:s', strtotime(now()));
+                $audit = DB::table('audit_log')->insert([
+                    'date' => date('Y-m-d'),
+                    'time' => $time,
+                    'action' => 'Scholarship Updated',
+                    'employee_id' => Auth::user()->id
+                ]);
+
                 $success_output = '<div class="alert alert-success">Success!</div>';
 
             }
@@ -228,6 +238,15 @@ class ScholarshipMainController extends Controller
                     $tracking->save();
 
                     $log = DB::table('log')->where('scholar_id', $request->get('scholarship_id'))->delete();
+
+                    date_default_timezone_set("Asia/Manila");
+                    $time = date('h:i:s', strtotime(now()));
+                    $audit = DB::table('audit_log')->insert([
+                        'date' => date('Y-m-d'),
+                        'time' => $time,
+                        'action' => 'Scholarship Opened',
+                        'employee_id' => Auth::user()->id
+                    ]);
                 }
 
                 else if($request->get('status') == "CLOSED")
@@ -246,6 +265,15 @@ class ScholarshipMainController extends Controller
                     'tracking_id' => $tr_id,
                      'created_at' => date('Y-m-d H:i:s'),
                      'updated_at' => date('Y-m-d H:i:s')
+                    ]);
+
+                    date_default_timezone_set("Asia/Manila");
+                    $time = date('h:i:s', strtotime(now()));
+                    $audit = DB::table('audit_log')->insert([
+                        'date' => date('Y-m-d'),
+                        'time' => $time,
+                        'action' => 'Scholarship Closed',
+                        'employee_id' => Auth::user()->id
                     ]);
 
                     $delapp = DB::table('application')->where('application_status', 'Pending')->where('application_status', 'Renew')->where('scholar_id', $request->get('scholarship_id'))->get();

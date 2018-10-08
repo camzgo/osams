@@ -73,6 +73,16 @@ class UsersArchiveController extends Controller
             // $faquestion->answer = $request->get('del_answer');
             $admin->user_isdel = $request->get('faq_isdel');
             $admin->save();
+
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $audit = DB::table('audit_log')->insert([
+                'date' => date('Y-m-d'),
+                'time' => $time,
+                'action' => 'Users Restored',
+                'employee_id' => Auth::user()->id
+            ]);
+
             $success_output = '';
 
         }
@@ -101,6 +111,16 @@ class UsersArchiveController extends Controller
         $admin = Admin::find($request->input('id'));
         if($admin->delete())
         {
+
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $audit = DB::table('audit_log')->insert([
+                'date' => date('Y-m-d'),
+                'time' => $time,
+                'action' => 'Users Deleted',
+                'employee_id' => Auth::user()->id
+            ]);
+
             echo 'It was successfully deleted!';
         }
     }

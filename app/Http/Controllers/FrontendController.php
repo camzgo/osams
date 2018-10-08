@@ -423,6 +423,7 @@ class FrontendController extends Controller
             $user->suffix = $request->get('suffix');
             $user->gender = $request->get('gender');
             $user->bday = $request->get('bday');
+            $user->school_id = $request->get('school_id');
             $user->save();
             
             return redirect('/profile');
@@ -1629,6 +1630,11 @@ class FrontendController extends Controller
     function spes($id)
     {
         return view('scholarship.spes');
+    }
+
+    function spes2()
+    {
+        return view('scholarship.spes2');
     }
 }
 

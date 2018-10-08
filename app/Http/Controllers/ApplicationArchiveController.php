@@ -95,6 +95,15 @@ class ApplicationArchiveController extends Controller
                 $application->save();
                 $success_output = '';
 
+                date_default_timezone_set("Asia/Manila");
+                $time = date('h:i:s', strtotime(now()));
+                $audit = DB::table('audit_log')->insert([
+                'date' => date('Y-m-d'),
+                'time' => $time,
+                'action' => 'Application Restored',
+                'employee_id' => Auth::user()->id
+                ]);
+
             }
             else if($request->get('button_action') == 'delete')
             {
@@ -103,6 +112,15 @@ class ApplicationArchiveController extends Controller
                 $application->application_status = $app_del;
                 $application->save();
                 $success_output = '';
+
+                date_default_timezone_set("Asia/Manila");
+                $time = date('h:i:s', strtotime(now()));
+                $audit = DB::table('audit_log')->insert([
+                'date' => date('Y-m-d'),
+                'time' => $time,
+                'action' => 'Application Disapproved',
+                'employee_id' => Auth::user()->id
+                ]);
             }
         }
         
@@ -165,6 +183,14 @@ class ApplicationArchiveController extends Controller
         $application = Application::find($request->input('id'));
         if($application->delete())
         {
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Application Deleted',
+            'employee_id' => Auth::user()->id
+            ]);
             echo 'It was successfully deleted!';
         }
     }
