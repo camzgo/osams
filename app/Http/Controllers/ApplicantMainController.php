@@ -83,13 +83,18 @@ class ApplicantMainController extends Controller
         // $mobile = $request->mobile_no;
         //
         // return view ('admin.file_maintenance.applicant.show');
+
+        $var = $request->bday;
+        $date = str_replace('/', '-', $var);
+        $dta = date('Y-m-d', strtotime($date));
+
         $users = new User([
             'surname' => $request->surname,
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
             'suffix' => $request->suffix,
             'gender' => $request->gender,
-            'bday' => $request->bday,
+            'bday' => $dta,
             'profile_photo' => $none,
             'applicant_isdel' => $isdel,
             'mobile_number' => $request->mobile_no,
@@ -168,7 +173,7 @@ class ApplicantMainController extends Controller
     function getdata()
     {   
         $users = User::select("id", "email", "gender",
-        DB::raw("CONCAT(users.surname,', ',users.first_name, ' ', users.middle_name) as fullname"))->where('applicant_isdel', '0')->get();
+        DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"))->where('applicant_isdel', '0')->get();
         return DataTables::of($users)
         ->addColumn('action', function($users){
             return '<a href="#" class="btn btn-sm btn-success view" id="'.$users->id.'"><i class="fa fa-eye"></i> View</a> 

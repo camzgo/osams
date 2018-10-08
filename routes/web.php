@@ -281,6 +281,12 @@ Route::prefix('/admin/tracking')->group(function(){
 });
 
 
+Route::prefix('/admin/grades')->group(function()
+{
+    Route::get('/', 'GradesController@index');
+    Route::get('/getdata', 'GradesController@getdata')->name('grades.getdata');
+});
+
 Route::get('/reports', function () {
 
     Fpdf::AddPage();

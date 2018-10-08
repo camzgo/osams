@@ -79,13 +79,18 @@ class RegisterController extends Controller
         {
             $none = 'female.png';
         }
+
+        $var = $data['bday'];
+        $date = str_replace('/', '-', $var);
+        $dta = date('Y-m-d', strtotime($date));
+
         return User::create([
             'surname' => ucfirst($data['surname']),
             'first_name' => ucfirst($data['first_name']),
             'middle_name'=> ucfirst($data['middle_name']),
             'suffix' => ucfirst($data['suffix']),
             'gender'=>$data['gender'],
-            'bday'=>$data['bday'],
+            'bday'=> $dta,
             'applicant_isdel' => 0,
             'mobile_number' => $data['mobile_no'],
             'profile_photo' => $none,
