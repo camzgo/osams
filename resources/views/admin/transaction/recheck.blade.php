@@ -358,6 +358,12 @@
                                       
                                   </div>
                               </div>
+                              <div class="row form-group">
+                                <div class="col-md-6">
+                                  <label>School ID</label>
+                                  <input type="text" class="form-control" id="school_id" name="school_id"  disabled placeholder='+63XXXXXXXXXX' required/>
+                                </div>
+                              </div>
 
                               <div class="row form-group">
                                   <div class="col-md-6" id="eefap" style="display:none;">
@@ -409,6 +415,28 @@
                                       </ul>
                                   </div>
 
+                                  <div class="col-md-6 mt-4" >
+                                    <div class="card">
+                                      <div class="card-header bg-primary"><strong>Grades</strong></div>
+                                      <div class="card-body">
+                                        <table class="table" id="grades">
+                        
+                          <tr>
+                            <th>Subject</th>
+                            <th>Grades</th>
+                          </tr>
+                        <tbody>
+
+                        </tbody> 
+                        
+                        
+                       
+                       </table>
+                                      </div>
+                                    </div>
+                                      
+                                  </div>
+
                                   
                               </div>
                             
@@ -416,9 +444,10 @@
                               <div class="row form-group pull-right">
                                   <a href="#" class="btn btn-primary" target="_blank" id="print" nae="print"><i class="fa fa-print"></i> PRINT</a> &nbsp; &nbsp;
                                   <button class="btn btn-danger" id="btn-disapproved"  disabled><i class="fa fa-close"></i> DISAPPROVED</button> &nbsp; &nbsp;
-                                  <button class="btn btn-success" id="btn-approved"   disabled><i class="fa fa-check"></i> APPROVED</button>
+                                  <button class="btn btn-success" id="btn-approved"   disabled><i class="fa fa-check"></i> RECHECKED</button>
                                   <div class="ghost">
                                     <input type="hidden" class="ghost" id="applicant_id" name="applicant_id" value=""/>
+                                    <input type="hidden" class="ghost" id="ctr" name="ctr" value="0"/>
                                     <input type="hidden" class="ghost" id="sc_id" name="sc_id" value=""/>
                                     <input type="hidden" class="ghost" id="aid" name="aid" value=""/>
                                     <input type="hidden" class="ghost" id="action" name="action"/>
@@ -524,9 +553,14 @@ function search()
 
         // document.getElementById("btn-disapproved").disabled = false;
         // document.getElementById("btn-approved").disabled = false;
-        
+        var ct = $('#ctr').val();
+        for(x=1; x<=ct; x++)
+        {
+          document.getElementById("grades").deleteRow(1);
+        }
+
         $.ajax({
-          url:"{{route('search.fetchdata')}}",
+          url:"{{route('research.fetchdata')}}",
           method:'get',
           data:{id:id},
           dataType:'json',
@@ -540,8 +574,22 @@ function search()
               $('#aid').val(data.aid);
               $('#sc_id').val(data.sc_id);
               $('#applicant_id').val(data.applicant_id);
+              $('#school_id').val(data.school_id);
               $('#print').attr("href", "/admin/apply/application/form/"+data.applicant_id);
 
+
+              var table = document.getElementById("grades");
+            
+
+              for(i =0; i<=data.subject.length-1; i++)
+              {
+                var row = table.insertRow(i+1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                cell1.innerHTML = data.subject[i];
+                cell2.innerHTML = data.grades[i];
+              }
+              $('#ctr').val(data.subject.length);
               var name = data.name;
               var mobile_no = data.mobile_number;
               var address = data.address;

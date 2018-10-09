@@ -60,19 +60,19 @@ class ApproveController extends Controller
         else if($type == "eefap-gv")
         {
             $users = DB::table('eefapgv')
-            ->Join('application', 'application.id', '=',  'eefapgv.application_id')
+            ->Join('application', 'application.id', '=',  'eefapgv.application_id')->JOIN('users', 'users.id', '=', 'application.applicant_id')
             ->where('application.barcode_number', $id)->where('application.application_status', '=', 'Pending')->orwhere('application.application_status', '=', 'Authenticating')
             ->select(DB::raw("CONCAT_WS('', eefapgv.surname,', ', eefapgv.first_name, ' ', eefapgv.middle_name, ' ', eefapgv.suffix) as fullname"), 
-            DB::raw("CONCAT_WS('', eefapgv.street, ' ', eefapgv.barangay, ' ' , eefapgv.municipality ) as fulladdress"), 'eefapgv.mobile_number')->first();
+            DB::raw("CONCAT_WS('', eefapgv.street, ' ', eefapgv.barangay, ' ' , eefapgv.municipality ) as fulladdress"), 'eefapgv.mobile_number', 'users.school_id')->first();
         }
 
         else if($type == "pcl")
         {
             $users = DB::table('pcl')
-            ->Join('application', 'application.id', '=',  'pcl.application_id')
+            ->Join('application', 'application.id', '=',  'pcl.application_id')->JOIN('users', 'users.id', '=', 'application.applicant_id')
             ->where('application.barcode_number', $id)->where('application.application_status', '=', 'Pending')->orwhere('application.application_status', '=', 'Authenticating')
             ->select(DB::raw("CONCAT_WS('', pcl.surname,', ', pcl.first_name, ' ', pcl.middle_name, ' ', pcl.suffix) as fullname"), 
-            DB::raw("CONCAT_WS('', pcl.street, ' ', pcl.barangay, ' ' , pcl.municipality ) as fulladdress"), 'pcl.mobile_number')->first();
+            DB::raw("CONCAT_WS('', pcl.street, ' ', pcl.barangay, ' ' , pcl.municipality ) as fulladdress"), 'pcl.mobile_number', 'users.school_id')->first();
         }
 
          $output = array(
@@ -109,15 +109,31 @@ class ApproveController extends Controller
             'employee_id' => Auth::user()->id
 
             ]);
+
+            $log = DB::table('log')->insert([
+                'desc' => 'Your application has been pre-approved.',
+                'scholar_id' => $request->get('scholarship_id'),
+                'tracking_id' => $request->get('scholarship_id'),
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
             
             date_default_timezone_set("Asia/Manila");
             $time = date('h:i:s', strtotime(now()));
             $history = DB::table('history_log')->insert([
-                'action'  => 'Application Approved',
+                'action'  => 'Application Pre-Approved',
                 'date'     => date('Y-m-d'),
                 'time'     =>$time,
                 'applicant_id' => $request->get('applicant_id'),
                 'scholar_id' => $request->get('sc_id'),
+            ]);
+
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Application Pre-Approved',
+            'employee_id' => Auth::user()->id
             ]);
 
             return redirect('/admin/approve');
@@ -164,14 +180,7 @@ class ApproveController extends Controller
             ]);
 
 
-            date_default_timezone_set("Asia/Manila");
-            $time = date('h:i:s', strtotime(now()));
-            $audit = DB::table('audit_log')->insert([
-            'date' => date('Y-m-d'),
-            'time' => $time,
-            'action' => 'Application Pre-Approved',
-            'employee_id' => Auth::user()->id
-            ]);
+           
 
             return redirect('/admin/approve');
         }

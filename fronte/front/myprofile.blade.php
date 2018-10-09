@@ -154,7 +154,7 @@
                         </div>
                         <div class="col-md-4">
                           <label >School ID No. <small>(required)</small></label>
-                          <input type="text" name="school_id" id="school_id" class="form-control" placeholder="School ID No."  required/>
+                          <input type="text" name="school_id" id="school_id" class="form-control" placeholder="School ID No."  value="{{Auth::user()->school_id}}" required/>
                         </div>
                       </div>
                       <div class="form-row form-group">

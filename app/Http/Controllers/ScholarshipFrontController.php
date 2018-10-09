@@ -295,7 +295,8 @@ class ScholarshipFrontController extends Controller
                     'student_id' => Auth::user()->id,
                     'new'     => "1",
                     'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s')
+                    'updated_at' => date('Y-m-d H:i:s'),
+                    'grades_isdel' => 0
                 ]);
             }
 
@@ -394,7 +395,8 @@ class ScholarshipFrontController extends Controller
                     'student_id' => Auth::user()->id,
                     'new'     => "1",
                     'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s')
+                    'updated_at' => date('Y-m-d H:i:s'),
+                    'grades_isdel' => 0
                 ]);
             }
 
@@ -500,7 +502,8 @@ class ScholarshipFrontController extends Controller
                     'student_id' => Auth::user()->id,
                     'new'     => "1",
                     'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s')
+                    'updated_at' => date('Y-m-d H:i:s'),
+                    'grades_isdel' => 0
                 ]);
             }
 

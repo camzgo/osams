@@ -27,7 +27,7 @@ class GradesController extends Controller
      function getdata()
     {   
         $grades = DB::table('grades')->JOIN('users', 'users.id', '=', 'grades.student_id')
-        ->select("grades.semester", "grades.student_id",
+        ->select("grades.semester", "grades.student_id", "grades.grades_isdel",
         DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"))->where('grades_isdel', '0')->groupBy('grades.student_id')->get();
         return DataTables::of($grades)
         ->addColumn('action', function($grades){
@@ -39,7 +39,26 @@ class GradesController extends Controller
     }
     function fetchdata(Request $request)
     {
-      //  $grades
+        $id = $request->input('id');
+        $grades = DB::table('grades')->where('student_id', $id)->get();
+        $nos = DB::table('grades')->where('student_id', $id)->count();
+        $grad = array();
+        $sub = array();
+        
+
+        foreach($grades as $graad)
+        {
+            array_push($grad, $graad->grades);
+            array_push($sub, $graad->subject);
+        }
+        
+        $output = array(
+            'grades'     =>  $grad,
+            'subject'   =>  $sub
+        );
+        echo json_encode($output);
+        
+        
 
         // $output = array(
         //     'surname'    =>  $user->surname,
@@ -90,12 +109,10 @@ class GradesController extends Controller
             }
             else if($request->get('button_action') == 'delete')
             {
-                $user = User::find($request->get('del_id'));
-                $user->applicant_isdel = $request->get('del_isdel');
-                // $faquestion->answer = $request->get('answer');
-                // $faquestion->faq_isdel = $request->get('faq_isdel');
-
-                $user->save();
+                $grades = DB::table('grades')->where('student_id', $request->get('del_id'))->update([
+                    'grades_isdel' => 1,
+                    'new'  => 1
+                ]);
                 $success_output = '';
 
                 date_default_timezone_set("Asia/Manila");
@@ -103,7 +120,7 @@ class GradesController extends Controller
                 $audit = DB::table('audit_log')->insert([
                 'date' => date('Y-m-d'),
                 'time' => $time,
-                'action' => 'Applicant Archived',
+                'action' => 'Grades Archived',
                 'employee_id' => Auth::user()->id
                 ]);
 

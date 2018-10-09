@@ -957,7 +957,38 @@ class FrontendController extends Controller
         //     });
                            
                            
-       
+        // $grades = DB::table('grades')->where('student_id', 6)->get();
+        // $nos = DB::table('grades')->where('student_id', 6)->count();
+        // $grad = array();
+        // $sub = array();
+        
+
+        // foreach($grades as $graad)
+        // {
+        //     array_push($grad, $graad->grades);
+        //     array_push($sub, $graad->subject);
+        // }
+        
+        
+        // for($x=0; $x<=$nos-1; $x++)
+        // {
+        //    echo $grad[$x]."<br>";
+        // }
+
+        $grad = DB::table('grades')->where('student_id', 6)->where('created_at', '2018-10-09 00:00:00')->get();
+        $del = array();
+        foreach($grad as $grad2)
+        {
+            array_push($del, $grad2->id);
+        }
+        $sum = count($del);
+        for($x=0; $x<=$sum-1;$x++)
+        {
+                #DB::table('grades')->where('student_id', $request->input('id'))->where('created_at', $request->created_at);
+            // if($grades->delete())
+           
+        }
+      //  return $del;
     }
     public function sendMail($data)
     {   

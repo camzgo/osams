@@ -285,7 +285,19 @@ Route::prefix('/admin/grades')->group(function()
 {
     Route::get('/', 'GradesController@index');
     Route::get('/getdata', 'GradesController@getdata')->name('grades.getdata');
+    Route::get('/fetchdata', 'GradesController@fetchdata')->name('grades.fetchdata');
+    Route::post('/postdata', 'GradesController@postdata')->name('grades.postdata');
 });
+
+Route::prefix('/admin/archive/grades')->group(function()
+{
+    Route::get('/', 'GradesArchiveController@index');
+    Route::get('/getdata', 'GradesArchiveController@getdata')->name('argrades.getdata');
+    Route::get('/fetchdata', 'GradesArchiveController@fetchdata')->name('argrades.fetchdata');
+    Route::post('/postdata', 'GradesArchiveController@postdata')->name('argrades.postdata');
+    Route::get('/removedata', 'GradesArchiveController@removedata')->name('argrades.removedata'); 
+});
+
 
 Route::get('/reports', function () {
 

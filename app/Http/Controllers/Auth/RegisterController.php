@@ -57,9 +57,11 @@ class RegisterController extends Controller
             'gender' => 'required|string|max:10',
             'bday' =>'required',
             'mobile_no' =>'required',
+            'school_id' => 'required|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'g-recaptcha-response' => new Captcha(),
+            
         ]);
     }
 

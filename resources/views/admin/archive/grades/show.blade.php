@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
- <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+<link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
   <title>Pampanga Capitol | Online Scholarship Application and Management System</title>
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -25,7 +25,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-     <a href="" class="brand-link text-center">
+    <a href="" class="brand-link text-center">
       <span class="brand-text font-weight-bold" style ="" >OSAMS</span>
     </a>
 
@@ -42,7 +42,7 @@
       </div>
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
+             <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="/admin" class="nav-link">
@@ -135,7 +135,7 @@
           </li>
           @endif
           @if($role->file_maintenance == "Grant")
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>
@@ -173,7 +173,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/grades" class="nav-link active">
+                <a href="/admin/grades" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-id-card nav-icon"></i>
                   <p>Grades</p>
@@ -198,7 +198,7 @@
           </li>
           @endif
           @if($role->utilities == "Grant")
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
               <p>
@@ -214,7 +214,7 @@
                   <p>Audit Log</p>
                 </a>
               </li>
-              <li class="nav-item has-treeview">
+              <li class="nav-item has-treeview menu-open">
                 <a href="#" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-archive nav-icon"></i>
@@ -251,6 +251,13 @@
                         <i class="fa fa-question nav-icon"></i>
                         <p>FAQs</p>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/admin/archive/grades" class="nav-link active">
+                        &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-id-card nav-icon"></i>
+                        <p>Grades</p>
+                      </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/archive/employee" class="nav-link">
@@ -302,7 +309,8 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">File Maintenance</li>
+              <li class="breadcrumb-item active">Utilities</li>
+              <li class="breadcrumb-item active">Archive</li>
               <li class="breadcrumb-item active">Grades</li>
             </ol>
           </div><!-- /.col -->
@@ -317,21 +325,22 @@
      <div class="content">
       <div class="container-fluid">
         <div class="card">
-          <div class="card-header" id="th-cl1">
-              <h3 class="boldtx">Grades</h3>
+          <div class="card-header" id="th-cl2">
+              <h3 class="boldtx">Grades Archive</h3>
           </div>
           <div class="card-body"> 
-        <div class="flt-right">
-            {{-- <a href="/admin/reg" class="btn btn-success ">
+         <div class="flt-right">
+            {{-- <a href="#" class="btn btn-success" id="add_data" data-backdrop="static" data-keyboard="false">
                 <i class="fa fa-plus"></i>
                 Add New
             </a> --}}
           </div>
+
         <br>
         <div class="container">
-
-     <table class=" table table-hover table-hover" style="width:100%" id="table">
-               <thead class="th-cl1">
+    <br />
+     <table class=" table table-hover" style="width:100%" id="table">
+               <thead class="th-cl2">
                   <tr>
                      <th>Name</th>
                      <th>Semester</th>
@@ -343,55 +352,45 @@
             <br>
 </div>
 
-<div id="mainModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-lg modal-dialog-centered" id="md-form">
+    <div id="mainModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" id="md-form">
             <div class="modal-content">
                 <form method="post" id="main_form">
                     <div class="modal-header">
-                      <h4 class="modal-title">Grades Information</h4>
                       <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
                     </div>
                     <div class="modal-body">
-                      {{csrf_field()}}    
-                      <span id="form_output"></span>              
-                      <div id="viewForm">
-                       <table class="table" id="tbl">
-                        
-                          <tr>
-                            <th>Subject</th>
-                            <th>Grades</th>
-                          </tr>
-                        <tbody>
-
-                        </tbody> 
-                        
-                        
-                       
-                       </table>
-                      </div>
-
-
+                      {{csrf_field()}}             
                       <div id="delForm">
-                        <div class="form-group">
-                            <h5 class="brand-text font-weight-bold" id="hddel">Are you sure you want to delete it?</h5>
+                        <span id="del_output"> </span>
+                        <div class="form-group" id="dvh2">
+                            <h5 class="brand-text font-weight-bold" id="hddel"></h5>
+                            {{-- <h2 class="brand-text font-weight-bold ghost" id="hddel2">Are you sure?</h2> --}}
+                            <p class="ghost" id="sec">You will not be able to recover this file</p>
                         </div>
-                        <div class="form-group">
-                          <input type="hidden" name="del_id" id="del_id" value="" />
-                          <input type="hidden" name="ctr" id="ctr" value="" />
-                          <input type="hidden" name="del_isdel" id="del_isdel" value=""/>
+                        <div class="form-group ghost">
+                          {{-- <input type="hidden" name="del_question" id="del_question" value="" class="ghost"/>
+                          <input type="hidden" name="del_answer" id="del_answer" value="" class="ghost"/> --}}
+                          <input type="hidden" name="a_isdel" id="a_isdel" value="" class="ghost"/>
+                          <input type="hidden" name="a_id" id="a_id" value="" class="ghost"/>
+                          <input type="hidden" name="created_at" id="created_at" value="" class="ghost"/>
+                          <input type="hidden" name="confirm" id="confirm" value="" class="ghost"/>
                         </div>
                       </div>
                     </div>
                       <div class="modal-footer">
-                          {{-- <input type="hidden" name="faq_id" id="faq_id" value="" /> --}}
                           <input type="hidden" name="button_action" id="button_action" value="insert" />
                           <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
-                          <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
+                            <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
+                          <div class="" id="condel" name="condel">
+                            <button class="btn btn-danger" value="" id="del" onclick="confirmDel()">Delete</button>
+                          </div>
                       </div>
                 </form>
             </div>
         </div>
-</div>
+    </div>
+
 
 </div>
 </div>
@@ -399,114 +398,29 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-  </div>
         
+  </div>
 </div>
 <script>
+
      $(function() {
                $('#table').DataTable({
                processing: true,
                serverSide: true,
-               ajax: '{{ route('grades.getdata') }}',
-               aoColumns: [
-                        { data: 'fullname', name: 'fullname'},
+               ajax: '{{ route('argrades.getdata') }}',
+               columns: [
+                        { data: 'fullname', name: 'fullname' },
                         { data: 'semester', name: 'semester' },
-                       
                         { width: '20%', data: 'action', orderable:false, searchable: false}
-                  ]
-
-                  // { width: '5%', data: 'checkbox', orderable:false, searchable: false}   
-                        // { searchable: true },
-                        // { mData: function fullname(data, type, dataToSet) {
-                        //   return data.surname + ", " + data.first_name + " " +data.middle_name;
-                        //     }
-                        // // },
-                        // { "mData": 'name' , "searchable": true,
-                        // "mRender" : function ( data, type, full ) { 
-                        //     return full['surname']+', '+full['first_name']+' '+full['middle_name'];}
-                        //   },
-
-
+                        // { width: '5%', data: 'checkbox', orderable:false, searchable: false}      
+                  ] 
             });
-    $(document).on('click', '.view', function(){
-        var id = $(this).attr("id");
-        $('#form_output').html('');
-        $.ajax({
-            url:"{{route('grades.fetchdata')}}",
-            method:'get',
-            data:{id:id},
-            dataType:'json',
-            success:function(data)
-            {
 
-              // $sum1 = ;
-              // $sum2 = A
-              
-            //   for (i = 0; i <= data.subject.length-1; i++) {
-            //   var tr = document.createElement('TR');
-            //   for (j = 0; j <=data.grades.length-1; j++) {
-            //       var td = document.createElement('TD')
-                  
-            //       var txt = document.createTextNode(data.subject[j])
-            //       td.appendChild(txt);
-            //       //tr.appendChild(td);
-
-            //       var td2 = document.createElement('TD')
-            //       var txt2 = document.createTextNode(data.grades[j])
-            //       td2.appendChild(txt2);
-
-                   
-            //        tr.appendChild(td2);
-                    
-            //   }
-             
-            
-            //    tbl.appendChild(tr); 
-            // }           
-            var table = document.getElementById("tbl");
-            
-
-            for(i =0; i<=data.subject.length-1; i++)
-            {
-              var row = table.insertRow(i+1);
-              var cell1 = row.insertCell(0);
-              var cell2 = row.insertCell(1);
-              cell1.innerHTML = data.subject[i];
-              cell2.innerHTML = data.grades[i];
-            }
-            
-             $('#ctr').val(data.subject.length);
-              $('#action').hide();
-              $('#mainModal').modal('show');
-
-              view_Form();
-            }
-
-        
-        });
-
-        
-        //  $('#mainModal').modal('show');
-        //  view_Form();
-
-    });
-
-    $('#mainModal').on('hidden.bs.modal', function () {
-      
-      var ct = $('#ctr').val();
-      for(x=1; x<=ct; x++)
-      {
-         document.getElementById("tbl").deleteRow(1);
-      }
-
-     // document.getElementById("tbl").deleteRow();
-     
-    });
     $('#main_form').on('submit', function(event){
         event.preventDefault();
         var form_data = $(this).serialize();
         $.ajax({
-            url:"{{ route('grades.postdata') }}",
+            url:"{{ route('argrades.postdata') }}",
             method:"POST",
             data:form_data,
             dataType:"json",
@@ -525,32 +439,13 @@
                 {
                    // $('#form_output').html(data.success);
                     $('#main_form')[0].reset();
-                    //$('#action').val('Add');
-                    $('.modal-title').text('Add Question');
-                    //$('#button_action').val('insert');
                     $('#table').DataTable().ajax.reload();
                     $('#mainModal').modal('hide');
-                    if($('#action').val() == 'Edit')
+                    if($('#action').val() == 'Restore')
                     {
                       swal(
                         'Success!',
-                        'Your data has been successfully updated',
-                        'success'
-                      )
-                    }
-                    else if (($('#action').val() == 'Add'))
-                    {
-                      swal(
-                        'Success!',
-                        'You have successfully added a new data',
-                        'success'
-                      )
-                    }
-                    else if (($('#action').val() == 'Delete'))
-                    {
-                      swal(
-                        'Success!',
-                        'Your data is successfully deleted',
+                        'Your data has been successfully restored',
                         'success'
                       )
                     }
@@ -564,88 +459,123 @@
         var id = $(this).attr("id");
         $('#form_output').html('');
         $.ajax({
-            url:"{{route('faqs.fetchdata')}}",
+            url:"{{route('argrades.fetchdata')}}",
             method:'get',
             data:{id:id},
             dataType:'json',
             success:function(data)
             {
-                $('#question').val(data.question);
-                $('#answer').val(data.answer);
-                $('#faq_id').val(id);
-                $('#formModal').modal('show');
-                $('#action').val('Edit');
-                $('.modal-title').text('Edit Question');
+                if(data.applicant_isdel==1)
+                {
+                    $('#a_isdel').val(0);
+                }
+
+                // $('#del_question').val(data.question);
+                // $('#del_answer').val(data.answer);
+                $('#a_id').val(id);
+                $('#created_at').val(data.created);
+
                 $('#button_action').val('update');
-                edit_Form();
                 $('#mainModal').modal('show');
-                $('#action').val('Edit');
-                document.getElementById("action").className = "btn btn-info";
-                document.getElementById("md-form").classList.add('modal-lg');
-                $('#button_action').val('update');
-                $('.modal-title').text('Edit Question');
+                $('#action').val('Restore');
+                $('#hddel').text('Are you sure you want to restore it?');
+                document.getElementById("action").className = "btn btn-success";
+                document.getElementById("condel").className = "ghost";
+                document.getElementById("sec").className = "ghost";
+                document.getElementById("hddel").classList.remove("ghost");
+                if($('#confirm').val()=='true')
+                {
+                    var parent = document.getElementById("dvh2");
+                    var child = document.getElementById("hddel2");
+                    parent.removeChild(child);
+                     $('#confirm').val('');
+                }
+                
+                //console.log(id + ' ' + data.faq_isdel + ' ' + data.answer + ' ' +data.question);
             }
     });   
     });
     
  $(document).on('click', '.delete', function(){
         var id = $(this).attr('id');
-         //$('#del_output').html('');
          $.ajax({
-            url:"{{route('grades.fetchdata')}}",
+            url:"{{route('argrades.fetchdata')}}",
             method:'get',
             data:{id:id},
             dataType:'json',
             success:function(data)
             {
-              // var smp=data.faq_isdel;
-              //   console.log(id + ' ' +smp);
-              del_Form();
-              $('#del_id').val(id);
-               $('#action').show();
-                $('#del_isdel').val(1);
-                $('#action').val('Delete');
-                $('#button_action').val('delete');
-                document.getElementById("action").className = "btn btn-danger";
-                document.getElementById("md-form").classList.remove('modal-lg');
-                $("#hddel").text("Are you sure you want to delete it?");
-                $('.modal-title').text('');
-                $('#mainModal').modal('show');
-                $('#del_id').val(id);
-
-                //   $('#faq_isdel').val(1);
-                //   $('#action').val('Delete');
-                //   document.getElementById("action").className = "btn btn-danger";
-                //   $("#hddel").text("Are you sure you want to delete it?");
-                // }
-                // del_Form();
-                // $('#question').val(data.question);
-                // $('#answer').val(data.answer);
-                // $('#faq_id').val(id);
-                // $('#mainModal').modal('show');
-                // document.getElementById("md-form").classList.remove('modal-lg');
-                // $('#button_action').val('delete');
-                // $('.modal-title').text('');
-                //console.log(data.surname + ' ' +data.applicant_isdel);
+              $('#created_at').val(data.created);
+          
             }
-        }); 
+         });
+        $('#mainModal').modal('show');
+        //$('#hddel').text('Are you sure you want to delete it?');
+        document.getElementById("action").className = "ghost";
+        document.getElementById("condel").className = "";
+        document.getElementById("sec").className = "";
+        document.getElementById("hddel").classList.add("ghost");
+        $('#del').val(id);
+        $('#confirm').val('true');
+        document.getElementById("sec").style.textAlign = "center";
+        // var para = document.createElement("h2");
+        // var node = document.createTextNode("Are you sure?");
+        // para.appendChild(node);
+        // var element = document.getElementById("dvh2");
+        // var child = document.getElementById("hddel");
+        // element.insertBefore(para, child);
+        //document.getElementById("hddel2").style.textAlign = "center";
+        //document.getElementById("hddel2").classList.remove("ghost");
+
+        var para = document.createElement("h2");
+        var node = document.createTextNode("Are you sure?");
+        para.appendChild(node);
+        // para.id = "hddel2";
+        // par.classList.add("brand-text font-weight-bold");
+        var element = document.getElementById("dvh2");
+        var child = document.getElementById("hddel");
+        element.insertBefore(para, child);
+        para.setAttribute("id", "hddel2");
+        para.setAttribute("class", "brand-text font-weight-bold");
+        document.getElementById("hddel2").style.textAlign = "center";
+
     });
 });
-function view_Form() {
-    var x = document.getElementById("viewForm");
-    if (x.style.display === "none") {
-        x.style.display = "block";
+function confirmDel()
+{
+    var id = $('#del').val();
+    var confirm = $('#confirm').val();
+    
+    $('#mainModal').modal('hide');
+    
+    if(confirm=='true')
+    {
+        
+        $.ajax({
+            url:"{{route('argrades.removedata')}}",
+            method:"get",
+            data:{id:id},
+            success:function(data)
+            { 
+                var x = data
+                $('#table').DataTable().ajax.reload();
+                swal("Done!", ""+ data, "success");
+            }
+        })
+
+        
     }
-    var y = document.getElementById("delForm");
-    y.style.display = "none";
-}
-function del_Form() {
-    var x = document.getElementById("delForm");
-    if (x.style.display === "none") {
-        x.style.display = "block";
+    else
+    {
+        return false;
     }
-    var y = document.getElementById("viewForm");
-      y.style.display = "none";
+    
+    document.getElementById("sec").className = "ghost";
+    document.getElementById("hddel").classList.remove("ghost");
+    var parent = document.getElementById("dvh2");
+    var child = document.getElementById("hddel2");
+    parent.removeChild(child);
+   
 }
 </script>
 </body>

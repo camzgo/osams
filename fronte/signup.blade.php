@@ -176,12 +176,12 @@
                                         <div class="form-row form-group">
                                             <div class="col-md-12">
                                             <label>Student ID Number / Student Number</label>
-                                            <input id="school_id" type="text" class="form-control form-control-lg" placeholder="Student ID Number / Student Number" name="school_id" required>
-                                                {{-- @if ($errors->has('school_id'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('password') }}</strong>
-                                                </span>
-                                                @endif --}}
+                                            <input id="school_id"  type="text" class="form-control {{ $errors->has('school_id') ? ' is-invalid' : '' }} form-control-lg" placeholder="Student ID Number / Student Number" name="school_id" required>
+                                            @if ($errors->has('school_id'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('school_id') }}</strong>
+                                            </span>
+                                            @endif
                                             </div>
                                         </div>
                                         <div class="form-row form-group">

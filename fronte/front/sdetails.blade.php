@@ -114,7 +114,7 @@
                               @endif
                             </table>
                             <hr>
-                            <a href="#" class="btn btn-primary btn-block mb-4">Edit Grades</a>
+                            {{-- <a href="#" class="btn btn-primary btn-block mb-4">Edit Grades</a> --}}
                           </div>
                         </div>
                       </div>
@@ -236,7 +236,7 @@
                                 </div>
                               </div>
                               @if($scholar->status == "OPEN")
-                              @if($applicant->application_status == "Pending" && $tracking->stage!="Approved")
+                              @if($applicant->application_status == "Pending" )
                               <div class="form-row">
                                 <div class="col-md-3">
                                   <a href="/scholarship/form/{{Auth::user()->id}}" target="_blank" class="btn btn-block text-white btn-dark">Print</a>
@@ -304,38 +304,8 @@
                 </div><hr>
                 <div class="form-row">
 
-                  @if($tracking->status=="CLOSED" || $applicant->application_status=="Renew")
-                  @if($tracking->stage=="Approved")
-                  <div class="card" style="width: 100%;">
-                    <div class="card-header boldtx bg-warning text-white">
-                      Application Track
-                    </div>
-                    <div class="card-body">
-                       <div class="container" >
-                        @include('inc.track')
-
-                         @if(count($log) > 0)
-                          @foreach($log as $logs)
-                            <div class="form-row">
-                              <div class="col-md-2">
-                                <p>{{$logs->created_at}}:</p>
-                              </div>
-                              <div class="col-md-8">
-                                <p>{{$logs->desc}}</p>
-                              </div>
-                              
-                            </div>
-                          @endforeach
-                          @else
-                              <p>No logs found!</p>
-                          @endif
-                       </div>
-                  </div>
-                </div>
-                @endif
-
-
-                @if($tracking->stage=="Re-Checking")
+                  @if($applicant->application_status!="Pending" || $applicant->application_status!="Disapproved" )
+                  @if($applicant->application_status=="Pre-Approved")
                   <div class="card" style="width: 100%;">
                     <div class="card-header boldtx bg-warning text-white">
                       Application Track
@@ -364,7 +334,8 @@
                 </div>
                 @endif
 
-                @if($tracking->stage=="Consolidation")
+
+                @if($applicant->application_status=="Re-checked")
                   <div class="card" style="width: 100%;">
                     <div class="card-header boldtx bg-warning text-white">
                       Application Track
@@ -393,8 +364,7 @@
                 </div>
                 @endif
 
-
-                @if($tracking->stage=="Payroll")
+                @if($applicant->application_status=="Approved")
                   <div class="card" style="width: 100%;">
                     <div class="card-header boldtx bg-warning text-white">
                       Application Track
@@ -423,7 +393,37 @@
                 </div>
                 @endif
 
-                @if($tracking->stage=="Awarding")
+
+                {{-- @if($tracking->stage=="Payroll")
+                  <div class="card" style="width: 100%;">
+                    <div class="card-header boldtx bg-warning text-white">
+                      Application Track
+                    </div>
+                    <div class="card-body">
+                       <div class="container" >
+                        @include('inc.payroll')
+
+                         @if(count($log) > 0)
+                          @foreach($log as $logs)
+                            <div class="form-row">
+                              <div class="col-md-2">
+                                <p>{{$logs->created_at}}:</p>
+                              </div>
+                              <div class="col-md-8">
+                                <p>{{$logs->desc}}</p>
+                              </div>
+                              
+                            </div>
+                          @endforeach
+                          @else
+                              <p>No logs found!</p>
+                          @endif
+                       </div>
+                  </div>
+                </div>
+                @endif --}}
+
+                @if($applicant->application_status=="Awarding")
                   <div class="card" style="width: 100%;">
                     <div class="card-header boldtx bg-warning text-white">
                       Application Track
