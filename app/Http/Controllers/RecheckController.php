@@ -99,4 +99,133 @@ class RecheckController extends Controller
         );
         echo json_encode($output);
     }
+
+    function approved(Request $request)
+    {  
+        if($request->get('action') == 'approved')
+        {
+            $id = $request->get('aid');
+            $approve =  'Re-checked';
+            DB::table('application')->where('id', $id)
+            ->update([
+                'application_status' => $approve
+            ]);
+
+            // $approval = DB::table('approval_date')->insert([
+            // 'status' => $approve,
+            // 'application_id' => $id,
+            // 'date_approved' => date('Y-m-d'),
+            // 'applicant_id' => $request->get('applicant_id'),
+            // 'scholarship_id' => $request->get('sc_id'),
+            // 'employee_id' => Auth::user()->id
+
+            // ]);
+            
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $log = DB::table('log')->insert([
+                'description' => 'Your application has been re-checked.',
+                'scholar_id' => $request->get('sc_id'),
+                'applicant_id' => $request->get('applicant_id'),
+                'employee_id'  => Auth::user()->id,
+                'remarks'    => $request->get('remarks'),
+                'date' => date('Y-m-d'),
+                'time' => $time
+            ]);
+            $log = DB::table('log')->insert([
+                'description' => 'Your application is being consolidate to ensure that there are no duplicate entry.',
+                'scholar_id' => $request->get('sc_id'),
+                'applicant_id' => $request->get('applicant_id'),
+                'remarks'    => $request->get('remarks'),
+                'employee_id'  => Auth::user()->id,
+                'date' => date('Y-m-d'),
+                'time' => $time
+            ]);
+            
+
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $history = DB::table('history_log')->insert([
+                'action'  => 'Application Re-checked',
+                'date'     => date('Y-m-d'),
+                'time'     =>$time,
+                'applicant_id' => $request->get('applicant_id'),
+                'scholar_id' => $request->get('sc_id'),
+            ]);
+
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Application Re-checked',
+            'employee_id' => Auth::user()->id
+            ]);
+
+            return redirect('/admin/recheck');
+
+        }
+        else if ($request->get('action') == 'disapproved')
+        {
+            $id = $request->get('aid');
+            $approve =  'Disapproved';
+            DB::table('application')->where('id', $id)
+            ->update([
+                'application_status' => $approve
+
+            ]);
+
+
+            // $approval = DB::table('approval_date')->insert([
+            // 'status' => $approve,
+            // 'application_id' => $id,
+            // 'date_approved' => date('Y-m-d'),
+            // 'applicant_id' => $request->get('applicant_id'),
+            // 'scholarship_id' => $request->get('sc_id'),
+            // 'employee_id' => '0'
+
+            // ]);
+
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $history = DB::table('history_log')->insert([
+                'action'  => 'Application Disapproved',
+                'date'     => date('Y-m-d'),
+                'time'     =>$time,
+                'applicant_id' => $request->get('applicant_id'),
+                'scholar_id' => $request->get('sc_id')
+
+            ]);
+
+
+            // $approval = DB::table('approval_date')->insert([
+            // 'status' => $approve,
+            // 'application_id' => $id,
+            // 'date_approved' => date('Y-m-d'),
+            // 'applicant_id' => $request->get('applicant_id'),
+            // 'scholarship_id' => $request->get('sc_id'),
+            // 'employee_id' => '0'
+
+            // ]);
+
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $history = DB::table('history_log')->insert([
+                'action'  => 'Application Disapproved',
+                'date'     => date('Y-m-d'),
+                'time'     =>$time,
+                'applicant_id' => $request->get('applicant_id'),
+                'scholar_id' => $request->get('sc_id')
+
+            ]);
+
+
+
+           
+
+            return redirect('/admin/approve');
+        }
+
+    }
+
 }

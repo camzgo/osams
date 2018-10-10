@@ -110,13 +110,27 @@ class ApproveController extends Controller
 
             ]);
 
-            $log = DB::table('log')->insert([
-                'desc' => 'Your application has been pre-approved.',
-                'scholar_id' => $request->get('scholarship_id'),
-                'tracking_id' => $request->get('scholarship_id'),
-                'created_at' => date('Y-m-d H:i:s')
-            ]);
+            // $log = DB::table('log')->insert([
+            //     'desc' => 'Your application has been pre-approved.',
+            //     'scholar_id' => $request->get('scholarship_id'),
+            //     'tracking_id' => $request->get('scholarship_id'),
+            //     'created_at' => date('Y-m-d H:i:s')
+            // ]);
+
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
             
+            $log = DB::table('log')->insert([
+                'description' => 'Your application has been pre-approved and being re-check.',
+                'scholar_id' => $request->get('sc_id'),
+                'applicant_id' => $request->get('applicant_id'),
+                'employee_id'  => Auth::user()->id,
+                'remarks'    => $request->get('remarks'),
+                'date' => date('Y-m-d'),
+                'time' => $time
+            ]);
+
+
             date_default_timezone_set("Asia/Manila");
             $time = date('h:i:s', strtotime(now()));
             $history = DB::table('history_log')->insert([
@@ -179,6 +193,14 @@ class ApproveController extends Controller
 
             ]);
 
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Application Disapproved',
+            'employee_id' => Auth::user()->id
+            ]);
 
            
 

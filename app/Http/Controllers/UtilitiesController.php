@@ -25,6 +25,48 @@ class UtilitiesController extends Controller
         return view ('admin.utilities.permission')->with('role', $role);
     }
 
+    public function backup_restore ()
+    {
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
+        return view ('admin.utilities.backup')->with('role', $role);
+    }
+
+    public function backup2()
+    {
+        $hostname = "localhost";
+        $username ="root";
+        $password = "";
+        $database = "osams";
+        $connection = mysqli_connect($hostname, $username, $password, $database);
+        if(!$connection){
+            die("Connection Failed:".mysqli_connect_error());
+        }
+
+        
+        date_default_timezone_set("Asia/Manila");
+        $date = date("Y-m-d");
+        $time = date('h:i:S', strtotime(now()));
+        $date2 = $date.' '.$time;
+        mysqli_query($connection, "INSERT INTO backup_tbl (backup_date) VALUES ('$date2')");
+
+        exec("C:/xampp/mysql/bin/mysqldump -u root osams > C:/xampp/htdocs/osams_001/backup/osams" . mysqlI_insert_id($connection) . ".sql");
+        
+        return redirect("admin/backup-restore");    
+    }
+    
+    public function getdata2()
+    {
+        $backup = DB::table('backup_tbl')->select(DB::raw("CONCAT('BACKUP-', backup_ID) as backup_name"), 'backup_date')->get();
+        return DataTables::of($backup)
+        ->addColumn('action', function($backup){
+            return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$backup->backup_name.'"><i class="fa fa-refresh"></i> Restore</a>';
+                   # <a href="#" class="btn btn-sm btn-danger delete" id="'.$backup->backup_ID.'"><i class="fa fa-trash"></i> Delete</a> ;
+        })
+        ->make(true);
+    }
+
     function getdata()
     {
         

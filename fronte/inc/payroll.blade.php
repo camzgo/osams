@@ -35,7 +35,7 @@
                             <p>Releasing</p>
                           </div>
                         </div>
-                        <hr>
+                        {{-- <hr> --}}
                          {{-- @if(count($log) > 0)
                           @foreach($log as $faqs) --}}
                             {{-- <div class="py-3 border-bottom">

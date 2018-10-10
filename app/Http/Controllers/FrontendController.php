@@ -254,7 +254,7 @@ class FrontendController extends Controller
         {
            $scholar = DB::table('scholarships')->where('id', $applicant->scholar_id)->first();
            $tracking = DB::table('tracking')->where('scholarship_id', $scholar->id)->first(); 
-           $log = DB::table('log')->where('scholar_id', $scholar->id)->orderBy('created_at', 'desc')->get();
+           $log = DB::table('log')->JOIN('admins', 'admins.id', '=', 'log.employee_id')->where('applicant_id', Auth::user()->id)->orderBy('date', 'desc')->orderBy('time', 'desc')->get();
 
            $grades = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->get();
            $grades1 = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->first();

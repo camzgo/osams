@@ -331,7 +331,7 @@
                             <hr/>
                         </div>
                         <div id="view" name="view" class="">
-                          <form id="main_form" method="post" form="{{ action('ApproveController@approved') }}">
+                          <form id="main_form" method="post" form="{{ action('RecheckController@approved') }}">
                             {{csrf_field()}}  
                           <div class="container justify-content-center">
                               <div class="row form-group">
@@ -421,17 +421,17 @@
                                       <div class="card-body">
                                         <table class="table" id="grades">
                         
-                          <tr>
-                            <th>Subject</th>
-                            <th>Grades</th>
-                          </tr>
-                        <tbody>
+                                            <tr>
+                                              <th>Subject</th>
+                                              <th>Grades</th>
+                                            </tr>
+                                          <tbody>
 
-                        </tbody> 
-                        
-                        
-                       
-                       </table>
+                                          </tbody> 
+                                          
+                                          
+                                        
+                                        </table>
                                       </div>
                                     </div>
                                       
@@ -439,12 +439,21 @@
 
                                   
                               </div>
-                            
-                            </form>
+                              <hr>
+
+
+                              <div class="form-row form-group">
+                                <div class="col-md-12">
+                                  <label>Remarks</label>
+                                  <textarea type="text" name="remarks" id="remarks" class="form-control noresize" rows="4"></textarea>
+                                </div>
+                              </div>
+                              <br>
+                             </form>
                               <div class="row form-group pull-right">
-                                  <a href="#" class="btn btn-primary" target="_blank" id="print" nae="print"><i class="fa fa-print"></i> PRINT</a> &nbsp; &nbsp;
+                                  <a href="#" class="btn btn-primary" target="_blank" id="print" name="print"><i class="fa fa-print"></i> PRINT</a> &nbsp; &nbsp;
                                   <button class="btn btn-danger" id="btn-disapproved"  disabled><i class="fa fa-close"></i> DISAPPROVED</button> &nbsp; &nbsp;
-                                  <button class="btn btn-success" id="btn-approved"   disabled><i class="fa fa-check"></i> RECHECKED</button>
+                                  <button class="btn btn-success" id="btn-approved"  disabled><i class="fa fa-check"></i> RECHECKED</button>
                                   <div class="ghost">
                                     <input type="hidden" class="ghost" id="applicant_id" name="applicant_id" value=""/>
                                     <input type="hidden" class="ghost" id="ctr" name="ctr" value="0"/>
@@ -456,6 +465,8 @@
                                   
                               </div>
                             </div>
+
+                           
 
                             <!--END-->
                             
@@ -547,7 +558,7 @@ $(document).ready(function(){
 function search()
 {
     //console.log($('#search').val());
-
+       
         var ids = $('#search').val();
         var id = ids.trim();
 
@@ -580,7 +591,7 @@ function search()
 
               var table = document.getElementById("grades");
             
-
+              $('#remarks').val("");
               for(i =0; i<=data.subject.length-1; i++)
               {
                 var row = table.insertRow(i+1);

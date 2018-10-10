@@ -92,7 +92,7 @@ class SubController extends Controller
         if($request->get('action') == 'approved')
         {
             $id = $request->get('app_id');
-            $approve =  'Approved';
+            $approve =  'Pre-Approved';
             DB::table('application')->where('id', $id)
             ->update([
                 'application_status' => $approve
@@ -108,13 +108,54 @@ class SubController extends Controller
 
             ]);
 
+             $approval = DB::table('approval_date')->insert([
+            'status' => $approve,
+            'application_id' => $id,
+            'date_approved' => date('Y-m-d'),
+            'applicant_id' => $request->get('applicant_id'),
+            'scholarship_id' => $request->get('sc_id'),
+            'employee_id' => Auth::user()->id
+
+            ]);
+
+            // $log = DB::table('log')->insert([
+            //     'desc' => 'Your application has been pre-approved.',
+            //     'scholar_id' => $request->get('scholarship_id'),
+            //     'tracking_id' => $request->get('scholarship_id'),
+            //     'created_at' => date('Y-m-d H:i:s')
+            // ]);
+
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            
+            $log = DB::table('log')->insert([
+                'description' => 'Your application has been pre-approved and being re-check.',
+                'scholar_id' => $request->get('sc_id'),
+                'applicant_id' => $request->get('applicant_id'),
+                'employee_id'  => Auth::user()->id,
+                'remarks'    => $request->get('remarks'),
+                'date' => date('Y-m-d'),
+                'time' => $time
+            ]);
+
+
             date_default_timezone_set("Asia/Manila");
             $time = date('h:i:s', strtotime(now()));
             $history = DB::table('history_log')->insert([
-                'action'  => 'Application Approved',
+                'action'  => 'Application Pre-Approved',
                 'date'     => date('Y-m-d'),
                 'time'     =>$time,
-                'applicant_id' => $request->get('applicant_id')
+                'applicant_id' => $request->get('applicant_id'),
+                'scholar_id' => $request->get('sc_id'),
+            ]);
+
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Application Pre-Approved',
+            'employee_id' => Auth::user()->id
             ]);
             return redirect('/admin/submission');
 
@@ -136,6 +177,17 @@ class SubController extends Controller
                 'time'     =>$time,
                 'applicant_id' => $request->get('applicant_id')
             ]);
+            
+
+            date_default_timezone_set("Asia/Manila");
+            $time = date('h:i:s', strtotime(now()));
+            $audit = DB::table('audit_log')->insert([
+            'date' => date('Y-m-d'),
+            'time' => $time,
+            'action' => 'Application Disapproved',
+            'employee_id' => Auth::user()->id
+            ]);
+            
             // $approval = DB::table('approval_date')->insert([
             // 'status' => $approve,
             // 'application_id' => $id,

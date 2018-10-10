@@ -183,6 +183,13 @@ Route::prefix('admin/permission')->group(function(){
     Route::get('/removedata', 'UtilitiesController@removedata')->name('permission.removedata'); 
 });
 
+Route::prefix('admin/backup-restore')->group(function()
+{
+    Route::get('/', 'UtilitiesController@backup_restore');
+    Route::get('/backup', 'UtilitiesController@backup2');
+    Route::get('/getdata2', 'UtilitiesController@getdata2')->name('backup.getdata');
+    Route::post('/postdata', 'UtilitiesController@postdata')->name('permission.postdata');
+});
 Route::prefix('admin/reports')->group(function()
 {
     Route::get('/master-list', 'ReportsController@index');
@@ -299,6 +306,23 @@ Route::prefix('/admin/archive/grades')->group(function()
 });
 
 
+Route::prefix('/admin/consolidation')->group(function()
+{
+    Route::get('/', 'ConsolidateController@index');
+    Route::get('/getdata', 'ConsolidateController@getdata')->name('consolo.getdata');
+    Route::post('/postdata', 'ConsolidateController@postdata')->name('consolo.postdata');
+    Route::get('/fetchdata', 'ConsolidateController@fetchdata')->name('consolo.fetchdata');
+});
+
+Route::prefix('/admin/awarding')->group(function()
+{
+    Route::get('/', 'AwardingController@index');
+    Route::get('/getdata', 'AwardingController@getdata')->name('award.getdata');
+    Route::get('/fetchdata', 'AwardingController@fetchdata')->name('award.fetchdata');
+    Route::post('/postdata', 'AwardingController@postdata')->name('award.postdata');
+});
+
+
 Route::get('/reports', function () {
 
     Fpdf::AddPage();
@@ -367,6 +391,7 @@ Route::prefix('admin/renew')->group(function()
 Route::prefix('admin/recheck')->group(function(){
     Route::get('/', 'RecheckController@index');
     Route::get('/fetchdata', 'RecheckController@researchData')->name('research.fetchdata');
+    Route::post('/', 'RecheckController@approved')->name('recheck.postdata');
 });
 
 Route::prefix('admin/audit-log')->group(function(){

@@ -73,7 +73,7 @@
           </li>
           @endif
           @if($role->transactions == "Grant")
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-exchange"></i>
               <p>
@@ -125,7 +125,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/awarding" class="nav-link">
+                <a href="/admin/awarding" class="nav-link active">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-trophy nav-icon"></i>
                   <p>Awarding</p>
@@ -135,7 +135,7 @@
           </li>
           @endif
           @if($role->file_maintenance == "Grant")
-          <li class="nav-item has-treeview ">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>
@@ -191,7 +191,7 @@
           </li>
           @endif
           @if($role->utilities == "Grant")
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-wrench"></i>
               <p>
@@ -201,7 +201,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/audit-log" class="nav-link ">
+                <a href="/admin/audit-log" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-history nav-icon"></i>
                   <p>Audit Log</p>
@@ -255,7 +255,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a href="/admin/backup-restore" class="nav-link active">
+                <a href="/admin/backup-restore" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-hdd-o nav-icon"></i>
                   <p>Backup and Restore</p>
@@ -272,37 +272,13 @@
           </li>
           @endif
           @if($role->reports == "Grant")
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item">
+            <a href="/admin/reports/master-list" class="nav-link">
               <i class="nav-icon fa fa-bar-chart"></i>
               <p>
                 Reports
-                <i class="right fa fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/reports/master-list" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p> Master List of Scholars</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/reports/scholarship-programs" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p>Scholarship Programs</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/reports/application-forms" class="nav-link">
-                  &nbsp &nbsp &nbsp
-                  <i class="fa fa-file nav-icon"></i>
-                  <p>Application Forms</p>
-                </a>
-              </li>
-            </ul>
           </li>
           @endif
         </ul>
@@ -319,8 +295,8 @@
           <div class="col-sm-6">
              <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-              <li class="breadcrumb-item active">Utilities</li>
-              <li class="breadcrumb-item active">Backup and Restore</li>
+              <li class="breadcrumb-item active">Transactions</li>
+              <li class="breadcrumb-item active">Awarding</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -332,35 +308,70 @@
 
     <!-- Main content -->
      <div class="content">
-      <div class="container-fluid"> 
+      <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h3 class="boldtx">Backup and Restore</h3>
+              <h3 class="boldtx">Awarding</h3>
           </div>
           <div class="card-body"> 
          <div class="flt-right">
-
-            <a href="backup-restore/backup" class="btn btn-success">
-                <i class="fa fa-plus"></i>
-                Add New
-            </a>
+            
           </div>
-          
-          <br>
-          <table class=" table table-hover table-hover" style="width:100%" id="table">
+
+        <br>
+        <div class="container">
+    <br />
+    <br />
+     <table class=" table table-hover" style="width:100%" id="table">
                <thead class="th-cl1">
                   <tr>
-                     <th>ID</th>
-                     <th>Date & Time</th>
+                     <th>Name</th>
+                     <th>Status</th>
                      <th>Actions</th>
-                     {{-- <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></button></th> --}}
                   </tr>
                </thead>
             </table>
+            <br>
+</div>
 
-    
-    
-          </div>
+    <div id="mainModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg modal-dialog-centered" id="md-form">
+            <div class="modal-content">
+                <form method="post" id="main_form">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Awarding</h4>
+                      <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+                    </div>
+                    <div class="modal-body">
+                      {{csrf_field()}}    
+                      <span id="form_output"></span>              
+                      <div id="editForm">
+                          <div class="form-row">
+                            <div class="col-md-12">
+                              <label>Remarks</label>
+                              <textarea type="text" name="remarks" id="remarks" class="form-control noresize" rows="4"></textarea>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                      <div class="modal-footer">
+                          <input type="hidden" name="app_id" id="app_id" value="" />
+                          <input type="hidden" name="users_id" id="users_id" value="" />
+                          <input type="hidden" name="sc_id" id="sc_id" value="" />
+                          <input type="hidden" name="sc_name" id="sc_name" value="" />
+                          <input type="hidden" name="sc_status" id="sc_status" value="" />
+                          <input type="hidden" name="sc_type" id="sc_type" value="" />
+                          <input type="hidden" name="button_action" id="button_action" value="insert" />
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
+                          <input type="submit" name="submit" id="action" value="Add" class="btn btn-info" />
+                      </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
 </div>
        
       </div><!-- /.container-fluid -->
@@ -371,18 +382,73 @@
 </div>
 <script>
      $(function() {
-        $('#table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: '{{ route('backup.getdata') }}',
-        aoColumns: [
-                { data: 'backup_name', name: 'backup_name'},
-                { data: 'backup_date', name: 'backup_date' },
-                { width: '20%', data: 'action', orderable:false, searchable: false}
-          ]
+               $('#table').DataTable({
+               processing: true,
+               serverSide: true,
+               ajax: '{{ route('award.getdata') }}',
+               columns: [
+                        { data: 'scholarship_name', name: 'scholarship_name' },
+                        { data: 'status', name: 'status' },
+                        { width: '30%', data: 'action', orderable:false, searchable: false}
+                  ] 
+            });
 
+    $('#main_form').on('submit', function(event){
+        event.preventDefault();
+        var form_data = $(this).serialize();
+        $.ajax({
+            url:"{{ route('award.postdata') }}",
+            method:"POST",
+            data:form_data,
+            dataType:"json",
+            success:function(data)
+            {
+                    //$('#button_action').val('insert');
+                    $('#main_form')[0].reset();
+                    $('#table').DataTable().ajax.reload();
+                    $('#mainModal').modal('hide');
+                    if($('#action').val() == 'Update')
+                    {
+                      swal(
+                        'Success!',
+                        'Status has been updated',
+                        'success'
+                      )
+                    }
+            }
+
+        });
     });
+
+
+    $(document).on('click', '.edit', function(){
+        var id = $(this).attr("id");
+        var name = $(this).text();
+        $('#form_output').html('');
+        $.ajax({
+            url:"{{route('award.fetchdata')}}",
+            method:'get',
+            data:{id:id},
+            dataType:'json',
+            success:function(data)
+            {
+               
+                // $('#app_id').val(id);
+                // $('#users_id').val(data.users_id);
+                $('#sc_id').val(data.sc_id);
+                $('#sc_name').val(data.scholar_name);
+                $('#sc_type').val(data.scholar_type);
+                $('#sc_status').val(data.status);
+                $('#formModal').modal('show');
+                $('#action').val("Update");
+                $('#button_action').val(name);
+                $('#mainModal').modal('show');
+            }
+    });   
+    });
+    
 });
+
 </script>
 </body>
 </html>

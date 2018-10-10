@@ -304,7 +304,7 @@
                 </div><hr>
                 <div class="form-row">
 
-                  @if($applicant->application_status!="Pending" || $applicant->application_status!="Disapproved" )
+                  @if($applicant->application_status!="Pending")
                   @if($applicant->application_status=="Pre-Approved")
                   <div class="card" style="width: 100%;">
                     <div class="card-header boldtx bg-warning text-white">
@@ -314,18 +314,29 @@
                        <div class="container" >
                         @include('inc.recheck')
 
-                         @if(count($log) > 0)
-                          @foreach($log as $logs)
-                            <div class="form-row">
-                              <div class="col-md-2">
-                                <p>{{$logs->created_at}}:</p>
-                              </div>
-                              <div class="col-md-8">
-                                <p>{{$logs->desc}}</p>
-                              </div>
-                              
+                        <div class="form-row">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Date & Time</th>
+                                    <th>Description</th>
+                                    <th>Updated By</th>
+                                    <th>Remarks</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @if(count($log) > 0)
+                                  @foreach($log as $logs)
+                                  <tr>
+                                    <td width="20%">{{$logs->date}} - {{ date('g:i a', strtotime($logs->time))}} </td> 
+                                    <td width="40%">{{$logs->description}}</td>
+                                    <td>{{$logs->first_name}} {{$logs->surname}}</td>
+                                    <td>{{$logs->remarks}}</td>
+                                  </tr>
+                                  @endforeach
+                                </tbody>
+                              </table>
                             </div>
-                          @endforeach
                           @else
                               <p>No logs found!</p>
                           @endif
@@ -343,19 +354,30 @@
                     <div class="card-body">
                        <div class="container" >
                         @include('inc.consolo')
-
-                         @if(count($log) > 0)
-                          @foreach($log as $logs)
+                         
                             <div class="form-row">
-                              <div class="col-md-2">
-                                <p>{{$logs->created_at}}:</p>
-                              </div>
-                              <div class="col-md-8">
-                                <p>{{$logs->desc}}</p>
-                              </div>
-                              
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Date & Time</th>
+                                    <th>Description</th>
+                                    <th>Updated By</th>
+                                    <th>Remarks</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @if(count($log) > 0)
+                                  @foreach($log as $logs)
+                                  <tr>
+                                    <td width="20%">{{$logs->date}} - {{ date('g:i a', strtotime($logs->time))}} </td> 
+                                    <td width="40%">{{$logs->description}}</td>
+                                    <td>{{$logs->first_name}} {{$logs->surname}}</td>
+                                    <td>{{$logs->remarks}}</td>
+                                  </tr>
+                                  @endforeach
+                                </tbody>
+                              </table>
                             </div>
-                          @endforeach
                           @else
                               <p>No logs found!</p>
                           @endif
@@ -372,19 +394,30 @@
                     <div class="card-body">
                        <div class="container" >
                         @include('inc.payroll')
-
-                         @if(count($log) > 0)
-                          @foreach($log as $logs)
+                         
                             <div class="form-row">
-                              <div class="col-md-2">
-                                <p>{{$logs->created_at}}:</p>
-                              </div>
-                              <div class="col-md-8">
-                                <p>{{$logs->desc}}</p>
-                              </div>
-                              
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Date & Time</th>
+                                    <th>Description</th>
+                                    <th>Updated By</th>
+                                    <th>Remarks</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @if(count($log) > 0)
+                                  @foreach($log as $logs)
+                                  <tr>
+                                    <td width="20%">{{$logs->date}} - {{ date('g:i a', strtotime($logs->time))}} </td> 
+                                    <td width="40%">{{$logs->description}}</td>
+                                    <td>{{$logs->first_name}} {{$logs->surname}}</td>
+                                    <td>{{$logs->remarks}}</td>
+                                  </tr>
+                                  @endforeach
+                                </tbody>
+                              </table>
                             </div>
-                          @endforeach
                           @else
                               <p>No logs found!</p>
                           @endif
@@ -423,7 +456,7 @@
                 </div>
                 @endif --}}
 
-                @if($applicant->application_status=="Awarding")
+                @if($applicant->application_status=="Renew")
                   <div class="card" style="width: 100%;">
                     <div class="card-header boldtx bg-warning text-white">
                       Application Track
@@ -431,19 +464,77 @@
                     <div class="card-body">
                        <div class="container" >
                         @include('inc.award')
-
-                         @if(count($log) > 0)
-                          @foreach($log as $logs)
+                         
                             <div class="form-row">
-                              <div class="col-md-2">
-                                <p>{{$logs->created_at}}:</p>
-                              </div>
-                              <div class="col-md-8">
-                                <p>{{$logs->desc}}</p>
-                              </div>
-                              
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Date & Time</th>
+                                    <th>Description</th>
+                                    <th>Updated By</th>
+                                    <th>Remarks</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @if(count($log) > 0)
+                                  @foreach($log as $logs)
+                                  <tr>
+                                    <td width="20%">{{$logs->date}} - {{ date('g:i a', strtotime($logs->time))}} </td> 
+                                    <td width="40%">{{$logs->description}}</td>
+                                    <td>{{$logs->first_name}} {{$logs->surname}}</td>
+                                    <td>{{$logs->remarks}}</td>
+                                  </tr>
+                                  @endforeach
+                                </tbody>
+                              </table>
                             </div>
-                          @endforeach
+                          @else
+                              <p>No logs found!</p>
+                          @endif
+                       </div>
+                  </div>
+                </div>
+                @endif
+
+
+
+
+
+
+                 @if($applicant->application_status=="Disapproved")
+                  <div class="card" style="width: 100%;">
+                    <div class="card-header boldtx bg-warning text-white">
+                      Application Track
+                    </div>
+                    <div class="card-body">
+                       <div class="container" >
+                        
+                         
+                            <div class="form-row">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Date & Time</th>
+                                    <th>Description</th>
+                                    <th>Updated By</th>
+                                    <th>Remarks</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @if(count($log) > 0)
+                                  @foreach($log as $logs)
+                                  <tr>
+                                    @if($logs->description == "Your application has been disapproved.")
+                                    <td width="20%">{{$logs->date}} - {{ date('g:i a', strtotime($logs->time))}} </td> 
+                                    <td width="40%">{{$logs->description}}</td>
+                                    <td>{{$logs->first_name}} {{$logs->surname}}</td>
+                                    <td>{{$logs->remarks}}</td>
+                                    @endif
+                                  </tr>
+                                  @endforeach
+                                </tbody>
+                              </table>
+                            </div>
                           @else
                               <p>No logs found!</p>
                           @endif

@@ -188,10 +188,14 @@ $pdf->SetY(15);
         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',18,176,6);
     }
     $pdf->Cell(50,-38,'_____ with High Honors', 0, 0,'C');
-    if($req->honor_sub == "Submitted")
+    if($scholar_id->id !=7)
     {
-        $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',117,176,6);
+        if($req->honor_sub == "Submitted")
+        {
+            $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',117,176,6);
+        }
     }
+    
     $pdf->Cell(150,-38,'_____Certificate of Honor', 0, 1,'C');
     if($eefap->awards == "Honors")
     {
