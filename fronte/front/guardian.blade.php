@@ -10,7 +10,16 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script src="{{asset('js/app.js')}}"></script>
 </head>
+<style>
+  .bdaymsg{
+    color: red;
+}
 
+.hidden {
+     visibility:hidden;
+}
+
+</style>
  
 @include('inc.nav')
 <main>
@@ -161,7 +170,13 @@
                         </div>
                         <div class="col-md-3">
                           <label for="bdate">Birth Date <small>(required)</small></label>
-                          <input type="date" name="bday" id="bday" class="form-control" data-provide="datepicker" required/>
+                          <input type="text" name="bday" id="lastReporteddate" class="form-control" placeholder="dd/mm/yyyy" required/>
+                          @if ($errors->has('bday'))
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $errors->first('bday') }}</strong>
+                              </span>
+                          @endif
+                          <p class="bdaymsg hidden">Please Enter a valid birth date</p>
                         </div>
                         <div class="col-md-4">
                           <label>Relationship <small>(required)</small></label>
@@ -252,7 +267,55 @@ $(document).ready(function(){
 
 });
 
+var d = new Date();
+var year = d.getFullYear() - 17;
+d.setFullYear(year);
+var age;
+$("#lastReporteddate").datepicker({ dateFormat: "dd/mm/yy",
+		    changeMonth: true,
+		    changeYear: true,
+		    maxDate: year,
+		    minDate: "-90Y",
+            yearRange: '-90:' + year + '',
+            defaultDate: d
+		 });
 
+$("#lastReporteddate").change(function(){
+        var dob = $("#lastReporteddate").val();
+        var now = new Date();
+        var birthdate = dob.split("/");
+        var born = new Date(birthdate[2], birthdate[1]-1, birthdate[0]);
+        age=get_age(born,now);
+     
+        console.log(birthdate[2]+" : "+birthdate[1]+" : "+birthdate[0]);
+        console.log(age);
+    
+        if (age<17)
+        {
+            $('.bdaymsg').removeClass('hidden');
+            $('.bdaymsg').show();
+             $('.bdaymsg').css({'color': 'red'});
+            $('.bdaymsg').text("Invalid Age: " +age);
+            return false;
+        }
+        else
+        {
+            $('.bdaymsg').removeClass('hidden');
+            $('.bdaymsg').show();
+            $('.bdaymsg').css({'color': 'green'});
+            $('.bdaymsg').text("Valid Age: " +age);
+            
+        }
+});
+
+
+    function get_age(born, now) {
+      var birthday = new Date(now.getFullYear(), born.getMonth(), born.getDate());
+      if (now >= birthday) 
+        return now.getFullYear() - born.getFullYear();
+      else
+        return now.getFullYear() - born.getFullYear() - 1;
+    }
 </script>
 
 

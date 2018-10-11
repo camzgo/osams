@@ -65,6 +65,10 @@
                             <td>{{$applicant->barcode_number}}</td>
                           </tr>
                           <tr>
+                            <td>School ID No.</td>
+                            <td>{{Auth::user()->school_id}}</td>
+                          </tr>
+                          <tr>
                             <td>Full Name</td>
                             <td>{{Auth::user()->first_name}} {{Auth::user()->middle_name}} {{Auth::user()->surname}} {{Auth::user()->suffix}}</td>
                           </tr>
@@ -229,8 +233,7 @@
                                   <h1 class="tx4">PHP {{$amount}}.00</h1>
                                 </div>
                               </div>
-                              @if($scholar->status == "OPEN")
-                              @if($applicant->application_status =="Pending" && $tracking->stage!="Approved" )
+                              @if($applicant->application_status =="Pending")
                               <div class="form-row">
                                 <div class="col-md-3">
                                   <a href="/scholarship/form/{{Auth::user()->id}}" target="_blank" class="btn btn-block text-white btn-dark">Print</a>
@@ -259,6 +262,7 @@
                               @endif
                               
                               @if($applicant->application_status == "Renew")
+                              @if($scholar->status == "OPEN")
                               <div class="form-row">
                                 <div class="col-md-6">
                                   <a href="/scholarship/details/renew/eefap-gv" class="btn btn-block text-white btn-primary">Renew</a>
@@ -272,7 +276,7 @@
                                   </form>
                                 </div>
                               </div>
-                              @endif
+                              
                               @else
                               <div class="form-row">
                                 <div class="col-md-12 ">
@@ -283,6 +287,8 @@
                                 </div>
                               </div>
                               @endif
+                              @endif
+                              
                               @if($applicant->application_status == "Disapproved")
                               <div class="form-row">
                                 <div class="col-md-12">

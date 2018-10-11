@@ -154,6 +154,14 @@ button:focus {
   background-color: #4CAF50;
 }
 
+
+.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg{
+    color: red;
+}
+
+.hidden {
+     visibility:hidden;
+}
 </style>
 
 <body>
@@ -178,9 +186,9 @@ button:focus {
      <div class="content mt-5">
       <div class="container">
         <div class="card">
-          <div class="card-header" id="th-cl1">
+          {{-- <div class="card-header" id="th-cl1">
               <h4 class="boldtx"><strong>SCHOLARSHIP APPLICATION</strong></h4>
-          </div>
+          </div> --}}
           <div class="card-body">
     <form action="{{ action('FrontendController@storedEefapgv') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
       {{csrf_field()}}
@@ -190,7 +198,7 @@ button:focus {
 
         {{-- <h5><strong>Step 1 of 3</strong></h5> --}}
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 33.3333333333%" aria-valuenow="33.3333333333" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 4</strong></div>
         </div>
 
         <div class="row form-group mt-5">
@@ -200,18 +208,22 @@ button:focus {
         <div class="row">
           <label for="fullname">* Full Name</label>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$eefapgv->surname}}" required/>
+          <input type="text" class="form-control req surname" id="surname" name="surname" placeholder='* Surname' value="{{$eefapgv->surname}}" required/>
+          <p class="surnamemsg hidden mb-0">Please Enter a valid surname</p>
           </div>
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$eefapgv->first_name}}" required/>
+          <input type="text" class="form-control req first_name" id="first_name" name="first_name" placeholder='* First Name' value="{{$eefapgv->first_name}}" required/>
+          <p class="first_namemsg hidden mb-0">Please Enter a valid first name</p>
           </div>
           <div class = "col-md-2">
           <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$eefapgv->middle_name}}"/>
+          <p class="middle_namemsg hidden mb-0">Please Enter a valid middle name</p>
           </div>
           <div class = "col-md-2">
           <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$eefapgv->suffix}}"/>
+          <p class="suffixmsg hidden mb-0">Please Enter a valid suffix</p>
           </div>
         </div>
         <div class="row form-group">
@@ -255,7 +267,7 @@ button:focus {
       <div class="tab">
 
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 66.66666666666667%" aria-valuenow="66.66666666666667" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 4</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -288,11 +300,11 @@ button:focus {
             </div>
             <div class="col-md-3">
                 <label>* Major <small>(No Abbreviation)</small></label>
-                <input name="major" type="text" class="form-control req" value="{{$eefapgv->major}}" placeholder ="Major">
+                <input name="major" id="major" type="text" class="form-control req" placeholder ="Major" value="{{$eefapgv->major}}">
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average" id="gen_average" type="text" class="form-control req" value="{{$eefapgv->general_average}}" placeholder ="General Average">
+                <input name="gen_average" id="gen_average" type="text" class="form-control req" placeholder ="Average" value="{{$eefapgv->general_average}}">
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -305,7 +317,7 @@ button:focus {
             </div>
         </div>
         <div class="row form-group">
-          <div class="col-md-2">
+          <div class="col-md-3">
             <label>* Graduating: </label>
             <select name="grad" id="grad" class="form-control req">
               <option value="" selected disabled>--Select--</option>
@@ -313,23 +325,22 @@ button:focus {
               <option value="NO">NO</option>
             </select>
           </div>
-          <div class="col-md-3">
+          {{-- <div class="col-md-3">
             <label>* I certify that: </label>
             <select name="spes" id="spes" class="form-control req">
               <option value="" selected disabled>--Select--</option>
               <option value="YES">Yes, I am SPES Recipient</option>
               <option value="NO">No, I am not SPES Recipient</option>
             </select>
-          </div>
+          </div> --}}
 
         </div>
     </div>
 
     <div class="tab">
       <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 4</strong></div>
         </div>
-
         <div class="row mt-5 form-group">
           <h4 class="tx1">Awards Received/Rank</h4>
         </div>
@@ -351,24 +362,66 @@ button:focus {
                 <li class="list-group-item list-group-item-secondary"> <label class="rad inline"> <input type="radio" name="rb1" id="rb6" value="None/VG DHVTSU"> <span> None/VG DHVTSU </span></li>
             </ul>					
           </div>
-          <div class="ghost">
-            <input class="ghost" id="sid" name="sid" type="hidden" value=""/>
-            <input class="ghost" id="award" name="award" type="hidden" value=""/>
-          </div>
-          {{-- <div class="ghost">
-            {!! Form::open(['action' => ['AnnounceMainController@update',  $scholar_id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-            <div class = "form-group col-md-8 ghost">
-            {{Form::text('title_id', $scholar_id, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            {{Form::text('title', $scholar_name, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            {{Form::text('barcode', $barcode, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            </div>
-            {!! Form::close() !!}
-          </div> --}}
-          	
+
         </div>
+        <input class="ghost" id="award" name="award" type="hidden" value=""/>
+        {{-- <div class="ghost">
+          <input type="hidden" id="sid" name="sid" value="{{Auth::user()->id}}">
+          <input type="hidden" id="scholar_id" name="scholar_id" value={{$scholar_id}}>
+          <input type="hidden" id="barcode" name="barcode" value={{$barcode}}>
+          
+          <input class="ghost" id="ids" name="ids" type="hidden" value=""/>
+        </div> --}}
+        
 
 
     </div>
+
+
+    <div class="tab">
+      <div class="progress mt-2">
+          <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 4 of 4</strong></div>
+        </div>
+      <div class="row mt-5 form-group">
+            <h4 class="tx1">Grades</h4>
+          </div>
+          <hr/>
+          <br>
+          <input type="hidden" name="samp" id="samp" value= "@foreach($subject as $sub) {{"/".$sub}}@endforeach">
+          <input type="hidden" name="samp2" id="samp2" value= "@foreach($grad as $grad) {{"/".$grad}}@endforeach">
+          <div class="form-row">
+            <div class="col-md-3">
+              <label>Number of Courses/Subjects </label>
+              <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
+                <option value="" selected disabled>--Select--</option>
+                @for($i = 1; $i<=12; $i++)
+                <option value="{{$i}}">{{$i}}</option>
+                @endfor
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label>Semester</label>
+              <select name="sem" id="sem" class="form-control req" required>
+                <option value="" selected disabled>--Select--</option>
+                <option value="1st">1st Semester</option>
+                <option value="2nd">2nd Semester</option>
+              </select>
+            </div>
+          </div>
+          <br><hr><br>
+          <div class="form-row" >
+            <div class="col-md-6" id="here">
+
+            </div>
+            <div class="col-md-2" id="here2">
+
+            </div>
+          </div>
+    </div>
+
+
+
+
 
       <div style="overflow:auto;" class="mt-4">
         <div style="float:right;">
@@ -378,6 +431,7 @@ button:focus {
       </div>
 
       <div style="text-align:center;margin-top:40px;">
+        <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
@@ -430,10 +484,19 @@ $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
   $('#gen_average').mask('0.00', {"clearIncomplete": true});
+  document.getElementById('nos').value="{{$grades2}}";
+  document.getElementById('sem').value="{{$grades3->semester}}";
+  addInputs("{{$grades2}}");
 
-  document.getElementById('educ_prog').value="{{$eefapgv->program_type}}";
+
+  var sx = "{{$eefapgv->program_type}}";
+  if(sx == "Bachelor&#039;s Degree")
+  {
+    sx = "Bachelor's Degree";
+  }
+  document.getElementById('educ_prog').value= sx;  
   document.getElementById('grad').value="{{$eefapgv->graduating}}";
-  document.getElementById('spes').value="{{$eefapgv->spes}}";
+
   var rb = "{{$eefapgv->awards}}";
 
   // if(rb == "Highest Honors")
@@ -471,7 +534,44 @@ $(document).ready(function(){
   }
   
 
+
+var pathname = window.location.pathname;
+  var parts = pathname.split('/');
+  console.log(parts[2]);
+
+  $('#ids').val(parts[2]);
+  // switch (rb) {
+  //   case 'Highest Honors' :
+  //     document.getElementById('rb5').checked;
+  //     break;
+  //   default:
+  //   console.log(
+  //     'Error'
+  //   );
+  // }
+  
+
 });
+
+
+// $('#surname').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#first_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#middle_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#suffix').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+
+
 
 var v = $("#regForm").validate({
     rules: {
@@ -487,23 +587,6 @@ var v = $("#regForm").validate({
     errorClass: "help-inline",
   });
 
-
-$('#surname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#first_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#middle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#suffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
 
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
@@ -601,7 +684,7 @@ $(document).ready(function(){
     var dependent = $(this).data('dependent');
     var _token = $('input[name="_token"]').val();
     $.ajax({
-      url:"{{ route('users.fetch') }}",
+      url:"{{ route('eefap.fetch') }}",
       method:"POST",
       data:{select:select, value:value, _token:_token, dependent:dependent},
       success:function(result)
@@ -619,6 +702,134 @@ $(document).ready(function(){
 
 });
 
+var $regexname=/^([a-zA-Z ]{2,30})$/;
+    $('.surname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.surnamemsg').removeClass('hidden');
+        $('.surnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.surnamemsg').addClass('hidden');
+        }
+    });
+
+    $('.first_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.first_namemsg').removeClass('hidden');
+        $('.first_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.first_namemsg').addClass('hidden');
+        }
+    });
+
+var $regexname2=/^([a-zA-Z ]{2,30})*$/;
+    $('.middle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.middle_namemsg').removeClass('hidden');
+        $('.middle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.middle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.suffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.suffixmsg').removeClass('hidden');
+        $('.suffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.suffixmsg').addClass('hidden');
+        }
+    });
+
+
+function addInputs()
+{
+  var no = document.getElementById("nos").value;
+  // Container <div> where dynamic content will be placed
+  var container = document.getElementById("here");
+  var container2 = document.getElementById("here2");
+  // Clear previous contents of the container
+  while (container.hasChildNodes()) {
+      container.removeChild(container.lastChild);
+  }
+  while (container2.hasChildNodes()) {
+      container2.removeChild(container2.lastChild);
+  }
+  for (i=0;i<no;i++){
+      // Append a node with a random text
+      container.appendChild(document.createTextNode("Subject Name " + (i+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "subject" + i;
+    
+      
+    var da="{{$grades2}}";
+    var data = document.getElementById('samp').value
+    var res = data.split("/");
+    // for(x=1; x<=da; x++)
+    // {
+      if(i<=da-1)
+      {
+        input.setAttribute("value", res[i+1]);
+      }
+      
+    //   x++;
+    // //   console.log(res[x]);
+    // }  
+      
+      
+
+      
+      input.setAttribute("class", "req");
+      // input.setAttribute("id", "subject"+i);
+      container.appendChild(input);
+      // Append a line break 
+      container.appendChild(document.createElement("br"));
+
+  
+
+   
+  }
+
+  for (y=0;y<no;y++){
+      // Append a node with a random text
+      container2.appendChild(document.createTextNode("Grade " + (y+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "grade" + y;
+
+
+      var da="{{$grades2}}";
+      var data2 = document.getElementById('samp2').value
+      var res2 = data2.split("/");
+      // for(x=1; x<=da; x++)
+      // {
+      if(y<=da-1)
+      {
+        input.setAttribute("value", res2[y+1]);
+      }
+      
+      input.setAttribute("class", "req");
+      container2.appendChild(input);
+      // Append a line break 
+      container2.appendChild(document.createElement("br"));
+  }
+
+    
+}
 
 </script>
 <script src="{{ URL::asset('data/religion.js') }}" type="text/javascript"></script>

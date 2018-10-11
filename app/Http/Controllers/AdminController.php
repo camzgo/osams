@@ -59,8 +59,9 @@ class AdminController extends Controller
             
 
         
-
-       if(Auth::user()->new==0)
+    if(Auth::user()->active == 0)
+    {
+        if(Auth::user()->new==0)
        {
             $list =array('ANGELES CITY', 'APALIT', 'ARAYAT', 'BACOLOR',  'CANDABA', 'CITY OF SAN FERNANDO (Capital)', 'FLORIDABLANCA', 'GUAGUA', 'LUBAO', 
             'MABALACAT CITY', 'MACABEBE', 'MAGALANG', 'MASANTOL', 'MEXICO', 'MINALIN', 'PORAC', 'SAN LUIS', 'SAN SIMON', 'SANTA ANA', 'SANTA RITA',
@@ -142,6 +143,7 @@ class AdminController extends Controller
             $total= array();
             $status=array();
             $slot=array();
+            $supp = array();
             for($x=1; $x<=8; $x++)
             {
                 $amount = DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->where('scholarships.id', $x)->sum('scholarships.amount');
@@ -153,6 +155,7 @@ class AdminController extends Controller
                 $stat = DB::table('scholarships')->where('id', $x)->first();
                 array_push($status, $stat->status);
                 array_push($slot, $stat->slot);
+                array_push($supp, $stat->supplement);
             }
 
             $ave = DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->select('scholarships.id')->count();
@@ -164,21 +167,27 @@ class AdminController extends Controller
             
             $all = array($ave, $over, $approve, $pending, $disapprove, $renew);
             // return $all;
-            $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-            ->select('account_type.account_name', 'account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+             $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+            ->select('account_type.account_name', 'account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
             'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
             
             // $check = array ('sample', 'dfdfdf', 'dfdfdfd', 'dfdfdf', 'dfdfdfd');
             return view('admin.admindash')->with('list', $list)->with('sadd', $sadd)->with('tr', $tr)->with('mod', $mod)->with('gen', $gen)->with('price', $price)
-            ->with('total', $total)->with('status', $status)->with('slot', $slot)->with('all', $all)->with('role', $role);
+            ->with('total', $total)->with('status', $status)->with('slot', $slot)->with('all', $all)->with('supp', $supp)->with('role', $role);
         // return $price;
        }
        else
        {
-           $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-            ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+            $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+            ->select('account_type.account_name', 'account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
             'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
             return view ('admin.file_maintenance.users.emprofile-pass')->with('role', $role);
        }
+    }
+    else
+    {
+        
+    }
+       
     }
 }

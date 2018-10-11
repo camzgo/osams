@@ -464,7 +464,7 @@ class FrontendController extends Controller
             'middle_name' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
             'suffix' => 'nullable|regex:/^[a-zA-Z]+$/u|max:50',
             'nationality' => 'string|regex:/^[a-zA-Z]+$/u|max:50',
-            'occupation' => 'string|regex:/^[a-zA-Z]+$/u|max:50',
+            'occupation' => 'string|regex:/^[a-zA-Z_ -]+$/u|max:50',
         ]);	
         
         
@@ -644,23 +644,66 @@ class FrontendController extends Controller
     
     function viewEefapgv()
     {
+        $grades = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->get();
+
+        $subject = array();
+        $grad = array();
+
+        foreach($grades as $sub)
+        {
+            array_push($subject, $sub->subject);
+            array_push($grad, $sub->grades);
+        }
+        
+        $grades2 = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->count();
+        $grades3 = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->first();
+
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
         $eefapgv = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->first();
-        return view('front.eefapgv-view2')->with('eefapgv', $eefapgv)->with('municipal_list', $municipal_list);
+        return view('front.eefapgv-view2')->with('eefapgv', $eefapgv)->with('municipal_list', $municipal_list)->with('grad', $grad)->with('subject', $subject)->with('grades2', $grades2)->with('grades3', $grades3);
     }
 
     function viewEefap()
     {
+
+        $grades = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->get();
+
+        $subject = array();
+        $grad = array();
+
+        foreach($grades as $sub)
+        {
+            array_push($subject, $sub->subject);
+            array_push($grad, $sub->grades);
+        }
+        
+        $grades2 = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->count();
+        $grades3 = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->first();
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
         $eefap = DB::table('eefap')->where('applicant_id', Auth::user()->id)->first();
-        return view('front.eefap-view')->with('eefap', $eefap)->with('municipal_list', $municipal_list);
+        return view('front.eefap-view')->with('eefap', $eefap)->with('municipal_list', $municipal_list)->with('grad', $grad)->with('subject', $subject)->with('grades2', $grades2)->with('grades3', $grades3);
+       // echo json_encode($subject);
     }
 
     function viewPcl()
     {
+        $grades = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->get();
+
+        $subject = array();
+        $grad = array();
+
+        foreach($grades as $sub)
+        {
+            array_push($subject, $sub->subject);
+            array_push($grad, $sub->grades);
+        }
+        
+        $grades2 = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->count();
+        $grades3 = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->first();
+
         $district_list = DB::select('select district FROM `munbar` GROUP BY district');
         $pcl = DB::table('pcl')->where('applicant_id', Auth::user()->id)->first();
-        return view('front.pcl-view')->with('pcl', $pcl)->with('district_list', $district_list);
+        return view('front.pcl-view')->with('pcl', $pcl)->with('district_list', $district_list)->with('grad', $grad)->with('subject', $subject)->with('grades2', $grades2)->with('grades3', $grades3);
     }
 
 
@@ -686,9 +729,37 @@ class FrontendController extends Controller
         $eefapgv->year_level = $request->get('yr_lvl');
         $eefapgv->graduating = $request->get('grad');
         $eefapgv->general_average = $request->get('gen_average');
-        $eefapgv->spes = $request->get('spes');
         $eefapgv->awards =$request->get('award');
         $eefapgv->save();
+
+
+        $del = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->delete();
+        
+        $ctr = $request->get('nos');
+        $sub1 = array();
+        $grad1 = array();
+        for($x=0; $x<=$ctr-1; $x++)
+        {
+            $sub = "subject".$x;
+            $grad = "grade".$x;
+            array_push($sub1, $request->$sub);
+            array_push($grad1, $request->$grad);
+        }
+        
+
+        for($y=0; $y<=$ctr-1; $y++)
+        {
+            $grades = DB::table('grades')->insert([
+                'subject' => $sub1[$y],
+                'grades' => $grad1[$y],
+                'semester' => $request->sem,
+                'student_id' => Auth::user()->id,
+                'new'     => "1",
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'grades_isdel' => 0
+            ]);
+        }
 
         return redirect ('/scholarship/details');
 
@@ -718,7 +789,6 @@ class FrontendController extends Controller
         $eefap->year_level = $request->get('yr_lvl');
         $eefap->graduating = $request->get('grad');
         $eefap->general_average = $request->get('gen_average');
-        $eefap->spes = $request->get('spes');
         $eefap->fb_account = $request->get('fb_account');
         $eefap->gsurname = $request->get('gsurname');
         $eefap->gfirst_name = $request->get('gfirst_name');
@@ -726,6 +796,35 @@ class FrontendController extends Controller
         $eefap->gsuffix = $request->get('gsuffix');
         $eefap->gmobile_number = $request->get('gmobile_no');
         $eefap->save();
+
+        $del = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->delete();
+        
+        $ctr = $request->get('nos');
+        $sub1 = array();
+        $grad1 = array();
+        for($x=0; $x<=$ctr-1; $x++)
+        {
+            $sub = "subject".$x;
+            $grad = "grade".$x;
+            array_push($sub1, $request->$sub);
+            array_push($grad1, $request->$grad);
+        }
+        
+
+        for($y=0; $y<=$ctr-1; $y++)
+        {
+            $grades = DB::table('grades')->insert([
+                'subject' => $sub1[$y],
+                'grades' => $grad1[$y],
+                'semester' => $request->sem,
+                'student_id' => Auth::user()->id,
+                'new'     => "1",
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'grades_isdel' => 0
+            ]);
+        }
+
         return redirect ('/scholarship/details');
 
     }
@@ -768,6 +867,37 @@ class FrontendController extends Controller
         $pcl->civil_status = $request->get('civil_status');
         $pcl->birth_place = $request->get('birth_place');
         $pcl->save();
+
+
+
+        $del = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->delete();
+        
+        $ctr = $request->get('nos');
+        $sub1 = array();
+        $grad1 = array();
+        for($x=0; $x<=$ctr-1; $x++)
+        {
+            $sub = "subject".$x;
+            $grad = "grade".$x;
+            array_push($sub1, $request->$sub);
+            array_push($grad1, $request->$grad);
+        }
+        
+
+        for($y=0; $y<=$ctr-1; $y++)
+        {
+            $grades = DB::table('grades')->insert([
+                'subject' => $sub1[$y],
+                'grades' => $grad1[$y],
+                'semester' => $request->sem,
+                'student_id' => Auth::user()->id,
+                'new'     => "1",
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'grades_isdel' => 0
+            ]);
+        }
+
         return redirect ('/scholarship/details');
 
     }
@@ -975,20 +1105,48 @@ class FrontendController extends Controller
         //    echo $grad[$x]."<br>";
         // }
 
-        $grad = DB::table('grades')->where('student_id', 6)->where('created_at', '2018-10-09 00:00:00')->get();
-        $del = array();
-        foreach($grad as $grad2)
-        {
-            array_push($del, $grad2->id);
-        }
-        $sum = count($del);
-        for($x=0; $x<=$sum-1;$x++)
-        {
-                #DB::table('grades')->where('student_id', $request->input('id'))->where('created_at', $request->created_at);
-            // if($grades->delete())
+        // $grad = DB::table('grades')->where('student_id', 6)->where('created_at', '2018-10-09 00:00:00')->get();
+        // $del = array();
+        // foreach($grad as $grad2)
+        // {
+        //     array_push($del, $grad2->id);
+        // }
+        // $sum = count($del);
+        // for($x=0; $x<=$sum-1;$x++)
+        // {
+        //         #DB::table('grades')->where('student_id', $request->input('id'))->where('created_at', $request->created_at);
+        //     // if($grades->delete())
            
-        }
+        // }
       //  return $del;
+
+    // $scholar2 = DB::table('scholarships')->where('id', 2)->first();
+    // $scholar = DB::table('scholarships')->join('application', 'application.scholar_id', '=', 'scholarships.id')->where('scholarships.id', 2)->count();
+    // $sr = $scholar2->slot + $scholar2->supplement;
+    // $ss = $scholar;
+    // if($scholar == $sr)
+    // {
+    //     return "FULL";
+    // }
+    // return "NOT YET!";
+
+
+
+    $grades = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->get();
+
+        $subject = array();
+        $grad = array();
+
+        foreach($grades as $sub)
+        {
+            array_push($subject, $sub->subject);
+            array_push($grad, $sub->grades);
+        }
+        return $subject;
+// return $scholar;        
+    
+    // dd ($scholar2);
+      
     }
     public function sendMail($data)
     {   
@@ -1430,23 +1588,27 @@ class FrontendController extends Controller
 
     function viewEefapgv_edit()
     {
+
+        $grades = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->first();
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
         $eefapgv = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->first();
-        return view('front.eefapgv-view2-edit')->with('eefapgv', $eefapgv)->with('municipal_list', $municipal_list);
+        return view('front.eefapgv-view2-edit')->with('eefapgv', $eefapgv)->with('municipal_list', $municipal_list)->with('grades', $grades);
     }
 
     function viewEefap_edit()
     {
+        $grades = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->first();
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
         $eefap = DB::table('eefap')->where('applicant_id', Auth::user()->id)->first();
-        return view('front.eefap-view-edit')->with('eefap', $eefap)->with('municipal_list', $municipal_list);
+        return view('front.eefap-view-edit')->with('eefap', $eefap)->with('municipal_list', $municipal_list)->with('grades', $grades);
     }
 
     function viewPcl_edit()
     {
+        $grades = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->first();
         $district_list = DB::select('select district FROM `munbar` GROUP BY district');
         $pcl = DB::table('pcl')->where('applicant_id', Auth::user()->id)->first();
-        return view('front.pcl-view-edit')->with('pcl', $pcl)->with('district_list', $district_list);
+        return view('front.pcl-view-edit')->with('pcl', $pcl)->with('district_list', $district_list)->with('grades', $grades);
     }
 
 
@@ -1475,11 +1637,58 @@ class FrontendController extends Controller
         $eefapgv->awards =$request->get('award');
         $eefapgv->save();
 
-        $appId = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
-        $app = Application::find($appId->id);
-        $app->application_status = "Pending";
-        $app->renew = "0";
-        $app->save();
+        $approve = "Pending";
+        
+        DB::table('application')->where('applicant_id', Auth::user()->id)
+        ->update([
+            'application_status' => $approve,
+            'renew'     => 1,
+            
+        ]);
+
+        $gradee = DB::table('grades')->where('student_id', Auth::user()->id)->update([
+            'grades_isdel' => 1,
+            'new'     => 0
+        ]);
+
+        $ctr = $request->get('nos');
+        $sub1 = array();
+        $grad1 = array();
+        for($x=0; $x<=$ctr-1; $x++)
+        {
+            $sub = "subject".$x;
+            $grad = "grade".$x;
+            array_push($sub1, $request->$sub);
+            array_push($grad1, $request->$grad);
+        }
+        
+
+        for($y=0; $y<=$ctr-1; $y++)
+        {
+            $grades = DB::table('grades')->insert([
+                'subject' => $sub1[$y],
+                'grades' => $grad1[$y],
+                'semester' => $request->sem,
+                'student_id' => Auth::user()->id,
+                'new'     => "1",
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'grades_isdel' => 0
+            ]);
+        }
+
+        
+
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $history = DB::table('history_log')->insert([
+            'action'  => 'Application Renewed',
+            'date'     => date('Y-m-d'),
+            'time'     =>$time,
+            'applicant_id' => Auth::user()->id,
+            'scholar_id' => $eefapgvId->scholarship_id
+
+        ]);
 
         return redirect ('/scholarship/details');
 
@@ -1517,11 +1726,59 @@ class FrontendController extends Controller
         $eefap->gmobile_number = $request->get('gmobile_no');
         $eefap->save();
 
-        $appId = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
-        $app = Application::find($appId->id);
-        $app->application_status = "Pending";
-        $app->renew = "0";
-        $app->save();
+        $approve = "Pending";
+        
+        DB::table('application')->where('applicant_id', Auth::user()->id)
+        ->update([
+            'application_status' => $approve,
+            'renew'     => 1,
+            
+        ]);
+
+        $gradee = DB::table('grades')->where('student_id', Auth::user()->id)->update([
+            'grades_isdel' => 1,
+            'new'     => 0
+        ]);
+
+        $ctr = $request->get('nos');
+        $sub1 = array();
+        $grad1 = array();
+        for($x=0; $x<=$ctr-1; $x++)
+        {
+            $sub = "subject".$x;
+            $grad = "grade".$x;
+            array_push($sub1, $request->$sub);
+            array_push($grad1, $request->$grad);
+        }
+        
+
+        for($y=0; $y<=$ctr-1; $y++)
+        {
+            $grades = DB::table('grades')->insert([
+                'subject' => $sub1[$y],
+                'grades' => $grad1[$y],
+                'semester' => $request->sem,
+                'student_id' => Auth::user()->id,
+                'new'     => "1",
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'grades_isdel' => 0
+            ]);
+        }
+
+        
+
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $history = DB::table('history_log')->insert([
+            'action'  => 'Application Renewed',
+            'date'     => date('Y-m-d'),
+            'time'     =>$time,
+            'applicant_id' => Auth::user()->id,
+            'scholar_id' => $eefapId->scholarship_id
+
+        ]);
+
 
         return redirect ('/scholarship/details');
 
@@ -1566,11 +1823,61 @@ class FrontendController extends Controller
         $pcl->birth_place = $request->get('birth_place');
         $pcl->save();
 
-        $appId = DB::table('application')->where('applicant_id', Auth::user()->id)->first();
-        $app = Application::find($appId->id);
-        $app->application_status = "Pending";
-        $app->renew = "0";
-        $app->save();
+        $approve = "Pending";
+        
+        DB::table('application')->where('applicant_id', Auth::user()->id)
+        ->update([
+            'application_status' => $approve,
+            'renew'     => 1,
+            
+        ]);
+
+        $gradee = DB::table('grades')->where('student_id', Auth::user()->id)->update([
+            'grades_isdel' => 1,
+            'new'     => 0
+        ]);
+
+        $ctr = $request->get('nos');
+        $sub1 = array();
+        $grad1 = array();
+        for($x=0; $x<=$ctr-1; $x++)
+        {
+            $sub = "subject".$x;
+            $grad = "grade".$x;
+            array_push($sub1, $request->$sub);
+            array_push($grad1, $request->$grad);
+        }
+        
+
+        for($y=0; $y<=$ctr-1; $y++)
+        {
+            $grades = DB::table('grades')->insert([
+                'subject' => $sub1[$y],
+                'grades' => $grad1[$y],
+                'semester' => $request->sem,
+                'student_id' => Auth::user()->id,
+                'new'     => "1",
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'grades_isdel' => 0
+            ]);
+        }
+
+        
+
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $history = DB::table('history_log')->insert([
+            'action'  => 'Application Renewed',
+            'date'     => date('Y-m-d'),
+            'time'     =>$time,
+            'applicant_id' => Auth::user()->id,
+            'scholar_id' => 6
+
+        ]);
+
+
+
 
         return redirect ('/scholarship/details');
 

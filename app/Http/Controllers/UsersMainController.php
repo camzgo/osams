@@ -30,8 +30,8 @@ class UsersMainController extends Controller
     {
         //
 
-        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+       $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         return view ('admin.file_maintenance.users.show')->with('role', $role);
     }
@@ -47,7 +47,7 @@ class UsersMainController extends Controller
         
         // $municipal_list = DB::table('munbar')->groupBy('municipality')->get();
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
         $accnt = DB::select('select account_name, id from account_type WHERE account_name != "Admin"');
@@ -280,8 +280,8 @@ class UsersMainController extends Controller
     function profile()
     {
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
-        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         $info = DB::table('admins_info')->where('admins_id', Auth::user()->id)->first();
         return view ('admin.file_maintenance.users.emprofile')->with('municipal_list', $municipal_list)->with('info', $info)->with('role', $role);
@@ -329,8 +329,8 @@ class UsersMainController extends Controller
     function editprofile()
     {
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
-        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         $info = DB::table('admins_info')->where('admins_id', Auth::user()->id)->first();
         return view ('admin.file_maintenance.users.emprofile-edit')->with('municipal_list', $municipal_list)->with('info', $info)->with('role', $role);
@@ -381,7 +381,7 @@ class UsersMainController extends Controller
     function editpass()
     {
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         return view ('admin.file_maintenance.users.emprofile-pass')->with('role', $role);
     }

@@ -52,16 +52,6 @@
               </p>
             </a>
           </li>
-          @if($role->tracking == "Grant")
-           <li class="nav-item">
-            <a href="/admin/tracking" class="nav-link">
-              <i class="nav-icon fa fa-map-marker"></i>
-              <p>
-                Tracking
-              </p>
-            </a>
-          </li>
-          @endif
           @if($role->submission == "Grant")
           <li class="nav-item">
             <a href="/admin/submission" class="nav-link">
@@ -173,6 +163,13 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="/admin/grades" class="nav-link">
+                  &nbsp &nbsp &nbsp
+                  <i class="fa fa-id-card nav-icon"></i>
+                  <p>Grades</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="/admin/scholarship" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
@@ -244,6 +241,13 @@
                         <i class="fa fa-question nav-icon"></i>
                         <p>FAQs</p>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/admin/archive/grades" class="nav-link">
+                        &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-id-card nav-icon"></i>
+                        <p>Grades</p>
+                      </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/archive/employee" class="nav-link">
@@ -341,7 +345,6 @@
                      <th>Account Name</th>
                      <th>Description</th>
                      <th>File Maintenance</th>
-                     <th>Tracking</th>
                      <th>Submission</th>
                      <th>Transactions</th>
                      <th>Utilities</th>
@@ -396,10 +399,10 @@
                           </div>
                           <div class="col-md-4">
                             <ul class="list-group">
-                              <li class="list-group-item ">      
+                               <li class="list-group-item ">      
                                 <div class="custom-control custom-checkbox mr-sm-2">
-                                  <input type="checkbox" class="custom-control-input" id="tr" onchange="traction(this)">
-                                  <label class="custom-control-label" for="tr">Tracking</label>
+                                  <input type="checkbox" class="custom-control-input" id="sub" onchange="subaction(this)">
+                                  <label class="custom-control-label" for="sub">Submission</label>
                                 </div> 
                               </li>
                               <li class="list-group-item">      
@@ -412,12 +415,6 @@
                           </div>
                           <div class="col-md-4">
                             <ul class="list-group">
-                              <li class="list-group-item ">      
-                                <div class="custom-control custom-checkbox mr-sm-2">
-                                  <input type="checkbox" class="custom-control-input" id="sub" onchange="subaction(this)">
-                                  <label class="custom-control-label" for="sub">Submission</label>
-                                </div> 
-                              </li>
                               <li class="list-group-item">      
                                 <div class="custom-control custom-checkbox mr-sm-2">
                                   <input type="checkbox" class="custom-control-input" id="rep" onchange="repaction(this)">
@@ -473,7 +470,7 @@
         
 </div>
 <script>
-  var fm="Deny", tr="Deny", trans="Deny", util="Deny", rep="Deny", sub="Deny";
+  var fm="Deny",  sub="Deny", trans="Deny", util="Deny", rep="Deny";
 
 
 
@@ -481,60 +478,48 @@
   function fmaction(fm2) {
     if (fm2.checked) {
       fm = 'Grant';
-      $('#tx_fm').val(fm + '/' + tr + '/' + trans + '/' + util + '/' + rep + '/' + sub);    
+      $('#tx_fm').val(fm + '/'  + sub + '/' + trans + '/' + util + '/' + rep );
     } 
     else {
       fm = 'Deny';
-      $('#tx_fm').val(fm + '/' + tr + '/' + trans + '/' + util + '/' + rep + '/' + sub);    
+      $('#tx_fm').val(fm + '/'  + sub + '/' + trans + '/' + util + '/' + rep );    
 
     }
   }
 
-  function traction(tr2) {
-    if (tr2.checked) {
-      tr = 'Grant';
-      $('#tx_fm').val(fm + '/' + tr + '/' + trans + '/' + util + '/' + rep + '/' + sub);    
-
-    } 
-    else {
-      tr = 'Deny';
-      $('#tx_fm').val(fm + '/' + tr + '/' + trans + '/' + util + '/' + rep + '/' + sub);    
-
-    }
-  }
    
   function transaction(trans2) {
     if (trans2.checked) {
       trans = 'Grant';
-      $('#tx_fm').val(fm + '/' + tr + '/' + trans + '/' + util + '/' + rep + '/' + sub);    
+      $('#tx_fm').val(fm + '/'  + sub + '/' + trans + '/' + util + '/' + rep );   
 
     } 
     else {
       trans = 'Deny';
-      $('#tx_fm').val(fm + '/' + tr + '/' + trans + '/' + util + '/' + rep + '/' + sub);    
+      $('#tx_fm').val(fm + '/'  + sub + '/' + trans + '/' + util + '/' + rep );    
     }
   }
 
   function utilaction(util2) {
     if (util2.checked) {
       util = 'Grant';
-      $('#tx_fm').val(fm + '/' + tr + '/' + trans + '/' + util + '/' + rep + '/' + sub);    
+      $('#tx_fm').val(fm + '/'  + sub + '/' + trans + '/' + util + '/' + rep );    
 
     } 
     else {
       util = 'Deny';
-      $('#tx_fm').val(fm + '/' + tr + '/' + trans + '/' + util + '/' + rep + '/' + sub);    
+      $('#tx_fm').val(fm + '/'  + sub + '/' + trans + '/' + util + '/' + rep );    
     }
   }
 
   function repaction(rep2) {
     if (rep2.checked) {
       rep = 'Grant';
-      $('#tx_fm').val(fm + '/' + tr + '/' + trans + '/' + util + '/' + rep + '/' + sub);    
+      $('#tx_fm').val(fm + '/'  + sub + '/' + trans + '/' + util + '/' + rep );    
     } 
     else {
       rep = 'Deny';
-      $('#tx_fm').val(fm + '/' + tr + '/' + trans + '/' + util + '/' + rep + '/' + sub);    
+      $('#tx_fm').val(fm + '/'  + sub + '/' + trans + '/' + util + '/' + rep );    
     }
   }
 
@@ -551,11 +536,11 @@
   function subaction(sub2) {
     if (sub2.checked) {
       sub = 'Grant';
-      $('#tx_fm').val(fm + '/' + tr + '/' + trans + '/' + util + '/' + rep + '/' + sub);    
+      $('#tx_fm').val(fm + '/'  + sub + '/' + trans + '/' + util + '/' + rep );    
     } 
     else {
       sub = 'Deny';
-      $('#tx_fm').val(fm + '/' + tr + '/' + trans + '/' + util + '/' + rep + '/' + sub);    
+      $('#tx_fm').val(fm + '/'  + sub + '/' + trans + '/' + util + '/' + rep );   
     }
   }
 
@@ -571,7 +556,7 @@
                         { data: 'account_desc', name: 'account_desc' },
                         { width: '10%', data: 'chk1', orderable:false, searchable: false},
                         { width: '10%', data: 'chk2', orderable:false, searchable: false},
-                        { width: '10%', data: 'chk6', orderable:false, searchable: false},
+                        // { width: '10%', data: 'chk6', orderable:false, searchable: false},
                         { width: '10%', data: 'chk3', orderable:false, searchable: false},
                         { width: '10%', data: 'chk4', orderable:false, searchable: false},
                         { width: '10%', data: 'chk5', orderable:false, searchable: false},
@@ -593,7 +578,7 @@
         event.preventDefault();
         var form_data = $(this).serialize();
 
-        if (fm == "Deny" && tr == "Deny" && trans == "Deny" && util == "Deny" && rep == "Deny" && sub == "Deny") alert('ERROR: You need to grant atleast one!'); 
+        if (fm == "Deny" && trans == "Deny" && util == "Deny" && rep == "Deny" && sub == "Deny") alert('ERROR: You need to grant atleast one!'); 
         //else alert('Success!');
         else 
         {
@@ -669,7 +654,6 @@
 
 
                 if(data.file_maintenance == 'Grant') document.getElementById("fm").checked = true;
-                if(data.tracking == 'Grant') document.getElementById("tr").checked = true;
                 if(data.transactions == 'Grant') document.getElementById("trans").checked = true; 
                 if(data.utilities == 'Grant') document.getElementById("util").checked = true; 
                 if(data.reports == 'Grant') document.getElementById("rep").checked = true;

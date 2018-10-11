@@ -53,16 +53,6 @@
               </p>
             </a>
           </li>
-          @if($role->tracking == "Grant")
-           <li class="nav-item">
-            <a href="/admin/tracking" class="nav-link">
-              <i class="nav-icon fa fa-map-marker"></i>
-              <p>
-                Tracking
-              </p>
-            </a>
-          </li>
-          @endif
           @if($role->submission == "Grant")
           <li class="nav-item">
             <a href="/admin/submission" class="nav-link">
@@ -174,6 +164,13 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="/admin/grades" class="nav-link">
+                  &nbsp &nbsp &nbsp
+                  <i class="fa fa-id-card nav-icon"></i>
+                  <p>Grades</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="/admin/scholarship" class="nav-link active">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
@@ -245,6 +242,13 @@
                         <i class="fa fa-question nav-icon"></i>
                         <p>FAQs</p>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/admin/archive/grades" class="nav-link">
+                        &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-id-card nav-icon"></i>
+                        <p>Grades</p>
+                      </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/archive/employee" class="nav-link">
@@ -326,6 +330,7 @@
                      <th>Amount</th>
                      <th>Deadline</th>
                      <th>Slots</th>
+                     <th>Supplement</th>
                      <th>Current Status</th>
                      <th>Actions</th>
                      {{-- <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></button></th> --}}
@@ -349,11 +354,11 @@
                   <div id="editForm">
                       <div class="form-group">
                           <label>Scholarship Name:</label>
-                          <input type="text" name="scholarship_name" id="scholarship_name" class="form-control" />
+                          <input type="text" name="scholarship_name" id="scholarship_name" class="form-control" required />
                       </div>
                       <div class="form-group">
                           <label>Description</label>
-                          <textarea type="text" name="scholarship_desc" id="scholarship_desc" class="form-control noresize" rows="5"></textarea>
+                          <textarea type="text" name="scholarship_desc" id="scholarship_desc" class="form-control noresize" rows="3" required></textarea>
                       </div>
                       <div class="form-group ">
                         <label>Amount</label>
@@ -361,16 +366,20 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text">Php</span>
                           </div>
-                            <input type="number" name="amount" id="amount" class="form-control" />
+                            <input type="number" name="amount" id="amount" class="form-control" required/>
                         </div>
                       </div>
                       <div class="form-group">
                           <label>Deadline</label>
-                          <input type="date" name="deadline" id="deadline" class="form-control" data-provide="datepicker" />
+                          <input type="date" name="deadline" id="deadline" class="form-control" data-provide="datepicker" required/>
                       </div>
                       <div class="form-group">
                           <label>Slots</label>
-                          <input type="text" name="slot" id="slot" class="form-control" />
+                          <input type="number" name="slot" id="slot" class="form-control" required/>
+                      </div>
+                      <div class="form-group">
+                          <label>Supplement</label>
+                          <input type="number" name="supp" id="supp" class="form-control" required/>
                       </div>
                   </div>
                   <div id="delForm">
@@ -450,6 +459,7 @@
                         { data: 'amount', name: 'amount'},
                         { data: 'deadline', name: 'deadline'},
                         { data: 'slot', name: 'slot'},
+                        { data: 'supplement', name: 'supplement'},
                         { width: '12%', data: 'badge', orderable:false, searchable: false},
                         { width: '20%', data: 'action', orderable:false, searchable: false}
                         
@@ -535,6 +545,7 @@
               $('#amount').val(data.amount);
               $('#slot').val(data.slot);
               $('#deadline').val(data.deadline);
+              $('#supp').val(data.supplement);
               $('#scholarship_id').val(id);
               $('#mainModal').modal('show');
               $('#action').val('Edit');
@@ -578,6 +589,7 @@
                 $('#scholarship_desc').val(data.scholarship_desc);
                 $('#amount').val(data.amount);
                 $('#slot').val(data.slot);
+                $('#supp').val(data.supplement);
                 $('#deadline').val(data.deadline);
                 $('#scholarship_id').val(id);
                 $('#mainModal').modal('show');

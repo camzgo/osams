@@ -82,6 +82,18 @@ class RegisterController extends Controller
             $none = 'female.png';
         }
 
+        $length=4;
+        $characters = '0123456789';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        
+      
+        $code = $randomString;
+
+
         $var = $data['bday'];
         $date = str_replace('/', '-', $var);
         $dta = date('Y-m-d', strtotime($date));
@@ -101,6 +113,8 @@ class RegisterController extends Controller
             'school_id' => $data['school_id'],
             'new'  => 1,
             'chg' => 0,
+            'active' =>1,
+            'code'  => $code
              
         ]);
     }

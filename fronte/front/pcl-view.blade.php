@@ -154,6 +154,15 @@ button:focus {
   background-color: #4CAF50;
 }
 
+.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg, .bdaymsg, .fsurnamemsg, .ffirst_namemsg, .fmiddle_namemsg, .fsuffixmsg, 
+.msurnamemsg, .mfirst_namemsg, .mmiddle_namemsg, .msuffixmsg, .emergencymsg{
+    color: red;
+}
+
+.hidden {
+     visibility:hidden;
+}
+
 </style>
 
 <body>
@@ -178,9 +187,9 @@ button:focus {
      <div class="content mt-5">
       <div class="container">
          <div class="card">
-          <div class="card-header" id="th-cl1">
+          {{-- <div class="card-header" id="th-cl1">
               <h4 class="boldtx">PCL</h4>
-          </div>
+          </div> --}}
           <div class="card-body">
     <form action="{{ action('FrontendController@storedPcl') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
       {{csrf_field()}}
@@ -190,7 +199,7 @@ button:focus {
 
         {{-- <h5><strong>Step 1 of 3</strong></h5> --}}
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 33.3333333333%" aria-valuenow="33.3333333333" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 4</strong></div>
         </div>
 
         <div class="row form-group mt-5">
@@ -200,21 +209,25 @@ button:focus {
         <div class="row">
           <label for="fullname">* Full Name</label>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$pcl->surname}}" required/>
+            <input type="text" class="form-control req surname" id="surname" name="surname" placeholder='* Surname' value="{{$pcl->surname}}" required/>
+            <p class="surnamemsg hidden mb-0">Please Enter a valid surname</p>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$pcl->first_name}}" required/>
+            <input type="text" class="form-control req first_name" id="first_name" name="first_name" placeholder='* First Name' value="{{$pcl->first_name}}" required/>
+            <p class="first_namemsg hidden mb-0">Please Enter a valid first name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$pcl->middle_name}}"/>
+            <input type="text" class="form-control middle_name" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$pcl->middle_name}}"/>
+            <p class="middle_namemsg hidden mb-0">Please Enter a valid middle name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$pcl->suffix}}"/>
+            <input type="text" class="form-control suffix" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$pcl->suffix}}"/>
+            <p class="suffixmsg hidden mb-0">Please Enter a valid suffix</p>
           </div>
         </div>
-        <div class="row form-group">
+        <div class="form-row form-group">
           <div class="col-md-3">
             <label>* District</label>
             <select name="district" id="district" data-val="true"  data-val-required="Please select District" data-dependent="municipality" class="form-control dynamic req" required >
@@ -241,7 +254,7 @@ button:focus {
             <input type="text" class="form-control" id="street" name="street" value="{{$pcl->street}}" placeholder='Street'/>
           </div>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
           <div class="col-md-2">
               <label for="gender">* Gender</label>
               <select name="gender" id="gender" class=" form-control req"  required>
@@ -276,10 +289,11 @@ button:focus {
           </div>
           <div class="col-md-2">
             <label for="bdate">* Birth Date</label>
-            <input type="date" name="bday" id="bday" class="form-control req" data-provide="datepicker" value="{{$pcl->birthdate}}" required/>
+            <input type="text" name="bday" id="bday" class="form-control bday" placeholder="dd/mm/yyyy" value="{{$pcl->birthdate}}" required/>
+            <p class="bdaymsg hidden">Please Enter a valid birth date</p>
           </div>
         </div>
-         <div class="row form-group">
+         <div class="form-row form-group">
            <div class="col-md-4">
             <label>* Place of Birth</label>
            <input type="text" class="form-control req" id="birth_place" name="birth_place" placeholder='Place of Birth'  value="{{$pcl->birth_place}}" required/>
@@ -301,7 +315,7 @@ button:focus {
     
       <div class="tab">
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 66.6666666667%" aria-valuenow="66.6666666667" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 4</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -311,55 +325,63 @@ button:focus {
         <div class="row">
           <label for="fullname">* Father's Full Name</label>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="fsurname" name="fsurname" value="{{$pcl->fsurname}}" placeholder='* Surname' required/>
+            <input type="text" class="form-control req fsurname" id="fsurname" name="fsurname"  placeholder='* Surname' value="{{$pcl->fsurname}}" required/>
+            <p class="fsurnamemsg hidden mb-0">Please Enter a valid surname</p>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="ffirst_name" name="ffirst_name" value="{{$pcl->ffirst_name}}" placeholder='* First Name' required/>
+            <input type="text" class="form-control req ffirst_name" id="ffirst_name" name="ffirst_name"  placeholder='* First Name'value="{{$pcl->ffirst_name}}" required/>
+            <p class="ffirst_namemsg hidden mb-0">Please Enter a valid first name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="fmiddle_name" name="fmiddle_name" value="{{$pcl->fmiddle_name}}" placeholder='Middle Name'/>
+            <input type="text" class="form-control fmiddle_name" id="fmiddle_name" name="fmiddle_name"  placeholder='Middle Name' value="{{$pcl->fmiddle_name}}"/>
+            <p class="fmiddle_namemsg hidden mb-0">Please Enter a valid middle name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="fsuffix" name="fsuffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$pcl->fsuffix}}"/>
+            <input type="text" class="form-control fsuffix" id="fsuffix" name="fsuffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$pcl->fsuffix}}"/>
+            <p class="fsuffixmsg hidden mb-0">Please Enter a valid suffix</p>
           </div>
         </div>
         <div class="row">
           <label for="fullname">* Mother's Full Name</label>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="msurname" name="msurname" placeholder='* Surname' required value="{{$pcl->msurname}}"/>
+            <input type="text" class="form-control req msurname" id="msurname" name="msurname" placeholder='* Surname' value="{{$pcl->msurname}}" required />
+            <p class="msurnamemsg hidden mb-0">Please Enter a valid surname</p>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="mfirst_name" name="mfirst_name" placeholder='* First Name' value="{{$pcl->mfirst_name}}" required/>
+            <input type="text" class="form-control req mfirst_name" id="mfirst_name" name="mfirst_name" placeholder='* First Name' value="{{$pcl->mfirst_name}}" required/>
+            <p class="mfirst_namemsg hidden mb-0">Please Enter a valid first name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="mmiddle_name" name="mmiddle_name" placeholder='Middle Name' value="{{$pcl->mmiddle_name}}"/>
+            <input type="text" class="form-control mmiddle_name" id="mmiddle_name" name="mmiddle_name" placeholder='Middle Name' value="{{$pcl->mmiddle_name}}"/>
+            <p class="mmiddle_namemsg hidden mb-0">Please Enter a valid middle name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="msuffix" name="msuffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$pcl->msuffix}}"/>
+            <input type="text" class="form-control msuffix" id="msuffix" name="msuffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$pcl->msuffix}}"/>
+            <p class="msuffixmsg hidden mb-0">Please Enter a valid first name</p>
           </div>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
             
             <div class="col-md-3">
                 <div class="form-group">
                     <label>* Father's Occupation</label>
-                    <input type="text" class="form-control" id="foccupation" name="foccupation" placeholder="Father's Occupation" value="{{$pcl->foccupation}}" required/>
+                    <input type="text" class="form-control" id="foccupation" name="foccupation" placeholder="Father's Occupation" value="{{$pcl->foccupation}}"  required/>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>* Mother's Occupation</label>
-                    <input type="text" class="form-control" id="moccupation" name="moccupation" placeholder="Mother's Occupation" value="{{$pcl->moccupation}}"required/>
+                    <input type="text" class="form-control" id="moccupation" name="moccupation" placeholder="Mother's Occupation" value="{{$pcl->moccupation}}" required/>
                 </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                   <label>* Address</label>
-                  <input type="text" class="form-control" id="gaddress" name="gaddress" placeholder="Address (Street, Village Subdivision, Municipality)" value="{{$pcl->address}}" required/>
+                  <input type="text" class="form-control" id="gaddress" name="gaddress" placeholder="Address (Street, Village Subdivision, Municipality)" value="{{$pcl->address}}"  required/>
               </div>
             </div>
         </div>
@@ -368,17 +390,17 @@ button:focus {
       <div class="tab">
 
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 4</strong></div>
         </div>
 
-        <div class="row mt-5 form-group">
+        <div class="form-row mt-5 form-group">
           <h4 class="tx1">Other Information</h4>
         </div>
         <hr/>
         <div class="row">
           <h5><strong>Educational Information</strong></h5>
         </div>
-        <div class="row form-group">
+        <div class="form-row form-group">
             <div class="col-md-5">
                 <label>* School Enrolled <small>(No Abbreviation)</small></label>
                 <input name="college_name" type="text" class="form-control req" value="{{$pcl->school_enrolled}}" placeholder="School Enrolled"/>
@@ -401,10 +423,11 @@ button:focus {
         <div class="row">
           <h5><strong>In Case of Emergency</strong></h5>
         </div>
-        <div class="row form-group">
+        <div class="form-row form-group">
             <div class="col-md-5">
                 <label>* Person to be contacted in case of emergency</label>
-                <input name="emergency" type="text" class="form-control req" value="{{$pcl->emergency}}" placeholder ="Full Name">
+                <input name="emergency" type="text" class="form-control req emergency" value="{{$pcl->emergency}}" placeholder ="Full Name">
+                <p class="emergencymsg hidden mb-0">Please Enter a valid name</p>
             </div>
             <div class="col-md-3">
             <label for="mobile_no">* Mobile Number</label>
@@ -416,15 +439,53 @@ button:focus {
             </div>  
           </div>
           {{-- <div class="ghost">
-            <input class="ghost" type="hidden" name="sid" id="sid"/>
-            <input type="hidden" class="ghost" id="barcode" name="barcode" value="{{$barcode}}"/>
-            <input type="hidden" class="ghost" id="gender2" name="gender2" value="{{$pcl->gender}}"/>
+            <input type="hidden" id="sid" name="sid" value="{{Auth::user()->id}}">
+            <input type="hidden" id="barcode" name="barcode" value={{$barcode}}>
           </div> --}}
         </div>
-        
-        
+    </div>
 
 
+
+    <div class="tab">
+      <div class="progress mt-2">
+          <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 4 of 4</strong></div>
+        </div>
+      <div class="row mt-5 form-group">
+            <h4 class="tx1">Grades</h4>
+          </div>
+          <hr/>
+          <br>
+          <input type="hidden" name="samp" id="samp" value= "@foreach($subject as $sub) {{"/".$sub}}@endforeach">
+          <input type="hidden" name="samp2" id="samp2" value= "@foreach($grad as $grad) {{"/".$grad}}@endforeach">
+          <div class="form-row">
+            <div class="col-md-3">
+              <label>Number of Courses/Subjects </label>
+              <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
+                <option value="" selected disabled>--Select--</option>
+                @for($i = 1; $i<=12; $i++)
+                <option value="{{$i}}">{{$i}}</option>
+                @endfor
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label>Semester</label>
+              <select name="sem" id="sem" class="form-control req" required>
+                <option value="" selected disabled>--Select--</option>
+                <option value="1st">1st Semester</option>
+                <option value="2nd">2nd Semester</option>
+              </select>
+            </div>
+          </div>
+          <br><hr><br>
+          <div class="form-row" >
+            <div class="col-md-6" id="here">
+
+            </div>
+            <div class="col-md-2" id="here2">
+
+            </div>
+          </div>
     </div>
 
       <div style="overflow:auto;" class="mt-4">
@@ -435,6 +496,7 @@ button:focus {
       </div>
 
       <div style="text-align:center;margin-top:40px;">
+        <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
@@ -454,74 +516,298 @@ button:focus {
 <script>
 
 $(document).ready(function(){
-  $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
+  
+ $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   $('#emobile_no').mask('0000000000', {"clearIncomplete": true});
   
   document.getElementById('gender').value="{{$pcl->gender}}";
   document.getElementById('civil_status').value="{{$pcl->civil_status}}";
   document.getElementById('nationality').value="{{$pcl->nationality}}";
   document.getElementById('religion').value="{{$pcl->religion}}";
+  
+  document.getElementById('nos').value="{{$grades2}}";
+  document.getElementById('sem').value="{{$grades3->semester}}";
+  addInputs("{{$grades2}}");
+  var y = document.getElementById("surname").className;
+  console.log(y);
+
+});
 
 
-});
+    var $regexname=/^([a-zA-Z ]{2,30})$/;
+    $('.surname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.surnamemsg').removeClass('hidden');
+        $('.surnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.surnamemsg').addClass('hidden');
+        }
+    });
 
 
-$('#surname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+    $('.first_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.first_namemsg').removeClass('hidden');
+        $('.first_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.first_namemsg').addClass('hidden');
+        }
+    });
+
+
+    $('.fsurname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.fsurnamemsg').removeClass('hidden');
+        $('.fsurnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.fsurnamemsg').addClass('hidden');
+        }
+    });
+
+
+    $('.ffirst_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.ffirst_namemsg').removeClass('hidden');
+        $('.ffirst_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.ffirst_namemsg').addClass('hidden');
+        }
+    });
+
+
+    $('.msurname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.msurnamemsg').removeClass('hidden');
+        $('.msurnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.msurnamemsg').addClass('hidden');
+        }
+    });
+
+
+    $('.mfirst_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.mfirst_namemsg').removeClass('hidden');
+        $('.mfirst_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.mfirst_namemsg').addClass('hidden');
+        }
+    });
+
+
+    $('.emergency').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.emergencymsg').removeClass('hidden');
+        $('.emergencymsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.emergencymsg').addClass('hidden');
+        }
+    });
+
+var regexname2=/^([a-zA-Z ]{2,30})*$/;
+    $('.middle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.middle_namemsg').removeClass('hidden');
+        $('.middle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.middle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.suffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.suffixmsg').removeClass('hidden');
+        $('.suffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.suffixmsg').addClass('hidden');
+        }
+    });
+
+    $('.fmiddle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.fmiddle_namemsg').removeClass('hidden');
+        $('.fmiddle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.fmiddle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.fsuffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.fsuffixmsg').removeClass('hidden');
+        $('.fsuffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.fsuffixmsg').addClass('hidden');
+        }
+    });
+
+    $('.mmiddle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.mmiddle_namemsg').removeClass('hidden');
+        $('.mmiddle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.mmiddle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.msuffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.msuffixmsg').removeClass('hidden');
+        $('.msuffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.msuffixmsg').addClass('hidden');
+        }
+    });
+
+
+var d = new Date();
+var year = d.getFullYear() - 17;
+d.setFullYear(year);
+var age;
+$("#bday").datepicker({ dateFormat: "dd/mm/yy",
+		    changeMonth: true,
+		    changeYear: true,
+		    maxDate: year,
+		    minDate: "-90Y",
+            yearRange: '-90:' + year + '',
+            defaultDate: d
+		 });
+
+$("#bday").change(function(){
+        var dob = $("#bday").val();
+        var now = new Date();
+        var birthdate = dob.split("/");
+        var born = new Date(birthdate[2], birthdate[1]-1, birthdate[0]);
+        age=get_age(born,now);
+     
+        console.log(birthdate[2]+" : "+birthdate[1]+" : "+birthdate[0]);
+        console.log(age);
+    
+        if (age<17)
+        {
+            $('.bdaymsg').removeClass('hidden');
+            $('.bdaymsg').show();
+             $('.bdaymsg').css({'color': 'red'});
+            $('.bdaymsg').text("Invalid Age: " +age);
+            return false;
+        }
+        else
+        {
+            $('.bdaymsg').removeClass('hidden');
+            $('.bdaymsg').show();
+            $('.bdaymsg').css({'color': 'green'});
+            $('.bdaymsg').text("Valid Age: " +age);
+            
+        }
 });
-$('#first_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#middle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#suffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#fsurname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#ffirst_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#fmiddle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#fsuffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#msurname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#mfirst_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#mmiddle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#msuffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#foccupation').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#moccupation').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
+
+function get_age(born, now) {
+      var birthday = new Date(now.getFullYear(), born.getMonth(), born.getDate());
+      if (now >= birthday) 
+        return now.getFullYear() - born.getFullYear();
+      else
+        return now.getFullYear() - born.getFullYear() - 1;
+    }
+
+
+
+
+// $('#surname').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#first_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#middle_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#suffix').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#fsurname').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#ffirst_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#fmiddle_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#fsuffix').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#msurname').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#mfirst_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#mmiddle_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#msuffix').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#foccupation').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#moccupation').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+
 
 
 
@@ -636,7 +922,7 @@ $(document).ready(function(){
     var dependent = $(this).data('dependent');
     var _token = $('input[name="_token"]').val();
     $.ajax({
-      url:"{{ route('pcl2.fetch') }}",
+      url:"{{ route('pcl4.fetch') }}",
       method:"POST",
       data:{select:select, value:value, _token:_token, dependent:dependent},
       success:function(result)
@@ -658,6 +944,84 @@ $(document).ready(function(){
 
 });
 
+
+function addInputs()
+{
+  var no = document.getElementById("nos").value;
+  // Container <div> where dynamic content will be placed
+  var container = document.getElementById("here");
+  var container2 = document.getElementById("here2");
+  // Clear previous contents of the container
+  while (container.hasChildNodes()) {
+      container.removeChild(container.lastChild);
+  }
+  while (container2.hasChildNodes()) {
+      container2.removeChild(container2.lastChild);
+  }
+  for (i=0;i<no;i++){
+      // Append a node with a random text
+      container.appendChild(document.createTextNode("Subject Name " + (i+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "subject" + i;
+    
+      
+    var da="{{$grades2}}";
+    var data = document.getElementById('samp').value
+    var res = data.split("/");
+    // for(x=1; x<=da; x++)
+    // {
+      if(i<=da-1)
+      {
+        input.setAttribute("value", res[i+1]);
+      }
+      
+    //   x++;
+    // //   console.log(res[x]);
+    // }  
+      
+      
+
+      
+      input.setAttribute("class", "req");
+      // input.setAttribute("id", "subject"+i);
+      container.appendChild(input);
+      // Append a line break 
+      container.appendChild(document.createElement("br"));
+
+  
+
+   
+  }
+
+  for (y=0;y<no;y++){
+      // Append a node with a random text
+      container2.appendChild(document.createTextNode("Grade " + (y+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "grade" + y;
+
+
+      var da="{{$grades2}}";
+      var data2 = document.getElementById('samp2').value
+      var res2 = data2.split("/");
+      // for(x=1; x<=da; x++)
+      // {
+      if(y<=da-1)
+      {
+        input.setAttribute("value", res2[y+1]);
+      }
+      
+      input.setAttribute("class", "req");
+      container2.appendChild(input);
+      // Append a line break 
+      container2.appendChild(document.createElement("br"));
+  }
+
+    
+}
 
 </script>
 

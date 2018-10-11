@@ -61,8 +61,8 @@ class ScholarshipCatController extends Controller
         $scholar_id = $scholar3;
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
 
-        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+       $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
 
         return  view ('admin.scholarships.scholar1')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
@@ -93,7 +93,7 @@ class ScholarshipCatController extends Controller
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
 
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
 
          return  view ('admin.scholarships.scholar1')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
@@ -121,7 +121,7 @@ class ScholarshipCatController extends Controller
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
 
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
 
         return  view ('admin.scholarships.scholar1')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
@@ -149,7 +149,7 @@ class ScholarshipCatController extends Controller
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
 
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
 
          return  view ('admin.scholarships.scholar1')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
@@ -177,7 +177,7 @@ class ScholarshipCatController extends Controller
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
 
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
 
         return  view ('admin.scholarships.scholar1')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
@@ -208,7 +208,7 @@ class ScholarshipCatController extends Controller
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
 
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
 
         return  view ('admin.scholarships.scholar2')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
@@ -238,7 +238,7 @@ class ScholarshipCatController extends Controller
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
 
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
 
         return  view ('admin.scholarships.scholar2')->with('municipal_list', $municipal_list)->with('scholar_id', $scholar_id)
@@ -268,7 +268,7 @@ class ScholarshipCatController extends Controller
 
         $district_list = DB::select('select district FROM `munbar` GROUP BY district');
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
 
         return view ('admin.scholarships.scholar3')->with('district_list', $district_list)->with('role', $role)
@@ -301,72 +301,110 @@ class ScholarshipCatController extends Controller
         $school_id = DB::table('spes_tbl')->where('school_id', $user->school_id)->count();
 
         $app = DB::table('application')->where('applicant_id', $request->get('sid'))->count();
-        $app2 = DB::table('application')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
+        $app2 = DB::table('application')->join('users', 'users.id', '=', 'application.applicant_id')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
 
         if($spes != 1 && $school_id != 1)
         {
             if($app != 1 && $app2 != 1)
             {
-                $id = DB::table('application')->insertGetId([
-                    'application_status' => 'Pre-Approved',
-                    'renew' => '0',
-                    'barcode_number' => $request->barcode,
-                    'barcode_image' => 'NONE',
-                    'applicant_id' => $request->sid,
-                    'scholar_id' => $request->title_id,
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s')
-                ]);
+                // $id = DB::table('application')->insertGetId([
+                //     'application_status' => 'Pre-Approved',
+                //     'renew' => '0',
+                //     'barcode_number' => $request->barcode,
+                //     'barcode_image' => 'NONE',
+                //     'applicant_id' => $request->sid,
+                //     'scholar_id' => $request->title_id,
+                //     'created_at' => date('Y-m-d H:i:s'),
+                //     'updated_at' => date('Y-m-d H:i:s')
+                // ]);
 
-                $eefap = DB::table('eefap')->insert([
-                    'surname' => $request->surname,
-                    'first_name' => $request->first_name,
-                    'middle_name' => $request->middle_name,
-                    'suffix' => $request->suffix,
-                    'municipality' => $request->municipality,
-                    'barangay' => $request->barangay,
-                    'street' => $request->street,
-                    'mobile_number' => $request->mobile_no,
-                    'fb_account' => $request->fb_account,
-                    'gsurname' => $request->gsurname,
-                    'gmiddle_name' => $request->gmiddle_name,
-                    'gfirst_name' => $request->gfirst_name,
-                    'gsuffix' => $request->gsuffix,
-                    'gmobile_number' =>$request->gmobile_no,
-                    'college_name' => $request->college_name,
-                    'college_address' => $request->college_address,
-                    'year_level' => $request->yr_lvl,
-                    'course' => $request->course,
-                    'major' => $request->major, 
-                    'general_average' => $request->gen_average,
-                    'program_type' => $request->educ_prog,
-                    'graduating' => $request->grad,
-                    'scholarship_id' => $request->title_id,
-                    'applicant_id' => $request->sid,
-                    'application_id' => $id
+                // $eefap = DB::table('eefap')->insert([
+                //     'surname' => $request->surname,
+                //     'first_name' => $request->first_name,
+                //     'middle_name' => $request->middle_name,
+                //     'suffix' => $request->suffix,
+                //     'municipality' => $request->municipality,
+                //     'barangay' => $request->barangay,
+                //     'street' => $request->street,
+                //     'mobile_number' => $request->mobile_no,
+                //     'fb_account' => $request->fb_account,
+                //     'gsurname' => $request->gsurname,
+                //     'gmiddle_name' => $request->gmiddle_name,
+                //     'gfirst_name' => $request->gfirst_name,
+                //     'gsuffix' => $request->gsuffix,
+                //     'gmobile_number' =>$request->gmobile_no,
+                //     'college_name' => $request->college_name,
+                //     'college_address' => $request->college_address,
+                //     'year_level' => $request->yr_lvl,
+                //     'course' => $request->course,
+                //     'major' => $request->major, 
+                //     'general_average' => $request->gen_average,
+                //     'program_type' => $request->educ_prog,
+                //     'graduating' => $request->grad,
+                //     'scholarship_id' => $request->title_id,
+                //     'applicant_id' => $request->sid,
+                //     'application_id' => $id
 
                     
-                ]);
+                // ]);
                 
-                $reqeefap = DB::table('reqeefap')->insert([
-                    'scholar_id' =>  $request->title_id,
-                    'applicant_id' => $request->sid,
-                    'application_id' => $id,
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'submit'   => 0
-                ]);
+                // $reqeefap = DB::table('reqeefap')->insert([
+                //     'scholar_id' =>  $request->title_id,
+                //     'applicant_id' => $request->sid,
+                //     'application_id' => $id,
+                //     'created_at' => date('Y-m-d H:i:s'),
+                //     'submit'   => 0
+                // ]);
 
-                    date_default_timezone_set("Asia/Manila");
-                    $time = date('h:i:s', strtotime(now()));
-                    $audit = DB::table('audit_log')->insert([
-                        'date' => date('Y-m-d'),
-                        'time' => $time,
-                        'action' => 'Application Applied & Pre-approved',
-                        'employee_id' => Auth::user()->id
-                    ]);
+                //     date_default_timezone_set("Asia/Manila");
+                //     $time = date('h:i:s', strtotime(now()));
+                //     $audit = DB::table('audit_log')->insert([
+                //         'date' => date('Y-m-d'),
+                //         'time' => $time,
+                //         'action' => 'Application Applied & Pre-approved',
+                //         'employee_id' => Auth::user()->id
+                //     ]);
+
+
+                //     $ctr = $request->get('nos');
+                //     $sub1 = array();
+                //     $grad1 = array();
+                //     for($x=0; $x<=$ctr-1; $x++)
+                //     {
+                //         $sub = "subject".$x;
+                //         $grad = "grade".$x;
+                //         array_push($sub1, $request->$sub);
+                //         array_push($grad1, $request->$grad);
+                //     }
+                    
+
+                //     for($y=0; $y<=$ctr-1; $y++)
+                //     {
+                //         $grades = DB::table('grades')->insert([
+                //             'subject' => $sub1[$y],
+                //             'grades' => $grad1[$y],
+                //             'semester' => $request->sem,
+                //             'student_id' => $user->id,
+                //             'new'     => "1",
+                //             'created_at' => date('Y-m-d H:i:s'),
+                //             'updated_at' => date('Y-m-d H:i:s'),
+                //             'grades_isdel' => 0
+                //         ]);
+                //     }
                 
-                $ids=$id;
-                return redirect('/admin/apply/send/'.$ids);
+                $ctr = $request->get('nos');
+                    $sub1 = array();
+                    $grad1 = array();
+                    for($x=0; $x<=$ctr-1; $x++)
+                    {
+                        $sub = "subject".$x;
+                        $grad = "grade".$x;
+                        array_push($sub1, $request->$sub);
+                        array_push($grad1, $request->$grad);
+                    }
+                //$ids=$id;
+                return $sub1;
+              //  return redirect('/admin/apply/send/'.$ids);
             }
             else
             {
@@ -392,7 +430,7 @@ class ScholarshipCatController extends Controller
         $school_id = DB::table('spes_tbl')->where('school_id', $user->school_id)->count();
 
         $app = DB::table('application')->where('applicant_id', $request->get('sid'))->count();
-        $app2 = DB::table('application')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
+        $app2 = DB::table('application')->join('users', 'users.id', '=', 'application.applicant_id')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
 
         if($spes != 1 && $school_id != 1)
         {
@@ -464,6 +502,32 @@ class ScholarshipCatController extends Controller
                     'action' => 'Application Applied & Pre-approved',
                     'employee_id' => Auth::user()->id
                 ]);
+
+                $ctr = $request->get('nos');
+                $sub1 = array();
+                $grad1 = array();
+                for($x=0; $x<=$ctr-1; $x++)
+                {
+                    $sub = "subject".$x;
+                    $grad = "grade".$x;
+                    array_push($sub1, $request->$sub);
+                    array_push($grad1, $request->$grad);
+                }
+                
+
+                for($y=0; $y<=$ctr-1; $y++)
+                {
+                    $grades = DB::table('grades')->insert([
+                        'subject' => $sub1[$y],
+                        'grades' => $grad1[$y],
+                        'semester' => $request->sem,
+                        'student_id' => Auth::user()->id,
+                        'new'     => "1",
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s'),
+                        'grades_isdel' => 0
+                    ]);
+                }
                 
                 $ids=$id;
                 return redirect('/admin/apply/send/'.$ids);
@@ -678,7 +742,7 @@ class ScholarshipCatController extends Controller
     {
 
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         return view('admin.scholarships.invalid')->with('role', $role);
     }
@@ -686,7 +750,7 @@ class ScholarshipCatController extends Controller
     {
 
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         return view('admin.scholarships.invalid2')->with('role', $role);
     }

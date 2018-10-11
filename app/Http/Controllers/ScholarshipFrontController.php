@@ -338,6 +338,21 @@ class ScholarshipFrontController extends Controller
                 'submit'     => 0
             ]);
 
+            $scholar2 = DB::table('scholarships')->where('id',  $request->scholar_id)->first();
+            $scholar = DB::table('scholarships')->join('application', 'application.scholar_id', '=', 'scholarships.id')->where('scholarships.id',  $request->scholar_id)->count();
+            $sr = $scholar2->slot + $scholar2->supplement;
+            $ss = $scholar;
+            if($scholar == $sr)
+            {
+                $sch = DB::table('scholarships')->where('id',  $request->scholar_id)->update([
+                    'status' => "CLOSED"
+                ]);
+            }
+            else
+            {
+
+            }
+
             return redirect('/scholarship/details');
         }
         else
@@ -448,6 +463,20 @@ class ScholarshipFrontController extends Controller
                 ]);
             }
             
+            $scholar2 = DB::table('scholarships')->where('id',  $request->scholar_id)->first();
+            $scholar = DB::table('scholarships')->join('application', 'application.scholar_id', '=', 'scholarships.id')->where('scholarships.id',  $request->scholar_id)->count();
+            $sr = $scholar2->slot + $scholar2->supplement;
+            $ss = $scholar;
+            if($scholar == $sr)
+            {
+                $sch = DB::table('scholarships')->where('id',  $request->scholar_id)->update([
+                    'status' => "CLOSED"
+                ]);
+            }
+            else
+            {
+
+            }
             
 
             return redirect('/scholarship/details');
@@ -560,6 +589,21 @@ class ScholarshipFrontController extends Controller
                 'submit'     => 0
             ]);
 
+            
+            $scholar2 = DB::table('scholarships')->where('id',  6)->first();
+            $scholar = DB::table('scholarships')->join('application', 'application.scholar_id', '=', 'scholarships.id')->where('scholarships.id', 6)->count();
+            $sr = $scholar2->slot + $scholar2->supplement;
+            $ss = $scholar;
+            if($scholar == $sr)
+            {
+                $sch = DB::table('scholarships')->where('id',  $request->scholar_id)->update([
+                    'status' => "CLOSED"
+                ]);
+            }
+            else
+            {
+
+            }
 
             return redirect('/scholarship/details');
         }

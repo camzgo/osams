@@ -210,7 +210,7 @@ button:focus {
         </div>
         <div class="form-row">
           <div class = "col-md-4">
-          <input type="text" class="form-control req surname  id="surname" name="surname" placeholder='* Surname' value="{{Auth::user()->surname}}" required/>
+          <input type="text" class="form-control req surname"  id="surname" name="surname" placeholder='* Surname' value="{{Auth::user()->surname}}" required/>
           @if ($errors->has('surname'))
           <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('surname') }}</strong>
@@ -231,7 +231,7 @@ button:focus {
             <p class="suffixmsg hidden mb-0">Please Enter a valid suffix</p>
           </div>
         </div>
-        <div class="row form-group">
+        <div class="form-row form-group">
           <div class="col-md-3">
             <label for="municipality">* Municipality</label>
             <select name="municipality" id="municipality" data-val="true"  data-val-required="Please select Municipality" data-dependent="barangay" class="form-control dynamic req" required >
@@ -252,7 +252,7 @@ button:focus {
             <input type="text" class="form-control" id="street" name="street"  value="{{$personal->street}}" placeholder='(Street, Village Subdivision)'/>
           </div>
         </div>
-         <div class="row form-group">
+         <div class="form-row form-group">
           <div class="col-md-3">
             <label for="mobile_no">* Mobile Number</label>
             <div class="input-group">
@@ -302,7 +302,7 @@ button:focus {
             <p class="gsuffixmsg hidden mb-0">Please Enter a valid suffix</p>
           </div>
         </div>
-        <div class="row form-group">
+        <div class="form-row form-group">
 
             <div class="col-md-4">
             <label for="mobile_no">* Mobile Number</label>
@@ -326,7 +326,7 @@ button:focus {
           <h4 class="tx1">Educational Information</h4>
         </div>
         <hr/>
-        <div class="row form-group">
+        <div class="form-row form-group">
             <div class="col-md-5">
                 <label>* College/University Name <small>(No Abbreviation)</small></label>
                 <input name="college_name" type="text" class="form-control req" value="{{$education->college_name}}" placeholder="College/University Name"/>
@@ -345,7 +345,7 @@ button:focus {
                 </div>
             </div>
         </div>
-        <div class="row form-group">
+        <div class="form-row form-group">
             <div class="col-md-4">
                 <label>* Course/Program <small>(No Abbreviation)</small></label>
                 <input name="course" type="text" class="form-control req" value="{{$education->course}}" placeholder ="Course/Program">
@@ -357,6 +357,7 @@ button:focus {
             <div class="col-md-2">
                 <label>* General Average</label>
                 <input name="gen_average" id="gen_average" type="text" class="form-control  req"  placeholder ="Average">
+                <small>Enter numeric equivalent only</small>
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>

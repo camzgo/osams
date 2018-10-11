@@ -235,7 +235,7 @@
                                   <h1 class="tx4">PHP {{$amount}}.00</h1>
                                 </div>
                               </div>
-                              @if($scholar->status == "OPEN")
+                              {{--  --}}
                               @if($applicant->application_status == "Pending" )
                               <div class="form-row">
                                 <div class="col-md-3">
@@ -258,7 +258,9 @@
                               </div>
                               @endif
                               
-                              @if($applicant->application_status == "Renew")
+                              
+                              @if($applicant->application_status == "Renew" )
+                              @if($scholar->status == "OPEN")
                               <div class="form-row">
                                 <div class="col-md-6">
                                   <a href="/scholarship/details/renew/eefap" class="btn btn-block text-white btn-primary">Renew</a>
@@ -272,7 +274,7 @@
                                   </form>
                                 </div>
                               </div>
-                              @endif
+                              {{-- @endif --}}
                               @else
                               <div class="form-row">
                                 <div class="col-md-12 ">
@@ -282,6 +284,7 @@
                                   
                                 </div>
                               </div>
+                              @endif
                               @endif
                               @if($applicant->application_status == "Disapproved")
                               <div class="form-row">

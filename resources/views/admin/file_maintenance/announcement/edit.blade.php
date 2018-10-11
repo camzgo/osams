@@ -35,16 +35,6 @@
               </p>
             </a>
           </li>
-          @if($role->tracking == "Grant")
-           <li class="nav-item">
-            <a href="/admin/tracking" class="nav-link">
-              <i class="nav-icon fa fa-map-marker"></i>
-              <p>
-                Tracking
-              </p>
-            </a>
-          </li>
-          @endif
           @if($role->submission == "Grant")
           <li class="nav-item">
             <a href="/admin/submission" class="nav-link">
@@ -156,6 +146,13 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="/admin/grades" class="nav-link">
+                  &nbsp &nbsp &nbsp
+                  <i class="fa fa-id-card nav-icon"></i>
+                  <p>Grades</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="/admin/scholarship" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
@@ -227,6 +224,13 @@
                         <i class="fa fa-question nav-icon"></i>
                         <p>FAQs</p>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/admin/archive/grades" class="nav-link">
+                        &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-id-card nav-icon"></i>
+                        <p>Grades</p>
+                      </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/archive/employee" class="nav-link">

@@ -20,15 +20,15 @@ class UtilitiesController extends Controller
     public function permission ()
     {
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         return view ('admin.utilities.permission')->with('role', $role);
     }
 
     public function backup_restore ()
     {
-        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+       $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         return view ('admin.utilities.backup')->with('role', $role);
     }
@@ -86,7 +86,7 @@ class UtilitiesController extends Controller
         })
         ->addColumn('chk2', function($permission)
         {
-            if($permission->tracking == 'Grant')
+            if($permission->submission == 'Grant')
             {
                 return '<strong><i class="fa fa-check"></i> Grant</strong>';
             }
@@ -98,7 +98,7 @@ class UtilitiesController extends Controller
         })
         ->addColumn('chk3', function($permission)
         {
-            if($permission->transactions == 'Grant')
+            if($permission->submission == 'Grant')
             {
                 return '<strong><i class="fa fa-check"></i> Grant</strong>';
             }
@@ -132,18 +132,18 @@ class UtilitiesController extends Controller
             }
             
         })
-        ->addColumn('chk6', function($permission)
-        {
-            if($permission->submission == 'Grant')
-            {
-                return '<strong><i class="fa fa-check"></i> Grant</strong>';
-            }
-            else
-            {
-                return '<strong><i class="fa fa-close"></i> Deny</strong>';
-            }
+        // ->addColumn('chk6', function($permission)
+        // {
+        //     if($permission->submission == 'Grant')
+        //     {
+        //         return '<strong><i class="fa fa-check"></i> Grant</strong>';
+        //     }
+        //     else
+        //     {
+        //         return '<strong><i class="fa fa-close"></i> Deny</strong>';
+        //     }
             
-        })
+        // })
         ->addColumn('action', function($permission){
             if($permission->account_name == "Admin" || $permission->account_name == "ADMIN" || $permission->account_name == "ADMINISTRATOR" || $permission->account_name == "Administrator" )
             {
@@ -165,7 +165,6 @@ class UtilitiesController extends Controller
             'account_name'    =>  $permissions->account_name,
             'account_desc'     =>  $permissions->account_desc,
             'file_maintenance' => $permissions->file_maintenance,
-            'tracking'         => $permissions->tracking,
             'transactions'     => $permissions->transactions,
             'utilities'        => $permissions->utilities,
             'reports'          => $permissions->reports,
@@ -202,11 +201,10 @@ class UtilitiesController extends Controller
                     'account_name'    =>  $request->get('accnt_name'),
                     'account_desc'     =>  $request->get('accnt_desc'),
                     'file_maintenance'  =>  $act[0],
-                    'tracking'         => $act[1],
+                    'submission'         => $act[1],
                     'transactions'     => $act[2],
                     'utilities'        => $act[3],
-                    'reports'          => $act[4],
-                    'submission'       => $act[5]
+                    'reports'          => $act[4]
                     //   'account_desc'     =>  $request->get('accnt_desc'),
                     //    'account_desc'     =>  $request->get('accnt_desc'),
                     //     'account_desc'     =>  $request->get('accnt_desc'),
@@ -234,11 +232,10 @@ class UtilitiesController extends Controller
                 $account->account_name    =  $request->get('accnt_name');
                 $account->account_desc     =  $request->get('accnt_desc');
                 $account->file_maintenance  =  $act[0];
-                $account->tracking         = $act[1];
+                $account->submission         = $act[1];
                 $account->transactions    =  $act[2];
                 $account->utilities        = $act[3];
                 $account->reports          = $act[4];
-                $account->submission       = $act[5];
                 $account->save();
 
                 date_default_timezone_set("Asia/Manila");

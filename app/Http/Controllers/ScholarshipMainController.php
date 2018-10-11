@@ -27,7 +27,7 @@ class ScholarshipMainController extends Controller
     {
         //
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         return view('admin.file_maintenance.scholar.show')->with('role', $role);
     }
@@ -99,7 +99,7 @@ class ScholarshipMainController extends Controller
     // }
     function getdata()
     {
-        $scholarships = Scholarship::select('id','scholarship_name', 'scholarship_desc', 'amount', 'deadline', 'slot', 'status')->orderByRaw('id', 'DESC');
+        $scholarships = Scholarship::select('id','scholarship_name', 'scholarship_desc', 'amount', 'deadline', 'slot', 'status', 'supplement')->orderByRaw('id', 'DESC');
         return DataTables::of($scholarships)
 
         ->addColumn('action', function($scholarships){
@@ -155,7 +155,8 @@ class ScholarshipMainController extends Controller
             'amount'              =>   $scholarship->amount,
             'deadline'             => $scholarship->deadline,
             'slot'                => $scholarship->slot,
-            'status'               =>$scholarship->status
+            'status'               =>$scholarship->status,
+            'supplement'           =>$scholarship->supplement
         );
         echo json_encode($output);
         //eval ($goback);
@@ -169,6 +170,7 @@ class ScholarshipMainController extends Controller
             'amount'            => 'required',
             'deadline'         => 'required',
             'slot'            => 'required',
+            'supp'             => 'required'
             //'status'          => 'required'
         
         ]);
@@ -201,6 +203,7 @@ class ScholarshipMainController extends Controller
                 $scholarship->amount = $request->get('amount');
                 $scholarship->deadline =$request->get('deadline');
                 $scholarship->slot = $request->get('slot');
+                $scholarship->supplement = $request->get('supp');
                 $scholarship->save();
 
                 date_default_timezone_set("Asia/Manila");
@@ -223,6 +226,7 @@ class ScholarshipMainController extends Controller
                 $scholarship->amount = $request->get('amount');
                 $scholarship->deadline =$request->get('deadline');
                 $scholarship->slot = $request->get('slot');
+                $scholarship->supplement = $request->get('supp');
                 $scholarship->status = $request->get('status');
                 $scholarship->save();
                 $success_output = '<div class="alert alert-success">Success!</div>';
@@ -230,14 +234,8 @@ class ScholarshipMainController extends Controller
                
                 if($request->get('status') == "OPEN")
                 {
-                    $scholar_id = DB::table('tracking')->where('scholarship_id', $request->get('scholarship_id'))->first();
-                    $tr_id =$scholar_id->id;
-                    $tracking = Tracking::find($tr_id);
-                    $tracking->stage ="Open";
-                    $tracking->status = "OPEN";
-                    $tracking->save();
 
-                    $log = DB::table('log')->where('scholar_id', $request->get('scholarship_id'))->delete();
+                   // $log = DB::table('log')->where('scholar_id', $request->get('scholarship_id'))->delete();
 
                     date_default_timezone_set("Asia/Manila");
                     $time = date('h:i:s', strtotime(now()));
@@ -259,13 +257,21 @@ class ScholarshipMainController extends Controller
                     $tracking->status = "CLOSED";
                     $tracking->save();
 
+  
+
+                    date_default_timezone_set("Asia/Manila");
+                    $time = date('h:i:s', strtotime(now()));
+                    
                     $log = DB::table('log')->insert([
-                    'desc' => 'Your application has been approved.',
-                    'scholar_id' => $request->get('scholarship_id'),
-                    'tracking_id' => $tr_id,
-                     'created_at' => date('Y-m-d H:i:s'),
-                     'updated_at' => date('Y-m-d H:i:s')
+                        'description' => 'Your application has been pre-approved and being re-check.',
+                        'scholar_id' => $request->get('scholarship_id'),
+                        'applicant_id' => $request->get('applicant_id'),
+                        'employee_id'  => Auth::user()->id,
+                        'remarks'    => $request->get('remarks'),
+                        'date' => date('Y-m-d'),
+                        'time' => $time
                     ]);
+
 
                     date_default_timezone_set("Asia/Manila");
                     $time = date('h:i:s', strtotime(now()));

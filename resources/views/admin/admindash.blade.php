@@ -50,16 +50,7 @@
               </p>
             </a>
           </li>
-          @if($role->tracking == "Grant")
-           <li class="nav-item">
-            <a href="/admin/tracking" class="nav-link">
-              <i class="nav-icon fa fa-map-marker"></i>
-              <p>
-                Tracking
-              </p>
-            </a>
-          </li>
-          @endif
+
           @if($role->submission == "Grant")
           <li class="nav-item">
             <a href="/admin/submission" class="nav-link">
@@ -171,6 +162,13 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="/admin/grades" class="nav-link">
+                  &nbsp &nbsp &nbsp
+                  <i class="fa fa-id-card nav-icon"></i>
+                  <p>Grades</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="/admin/scholarship" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
@@ -242,6 +240,13 @@
                         <i class="fa fa-question nav-icon"></i>
                         <p>FAQs</p>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/admin/archive/grades" class="nav-link">
+                        &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-id-card nav-icon"></i>
+                        <p>Grades</p>
+                      </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/archive/employee" class="nav-link">
@@ -318,11 +323,15 @@
               </div>
               <div class="inner" style="height:168.8px;">
                 <h4><strong>{{$mod[$x]}}</strong></h4>
+                @if($total[$x] > $slot[$x])
+                <span class="info-box-text">Total Applications: <strong>{{$total[$x]}}/{{$slot[$x]}}</strong> <i class="badge badge-warning"> + {{$supp[$x]}}</i></span>
+                @else
                 <span class="info-box-text">Total Applications: <strong>{{$total[$x]}}/{{$slot[$x]}}</strong></span>
+                @endif
                 <span class="info-box-text">Total Amount:  <strong>Php {{$price[$x]}}</strong></span>
                 <span class="info-box-text">Status: <strong>{{$status[$x]}}</strong></span>
                 @if($total[$x] > $slot[$x])
-                <h5><span class="info-box-text"><i class="badge badge-danger">Application Exceeded!</i></span></h5>
+                <h5><span class="info-box-text"><i class="badge badge-danger">Application Exceeded. <br>Supplement slots added!</i></span></h5>
                 @endif
                 @if($total[$x] == $slot[$x])
                 <h5><span class="info-box-text"><i class="badge badge-warning text-white">Slots are full!</i></span></h5>
@@ -348,11 +357,15 @@
               </div>
               <div class="inner" style="height:168.8px;">
                 <h4><strong>{{$mod[$x]}}</strong></h4>
+                @if($total[$x] > $slot[$x])
+                <span class="info-box-text">Total Applications: <strong>{{$total[$x]}}/{{$slot[$x]}}</strong> <i class="badge badge-warning"> + {{$supp[$x]}}</i></span>
+                @else
                 <span class="info-box-text">Total Applications: <strong>{{$total[$x]}}/{{$slot[$x]}}</strong></span>
+                @endif
                 <span class="info-box-text">Total Amount:  <strong>Php {{$price[$x]}}</strong></span>
                 <span class="info-box-text">Status: <strong>{{$status[$x]}}</strong></span>
                 @if($total[$x] > $slot[$x])
-                <h5><span class="info-box-text"><i class="badge badge-danger">Application Exceeded!</i></span></h5>
+                <h5><span class="info-box-text"><i class="badge badge-danger">Application Exceeded. <br>Supplement slots added!</i></span></h5>
                 @endif
                 @if($total[$x] == $slot[$x])
                 <h5><span class="info-box-text"><i class="badge badge-warning text-white">Slots are full!</i></span></h5>

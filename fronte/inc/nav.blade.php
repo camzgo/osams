@@ -30,6 +30,17 @@
       <li class="nav-item">
         <a class="nav-link" href="/contact"><strong>Contact Us</strong></a>
       </li>
+      {{-- <li class="nav-item dropdown"> 
+        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            <strong>Downloads</strong> <span class="caret"></span>
+        </a>
+
+        <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/profile">View Dashboard
+            </a>
+            
+        </div>
+      </li> --}}
     </ul>
     {{-- <ul class="navbar-nav ml-auto align-items-lg-center">
       <li class="nav-item mr-0">

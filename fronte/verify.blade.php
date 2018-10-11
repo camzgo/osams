@@ -23,7 +23,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark py-3" style="height: 6em;   position: relative;
     background: linear-gradient(80deg, #004280 0, #001a33 100%)">
     <div class="container">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="#">
             <img src="/added/img/icons/logo.png" class="mr-4" width="50px" alt="">
             <strong>Online Scholarship Application</strong>
             {{-- <img  class="mr-4" style="width: 50px;"> --}}
@@ -52,38 +52,48 @@
                     <div class="container">
                         <div class="form-row">
                             <div class="col-md-12">
-                              <form action=" {{route('verify')}}">
-                                @csrf
+                              
                                 <div class=" row mt-4 justify-content-center">
                                     <h5 class="mt-2">Code: </h5>
                                 
                                     <div class="col-md-5">
-                                        <input type="text" id="code" class="form-control form-control-lg {{$errors->has('code') ? 'is-invalid' : '' }}" name="code" required>
-                                        @if ($errors->has('code'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('code') }}</strong>
-                                            </span>
-                                        @endif
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <input type="text" id="code" class="form-control form-control-lg {{$errors->has('code') ? 'is-invalid' : '' }}" name="code" required>
+                                                @if ($errors->has('code'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('code') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                           
+                                                <div class="col-md-6">
+                                                    <button type="submit" class=" btn btn-block btn-success mt-4">Request new code</button>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                    <form action=" {{route('verify')}}">
+                                                    @csrf
+                                                    <button type="submit" class="pull-right btn btn-block btn-primary mt-4">Verify</button>
+                                                    </form>
+                                                </div>
+ 
+                                        </div>
+                                        
                                         
                                     </div>
                                 </div>
                                 <div class="form-group row justify-content-center">
                                     <div class="col-md-5">
-                                        <div class="row">
-                                            <div class="col-md-6 mt-5">
-                                                <a class="mt-5" href="#">Request new code</a>
-                                                <input type="text" name="phone" class="ghost mt-5">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <button type="submit" class="pull-right btn btn-primary mt-4">Verify</button>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 
 
 
-                              </form>
+                              
                                 
                                
                             </div>

@@ -154,6 +154,13 @@ button:focus {
   background-color: #4CAF50;
 }
 
+.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg, .gsurnamemsg, .gfirst_namemsg, .gmiddle_namemsg, .gsuffixmsg{
+    color: red;
+}
+
+.hidden {
+     visibility:hidden;
+}
 </style>
 
 <body>
@@ -178,22 +185,20 @@ button:focus {
      <div class="content mt-5">
       <div class="container">
          <div class="card">
-          <div class="card-header" id="th-cl1">
+          {{-- <div class="card-header" id="th-cl1">
               <h4 class="boldtx"><strong>EEFAP APPLICATION</strong></h4>
-          </div>
+          </div> --}}
           <div class="card-body">
             
           {{-- <img src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode, 'C39')}}" alt="barcode" /> --}}
           {{-- <small>{{$barcode}}</small> --}}
     <form action="{{ action('FrontendController@storedEefap') }}" id="regForm" method="post" enctype="multipart/form-data" class="container">
       {{csrf_field()}}
-
-      
       <div class="tab">
 
         {{-- <h5><strong>Step 1 of 3</strong></h5> --}}
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 33.3333333333%" aria-valuenow="33.3333333333" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 4</strong></div>
         </div>
 
         <div class="row form-group mt-5">
@@ -203,18 +208,27 @@ button:focus {
         <div class="row">
           <label for="fullname">* Full Name</label>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$eefap->surname}}" required/>
+          <input type="text" class="form-control req surname" id="surname" name="surname" placeholder='* Surname' value="{{$eefap->surname}}" required/>
+          @if ($errors->has('surname'))
+          <span class="invalid-feedback" role="alert">
+              <strong>{{ $errors->first('surname') }}</strong>
+          </span>
+          @endif
+          <p class="surnamemsg hidden">Please Enter a valid surname</p>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$eefap->first_name}}" required/>
+            <input type="text" class="form-control req first_name" id="first_name" name="first_name" placeholder='* First Name' value="{{$eefap->first_name}}" required/>
+            <p class="first_namemsg hidden">Please Enter a valid first name</p>
           </div>
           <div class = "col-md-2">
-          <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{$eefap->middle_name}}" placeholder='Middle Name'/>
+            <input type="text" class="form-control middle_name mb-0" id="middle_name" name="middle_name" value="{{$eefap->middle_name}}" placeholder='Middle Name'/>
+            <p class="middle_namemsg hidden">Please Enter a valid middle name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="suffix" name="suffix" value="{{$eefap->suffix}}" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <input type="text" class="form-control suffix mb-0" id="suffix" name="suffix" value="{{$eefap->suffix}}" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <p class="suffixmsg hidden mb-0">Please Enter a valid suffix</p>
           </div>
         </div>
         <div class="row form-group">
@@ -251,7 +265,7 @@ button:focus {
           </div>
           <div class="col-md-4">
             <label for="email">* Facebook Account</label>
-            <input type="text" class="form-control req" id="fb_account" name="fb_account" value="{{$eefap->fb_account}}" placeholder='facebook.com/username' required/>
+            <input type="text" class="form-control req" id="fb_account" name="fb_account"  placeholder='facebook.com/username' value="{{$eefap->fb_account}}" required/>
           </div>
         </div>
 
@@ -260,7 +274,7 @@ button:focus {
     
       <div class="tab">
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 66.6666666667%" aria-valuenow="66.6666666667" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 4</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -270,18 +284,22 @@ button:focus {
         <div class="row">
           <label for="fullname">* Full Name</label>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="gsurname" name="gsurname" value="{{$eefap->gsurname}}" placeholder='* Surname' required/>
+            <input type="text" class="form-control req gsurname" id="gsurname" name="gsurname" value="{{$eefap->gsurname}}" placeholder='* Surname' required/>
+            <p class="gsurnamemsg hidden mb-0">Please Enter a valid surname</p>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="gfirst_name" name="gfirst_name" value="{{$eefap->gfirst_name}}" placeholder='* First Name' required/>
+            <input type="text" class="form-control gfirst_name req" id="gfirst_name" name="gfirst_name" value="{{$eefap->gfirst_name}}" placeholder='* First Name' required/>
+            <p class="gfirst_namemsg hidden mb-0">Please Enter a valid first name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="gmiddle_name" name="gmiddle_name" value="{{$eefap->gmiddle_name}}" placeholder='Middle Name'/>
+            <input type="text" class="form-control gmiddle_name" id="gmiddle_name" name="gmiddle_name" value="{{$eefap->gmiddle_name}}" placeholder='Middle Name'/>
+            <p class="gmiddle_namemsg hidden mb-0">Please Enter a valid middle name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="gsuffix" name="gsuffix" value="{{$eefap->gsuffix}}" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <input type="text" class="form-control gsuffix" id="gsuffix" name="gsuffix" value="{{$eefap->gsuffix}}" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <p class="gsuffixmsg hidden mb-0">Please Enter a valid suffix</p>
           </div>
         </div>
         <div class="row form-group">
@@ -300,8 +318,8 @@ button:focus {
 
       <div class="tab">
 
-        <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 3</strong></div>
+       <div class="progress mt-2">
+          <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 4</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -334,11 +352,11 @@ button:focus {
             </div>
             <div class="col-md-3">
                 <label>* Major <small>(No Abbreviation)</small></label>
-                <input name="major" type="text" class="form-control req" value="{{$eefap->major}}" placeholder ="Major">
+                <input name="major" type="text" class="form-control req" placeholder ="Major" value="{{$eefap->major}}">
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average" id="gen_average" type="text" class="form-control req" value="{{$eefap->general_average}}" placeholder ="General Average">
+                <input name="gen_average" id="gen_average" type="text" class="form-control  req" value="{{$eefap->general_average}}"  placeholder ="Average">
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -351,7 +369,7 @@ button:focus {
             </div>
         </div>
         <div class="row form-group">
-          <div class="col-md-2">
+          <div class="col-md-3">
             <label>* Graduating: </label>
             <select name="grad" id="grad" class="form-control">
               <option value="" selected disabled>--Select--</option>
@@ -359,16 +377,67 @@ button:focus {
               <option value="NO">NO</option>
             </select>
           </div>
-          <div class="col-md-3">
+          {{-- <div class="col-md-3">
             <label>* I certify that: </label>
             <select name="spes" id="spes" class="form-control">
               <option value="" selected disabled>--Select--</option>
               <option value="YES">Yes, I am SPES Recipient</option>
               <option value="NO">No, I am not SPES Recipient</option>
             </select>
+          </div> --}}
+        </div>
+        </div>
+        <div class="tab">
+          <div class="progress mt-2">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 4 of 4</strong></div>
           </div>
-        </div>
-        </div>
+          <div class="row mt-5 form-group">
+            <h4 class="tx1">Grades</h4>
+          </div>
+          <hr/>
+          <br>
+          <input type="hidden" name="samp" id="samp" value= "@foreach($subject as $sub) {{"/".$sub}}@endforeach">
+          <input type="hidden" name="samp2" id="samp2" value= "@foreach($grad as $grad) {{"/".$grad}}@endforeach">
+          <input type="hidden" name="ctr" id="ctr">          
+          <div class="form-row">
+            <div class="col-md-3">
+              <label>Number of Courses/Subjects </label>
+              <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
+                <option value="" selected disabled>--Select--</option>
+                @for($i = 1; $i<=12; $i++)
+                <option value="{{$i}}">{{$i}}</option>
+                @endfor
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label>Semester</label>
+              <select name="sem" id="sem" class="form-control req" required>
+                <option value="" selected disabled>--Select--</option>
+                <option value="1st">1st Semester</option>
+                <option value="2nd">2nd Semester</option>
+              </select>
+            </div>
+          </div>
+          <br><hr><br>
+          <div class="form-row" >
+            <div class="col-md-6" id="here">
+
+            </div>
+            <div class="col-md-2" id="here2">
+
+            </div>
+          </div>
+          
+          
+         
+      </div>
+
+
+        {{-- <div class="ghost">
+          <input type="hidden" id="sid" name="sid" value="{{Auth::user()->id}}">
+          <input type="hidden" id="scholar_id" name="scholar_id" value={{$scholar_id}}>
+          <input type="hidden" id="barcode" name="barcode" value={{$barcode}}>
+        </div> --}}
         
         
 
@@ -382,12 +451,14 @@ button:focus {
         </div>
       </div>
 
+    </form>
       <div style="text-align:center;margin-top:40px;">
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
+        <span class="step"></span>
       </div>
-    </form>
+    
   </div>
  </div>
   {{-- </div>
@@ -406,55 +477,70 @@ button:focus {
 
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
+ // $('#gen_average').mask('0.00', {"clearIncomplete": true});
   $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
-  $('#gen_average').mask('0.00', {"clearIncomplete": true});
-  
-  document.getElementById('educ_prog').value="{{$eefap->program_type}}";
+
+  var sx = "{{$eefap->program_type}}";
+  if(sx == "Bachelor&#039;s Degree")
+  {
+    sx = "Bachelor's Degree";
+  }
+  document.getElementById('educ_prog').value=sx;
   document.getElementById('grad').value="{{$eefap->graduating}}";
-  document.getElementById('spes').value="{{$eefap->spes}}";
+  document.getElementById('nos').value="{{$grades2}}";
+  document.getElementById('ctr').value="{{$grades2}}";
+  document.getElementById('sem').value="{{$grades3->semester}}";
+  addInputs("{{$grades2}}");
+ 
+  
+  // 
+
+  // var pathname = window.location.pathname;
+  // var parts = pathname.split('/');
+  // console.log(parts[3]);
+  // $('#sid').val(parts[3]);
 
 });
 
-
-
-$('#surname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#first_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#middle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#suffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#gsurname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#gfirst_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#gmiddle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#gsuffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
+// $('#surname').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#first_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#middle_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#suffix').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#gsurname').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#gfirst_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#gmiddle_name').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
+// $('#gsuffix').keyup(function() {
+//     var $th = $(this);
+//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+// });
 
 
 var v = $("#regForm").validate({
     rules: {
-      religion: {
+      surname: {
         required: true
+
       },
       nationality: {
         required: true
@@ -580,7 +666,186 @@ $(document).ready(function(){
 
 });
 
+var $regexname=/^([a-zA-Z ]{2,30})$/;
+    $('.surname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.surnamemsg').removeClass('hidden');
+        $('.surnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.surnamemsg').addClass('hidden');
+        }
+    });
 
+    $('.first_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.first_namemsg').removeClass('hidden');
+        $('.first_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.first_namemsg').addClass('hidden');
+        }
+    });
+
+
+    $('.gsurname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.gsurnamemsg').removeClass('hidden');
+        $('.gsurnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.gsurnamemsg').addClass('hidden');
+        }
+    });
+
+    $('.gfirst_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.gfirst_namemsg').removeClass('hidden');
+        $('.gfirst_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.gfirst_namemsg').addClass('hidden');
+        }
+    });
+
+
+var $regexname2=/^([a-zA-Z ]{2,30})*$/;
+    $('.middle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.middle_namemsg').removeClass('hidden');
+        $('.middle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.middle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.suffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.suffixmsg').removeClass('hidden');
+        $('.suffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.suffixmsg').addClass('hidden');
+        }
+    });
+
+
+     $('.gmiddle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.gmiddle_namemsg').removeClass('hidden');
+        $('.gmiddle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.gmiddle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.gsuffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.gsuffixmsg').removeClass('hidden');
+        $('.gsuffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.gsuffixmsg').addClass('hidden');
+        }
+    });
+
+function addInputs()
+{
+  var no = document.getElementById("nos").value;
+  // Container <div> where dynamic content will be placed
+  var container = document.getElementById("here");
+  var container2 = document.getElementById("here2");
+  // Clear previous contents of the container
+  while (container.hasChildNodes()) {
+      container.removeChild(container.lastChild);
+  }
+  while (container2.hasChildNodes()) {
+      container2.removeChild(container2.lastChild);
+  }
+  for (i=0;i<no;i++){
+      // Append a node with a random text
+      container.appendChild(document.createTextNode("Subject Name " + (i+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "subject" + i;
+    
+      
+    var da="{{$grades2}}";
+    var data = document.getElementById('samp').value
+    var res = data.split("/");
+    // for(x=1; x<=da; x++)
+    // {
+      if(i<=da-1)
+      {
+        input.setAttribute("value", res[i+1]);
+      }
+      
+    //   x++;
+    // //   console.log(res[x]);
+    // }  
+      
+      
+
+      
+      input.setAttribute("class", "req");
+      // input.setAttribute("id", "subject"+i);
+      container.appendChild(input);
+      // Append a line break 
+      container.appendChild(document.createElement("br"));
+
+  
+
+   
+  }
+
+  for (y=0;y<no;y++){
+      // Append a node with a random text
+      container2.appendChild(document.createTextNode("Grade " + (y+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "grade" + y;
+
+
+      var da="{{$grades2}}";
+      var data2 = document.getElementById('samp2').value
+      var res2 = data2.split("/");
+      // for(x=1; x<=da; x++)
+      // {
+      if(y<=da-1)
+      {
+        input.setAttribute("value", res2[y+1]);
+      }
+      
+      input.setAttribute("class", "req");
+      container2.appendChild(input);
+      // Append a line break 
+      container2.appendChild(document.createElement("br"));
+  }
+
+    
+}
+
+     
 </script>
 <script src="{{ URL::asset('data/religion.js') }}" type="text/javascript"></script>
 </body>

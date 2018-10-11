@@ -28,8 +28,8 @@ class ReportsController extends Controller
         $sample= Session::get('data');
         $scholar = DB::table('scholarships')->get();
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
-        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+      $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
          return view ('admin.reports.master')->with('sample', $sample)->with('scholar', $scholar)->with('role', $role)->with('municipal_list', $municipal_list);
        // include(app_path() . '\repo.php');

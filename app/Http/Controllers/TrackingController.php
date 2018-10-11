@@ -497,8 +497,7 @@ class TrackingController extends Controller
             {
                 return 'ERROR!';
             }
-            
-    
+         
         
         $output = array(
             'error'     =>  $error_array,

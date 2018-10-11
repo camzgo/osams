@@ -19,7 +19,7 @@ class GradesController extends Controller
     public function index()
     {
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
          return view ('admin.file_maintenance.grades.show')->with('role', $role);
     }
@@ -40,8 +40,8 @@ class GradesController extends Controller
     function fetchdata(Request $request)
     {
         $id = $request->input('id');
-        $grades = DB::table('grades')->where('student_id', $id)->get();
-        $nos = DB::table('grades')->where('student_id', $id)->count();
+        $grades = DB::table('grades')->where('student_id', $id)->where('grades_isdel', 0)->where('new', 1)->get();
+        $nos = DB::table('grades')->where('student_id', $id)->where('grades_isdel', 0)->where('new', 1)->count();
         $grad = array();
         $sub = array();
         

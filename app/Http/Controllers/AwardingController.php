@@ -27,8 +27,8 @@ class AwardingController extends Controller
 
     public function index()
     {
-        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+       $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
 
         return view('admin.transaction.awarding')->with('role', $role);
@@ -36,7 +36,8 @@ class AwardingController extends Controller
 
     public function getdata()
     {
-        $scholarships = DB::table('scholarships')->where('status', 'CLOSED')->get();
+        $scholarships = DB::table('scholarships')->Join('application', 'application.scholar_id', '=', 'scholarships.id')->where('scholarships.status', 'CLOSED')
+        ->where('application.application_status', 'Approved')->select('scholarships.scholarship_name', 'scholarships.status', 'scholarships.type', 'scholarships.id')->get();
         return DataTables::of($scholarships)
         ->addColumn('action', function($scholarships){
                        
@@ -65,6 +66,8 @@ class AwardingController extends Controller
 
     public function postdata(Request $request)
     {
+         $error_array = array();
+         $success_output = '';
             date_default_timezone_set("Asia/Manila");
             $time = date('h:i:s', strtotime(now()));
             
@@ -227,7 +230,7 @@ class AwardingController extends Controller
                         ->JOIN('eefap', 'eefap.application_id', '=', 'application.id')
                         ->where('application.application_status', 'Approved')->select('users.email', 'users.mobile_number', 'users.surname',
                          'users.first_name', 'users.middle_name', 'users.suffix', 'application.id', 'users.id as user_id')->get();
-                        $app2->where('application.scholar_id', $scid);
+                        $app2->where('application.scholar_id', $request->get('sc_id'));
 
                         // $userss = DB::table('users')->get();
                         // $userss->where('id', $app2->applicant_id);
@@ -346,7 +349,7 @@ class AwardingController extends Controller
                         ->JOIN('pcl', 'pcl.application_id', '=', 'application.id')
                         ->where('application.application_status', 'Approved')->select('users.email', 'users.mobile_number', 'users.surname',
                          'users.first_name', 'users.middle_name', 'users.suffix', 'application.id', 'users.id as user_id')->get();
-                        $app2->where('application.scholar_id', $scid);
+                        $app2->where('application.scholar_id', $request->get('sc_id'));
 
                         // $userss = DB::table('users')->get();
                         // $userss->where('id', $app2->applicant_id);
@@ -465,10 +468,11 @@ class AwardingController extends Controller
                     'action' => 'Scholarship Awarded',
                     'employee_id' => Auth::user()->id
                     ]);
+
                     $output = array(
                     'error'     =>  $error_array,
                     'success'   =>  $success_output
-                );
+                     );
                 echo json_encode($output);
     
     }

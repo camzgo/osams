@@ -426,6 +426,7 @@ Route::get('/json-village', 'CountryController@villages');
 
 Route::get('/verify', 'VerifyController@getVerify')->name('getVerify');
 Route::post('/verify', 'VerifyController@postVerify')->name('verify');
+Route::post('/verify/new', 'VerifyController@genVerify');
 
 
 Route::resource('admin/applicant', 'ApplicantMainController');

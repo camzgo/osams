@@ -52,16 +52,7 @@
               </p>
             </a>
           </li>
-          @if($role->tracking == "Grant")
-           <li class="nav-item">
-            <a href="/admin/tracking" class="nav-link">
-              <i class="nav-icon fa fa-map-marker"></i>
-              <p>
-                Tracking
-              </p>
-            </a>
-          </li>
-          @endif
+
           @if($role->submission == "Grant")
           <li class="nav-item">
             <a href="/admin/submission" class="nav-link">

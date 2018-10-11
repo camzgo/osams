@@ -35,7 +35,7 @@ $pdf->setY(25);
 	$pdf->SetFont('Arial','B',10);
 	$pdf->Cell(10,7,'ID',1,0);
 	$pdf->Cell(50,7,'NAME',1,0);
-	$pdf->Cell(50,7,'EMAIL',1,0);
+	$pdf->Cell(50,7,'CONTACT NUMBER',1,0);
 	$pdf->Cell(90,7,'ADDRESS',1,1);
 
 
@@ -51,7 +51,7 @@ $pdf->setY(25);
 		$pdf->Cell(10,7,$i,1,0);
 		$pdf->Cell(50,7,$json[$x]['surname'].', '.$json[$x]['first_name'].' '.$json[$x]['middle_name'].' '.$json[$x]['suffix'],1,0);
 		//$pdf->Cell(30,7,'',1,0);
-		$pdf->Cell(50,7,$json[$x]['email'],1,0);
+		$pdf->Cell(50,7,'0'.$json[$x]['mobile_number'],1,0);
 		$pdf->Cell(90,7,$json[$x]['barangay'].', '.$json[$x]['municipality'],1, 1);
 		//$pdf->Cell(30,7,'',1,0);
 		$i++;

@@ -21,7 +21,7 @@ class RenewController extends Controller
     function show()
     {
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         return view('admin.transaction.renew')->with('role', $role);
     }
@@ -59,7 +59,7 @@ class RenewController extends Controller
     {
         $eefap = DB::table('eefap')->where('application_id', $id)->first();
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
         return view ('admin.scholarships.scholar1-edit')->with('role', $role)->with('eefap', $eefap)->with('municipal_list', $municipal_list);
@@ -199,7 +199,7 @@ class RenewController extends Controller
     {
         $pcl = DB::table('pcl')->where('application_id', $id)->first();
         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         $district_list = DB::select('select district FROM `munbar` GROUP BY district');
         return view ('admin.scholarships.scholar3-edit')->with('role', $role)->with('pcl', $pcl)->with('district_list', $district_list);
@@ -281,8 +281,8 @@ class RenewController extends Controller
     function showsend($data)
     {
         $name =$data;
-         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
          return view ('admin.scholarships.application2')->with('name', $name)->with('role', $role);
     }

@@ -205,16 +205,6 @@ button:focus {
               </p>
             </a>
           </li>
-          @if($role->tracking == "Grant")
-           <li class="nav-item">
-            <a href="/admin/tracking" class="nav-link">
-              <i class="nav-icon fa fa-map-marker"></i>
-              <p>
-                Tracking
-              </p>
-            </a>
-          </li>
-          @endif
           @if($role->submission == "Grant")
           <li class="nav-item">
             <a href="/admin/submission" class="nav-link">
@@ -326,6 +316,13 @@ button:focus {
                 </a>
               </li>
               <li class="nav-item">
+                <a href="/admin/grades" class="nav-link">
+                  &nbsp &nbsp &nbsp
+                  <i class="fa fa-id-card nav-icon"></i>
+                  <p>Grades</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="/admin/scholarship" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-graduation-cap nav-icon"></i>
@@ -397,6 +394,13 @@ button:focus {
                         <i class="fa fa-question nav-icon"></i>
                         <p>FAQs</p>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/admin/archive/grades" class="nav-link">
+                        &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <i class="fa fa-id-card nav-icon"></i>
+                        <p>Grades</p>
+                      </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/archive/employee" class="nav-link">
@@ -479,7 +483,7 @@ button:focus {
 
         {{-- <h5><strong>Step 1 of 3</strong></h5> --}}
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 33.3333333333%" aria-valuenow="33.3333333333" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 4</strong></div>
         </div>
 
         <div class="row form-group mt-5">
@@ -550,7 +554,7 @@ button:focus {
     
       <div class="tab">
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 66.6666666667%" aria-valuenow="66.6666666667" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 4</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -595,8 +599,8 @@ button:focus {
       <div class="tab">
 
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 3</strong></div>
-        </div>
+            <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 4</strong></div>
+          </div>
 
         <div class="row mt-5 form-group">
           <h4 class="tx1">Educational Information</h4>
@@ -670,11 +674,52 @@ button:focus {
           </div>
         </div>
         </div>
+
+        <div class="tab">
+          <div class="progress mt-2">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 4 of 4</strong></div>
+          </div>
+          
+          <div class="row mt-5 form-group">
+            <h4 class="tx1 ml-3">Grades</h4>
+          </div>
+          <hr/>
+          <br>
+          <div class="form-row">
+            <div class="col-md-3">
+              <label>Number of Courses/Subjects </label>
+              <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
+                <option value="" selected disabled>--Select--</option>
+                @for($i = 1; $i<=12; $i++)
+                <option value="{{$i}}">{{$i}}</option>
+                @endfor
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label>Semester</label>
+              <select name="sem" id="sem" class="form-control req" required>
+                <option value="" selected disabled>--Select--</option>
+                <option value="1st">1st Semester</option>
+                <option value="2nd">2nd Semester</option>
+              </select>
+            </div>
+          </div>
+          <br><hr><br>
+          <div class="form-row" >
+            <div class="col-md-6" id="here">
+
+            </div>
+            <div class="col-md-2" id="here2">
+
+            </div>
+          </div>
+        </div>
+
         
         
 
 
-   
+   </form>
 
       <div style="overflow:auto;" class="mt-4">
         <div style="float:right;">
@@ -687,8 +732,9 @@ button:focus {
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
+        <span class="step"></span>
       </div>
-    </form>
+    
   </div>
  </div>
   {{-- </div>
@@ -952,6 +998,47 @@ $(document).ready(function(){
   });
 
 });
+
+function addInputs()
+{
+  var no = document.getElementById("nos").value;
+  // Container <div> where dynamic content will be placed
+  var container = document.getElementById("here");
+  var container2 = document.getElementById("here2");
+  // Clear previous contents of the container
+  while (container.hasChildNodes()) {
+      container.removeChild(container.lastChild);
+  }
+  while (container2.hasChildNodes()) {
+      container2.removeChild(container2.lastChild);
+  }
+  for (i=0;i<no;i++){
+      // Append a node with a random text
+      container.appendChild(document.createTextNode("Subject Name " + (i+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "subject" + i;
+      input.setAttribute("class", "req");
+      container.appendChild(input);
+      // Append a line break 
+      container.appendChild(document.createElement("br"));
+  }
+
+  for (y=0;y<no;y++){
+      // Append a node with a random text
+      container2.appendChild(document.createTextNode("Grade " + (y+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "grade" + y;
+      input.setAttribute("class", "req");
+      container2.appendChild(input);
+      // Append a line break 
+      container2.appendChild(document.createElement("br"));
+  }
+        
+}
 
 
 </script>
