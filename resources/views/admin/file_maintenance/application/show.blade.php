@@ -300,7 +300,7 @@
              <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">File Maintenance</li>
-              <li class="breadcrumb-item active">FAQS</li>
+              <li class="breadcrumb-item active">Application</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">

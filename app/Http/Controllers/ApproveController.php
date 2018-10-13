@@ -219,7 +219,7 @@ class ApproveController extends Controller
         ->Join('admins', 'admins.id',  '=', 'approval_date.employee_id')
         ->where('application.application_status', $stat)
         ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"),
-        DB::raw("CONCAT_WS('', admins.surname,', ', admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as empfullname"), 'scholarships.scholarship_name', 'approval_date.date_approved' )->get();
+        DB::raw("CONCAT_WS('', admins.surname,', ', admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as empfullname"), 'scholarships.scholarship_name', DB::raw("DATE_FORMAT(approval_date.date_approved, '%W, %d %M %Y') as date_approved"))->get();
         return DataTables::of($approve)
         ->addColumn('action', function($approve){
             return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$approve->fullname.'"><i class="fa fa-edit"></i>Apply</a>';
@@ -236,7 +236,7 @@ class ApproveController extends Controller
         ->Join('admins', 'admins.id',  '=', 'approval_date.employee_id')
         ->where('approval_date.status', $stat)
         ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"),
-        DB::raw("CONCAT_WS('', admins.surname,', ', admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as empfullname"), 'scholarships.scholarship_name', 'approval_date.date_approved' )->get();
+        DB::raw("CONCAT_WS('', admins.surname,', ', admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as empfullname"), 'scholarships.scholarship_name', DB::raw("DATE_FORMAT(approval_date.date_approved, '%W, %d %M %Y') as date_approved") )->get();
         return DataTables::of($approve)
         ->addColumn('action', function($approve){
             return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$approve->fullname.'"><i class="fa fa-edit"></i>Apply</a>';

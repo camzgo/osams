@@ -10,16 +10,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class RegSuccess extends Mailable
 {
     use Queueable, SerializesModels;
-    public $name;
+    public $arr;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name)
+    public function __construct($arr)
     {
         //
-        $this->name = $name;
+        $this->arr = $arr;
     }
 
     /**

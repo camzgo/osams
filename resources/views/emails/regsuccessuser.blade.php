@@ -1,10 +1,10 @@
 @component('mail::message')
 # Welcome New User
 
-Hi <strong>{{$name}}</strong>, you have successfully created your account. Change your password immediately.
+Hi <strong>{{$arr2['name']}}</strong>, you have successfully created your account. Change your password immediately.
 
 @component('mail::panel')
-Your password is: <strong>defaultpassword</strong>
+Your password is: <strong>{{$arr2['pass']}}</strong>
 @endcomponent
 
 

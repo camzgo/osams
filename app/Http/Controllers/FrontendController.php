@@ -67,64 +67,71 @@ class FrontendController extends Controller
                 $ck=0;
             }
 
-            if(Auth::user()->chg == 0)
+            if(Auth::user()->active==0)
             {
-                if(Auth::user()->new==1)
+                if(Auth::user()->chg == 0)
                 {
-                    $tak = DB::table('personal_info')->where('applicant_id', Auth::user()->id)->first();
-                    $guardian = DB::table('guardian_info')->where('applicant_id', Auth::user()->id)->first();
-                    $education = DB::table('education_info')->where('applicant_id', Auth::user()->id)->first();
-
-                    
-                    $gurUrl = array ();
-                    $eduUrl = array ();
-                    $takti =  array();
-
-                    if($guardian)
+                    if(Auth::user()->new==1)
                     {
-                        $gurUrl[] = 'profile/guardian-information/edit';
-                        $gurUrl[] = "Edit Guardian";
+                        $tak = DB::table('personal_info')->where('applicant_id', Auth::user()->id)->first();
+                        $guardian = DB::table('guardian_info')->where('applicant_id', Auth::user()->id)->first();
+                        $education = DB::table('education_info')->where('applicant_id', Auth::user()->id)->first();
+
+                        
+                        $gurUrl = array ();
+                        $eduUrl = array ();
+                        $takti =  array();
+
+                        if($guardian)
+                        {
+                            $gurUrl[] = 'profile/guardian-information/edit';
+                            $gurUrl[] = "Edit Guardian";
+                        }
+                        else
+                        {
+                            $gurUrl[] = 'profile/guardian-information';
+                            $gurUrl[] = "Who's your guardian?";
+                        }
+
+                        if($education)
+                        {
+                            $eduUrl[] = "/profile/education-information/edit";
+                            $eduUrl[] = "Edit Education";
+                        }
+                        else
+                        {
+                            $eduUrl[] = 'profile/education-information';
+                            $eduUrl[] = 'Where do you study?';
+                        }
+
+                        if($tak)
+                        {
+                            $takti[] = "/profile/personal-information/edit";
+                            $takti[] = "Edit Profile";
+                        }
+                        else
+                        {
+                            $takti[] = "/profile/personal-information";
+                            $takti[] = "Complete My Profile";
+                        }
+                        $view = 1;
+
+                        return view('front.profile')->with('takti', $takti)->with('gurUrl', $gurUrl)->with('eduUrl', $eduUrl)->with('view', $view);
                     }
                     else
                     {
-                        $gurUrl[] = 'profile/guardian-information';
-                        $gurUrl[] = "Who's your guardian?";
+                        return view ('sas')->with('ncw', $ncw)->with('gad', $gad)->with('vg', $vg)->with('gp', $gp)->with('gpr', $gpr)
+                        ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr)->with('ck', $ck)->with('announce', $announce); 
                     }
-
-                    if($education)
-                    {
-                        $eduUrl[] = "/profile/education-information/edit";
-                        $eduUrl[] = "Edit Education";
-                    }
-                    else
-                    {
-                        $eduUrl[] = 'profile/education-information';
-                        $eduUrl[] = 'Where do you study?';
-                    }
-
-                    if($tak)
-                    {
-                        $takti[] = "/profile/personal-information/edit";
-                        $takti[] = "Edit Profile";
-                    }
-                    else
-                    {
-                        $takti[] = "/profile/personal-information";
-                        $takti[] = "Complete My Profile";
-                    }
-                    $view = 1;
-
-                    return view('front.profile')->with('takti', $takti)->with('gurUrl', $gurUrl)->with('eduUrl', $eduUrl)->with('view', $view);
                 }
                 else
                 {
-                    return view ('sas')->with('ncw', $ncw)->with('gad', $gad)->with('vg', $vg)->with('gp', $gp)->with('gpr', $gpr)
-                    ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr)->with('ck', $ck)->with('announce', $announce); 
+                    return view('front.account-del');
                 }
             }
             else
             {
-                return view('front.account-del');
+                return view('verify');
             }
               
         }

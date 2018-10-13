@@ -465,7 +465,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Scholarship</th>
-                            <th>Date Approved</th>
+                            <th>Date Pre-Approved</th>
                             <th>Received by</th>          
                         </tr>
                       </thead>

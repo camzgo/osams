@@ -71,7 +71,18 @@ class UsersMainController extends Controller
         // $announce->save();
         $user_photo = "None";
         $user_isdel = 0;
-        $pass = 'defaultpassword';
+        //$pass = 'defaultpassword';
+
+        $length=8;
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        
+        
+        $pass = $randomString;
 
         $suffix = $request->suffix;
         // if($suffix=="")
@@ -106,9 +117,14 @@ class UsersMainController extends Controller
         // $mail = 'shishi@mail.com';
         // $query = DB::select('select id from admins where email = ?', [$mail]);
         // $idint = (int)$query;
+
+        $var = $request->bday;
+        $date = str_replace('/', '-', $var);
+        $dta = date('Y-m-d', strtotime($date));
+
         $adminsInfo = new AdminInfo ([
             'gender' => $request->gender,
-            'birthdate' => $request->bday,
+            'birthdate' => $dta,
             'civil_status' => $request->civil_status,
             'mobile_number' => $request->mobile_no,
             'municipality' => $request->municipality,
@@ -120,6 +136,11 @@ class UsersMainController extends Controller
         $email = $request->get('email');
         $name = $request->first_name.' '.$request->middle_name.' '.$request->surname.' '.$request->suffix;
 
+        $arr2 = array(
+            'name' => $name,
+            'pass' => $pass
+        );
+
         date_default_timezone_set("Asia/Manila");
         $time = date('h:i:s', strtotime(now()));
         $audit = DB::table('audit_log')->insert([
@@ -129,7 +150,7 @@ class UsersMainController extends Controller
             'employee_id' => Auth::user()->id
         ]);
 
-         \Mail::to($email)->send(new RegSuccessUser($name));
+         \Mail::to($email)->send(new RegSuccessUser($arr2));
         return redirect('/admin/employee/');
 
     }

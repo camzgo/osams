@@ -480,7 +480,7 @@
                searching: false,
                ajax: '{{ route('audit.getdata') }}',
                columns: [
-                        { data: 'employee_id', name: 'employee_id' },
+                        { data: 'fullname', name: 'fullname' },
                         { data: 'action', name: 'action' },
                         { data: 'date', name: 'date' },
                         { data: 'time', name: 'time' }

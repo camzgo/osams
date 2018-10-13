@@ -392,7 +392,7 @@ class ScholarshipCatController extends Controller
                 //         ]);
                 //     }
                 
-                $ctr = $request->get('nos');
+                    $ctr = $request->get('nos');
                     $sub1 = array();
                     $grad1 = array();
                     for($x=0; $x<=$ctr-1; $x++)

@@ -59,9 +59,8 @@ class AdminController extends Controller
             
 
         
-    if(Auth::user()->active == 0)
-    {
-        if(Auth::user()->new==0)
+
+    if(Auth::user()->new==0)
        {
             $list =array('ANGELES CITY', 'APALIT', 'ARAYAT', 'BACOLOR',  'CANDABA', 'CITY OF SAN FERNANDO (Capital)', 'FLORIDABLANCA', 'GUAGUA', 'LUBAO', 
             'MABALACAT CITY', 'MACABEBE', 'MAGALANG', 'MASANTOL', 'MEXICO', 'MINALIN', 'PORAC', 'SAN LUIS', 'SAN SIMON', 'SANTA ANA', 'SANTA RITA',
@@ -183,11 +182,8 @@ class AdminController extends Controller
             'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
             return view ('admin.file_maintenance.users.emprofile-pass')->with('role', $role);
        }
-    }
-    else
-    {
-        
-    }
+    
+
        
     }
 }

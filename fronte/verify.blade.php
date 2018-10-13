@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
-    <title>Create an Account | Pampanga Capitol</title>
+    <title>Verify your Account | Pampanga Capitol</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script src="{{asset('js/app.js')}}"></script>
@@ -52,9 +52,9 @@
                     <div class="container">
                         <div class="form-row">
                             <div class="col-md-12">
-                              
+                              <form action=" {{route('verify')}}" method="post">
                                 <div class=" row mt-4 justify-content-center">
-                                    <h5 class="mt-2">Code: </h5>
+                                    <h5 class="mt-2">Activation Code: </h5>
                                 
                                     <div class="col-md-5">
                                         <div class="row">
@@ -68,13 +68,15 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                           
+
                                                 <div class="col-md-6">
-                                                    <button type="submit" class=" btn btn-block btn-success mt-4">Request new code</button>
+
+                                                    <a href="/verify/new" role="button" class=" btn btn-block btn-success mt-4">Request new code</a>
+                                                    
                                                 </div>
                                                 
                                                 <div class="col-md-6">
-                                                    <form action=" {{route('verify')}}">
+                                                    
                                                     @csrf
                                                     <button type="submit" class="pull-right btn btn-block btn-primary mt-4">Verify</button>
                                                     </form>

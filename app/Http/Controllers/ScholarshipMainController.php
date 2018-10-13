@@ -99,7 +99,7 @@ class ScholarshipMainController extends Controller
     // }
     function getdata()
     {
-        $scholarships = Scholarship::select('id','scholarship_name', 'scholarship_desc', 'amount', 'deadline', 'slot', 'status', 'supplement')->orderByRaw('id', 'DESC');
+        $scholarships = Scholarship::select('id','scholarship_name', 'scholarship_desc', 'amount', DB::raw("DATE_FORMAT(deadline, '%W, %d %M %Y') as deadline"), 'slot', 'status', 'supplement')->orderByRaw('id', 'DESC');
         return DataTables::of($scholarships)
 
         ->addColumn('action', function($scholarships){

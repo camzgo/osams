@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use Itexmo;
+use DB;
 
 class VerifyController extends Controller
 {
@@ -12,17 +14,26 @@ class VerifyController extends Controller
 
     public function getVerify()
     {
-        return view('verify');
+
+        if(Auth::check())
+        {
+            return view('verify');
+        }
+        
     }
 
-    public function postVerify()
+    public function postVerify(Request $request)
     {
+        $user = User::where('code', $request->code)->first();
 
-        if ($user = User::where('code', $request->code)->first())
+        if ($user)
         {
-            $user->active=1;
-            $user->code =null;
-            $user->save();
+            
+            $user2 = DB::table('users')->where('code', $request->code)->update([
+                'active'  => 0,
+                'code'   => null
+            ]);
+
             return redirect ('/');
         }
         else
@@ -56,5 +67,9 @@ class VerifyController extends Controller
         $user = DB::table('users')->where('id', Auth::user()->id)->update([
             'code' => $code
         ]);
+        
+        $res = Itexmo::to('0'.Auth::user()->mobile_number)->message('Your activation code: '.$code)->send();
+
+        return redirect('/verify');
     }
 }

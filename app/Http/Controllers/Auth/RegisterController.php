@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Rules\Captcha;
+use Itexmo;
 
 class RegisterController extends Controller
 {
@@ -98,6 +99,11 @@ class RegisterController extends Controller
         $date = str_replace('/', '-', $var);
         $dta = date('Y-m-d', strtotime($date));
 
+
+        $res = Itexmo::to('0'.$data['mobile_no'])->message($code)->send();
+        if($res == '0') {
+            //
+        }
         return User::create([
             'surname' => ucfirst($data['surname']),
             'first_name' => ucfirst($data['first_name']),
@@ -117,5 +123,7 @@ class RegisterController extends Controller
             'code'  => $code
              
         ]);
+
+        
     }
 }

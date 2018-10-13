@@ -79,7 +79,19 @@ class ApplicantMainController extends Controller
         }
         
         $isdel = 0;
-        $defpass = 'pampangascholar';
+
+        $length=8;
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        
+      
+        $defpass = $randomString;
+
+        // $defpass = 'pampangascholar';
         // $mobile = $request->mobile_no;
         //
         // return view ('admin.file_maintenance.applicant.show');
@@ -108,10 +120,15 @@ class ApplicantMainController extends Controller
         $users->save();
         $email = $request->get('email');
         $name =  $request->first_name.' '.$request->middle_name.' '.$request->surname.' '.$request->suffix;
+        $arr = array(
+            'name' => $name,
+            'pass' => $defpass
+        );
+
 
         
        // Mail::to($request->get('email'))->send(new RegSuccess($name));
-        \Mail::to($email)->send(new RegSuccess($name));
+        \Mail::to($email)->send(new RegSuccess($arr));
 
         date_default_timezone_set("Asia/Manila");
         $time = date('h:i:s', strtotime(now()));
