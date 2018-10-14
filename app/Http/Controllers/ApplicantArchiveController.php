@@ -152,10 +152,11 @@ class ApplicantArchiveController extends Controller
 
                 $user->save();
                 $success_output = '';
+                date_default_timezone_set("Asia/Manila");
                 $time = date('h:i:s', strtotime(now()));
                 $audit = DB::table('audit_log')->insert([
-                'date' => date('Y-m-d'),
-                'time' => $time,
+                'a_date' => date('Y-m-d'),
+                'a_time' => $time,
                 'action' => 'Applicant Restored',
                 'employee_id' => Auth::user()->id
                 ]);
@@ -181,8 +182,8 @@ class ApplicantArchiveController extends Controller
             date_default_timezone_set("Asia/Manila");
             $time = date('h:i:s', strtotime(now()));
             $audit = DB::table('audit_log')->insert([
-            'date' => date('Y-m-d'),
-            'time' => $time,
+            'a_date' => date('Y-m-d'),
+            'a_time' => $time,
             'action' => 'Applicant Deleted',
             'employee_id' => Auth::user()->id
             ]);

@@ -209,8 +209,8 @@ class ScholarshipMainController extends Controller
                 date_default_timezone_set("Asia/Manila");
                 $time = date('h:i:s', strtotime(now()));
                 $audit = DB::table('audit_log')->insert([
-                    'date' => date('Y-m-d'),
-                    'time' => $time,
+                    'a_date' => date('Y-m-d'),
+                    'a_time' => $time,
                     'action' => 'Scholarship Updated',
                     'employee_id' => Auth::user()->id
                 ]);
@@ -240,8 +240,8 @@ class ScholarshipMainController extends Controller
                     date_default_timezone_set("Asia/Manila");
                     $time = date('h:i:s', strtotime(now()));
                     $audit = DB::table('audit_log')->insert([
-                        'date' => date('Y-m-d'),
-                        'time' => $time,
+                        'a_date' => date('Y-m-d'),
+                        'a_time' => $time,
                         'action' => 'Scholarship Opened',
                         'employee_id' => Auth::user()->id
                     ]);
@@ -276,8 +276,8 @@ class ScholarshipMainController extends Controller
                     date_default_timezone_set("Asia/Manila");
                     $time = date('h:i:s', strtotime(now()));
                     $audit = DB::table('audit_log')->insert([
-                        'date' => date('Y-m-d'),
-                        'time' => $time,
+                        'a_date' => date('Y-m-d'),
+                        'a_time' => $time,
                         'action' => 'Scholarship Closed',
                         'employee_id' => Auth::user()->id
                     ]);

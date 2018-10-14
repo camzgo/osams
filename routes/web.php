@@ -429,6 +429,8 @@ Route::post('/verify', 'VerifyController@postVerify')->name('verify');
 Route::get('/verify/new', 'VerifyController@genVerify')->name('verify2');
 
 
+Route::post('/saved/logout', 'AdminController@logsaved')->name('log.saved');
+
 Route::resource('admin/applicant', 'ApplicantMainController');
 Route::resource('admin/application', 'ApplicationMainController');
 Route::resource('admin/announcement', 'AnnounceMainController');

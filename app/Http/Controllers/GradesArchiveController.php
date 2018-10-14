@@ -166,8 +166,8 @@ class GradesArchiveController extends Controller
                 $success_output = '';
                 $time = date('h:i:s', strtotime(now()));
                 $audit = DB::table('audit_log')->insert([
-                'date' => date('Y-m-d'),
-                'time' => $time,
+                'a_date' => date('Y-m-d'),
+                'a_time' => $time,
                 'action' => 'Grades Restored',
                 'employee_id' => Auth::user()->id
                 ]);

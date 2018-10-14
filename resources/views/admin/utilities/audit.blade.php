@@ -319,12 +319,25 @@
               <h3 class="boldtx">Audit Log</h3>
           </div>
           <div class="card-body"> 
-         {{-- <div class="flt-right">
-            <a href="#" class="btn btn-success" id="add_data" data-backdrop="static" data-keyboard="false">
-                <i class="fa fa-plus"></i>
-                Add New
-            </a>
-          </div> --}}
+         <div class="container">
+           <div class="form-row align-items-center mt-4 mb-2">
+             <div class="col-md-2">
+               {{-- <label>Date from:</label> --}}
+               <input type="date" class="form-control">
+             </div>
+             <div class="col-md-0 mt-2">
+               <label>FROM <i class="fa fa-arrow-right"></i> TO</label>
+             </div>
+             <div class="col-md-2">
+               {{-- <label>Date to:</label> --}}
+               <input type="date" class="form-control">
+             </div>
+             
+             <div class="col-md-3">
+               <a href="#" class="btn btn-success ">Search</a>
+             </div>
+           </div>
+          </div>
 
         <br>
         <div class="container">
@@ -338,8 +351,6 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-    <br />
-    <br />
      <table class=" table table-hover" style="width:100%" id="table">
                <thead class="th-cl1">
                   <tr>

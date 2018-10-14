@@ -144,8 +144,8 @@ class UsersMainController extends Controller
         date_default_timezone_set("Asia/Manila");
         $time = date('h:i:s', strtotime(now()));
         $audit = DB::table('audit_log')->insert([
-            'date' => date('Y-m-d'),
-            'time' => $time,
+            'a_date' => date('Y-m-d'),
+            'a_time' => $time,
             'action' => 'Users added new data',
             'employee_id' => Auth::user()->id
         ]);
@@ -259,8 +259,8 @@ class UsersMainController extends Controller
                 date_default_timezone_set("Asia/Manila");
                 $time = date('h:i:s', strtotime(now()));
                 $audit = DB::table('audit_log')->insert([
-                    'date' => date('Y-m-d'),
-                    'time' => $time,
+                    'a_date' => date('Y-m-d'),
+                    'a_time' => $time,
                     'action' => 'Users Archived',
                     'employee_id' => Auth::user()->id
                 ]);
@@ -339,8 +339,8 @@ class UsersMainController extends Controller
         date_default_timezone_set("Asia/Manila");
         $time = date('h:i:s', strtotime(now()));
         $audit = DB::table('audit_log')->insert([
-            'date' => date('Y-m-d'),
-            'time' => $time,
+            'a_date' => date('Y-m-d'),
+            'a_time' => $time,
             'action' => 'Users Uploaded a new profile photo',
             'employee_id' => Auth::user()->id
         ]);
@@ -391,8 +391,8 @@ class UsersMainController extends Controller
         date_default_timezone_set("Asia/Manila");
         $time = date('h:i:s', strtotime(now()));
         $audit = DB::table('audit_log')->insert([
-            'date' => date('Y-m-d'),
-            'time' => $time,
+            'a_date' => date('Y-m-d'),
+            'a_time' => $time,
             'action' => 'Users Updated Information',
             'employee_id' => Auth::user()->id
         ]);
@@ -432,8 +432,8 @@ class UsersMainController extends Controller
         date_default_timezone_set("Asia/Manila");
         $time = date('h:i:s', strtotime(now()));
         $audit = DB::table('audit_log')->insert([
-            'date' => date('Y-m-d'),
-            'time' => $time,
+            'a_date' => date('Y-m-d'),
+            'a_time' => $time,
             'action' => 'Users Change Password',
             'employee_id' => Auth::user()->id
         ]);

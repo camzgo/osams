@@ -156,8 +156,8 @@ class RecheckController extends Controller
             date_default_timezone_set("Asia/Manila");
             $time = date('h:i:s', strtotime(now()));
             $audit = DB::table('audit_log')->insert([
-            'date' => date('Y-m-d'),
-            'time' => $time,
+            'a_date' => date('Y-m-d'),
+            'a_time' => $time,
             'action' => 'Application Re-checked',
             'employee_id' => Auth::user()->id
             ]);

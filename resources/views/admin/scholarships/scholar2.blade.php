@@ -622,7 +622,7 @@ button:focus {
 
     <div class="tab">
       <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 4</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 4</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -679,12 +679,7 @@ button:focus {
           <div class="form-row">
             <div class="col-md-3">
               <label>Number of Courses/Subjects </label>
-              <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
-                <option value="" selected disabled>--Select--</option>
-                @for($i = 1; $i<=12; $i++)
-                <option value="{{$i}}">{{$i}}</option>
-                @endfor
-              </select>
+              <input type="text" name="saml" id="saml" class="form-control">
             </div>
             <div class="col-md-3">
               <label>Semester</label>

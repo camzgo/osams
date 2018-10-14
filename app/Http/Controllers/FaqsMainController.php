@@ -158,8 +158,8 @@ class FaqsMainController extends Controller
                 date_default_timezone_set("Asia/Manila");
                 $time = date('h:i:s', strtotime(now()));
                 $audit = DB::table('audit_log')->insert([
-                'date' => date('Y-m-d'),
-                'time' => $time,
+                'a_date' => date('Y-m-d'),
+                'a_time' => $time,
                 'action' => 'FAQs Added new data',
                 'employee_id' => Auth::user()->id
                 ]);
@@ -176,8 +176,8 @@ class FaqsMainController extends Controller
                 date_default_timezone_set("Asia/Manila");
                 $time = date('h:i:s', strtotime(now()));
                 $audit = DB::table('audit_log')->insert([
-                'date' => date('Y-m-d'),
-                'time' => $time,
+                'a_date' => date('Y-m-d'),
+                'a_time' => $time,
                 'action' => 'FAQs Updated new data',
                 'employee_id' => Auth::user()->id
                 ]);
@@ -196,8 +196,8 @@ class FaqsMainController extends Controller
                 date_default_timezone_set("Asia/Manila");
                 $time = date('h:i:s', strtotime(now()));
                 $audit = DB::table('audit_log')->insert([
-                'date' => date('Y-m-d'),
-                'time' => $time,
+                'a_date' => date('Y-m-d'),
+                'a_time' => $time,
                 'action' => 'FAQs Deleted new data',
                 'employee_id' => Auth::user()->id
                 ]);

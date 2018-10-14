@@ -28,13 +28,33 @@ class AdminController extends Controller
 
     public function saved()
     {
-        $audit = DB::table('audit_log')->insert([
-        'date' => date('Y-m-d'),
-        'time' => date('H:i:s'),
-        'action' => 'User Login',
-        'employee_id' => Auth::user()->id
-        ]);
+        // $audit = DB::table('audit_log')->insert([
+        // 'date' => date('Y-m-d'),
+        // 'time' => date('H:i:s'),
+        // 'action' => 'User Login',
+        // 'employee_id' => Auth::user()->id
+        // ]);
       //  return redirect()->intended(route('admin.dashboard'));
+    }
+
+    public function logsaved()
+    {
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $chk1 = DB::table('checker')->first();
+        if($chk1->chk == 1)
+        {
+            $audit = DB::table('audit_log')->insert([
+            'a_date' => date('Y-m-d'),
+            'a_time' => $time,
+            'action' => 'User Logout',
+            'employee_id' => Auth::user()->id
+            ]);
+            $chks = DB::table('checker')->update([
+                'chk' => 0
+            ]);
+        }
+        return redirect('/admin/logout');
     }
 
     public function index()
@@ -43,19 +63,21 @@ class AdminController extends Controller
         
         // $eefap_mun_list = DB::table('eefap')->join('application', 'application.id', '=', 'eefap.application_id')
         // ->select('eefap.municipality')->where('application.application_status', 'Approved')->where('eefap.municipality', 'MASANTOL')->count();
-        // $chk1 = DB::table('checker')->first();
-        // if($chk1->chk == 0)
-        // {
-        //     $audit = DB::table('audit_log')->insert([
-        //     'date' => date('Y-m-d'),
-        //     'time' => date('H:i:s'),
-        //     'action' => 'User Login',
-        //     'employee_id' => Auth::user()->id
-        //     ]);
-        //     $chks = DB::table('checker')->update([
-        //         'chk' => 1
-        //     ]);
-        // }
+        date_default_timezone_set("Asia/Manila");
+        $time = date('h:i:s', strtotime(now()));
+        $chk1 = DB::table('checker')->first();
+        if($chk1->chk == 0)
+        {
+            $audit = DB::table('audit_log')->insert([
+            'a_date' => date('Y-m-d'),
+            'a_time' => $time,
+            'action' => 'User Login',
+            'employee_id' => Auth::user()->id
+            ]);
+            $chks = DB::table('checker')->update([
+                'chk' => 1
+            ]);
+        }
             
 
         

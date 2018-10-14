@@ -27,7 +27,7 @@ class AuditController extends Controller
 
     function getdata()
     {
-        $audit = DB::table('audit_log')->join('admins', 'admins.id', '=', 'audit_log.employee_id')->select(DB::raw("CONCAT_WS('', admins.surname,', ', admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as fullname"), "audit_log.action", DB::raw("DATE_FORMAT(audit_log.time, '%r') as time"), DB::raw("DATE_FORMAT(audit_log.date, '%W, %d %M %Y') as date"), "audit_log.id")->orderByRaw('id', 'ASC');
+        $audit = DB::table('audit_log')->join('admins', 'admins.id', '=', 'audit_log.employee_id')->select(DB::raw("CONCAT_WS('', admins.surname,', ', admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as fullname"), "audit_log.action", DB::raw("DATE_FORMAT(audit_log.a_time, '%h:%i %p') as time"), DB::raw("DATE_FORMAT(audit_log.a_date, '%W, %d %M %Y') as date"), "audit_log.id")->orderBy('id', 'DESC');
         return DataTables::of($audit)
         ->addColumn('ccas', function($audit){
             return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$audit->id.'"><i class="fa fa-edit"></i> Edit</a>
@@ -35,5 +35,16 @@ class AuditController extends Controller
         })
         ->make(true);
 
+    }
+
+    function search()
+    {
+        $audit = DB::table('audit_log')->join('admins', 'admins.id', '=', 'audit_log.employee_id')->select(DB::raw("CONCAT_WS('', admins.surname,', ', admins.first_name, ' ', admins.middle_name, ' ', admins.suffix) as fullname"), "audit_log.action", DB::raw("DATE_FORMAT(audit_log.time, '%h:%i %p') as time"), DB::raw("DATE_FORMAT(audit_log.date, '%W, %d %M %Y') as date"), "audit_log.id")->orderBy('id', 'DESC');
+        return DataTables::of($audit)
+        ->addColumn('ccas', function($audit){
+            return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$audit->id.'"><i class="fa fa-edit"></i> Edit</a>
+                    <a href="#" class="btn btn-sm btn-danger delete" id="'.$audit->id.'"><i class="fa fa-trash"></i> Delete</a> ';
+        })
+        ->make(true);
     }
 }

@@ -216,8 +216,8 @@ class UtilitiesController extends Controller
                 date_default_timezone_set("Asia/Manila");
                 $time = date('h:i:s', strtotime(now()));
                 $audit = DB::table('audit_log')->insert([
-                    'date' => date('Y-m-d'),
-                    'time' => $time,
+                    'a_date' => date('Y-m-d'),
+                    'a_time' => $time,
                     'action' => 'Account Type Added',
                     'employee_id' => Auth::user()->id
                 ]);
@@ -241,8 +241,8 @@ class UtilitiesController extends Controller
                 date_default_timezone_set("Asia/Manila");
                 $time = date('h:i:s', strtotime(now()));
                 $audit = DB::table('audit_log')->insert([
-                    'date' => date('Y-m-d'),
-                    'time' => $time,
+                    'a_date' => date('Y-m-d'),
+                    'a_time' => $time,
                     'action' => 'Account Type Updated',
                     'employee_id' => Auth::user()->id
                 ]);
@@ -276,8 +276,8 @@ class UtilitiesController extends Controller
             date_default_timezone_set("Asia/Manila");
             $time = date('h:i:s', strtotime(now()));
             $audit = DB::table('audit_log')->insert([
-                'date' => date('Y-m-d'),
-                'time' => $time,
+                'a_date' => date('Y-m-d'),
+                'a_time' => $time,
                 'action' => 'Trying to delete an account type that is in used.',
                 'employee_id' => Auth::user()->id
             ]);
@@ -300,8 +300,8 @@ class UtilitiesController extends Controller
                 date_default_timezone_set("Asia/Manila");
                 $time = date('h:i:s', strtotime(now()));
                 $audit = DB::table('audit_log')->insert([
-                    'date' => date('Y-m-d'),
-                    'time' => $time,
+                    'a_date' => date('Y-m-d'),
+                    'a_time' => $time,
                     'action' => 'Account Type Deleted',
                     'employee_id' => Auth::user()->id
                 ]);
