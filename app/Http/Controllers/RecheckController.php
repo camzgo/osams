@@ -32,6 +32,7 @@ class RecheckController extends Controller
         ->where('application.application_status', 'Pre-Approved')
         ->select('scholarships.scholarship_name', 'application.application_status', 'scholarships.type','application.id', 'scholarships.id AS sc_id', 'application.applicant_id AS applicant_id' )->first();
         
+        $app = DB::table('application')->where('barcode_number', $id)->first();
         
         //$name = $users->first_name . ' ' .$users->middle_name. ' '. $users->surname . ' ' . $users->suffix;
         // $address = $users->street. ', '. $users->barangay. ', '. $users->municipality;
@@ -51,6 +52,8 @@ class RecheckController extends Controller
             ->where('application.barcode_number', $id)->where('application.application_status', '=', 'Pre-Approved')->orwhere('application.application_status', '=', 'Authenticating')
             ->select(DB::raw("CONCAT_WS('', eefap.surname,', ', eefap.first_name, ' ', eefap.middle_name, ' ', eefap.suffix) as fullname"), 
             DB::raw("CONCAT_WS('', eefap.street, ' ', eefap.barangay, ' ' , eefap.municipality ) as fulladdress"), 'eefap.mobile_number', 'users.school_id', 'users.id')->first();
+
+            
 
             $grades= DB::table('grades')->where('student_id', $users->id)->where('grades_isdel', 0)->get();
         }

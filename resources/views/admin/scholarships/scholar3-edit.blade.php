@@ -160,6 +160,15 @@ button:focus {
   background-color: #4CAF50;
 }
 
+
+.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg, .bdaymsg, .fsurnamemsg, .ffirst_namemsg, .fmiddle_namemsg, .fsuffixmsg, 
+.msurnamemsg, .mfirst_namemsg, .mmiddle_namemsg, .msuffixmsg, .emergencymsg{
+    color: red;
+}
+
+.hidden {
+     visibility:hidden;
+}
 </style>
 
 <body class="hold-transition sidebar-mini">
@@ -226,7 +235,7 @@ button:focus {
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/apply" class="nav-link">
+                <a href="/admin/apply" class="nav-link active">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
@@ -240,7 +249,7 @@ button:focus {
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/renew" class="nav-link active">
+                <a href="/admin/renew" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-refresh nav-icon"></i>
                   <p>Renew</p>
@@ -325,7 +334,7 @@ button:focus {
               <li class="nav-item">
                 <a href="/admin/employee" class="nav-link">
                   &nbsp &nbsp &nbsp
-                  <i class="fa fa-pcl nav-icon"></i>
+                  <i class="fa fa-users nav-icon"></i>
                   <p>Employee</p>
                 </a>
               </li>
@@ -398,7 +407,7 @@ button:focus {
                     <li class="nav-item">
                         <a href="/admin/archive/employee" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <i class="fa fa-pcl nav-icon"></i>
+                        <i class="fa fa-users nav-icon"></i>
                         <p>Employee</p>
                         </a>
                     </li>
@@ -473,7 +482,7 @@ button:focus {
 
         {{-- <h5><strong>Step 1 of 3</strong></h5> --}}
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 33.3333333333%" aria-valuenow="33.3333333333" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 4</strong></div>
         </div>
 
         <div class="row form-group mt-5">
@@ -483,18 +492,22 @@ button:focus {
         <div class="row">
           <label for="fullname">* Full Name</label>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$pcl->surname}}" required/>
+            <input type="text" class="form-control req surname" id="surname" name="surname" placeholder='* Surname' value="{{$pcl->surname}}" required/>
+            <p class="surnamemsg hidden mb-0">Please Enter a valid surname</p>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$pcl->first_name}}" required/>
+            <input type="text" class="form-control req first_name" id="first_name" name="first_name" placeholder='* First Name' value="{{$pcl->first_name}}" required/>
+            <p class="first_namemsg hidden mb-0">Please Enter a valid first name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$pcl->middle_name}}"/>
+            <input type="text" class="form-control middle_name" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$pcl->middle_name}}"/>
+            <p class="middle_namemsg hidden mb-0">Please Enter a valid middle name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$pcl->suffix}}"/>
+            <input type="text" class="form-control suffix" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$pcl->suffix}}"/>
+            <p class="suffixmsg hidden mb-0">Please Enter a valid suffix</p>
           </div>
         </div>
         <div class="row form-group">
@@ -521,10 +534,10 @@ button:focus {
           </div>
           <div class="col-md-3">
             <label for="street">Street</label>
-            <input type="text" class="form-control" id="street" name="street" placeholder='Street' value="{{$pcl->street}}" />
+            <input type="text" class="form-control" id="street" name="street" placeholder='Street' value="{{$pcl->street}}"/>
           </div>
         </div>
-        <div class="row form-group">
+        <div class="row">
           <div class="col-md-2">
               <label for="gender">* Gender</label>
               <select name="gender" id="gender" class=" form-control req"  required>
@@ -559,7 +572,8 @@ button:focus {
           </div>
           <div class="col-md-2">
             <label for="bdate">* Birth Date</label>
-            <input type="date" name="bday" id="bday" class="form-control req" data-provide="datepicker" value="{{$pcl->birthdate}}" required/>
+            <input type="text" name="bday" id="bday" class="form-control bday req" value="{{$pcl->birthdate}}" required/>
+            <p class="bdaymsg hidden"></p>
           </div>
         </div>
          <div class="row form-group">
@@ -584,7 +598,7 @@ button:focus {
     
       <div class="tab">
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 66.6666666667%" aria-valuenow="66.6666666667" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 4</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -613,10 +627,10 @@ button:focus {
         </div>
         <div class="row form-group">
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="msurname" name="msurname" placeholder='* Surname' required value="{{$pcl->msurname}}"/>
+            <input type="text" class="form-control req" id="msurname" name="msurname" placeholder='* Surname' value="{{$pcl->msurname}}" required/>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="mfirst_name" name="mfirst_name" placeholder='* First Name' required  value="{{$pcl->mfirst_name}}"/>
+            <input type="text" class="form-control req" id="mfirst_name" name="mfirst_name" placeholder='* First Name' value="{{$pcl->mfirst_name}}" required/>
           </div>
           <div class = "col-md-2">
             <input type="text" class="form-control" id="mmiddle_name" name="mmiddle_name" placeholder='Middle Name' value="{{$pcl->mmiddle_name}}"/>
@@ -630,13 +644,13 @@ button:focus {
             <div class="col-md-3">
                 <div class="form-group">
                     <label>* Father's Occupation</label>
-                    <input type="text" class="form-control" id="foccupation" name="foccupation" placeholder="Father's Occupation" required value="{{$pcl->foccupation}}"/>
+                    <input type="text" class="form-control" id="foccupation" name="foccupation" placeholder="Father's Occupation" value="{{$pcl->foccupation}}" required/>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>* Mother's Occupation</label>
-                    <input type="text" class="form-control" id="moccupation" name="moccupation" placeholder="Mother's Occupation" value="{{$pcl->moccupation}}"required/>
+                    <input type="text" class="form-control" id="moccupation" name="moccupation" placeholder="Mother's Occupation" value="{{$pcl->moccupation}}" required/>
                 </div>
             </div>
             <div class="col-md-6">
@@ -651,7 +665,7 @@ button:focus {
       <div class="tab">
 
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 4</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -664,11 +678,11 @@ button:focus {
         <div class="row form-group">
             <div class="col-md-5">
                 <label>* School Enrolled <small>(No Abbreviation)</small></label>
-                <input name="college_name" type="text" class="form-control req" value="{{$pcl->school_enrolled}}" placeholder="School Enrolled"/>
+                <input name="college_name" type="text" class="form-control req" placeholder="School Enrolled" value="{{$pcl->school_enrolled}}"/>
             </div>
             <div class="col-md-4">
                 <label>* Course/Program <small>(No Abbreviation)</small></label>
-                <input name="course" type="text" class="form-control req" placeholder="Course/Program" value="{{$pcl->course}}">
+                <input name="course" type="text" class="form-control req" placeholder ="Course/Program" value="{{$pcl->course}}">
             </div>
             <div class="col-md-2">
                 <label>* Year Level</label>
@@ -689,21 +703,62 @@ button:focus {
               <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+63</span>
               </div>
-              <input type="text" class="form-control req" id="emobile_no" name="emobile_no" placeholder='9xxxxxxxxx'value="{{$pcl->emobile_number}}"  required/>
+              <input type="text" class="form-control req" id="emobile_no" name="emobile_no" placeholder='9xxxxxxxxx' value="{{$pcl->emobile_number}}" required/>
             </div>  
           </div>
-            {{-- <div class="ghost">
-              
-              <input type="hidden" class="ghost" id="barcode" name="barcode" value="{{$barcode}}"/>
-              <input type="hidden" class="ghost" id="gender2" name="gender2" value="{{$pcl->gender}}"/>
-            </div> --}}
+          <div class="ghost">
             <input class="ghost" type="hidden" name="sid" id="sid"/>
+            
+            <input type="hidden" class="ghost" id="gender2" name="gender2" value="{{$pcl->gender}}"/>
+            <input class="ghost" id="app_id" name="app_id" type="hidden" value="{{$pcl->applicant_id}}"/>
+          </div>
         </div>
         
         
 
 
     </div>
+
+     <div class="tab">
+          <div class="progress mt-2">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 4 of 4</strong></div>
+          </div>
+          
+          <div class="row mt-5 form-group">
+            <h4 class="tx1 ml-3">Grades</h4>
+          </div>
+          <hr/>
+          <br>
+          <div class="form-row">
+            <div class="col-md-3">
+              <label>Number of Courses/Subjects </label>
+              <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
+                <option value="" selected disabled>--Select--</option>
+                @for($i = 1; $i<=12; $i++)
+                <option value="{{$i}}">{{$i}}</option>
+                @endfor
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label>Semester</label>
+              <select name="sem" id="sem" class="form-control req" required>
+                <option value="" selected disabled>--Select--</option>
+                <option value="1st">1st Semester</option>
+                <option value="2nd">2nd Semester</option>
+              </select>
+            </div>
+          </div>
+          <br><hr><br>
+          <div class="form-row" >
+            <div class="col-md-6" id="here">
+
+            </div>
+            <div class="col-md-2" id="here2">
+
+            </div>
+          </div>
+        </div>
+
 
       <div style="overflow:auto;" class="mt-4">
         <div style="float:right;">
@@ -713,6 +768,7 @@ button:focus {
       </div>
 
       <div style="text-align:center;margin-top:40px;">
+        <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
@@ -746,6 +802,7 @@ $(document).ready(function(){
 
   var id = $('input[name=title]').val();
   $('#title_scholar').text(id);
+
   document.getElementById('gender').value="{{$pcl->gender}}";
   document.getElementById('civil_status').value="{{$pcl->civil_status}}";
   document.getElementById('religion').value="{{$pcl->religion}}";
@@ -753,62 +810,221 @@ $(document).ready(function(){
 
 });
 
-$('#surname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
+
+    var $regexname=/^([a-zA-Z ]{2,30})$/;
+    $('.surname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.surnamemsg').removeClass('hidden');
+        $('.surnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.surnamemsg').addClass('hidden');
+        }
+    });
+
+
+    $('.first_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.first_namemsg').removeClass('hidden');
+        $('.first_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.first_namemsg').addClass('hidden');
+        }
+    });
+
+
+    $('.fsurname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.fsurnamemsg').removeClass('hidden');
+        $('.fsurnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.fsurnamemsg').addClass('hidden');
+        }
+    });
+
+
+    $('.ffirst_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.ffirst_namemsg').removeClass('hidden');
+        $('.ffirst_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.ffirst_namemsg').addClass('hidden');
+        }
+    });
+
+
+    $('.msurname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.msurnamemsg').removeClass('hidden');
+        $('.msurnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.msurnamemsg').addClass('hidden');
+        }
+    });
+
+
+    $('.mfirst_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.mfirst_namemsg').removeClass('hidden');
+        $('.mfirst_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.mfirst_namemsg').addClass('hidden');
+        }
+    });
+
+
+    $('.emergency').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.emergencymsg').removeClass('hidden');
+        $('.emergencymsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.emergencymsg').addClass('hidden');
+        }
+    });
+
+var regexname2=/^([a-zA-Z ]{2,30})*$/;
+    $('.middle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.middle_namemsg').removeClass('hidden');
+        $('.middle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.middle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.suffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.suffixmsg').removeClass('hidden');
+        $('.suffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.suffixmsg').addClass('hidden');
+        }
+    });
+
+    $('.fmiddle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.fmiddle_namemsg').removeClass('hidden');
+        $('.fmiddle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.fmiddle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.fsuffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.fsuffixmsg').removeClass('hidden');
+        $('.fsuffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.fsuffixmsg').addClass('hidden');
+        }
+    });
+
+    $('.mmiddle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.mmiddle_namemsg').removeClass('hidden');
+        $('.mmiddle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.mmiddle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.msuffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match(regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.msuffixmsg').removeClass('hidden');
+        $('.msuffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.msuffixmsg').addClass('hidden');
+        }
+    });
+
+
+var d = new Date();
+var year = d.getFullYear() - 17;
+d.setFullYear(year);
+var age;
+$("#bday").datepicker({ dateFormat: "dd/mm/yy",
+		    changeMonth: true,
+		    changeYear: true,
+		    maxDate: year,
+		    minDate: "-90Y",
+            yearRange: '-90:' + year + '',
+            defaultDate: d
+		 });
+
+$("#bday").change(function(){
+        var dob = $("#bday").val();
+        var now = new Date();
+        var birthdate = dob.split("/");
+        var born = new Date(birthdate[2], birthdate[1]-1, birthdate[0]);
+        age=get_age(born,now);
+     
+        console.log(birthdate[2]+" : "+birthdate[1]+" : "+birthdate[0]);
+        console.log(age);
+    
+        if (age<17)
+        {
+            $('.bdaymsg').removeClass('hidden');
+            $('.bdaymsg').show();
+             $('.bdaymsg').css({'color': 'red'});
+            $('.bdaymsg').text("Invalid Age: " +age);
+            return false;
+        }
+        else
+        {
+            $('.bdaymsg').removeClass('hidden');
+            $('.bdaymsg').show();
+            $('.bdaymsg').css({'color': 'green'});
+            $('.bdaymsg').text("Valid Age: " +age);
+            
+        }
 });
-$('#first_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#middle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#suffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#fsurname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#ffirst_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#fmiddle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#fsuffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#msurname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#mfirst_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#mmiddle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#msuffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#foccupation').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#moccupation').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
+
+function get_age(born, now) {
+      var birthday = new Date(now.getFullYear(), born.getMonth(), born.getDate());
+      if (now >= birthday) 
+        return now.getFullYear() - born.getFullYear();
+      else
+        return now.getFullYear() - born.getFullYear() - 1;
+    }
+
 
 var v = $("#regForm").validate({
     rules: {
@@ -921,7 +1137,7 @@ $(document).ready(function(){
     var dependent = $(this).data('dependent');
     var _token = $('input[name="_token"]').val();
     $.ajax({
-      url:"{{ route('pcl5.fetch') }}",
+      url:"{{ route('users.fetch') }}",
       method:"POST",
       data:{select:select, value:value, _token:_token, dependent:dependent},
       success:function(result)
@@ -943,6 +1159,46 @@ $(document).ready(function(){
 
 });
 
+function addInputs()
+{
+  var no = document.getElementById("nos").value;
+  // Container <div> where dynamic content will be placed
+  var container = document.getElementById("here");
+  var container2 = document.getElementById("here2");
+  // Clear previous contents of the container
+  while (container.hasChildNodes()) {
+      container.removeChild(container.lastChild);
+  }
+  while (container2.hasChildNodes()) {
+      container2.removeChild(container2.lastChild);
+  }
+  for (i=0;i<no;i++){
+      // Append a node with a random text
+      container.appendChild(document.createTextNode("Subject Name " + (i+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "subject" + i;
+      input.setAttribute("class", "req");
+      container.appendChild(input);
+      // Append a line break 
+      container.appendChild(document.createElement("br"));
+  }
+
+  for (y=0;y<no;y++){
+      // Append a node with a random text
+      container2.appendChild(document.createTextNode("Grade " + (y+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "grade" + y;
+      input.setAttribute("class", "req");
+      container2.appendChild(input);
+      // Append a line break 
+      container2.appendChild(document.createElement("br"));
+  }
+        
+}
 
 </script>
 

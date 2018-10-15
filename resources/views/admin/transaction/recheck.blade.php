@@ -436,6 +436,8 @@
                                           
                                         
                                         </table>
+
+                                        <a href="/storage/uploads/{{$req->brgy}}" target="_blank" class="btn btn-primary">View Uploaded File</a>
                                       </div>
                                     </div>
                                       

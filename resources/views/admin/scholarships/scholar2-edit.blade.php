@@ -6,7 +6,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   
-  <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+ <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
   <title>Pampanga Capitol | Online Scholarship Application and Management System</title>
 
   <!-- CSRF Token -->
@@ -162,6 +162,13 @@ button:focus {
   background-color: #4CAF50;
 }
 
+.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg{
+    color: red;
+}
+
+.hidden {
+     visibility:hidden;
+}
 </style>
 
 <body class="hold-transition sidebar-mini">
@@ -228,7 +235,7 @@ button:focus {
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/apply" class="nav-link">
+                <a href="/admin/apply" class="nav-link active">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
@@ -242,7 +249,7 @@ button:focus {
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/renew" class="nav-link active">
+                <a href="/admin/renew" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-refresh nav-icon"></i>
                   <p>Renew</p>
@@ -327,7 +334,7 @@ button:focus {
               <li class="nav-item">
                 <a href="/admin/employee" class="nav-link">
                   &nbsp &nbsp &nbsp
-                  <i class="fa fa-eefapgv nav-icon"></i>
+                  <i class="fa fa-users nav-icon"></i>
                   <p>Employee</p>
                 </a>
               </li>
@@ -400,7 +407,7 @@ button:focus {
                     <li class="nav-item">
                         <a href="/admin/archive/employee" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <i class="fa fa-eefapgv nav-icon"></i>
+                        <i class="fa fa-users nav-icon"></i>
                         <p>Employee</p>
                         </a>
                     </li>
@@ -448,7 +455,7 @@ button:focus {
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">Transactions</li>
-              <li class="breadcrumb-item active">Renew</li>
+              <li class="breadcrumb-item active">Apply</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -475,7 +482,7 @@ button:focus {
 
         {{-- <h5><strong>Step 1 of 3</strong></h5> --}}
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 33.3333333333%" aria-valuenow="33.3333333333" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 4</strong></div>
         </div>
 
         <div class="row form-group mt-5">
@@ -485,21 +492,25 @@ button:focus {
         <div class="row">
           <label for="fullname">* Full Name</label>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$eefapgv->surname}}" required/>
+          <input type="text" class="form-control req surname" id="surname" name="surname" placeholder='* Surname' value="{{$eefapgv->surname}}" required/>
+          <p class="surnamemsg hidden">Please Enter a valid surname</p>
           </div>
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$eefapgv->first_name}}" required/>
+          <input type="text" class="form-control req first_name" id="first_name" name="first_name" placeholder='* First Name' value="{{$eefapgv->first_name}}" required/>
+          <p class="first_namemsg hidden">Please Enter a valid first name</p>
           </div>
           <div class = "col-md-2">
-          <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$eefapgv->middle_name}}"/>
+          <input type="text" class="form-control middle_name" id="middle_name" name="middle_name" placeholder='Middle Name' value="{{$eefapgv->middle_name}}"/>
+          <p class="middle_namemsg hidden">Please Enter a valid middle name</p>
           </div>
           <div class = "col-md-2">
-          <input type="text" class="form-control" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$eefapgv->suffix}}"/>
+          <input type="text" class="form-control suffix" id="suffix" name="suffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$eefapgv->suffix}}"/>
+          <p class="suffixmsg hidden">Please Enter a valid suffix</p>
           </div>
         </div>
-        <div class="row form-group">
+        <div class="form-row form-group">
           <div class="col-md-3">
             <label for="municipality">* Municipality</label>
             <select name="municipality" id="municipality" data-val="true"  data-val-required="Please select Municipality" data-dependent="barangay" class="form-control dynamic req" required >
@@ -520,7 +531,7 @@ button:focus {
             <input type="text" class="form-control" id="street" name="street" placeholder='(Street, Village Subdivision)' value="{{$eefapgv->street}}"/>
           </div>
         </div>
-         <div class="row form-group">
+         <div class="form-row form-group">
           <div class="col-md-3">
             <label for="mobile_no">* Mobile Number</label>
             <div class="input-group">
@@ -531,10 +542,10 @@ button:focus {
             </div>
             
           </div>
-          <div class="col-md-4 ghost">
+          {{-- <div class="col-md-4 ghost">
             <label for="email">* Facebook Account</label>
-            <input type="text" class="form-control" id="fb_account" name="fb_account" placeholder='facebook.com/username'/>
-          </div>
+            <input type="text" class="form-control" id="fb_account" name="fb_account" placeholder='facebook.com/username' value="{{$eefapgv->fb_account}}/>
+          </div> --}}
         </div>
 
 
@@ -544,7 +555,7 @@ button:focus {
       <div class="tab">
 
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 66.66666666666667%" aria-valuenow="66.66666666666667" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 4</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -554,29 +565,29 @@ button:focus {
         <div class="row form-group">
             <div class="col-md-5">
                 <label>* College/University Name <small>(No Abbreviation)</small></label>
-                <input name="college_name" type="text" class="form-control req" value="{{$eefapgv->college_name}}" placeholder="College/University Name"/>
+                <input name="college_name" type="text" class="form-control req" placeholder="College/University Name" value="{{$eefapgv->college_name}}"/>
             </div>
             <div class="col-md-5">
                 <label>* College/University Address</label>
-                <input name="college_address" type="text" class="form-control req"  value="{{$eefapgv->college_address}}" placeholder ="(Building no., Street, City Municipality, Province)">
+                <input name="college_address" type="text" class="form-control req" placeholder ="(Building no., Street, City Municipality, Province)" value="{{$eefapgv->college_address}}">
             </div>
             <div class="col-md-2">
                 <label>* Year Level</label>
-                <input name="yr_lvl" type="text" class="form-control req" placeholder ="Year Level"  value="{{$eefapgv->year_level}}">
+                <input name="yr_lvl" type="text" class="form-control req" placeholder ="Year Level" value="{{$eefapgv->year_level}}">
             </div>
         </div>
         <div class="row form-group">
             <div class="col-md-4">
                 <label>* Course/Program <small>(No Abbreviation)</small></label>
-                <input name="course" type="text" class="form-control req" placeholder ="Course/Program"  value="{{$eefapgv->course}}">
+                <input name="course" type="text" class="form-control req" placeholder ="Course/Program" value="{{$eefapgv->course}}">
             </div>
             <div class="col-md-3">
                 <label>* Major <small>(No Abbreviation)</small></label>
-                <input name="major" type="text" class="form-control req" placeholder ="Major"  value="{{$eefapgv->major}}">
+                <input name="major" type="text" class="form-control req" placeholder ="Major" value="{{$eefapgv->major}}">
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average" id="gen_average" type="text" class="form-control req" placeholder ="1.25"  value="{{$eefapgv->general_average}}">
+                <input name="gen_average" id="gen_average" type="text" class="form-control req" placeholder ="average" value="{{$eefapgv->general_average}}">
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -589,7 +600,7 @@ button:focus {
             </div>
         </div>
         <div class="row form-group">
-          <div class="col-md-2">
+          <div class="col-md-3">
             <label>* Graduating: </label>
             <select name="grad" id="grad" class="form-control">
               <option value="" selected disabled>--Select--</option>
@@ -597,21 +608,21 @@ button:focus {
               <option value="NO">NO</option>
             </select>
           </div>
-          <div class="col-md-3">
+          {{-- <div class="col-md-3">
             <label>* I certify that: </label>
             <select name="spes" id="spes" class="form-control">
               <option value="" selected disabled>--Select--</option>
               <option value="YES">Yes, I am SPES Recipient</option>
               <option value="NO">No, I am not SPES Recipient</option>
             </select>
-          </div>
+          </div> --}}
 
         </div>
     </div>
 
     <div class="tab">
       <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 4</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -639,11 +650,62 @@ button:focus {
             <input class="ghost" id="sid" name="sid" type="hidden" value=""/>
             <input class="ghost" id="award" name="award" type="hidden" value=""/>
           </div>
+          <div class="ghost">
+            <div class = "form-group col-md-8 ghost">
+              {{-- <input class="ghost" id="title_id" name="title_id" type="hidden" value="{{$scholar_id}}"/>
+              <input class="ghost" id="title" name="title" type="hidden" value="{{$scholar_name}}"/>
+              <input class="ghost" id="barcode" name="barcode" type="hidden" value="{{$barcode}}"/> --}}
+              <input class="ghost" id="title_id" name="title_id" type="hidden" value="{{$eefapgv->scholarship_id}}"/>
+              <input class="ghost" id="app_id" name="app_id" type="hidden" value="{{$eefapgv->applicant_id}}"/>
+            </div>
+          </div>
           	
         </div>
 
 
     </div>
+
+
+    <div class="tab">
+          <div class="progress mt-2">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 4 of 4</strong></div>
+          </div>
+          
+          <div class="row mt-5 form-group">
+            <h4 class="tx1 ml-3">Grades</h4>
+          </div>
+          <hr/>
+          <br>
+          <div class="form-row">
+            <div class="col-md-3">
+              <label>Number of Courses/Subjects </label>
+              <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
+                <option value="" selected disabled>--Select--</option>
+                @for($i = 1; $i<=12; $i++)
+                <option value="{{$i}}">{{$i}}</option>
+                @endfor
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label>Semester</label>
+              <select name="sem" id="sem" class="form-control req" required>
+                <option value="" selected disabled>--Select--</option>
+                <option value="1st">1st Semester</option>
+                <option value="2nd">2nd Semester</option>
+              </select>
+            </div>
+          </div>
+          <br><hr><br>
+          <div class="form-row" >
+            <div class="col-md-6" id="here">
+
+            </div>
+            <div class="col-md-2" id="here2">
+
+            </div>
+          </div>
+        </div>
+
 
       <div style="overflow:auto;" class="mt-4">
         <div style="float:right;">
@@ -653,6 +715,7 @@ button:focus {
       </div>
 
       <div style="text-align:center;margin-top:40px;">
+        <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
@@ -704,7 +767,7 @@ button:focus {
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
-  $('#gen_average').mask('0.00', {"clearIncomplete": true});
+  //$('#gen_average').mask('0.00', {"clearIncomplete": true});
 
     var pathname = window.location.pathname;
   var parts = pathname.split('/');
@@ -712,7 +775,10 @@ $(document).ready(function(){
 
   $('#sid').val(parts[4]);
 
-  var muni = "{{$eefapgv->program_type}}";
+  var id = $('input[name=title]').val();
+  $('#title_scholar').text(id);
+
+   var muni = "{{$eefapgv->program_type}}";
 
   if(muni == "Bachelor&#039;s Degree")
   {
@@ -720,7 +786,6 @@ $(document).ready(function(){
   }
   document.getElementById('educ_prog').value = muni;
   document.getElementById('grad').value = "{{$eefapgv->graduating}}";
-  document.getElementById('spes').value = "{{$eefapgv->spes}}";
   var id = $('input[name=title]').val();
  $('#title_scholar').text(id); 
  var rb = "{{$eefapgv->awards}}";
@@ -751,26 +816,7 @@ $(document).ready(function(){
       'Error'
     );
   }
-  
 
-});
-
-
-$('#surname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#first_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#middle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#suffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
 });
 
 var v = $("#regForm").validate({
@@ -884,7 +930,7 @@ $(document).ready(function(){
     var dependent = $(this).data('dependent');
     var _token = $('input[name="_token"]').val();
     $.ajax({
-      url:"{{ route('eefap.fetch') }}",
+      url:"{{ route('users.fetch') }}",
       method:"POST",
       data:{select:select, value:value, _token:_token, dependent:dependent},
       success:function(result)
@@ -902,6 +948,136 @@ $(document).ready(function(){
 
 });
 
+var $regexname=/^([a-zA-Z ]{2,30})$/;
+    $('.surname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.surnamemsg').removeClass('hidden');
+        $('.surnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.surnamemsg').addClass('hidden');
+        }
+    });
+
+    $('.first_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.first_namemsg').removeClass('hidden');
+        $('.first_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.first_namemsg').addClass('hidden');
+        }
+    });
+
+var $regexname2=/^([a-zA-Z ]{2,30})*$/;
+    $('.middle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.middle_namemsg').removeClass('hidden');
+        $('.middle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.middle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.suffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.suffixmsg').removeClass('hidden');
+        $('.suffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.suffixmsg').addClass('hidden');
+        }
+    });
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class to the current step:
+  x[n].className += " active";
+}
+
+$(document).ready(function(){
+  $('.dynamic').change(function(){
+    var x = $('#municipality').val();
+    console.log(x);
+    console.log($('#barangay').val());
+    if($(this).val() != '')
+    {
+    var select = $(this).attr("id");
+    var value = $(this).val();
+    var dependent = $(this).data('dependent');
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+      url:"{{ route('users.fetch') }}",
+      method:"POST",
+      data:{select:select, value:value, _token:_token, dependent:dependent},
+      success:function(result)
+      {
+      $('#'+dependent).html(result);
+      }
+
+    })
+    }
+  });
+
+  $('#municipality').change(function(){
+    $('#barangay').val('');
+  });
+
+});
+
+function addInputs()
+{
+  var no = document.getElementById("nos").value;
+  // Container <div> where dynamic content will be placed
+  var container = document.getElementById("here");
+  var container2 = document.getElementById("here2");
+  // Clear previous contents of the container
+  while (container.hasChildNodes()) {
+      container.removeChild(container.lastChild);
+  }
+  while (container2.hasChildNodes()) {
+      container2.removeChild(container2.lastChild);
+  }
+  for (i=0;i<no;i++){
+      // Append a node with a random text
+      container.appendChild(document.createTextNode("Subject Name " + (i+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "subject" + i;
+      input.setAttribute("class", "req");
+      container.appendChild(input);
+      // Append a line break 
+      container.appendChild(document.createElement("br"));
+  }
+
+  for (y=0;y<no;y++){
+      // Append a node with a random text
+      container2.appendChild(document.createTextNode("Grade " + (y+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "grade" + y;
+      input.setAttribute("class", "req");
+      container2.appendChild(input);
+      // Append a line break 
+      container2.appendChild(document.createElement("br"));
+  }
+        
+}
 
 </script>
 <script src="{{ URL::asset('data/religion.js') }}" type="text/javascript"></script>

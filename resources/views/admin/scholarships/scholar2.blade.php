@@ -651,13 +651,11 @@ button:focus {
             <input class="ghost" id="award" name="award" type="hidden" value=""/>
           </div>
           <div class="ghost">
-            {!! Form::open(['action' => ['AnnounceMainController@update',  $scholar_id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
             <div class = "form-group col-md-8 ghost">
-            {{Form::text('title_id', $scholar_id, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            {{Form::text('title', $scholar_name, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            {{Form::text('barcode', $barcode, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
+              <input class="ghost" id="title_id" name="title_id" type="hidden" value="{{$scholar_id}}"/>
+              <input class="ghost" id="title" name="title" type="hidden" value="{{$scholar_name}}"/>
+              <input class="ghost" id="barcode" name="barcode" type="hidden" value="{{$barcode}}"/>
             </div>
-            {!! Form::close() !!}
           </div>
           	
         </div>
@@ -679,7 +677,12 @@ button:focus {
           <div class="form-row">
             <div class="col-md-3">
               <label>Number of Courses/Subjects </label>
-              <input type="text" name="saml" id="saml" class="form-control">
+              <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
+                <option value="" selected disabled>--Select--</option>
+                @for($i = 1; $i<=12; $i++)
+                <option value="{{$i}}">{{$i}}</option>
+                @endfor
+              </select>
             </div>
             <div class="col-md-3">
               <label>Semester</label>

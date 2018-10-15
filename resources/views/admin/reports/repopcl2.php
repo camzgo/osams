@@ -31,7 +31,7 @@ $pdf->SetY(55);
     //     while($reports=mysqli_fetch_assoc($query)){
 
     $pdf->Cell(55);
-    if($app->renew != 1 && $app->renew == 1){
+    if($app->renew == 1 && $app->renew == 1){
         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',65.5,34,6);
     }else{
         $pdf->Image('C:/xampp/htdocs/osams_001/resources/views/admin/reports/Check_mark.png',138,34,6);    //$pdf->Cell(1,0,'',0,0);

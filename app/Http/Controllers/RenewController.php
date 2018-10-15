@@ -96,6 +96,13 @@ class RenewController extends Controller
 
         $approve = "Pending";
         
+
+        $gradee = DB::table('grades')->where('student_id', $request->get('app_id'))->update([
+            'grades_isdel' => 1,
+            'new'     => 0
+        ]);
+
+
         DB::table('application')->where('id', $request->get('sid'))
         ->update([
             'application_status' => $approve,
@@ -108,7 +115,7 @@ class RenewController extends Controller
             'action'  => 'Application Renewed',
             'date'     => date('Y-m-d'),
             'time'     =>$time,
-            'applicant_id' => $request->get('sid'),
+            'applicant_id' => $request->get('app_id'),
             'scholar_id' => $eefapId->scholarship_id
 
         ]);
@@ -123,15 +130,43 @@ class RenewController extends Controller
             'employee_id' => Auth::user()->id
         ]);
 
-       $ids=$request->get('sid');
+
+        $ctr = $request->get('nos');
+        $sub1 = array();
+        $grad1 = array();
+        for($x=0; $x<=$ctr-1; $x++)
+        {
+            $sub = "subject".$x;
+            $grad = "grade".$x;
+            array_push($sub1, $request->$sub);
+            array_push($grad1, $request->$grad);
+        }
+        
+
+        for($y=0; $y<=$ctr-1; $y++)
+        {
+            $grades = DB::table('grades')->insert([
+                'subject' => $sub1[$y],
+                'grades' => $grad1[$y],
+                'semester' => $request->sem,
+                'student_id' => $eefapId->applicant_id,
+                'new'     => "1",
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'grades_isdel' => 0
+            ]);
+        }
+
+
+       $ids=$request->get('app_id');
         return redirect ('admin/renew/send/'.$ids);
     }
 
     public function vieweefapgv($id)
     {
         $eefapgv = DB::table('eefapgv')->where('application_id', $id)->first();
-        $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
-        ->select('account_type.file_maintenance', 'account_type.tracking', 'account_type.submission', 'account_type.transactions', 
+         $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
+        ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
         return view ('admin.scholarships.scholar2-edit')->with('role', $role)->with('eefapgv', $eefapgv)->with('municipal_list', $municipal_list);
@@ -169,6 +204,11 @@ class RenewController extends Controller
             'application_status' => $approve,
             'renew'     => 1
         ]);
+
+        $gradee = DB::table('grades')->where('student_id', $request->get('app_id'))->update([
+            'grades_isdel' => 1,
+            'new'     => 0
+        ]);
         
         
         date_default_timezone_set("Asia/Manila");
@@ -190,7 +230,35 @@ class RenewController extends Controller
             'action' => 'Application Renewed',
             'employee_id' => Auth::user()->id
         ]);
-        $ids=$request->get('sid');
+
+
+        $ctr = $request->get('nos');
+        $sub1 = array();
+        $grad1 = array();
+        for($x=0; $x<=$ctr-1; $x++)
+        {
+            $sub = "subject".$x;
+            $grad = "grade".$x;
+            array_push($sub1, $request->$sub);
+            array_push($grad1, $request->$grad);
+        }
+        
+
+        for($y=0; $y<=$ctr-1; $y++)
+        {
+            $grades = DB::table('grades')->insert([
+                'subject' => $sub1[$y],
+                'grades' => $grad1[$y],
+                'semester' => $request->sem,
+                'student_id' => $eefapgvId->applicant_id,
+                'new'     => "1",
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'grades_isdel' => 0
+            ]);
+        }
+
+        $ids=$request->get('app_id');
         return redirect ('admin/renew/send/'.$ids);
     }
 
@@ -255,13 +323,19 @@ class RenewController extends Controller
             'renew'     => 1
         ]);
 
+        $gradee = DB::table('grades')->where('student_id', $request->get('app_id'))->update([
+            'grades_isdel' => 1,
+            'new'     => 0
+        ]);
+        
+        
         date_default_timezone_set("Asia/Manila");
         $time = date('h:i:s', strtotime(now()));
         $history = DB::table('history_log')->insert([
             'action'  => 'Application Renewed',
             'date'     => date('Y-m-d'),
             'time'     =>$time,
-            'applicant_id' => $request->get('applicant_id'),
+            'applicant_id' => $request->get('sid'),
             'scholar_id' => 6
 
         ]);
@@ -275,7 +349,34 @@ class RenewController extends Controller
             'employee_id' => Auth::user()->id
         ]);
 
-        $ids=$request->get('sid');
+
+        $ctr = $request->get('nos');
+        $sub1 = array();
+        $grad1 = array();
+        for($x=0; $x<=$ctr-1; $x++)
+        {
+            $sub = "subject".$x;
+            $grad = "grade".$x;
+            array_push($sub1, $request->$sub);
+            array_push($grad1, $request->$grad);
+        }
+        
+
+        for($y=0; $y<=$ctr-1; $y++)
+        {
+            $grades = DB::table('grades')->insert([
+                'subject' => $sub1[$y],
+                'grades' => $grad1[$y],
+                'semester' => $request->sem,
+                'student_id' => $pclId->applicant_id,
+                'new'     => "1",
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'grades_isdel' => 0
+            ]);
+        }
+
+        $ids=$request->get('app_id');
         return redirect ('admin/renew/send/'.$ids);
     }
     function showsend($data)

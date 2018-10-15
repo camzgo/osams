@@ -323,19 +323,19 @@
            <div class="form-row align-items-center mt-4 mb-2">
              <div class="col-md-2">
                {{-- <label>Date from:</label> --}}
-               <input type="date" class="form-control">
+               <input type="date" class="form-control" id="date_to" name="date_to" onchange="srch()">
              </div>
              <div class="col-md-0 mt-2">
                <label>FROM <i class="fa fa-arrow-right"></i> TO</label>
              </div>
              <div class="col-md-2">
                {{-- <label>Date to:</label> --}}
-               <input type="date" class="form-control">
+               <input type="date" class="form-control" id="date_from" date="date_to" onchange="srch()">
              </div>
              
-             <div class="col-md-3">
+             {{-- <div class="col-md-3">
                <a href="#" class="btn btn-success ">Search</a>
-             </div>
+             </div> --}}
            </div>
           </div>
 
@@ -715,6 +715,12 @@ function del_Form() {
     z.style.display = "block";
     var y = document.getElementById("editForm");
     y.style.display = "none";
+}
+
+function srch()
+{
+ 
+  console.log($('#date_to').val());
 }
 </script>
 </body>

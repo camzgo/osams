@@ -21,7 +21,7 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
   <!-- Navbar -->
-  @include('inc.admin-nav')
+  @include('inc.admin-nav')ee
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
@@ -181,7 +181,7 @@
               <li class="nav-item">
                 <a href="/admin/employee" class="nav-link">
                   &nbsp &nbsp &nbsp
-                  <i class="fa fa-eefapgv nav-icon"></i>
+                  <i class="fa fa-users nav-icon"></i>
                   <p>Employee</p>
                 </a>
               </li>

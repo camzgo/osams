@@ -50,7 +50,7 @@ class AdminController extends Controller
             'action' => 'User Logout',
             'employee_id' => Auth::user()->id
             ]);
-            $chks = DB::table('checker')->update([
+            $chks = DB::table('checker')->where('id', 1)->update([
                 'chk' => 0
             ]);
         }
@@ -74,7 +74,7 @@ class AdminController extends Controller
             'action' => 'User Login',
             'employee_id' => Auth::user()->id
             ]);
-            $chks = DB::table('checker')->update([
+            $chks = DB::table('checker')->where('id', 1)->update([
                 'chk' => 1
             ]);
         }

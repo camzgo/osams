@@ -664,13 +664,12 @@ button:focus {
             <input class="ghost" id="sid" name="sid" type="hidden" value=""/>
           </div>
           <div class="ghost">
-            {!! Form::open(['action' => ['AnnounceMainController@update',  $scholar_id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+           
             <div class = "form-group col-md-8 ghost">
-            {{Form::text('title_id', $scholar_id, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            {{Form::text('title', $scholar_name, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            {{Form::text('barcode', $barcode, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
+              <input class="ghost" id="title_id" name="title_id" type="hidden" value="{{$scholar_id}}"/>
+              <input class="ghost" id="title" name="title" type="hidden" value="{{$scholar_name}}"/>
+              <input class="ghost" id="barcode" name="barcode" type="hidden" value="{{$barcode}}"/>
             </div>
-            {!! Form::close() !!}
           </div>
         </div>
         </div>

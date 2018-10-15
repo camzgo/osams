@@ -342,7 +342,7 @@
               <h3 class="boldtx">Backup and Restore</h3>
           </div>
           <div class="card-body"> 
-         <div class="flt-right">
+         <div class="flt-right mb-2">
 
             <a href="backup-restore/backup" class="btn btn-success">
                 <i class="fa fa-plus"></i>
@@ -350,6 +350,7 @@
             </a>
           </div>
           
+          <br>
           <br>
           <table class=" table table-hover table-hover" style="width:100%" id="table">
                <thead class="th-cl1">

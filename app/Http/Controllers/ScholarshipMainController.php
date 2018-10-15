@@ -105,6 +105,9 @@ class ScholarshipMainController extends Controller
         ->addColumn('action', function($scholarships){
             $date = $scholarships->deadline;
             $date2 = date("Y-m-d");
+            //$scholar2 = DB::table('scholarships')->where('id',  $scholarships->id)->first();
+            $scholar = DB::table('scholarships')->join('application', 'application.scholar_id', '=', 'scholarships.id')->where('scholarships.id',  $scholarships->id)->count();
+            $sr = $scholarships->slot + $scholarships->supplement;
 
             if($scholarships->status=="OPEN")
             {
@@ -115,14 +118,26 @@ class ScholarshipMainController extends Controller
             {
                if($date >= $date2)
                {
-                    return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$scholarships->id.'"><i class="fa fa-edit"></i> Edit</a>
-                    <a href="#" class="btn btn-sm btn-success delete" id="'.$scholarships->id.'"><i class="fa fa-check"></i> Open</a>';
+                   if($sr != $scholar)
+                   {
+                        return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$scholarships->id.'"><i class="fa fa-edit"></i> Edit</a>
+                        <a href="#" class="btn btn-sm btn-success delete" id="'.$scholarships->id.'"><i class="fa fa-check"></i> Open</a>';
+                   }
+                   else
+                   {
+                        return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$scholarships->id.'"><i class="fa fa-edit"></i> Edit</a>
+                        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" id="'.$scholarships->id.'"><i class="fa fa-check"></i> Open</a>
+                        <p><span class="badge badge-warning text-white mt-2"> <strong>No more slots. </strong> <br>Slots and Supplement has reached.</span></p>';
+                   }
+                    
                }
                else
                {
                     return '<a href="#" class="btn btn-sm btn-primary edit" id="'.$scholarships->id.'"><i class="fa fa-edit"></i> Edit</a>
                     <a href="javascript:void(0)" class="btn btn-sm btn-secondary" id="'.$scholarships->id.'"><i class="fa fa-check"></i> Open</a>';
                }
+
+             
             }
             
         })

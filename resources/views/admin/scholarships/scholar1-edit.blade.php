@@ -160,6 +160,13 @@ button:focus {
   background-color: #4CAF50;
 }
 
+.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg, .gsurnamemsg, .gfirst_namemsg, .gmiddle_namemsg, .gsuffixmsg{
+    color: red;
+}
+
+.hidden {
+     visibility:hidden;
+}
 </style>
 
 <body class="hold-transition sidebar-mini">
@@ -198,7 +205,6 @@ button:focus {
               </p>
             </a>
           </li>
-
           @if($role->submission == "Grant")
           <li class="nav-item">
             <a href="/admin/submission" class="nav-link">
@@ -227,7 +233,7 @@ button:focus {
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/apply" class="nav-link">
+                <a href="/admin/apply" class="nav-link active">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-paper-plane nav-icon"></i>
                   <p>Apply</p>
@@ -241,7 +247,7 @@ button:focus {
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/renew" class="nav-link active">
+                <a href="/admin/renew" class="nav-link">
                   &nbsp &nbsp &nbsp
                   <i class="fa fa-refresh nav-icon"></i>
                   <p>Renew</p>
@@ -326,7 +332,7 @@ button:focus {
               <li class="nav-item">
                 <a href="/admin/employee" class="nav-link">
                   &nbsp &nbsp &nbsp
-                  <i class="fa fa-eefap nav-icon"></i>
+                  <i class="fa fa-users nav-icon"></i>
                   <p>Employee</p>
                 </a>
               </li>
@@ -399,7 +405,7 @@ button:focus {
                     <li class="nav-item">
                         <a href="/admin/archive/employee" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <i class="fa fa-eefap nav-icon"></i>
+                        <i class="fa fa-users nav-icon"></i>
                         <p>Employee</p>
                         </a>
                     </li>
@@ -447,11 +453,11 @@ button:focus {
             <ol class="breadcrumb float-sm-left">
               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
               <li class="breadcrumb-item active">Transactions</li>
-              <li class="breadcrumb-item active">Renew</li>
+              <li class="breadcrumb-item active">Apply</li>
             </ol>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <a href="/admin/renew" class="btn btn-secondary btn-rounded flt-right"><i class="fa fa-arrow-left"></i> Go Back</a>
+            <a href="/admin/apply" class="btn btn-secondary btn-rounded flt-right"><i class="fa fa-arrow-left"></i> Go Back</a>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -477,7 +483,7 @@ button:focus {
 
         {{-- <h5><strong>Step 1 of 3</strong></h5> --}}
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 33.3333333333%" aria-valuenow="33.3333333333" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><strong>Step 1 of 4</strong></div>
         </div>
 
         <div class="row form-group mt-5">
@@ -487,21 +493,25 @@ button:focus {
         <div class="row">
           <label for="fullname">* Full Name</label>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
           <div class = "col-md-4">
-          <input type="text" class="form-control req" id="surname" name="surname" placeholder='* Surname' value="{{$eefap->surname}}" required/>
+          <input type="text" class="form-control req surname" id="surname" name="surname" placeholder='* Surname' value="{{$eefap->surname}}" required/>
+           <p class="surnamemsg hidden">Please Enter a valid surname</p>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="first_name" name="first_name" placeholder='* First Name' value="{{$eefap->first_name}}" required/>
+            <input type="text" class="form-control req first_name" id="first_name" name="first_name" placeholder='* First Name' value="{{$eefap->first_name}}" required/>
+            <p class="first_namemsg hidden">Please Enter a valid first name</p>
           </div>
           <div class = "col-md-2">
-          <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{$eefap->middle_name}}" placeholder='Middle Name'/>
-          </div>
+          <input type="text" class="form-control middle_name" id="middle_name" name="middle_name" value="{{$eefap->middle_name}}" placeholder='Middle Name'/>
+          <p class="middle_namemsg hidden">Please Enter a valid middle name</p>
+        </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="suffix" name="suffix" value="{{$eefap->suffix}}" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <input type="text" class="form-control suffix" id="suffix" name="suffix" value="{{$eefap->suffix}}" placeholder='Suffix (e.g., Jr. Sr. III)'/>
+            <p class="suffixmsg hidden">Please Enter a valid suffix</p>
           </div>
         </div>
-        <div class="row form-group">
+        <div class="form-row form-group">
           <div class="col-md-3">
             <label for="municipality">* Municipality</label>
             <select name="municipality" id="municipality" data-val="true"  data-val-required="Please select Municipality" data-dependent="barangay" class="form-control dynamic req" required >
@@ -519,7 +529,7 @@ button:focus {
           </div>
           <div class="col-md-6">
             <label for="street">Street</label>
-            <input type="text" class="form-control" id="street" name="street" placeholder='(Street, Village Subdivision)'/>
+            <input type="text" class="form-control" id="_street" name="_street" placeholder='(Street, Village Subdivision)'/>
           </div>
         </div>
          <div class="row form-group">
@@ -544,7 +554,7 @@ button:focus {
     
       <div class="tab">
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 66.6666666667%" aria-valuenow="66.6666666667" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 3</strong></div>
+          <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><strong>Step 2 of 4</strong></div>
         </div>
 
         <div class="row mt-5 form-group">
@@ -554,18 +564,22 @@ button:focus {
         <div class="row">
           <label for="fullname">* Full Name</label>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="gsurname" name="gsurname" placeholder='* Surname' value="{{$eefap->gsurname}}" required/>
+            <input type="text" class="form-control req gsurname" id="gsurname" name="gsurname" placeholder='* Surname' value="{{$eefap->gsurname}}" required/>
+            <p class="gsurnamemsg hidden">Please Enter a valid surname</p>
           </div>
           <div class = "col-md-4">
-            <input type="text" class="form-control req" id="gfirst_name" name="gfirst_name" placeholder='* First Name' value="{{$eefap->gfirst_name}}"  required/>
+            <input type="text" class="form-control req gfirst_name" id="gfirst_name" name="gfirst_name" placeholder='* First Name' value="{{$eefap->gfirst_name}}" required/>
+            <p class="gfirst_namemsg hidden">Please Enter a valid first name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="gmiddle_name" name="gmiddle_name" placeholder='Middle Name' value="{{$eefap->gmiddle_name}}" />
+            <input type="text" class="form-control gmiddle_name" id="gmiddle_name" name="gmiddle_name" placeholder='Middle Name' value="{{$eefap->gmiddle_name}}"/>
+            <p class="gmiddle_namemsg hidden">Please Enter a valid middle name</p>
           </div>
           <div class = "col-md-2">
-            <input type="text" class="form-control" id="gsuffix" name="gsuffix" placeholder='Suffix (e.g., Jr. Sr. III)'value="{{$eefap->suffix}}"  />
+            <input type="text" class="form-control gsuffix" id="gsuffix" name="gsuffix" placeholder='Suffix (e.g., Jr. Sr. III)' value="{{$eefap->gsuffix}}"/>
+            <p class="gsuffixmsg hidden">Please Enter a valid suffix</p>
           </div>
         </div>
         <div class="row form-group">
@@ -585,8 +599,8 @@ button:focus {
       <div class="tab">
 
         <div class="progress mt-2">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 3</strong></div>
-        </div>
+            <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><strong>Step 3 of 4</strong></div>
+          </div>
 
         <div class="row mt-5 form-group">
           <h4 class="tx1">Educational Information</h4>
@@ -595,15 +609,15 @@ button:focus {
         <div class="row form-group">
             <div class="col-md-5">
                 <label>* College/University Name <small>(No Abbreviation)</small></label>
-                <input name="college_name" type="text" class="form-control req" placeholder="College/University Name" value="{{$eefap->college_name}}" />
+                <input name="college_name" type="text" class="form-control req" placeholder="College/University Name" value="{{$eefap->college_name}}"/>
             </div>
             <div class="col-md-5">
                 <label>* College/University Address</label>
-                <input name="college_address" type="text" class="form-control req" placeholder ="(Building no., Street, City Municipality, Province)" value="{{$eefap->college_address}}" >
+                <input name="college_address" type="text" class="form-control req" placeholder ="(Building no., Street, City Municipality, Province)" value="{{$eefap->college_address}}">
             </div>
             <div class="col-md-2">
                 <label>* Year Level</label>
-                <input name="yr_lvl" type="text" class="form-control req" placeholder ="Year Level" value="{{$eefap->year_level}} ">
+                <input name="yr_lvl" type="text" class="form-control req" placeholder ="Year Level" value="{{$eefap->year_level}}">
             </div>
         </div>
         <div class="row form-group">
@@ -617,7 +631,7 @@ button:focus {
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average"  id="gen_average" type="text" class="form-control req" placeholder ="1.25" value="{{$eefap->general_average}}">
+                <input name="gen_average"  id="gen_average" type="text" class="form-control req" placeholder ="average" value="{{$eefap->general_average}}">
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -630,7 +644,7 @@ button:focus {
             </div>
         </div>
         <div class="row form-group">
-          <div class="col-md-2">
+          <div class="col-md-3">
             <label>* Graduating: </label>
             <select name="grad" id="grad" class="form-control">
               <option value="" selected disabled>--Select--</option>
@@ -638,34 +652,75 @@ button:focus {
               <option value="NO">NO</option>
             </select>
           </div>
-          <div class="col-md-3">
+          {{-- <div class="col-md-3">
             <label>* I certify that: </label>
             <select name="spes" id="spes" class="form-control">
               <option value="" selected disabled>--Select--</option>
               <option value="YES">Yes, I am SPES Recipient</option>
               <option value="NO">No, I am not SPES Recipient</option>
             </select>
-          </div>
+          </div> --}}
           <div class="ghost">
             <input class="ghost" id="sid" name="sid" type="hidden" value=""/>
             <input type="hidden" id="educ" name="educ">
           </div>
           <div class="ghost">
-            {{-- {!! Form::open(['action' => ['AnnounceMainController@update',  $scholar_id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+           
             <div class = "form-group col-md-8 ghost">
-            {{Form::text('title_id', $scholar_id, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            {{Form::text('title', $scholar_name, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
-            {{Form::text('barcode', $barcode, ['class' => 'ghost', 'placeholder' => 'Title', 'required'])}}
+              <input class="ghost" id="title_id" name="title_id" type="hidden" value="{{$eefap->scholarship_id}}"/>
+              <input class="ghost" id="app_id" name="app_id" type="hidden" value="{{$eefap->applicant_id}}"/>
+              {{-- <input class="ghost" id="title" name="title" type="hidden" value="{{$scholar_name}}"/>
+              <input class="ghost" id="barcode" name="barcode" type="hidden" value="{{$barcode}}"/> --}}
             </div>
-            {!! Form::close() !!} --}}
           </div>
         </div>
         </div>
+
+        <div class="tab">
+          <div class="progress mt-2">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Step 4 of 4</strong></div>
+          </div>
+          
+          <div class="row mt-5 form-group">
+            <h4 class="tx1 ml-3">Grades</h4>
+          </div>
+          <hr/>
+          <br>
+          <div class="form-row">
+            <div class="col-md-3">
+              <label>Number of Courses/Subjects </label>
+              <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
+                <option value="" selected disabled>--Select--</option>
+                @for($i = 1; $i<=12; $i++)
+                <option value="{{$i}}">{{$i}}</option>
+                @endfor
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label>Semester</label>
+              <select name="sem" id="sem" class="form-control req" required>
+                <option value="" selected disabled>--Select--</option>
+                <option value="1st">1st Semester</option>
+                <option value="2nd">2nd Semester</option>
+              </select>
+            </div>
+          </div>
+          <br><hr><br>
+          <div class="form-row" >
+            <div class="col-md-6" id="here">
+
+            </div>
+            <div class="col-md-2" id="here2">
+
+            </div>
+          </div>
+        </div>
+
         
         
 
 
-   
+   </form>
 
       <div style="overflow:auto;" class="mt-4">
         <div style="float:right;">
@@ -678,8 +733,9 @@ button:focus {
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
+        <span class="step"></span>
       </div>
-    </form>
+    
   </div>
  </div>
   {{-- </div>
@@ -699,7 +755,7 @@ button:focus {
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
-  $('#gen_average').mask('0.00', {"clearIncomplete": true});
+  //$('#gen_average').mask('0.00', {"clearIncomplete": true});
   
   var pathname = window.location.pathname;
   var parts = pathname.split('/');
@@ -719,44 +775,111 @@ $(document).ready(function(){
   }
   document.getElementById('educ_prog').value = muni;
   document.getElementById('grad').value = "{{$eefap->graduating}}";
-  document.getElementById('spes').value = "{{$eefap->spes}}";
 
-  
-});
 
-$('#surname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#first_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#middle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#suffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#gsurname').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#gfirst_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#gmiddle_name').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-});
-$('#gsuffix').keyup(function() {
-    var $th = $(this);
-    $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
 });
 
+
+var $regexname=/^([a-zA-Z ]{2,30})$/;
+    $('.surname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.surnamemsg').removeClass('hidden');
+        $('.surnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.surnamemsg').addClass('hidden');
+        }
+    });
+
+    $('.first_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.first_namemsg').removeClass('hidden');
+        $('.first_namemsg').show();
+    }
+    else{
+        // else, do not display message
+      $('.first_namemsg').addClass('hidden');
+    }
+    });
+
+
+    $('.gsurname').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.gsurnamemsg').removeClass('hidden');
+        $('.gsurnamemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.gsurnamemsg').addClass('hidden');
+        }
+    });
+
+    $('.gfirst_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname)) {
+    // there is a mismatch, hence show the error message
+        $('.gfirst_namemsg').removeClass('hidden');
+        $('.gfirst_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.gfirst_namemsg').addClass('hidden');
+        }
+    });
+
+
+var $regexname2=/^([a-zA-Z ]{2,30})*$/;
+    $('.middle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.middle_namemsg').removeClass('hidden');
+        $('.middle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.middle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.suffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.suffixmsg').removeClass('hidden');
+        $('.suffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.suffixmsg').addClass('hidden');
+        }
+    });
+
+
+     $('.gmiddle_name').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.gmiddle_namemsg').removeClass('hidden');
+        $('.gmiddle_namemsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.gmiddle_namemsg').addClass('hidden');
+        }
+    });
+
+    $('.gsuffix').on('keypress keydown keyup',function(){
+    if (!$(this).val().match($regexname2)) {
+    // there is a mismatch, hence show the error message
+        $('.gsuffixmsg').removeClass('hidden');
+        $('.gsuffixmsg').show();
+    }
+    else{
+        // else, do not display message
+        $('.gsuffixmsg').addClass('hidden');
+        }
+    });
 
 var v = $("#regForm").validate({
     rules: {
@@ -869,7 +992,7 @@ $(document).ready(function(){
     var dependent = $(this).data('dependent');
     var _token = $('input[name="_token"]').val();
     $.ajax({
-      url:"{{ route('eefap.fetch') }}",
+      url:"{{ route('users.fetch') }}",
       method:"POST",
       data:{select:select, value:value, _token:_token, dependent:dependent},
       success:function(result)
@@ -886,6 +1009,47 @@ $(document).ready(function(){
   });
 
 });
+
+function addInputs()
+{
+  var no = document.getElementById("nos").value;
+  // Container <div> where dynamic content will be placed
+  var container = document.getElementById("here");
+  var container2 = document.getElementById("here2");
+  // Clear previous contents of the container
+  while (container.hasChildNodes()) {
+      container.removeChild(container.lastChild);
+  }
+  while (container2.hasChildNodes()) {
+      container2.removeChild(container2.lastChild);
+  }
+  for (i=0;i<no;i++){
+      // Append a node with a random text
+      container.appendChild(document.createTextNode("Subject Name " + (i+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "subject" + i;
+      input.setAttribute("class", "req");
+      container.appendChild(input);
+      // Append a line break 
+      container.appendChild(document.createElement("br"));
+  }
+
+  for (y=0;y<no;y++){
+      // Append a node with a random text
+      container2.appendChild(document.createTextNode("Grade " + (y+1)));
+      // Create an <input> element, set its type and name attributes
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "grade" + y;
+      input.setAttribute("class", "req");
+      container2.appendChild(input);
+      // Append a line break 
+      container2.appendChild(document.createElement("br"));
+  }
+        
+}
 
 
 </script>
