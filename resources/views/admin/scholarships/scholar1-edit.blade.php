@@ -160,7 +160,7 @@ button:focus {
   background-color: #4CAF50;
 }
 
-.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg, .gsurnamemsg, .gfirst_namemsg, .gmiddle_namemsg, .gsuffixmsg{
+.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg, .gsurnamemsg, .gfirst_namemsg, .gmiddle_namemsg, .gsuffixmsg, .gen{
     color: red;
 }
 
@@ -469,7 +469,7 @@ button:focus {
       <div class="container-fluid">
         <div class="card">
           <div class="card-header" id="th-cl1">
-              <h4 class="boldtx" id="title_scholar"></h4>
+              <h4 class="boldtx" id="title_scholar">{{$scholar->scholarship_name}}</h4>
           </div>
           <div class="card-body">
             
@@ -606,7 +606,7 @@ button:focus {
           <h4 class="tx1">Educational Information</h4>
         </div>
         <hr/>
-        <div class="row form-group">
+        <div class="form-row form-group">
             <div class="col-md-5">
                 <label>* College/University Name <small>(No Abbreviation)</small></label>
                 <input name="college_name" type="text" class="form-control req" placeholder="College/University Name" value="{{$eefap->college_name}}"/>
@@ -620,7 +620,7 @@ button:focus {
                 <input name="yr_lvl" type="text" class="form-control req" placeholder ="Year Level" value="{{$eefap->year_level}}">
             </div>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
             <div class="col-md-4">
                 <label>* Course/Program <small>(No Abbreviation)</small></label>
                 <input name="course" type="text" class="form-control req" placeholder ="Course/Program" value="{{$eefap->course}}">
@@ -631,7 +631,9 @@ button:focus {
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average"  id="gen_average" type="text" class="form-control req" placeholder ="average" value="{{$eefap->general_average}}">
+                <input name="gen_average"  id="gen_average" type="text" class="form-control gen_average req" placeholder ="average" value="{{$eefap->general_average}}">
+                <small>Enter numeric equivalent only</small>
+                <p class="gen hidden">Please Enter a valid suffix</p>
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -755,6 +757,7 @@ button:focus {
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
+
   //$('#gen_average').mask('0.00', {"clearIncomplete": true});
   
   var pathname = window.location.pathname;
@@ -779,6 +782,25 @@ $(document).ready(function(){
 
 });
 
+
+var $regexname=/^([a-zA-Z ])$/;
+$('#gen_average').on('keypress keydown keyup',function(){
+  var value = $('#gen_average').val();
+  if (!$(this).val().match($regexname) && $('#gen_average').val() != "" && value.length<5) {
+    $('.gen').removeClass('hidden');
+    $('.gen').show();
+    $('.gen').text("Valid!");
+    $('.gen').css({'color': 'green'});
+    
+  }
+  else
+  {
+    $('.gen').removeClass('hidden');
+    $('.gen').show();
+    $('.gen').text("Invalid!");
+    $('.gen').css({'color': 'red'});
+  }
+});
 
 var $regexname=/^([a-zA-Z ]{2,30})$/;
     $('.surname').on('keypress keydown keyup',function(){

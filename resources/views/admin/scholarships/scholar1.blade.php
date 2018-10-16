@@ -160,7 +160,7 @@ button:focus {
   background-color: #4CAF50;
 }
 
-.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg, .gsurnamemsg, .gfirst_namemsg, .gmiddle_namemsg, .gsuffixmsg{
+.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg, .gsurnamemsg, .gfirst_namemsg, .gmiddle_namemsg, .gsuffixmsg, .gen{
     color: red;
 }
 
@@ -606,7 +606,7 @@ button:focus {
           <h4 class="tx1">Educational Information</h4>
         </div>
         <hr/>
-        <div class="row form-group">
+        <div class="form-row form-group">
             <div class="col-md-5">
                 <label>* College/University Name <small>(No Abbreviation)</small></label>
                 <input name="college_name" type="text" class="form-control req" placeholder="College/University Name"/>
@@ -620,7 +620,7 @@ button:focus {
                 <input name="yr_lvl" type="text" class="form-control req" placeholder ="Year Level">
             </div>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
             <div class="col-md-4">
                 <label>* Course/Program <small>(No Abbreviation)</small></label>
                 <input name="course" type="text" class="form-control req" placeholder ="Course/Program">
@@ -631,7 +631,9 @@ button:focus {
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average"  id="gen_average" type="text" class="form-control req" placeholder ="average">
+                <input name="gen_average"  id="gen_average" type="text" class="form-control gen_average req" placeholder ="average">
+                <small>Enter numeric equivalent only</small>
+                <p class="gen hidden">Please Enter a valid suffix</p>
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -753,7 +755,7 @@ button:focus {
 $(document).ready(function(){
   $('#mobile_no').mask('0000000000', {"clearIncomplete": true});
   $('#gmobile_no').mask('0000000000', {"clearIncomplete": true});
-  //$('#gen_average').mask('0.00', {"clearIncomplete": true});
+  // $('#gen_average').mask('000', {"clearIncomplete": true});
   
   var pathname = window.location.pathname;
   var parts = pathname.split('/');
@@ -765,6 +767,24 @@ $(document).ready(function(){
   $('#title_scholar').text(id);
 
 
+});
+var $regexname=/^([a-zA-Z ]{2,30})$/;
+$('#gen_average').on('keypress keydown keyup',function(){
+  var value = $('#gen_average').val();
+  if (!$(this).val().match($regexname) && $('#gen_average').val() != "" && value.length<5) {
+    $('.gen').removeClass('hidden');
+    $('.gen').show();
+    $('.gen').text("Valid!");
+    $('.gen').css({'color': 'green'});
+    
+  }
+  else
+  {
+    $('.gen').removeClass('hidden');
+    $('.gen').show();
+    $('.gen').text("Invalid!");
+    $('.gen').css({'color': 'red'});
+  }
 });
 
 

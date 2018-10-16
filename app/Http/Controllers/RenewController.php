@@ -62,7 +62,8 @@ class RenewController extends Controller
         ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
-        return view ('admin.scholarships.scholar1-edit')->with('role', $role)->with('eefap', $eefap)->with('municipal_list', $municipal_list);
+        $scholar = DB::table('scholarships')->where('id', $eefap->scholarship_id)->first();
+        return view ('admin.scholarships.scholar1-edit')->with('role', $role)->with('eefap', $eefap)->with('municipal_list', $municipal_list)->with('scholar', $scholar);
     }
     function editeefap(Request $request)
     {
@@ -102,6 +103,7 @@ class RenewController extends Controller
             'new'     => 0
         ]);
 
+        $logs = DB::table('log')->where('applicant_id', $eefapId->applicant_id)->delete();
 
         DB::table('application')->where('id', $request->get('sid'))
         ->update([
@@ -169,7 +171,9 @@ class RenewController extends Controller
         ->select('account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 
         'account_type.utilities', 'account_type.reports')->where('admins.id', Auth::user()->id)->first();
         $municipal_list = DB::select('select municipality from `munbar` group by municipality');
-        return view ('admin.scholarships.scholar2-edit')->with('role', $role)->with('eefapgv', $eefapgv)->with('municipal_list', $municipal_list);
+
+        $scholar = DB::table('scholarships')->where('id', $eefapgv->scholarship_id)->first();
+        return view ('admin.scholarships.scholar2-edit')->with('role', $role)->with('eefapgv', $eefapgv)->with('municipal_list', $municipal_list)->with('scholar', $scholar);
     }
 
     public function editeefapgv(Request $request)
@@ -209,6 +213,8 @@ class RenewController extends Controller
             'grades_isdel' => 1,
             'new'     => 0
         ]);
+
+        $logs = DB::table('log')->where('applicant_id', $eefapgvId->applicant_id)->delete();
         
         
         date_default_timezone_set("Asia/Manila");
@@ -328,6 +334,7 @@ class RenewController extends Controller
             'new'     => 0
         ]);
         
+        $logs = DB::table('log')->where('applicant_id', $pclId->applicant_id)->delete();
         
         date_default_timezone_set("Asia/Manila");
         $time = date('h:i:s', strtotime(now()));

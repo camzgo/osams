@@ -268,7 +268,7 @@ $(document).ready(function(){
 });
 
 var d = new Date();
-var year = d.getFullYear() - 17;
+var year = d.getFullYear() - 30;
 d.setFullYear(year);
 var age;
 $("#lastReporteddate").datepicker({ dateFormat: "dd/mm/yy",
@@ -290,7 +290,7 @@ $("#lastReporteddate").change(function(){
         console.log(birthdate[2]+" : "+birthdate[1]+" : "+birthdate[0]);
         console.log(age);
     
-        if (age<17)
+        if (age<30)
         {
             $('.bdaymsg').removeClass('hidden');
             $('.bdaymsg').show();

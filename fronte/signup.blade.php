@@ -41,7 +41,7 @@
 <main>
   <section>
       <div class="container">
-           <div class="card  mt-4" style="width: 1100px; height: 905px; margin-left:2em;">
+           <div class="card  mt-4" style="width: 1100px; height: 910px; margin-left:2em;">
                 <div class="card-body">
                     {{-- @foreach ($errors->all() as $error)
                           <div class="alert alert-danger">
@@ -64,7 +64,8 @@
                                             <h5 class="text-danger"><strong>REMINDERS</strong></h5>
                                         </div>
                                         <p>1. Sign up with a <strong>valid email address</strong> where we can send you notifications.</p>
-                                        <p>2. Enter your name as it appears on your birth certificate to avoid delays in the processing of your application.</p>
+                                        <p>2. Enter a <strong>valid mobile number</strong> where we can send your activation code.</p>
+                                        <p>2. Enter your name as it appears on your birth certificate to avoid delays in the processing of your application.</p>                                        
                                     </div>
                                 </div>
                                 <img src="{{asset('images/signup-icon.png')}}" alt="" style="width: 100%;">

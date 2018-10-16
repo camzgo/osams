@@ -278,6 +278,8 @@ Route::prefix('/')->group(function()
     Route::get('/scholarship/getdata', 'FrontendController@getdata')->name('logs.getdata');
     Route::get('/scholarship/check/{id}', 'FrontendController@spes');
     Route::get('/scholarship/invalid', 'FrontendController@spes2');
+    Route::get('/application/success', 'FrontendController@success');
+    Route::get('/application/renewed', 'FrontendController@renewed');
 });
 
 Route::prefix('/admin/tracking')->group(function(){
@@ -397,6 +399,9 @@ Route::prefix('admin/recheck')->group(function(){
 Route::prefix('admin/audit-log')->group(function(){
     Route::get('/', 'AuditController@index');
     Route::get('/getdata', 'AuditController@getdata')->name('audit.getdata');
+    Route::get('/srch/{date1}/{date2}', 'AuditController@search')->name('audit.srch');
+    Route::get('/print/{date1}/{date2}', 'AuditController@print_audit');
+    Route::get('/print_all', 'AuditController@print_all');
 });
 
 Route::get('/mailable', function () {

@@ -330,8 +330,11 @@
                 @endif
                 <span class="info-box-text">Total Amount:  <strong>Php {{$price[$x]}}</strong></span>
                 <span class="info-box-text">Status: <strong>{{$status[$x]}}</strong></span>
-                @if($total[$x] > $slot[$x])
-                <h5><span class="info-box-text"><i class="badge badge-danger">Application Exceeded. <br>Supplement slots added!</i></span></h5>
+                @if($total[$x] > $slot[$x] && $total[$x] != $slot[$x]+$supp[$x])
+                <h5><span class="info-box-text"><i class="badge badge-warning">Slots Exceeded. <br>Supplement slots added!</i></span></h5>
+                @endif
+                @if($total[$x] == $slot[$x]+$supp[$x])
+                <h5><span class="info-box-text"><i class="badge badge-danger">There are no slots available!</i></span></h5>
                 @endif
                 @if($total[$x] == $slot[$x])
                 <h5><span class="info-box-text"><i class="badge badge-warning text-white">Slots are full!</i></span></h5>
@@ -364,8 +367,11 @@
                 @endif
                 <span class="info-box-text">Total Amount:  <strong>Php {{$price[$x]}}</strong></span>
                 <span class="info-box-text">Status: <strong>{{$status[$x]}}</strong></span>
-                @if($total[$x] > $slot[$x])
-                <h5><span class="info-box-text"><i class="badge badge-danger">Application Exceeded. <br>Supplement slots added!</i></span></h5>
+                @if($total[$x] > $slot[$x] && $total[$x] != $slot[$x]+$supp[$x])
+                <h5><span class="info-box-text"><i class="badge badge-warning">Slots Exceeded. <br>Supplement slots added!</i></span></h5>
+                @endif
+                @if($total[$x] == $slot[$x]+$supp[$x])
+                <h5><span class="info-box-text"><i class="badge badge-danger">There are no slots available!</i></span></h5>
                 @endif
                 @if($total[$x] == $slot[$x])
                 <h5><span class="info-box-text"><i class="badge badge-warning text-white">Slots are full!</i></span></h5>
@@ -446,6 +452,15 @@
               <div class="info-box-content">
                 <span class="info-box-text">Total Amount</span>
                 <span class="info-box-number"><strong>{{$all[1]}}</strong></span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+             <div class="info-box mb-3 bg-secondary">
+              <span class="info-box-icon"><i class="fa fa-check"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Total Pre-Approved Applications</span>
+                <span class="info-box-number"><strong>{{$all[6]}}</strong></span>
               </div>
               <!-- /.info-box-content -->
             </div>

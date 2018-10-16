@@ -38,7 +38,7 @@ class VerifyController extends Controller
         }
         else
         {
-            return back()->withMessage('Verify code is not correct, Please try again.');
+           return redirect()->back()->with('error', 'Activation code is not correct, Please try again.');
         }
 
         //     return redirect()->route('login')->withMessage('Your account is activated!');

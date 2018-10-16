@@ -26,19 +26,42 @@ class SubController extends Controller
     
     function getdata()
     {
+        $app1 = DB::table('application')->where('application_status', "Pending")->get();
+        $ctr = DB::table('application')->where('application_status', "Pending")->count();
+        $datas = $app1->toJson();
+        $json = json_decode($datas, true);
         
-        $app = DB::table('application')->JOIN('scholarships', 'scholarships.id', '=', 'application.scholar_id')->JOIN('users', 'users.id', '=', 'application.applicant_id')
-        ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"), 'application.applicant_id', 
-        'application.application_status', 'application.id', 'scholarships.scholarship_name', 'scholarships.id as scid')
-        ->where('application.application_status', 'Pending')->get();
-         return DataTables::of($app)
+        for($x = 0; $x<=$ctr-1; $x++)
+        {
+            if($json[$x]['scholar_id'] == 8)
+            {
+                $app = DB::table('application')->JOIN('scholarships', 'scholarships.id', '=', 'application.scholar_id')->JOIN('reqgv', 'reqgv.scholar_id', '=', 'application.scholar_id')->JOIN('users', 'users.id', '=', 'application.applicant_id')
+                ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"), 'application.applicant_id AS applicant_id', 
+                'application.application_status', 'application.id AS app_id', 'scholarships.scholarship_name', 'scholarships.id as scid')
+                ->where('application.application_status', 'Pending')->where('reqgv.submit', 1)->get(); 
+                    
+            }
+            else
+            {
+                $app = DB::table('application')->JOIN('scholarships', 'scholarships.id', '=', 'application.scholar_id')->JOIN('reqeefap', 'reqeefap.scholar_id', '=', 'application.scholar_id')->JOIN('users', 'users.id', '=', 'application.applicant_id')
+                ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"), 'application.applicant_id AS applicant_id', 
+                'application.application_status', 'application.id AS app_id', 'scholarships.scholarship_name', 'scholarships.id as scid')
+                ->where('application.application_status', 'Pending')->where('reqeefap.submit', 1)->get(); 
+            }
+        }
+        // $app = DB::table('application')->JOIN('scholarships', 'scholarships.id', '=', 'application.scholar_id')->JOIN('users', 'users.id', '=', 'application.applicant_id')
+        // ->select(DB::raw("CONCAT_WS('', users.surname,', ', users.first_name, ' ', users.middle_name, ' ', users.suffix) as fullname"), 'application.applicant_id AS applicant_id', 
+        // 'application.application_status', 'application.id AS app_id', 'scholarships.scholarship_name', 'scholarships.id as scid')
+        // ->where('application.application_status', 'Pending')->get();
+        return DataTables::of($app)
 
         ->addColumn('action', function($app){
                        
-            return '<a href="submission/details/'.$app->scid.'" class="btn btn-sm btn-primary edit" id="'.$app->id.'"><i class="fa fa-eye"></i> View</a>';
+            return '<a href="submission/details/'.$app->scid.'" class="btn btn-sm btn-primary edit" id="'.$app->app_id.'"><i class="fa fa-eye"></i> View</a>';
 
         })
         ->make(true);
+        
 
     }
     public function details($id)

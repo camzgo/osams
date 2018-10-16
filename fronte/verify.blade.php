@@ -50,6 +50,12 @@
                     <hr>
                
                     <div class="container">
+                        @if(Session::has('error'))
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                {{Session::get('error')}}
+                                </div>
+                                @endif
                         <div class="form-row">
                             <div class="col-md-12">
                               <form action=" {{route('verify')}}" method="post">
@@ -59,12 +65,12 @@
                                     <div class="col-md-5">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="text" id="code" class="form-control form-control-lg {{$errors->has('code') ? 'is-invalid' : '' }}" name="code" required>
-                                                @if ($errors->has('code'))
+                                                <input type="text" id="code" class="form-control form-control-lg {{$errors->has('code') ? 'is-invalid' : '' }}" name="code" required autofocus>
+                                                {{-- @if ($errors->has('code'))
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('code') }}</strong>
                                                     </span>
-                                                @endif
+                                                @endif --}}
                                             </div>
                                         </div>
                                         <div class="form-row">

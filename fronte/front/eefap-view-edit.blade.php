@@ -154,7 +154,7 @@ button:focus {
   background-color: #4CAF50;
 }
 
-.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg, .gsurnamemsg, .gfirst_namemsg, .gmiddle_namemsg, .gsuffixmsg{
+.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg, .gsurnamemsg, .gfirst_namemsg, .gmiddle_namemsg, .gsuffixmsg, .gen{
     color: red;
 }
 
@@ -231,7 +231,7 @@ button:focus {
             <p class="suffixmsg hidden mb-0">Please Enter a valid suffix</p>
           </div>
         </div>
-        <div class="row form-group">
+        <div class="form-row form-group">
           <div class="col-md-3">
             <label for="municipality">* Municipality</label>
             <select name="municipality" id="municipality" data-val="true"  data-val-required="Please select Municipality" data-dependent="barangay" class="form-control dynamic req" required >
@@ -252,7 +252,7 @@ button:focus {
             <input type="text" class="form-control" id="street" name="street"  value="{{$eefap->street}}" placeholder='(Street, Village Subdivision)'/>
           </div>
         </div>
-         <div class="row form-group">
+         <div class="form-row form-group">
           <div class="col-md-3">
             <label for="mobile_no">* Mobile Number</label>
             <div class="input-group">
@@ -326,7 +326,7 @@ button:focus {
           <h4 class="tx1">Educational Information</h4>
         </div>
         <hr/>
-        <div class="row form-group">
+        <div class="form-row">
             <div class="col-md-5">
                 <label>* College/University Name <small>(No Abbreviation)</small></label>
                 <input name="college_name" type="text" class="form-control req" value="{{$eefap->college_name}}" placeholder="College/University Name"/>
@@ -345,7 +345,7 @@ button:focus {
                 </div>
             </div>
         </div>
-        <div class="row form-group">
+        <div class="form-row">
             <div class="col-md-4">
                 <label>* Course/Program <small>(No Abbreviation)</small></label>
                 <input name="course" type="text" class="form-control req" value="{{$eefap->course}}" placeholder ="Course/Program">
@@ -356,7 +356,9 @@ button:focus {
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average" id="gen_average" type="text" class="form-control  req" value="{{$eefap->general_average}}"  placeholder ="Average">
+                <input name="gen_average" id="gen_average" type="text" class="form-control gen_average req" value="{{$eefap->general_average}}"  placeholder ="Average">
+                <small>Enter numeric equivalent only</small>
+                <p class="gen hidden">Please Enter a valid suffix</p>
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -511,6 +513,25 @@ $(document).ready(function(){
   // console.log(parts[3]);
   // $('#sid').val(parts[3]);
 
+});
+
+var $regexname=/^([a-zA-Z ])$/;
+$('#gen_average').on('keypress keydown keyup',function(){
+  var value = $('#gen_average').val();
+  if (!$(this).val().match($regexname) && $('#gen_average').val() != "" && value.length<5) {
+    $('.gen').removeClass('hidden');
+    $('.gen').show();
+    $('.gen').text("Valid!");
+    $('.gen').css({'color': 'green'});
+    
+  }
+  else
+  {
+    $('.gen').removeClass('hidden');
+    $('.gen').show();
+    $('.gen').text("Invalid!");
+    $('.gen').css({'color': 'red'});
+  }
 });
 
 // $('#surname').keyup(function() {

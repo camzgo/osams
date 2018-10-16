@@ -436,8 +436,8 @@
                                           
                                         
                                         </table>
-
-                                        <a href="/storage/uploads/{{$req->brgy}}" target="_blank" class="btn btn-primary">View Uploaded File</a>
+                                        <hr>
+                                        <a href="#" target="_blank" id="filed" name="filed" class="btn btn-primary pull-right">View Uploaded File</a>
                                       </div>
                                     </div>
                                       
@@ -593,7 +593,17 @@ function search()
               $('#applicant_id').val(data.applicant_id);
               $('#school_id').val(data.school_id);
               $('#print').attr("href", "/admin/apply/application/form/"+data.applicant_id);
-
+              
+              if(data.grades_sub == "Submitted")
+              {
+                $('#filed').show();
+                $("#filed").attr("href", "/storage/uploads/"+data.grades2);
+                
+              }
+              else
+              {
+                $('#filed').hide();
+              }
 
               var table = document.getElementById("grades");
             

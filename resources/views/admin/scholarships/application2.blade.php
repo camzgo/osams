@@ -254,7 +254,7 @@
                     <li class="nav-item">
                         <a href="/admin/archive/employee" class="nav-link">
                           &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <i class="fa fa-eefapgv nav-icon"></i>
+                        <i class="fa fa-users nav-icon"></i>
                         <p>Employee</p>
                         </a>
                     </li>

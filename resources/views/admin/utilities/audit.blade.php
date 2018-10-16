@@ -320,37 +320,33 @@
           </div>
           <div class="card-body"> 
          <div class="container">
-           <div class="form-row align-items-center mt-4 mb-2">
+           <form method="get">
+           <div class="form-row justify-content-center mt-4 mb-2">
+   
              <div class="col-md-2">
                {{-- <label>Date from:</label> --}}
-               <input type="date" class="form-control" id="date_to" name="date_to" onchange="srch()">
+               <input type="date" class="form-control" id="date_from" name="date_from" onchange="srch()">
              </div>
              <div class="col-md-0 mt-2">
                <label>FROM <i class="fa fa-arrow-right"></i> TO</label>
              </div>
              <div class="col-md-2">
                {{-- <label>Date to:</label> --}}
-               <input type="date" class="form-control" id="date_from" date="date_to" onchange="srch()">
+               <input type="date" class="form-control" id="date_to" date="date_to" onchange="srch()">
              </div>
-             
-             {{-- <div class="col-md-3">
-               <a href="#" class="btn btn-success ">Search</a>
-             </div> --}}
+
+             <div class=" ml-2 col-md-2">
+               <a href="#" id="print" name="print" target = "_blank" class="btn btn-success btn-block print">Print</a>
+             </div>
+             <div class=" ml-2 col-md-2">
+               <a href="#" class="btn btn-danger btn-block">Delete All</a>
+             </div>
            </div>
-          </div>
+          
+        </form>
 
         <br>
-        <div class="container">
-           @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
+
      <table class=" table table-hover" style="width:100%" id="table">
                <thead class="th-cl1">
                   <tr>
@@ -361,6 +357,7 @@
                   </tr>
                </thead>
             </table>
+            </div>
             <br>
 </div>
 
@@ -484,6 +481,7 @@
         
 </div>
 <script>
+
      $(function() {
                $('#table').DataTable({
                processing: true,
@@ -498,16 +496,10 @@
                         
                   ] 
             });
-    $('#add_data').click(function(){
-        $('#mainModal').modal('show');
-        $('#main_form')[0].reset();
-        $('#form_output').html('');
-        $('#button_action').val('insert');
-        $('#action').val('Add');
-        $('.modal-title').text('Add Account');
-        edit_Form();
-    });
-
+$(document).ready(function()
+{
+$("#print").attr("href", "audit-log/print_all");
+});
     $('#main_form').on('submit', function(event){
         event.preventDefault();
         var form_data = $(this).serialize();
@@ -719,9 +711,35 @@ function del_Form() {
 
 function srch()
 {
- 
-  console.log($('#date_to').val());
+  var table = $('#table').DataTable();
+  if($('#date_from').val() != "" && $('#date_to').val()!="")
+  {
+   var date_from = $('#date_from').val();
+   var date_to = $('#date_to').val();
+   //"{{route ('audit.srch', ['2018-10-15', '2018-10-16'])}}" 
+
+    var url = '{{route ("audit.srch",  [":date_from", ":date_to"])}}';
+    url = url.replace(':date_from', date_from);
+    url = url.replace(':date_to', date_to);
+    console.log(url);
+    table.ajax.url(url).load();
+    $("#print").attr("href", "audit-log/print/"+date_from+'/'+date_to);
+  
+  }
+  else
+  {
+    $("#print").attr("href", "audit-log/print_all");
+  
+  }
+
+  
+//  $('#table').DataTable().ajax.reload();
+  console.log($('#date_from').val());
 }
+
+//  $(document).on('click', '.print', function(){
+    
+//  });
 </script>
 </body>
 </html>

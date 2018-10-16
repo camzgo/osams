@@ -162,7 +162,7 @@ button:focus {
   background-color: #4CAF50;
 }
 
-.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg{
+.surnamemsg, .first_namemsg, .middle_namemsg, .suffixmsg, .gen{
     color: red;
 }
 
@@ -587,7 +587,9 @@ button:focus {
             </div>
             <div class="col-md-2">
                 <label>* General Average</label>
-                <input name="gen_average" id="gen_average" type="text" class="form-control req" placeholder ="average">
+                <input name="gen_average" id="gen_average" type="text" class="form-control gen_average req" placeholder ="average">
+                <small>Enter numeric equivalent only</small>
+                <p class="gen hidden">Please Enter a valid suffix</p>
             </div>
             <div class="col-md-3">
               <label>* Education Program</label>
@@ -778,6 +780,27 @@ $(document).ready(function(){
 
 });
 
+
+var $regexname=/^([a-zA-Z ])$/;
+$('#gen_average').on('keypress keydown keyup',function(){
+  var value = $('#gen_average').val();
+  if (!$(this).val().match($regexname) && $('#gen_average').val() != "" && value.length<5) {
+    $('.gen').removeClass('hidden');
+    $('.gen').show();
+    $('.gen').text("Valid!");
+    $('.gen').css({'color': 'green'});
+    
+  }
+  else
+  {
+    $('.gen').removeClass('hidden');
+    $('.gen').show();
+    $('.gen').text("Invalid!");
+    $('.gen').css({'color': 'red'});
+  }
+});
+
+
 var v = $("#regForm").validate({
     rules: {
       religion: {
@@ -791,6 +814,7 @@ var v = $("#regForm").validate({
     errorElement: "span",
     errorClass: "help-inline",
   });
+
 
 
 var currentTab = 0; // Current tab is set to be the first tab (0)

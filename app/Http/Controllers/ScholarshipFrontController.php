@@ -353,7 +353,7 @@ class ScholarshipFrontController extends Controller
 
             }
 
-            return redirect('/scholarship/details');
+            return redirect('/application/success');
         }
         else
         {
@@ -479,7 +479,7 @@ class ScholarshipFrontController extends Controller
             }
             
 
-            return redirect('/scholarship/details');
+            return redirect('/application/success');
         }
         else
         {
@@ -605,7 +605,7 @@ class ScholarshipFrontController extends Controller
 
             }
 
-            return redirect('/scholarship/details');
+            return redirect('/application/success');
         }
         else
         {

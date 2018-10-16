@@ -33,7 +33,14 @@ class RecheckController extends Controller
         ->select('scholarships.scholarship_name', 'application.application_status', 'scholarships.type','application.id', 'scholarships.id AS sc_id', 'application.applicant_id AS applicant_id' )->first();
         
         $app = DB::table('application')->where('barcode_number', $id)->first();
-        
+        if($scholar->sc_id == 8)
+        {
+            $req = DB::table('reqgv')->where('applicant_id', $scholar->applicant_id)->first();
+        }
+        else
+        {
+            $req = DB::table('reqeefap')->where('applicant_id', $scholar->applicant_id)->first();
+        }
         //$name = $users->first_name . ' ' .$users->middle_name. ' '. $users->surname . ' ' . $users->suffix;
         // $address = $users->street. ', '. $users->barangay. ', '. $users->municipality;
         // $output = array(
@@ -98,6 +105,8 @@ class RecheckController extends Controller
             'sc_id' => $scholar->sc_id,
             'applicant_id' => $scholar->applicant_id,
             'school_id' => $users->school_id,
+            'grades_sub' => $req->grades_sub,
+            'grades2'  => $req->grades,
             
         );
         echo json_encode($output);

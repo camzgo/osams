@@ -100,7 +100,7 @@ class RegisterController extends Controller
         $dta = date('Y-m-d', strtotime($date));
 
 
-        $res = Itexmo::to('0'.$data['mobile_no'])->message($code)->send();
+        $res = Itexmo::to('0'.$data['mobile_no'])->message('Your activation code: '.$code)->send();
         if($res == '0') {
             //
         }

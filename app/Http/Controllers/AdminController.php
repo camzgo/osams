@@ -180,13 +180,28 @@ class AdminController extends Controller
             }
 
             $ave = DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->select('scholarships.id')->count();
+            $pre = DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->where('application.application_status', 'Pre-Approved')->select('scholarships.id')->count();
             $approve = DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->where('application.application_status', 'Approved')->select('scholarships.id')->count();
             $pending = DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->where('application.application_status', 'Pending')->select('scholarships.id')->count();
             $disapprove = DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->where('application.application_status', 'Disapproved')->select('scholarships.id')->count();
             $renew = DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->where('application.application_status', 'Renew')->select('scholarships.id')->count();
             $over =DB::table('scholarships')->JOIN('application', 'application.scholar_id', '=', 'scholarships.id')->where('application.application_status', "Approved")->sum('scholarships.amount');
             
-            $all = array($ave, $over, $approve, $pending, $disapprove, $renew);
+            $ctr =  strlen ($over);
+            if($ctr == 4)
+            {
+                $over = substr($over,0,1).','.substr($over,1,3);
+            }
+            else if ($ctr == 5)
+            {
+                $over = substr($over,0,2).','.substr($over,2,3);
+            }
+            else if ($ctr == 6)
+            {
+                $over = substr($over,0,3).','.substr($over,3,3);
+            }
+
+            $all = array($ave, $over, $approve, $pending, $disapprove, $renew, $pre);
             // return $all;
              $role = DB::table('account_type')->JOIN('admins', 'admins.account_id', '=', 'account_type.id')
             ->select('account_type.account_name', 'account_type.file_maintenance',  'account_type.submission', 'account_type.transactions', 

@@ -411,6 +411,10 @@ class FrontendController extends Controller
         if ($personal) { 
             
 
+            
+            $var = $request->get('bday');
+            $date = str_replace('/', '-', $var);
+            $dta = date('Y-m-d', strtotime($date));
 
             $id = $personal->id;
             $personals = Personal::find($id);
@@ -429,7 +433,7 @@ class FrontendController extends Controller
             $user->middle_name = $request->get('middle_name');
             $user->suffix = $request->get('suffix');
             $user->gender = $request->get('gender');
-            $user->bday = $request->get('bday');
+            $user->bday = $dta;
             $user->school_id = $request->get('school_id');
             $user->save();
             
@@ -448,13 +452,16 @@ class FrontendController extends Controller
                 'applicant_id' => Auth::user()->id
             ]);
 
+            $var = $request->get('bday');
+            $date = str_replace('/', '-', $var);
+            $dta = date('Y-m-d', strtotime($date));
             $user = User::find(Auth::user()->id);
             $user->surname = $request->get('surname');
             $user->first_name = $request->get('first_name');
             $user->middle_name = $request->get('middle_name');
             $user->suffix = $request->get('suffix');
             $user->gender = $request->get('gender');
-            $user->bday = $request->get('bday');
+            $user->bday = $dta;
             $user->save();
 
             return redirect('/profile');
@@ -477,6 +484,9 @@ class FrontendController extends Controller
         
         if($guardian)
         {
+            $var = $request->get('bday');
+            $date = str_replace('/', '-', $var);
+            $dta = date('Y-m-d', strtotime($date));
             $id = $guardian->id;
             $guardians = Guardian::find($id);
             $guardians->surname = ucfirst($request->get('surname'));
@@ -491,7 +501,7 @@ class FrontendController extends Controller
             $guardians->municipality = $request->get('municipality');
             $guardians->barangay = $request->get('barangay');
             $guardians->street = $request->get('street');
-            $guardians->bday = $request->get('bday');
+            $guardians->bday = $dta;
             $guardians->relationship = $request->get('relationship');
             $guardians->save();
             return redirect('/profile');
@@ -499,6 +509,9 @@ class FrontendController extends Controller
         }
         else
         {
+            $var = $request->get('bday');
+            $date = str_replace('/', '-', $var);
+            $dta = date('Y-m-d', strtotime($date));
             $guardians = DB::table('guardian_info')->insert([
                 'surname' => ucfirst($request->surname),
                 'first_name' => ucfirst($request->first_name),
@@ -512,7 +525,7 @@ class FrontendController extends Controller
                 'municipality' => $request->municipality,
                 'barangay'  => $request->barangay,
                 'street'   => $request->street, 
-                'bday'  => $request->bday,
+                'bday'  => $dta,
                 'relationship' => $request->relationship,
                 'applicant_id'  => Auth::user()->id
             ]);
@@ -1658,6 +1671,8 @@ class FrontendController extends Controller
             'new'     => 0
         ]);
 
+        $logs = DB::table('log')->where('applicant_id', Auth::user()->id)->delete();
+
         $ctr = $request->get('nos');
         $sub1 = array();
         $grad1 = array();
@@ -1697,7 +1712,7 @@ class FrontendController extends Controller
 
         ]);
 
-        return redirect ('/scholarship/details');
+        return redirect('/application/renewed');
 
 
 
@@ -1747,6 +1762,8 @@ class FrontendController extends Controller
             'new'     => 0
         ]);
 
+        $logs = DB::table('log')->where('applicant_id', Auth::user()->id)->delete();
+
         $ctr = $request->get('nos');
         $sub1 = array();
         $grad1 = array();
@@ -1787,7 +1804,7 @@ class FrontendController extends Controller
         ]);
 
 
-        return redirect ('/scholarship/details');
+        return redirect('/application/renewed');
 
     }
 
@@ -1844,6 +1861,8 @@ class FrontendController extends Controller
             'new'     => 0
         ]);
 
+        $logs = DB::table('log')->where('applicant_id', Auth::user()->id)->delete();
+
         $ctr = $request->get('nos');
         $sub1 = array();
         $grad1 = array();
@@ -1886,7 +1905,7 @@ class FrontendController extends Controller
 
 
 
-        return redirect ('/scholarship/details');
+        return redirect('/application/renewed');
 
     }
 
@@ -1980,6 +1999,16 @@ class FrontendController extends Controller
     function spes2()
     {
         return view('scholarship.spes2');
+    }
+
+    function success()
+    {
+        return view('success');
+    }
+    
+    function renewed()
+    {
+        return view('renew');
     }
 }
 
