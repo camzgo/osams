@@ -9,7 +9,7 @@
   <title>Pampanga Capitol | Online Scholarship Application and Management System</title>
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-
+  {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> --}}
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.11/dist/sweetalert2.min.css"> --}}
   <script src="{{asset('js/app.js')}}"></script>

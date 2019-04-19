@@ -461,7 +461,7 @@ button:focus {
               <label>Number of Courses/Subjects </label>
               <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
                 <option value="" selected disabled>--Select--</option>
-                @for($i = 1; $i<=12; $i++)
+                @for($i = 8; $i<=12; $i++)
                 <option value="{{$i}}">{{$i}}</option>
                 @endfor
               </select>
@@ -742,69 +742,6 @@ function get_age(born, now) {
         return now.getFullYear() - born.getFullYear() - 1;
     }
 
-
-
-
-// $('#surname').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-// $('#first_name').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-// $('#middle_name').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-// $('#suffix').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-// $('#fsurname').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-// $('#ffirst_name').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-// $('#fmiddle_name').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-// $('#fsuffix').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-// $('#msurname').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-// $('#mfirst_name').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-// $('#mmiddle_name').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-// $('#msuffix').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-// $('#foccupation').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-// $('#moccupation').keyup(function() {
-//     var $th = $(this);
-//     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
-// });
-
-
-
-
 var v = $("#regForm").validate({
     rules: {
       religion: {
@@ -876,15 +813,6 @@ function validateForm() {
       // and set the current valid status to false:
       valid = false;
     }
-
-    // for (c =0; c < w.length; c++)
-    // {
-    //   if(w[c].value == "")
-    //   {
-    //     w[c].className += " invalid";
-    //     valid = false;
-    //   }
-    // }
   }
   // If the valid status is true, mark the step as finished and valid:
   if (valid) {

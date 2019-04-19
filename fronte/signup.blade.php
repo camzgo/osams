@@ -124,15 +124,24 @@
 
                                         <div class="form-row ">
                                             <div class="col-md-6">
-                                            <label>Birth Date</label>
-                                            <input type="text" name="bday" id="lastReporteddate" class="form-control form-control-lg" placeholder="dd/mm/yyyy" required/>
-                                            @if ($errors->has('bday'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('bday') }}</strong>
-                                                </span>
-                                            @endif
-                                            <p class="bdaymsg hidden">Please Enter a valid birth date</p>
+                                                <label>Birth Date</label>
+                                                <div class="input-group ">
+                                                     <input type="text" name="bday" id="lastReporteddate" class="form-control form-control-lg" placeholder="dd/mm/yyyy" required/>
+                                                    @if ($errors->has('bday'))
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $errors->first('bday') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text" id="age" name="age"><strong>Age: 00</strong></span>
+                                                    </div>
+                                                </div>
+                                                <p class="bdaymsg hidden">Please Enter a valid birth date</p>
+                                            
                                             </div>   
+
+                                            
+
                                             <div class="col-md-6">
                                             <label>Gender</label>
                                             <select name="gender" id="gender" class="form-control form-control-lg"> 
@@ -382,7 +391,8 @@ $("#lastReporteddate").change(function(){
             $('.bdaymsg').removeClass('hidden');
             $('.bdaymsg').show();
              $('.bdaymsg').css({'color': 'red'});
-            $('.bdaymsg').text("Invalid Age: " +age);
+            $('.bdaymsg').text("Invalid Age");
+            document.getElementById("age").innerHTML="<strong> Age: "+age+"</strong>";
             return false;
         }
         else
@@ -390,7 +400,8 @@ $("#lastReporteddate").change(function(){
             $('.bdaymsg').removeClass('hidden');
             $('.bdaymsg').show();
             $('.bdaymsg').css({'color': 'green'});
-            $('.bdaymsg').text("Valid Age: " +age);
+            $('.bdaymsg').text("Valid Age");
+            document.getElementById("age").innerHTML="<strong> Age: "+age+"</strong>";
             
         }
 });

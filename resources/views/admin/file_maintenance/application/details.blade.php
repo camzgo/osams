@@ -117,7 +117,7 @@
                             <input type="text" class="form-control-plaintext" readonly id="gen_ave" value="{{$eefap->general_average}}" name="gen_ave">
                         </div>
                     </div>
-                    <div class="form-row">
+                    {{-- <div class="form-row">
                         <div class="col-md-4">
                             <label>I certify that: </label>
                             @if($eefap->spes == "YES")
@@ -126,7 +126,7 @@
                             <input type="text" class="form-control-plaintext" readonly id="spes" value="{{$eefap->spes}}, I am not SPES Recipient" name="spes">
                             @endif
                         </div>
-                    </div>
+                    </div> --}}
                     @endif
                     <!--end-->
 
@@ -195,14 +195,14 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-4">
+                        {{-- <div class="col-md-4">
                             <label>I certify that: </label>
                             @if($eefapgv->spes == "YES")
                             <input type="text" class="form-control-plaintext" readonly id="spes" name="spes" value="{{$eefapgv->spes}}, I am SPES Recipient">
                             @else
                             <input type="text" class="form-control-plaintext" readonly id="spes" name="spes" value="{{$eefapgv->spes}}, I am not SPES Recipient">
                             @endif
-                        </div>
+                        </div> --}}
                         <div class="col-md-4">
                             <label>Awards Received / Rank: </label>
                             <input type="text" class="form-control-plaintext" readonly id="award" name="award" value="{{$eefapgv->awards}}">

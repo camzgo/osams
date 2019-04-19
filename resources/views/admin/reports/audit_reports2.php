@@ -30,7 +30,12 @@ $pdf->setY(25);
 	$pdf->Cell(215, 5, 'ONLINE SCHOLARSHIP AND MANAGEMENT SYSTEM',0,1,'C');
 	$pdf->Ln(5);
 	$pdf->Cell(205,5,'AUDIT LOGS',0,1,'C');
+	$pdf->Ln(5);
+	$pdf->SetFont('Arial','B',10);
+	$pdf->Cell(200, 1, 'As of October 12 to October 17, 2018',0,1,'C');
 	$pdf->Ln(10);
+	// $pdf->Ln(10);
+	
 	$pdf->Cell(-2);
 	$pdf->SetFont('Arial','B',10);
 	$pdf->Cell(10,7,'#',1,0);

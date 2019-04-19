@@ -263,17 +263,7 @@ class ScholarshipFrontController extends Controller
                 // 'occupation' => 'string|regex:/^[a-zA-Z]+$/u|max:50',
             ]);	
             
-            $id = DB::table('application')->insertGetId([
-                'application_status' => 'Pending',
-                'renew' => '0',
-                'barcode_number' => $request->barcode,
-                'barcode_image' => 'NONE',
-                'applicant_id' => $request->sid,
-                'scholar_id' => $request->scholar_id,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ]);
-
+            
             $ctr = $request->get('nos');
             $sub1 = array();
             $grad1 = array();
@@ -288,17 +278,41 @@ class ScholarshipFrontController extends Controller
 
             for($y=0; $y<=$ctr-1; $y++)
             {
-                $grades = DB::table('grades')->insert([
-                    'subject' => $sub1[$y],
-                    'grades' => $grad1[$y],
-                    'semester' => $request->sem,
-                    'student_id' => Auth::user()->id,
-                    'new'     => "1",
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
-                    'grades_isdel' => 0
-                ]);
+                if($grad1[$y] >=75)
+                {
+                    $grades = DB::table('grades')->insert([
+                        'subject' => $sub1[$y],
+                        'grades' => $grad1[$y],
+                        'semester' => $request->sem,
+                        'student_id' => Auth::user()->id,
+                        'new'     => "1",
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s'),
+                        'grades_isdel' => 0
+                    ]);
+                }
+                else
+                {
+                    return redirect('/application/error');
+                }
             }
+
+            $id = DB::table('application')->insertGetId([
+                'application_status' => 'Pending',
+                'renew' => '0',
+                'barcode_number' => $request->barcode,
+                'barcode_image' => 'NONE',
+                'applicant_id' => $request->sid,
+                'scholar_id' => $request->scholar_id,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+
+            
+            $total = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->sum('grades');
+            $ctr2 = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->count();
+            $sum = $total/$ctr2;
+
 
             $eefap = DB::table('eefap')->insert([
                 'surname' => ucfirst($request->surname),
@@ -320,7 +334,7 @@ class ScholarshipFrontController extends Controller
                 'year_level' => $request->yr_lvl,
                 'course' => $request->course,
                 'major' => ucfirst($request->major), 
-                'general_average' => $request->gen_average,
+                'general_average' => $sum,
                 'program_type' => $request->educ_prog,
                 'graduating' => $request->grad,
                 'scholarship_id' => $request->scholar_id,
@@ -377,17 +391,7 @@ class ScholarshipFrontController extends Controller
 
         if($spes != 1 &&  $school_id != 1)
         {
-            $id = DB::table('application')->insertGetId([
-                'application_status' => 'Pending',
-                'renew' => '0',
-                'barcode_number' => $request->barcode,
-                'barcode_image' => 'NONE',
-                'applicant_id' => $request->sid,
-                'scholar_id' => $request->scholar_id,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ]);
-
+           
 
             $ctr = $request->get('nos');
             $sub1 = array();
@@ -403,19 +407,41 @@ class ScholarshipFrontController extends Controller
 
             for($y=0; $y<=$ctr-1; $y++)
             {
-                $grades = DB::table('grades')->insert([
-                    'subject' => $sub1[$y],
-                    'grades' => $grad1[$y],
-                    'semester' => $request->sem,
-                    'student_id' => Auth::user()->id,
-                    'new'     => "1",
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
-                    'grades_isdel' => 0
-                ]);
+                if($grad1[$y] >=75)
+                {
+                    $grades = DB::table('grades')->insert([
+                        'subject' => $sub1[$y],
+                        'grades' => $grad1[$y],
+                        'semester' => $request->sem,
+                        'student_id' => Auth::user()->id,
+                        'new'     => "1",
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s'),
+                        'grades_isdel' => 0
+                    ]);
+                }
+                else
+                {
+                    return redirect('/application/error');
+                }
             }
+            
+             $id = DB::table('application')->insertGetId([
+                'application_status' => 'Pending',
+                'renew' => '0',
+                'barcode_number' => $request->barcode,
+                'barcode_image' => 'NONE',
+                'applicant_id' => $request->sid,
+                'scholar_id' => $request->scholar_id,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
 
 
+
+            $total = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->sum('grades');
+            $ctr2 = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->count();
+            $sum = $total/$ctr2;
 
             $eefap = DB::table('eefapgv')->insert([
                 'surname' => ucfirst($request->surname),
@@ -431,7 +457,7 @@ class ScholarshipFrontController extends Controller
                 'year_level' => $request->yr_lvl,
                 'course' => ucfirst($request->course),
                 'major' => ucfirst($request->major), 
-                'general_average' => $request->gen_average,
+                'general_average' => $sum,
                 'program_type' => $request->educ_prog,
                 'graduating' => $request->grad,
                 'awards'=> $request->award,
@@ -524,16 +550,23 @@ class ScholarshipFrontController extends Controller
 
             for($y=0; $y<=$ctr-1; $y++)
             {
-                $grades = DB::table('grades')->insert([
-                    'subject' => $sub1[$y],
-                    'grades' => $grad1[$y],
-                    'semester' => $request->sem,
-                    'student_id' => Auth::user()->id,
-                    'new'     => "1",
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
-                    'grades_isdel' => 0
-                ]);
+                if($grad1[$y] >=75)
+                {
+                    $grades = DB::table('grades')->insert([
+                        'subject' => $sub1[$y],
+                        'grades' => $grad1[$y],
+                        'semester' => $request->sem,
+                        'student_id' => Auth::user()->id,
+                        'new'     => "1",
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s'),
+                        'grades_isdel' => 0
+                    ]);
+                }
+                else
+                {
+                    return redirect('/application/error');
+                }
             }
 
             $eefap = DB::table('pcl')->insert([

@@ -353,13 +353,14 @@ button:focus {
             <div class="col-md-3">
                 <label>* Major <small>(No Abbreviation)</small></label>
                 <input name="major" type="text" class="form-control req" placeholder ="Major">
+                <small>Enter <strong>None</strong> if not applicable</small>
             </div>
-            <div class="col-md-2">
+            {{-- <div class="col-md-2">
                 <label>* General Average</label>
                 <input name="gen_average" id="gen_average" type="text" class="form-control gen_average req"  placeholder ="Average">
                 <small>Enter numeric equivalent only</small>
                 <p class="gen hidden">Please Enter a valid suffix</p>
-            </div>
+            </div> --}}
             <div class="col-md-3">
               <label>* Education Program</label>
               <select name="educ_prog" id="educ_prog" class="form-control req">
@@ -369,15 +370,16 @@ button:focus {
                 <option value="Ladderized">Ladderized</option>
               </select>
             </div>
-        </div>
-        <div class="row form-group">
-          <div class="col-md-3">
+            <div class="col-md-2">
             <label>* Graduating: </label>
             <select name="grad" id="grad" class="form-control">
               <option value="" selected disabled>--Select--</option>
               <option value="YES">YES</option>
               <option value="NO">NO</option>
             </select>
+        </div>
+        <div class="row form-group">
+          
           </div>
           {{-- <div class="col-md-3">
             <label>* I certify that: </label>
@@ -403,7 +405,7 @@ button:focus {
               <label>Number of Courses/Subjects </label>
               <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
                 <option value="" selected disabled>--Select--</option>
-                @for($i = 1; $i<=12; $i++)
+                @for($i = 5; $i<=12; $i++)
                 <option value="{{$i}}">{{$i}}</option>
                 @endfor
               </select>
@@ -515,24 +517,7 @@ $(document).ready(function(){
 //     var $th = $(this);
 //     $th.val( $th.val().replace(/[^a-zA-Z]/, function(str) { alert('You typed " ' + str + ' "\n\nPlease use only letters.'); return ''; } ) );
 // });
-var $regexname=/^([a-zA-Z ])$/;
-$('#gen_average').on('keypress keydown keyup',function(){
-  var value = $('#gen_average').val();
-  if (!$(this).val().match($regexname) && $('#gen_average').val() != "" && value.length<5) {
-    $('.gen').removeClass('hidden');
-    $('.gen').show();
-    $('.gen').text("Valid!");
-    $('.gen').css({'color': 'green'});
-    
-  }
-  else
-  {
-    $('.gen').removeClass('hidden');
-    $('.gen').show();
-    $('.gen').text("Invalid!");
-    $('.gen').css({'color': 'red'});
-  }
-});
+
 
 var v = $("#regForm").validate({
     rules: {

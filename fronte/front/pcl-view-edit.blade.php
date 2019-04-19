@@ -462,7 +462,7 @@ button:focus {
               <label>Number of Courses/Subjects </label>
               <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
                 <option value="" selected disabled>--Select--</option>
-                @for($i = 1; $i<=12; $i++)
+                @for($i = 8; $i<=12; $i++)
                 <option value="{{$i}}">{{$i}}</option>
                 @endfor
               </select>

@@ -300,14 +300,10 @@ button:focus {
             </div>
             <div class="col-md-3">
                 <label>* Major <small>(No Abbreviation)</small></label>
-                <input name="major" id="major" type="text" class="form-control req" placeholder ="Major">
+                <input name="major" type="text" class="form-control req" placeholder ="Major">
+                <small>Enter <strong>None</strong> if not applicable</small>
             </div>
-            <div class="col-md-2">
-                <label>* General Average</label>
-                <input name="gen_average" id="gen_average" type="text" class="form-control gen_average req" placeholder ="Average">
-                <small>Enter numeric equivalent only</small>
-                <p class="gen hidden">Please Enter a valid suffix</p>
-            </div>
+            
             <div class="col-md-3">
               <label>* Education Program</label>
               <select name="educ_prog" id="educ_prog" class="form-control req">
@@ -317,26 +313,16 @@ button:focus {
                 <option value="Ladderized">Ladderized</option>
               </select>
             </div>
+            <div class="col-md-2">
+              <label>* Graduating: </label>
+              <select name="grad" id="grad" class="form-control req">
+                <option value="" selected disabled>--Select--</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+              </select>
+            </div>
         </div>
-        <div class="row form-group">
-          <div class="col-md-3">
-            <label>* Graduating: </label>
-            <select name="grad" id="grad" class="form-control req">
-              <option value="" selected disabled>--Select--</option>
-              <option value="YES">YES</option>
-              <option value="NO">NO</option>
-            </select>
-          </div>
-          {{-- <div class="col-md-3">
-            <label>* I certify that: </label>
-            <select name="spes" id="spes" class="form-control req">
-              <option value="" selected disabled>--Select--</option>
-              <option value="YES">Yes, I am SPES Recipient</option>
-              <option value="NO">No, I am not SPES Recipient</option>
-            </select>
-          </div> --}}
 
-        </div>
     </div>
 
     <div class="tab">
@@ -394,7 +380,7 @@ button:focus {
               <label>Number of Courses/Subjects </label>
               <select name="nos" id="nos" class="form-control req" onchange="addInputs()" required>
                 <option value="" selected disabled>--Select--</option>
-                @for($i = 1; $i<=12; $i++)
+                @for($i = 5; $i<=12; $i++)
                 <option value="{{$i}}">{{$i}}</option>
                 @endfor
               </select>

@@ -280,6 +280,8 @@ Route::prefix('/')->group(function()
     Route::get('/scholarship/invalid', 'FrontendController@spes2');
     Route::get('/application/success', 'FrontendController@success');
     Route::get('/application/renewed', 'FrontendController@renewed');
+    Route::get('/application/error', 'FrontendController@err');
+    Route::get('/announce_front', 'FrontendController@frontannounce')->name('front.announce');
 });
 
 Route::prefix('/admin/tracking')->group(function(){

@@ -15,7 +15,7 @@ return [
     |
     */
 	
-    'api_code' => env('ITEXMO_API_CODE', 'TR-ALBER426646_LIHKS'),
+    'api_code' => env('ITEXMO_API_CODE', 'TR-JMDEV385912_PZW8N'),
 	
     /*
     |--------------------------------------------------------------------------

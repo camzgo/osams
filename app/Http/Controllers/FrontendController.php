@@ -35,14 +35,16 @@ class FrontendController extends Controller
 
     public function fronte()
     {
-        $ncw = DB::table('scholarships')->where('id', 1)->first();
-        $gad = DB::table('scholarships')->where('id', 2)->first();
-        $vg = DB::table('scholarships')->where('id', 3)->first();
-        $gp = DB::table('scholarships')->where('id', 4)->first();
-        $gpr = DB::table('scholarships')->where('id', 5)->first();
-        $pcl = DB::table('scholarships')->where('id', 6)->first();
-        $vgd = DB::table('scholarships')->where('id', 7)->first();
-        $hr = DB::table('scholarships')->where('id', 8)->first();
+        $ncw = DB::table('scholarships')->select('scholarship_name', 'scholarship_desc', 'status', DB::raw("DATE_FORMAT(deadline, ' %M %d %Y') as deadline"))->where('id', 1)->first();
+        $gad = DB::table('scholarships')->select('scholarship_name', 'scholarship_desc', 'status', DB::raw("DATE_FORMAT(deadline, ' %M %d %Y') as deadline"))->where('id', 2)->first();
+        $vg = DB::table('scholarships')->select('scholarship_name', 'scholarship_desc', 'status', DB::raw("DATE_FORMAT(deadline, ' %M %d %Y') as deadline"))->where('id', 3)->first();
+        $gp = DB::table('scholarships')->select('scholarship_name', 'scholarship_desc', 'status', DB::raw("DATE_FORMAT(deadline, ' %M %d %Y') as deadline"))->where('id', 4)->first();
+        $gpr = DB::table('scholarships')->select('scholarship_name', 'scholarship_desc', 'status', DB::raw("DATE_FORMAT(deadline, ' %M %d %Y') as deadline"))->where('id', 5)->first();
+        $pcl = DB::table('scholarships')->select('scholarship_name', 'scholarship_desc', 'status', DB::raw("DATE_FORMAT(deadline, ' %M %d %Y') as deadline"))->where('id', 6)->first();
+        $vgd = DB::table('scholarships')->select('scholarship_name', 'scholarship_desc', 'status', DB::raw("DATE_FORMAT(deadline, ' %M %d %Y') as deadline"))->where('id', 7)->first();
+        $hr = DB::table('scholarships')->select('scholarship_name', 'scholarship_desc', 'status', DB::raw("DATE_FORMAT(deadline, ' %M %d %Y') as deadline"))->where('id', 8)->first();
+        $dateNow = date("d");
+        $dta = date("F", strtotime($dateNow));
         
         // $ck;
         // if($applicant)
@@ -121,7 +123,7 @@ class FrontendController extends Controller
                     else
                     {
                         return view ('sas')->with('ncw', $ncw)->with('gad', $gad)->with('vg', $vg)->with('gp', $gp)->with('gpr', $gpr)
-                        ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr)->with('ck', $ck)->with('announce', $announce); 
+                        ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr)->with('ck', $ck)->with('announce', $announce)->with('dateNow', $dateNow)->with('dta', $dta); 
                     }
                 }
                 else
@@ -139,7 +141,7 @@ class FrontendController extends Controller
         else
         {
             return view ('sas')->with('ncw', $ncw)->with('gad', $gad)->with('vg', $vg)->with('gp', $gp)->with('gpr', $gpr)
-            ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr)->with('announce', $announce);
+            ->with('pcl', $pcl)->with('vgd', $vgd)->with('hr', $hr)->with('announce', $announce)->with('dateNow', $dateNow)->with('dta', $dta);
         }
     }
     function faq()
@@ -285,10 +287,13 @@ class FrontendController extends Controller
                     $amount = substr($amount,0,3).','.substr($amount,3,3);
                }
                
-               
+                $total = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->sum('grades');
+                $ctr2 = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->count();
+                $sum = $total/$ctr2;
+
 
                return view('front.sdetails')->with('eefap', $eefap)->with('applicant', $applicant)->with('scholar', $scholar)
-               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap)->with('amount', $amount)->with('grades', $grades)->with('grades1', $grades1);
+               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap)->with('amount', $amount)->with('grades', $grades)->with('grades1', $grades1)->with('sum', $sum);
            }
            else if($scholar->type == "eefap-gv")
            {
@@ -310,9 +315,13 @@ class FrontendController extends Controller
                {
                     $amount = substr($amount,0,3).','.substr($amount,3,3);
                }
-
+               
+                $total = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->sum('grades');
+                $ctr2 = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->count();
+                $sum = $total/$ctr2;
+                
                return view('front.sdetails-eefapgv')->with('eefapgv', $eefapgv)->with('applicant', $applicant)->with('scholar', $scholar)
-               ->with('tracking', $tracking)->with('log', $log)->with('reqgv', $reqgv)->with('reqeefap', $reqeefap)->with('amount', $amount)->with('grades', $grades)->with('grades1', $grades1);
+               ->with('tracking', $tracking)->with('log', $log)->with('reqgv', $reqgv)->with('reqeefap', $reqeefap)->with('amount', $amount)->with('grades', $grades)->with('grades1', $grades1)->with('sum', $sum);
            }
            else if($scholar->type == "pcl")
            {
@@ -333,9 +342,12 @@ class FrontendController extends Controller
                {
                     $amount = substr($amount,0,3).','.substr($amount,3,3);
                }
+                $total = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->sum('grades');
+                $ctr2 = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->count();
+                $sum = $total/$ctr2;
 
                return view('front.sdetails-pcl')->with('pcl', $pcl)->with('applicant', $applicant)->with('scholar', $scholar)
-               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap)->with('amount', $amount)->with('grades', $grades)->with('grades1', $grades1);
+               ->with('tracking', $tracking)->with('log', $log)->with('reqeefap', $reqeefap)->with('amount', $amount)->with('grades', $grades)->with('grades1', $grades1)->with('sum', $sum);
            }
         }
         else
@@ -729,30 +741,6 @@ class FrontendController extends Controller
 
     function storedEefapgv(Request $request)
     {
-        $eefapgvId = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->first();
-        $id = $eefapgvId->id;
-        
-        $eefapgv = Eefapgv::find($id);
-        $eefapgv->surname = ucfirst($request->get('surname'));
-        $eefapgv->first_name = ucfirst($request->get('first_name'));
-        $eefapgv->middle_name = ucfirst($request->get('middle_name'));
-        $eefapgv->suffix = ucfirst($request->get('suffix'));
-        $eefapgv->mobile_number = $request->get('mobile_no');
-        $eefapgv->municipality = $request->get('municipality');
-        $eefapgv->barangay = $request->get('barangay');
-        $eefapgv->street = $request->get('street');
-        $eefapgv->college_name = $request->get('college_name');
-        $eefapgv->college_address = $request->get('college_address');
-        $eefapgv->course = ucfirst($request->get('course'));
-        $eefapgv->major = ucfirst($request->get('major'));
-        $eefapgv->program_type = $request->get('educ_prog');
-        $eefapgv->year_level = $request->get('yr_lvl');
-        $eefapgv->graduating = $request->get('grad');
-        $eefapgv->general_average = $request->get('gen_average');
-        $eefapgv->awards =$request->get('award');
-        $eefapgv->save();
-
-
         $del = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->delete();
         
         $ctr = $request->get('nos');
@@ -781,6 +769,37 @@ class FrontendController extends Controller
             ]);
         }
 
+        $total = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->sum('grades');
+        $ctr2 = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->count();
+        $sum = $total/$ctr2;
+
+
+        $eefapgvId = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->first();
+        $id = $eefapgvId->id;
+        
+        $eefapgv = Eefapgv::find($id);
+        $eefapgv->surname = ucfirst($request->get('surname'));
+        $eefapgv->first_name = ucfirst($request->get('first_name'));
+        $eefapgv->middle_name = ucfirst($request->get('middle_name'));
+        $eefapgv->suffix = ucfirst($request->get('suffix'));
+        $eefapgv->mobile_number = $request->get('mobile_no');
+        $eefapgv->municipality = $request->get('municipality');
+        $eefapgv->barangay = $request->get('barangay');
+        $eefapgv->street = $request->get('street');
+        $eefapgv->college_name = $request->get('college_name');
+        $eefapgv->college_address = $request->get('college_address');
+        $eefapgv->course = ucfirst($request->get('course'));
+        $eefapgv->major = ucfirst($request->get('major'));
+        $eefapgv->program_type = $request->get('educ_prog');
+        $eefapgv->year_level = $request->get('yr_lvl');
+        $eefapgv->graduating = $request->get('grad');
+        $eefapgv->general_average = $sum;
+        $eefapgv->awards =$request->get('award');
+        $eefapgv->save();
+
+
+        
+
         return redirect ('/scholarship/details');
 
 
@@ -789,6 +808,40 @@ class FrontendController extends Controller
 
     function storedEefap(Request $request)
     {
+        $del = DB::table('grades')->where('student_id', Auth::user()->id)->where('grades_isdel', 0)->delete();
+        
+        $ctr = $request->get('nos');
+        $sub1 = array();
+        $grad1 = array();
+        for($x=0; $x<=$ctr-1; $x++)
+        {
+            $sub = "subject".$x;
+            $grad = "grade".$x;
+            array_push($sub1, $request->$sub);
+            array_push($grad1, $request->$grad);
+        }
+        
+
+        for($y=0; $y<=$ctr-1; $y++)
+        {
+            $grades = DB::table('grades')->insert([
+                'subject' => $sub1[$y],
+                'grades' => $grad1[$y],
+                'semester' => $request->sem,
+                'student_id' => Auth::user()->id,
+                'new'     => "1",
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'grades_isdel' => 0
+            ]);
+        }
+
+
+        $total = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->sum('grades');
+        $ctr2 = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->count();
+        $sum = $total/$ctr2;
+
+
         $eefapId = DB::table('eefap')->where('applicant_id', Auth::user()->id)->first();
         $id = $eefapId->id;
         
@@ -808,7 +861,7 @@ class FrontendController extends Controller
         $eefap->program_type = $request->get('educ_prog');
         $eefap->year_level = $request->get('yr_lvl');
         $eefap->graduating = $request->get('grad');
-        $eefap->general_average = $request->get('gen_average');
+        $eefap->general_average = $sum;
         $eefap->fb_account = $request->get('fb_account');
         $eefap->gsurname = $request->get('gsurname');
         $eefap->gfirst_name = $request->get('gfirst_name');
@@ -1634,44 +1687,12 @@ class FrontendController extends Controller
 
     function storedEefapgv_edit(Request $request)
     {
-        $eefapgvId = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->first();
-        $id = $eefapgvId->id;
-        
-        $eefapgv = Eefapgv::find($id);
-        $eefapgv->surname = $request->get('surname');
-        $eefapgv->first_name = $request->get('first_name');
-        $eefapgv->middle_name = $request->get('middle_name');
-        $eefapgv->suffix = $request->get('suffix');
-        $eefapgv->mobile_number = $request->get('mobile_no');
-        $eefapgv->municipality = $request->get('municipality');
-        $eefapgv->barangay = $request->get('barangay');
-        $eefapgv->street = $request->get('street');
-        $eefapgv->college_name = $request->get('college_name');
-        $eefapgv->college_address = $request->get('college_address');
-        $eefapgv->course = $request->get('course');
-        $eefapgv->major = $request->get('major');
-        $eefapgv->program_type = $request->get('educ_prog');
-        $eefapgv->year_level = $request->get('yr_lvl');
-        $eefapgv->graduating = $request->get('grad');
-        $eefapgv->general_average = $request->get('gen_average');
-        $eefapgv->awards =$request->get('award');
-        $eefapgv->save();
-
-        $approve = "Pending";
-        
-        DB::table('application')->where('applicant_id', Auth::user()->id)
-        ->update([
-            'application_status' => $approve,
-            'renew'     => 1,
-            
-        ]);
 
         $gradee = DB::table('grades')->where('student_id', Auth::user()->id)->update([
             'grades_isdel' => 1,
             'new'     => 0
         ]);
 
-        $logs = DB::table('log')->where('applicant_id', Auth::user()->id)->delete();
 
         $ctr = $request->get('nos');
         $sub1 = array();
@@ -1699,6 +1720,46 @@ class FrontendController extends Controller
             ]);
         }
 
+        $total = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->sum('grades');
+        $ctr2 = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->count();
+        $sum = $total/$ctr2;
+        
+        $eefapgvId = DB::table('eefapgv')->where('applicant_id', Auth::user()->id)->first();
+        $id = $eefapgvId->id;
+        
+        $eefapgv = Eefapgv::find($id);
+        $eefapgv->surname = $request->get('surname');
+        $eefapgv->first_name = $request->get('first_name');
+        $eefapgv->middle_name = $request->get('middle_name');
+        $eefapgv->suffix = $request->get('suffix');
+        $eefapgv->mobile_number = $request->get('mobile_no');
+        $eefapgv->municipality = $request->get('municipality');
+        $eefapgv->barangay = $request->get('barangay');
+        $eefapgv->street = $request->get('street');
+        $eefapgv->college_name = $request->get('college_name');
+        $eefapgv->college_address = $request->get('college_address');
+        $eefapgv->course = $request->get('course');
+        $eefapgv->major = $request->get('major');
+        $eefapgv->program_type = $request->get('educ_prog');
+        $eefapgv->year_level = $request->get('yr_lvl');
+        $eefapgv->graduating = $request->get('grad');
+        $eefapgv->general_average = $sum;
+        $eefapgv->awards =$request->get('award');
+        $eefapgv->save();
+
+        $approve = "Pending";
+        
+        DB::table('application')->where('applicant_id', Auth::user()->id)
+        ->update([
+            'application_status' => $approve,
+            'renew'     => 1,
+            
+        ]);
+
+        
+        $logs = DB::table('log')->where('applicant_id', Auth::user()->id)->delete();
+
+        
         
 
         date_default_timezone_set("Asia/Manila");
@@ -1720,49 +1781,12 @@ class FrontendController extends Controller
 
     function storedEefap_edit(Request $request)
     {
-        $eefapId = DB::table('eefap')->where('applicant_id', Auth::user()->id)->first();
-        $id = $eefapId->id;
-        
-        $eefap = Eefap::find($id);
-        $eefap->surname = $request->get('surname');
-        $eefap->first_name = $request->get('first_name');
-        $eefap->middle_name = $request->get('middle_name');
-        $eefap->suffix = $request->get('suffix');
-        $eefap->mobile_number = $request->get('mobile_no');
-        $eefap->municipality = $request->get('municipality');
-        $eefap->barangay = $request->get('barangay');
-        $eefap->street = $request->get('street');
-        $eefap->college_name = $request->get('college_name');
-        $eefap->college_address = $request->get('college_address');
-        $eefap->course = $request->get('course');
-        $eefap->major = $request->get('major');
-        $eefap->program_type = $request->get('educ_prog');
-        $eefap->year_level = $request->get('yr_lvl');
-        $eefap->graduating = $request->get('grad');
-        $eefap->general_average = $request->get('gen_average');
-        $eefap->fb_account = $request->get('fb_account');
-        $eefap->gsurname = $request->get('gsurname');
-        $eefap->gfirst_name = $request->get('gfirst_name');
-        $eefap->gmiddle_name = $request->get('gmiddle_name');
-        $eefap->gsuffix = $request->get('gsuffix');
-        $eefap->gmobile_number = $request->get('gmobile_no');
-        $eefap->save();
 
-        $approve = "Pending";
-        
-        DB::table('application')->where('applicant_id', Auth::user()->id)
-        ->update([
-            'application_status' => $approve,
-            'renew'     => 1,
-            
-        ]);
 
         $gradee = DB::table('grades')->where('student_id', Auth::user()->id)->update([
             'grades_isdel' => 1,
             'new'     => 0
         ]);
-
-        $logs = DB::table('log')->where('applicant_id', Auth::user()->id)->delete();
 
         $ctr = $request->get('nos');
         $sub1 = array();
@@ -1790,6 +1814,51 @@ class FrontendController extends Controller
             ]);
         }
 
+        $total = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->sum('grades');
+        $ctr2 = DB::table('grades')->where('student_id', Auth::user()->id)->where('new', 1)->where('grades_isdel', 0)->count();
+        $sum = $total/$ctr2;
+
+        $eefapId = DB::table('eefap')->where('applicant_id', Auth::user()->id)->first();
+        $id = $eefapId->id;
+        
+        $eefap = Eefap::find($id);
+        $eefap->surname = $request->get('surname');
+        $eefap->first_name = $request->get('first_name');
+        $eefap->middle_name = $request->get('middle_name');
+        $eefap->suffix = $request->get('suffix');
+        $eefap->mobile_number = $request->get('mobile_no');
+        $eefap->municipality = $request->get('municipality');
+        $eefap->barangay = $request->get('barangay');
+        $eefap->street = $request->get('street');
+        $eefap->college_name = $request->get('college_name');
+        $eefap->college_address = $request->get('college_address');
+        $eefap->course = $request->get('course');
+        $eefap->major = $request->get('major');
+        $eefap->program_type = $request->get('educ_prog');
+        $eefap->year_level = $request->get('yr_lvl');
+        $eefap->graduating = $request->get('grad');
+        $eefap->general_average = $sum;
+        $eefap->fb_account = $request->get('fb_account');
+        $eefap->gsurname = $request->get('gsurname');
+        $eefap->gfirst_name = $request->get('gfirst_name');
+        $eefap->gmiddle_name = $request->get('gmiddle_name');
+        $eefap->gsuffix = $request->get('gsuffix');
+        $eefap->gmobile_number = $request->get('gmobile_no');
+        $eefap->save();
+
+        $approve = "Pending";
+        
+        DB::table('application')->where('applicant_id', Auth::user()->id)
+        ->update([
+            'application_status' => $approve,
+            'renew'     => 1,
+            
+        ]);
+
+        
+        $logs = DB::table('log')->where('applicant_id', Auth::user()->id)->delete();
+
+        
         
 
         date_default_timezone_set("Asia/Manila");
@@ -1991,6 +2060,18 @@ class FrontendController extends Controller
 
     }
 
+    function frontannounce()
+    {
+        $announces2 = Announcement::select('id','title', 'body')->where('id', '1')->first();
+        $output = array(
+            'title'    =>  $announces2->title,
+            'body'     =>  $announces2->body,
+            'id' => $announces2->id
+        );
+
+        echo json_encode($output);
+    }
+
     function spes($id)
     {
         return view('scholarship.spes');
@@ -2009,6 +2090,11 @@ class FrontendController extends Controller
     function renewed()
     {
         return view('renew');
+    }
+
+    function err()
+    {
+        return view('success2');
     }
 }
 

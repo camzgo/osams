@@ -114,6 +114,10 @@
                                 </tr>
                                 @endforeach
                               @endif
+                              <tr>
+                                <td><strong>General Average:</strong></td>
+                                <td><strong>{{$sum}}</strong></td>
+                              </tr>
                             </table>
                             <hr>
                             {{-- <a href="#" class="btn btn-primary btn-block mb-4">Edit Grades</a> --}}

@@ -8,7 +8,10 @@
     <title>Pampanga Capitol | Online Scholarship Application</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
      {{-- <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800" rel="stylesheet"> --}}
-
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="/js/src/mini-event-calendar.min.css">
   <script src="{{asset('js/app.js')}}"></script>
@@ -274,7 +277,7 @@
 
 
       <!--here-->
-      <div class="col-lg-4 mt-4">
+      {{-- <div class="col-lg-4 mt-4">
         <div class="row">
         <div class="col-md-8" style="margin-left:120px; margin-top: 50px;">
          <div class="card rounded"> 
@@ -309,9 +312,9 @@
 
         </div>
       </div>
-      </div> <!--end-->
+      </div> <!--end--> --}}
 
-      {{-- <div class="col-lg-4 mt-4">
+      <div class="col-lg-4 mt-4">
       <div class="row">
         <div class="col-md-8"  style="margin-left:120px; margin-top: 50px;">
           <div class="card rounded shadow-sm">
@@ -322,8 +325,8 @@
               @if(count($announce) > 0)
               @foreach($announce as $a)
               <div class="clamp-name clamp-lines">
-                <ul>
-                  <li><h5><a href="/announcement/{{$a->id}}" class="text-muted"> {{$a->title}}</a></h5></li>
+                <ul id="ann" name="ann">
+                  <li><h5><a href="/announcement/{{$a->id}}"  class="text-muted"> {{$a->title}}</a></h5></li>
                 </ul>
                 
               </div>
@@ -337,7 +340,7 @@
         </div>
       </div>
       
-      </div> --}}
+      </div>
       
       
     
@@ -377,10 +380,15 @@
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong> {{$ncw->slot}} </strong></li>
+                                @if($ncw->status == "OPEN")
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>{{$dta}} {{$dateNow}} to {{$ncw->deadline}} </strong></small></li>
+                                @else
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>Application Ends</strong></small></li>
+                                @endif
+                                {{-- <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong> {{$ncw->slot}} </strong></li>
                                 <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$ncw->amount}}</strong></li>
                                 <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong> {{$ncw->deadline}}</strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$ncw->status}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$ncw->status}}</strong></li> --}}
                               </ul>
                              </div>
                              @if(Auth::check())
@@ -422,10 +430,15 @@
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$gad->slot}} </strong></li>
+                                @if($gad->status == "OPEN")
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>{{$dta}} {{$dateNow}} to {{$gad->deadline}} </strong></small></li>
+                                @else
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>Application Ends</strong></small></li>
+                                @endif
+                                {{-- <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$gad->slot}} </strong></li>
                                 <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$gad->amount}}</strong></li>
                                 <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$gad->deadline}}</strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$gad->status}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$gad->status}}</strong></li> --}}
                               </ul>
                              </div>
                             @if(Auth::check())
@@ -469,10 +482,15 @@
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$vg->slot}} </strong></li>
+                                @if($vg->status == "OPEN")
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>{{$dta}} {{$dateNow}} to {{$vg->deadline}} </strong></small></li>
+                                @else
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>Application Ends</strong></small></li>
+                                @endif
+                                {{-- <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$vg->slot}} </strong></li>
                                 <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$vg->amount}}</strong></li>
                                 <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$vg->deadline}}</strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$vg->status}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$vg->status}}</strong></li> --}}
                               </ul>
                              </div>
                              @if(Auth::check())
@@ -515,10 +533,15 @@
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$gp->slot}} </strong></li>
+                                @if($gp->status == "OPEN")
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>{{$dta}} {{$dateNow}} to {{$gp->deadline}} </strong></small></li>
+                                @else
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>Application Ends</strong></small></li>
+                                @endif
+                                {{-- <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$gp->slot}} </strong></li>
                                 <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$gp->amount}}</strong></li>
                                 <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$gp->deadline}}</strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$gp->status}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$gp->status}}</strong></li> --}}
                               </ul>
                              </div>
                             @if(Auth::check())
@@ -570,10 +593,15 @@
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$gpr->slot}} </strong></li>
+                                @if($gpr->status == "OPEN")
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>{{$dta}} {{$dateNow}} to {{$gpr->deadline}} </strong></small></li>
+                                @else
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>Application Ends</strong></small></li>
+                                @endif
+                                {{-- <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$gpr->slot}} </strong></li>
                                 <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$gpr->amount}}</strong></li>
                                 <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$gpr->deadline}}</strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$gpr->status}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$gpr->status}}</strong></li> --}}
                               </ul>
                              </div>
                              @if(Auth::check())
@@ -614,10 +642,15 @@
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$pcl->slot}} </strong></li>
+                                @if($pcl->status == "OPEN")
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>{{$dta}} {{$dateNow}} to {{$pcl->deadline}} </strong></small></li>
+                                @else
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>Application Ends</strong></small></li>
+                                @endif
+                                {{-- <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$pcl->slot}} </strong></li>
                                 <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$pcl->amount}}</strong></li>
                                 <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$pcl->deadline}}</strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$pcl->status}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$pcl->status}}</strong></li> --}}
                               </ul>
                              </div>
                             @if(Auth::check())
@@ -657,10 +690,15 @@
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$vgd->slot}} </strong></li>
+                                @if($vgd->status == "OPEN")
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>{{$dta}} {{$dateNow}} to {{$vgd->deadline}} </strong></small></li>
+                                @else
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>Application Ends</strong></small></li>
+                                @endif
+                                {{-- <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$vgd->slot}} </strong></li>
                                 <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$vgd->amount}}</strong></li>
                                 <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$vgd->deadline}}</strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$vgd->status}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$vgd->status}}</strong></li> --}}
                               </ul>
                              </div>
                             @if(Auth::check())
@@ -700,10 +738,14 @@
                             </div>
                              <div class="card-body">
                               <ul class="list-group list-group-flush">
-                                <li class="list-unstyled"><i class="fa fa-user"></i> Slots: <strong>{{$hr->slot}} </strong></li>
-                                <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$hr->amount}}</strong></li>
+                                @if($hr->status == "OPEN")
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>{{$dta}} {{$dateNow}} to {{$hr->deadline}} </strong></small></li>
+                                @else
+                                <li class="list-unstyled"><i class="fa fa-calendar"></i> Application Period: <br><small><strong>Application Ends</strong></small></li>
+                                @endif
+                                {{-- <li class="list-unstyled"><i class="fa fa-money"></i> Amount: <strong>P{{$hr->amount}}</strong></li>
                                 <li class="list-unstyled"><i class="fa fa-calendar"></i> Deadline: <strong>{{$hr->deadline}}</strong></li>
-                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$hr->status}}</strong></li>
+                                <li class="list-unstyled"><i class="fa fa-check"></i> Availability: <strong>{{$hr->status}}</strong></li> --}}
                               </ul>
                              </div>
                              @if(Auth::check())
@@ -790,7 +832,95 @@
 
 			//if you don't have events, use
 			$("#calendar2").MEC();
+      // var xhttp;    
+      // xhttp = new XMLHttpRequest();
+      // xhttp.onreadystatechange = function() {
+      //   if (this.readyState == 4 && this.status == 200) {
+      //     document.getElementById("txtHint").innerHTML = this.responseText;
+      //   }
+      // };
+      // xhttp.open("GET.html", "getcustomer03d2.html?q="+str, true);
+      // xhttp.send();
 		});
+
+      //  $.ajax({
+      //   url:"{{ route('front.announce') }}",
+      //   method:"GET",
+      //   // data:form_data,
+      //   dataType:"json",
+      //   success:function(data)
+      //   {
+      //     // if(data.id.length > 0)
+      //     // {
+      //     //   foreach(data.title in datas)
+      //     //   {
+      //     //     console.log(datas);
+      //     //   }
+      //     // }
+      //     //console.log(data.title);
+      //     document.getElementById("ann").innerHTML="<li><h5><a href='/announcement/'"+data.id+" class='text-muted'>"+data.title+"</a></h5></li>";
+      //   }
+      // });
+     
+      function samp()
+      {
+        // $.ajax({
+        //   url:"{{ route('front.announce') }}",
+        //   method:"GET",
+        //   // data:form_data,
+        //   dataType:"json",
+        //   success:function(data)
+        //   {
+        //     document.getElementById("ann").innerHTML="<li><h5><a href='/announcement/'"+data.id+" class='text-muted'>"+data.title+"</a></h5></li>";
+        //   }
+        // })
+        console.log("SAMPLE");
+      }
+      function ssas()
+      {
+        var x = "heloo";
+        var id = 1;
+      //  console.log(x);
+        // $.ajax({
+        //     url:"{{ route('front.announce') }}",
+        //     method:"GET",
+        //     data:{id:id},
+        //     // data:form_data,
+        //     dataType:"json",
+        //     success:function(data)
+        //     {
+        //       document.getElementById("ann").innerHTML="<li><h5><a href='/announcement/'"+data.id+" class='text-muted'>"+data.title+"</a></h5></li>";
+        //     }
+        // })
+      }
+
+      // var ajax_call = function() {
+      //    $.ajax({
+      //       url:"{{ route('front.announce') }}",
+      //       method:"GET",
+      //     //  data:{id:id},
+      //       // data:form_data,
+      //       dataType:"json",
+      //       success:function(data)
+      //       {
+      //         document.getElementById("ann").innerHTML="<li><h5><a href='/announcement/'"+data.id+" class='text-muted'>"+data.title+"</a></h5></li>";
+      //       }
+      //   });
+      // };
+
+     //
+     // var interval = 1000 * 60 * X; // where X is your every X minutes
+
+      // setInterval(ajax_call, 1000);
+      $(document).ready(function(){
+      //setInterval(fetchdata,1000);
+      });
+
+  var myVar;
+
+  // myVar = setInterval(ssas, 1000);
+
+
 // function autoRefreshPage()
 //     {
 //         window.location = window.location.href;

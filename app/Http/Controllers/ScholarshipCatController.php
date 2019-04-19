@@ -406,7 +406,7 @@ class ScholarshipCatController extends Controller
                     {
 
                     }
-                $ids=$id;
+                $ids=$request->sid;
                 return redirect('/admin/apply/send/'.$ids);
             }
             else
@@ -433,12 +433,12 @@ class ScholarshipCatController extends Controller
         $school_id = DB::table('spes_tbl')->where('school_id', $user->school_id)->count();
 
         $app = DB::table('application')->where('applicant_id', $request->get('sid'))->count();
-        $app2 = DB::table('application')->join('users', 'users.id', '=', 'application.applicant_id')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
+       // $app2 = DB::table('application')->join('users', 'users.id', '=', 'application.applicant_id')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
 
         if($spes != 1 && $school_id != 1)
         {
 
-            if($app != 1 && $app2 != 1)
+            if($app != 1)
             {
                 $id = DB::table('application')->insertGetId([
                     'application_status' => 'Pre-Approved',
@@ -547,7 +547,7 @@ class ScholarshipCatController extends Controller
 
                 }
                 
-                $ids=$id;
+                $ids=$request->sid;
                 return redirect('/admin/apply/send/'.$ids);
             }
             else
@@ -575,11 +575,11 @@ class ScholarshipCatController extends Controller
         $school_id = DB::table('spes_tbl')->where('school_id', $user->school_id)->count();
 
         $app = DB::table('application')->where('applicant_id', $request->get('sid'))->count();
-        $app2 = DB::table('application')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
+       // $app2 = DB::table('application')->where('first_name', $user->first_name)->where('surname', $user->surname)->count();
 
         if($spes != 1 && $school_id != 1)
         {
-            if($app != 1 && $app2 != 1)
+            if($app != 1)
             {
                 $id = DB::table('application')->insertGetId([
                     'application_status' => 'Pre-Approved',
@@ -695,7 +695,7 @@ class ScholarshipCatController extends Controller
 
                 }
 
-                $ids=$id;
+                $ids=$request->sid;
                 return redirect('/admin/apply/send/'.$ids);
             }
             else

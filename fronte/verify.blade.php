@@ -66,11 +66,6 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <input type="text" id="code" class="form-control form-control-lg {{$errors->has('code') ? 'is-invalid' : '' }}" name="code" required autofocus>
-                                                {{-- @if ($errors->has('code'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('code') }}</strong>
-                                                    </span>
-                                                @endif --}}
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -114,19 +109,6 @@
   </section>
    
 </main>
-{{-- <footer class="footer2">
-  <div class="container mt-4">
-    <div class="align-items-center">
-        <div class="text-center">
-            <a href="#">
-                <img src="/added/img/icons/logo.png" style="width: 50px;">
-            </a>
-            <span class="d-block mt-1 text-white">&copy; 2018 <a href="http://www.pampanga.gov.ph/" class="footer-link text-white" target="_blank">Provincial Capitol of Pampanga</a>. All rights reserved.</span>
-        </div>
-    </div>
-  </div>
-</footer> --}}
-
 </body>
 <script>
 

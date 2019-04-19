@@ -331,7 +331,7 @@
                 <span class="info-box-text">Total Amount:  <strong>Php {{$price[$x]}}</strong></span>
                 <span class="info-box-text">Status: <strong>{{$status[$x]}}</strong></span>
                 @if($total[$x] > $slot[$x] && $total[$x] != $slot[$x]+$supp[$x])
-                <h5><span class="info-box-text"><i class="badge badge-warning">Slots Exceeded. <br>Supplement slots added!</i></span></h5>
+                <h5><span class="info-box-text"><i class="badge badge-warning text-white">Slots Exceeded. <br>Supplement slots added!</i></span></h5>
                 @endif
                 @if($total[$x] == $slot[$x]+$supp[$x])
                 <h5><span class="info-box-text"><i class="badge badge-danger">There are no slots available!</i></span></h5>
@@ -368,7 +368,7 @@
                 <span class="info-box-text">Total Amount:  <strong>Php {{$price[$x]}}</strong></span>
                 <span class="info-box-text">Status: <strong>{{$status[$x]}}</strong></span>
                 @if($total[$x] > $slot[$x] && $total[$x] != $slot[$x]+$supp[$x])
-                <h5><span class="info-box-text"><i class="badge badge-warning">Slots Exceeded. <br>Supplement slots added!</i></span></h5>
+                <h5><span class="info-box-text"><i class="badge badge-warning text-white">Slots Exceeded. <br>Supplement slots added!</i></span></h5>
                 @endif
                 @if($total[$x] == $slot[$x]+$supp[$x])
                 <h5><span class="info-box-text"><i class="badge badge-danger">There are no slots available!</i></span></h5>

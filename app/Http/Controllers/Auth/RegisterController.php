@@ -61,7 +61,7 @@ class RegisterController extends Controller
             'school_id' => 'required|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'g-recaptcha-response' => new Captcha(),
+            // 'g-recaptcha-response' => new Captcha(),
             
         ]);
     }

@@ -37,7 +37,7 @@ class AwardingController extends Controller
     public function getdata()
     {
         $scholarships = DB::table('scholarships')->Join('application', 'application.scholar_id', '=', 'scholarships.id')->where('scholarships.status', 'CLOSED')
-        ->where('application.application_status', 'Approved')->select('scholarships.scholarship_name', 'scholarships.status', 'scholarships.type', 'scholarships.id')->get();
+        ->where('application.application_status', 'Approved')->select('scholarships.scholarship_name', 'scholarships.status', 'scholarships.type', 'scholarships.id')->groupBy('scholarships.scholarship_name');
         return DataTables::of($scholarships)
         ->addColumn('action', function($scholarships){
                        

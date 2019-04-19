@@ -57,7 +57,13 @@ class AuditController extends Controller
         $json = json_decode($datas, true);
         $ctr =  count($json);
         $ctr-=1;
-        return view('admin.reports.audit_reports')->with('json', $json);
+
+        
+        $date11 = date('F j', strtotime($date1));
+        $date22 = date('F j\, Y', strtotime($date2));
+        return view('admin.reports.audit_reports')->with('json', $json)->with('date11', $date11)->with('date22', $date22);
+        //return $date11;
+        //echo $date22;
     }
      function print_all()
     {

@@ -338,9 +338,9 @@
              <div class=" ml-2 col-md-2">
                <a href="#" id="print" name="print" target = "_blank" class="btn btn-success btn-block print">Print</a>
              </div>
-             <div class=" ml-2 col-md-2">
+             {{-- <div class=" ml-2 col-md-2">
                <a href="#" class="btn btn-danger btn-block">Delete All</a>
-             </div>
+             </div> --}}
            </div>
           
         </form>
